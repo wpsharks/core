@@ -6,12 +6,12 @@
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license GNU General Public License, version 3
  */
-namespace websharks\core
+namespace WebSharks\Core
 {
 	/**
 	 * Base Abstraction
 	 */
-	abstract class abs_base
+	abstract class AbsBase
 	{
 		/**
 		 * @var array Instance cache.
@@ -29,7 +29,7 @@ namespace websharks\core
 		protected static $___static = array();
 
 		/**
-		 * @var \stdClass Overload properties.
+		 * @var \StdClass Overload properties.
 		 */
 		protected $___overload;
 
@@ -44,7 +44,7 @@ namespace websharks\core
 				static::$___static[$class] = array();
 			$this->static = &static::$___static[$class];
 
-			$this->___overload = new \stdClass;
+			$this->___overload = new \StdClass;
 		}
 
 		/**
@@ -70,7 +70,7 @@ namespace websharks\core
 		 *
 		 * @return mixed The value of `$this->___overload->{$property}`.
 		 *
-		 * @throws \exception If the `$___overload` property is undefined.
+		 * @throws \Exception If the `$___overload` property is undefined.
 		 *
 		 * @see http://php.net/manual/en/language.oop5.overloading.php
 		 */
@@ -81,7 +81,7 @@ namespace websharks\core
 			if(is_object($this->___overload) && property_exists($this->___overload, $property))
 				return $this->___overload->{$property};
 
-			throw new \exception(sprintf('Undefined overload property: `%1$s`.', $property));
+			throw new \Exception(sprintf('Undefined overload property: `%1$s`.', $property));
 		}
 
 		/**
@@ -90,7 +90,7 @@ namespace websharks\core
 		 * @param string $property Property to set.
 		 * @param mixed  $value The value for this property.
 		 *
-		 * @throws \exception We do NOT allow magic/overload properties to be set.
+		 * @throws \Exception We do NOT allow magic/overload properties to be set.
 		 *    Magic/overload properties in this class are read-only.
 		 *
 		 * @see http://php.net/manual/en/language.oop5.overloading.php
@@ -99,7 +99,7 @@ namespace websharks\core
 		{
 			$property = (string)$property; // Force string.
 
-			throw new \exception(sprintf('Refused to set overload property: `%1$s`.', $property));
+			throw new \Exception(sprintf('Refused to set overload property: `%1$s`.', $property));
 		}
 
 		/**
@@ -107,7 +107,7 @@ namespace websharks\core
 		 *
 		 * @param string $property Property to unset.
 		 *
-		 * @throws \exception We do NOT allow magic/overload properties to be unset.
+		 * @throws \Exception We do NOT allow magic/overload properties to be unset.
 		 *    Magic/overload properties in this class are read-only.
 		 *
 		 * @see http://php.net/manual/en/language.oop5.overloading.php
@@ -116,7 +116,7 @@ namespace websharks\core
 		{
 			$property = (string)$property; // Force string.
 
-			throw new \exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
+			throw new \Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
 		}
 
 		/*
@@ -178,9 +178,9 @@ namespace websharks\core
 		protected function isset_coalesce(&$a, &$b = NULL, &$c = NULL, &$d = NULL, &$e = NULL, &$f = NULL, &$g = NULL, &$h = NULL, &$i = NULL, &$j = NULL)
 		{
 			foreach(func_get_args() as $var)
-			{
-				if(isset($var)) return $var;
-			}
+				if(isset($var)) // Set?
+					return $var;
+
 			return NULL; // Default value.
 		}
 
@@ -240,9 +240,9 @@ namespace websharks\core
 		protected function not_empty_coalesce(&$a, &$b = NULL, &$c = NULL, &$d = NULL, &$e = NULL, &$f = NULL, &$g = NULL, &$h = NULL, &$i = NULL, &$j = NULL)
 		{
 			foreach(func_get_args() as $var)
-			{
-				if(!empty($var)) return $var;
-			}
+				if(!empty($var)) // Not empty?
+					return $var;
+
 			return NULL; // Default value.
 		}
 
@@ -255,14 +255,14 @@ namespace websharks\core
 		 *    If you need to check uninitialized variables, see {@link not_empty_coalesce()}.
 		 *
 		 * @note If you need to check properties in a class that implements overloading, this method is suggested.
-		 *    i.e. this will work on overloaded properties too; since they are NOT passed by reference here.
+		 *    i.e., This will work on overloaded properties too; since they are NOT passed by reference here.
 		 */
 		protected function coalesce()
 		{
 			foreach(func_get_args() as $var)
-			{
-				if(!empty($var)) return $var;
-			}
+				if(!empty($var)) // Not empty?
+					return $var;
+
 			return NULL; // Default value.
 		}
 
@@ -301,7 +301,7 @@ namespace websharks\core
 
 			foreach($args as $_arg) // Use each arg as a key.
 			{
-				switch(gettype($_arg))
+				switch(strtolower(gettype($_arg)))
 				{
 					case 'integer':
 						$_key = (integer)$_arg;
@@ -321,7 +321,7 @@ namespace websharks\core
 						$_key = sha1(serialize($_arg));
 						break; // Break switch handler.
 
-					case 'NULL':
+					case 'null':
 					case 'resource':
 					case 'unknown type':
 					default: // Default case handler.

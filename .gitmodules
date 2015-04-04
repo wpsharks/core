@@ -1,12 +1,3 @@
-[submodule "submodules/php-markdown"]
-	path = submodules/php-markdown
-	url = https://github.com/michelf/php-markdown
-[submodule "submodules/parsedown"]
-	path = submodules/parsedown
-	url = https://github.com/erusev/parsedown
-[submodule "submodules/parsedown-extra"]
-	path = submodules/parsedown-extra
-	url = https://github.com/erusev/parsedown-extra
-[submodule "submodules/symfony-yaml"]
-	path = submodules/symfony-yaml
-	url = https://github.com/symfony/Yaml
+[submodule "submodules/php-oauth-lib"]
+	path = submodules/php-oauth-lib
+	url = https://github.com/Lusitanian/PHPoAuthLib
