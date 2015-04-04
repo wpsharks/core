@@ -2,39 +2,49 @@
 /**
  * Base Abstraction
  *
- * @since 150402 First documented version.
+ * @since 15xxxx Initial release.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license GNU General Public License, version 3
  */
-namespace WebSharks\Core
+namespace WebSharks\Core\Classes
 {
 	/**
 	 * Base Abstraction
+	 *
+	 * @since 15xxxx Initial release.
 	 */
 	abstract class AbsBase
 	{
+		/*
+		 * Cache Properties
+		 */
+
 		/**
 		 * @var array Instance cache.
+		 * @since 15xxxx Initial release.
 		 */
 		protected $cache = array();
 
 		/**
 		 * @var array Global static cache ref.
+		 * @since 15xxxx Initial release.
 		 */
 		protected $static = array();
 
 		/**
 		 * @var array Global static cache.
+		 * @since 15xxxx Initial release.
 		 */
 		protected static $___static = array();
 
-		/**
-		 * @var \StdClass Overload properties.
+		/*
+		 * Constructor
 		 */
-		protected $___overload;
 
 		/**
 		 * Class constructor.
+		 *
+		 * @since 15xxxx Initial release.
 		 */
 		public function __construct()
 		{
@@ -43,235 +53,16 @@ namespace WebSharks\Core
 			if(empty(static::$___static[$class]))
 				static::$___static[$class] = array();
 			$this->static = &static::$___static[$class];
-
-			$this->___overload = new \StdClass;
-		}
-
-		/**
-		 * Magic/overload `isset()` checker.
-		 *
-		 * @param string $property Property to check.
-		 *
-		 * @return boolean TRUE if `isset($this->___overload->{$property})`.
-		 *
-		 * @see http://php.net/manual/en/language.oop5.overloading.php
-		 */
-		public function __isset($property)
-		{
-			$property = (string)$property; // Force string.
-
-			return is_object($this->___overload) && isset($this->___overload->{$property});
-		}
-
-		/**
-		 * Magic/overload property getter.
-		 *
-		 * @param string $property Property to get.
-		 *
-		 * @return mixed The value of `$this->___overload->{$property}`.
-		 *
-		 * @throws \Exception If the `$___overload` property is undefined.
-		 *
-		 * @see http://php.net/manual/en/language.oop5.overloading.php
-		 */
-		public function __get($property)
-		{
-			$property = (string)$property; // Force string.
-
-			if(is_object($this->___overload) && property_exists($this->___overload, $property))
-				return $this->___overload->{$property};
-
-			throw new \Exception(sprintf('Undefined overload property: `%1$s`.', $property));
-		}
-
-		/**
-		 * Magic/overload property setter.
-		 *
-		 * @param string $property Property to set.
-		 * @param mixed  $value The value for this property.
-		 *
-		 * @throws \Exception We do NOT allow magic/overload properties to be set.
-		 *    Magic/overload properties in this class are read-only.
-		 *
-		 * @see http://php.net/manual/en/language.oop5.overloading.php
-		 */
-		public function __set($property, $value)
-		{
-			$property = (string)$property; // Force string.
-
-			throw new \Exception(sprintf('Refused to set overload property: `%1$s`.', $property));
-		}
-
-		/**
-		 * Magic `unset()` handler.
-		 *
-		 * @param string $property Property to unset.
-		 *
-		 * @throws \Exception We do NOT allow magic/overload properties to be unset.
-		 *    Magic/overload properties in this class are read-only.
-		 *
-		 * @see http://php.net/manual/en/language.oop5.overloading.php
-		 */
-		public function __unset($property)
-		{
-			$property = (string)$property; // Force string.
-
-			throw new \Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
 		}
 
 		/*
-		 * Protected Core Utilities
-		 */
-
-		/**
-		 * Utility Method; `isset()` or what?
-		 *
-		 * @param mixed  $var A variable; by reference.
-		 * @param mixed  $or If `$var` is not set, return this.
-		 * @param string $type Force a particular type if `isset()`?
-		 *
-		 * @return mixed `$var` if `isset()`; else `$or`.
-		 *
-		 * @warning Overloaded properties may NOT be passed by reference under most circumstanes.
-		 *
-		 * @warning Passing a variable by reference forces it be initialied should it not exist at all.
-		 *    Ordinarly this is NOT an issue; since the variable is initialized w/ a `NULL` value. That's PHP's behavior.
-		 *    However, in the case of objects/arrays this can add keys/properties with a `NULL` value inadvertently.
-		 *    Thus, please exercise caution when using this against objects/arrays where it might matter!
-		 */
-		protected function issetOr(&$var, $or = NULL, $type = '')
-		{
-			if(isset($var))
-			{
-				if($type) // Set type?
-					settype($var, $type);
-				return $var;
-			}
-			return $or; // Do not cast `$or`.
-		}
-
-		/**
-		 * Utility Method; `isset()` coalesce.
-		 *
-		 * @param mixed $a A variable; by reference.
-		 * @param mixed $b A variable; by reference.
-		 * @param mixed $c A variable; by reference.
-		 * @param mixed $d A variable; by reference.
-		 * @param mixed $e A variable; by reference.
-		 * @param mixed $f A variable; by reference.
-		 * @param mixed $g A variable; by reference.
-		 * @param mixed $h A variable; by reference.
-		 * @param mixed $i A variable; by reference.
-		 * @param mixed $j A variable; by reference.
-		 *
-		 * @return mixed First `$var` that is `isset()`; else `NULL`.
-		 *
-		 * @warning Only the first 10 arguments can be passed by reference.
-		 *
-		 * @warning Overloaded properties may NOT be passed by reference under most circumstanes.
-		 *
-		 * @warning Passing a variable by reference forces it be initialied should it not exist at all.
-		 *    Ordinarly this is NOT an issue; since the variable is initialized w/ a `NULL` value. That's PHP's behavior.
-		 *    However, in the case of objects/arrays this can add keys/properties with a `NULL` value inadvertently.
-		 *    Thus, please exercise caution when using this against objects/arrays where it might matter!
-		 */
-		protected function issetCoalesce(&$a, &$b = NULL, &$c = NULL, &$d = NULL, &$e = NULL, &$f = NULL, &$g = NULL, &$h = NULL, &$i = NULL, &$j = NULL)
-		{
-			foreach(func_get_args() as $var)
-				if(isset($var)) // Set?
-					return $var;
-
-			return NULL; // Default value.
-		}
-
-		/**
-		 * Utility Method; `!empty()` or what?
-		 *
-		 * @param mixed  $var A variable; by reference.
-		 * @param mixed  $or If `$var` is empty, return this.
-		 * @param string $type Force a particular type if `!empty()`?
-		 *
-		 * @return mixed `$var` if `!empty()`; else `$or`.
-		 *
-		 * @warning Overloaded properties may NOT be passed by reference under most circumstanes.
-		 *
-		 * @warning Passing a variable by reference forces it be initialied should it not exist at all.
-		 *    Ordinarly this is NOT an issue; since the variable is initialized w/ a `NULL` value. That's PHP's behavior.
-		 *    However, in the case of objects/arrays this can add keys/properties with a `NULL` value inadvertently.
-		 *    Thus, please exercise caution when using this against objects/arrays where it might matter!
-		 */
-		protected function notEmptyOr(&$var, $or = NULL, $type = '')
-		{
-			if(!empty($var))
-			{
-				if($type) // Set type?
-					settype($var, $type);
-				return $var;
-			}
-			return $or; // Do not cast `$or`.
-		}
-
-		/**
-		 * Utility Method; `!empty()` coalesce.
-		 *
-		 * @param mixed $a A variable; by reference.
-		 * @param mixed $b A variable; by reference.
-		 * @param mixed $c A variable; by reference.
-		 * @param mixed $d A variable; by reference.
-		 * @param mixed $e A variable; by reference.
-		 * @param mixed $f A variable; by reference.
-		 * @param mixed $g A variable; by reference.
-		 * @param mixed $h A variable; by reference.
-		 * @param mixed $i A variable; by reference.
-		 * @param mixed $j A variable; by reference.
-		 *
-		 * @return mixed First argument that is `!empty()`; else `NULL`.
-		 *
-		 * @warning Only the first 10 arguments can be passed by reference.
-		 *
-		 * @warning Overloaded properties may NOT be passed by reference under most circumstanes.
-		 *    See {@link coalesce()} for a variation that allows for overloaded properties.
-		 *
-		 * @warning Passing a variable by reference forces it be initialied should it not exist at all.
-		 *    Ordinarly this is NOT an issue; since the variable is initialized w/ a `NULL` value. That's PHP's behavior.
-		 *    However, in the case of objects/arrays this can add keys/properties with a `NULL` value inadvertently.
-		 *    Thus, please exercise caution when using this against objects/arrays where it might matter!
-		 */
-		protected function notEmptyCoalesce(&$a, &$b = NULL, &$c = NULL, &$d = NULL, &$e = NULL, &$f = NULL, &$g = NULL, &$h = NULL, &$i = NULL, &$j = NULL)
-		{
-			foreach(func_get_args() as $var)
-				if(!empty($var)) // Not empty?
-					return $var;
-
-			return NULL; // Default value.
-		}
-
-		/**
-		 * Utility Method; `!empty()` coalesce.
-		 *
-		 * @return mixed First argument that is `!empty()`; else `NULL`.
-		 *
-		 * @note This works only on existing variables; i.e. those that have been initialized already.
-		 *    If you need to check uninitialized variables, see {@link not_empty_coalesce()}.
-		 *
-		 * @note If you need to check properties in a class that implements overloading, this method is suggested.
-		 *    i.e., This will work on overloaded properties too; since they are NOT passed by reference here.
-		 */
-		protected function coalesce()
-		{
-			foreach(func_get_args() as $var)
-				if(!empty($var)) // Not empty?
-					return $var;
-
-			return NULL; // Default value.
-		}
-
-		/*
-		 * Cache key generation helpers.
+		 * Cache Key Helpers
 		 */
 
 		/**
 		 * Construct and acquire a cache key.
+		 *
+		 * @since 15xxxx Initial release.
 		 *
 		 * @param string      $function `__FUNCTION__` is suggested here.
 		 *    i.e. the calling function name in the calling class.
@@ -337,6 +128,8 @@ namespace WebSharks\Core
 		/**
 		 * Construct and acquire a static key.
 		 *
+		 * @since 15xxxx Initial release.
+		 *
 		 * @param string      $function See {@link cache_key()}.
 		 * @param mixed|array $args See {@link cache_key()}.
 		 *
@@ -355,7 +148,7 @@ namespace WebSharks\Core
 		/**
 		 * Unset cache keys.
 		 *
-		 * @since 150113 first documented version.
+		 * @since 15xxxx Initial release.
 		 *
 		 * @param array $preserve Preserve certain keys?
 		 */
@@ -370,7 +163,7 @@ namespace WebSharks\Core
 		/**
 		 * Unset static keys.
 		 *
-		 * @since 150113 first documented version.
+		 * @since 15xxxx Initial release.
 		 *
 		 * @param array $preserve Preserve certain keys?
 		 */

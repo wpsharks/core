@@ -44,7 +44,12 @@
 
 	"autoload"     : {
 		"psr-4": {
-			"WebSharks\\Core\\": "includes/classes/"
+			"WebSharks\\Core\\Classes\\": "includes/classes/",
+			"WebSharks\\Core\\Traits\\" : "includes/traits/"
 		}
+	},
+
+	"config"       : {
+		"vendor-dir": "includes/vendor"
 	}
 }
