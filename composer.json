@@ -1,11 +1,11 @@
 {
-	"name"       : "websharks/core",
-	"homepage"   : "https://github.com/websharks/core",
-	"description": "Core PHP library used by WebSharks, Inc.",
-	"keywords"   : ["websharks"],
-	"type"       : "library",
-	"license"    : "GPL-3.0+",
-	"authors"    : [
+	"name"         : "websharks/core",
+	"homepage"     : "https://github.com/websharks/core",
+	"description"  : "Core PHP library used by WebSharks, Inc.",
+	"keywords"     : ["websharks"],
+	"type"         : "library",
+	"license"      : "GPL-3.0+",
+	"authors"      : [
 		{
 			"name"    : "websharks",
 			"homepage": "http://websharks-inc.com/",
@@ -22,12 +22,14 @@
 			"role"    : "developer"
 		}
 	],
-	"support"    : {
+	"support"      : {
 		"source": "https://github.com/websharks/core",
 		"issues": "https://github.com/websharks/core/issues"
 	},
-	"require"    : {
+
+	"require"      : {
 		"php"                   : ">=5.4",
+		"ext-openssl"           : "*",
 		"ext-curl"              : "*",
 		"ext-mbstring"          : "*",
 
@@ -38,7 +40,9 @@
 		"symfony/yaml"          : "2.*",
 		"lusitanian/oauth"      : "0.*"
 	},
-	"autoload"   : {
+	"prefer-stable": true,
+
+	"autoload"     : {
 		"psr-4": {
 			"WebSharks\\Core\\": "includes/classes/"
 		}
