@@ -139,7 +139,7 @@ namespace WebSharks\Core
 		 *    However, in the case of objects/arrays this can add keys/properties with a `NULL` value inadvertently.
 		 *    Thus, please exercise caution when using this against objects/arrays where it might matter!
 		 */
-		protected function isset_or(&$var, $or = NULL, $type = '')
+		protected function issetOr(&$var, $or = NULL, $type = '')
 		{
 			if(isset($var))
 			{
@@ -175,7 +175,7 @@ namespace WebSharks\Core
 		 *    However, in the case of objects/arrays this can add keys/properties with a `NULL` value inadvertently.
 		 *    Thus, please exercise caution when using this against objects/arrays where it might matter!
 		 */
-		protected function isset_coalesce(&$a, &$b = NULL, &$c = NULL, &$d = NULL, &$e = NULL, &$f = NULL, &$g = NULL, &$h = NULL, &$i = NULL, &$j = NULL)
+		protected function issetCoalesce(&$a, &$b = NULL, &$c = NULL, &$d = NULL, &$e = NULL, &$f = NULL, &$g = NULL, &$h = NULL, &$i = NULL, &$j = NULL)
 		{
 			foreach(func_get_args() as $var)
 				if(isset($var)) // Set?
@@ -200,7 +200,7 @@ namespace WebSharks\Core
 		 *    However, in the case of objects/arrays this can add keys/properties with a `NULL` value inadvertently.
 		 *    Thus, please exercise caution when using this against objects/arrays where it might matter!
 		 */
-		protected function not_empty_or(&$var, $or = NULL, $type = '')
+		protected function notEmptyOr(&$var, $or = NULL, $type = '')
 		{
 			if(!empty($var))
 			{
@@ -237,7 +237,7 @@ namespace WebSharks\Core
 		 *    However, in the case of objects/arrays this can add keys/properties with a `NULL` value inadvertently.
 		 *    Thus, please exercise caution when using this against objects/arrays where it might matter!
 		 */
-		protected function not_empty_coalesce(&$a, &$b = NULL, &$c = NULL, &$d = NULL, &$e = NULL, &$f = NULL, &$g = NULL, &$h = NULL, &$i = NULL, &$j = NULL)
+		protected function notEmptyCoalesce(&$a, &$b = NULL, &$c = NULL, &$d = NULL, &$e = NULL, &$f = NULL, &$g = NULL, &$h = NULL, &$i = NULL, &$j = NULL)
 		{
 			foreach(func_get_args() as $var)
 				if(!empty($var)) // Not empty?
@@ -290,7 +290,7 @@ namespace WebSharks\Core
 		 * @note This function returns by reference. The use of `&` is highly recommended when calling this utility.
 		 *    See also: <http://php.net/manual/en/language.references.return.php>
 		 */
-		protected function &cache_key($function, $args = array(), $___prop = 'cache')
+		protected function &cacheKey($function, $args = array(), $___prop = 'cache')
 		{
 			$function = (string)$function;
 			$args     = (array)$args;
@@ -345,9 +345,9 @@ namespace WebSharks\Core
 		 * @note This function returns by reference. The use of `&` is highly recommended when calling this utility.
 		 *    See also: <http://php.net/manual/en/language.references.return.php>
 		 */
-		protected function &static_key($function, $args = array())
+		protected function &staticKey($function, $args = array())
 		{
-			$key = &$this->cache_key($function, $args, 'static');
+			$key = &$this->cacheKey($function, $args, 'static');
 
 			return $key; // By reference.
 		}
@@ -359,7 +359,7 @@ namespace WebSharks\Core
 		 *
 		 * @param array $preserve Preserve certain keys?
 		 */
-		protected function unset_cache_keys(array $preserve = array())
+		protected function unsetCacheKeys(array $preserve = array())
 		{
 			foreach($this->cache as $_key => $_value)
 				if(!$preserve || !in_array($_key, $preserve, TRUE))
@@ -374,7 +374,7 @@ namespace WebSharks\Core
 		 *
 		 * @param array $preserve Preserve certain keys?
 		 */
-		protected function unset_static_keys(array $preserve = array())
+		protected function unsetStaticKeys(array $preserve = array())
 		{
 			foreach($this->static as $_key => $_value)
 				if(!$preserve || !in_array($_key, $preserve, TRUE))
