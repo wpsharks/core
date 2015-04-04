@@ -10,7 +10,6 @@
 
 # Composer
 vendor/
-composer.lock
 
 # Node
 node_modules/

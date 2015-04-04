@@ -27,6 +27,10 @@
 		"issues": "https://github.com/websharks/core/issues"
 	},
 	"require"    : {
+		"php"                   : ">=5.4",
+		"ext-curl"              : "*",
+		"ext-mbstring"          : "*",
+
 		"aws/aws-sdk-php"       : "2.*",
 		"erusev/parsedown"      : "1.*",
 		"erusev/parsedown-extra": "0.*",
