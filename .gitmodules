@@ -1,3 +1,0 @@
-[submodule "submodules/php-oauth-lib"]
-	path = submodules/php-oauth-lib
-	url = https://github.com/Lusitanian/PHPoAuthLib
