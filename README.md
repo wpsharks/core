@@ -3,7 +3,6 @@
 <img src="http://cdn.websharks-inc.com/websharks/uploads/2013/11/sharks-logo.png" width="150" align="right" />
 
 [![](https://img.shields.io/github/license/websharks/core.svg)](https://github.com/websharks/core/blob/HEAD/LICENSE.txt)
-
 [![](https://img.shields.io/badge/made-w%2F_100%25_pure_awesome_sauce-AB815F.svg?label=made)](http://websharks-inc.com/)
 [![](https://img.shields.io/badge/by-WebSharks_Inc.-656598.svg?label=by)](http://www.websharks-inc.com/team/)
 [![](https://img.shields.io/github/release/websharks/core.svg?label=latest)](https://github.com/websharks/core/releases)
