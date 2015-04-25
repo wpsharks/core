@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="Project" default="build">
+
+  <basename property="project_basename" file="${project.basedir}" suffix="" />
+  <property name="build_dir" value="${project.basedir}/.~build" />
+
+  <property name="phar_file" value="${build_dir}/websharks-${project_basename}.phar" />
+  <property name="phar_stub_file" value="${project.basedir}/src/phar-stub.php" />
+
+  <property name="composer_path" value="/usr/bin/env composer" />
+  <property name="composer_lock" value="${project.basedir}/composer.lock" />
+  <property name="vendor_dir" value="${project.basedir}/src/vendor" />
+
+  <property name="brand" value="Brand" />
+
+  <target name="preamble">
+    <echo msg="OS: ${os.name}" />
+    <echo msg="HOME: ${user.home}" />
+    <echo msg="------------------------------------" />
+    <echo msg="PHP version: ${php.version}" />
+    <echo msg="Phing version: ${phing.version}" />
+    <echo msg="------------------------------------" />
+    <echo msg="Project: ${phing.project.name}" />
+    <echo msg="Project basename: ${project_basename}" />
+    <echo msg="Base directory: ${project.basedir}" />
+    <echo msg="------------------------------------" />
+  </target>
+
+  <target name="prepare" depends="preamble">
+    <echo msg="Preparing to build..." />
+    <echo msg="------------------------------------" />
+    <echo msg="Deleting previous: ${build_dir} ..." />
+    <delete dir="${build_dir}" includeemptydirs="true" quiet="true" />
+    <echo msg="------------------------------------" />
+    <echo msg="Creating: ${build_dir} ..." />
+    <mkdir dir="${build_dir}" />
+    <echo msg="------------------------------------" />
+  </target>
+
+  <target name="composer" depends="preamble,prepare">
+    <echo msg="Deleting previous: ${vendor_dir} ..." />
+    <delete dir="${vendor_dir}" includeemptydirs="true" quiet="true" />
+    <echo msg="------------------------------------" />
+    <echo msg="Deleting previous: ${composer_lock} ..." />
+    <delete file="${composer_lock}" quiet="true" />
+    <echo msg="------------------------------------" />
+    <echo msg="Running Composer..." />
+    <exec command="${composer_path} install" dir="${project.basedir}" passthru="true" checkreturn="true" />
+    <echo msg="------------------------------------" />
+  </target>
+
+  <target name="phar" depends="preamble,prepare">
+    <echo msg="Deleting previous: ${phar_file} ..." />
+    <delete file="${phar_file}" quiet="true" />
+    <echo msg="------------------------------------" />
+    <echo msg="Creating PHAR file..." />
+    <pharpackage basedir="${project.basedir}" stub="${phar_stub_file}" destfile="${phar_file}">
+      <fileset dir="${project.basedir}/src">
+        <exclude name="**/vendor/bin/**" />
+        <exclude name="**/phar-stub.php" />
+        <exclude name="**/build.xml" />
+        <exclude name="**/composer.json" />
+        <exclude name="**/composer.lock" />
+        <exclude name="**/.~**" />
+      </fileset>
+    </pharpackage>
+    <echo msg="------------------------------------" />
+  </target>
+
+  <target name="rebrand-src" depends="preamble,prepare">
+    <echo msg="Rebranding: ${project.basedir}/src ..." />
+    <reflexive>
+      <fileset dir="${project.basedir}/src">
+        <include pattern="includes/classes/*.php" />
+        <include pattern="includes/traits/*.php" />
+      </fileset>
+      <filterchain>
+        <replaceregexp>
+          <regexp pattern="\bnamespace\s+WebSharks\\Core(?:\\[^\\]+)?\\Classes\b" replace="namespace WebSharks\Core\${brand}\Classes" />
+          <regexp pattern="\bnamespace\s+WebSharks\\Core(?:\\[^\\]+)?\\Traits\b" replace="namespace WebSharks\Core\${brand}\Traits" />
+        </replaceregexp>
+      </filterchain>
+    </reflexive>
+    <echo msg="------------------------------------" />
+  </target>
+
+  <target name="build" depends="preamble,prepare,composer,phar">
+    <echo msg="Build complete! :-)" />
+  </target>
+
+  <target name="rebuild" depends="preamble,prepare,phar">
+    <echo msg="Rebuild complete! :-)" />
+  </target>
+
+  <target name="rebrand" depends="preamble,prepare,rebrand-src">
+    <echo msg="Rebrand complete! :-)" />
+  </target>
+
+</project>

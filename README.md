@@ -1,3 +1,10 @@
 ## Core PHP library used by WebSharks, Inc.
 
-A work in progress.
+```json
+{
+    "require": {
+        "php": ">=5.4",
+        "websharks/core": "dev-master"
+    }
+}
+```
