@@ -1,6 +1,6 @@
 <?php
 /**
- * Core Stub.
+ * Stub.
  *
  * @since 150424 Initial release.
  */
