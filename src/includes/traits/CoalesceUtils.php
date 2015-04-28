@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Coalesce.
+ * Coalesce Utilities.
  *
  * @since 150424 Initial release.
  */
-trait Coalesce
+trait CoalesceUtils
 {
     /**
      * Utility; `!empty()` coalesce.
