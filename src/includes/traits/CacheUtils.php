@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Classes;
 
 /**
- * Cache Members.
+ * Cache Utilities.
  *
  * @since 150424 Initial release.
  */
-trait CacheMembers
+trait CacheUtils
 {
     /**
      * @type array Instance cache.

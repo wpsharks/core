@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Overload Members.
+ * Overload Utilities.
  *
  * @since 150424 Initial release.
  */
-trait OverloadMembers
+trait OverloadUtils
 {
     /**
      * @type array Overload properties.
