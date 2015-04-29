@@ -1,4 +1,4 @@
-## Core PHP library used by WebSharks, Inc.
+## WebSharks™ Core
 
 <img src="http://cdn.websharks-inc.com/websharks/uploads/2013/11/sharks-logo.png" width="150" align="right" />
 
@@ -12,6 +12,8 @@
 [![](https://img.shields.io/github/stars/websharks/core.svg?label=stars)](https://github.com/websharks/core/stargazers)
 [![](https://img.shields.io/github/downloads/websharks/core/latest/total.svg?label=downloads)](https://github.com/websharks/core/releases)
 [![](https://img.shields.io/packagist/dt/websharks/core.svg?label=packagist)](https://packagist.org/packages/websharks/core)
+
+Core PHP library used by WebSharks, Inc.
 
 ```json
 {
