@@ -88,4 +88,29 @@ trait Definitions
      * @type string Regular expression fragment (dot matches newline inside quotes).
      */
     protected $def_regex_frag_dsq_value = '(?P<open_dsq>(?<!\\\\)["\'])(?P<dsq_value>(?s:\\\\.|(?!\\\\|(?P=open_dsq)).)*?)(?P<close_dsq>(?P=open_dsq))';
+
+    /**
+     * @type string Regex matches a `scheme://`.
+     */
+    protected $def_regex_frag_scheme = '(?:[a-zA-Z0-9]+\:)?\/\/';
+
+    /**
+     * @type string Regex matches a `host` name (TLD optional).
+     */
+    protected $def_regex_frag_host = '[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*)*(?:\.[a-zA-Z][a-zA-Z0-9]+)?';
+
+    /**
+     * @type string Regex matches a `host:port` (`:port`, TLD are optional).
+     */
+    protected $def_regex_frag_host_port = '[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*)*(?:\.[a-zA-Z][a-zA-Z0-9]+)?(?:\:[0-9]+)?';
+
+    /**
+     * @type string Regex matches a `user:pass@host:port` (`user:pass@`, `:port`, TLD are optional).
+     */
+    protected $def_regex_frag_user_host_port = '(?:[a-zA-Z0-9\-_.~+%]+(?:\:[a-zA-Z0-9\-_.~+%]+)?@)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*)*(?:\.[a-zA-Z][a-zA-Z0-9]+)?(?:\:[0-9]+)?';
+
+    /**
+     * @type string Regex matches a valid `scheme://user:pass@host:port/path/?query#fragment` URL (`scheme:`, `user:pass@`, `:port`, `TLD`, `path`, `query` and `fragment` are optional).
+     */
+    protected $def_regex_valid_url = '/^(?:[a-zA-Z0-9]+\:)?\/\/(?:[a-zA-Z0-9\-_.~+%]+(?:\:[a-zA-Z0-9\-_.~+%]+)?@)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*)*(?:\.[a-zA-Z][a-zA-Z0-9]+)?(?:\:[0-9]+)?(?:\/(?!\/)[a-zA-Z0-9\-_.~+%]*)*(?:\?(?:[a-zA-Z0-9\-_.~+%]+(?:\=[a-zA-Z0-9\-_.~+%&]*)?)*)?(?:#[^\s]*)?$/';
 }

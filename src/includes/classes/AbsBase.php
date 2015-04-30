@@ -12,6 +12,7 @@ use WebSharks\Core\Traits;
 abstract class AbsBase implements Interfaces\Constants
 {
     use Traits\CacheUtils;
+    use Traits\Definitions;
 
     /**
      * Class constructor.

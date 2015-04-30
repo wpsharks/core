@@ -1,0 +1,203 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	Development	//
+ALL	src/includes/interfaces/Constants.php	/^    const ALL = '___all___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+ANY	src/includes/interfaces/Constants.php	/^    const ANY = '___any___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+APPEND	src/includes/interfaces/Constants.php	/^    const APPEND = '___append___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+ARRAY_A_TYPE	src/includes/interfaces/Constants.php	/^    const ARRAY_A_TYPE = '___array_a_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+ARRAY_N_TYPE	src/includes/interfaces/Constants.php	/^    const ARRAY_N_TYPE = '___array_n_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+AbsBase	src/includes/classes/AbsBase.php	/^abstract class AbsBase implements Interfaces\\Constants$/;"	c	namespace:WebSharks\Core\Classes
+ArrayDimensionUtils	src/includes/traits/ArrayDimensionUtils.php	/^trait ArrayDimensionUtils$/;"	t	namespace:WebSharks\Core\Traits
+ArrayDotKeyUtils	src/includes/traits/ArrayDotKeyUtils.php	/^trait ArrayDotKeyUtils$/;"	t	namespace:WebSharks\Core\Traits
+ArrayIteratorUtils	src/includes/traits/ArrayIteratorUtils.php	/^trait ArrayIteratorUtils$/;"	t	namespace:WebSharks\Core\Traits
+ArrayUtils	src/includes/traits/ArrayUtils.php	/^trait ArrayUtils$/;"	t	namespace:WebSharks\Core\Traits
+BINARY	src/includes/interfaces/Constants.php	/^    const BINARY = '___binary___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+BOOLEAN_TYPE	src/includes/interfaces/Constants.php	/^    const BOOLEAN_TYPE = '___boolean_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+CACHEABLE	src/includes/interfaces/Constants.php	/^    const CACHEABLE = '___cacheable___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+COMPRESSABLE	src/includes/interfaces/Constants.php	/^    const COMPRESSABLE = '___compressable___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+CORE	src/includes/interfaces/Constants.php	/^    const CORE = '___core___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+CacheUtils	src/includes/traits/CacheUtils.php	/^trait CacheUtils$/;"	t	namespace:WebSharks\Core\Classes
+CoalesceUtils	src/includes/traits/CoalesceUtils.php	/^trait CoalesceUtils$/;"	t	namespace:WebSharks\Core\Traits
+Constants	src/includes/interfaces/Constants.php	/^interface Constants$/;"	i	namespace:WebSharks\Core\Interfaces
+DEFAULTS	src/includes/interfaces/Constants.php	/^    const DEFAULTS = '___defaults___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+DIR	src/includes/interfaces/Constants.php	/^    const DIR = '___dir___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+DIRECT	src/includes/interfaces/Constants.php	/^    const DIRECT = '___direct___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+DO_ECHO	src/includes/interfaces/Constants.php	/^    const DO_ECHO = true;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+Definitions	src/includes/traits/Definitions.php	/^trait Definitions$/;"	t	namespace:WebSharks\Core\Traits
+EnvUtils	src/includes/traits/EnvUtils.php	/^trait EnvUtils$/;"	t	namespace:WebSharks\Core\Traits
+FILE	src/includes/interfaces/Constants.php	/^    const FILE = '___file___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+FLOAT_TYPE	src/includes/interfaces/Constants.php	/^    const FLOAT_TYPE = '___float_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+FsSizeUtils	src/includes/traits/FsSizeUtils.php	/^trait FsSizeUtils$/;"	t	namespace:WebSharks\Core\Traits
+FsUtils	src/includes/traits/FsUtils.php	/^trait FsUtils$/;"	t	namespace:WebSharks\Core\Traits
+GITIGNORE	src/includes/interfaces/Constants.php	/^    const GITIGNORE = '___gitignore___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_BRACE	src/includes/interfaces/Constants.php	/^    const GLOB_BRACE = 16;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_CASEFOLD	src/includes/interfaces/Constants.php	/^    const GLOB_CASEFOLD = 128;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_ERR	src/includes/interfaces/Constants.php	/^    const GLOB_ERR = 64;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_MARK	src/includes/interfaces/Constants.php	/^    const GLOB_MARK = 1;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_NOCHECK	src/includes/interfaces/Constants.php	/^    const GLOB_NOCHECK = 4;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_NOESCAPE	src/includes/interfaces/Constants.php	/^    const GLOB_NOESCAPE = 8;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_NOSORT	src/includes/interfaces/Constants.php	/^    const GLOB_NOSORT = 2;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_ONLYDIR	src/includes/interfaces/Constants.php	/^    const GLOB_ONLYDIR = 32;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+GLOB_PERIOD	src/includes/interfaces/Constants.php	/^    const GLOB_PERIOD = 256;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+IGNORE_EXTRA_GLOBS	src/includes/interfaces/Constants.php	/^    const IGNORE_EXTRA_GLOBS = '___ignore_extra_globs___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+IGNORE_GLOBS	src/includes/interfaces/Constants.php	/^    const IGNORE_GLOBS = '___ignore_globs___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+INTEGER_TYPE	src/includes/interfaces/Constants.php	/^    const INTEGER_TYPE = '___integer_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+NO_ECHO	src/includes/interfaces/Constants.php	/^    const NO_ECHO = false;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+OBJECT_TYPE	src/includes/interfaces/Constants.php	/^    const OBJECT_TYPE = '___object_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+OWN	src/includes/interfaces/Constants.php	/^    const OWN = '___own___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+OverloadUtils	src/includes/traits/OverloadUtils.php	/^trait OverloadUtils$/;"	t	namespace:WebSharks\Core\Traits
+PREG_REPLACE	src/includes/interfaces/Constants.php	/^    const PREG_REPLACE = '___preg_replace___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+PREPEND	src/includes/interfaces/Constants.php	/^    const PREPEND = '___prepend___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+PRIVATE_TYPE	src/includes/interfaces/Constants.php	/^    const PRIVATE_TYPE = '___private_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+PROTECTED_TYPE	src/includes/interfaces/Constants.php	/^    const PROTECTED_TYPE = '___protected_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+PUBLIC_TYPE	src/includes/interfaces/Constants.php	/^    const PUBLIC_TYPE = '___public_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+RECONSIDER	src/includes/interfaces/Constants.php	/^    const RECONSIDER = true;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+REGEX_JS	src/includes/interfaces/Constants.php	/^    const REGEX_JS = '___regex_js___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+REGEX_PHP	src/includes/interfaces/Constants.php	/^    const REGEX_PHP = '___regex_php___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+REPLACE	src/includes/interfaces/Constants.php	/^    const REPLACE = '___replace___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+RFC1738	src/includes/interfaces/Constants.php	/^    const RFC1738 = '___rfc1738___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+RFC3986	src/includes/interfaces/Constants.php	/^    const RFC3986 = '___rfc3986___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+RegexPatternUtils	src/includes/traits/RegexPatternUtils.php	/^trait RegexPatternUtils$/;"	t	namespace:WebSharks\Core\Traits
+RegexUtils	src/includes/traits/RegexUtils.php	/^trait RegexUtils$/;"	t	namespace:WebSharks\Core\Traits
+ReplaceUtils	src/includes/traits/ReplaceUtils.php	/^trait ReplaceUtils$/;"	t	namespace:WebSharks\Core\Traits
+STRING_TYPE	src/includes/interfaces/Constants.php	/^    const STRING_TYPE = '___string_type___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+STR_REPLACE	src/includes/interfaces/Constants.php	/^    const STR_REPLACE = '___str_replace___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+SlashUtils	src/includes/traits/SlashUtils.php	/^trait SlashUtils$/;"	t	namespace:WebSharks\Core\Traits
+StripUtils	src/includes/traits/StripUtils.php	/^trait StripUtils$/;"	t	namespace:WebSharks\Core\Traits
+TEXTUAL	src/includes/interfaces/Constants.php	/^    const TEXTUAL = '___textual___';$/;"	d	class:WebSharks\Core\Interfaces::Constants
+TrimUtils	src/includes/traits/TrimUtils.php	/^trait TrimUtils$/;"	t	namespace:WebSharks\Core\Traits
+URL_FRAGMENT	src/includes/interfaces/Constants.php	/^    const URL_FRAGMENT = 128;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+URL_HOST	src/includes/interfaces/Constants.php	/^    const URL_HOST = 8;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+URL_PASS	src/includes/interfaces/Constants.php	/^    const URL_PASS = 4;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+URL_PATH	src/includes/interfaces/Constants.php	/^    const URL_PATH = 32;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+URL_PORT	src/includes/interfaces/Constants.php	/^    const URL_PORT = 16;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+URL_QUERY	src/includes/interfaces/Constants.php	/^    const URL_QUERY = 64;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+URL_SCHEME	src/includes/interfaces/Constants.php	/^    const URL_SCHEME = 1;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+URL_USER	src/includes/interfaces/Constants.php	/^    const URL_USER = 2;$/;"	d	class:WebSharks\Core\Interfaces::Constants
+UrlCurrentUtils	src/includes/traits/UrlCurrentUtils.php	/^trait UrlCurrentUtils$/;"	t	namespace:WebSharks\Core\Traits
+UrlHashUtils	src/includes/traits/UrlHashUtils.php	/^trait UrlHashUtils$/;"	t	namespace:WebSharks\Core\Traits
+UrlQueryUtils	src/includes/traits/UrlQueryUtils.php	/^trait UrlQueryUtils$/;"	t	namespace:WebSharks\Core\Traits
+UrlSchemeUtils	src/includes/traits/UrlSchemeUtils.php	/^trait UrlSchemeUtils$/;"	t	namespace:WebSharks\Core\Traits
+UrlUtils	src/includes/traits/UrlUtils.php	/^trait UrlUtils$/;"	t	namespace:WebSharks\Core\Traits
+VarDumpUtils	src/includes/traits/VarDumpUtils.php	/^trait VarDumpUtils$/;"	t	namespace:WebSharks\Core\Traits
+VarUtils	src/includes/traits/VarUtils.php	/^trait VarUtils$/;"	t	namespace:WebSharks\Core\Traits
+WebSharks\Core	src/phar-stub.php	/^namespace WebSharks\\Core;$/;"	n
+WebSharks\Core	src/stub.php	/^namespace WebSharks\\Core;$/;"	n
+WebSharks\Core\Classes	src/includes/classes/AbsBase.php	/^namespace WebSharks\\Core\\Classes;$/;"	n
+WebSharks\Core\Classes	src/includes/traits/CacheUtils.php	/^namespace WebSharks\\Core\\Classes;$/;"	n
+WebSharks\Core\Interfaces	src/includes/interfaces/Constants.php	/^namespace WebSharks\\Core\\Interfaces;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/ArrayDimensionUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/ArrayDotKeyUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/ArrayIteratorUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/ArrayUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/CoalesceUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/Definitions.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/EnvUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/FsSizeUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/FsUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/OverloadUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/RegexPatternUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/RegexUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/ReplaceUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/SlashUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/StripUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/TrimUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/UrlCurrentUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/UrlHashUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/UrlQueryUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/UrlSchemeUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/UrlUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/VarDumpUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/VarUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/WildcardPatternUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WebSharks\Core\Traits	src/includes/traits/WildcardUtils.php	/^namespace WebSharks\\Core\\Traits;$/;"	n
+WildcardPatternUtils	src/includes/traits/WildcardPatternUtils.php	/^trait WildcardPatternUtils$/;"	t	namespace:WebSharks\Core\Traits
+WildcardUtils	src/includes/traits/WildcardUtils.php	/^trait WildcardUtils$/;"	t	namespace:WebSharks\Core\Traits
+__construct	src/includes/classes/AbsBase.php	/^    public function __construct()$/;"	f	class:WebSharks\Core\Classes::AbsBase
+__get	src/includes/traits/OverloadUtils.php	/^    public function __get($property)$/;"	f	trait:WebSharks\Core\Traits::OverloadUtils
+__isset	src/includes/traits/OverloadUtils.php	/^    public function __isset($property)$/;"	f	trait:WebSharks\Core\Traits::OverloadUtils
+__set	src/includes/traits/OverloadUtils.php	/^    public function __set($property, $value)$/;"	f	trait:WebSharks\Core\Traits::OverloadUtils
+__unset	src/includes/traits/OverloadUtils.php	/^    public function __unset($property)$/;"	f	trait:WebSharks\Core\Traits::OverloadUtils
+addUrlQueryArgs	src/includes/traits/UrlQueryUtils.php	/^    protected function addUrlQueryArgs(array $new_args, $url)$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+arrayDotKeys	src/includes/traits/ArrayDotKeyUtils.php	/^    protected function arrayDotKeys(array $array)$/;"	f	trait:WebSharks\Core\Traits::ArrayDotKeyUtils
+arrayIterator	src/includes/traits/ArrayIteratorUtils.php	/^    protected function arrayIterator(array $array)$/;"	f	trait:WebSharks\Core\Traits::ArrayIteratorUtils
+arrayToOneDimension	src/includes/traits/ArrayDimensionUtils.php	/^    public function arrayToOneDimension(array $array)$/;"	f	trait:WebSharks\Core\Traits::ArrayDimensionUtils
+buildRawUrlQuery	src/includes/traits/UrlQueryUtils.php	/^    protected function buildRawUrlQuery(array $args, $numeric_prefix = null, $arg_separator = '&')$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+buildUrlQuery	src/includes/traits/UrlQueryUtils.php	/^    protected function buildUrlQuery(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null)$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+cache	src/includes/traits/CacheUtils.php	/^    protected $cache = array();$/;"	v	trait:WebSharks\Core\Classes::CacheUtils
+cacheInit	src/includes/traits/CacheUtils.php	/^    protected function cacheInit()$/;"	f	trait:WebSharks\Core\Classes::CacheUtils
+cacheKey	src/includes/traits/CacheUtils.php	/^    protected function &cacheKey($function, $args = array(), $___prop = 'cache')$/;"	f	trait:WebSharks\Core\Classes::CacheUtils
+coalesce	src/includes/traits/CoalesceUtils.php	/^    protected function coalesce()$/;"	f	trait:WebSharks\Core\Traits::CoalesceUtils
+currentUrl	src/includes/traits/UrlCurrentUtils.php	/^    protected function currentUrl($scheme = null)$/;"	f	trait:WebSharks\Core\Traits::UrlCurrentUtils
+currentUrlHost	src/includes/traits/EnvUtils.php	/^    abstract protected function currentUrlHost($no_port = false);$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+currentUrlHost	src/includes/traits/UrlCurrentUtils.php	/^    protected function currentUrlHost($no_port = false)$/;"	f	trait:WebSharks\Core\Traits::UrlCurrentUtils
+currentUrlPath	src/includes/traits/UrlCurrentUtils.php	/^    protected function currentUrlPath()$/;"	f	trait:WebSharks\Core\Traits::UrlCurrentUtils
+currentUrlPathInfo	src/includes/traits/UrlCurrentUtils.php	/^    protected function currentUrlPathInfo()$/;"	f	trait:WebSharks\Core\Traits::UrlCurrentUtils
+currentUrlScheme	src/includes/traits/UrlCurrentUtils.php	/^    protected function currentUrlScheme()$/;"	f	trait:WebSharks\Core\Traits::UrlCurrentUtils
+currentUrlUri	src/includes/traits/UrlCurrentUtils.php	/^    protected function currentUrlUri()$/;"	f	trait:WebSharks\Core\Traits::UrlCurrentUtils
+def_ampersand_entities	src/includes/traits/Definitions.php	/^    protected $def_ampersand_entities = array($/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_html_whitespace	src/includes/traits/Definitions.php	/^    protected $def_html_whitespace = array($/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_mb_detection_order	src/includes/traits/Definitions.php	/^    protected $def_mb_detection_order = array('UTF-8', 'ISO-8859-1');$/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_quote_entities	src/includes/traits/Definitions.php	/^    protected $def_quote_entities = array($/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_regex_frag_dq_value	src/includes/traits/Definitions.php	/^    protected $def_regex_frag_dq_value = '(?P<open_dq>(?<!\\\\\\\\)")(?P<dq_value>(?s:\\\\\\\\.|[^\\\\\\\\"])*?)(?P<close_dq>")';$/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_regex_frag_dsq_value	src/includes/traits/Definitions.php	/^    protected $def_regex_frag_dsq_value = '(?P<open_dsq>(?<!\\\\\\\\)["\\'])(?P<dsq_value>(?s:\\\\\\\\.|(?!\\\\\\\\|(?P=open_dsq)).)*?)(?P<close_dsq>(?P=open_dsq))';$/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_regex_frag_host	src/includes/traits/Definitions.php	/^    protected $def_regex_frag_host = '[a-zA-Z0-9]+(?:\\-*[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+(?:\\-*[a-zA-Z0-9]+)*)*(?:\\.[a-zA-Z][a-zA-Z0-9]+)?';$/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_regex_frag_host_port	src/includes/traits/Definitions.php	/^    protected $def_regex_frag_host_port = '[a-zA-Z0-9]+(?:\\-*[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+(?:\\-*[a-zA-Z0-9]+)*)*(?:\\.[a-zA-Z][a-zA-Z0-9]+)?(?:\\:[0-9]+)?';$/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_regex_frag_scheme	src/includes/traits/Definitions.php	/^    protected $def_regex_frag_scheme = '(?:[a-zA-Z0-9]+\\:)?\\\/\\\/';$/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_regex_frag_sq_value	src/includes/traits/Definitions.php	/^    protected $def_regex_frag_sq_value = '(?P<open_sq>(?<!\\\\\\\\)\\')(?P<sq_value>(?s:\\\\\\\\.|[^\\\\\\\\\\'])*?)(?P<close_sq>\\')';$/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_regex_frag_user_host_port	src/includes/traits/Definitions.php	/^    protected $def_regex_frag_user_host_port = '(?:[a-zA-Z0-9\\-_.~+%]+(?:\\:[a-zA-Z0-9\\-_.~+%]+)?@)?[a-zA-Z0-9]+(?:\\-*[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+(?:\\-*[a-zA-Z0-9]+)*)*(?:\\.[a-zA-Z][a-zA-Z0-9]+)?(?:\\:[0-9]+)?';$/;"	v	trait:WebSharks\Core\Traits::Definitions
+def_regex_valid_url	src/includes/traits/Definitions.php	/^    protected $def_regex_valid_url = '\/^(?:[a-zA-Z0-9]+\\:)?\\\/\\\/(?:[a-zA-Z0-9\\-_.~+%]+(?:\\:[a-zA-Z0-9\\-_.~+%]+)?@)?[a-zA-Z0-9]+(?:\\-*[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+(?:\\-*[a-zA-Z0-9]+)*)*(?:\\.[a-zA-Z][a-zA-Z0-9]+)?(?:\\:[0-9]+)?(?:\\\/(?!\\\/)[a-zA-Z0-9\\-_.~+%]*)*(?:\\?(?:[a-zA-Z0-9\\-_.~+%]+(?:\\=[a-zA-Z0-9\\-_.~+%&]*)?)*)?(?:#[^\\s]*)?$\/';$/;"	v	trait:WebSharks\Core\Traits::Definitions
+doVarDump	src/includes/traits/VarDumpUtils.php	/^    protected function doVarDump($/;"	f	trait:WebSharks\Core\Traits::VarDumpUtils
+envDoingExit	src/includes/traits/EnvUtils.php	/^    protected function envDoingExit($doing = null)$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envIsCli	src/includes/traits/EnvUtils.php	/^    protected function envIsCli()$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envIsLocalhost	src/includes/traits/EnvUtils.php	/^    protected function envIsLocalhost()$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envIsSsl	src/includes/traits/EnvUtils.php	/^    protected function envIsSsl()$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envIsUnix	src/includes/traits/EnvUtils.php	/^    protected function envIsUnix()$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envIsWindows	src/includes/traits/EnvUtils.php	/^    protected function envIsWindows()$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envMaxExecutionTime	src/includes/traits/EnvUtils.php	/^    protected function envMaxExecutionTime()$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envMaxUploadSize	src/includes/traits/EnvUtils.php	/^    protected function envMaxUploadSize()$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envMaximizeMemory	src/includes/traits/EnvUtils.php	/^    protected function envMaximizeMemory($max = '256M')$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+envPrepForOutput	src/includes/traits/EnvUtils.php	/^    protected function envPrepForOutput()$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+global_static	src/includes/traits/CacheUtils.php	/^    protected static $global_static = array();$/;"	v	trait:WebSharks\Core\Classes::CacheUtils
+iReplaceCodes	src/includes/traits/ReplaceUtils.php	/^    protected function iReplaceCodes($string, array $meta_vars = array(), array $vars = array(), $urlencode = false, $implode_non_scalars = '')$/;"	f	trait:WebSharks\Core\Traits::ReplaceUtils
+iReplaceCodesDeep	src/includes/traits/ReplaceUtils.php	/^    protected function iReplaceCodesDeep($value, array $meta_vars = array(), array $vars = array(), $preserve_types = false, $urlencode = false, $implode_non_scalars = '')$/;"	f	trait:WebSharks\Core\Traits::ReplaceUtils
+iReplaceOnce	src/includes/traits/ReplaceUtils.php	/^    protected function iReplaceOnce($needle, $replace, $string)$/;"	f	trait:WebSharks\Core\Traits::ReplaceUtils
+iReplaceOnceDeep	src/includes/traits/ReplaceUtils.php	/^    protected function iReplaceOnceDeep($needle, $replace, $value)$/;"	f	trait:WebSharks\Core\Traits::ReplaceUtils
+inRegexPatterns	src/includes/traits/RegexPatternUtils.php	/^    protected function inRegexPatterns($string, $value, $collect_key_props = false)$/;"	f	trait:WebSharks\Core\Traits::RegexPatternUtils
+inWildcardPatterns	src/includes/traits/WildcardPatternUtils.php	/^    protected function inWildcardPatterns($/;"	f	trait:WebSharks\Core\Traits::WildcardPatternUtils
+lTrim	src/includes/traits/TrimUtils.php	/^    protected function lTrim($string, $chars = '', $extra_chars = '')$/;"	f	trait:WebSharks\Core\Traits::TrimUtils
+lTrimContent	src/includes/traits/TrimUtils.php	/^    protected function lTrimContent($string, $chars = '', $extra_chars = '')$/;"	f	trait:WebSharks\Core\Traits::TrimUtils
+overload	src/includes/traits/OverloadUtils.php	/^    protected $overload = [];$/;"	v	trait:WebSharks\Core\Traits::OverloadUtils
+parseRawUrlQuery	src/includes/traits/UrlQueryUtils.php	/^    protected function parseRawUrlQuery($string, $convert_dots_spaces = true)$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+parseUrl	src/includes/traits/UrlQueryUtils.php	/^    protected function parseUrl($url, $component = -1)$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+parseUrlQuery	src/includes/traits/UrlQueryUtils.php	/^    protected function parseUrlQuery($string, $convert_dots_spaces = true, $dec_type = self::RFC1738, &$___parent_array = null)$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+rTrim	src/includes/traits/TrimUtils.php	/^    protected function rTrim($string, $chars = '', $extra_chars = '')$/;"	f	trait:WebSharks\Core\Traits::TrimUtils
+rTrimContent	src/includes/traits/TrimUtils.php	/^    protected function rTrimContent($string, $chars = '', $extra_chars = '')$/;"	f	trait:WebSharks\Core\Traits::TrimUtils
+regexPatternIn	src/includes/traits/RegexPatternUtils.php	/^    protected function regexPatternIn($regex, $value, $collect_key_props = false)$/;"	f	trait:WebSharks\Core\Traits::RegexPatternUtils
+removeUrlQueryArgs	src/includes/traits/UrlQueryUtils.php	/^    protected function removeUrlQueryArgs(array $arg_keys, $url)$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+replaceCodes	src/includes/traits/ReplaceUtils.php	/^    protected function replaceCodes($string, array $meta_vars = array(), array $vars = array(), $caSe_insensitive = false, $urlencode = false, $implode_non_scalars = '')$/;"	f	trait:WebSharks\Core\Traits::ReplaceUtils
+replaceCodesDeep	src/includes/traits/ReplaceUtils.php	/^    protected function replaceCodesDeep($/;"	f	trait:WebSharks\Core\Traits::ReplaceUtils
+replaceOnce	src/includes/traits/ReplaceUtils.php	/^    protected function replaceOnce($needle, $replace, $string, $caSe_insensitive = false)$/;"	f	trait:WebSharks\Core\Traits::ReplaceUtils
+replaceOnceDeep	src/includes/traits/ReplaceUtils.php	/^    protected function replaceOnceDeep($needle, $replace, $value, $caSe_insensitive = false)$/;"	f	trait:WebSharks\Core\Traits::ReplaceUtils
+setUrlScheme	src/includes/traits/UrlSchemeUtils.php	/^    protected function setUrlScheme($url, $scheme = null)$/;"	f	trait:WebSharks\Core\Traits::UrlSchemeUtils
+slash	src/includes/traits/SlashUtils.php	/^    protected function slash($string)$/;"	f	trait:WebSharks\Core\Traits::SlashUtils
+slashDeep	src/includes/traits/SlashUtils.php	/^    protected function slashDeep($value)$/;"	f	trait:WebSharks\Core\Traits::SlashUtils
+static	src/includes/traits/CacheUtils.php	/^    protected $static = array();$/;"	v	trait:WebSharks\Core\Classes::CacheUtils
+staticKey	src/includes/traits/CacheUtils.php	/^    protected function &staticKey($function, $args = array())$/;"	f	trait:WebSharks\Core\Classes::CacheUtils
+staticKey	src/includes/traits/EnvUtils.php	/^    abstract protected function &staticKey($function, $args = array());$/;"	f	trait:WebSharks\Core\Traits::EnvUtils
+strip	src/includes/traits/StripUtils.php	/^    protected function strip($string)$/;"	f	trait:WebSharks\Core\Traits::StripUtils
+stripDeep	src/includes/traits/StripUtils.php	/^    protected function stripDeep($value)$/;"	f	trait:WebSharks\Core\Traits::StripUtils
+stripUrlHash	src/includes/traits/UrlHashUtils.php	/^    protected function stripUrlHash($url)$/;"	f	trait:WebSharks\Core\Traits::UrlHashUtils
+stripUrlQuery	src/includes/traits/UrlQueryUtils.php	/^    protected function stripUrlQuery($url)$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+trim	src/includes/traits/TrimUtils.php	/^    protected function trim($string, $chars = '', $extra_chars = '', $side = '')$/;"	f	trait:WebSharks\Core\Traits::TrimUtils
+trimContent	src/includes/traits/TrimUtils.php	/^    protected function trimContent($string, $chars = '', $extra_chars = '', $side = '')$/;"	f	trait:WebSharks\Core\Traits::TrimUtils
+trimContentDeep	src/includes/traits/TrimUtils.php	/^    protected function trimContentDeep($value, $chars = '', $extra_chars = '', $side = '')$/;"	f	trait:WebSharks\Core\Traits::TrimUtils
+trimDeep	src/includes/traits/TrimUtils.php	/^    protected function trimDeep($value, $chars = '', $extra_chars = '', $side = '')$/;"	f	trait:WebSharks\Core\Traits::TrimUtils
+unparseUrl	src/includes/traits/UrlQueryUtils.php	/^    protected function unparseUrl(array $parts)$/;"	f	trait:WebSharks\Core\Traits::UrlQueryUtils
+unsetCacheKeys	src/includes/traits/CacheUtils.php	/^    protected function unsetCacheKeys(array $preserve = array())$/;"	f	trait:WebSharks\Core\Classes::CacheUtils
+unsetStaticKeys	src/includes/traits/CacheUtils.php	/^    protected function unsetStaticKeys(array $preserve = array())$/;"	f	trait:WebSharks\Core\Classes::CacheUtils
+varDump	src/includes/traits/VarDumpUtils.php	/^    protected function varDump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false)$/;"	f	trait:WebSharks\Core\Traits::VarDumpUtils
+wildcardPatternIn	src/includes/traits/WildcardPatternUtils.php	/^    protected function wildcardPatternIn($/;"	f	trait:WebSharks\Core\Traits::WildcardPatternUtils

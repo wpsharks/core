@@ -56,7 +56,7 @@ trait CacheUtils
      *                              That said, it's generally a good idea to customize this a bit.
      *                              This should include the cachable arguments only.
      * @param string      $___prop  For internal use only. This defaults to `cache`.
-     *                              See also: {@link static_key()} where a value of `static` is used instead.
+     *                              See also: {@link staticKey()} where a value of `static` is used instead.
      *
      * @return mixed|null Returns the current value for the cache key.
      *                    Or, this returns `NULL` if the key is not set yet.

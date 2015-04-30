@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Wildcard Utilities.
+ * Var Utilities.
  *
  * @since 150424 Initial release.
  */
-trait WildcardUtils
+trait VarUtils
 {
-    use WildcardPatternUtils;
+    use VarDumpUtils;
 }

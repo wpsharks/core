@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Dump Utilities.
+ * Var Dump Utilities.
  *
  * @since 150424 Initial release.
  */
-trait DumpUtils
+trait VarDumpUtils
 {
     /**
      * A better `var_dump()`.
@@ -29,9 +29,9 @@ trait DumpUtils
      * @note This routine MUST be very careful that it does NOT write to any variables.
      *    Writing to a variable (or to a variable reference) could cause damage in other routines.
      */
-    protected function dump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false)
+    protected function varDump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false)
     {
-        return $this->doDump($var, $echo, $indent_size, $dump_circular_ids);
+        return $this->doVarDump($var, $echo, $indent_size, $dump_circular_ids);
     }
 
     /**
@@ -58,7 +58,7 @@ trait DumpUtils
      * @note This routine MUST be very careful that it does NOT write to any variables.
      *    Writing to a variable (or to a variable reference) could cause damage in other routines.
      */
-    protected function doDump(
+    protected function doVarDump(
         &$var,
         $echo = false,
         $indent_size = 4,
@@ -72,7 +72,7 @@ trait DumpUtils
             $indent_size = max(1, $indent_size);
             $indent_char = (string) $indent_char;
         }
-        switch (($type = $real_type = gettype($var))) {
+        switch (($type = $real_type = strtolower(gettype($var)))) {
 
             case 'object': // Iterates each object property.
             case 'array': // Or, each array key (if this is an array).
@@ -102,7 +102,7 @@ trait DumpUtils
 
                 foreach ($var as $_nested_key_prop => $_nested_value /* Not by reference. */) {
                     // Do NOT use `&`. Some iterators CANNOT be iterated by reference.
-                    $_nested_type = gettype($_nested_value);
+                    $_nested_type = strtolower(gettype($_nested_value));
 
                     if (is_string($_nested_key_prop)) {
                         $_nested_key_prop = "'".$_nested_key_prop."'";
@@ -143,7 +143,7 @@ trait DumpUtils
                             if (isset($___nested_circular_ids[$_nested_circular_id_key])) {
                                 $nested_dumps[$_nested_key_prop] = $_nested_real_type.'{} *circular*';
                             } elseif (($___nested_circular_ids[$_nested_circular_id_key] = -1)
-                                && ($_nested_dump = $this->doDump(
+                                && ($_nested_dump = $this->doVarDump(
                                     $_nested_value,
                                     $this::NO_ECHO,
                                     $indent_size,
@@ -168,7 +168,7 @@ trait DumpUtils
                             if (isset($___nested_circular_ids[$_nested_circular_id_key])) {
                                 $nested_dumps[$_nested_key_prop] = $_nested_real_type.'() *circular*';
                             } elseif (($___nested_circular_ids[$_nested_circular_id_key] = -1)
-                                    && ($_nested_dump = $this->doDump(
+                                    && ($_nested_dump = $this->doVarDump(
                                         $_nested_value,
                                         $this::NO_ECHO,
                                         $indent_size,
@@ -185,7 +185,7 @@ trait DumpUtils
                             unset($_nested_real_type, $_nested_circular_id_key, $_nested_dump);
                             break; // Break switch.
 
-                        case 'NULL':
+                        case 'null':
                             $nested_dumps[$_nested_key_prop] = 'null';
                             break; // Break switch.
 
@@ -234,7 +234,7 @@ trait DumpUtils
                 $var_dump = '['.(string) $var.']';
                 break; // Break switch.
 
-            case 'NULL':
+            case 'null':
                 $var_dump = 'null';
                 break; // Break switch.
 

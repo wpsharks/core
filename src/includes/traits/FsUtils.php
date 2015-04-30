@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Wildcard Utilities.
+ * Filesystem Utilities.
  *
  * @since 150424 Initial release.
  */
-trait WildcardUtils
+trait FsUtils
 {
-    use WildcardPatternUtils;
+    use FsSizeUtils;
 }

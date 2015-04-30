@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Iterator Utilities.
+ * Array Iterator Utilities.
  *
  * @since 150424 Initial release.
  */
-trait IteratorUtils
+trait ArrayIteratorUtils
 {
     /**
      * Recursive iterator.

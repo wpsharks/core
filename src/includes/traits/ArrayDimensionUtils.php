@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Dimension Utilities.
+ * Array Dimension Utilities.
  *
  * @since 150424 Initial release.
  */
-trait DimensionUtils
+trait ArrayDimensionUtils
 {
     /**
      * Forces an array to a single dimension.
@@ -15,7 +15,7 @@ trait DimensionUtils
      *
      * @return array Output array, with only ONE dimension.
      */
-    public function oneDimension(array $array)
+    protected function arrayToOneDimension(array $array)
     {
         foreach ($array as $_key => $_value) {
             if (is_array($_value) || is_object($_value)) {

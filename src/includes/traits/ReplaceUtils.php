@@ -8,11 +8,11 @@ namespace WebSharks\Core\Traits;
  */
 trait ReplaceUtils
 {
-    use DimensionUtils;
-    use DotKeyUtils;
-    use DumpUtils;
-    use QueryUtils;
-    use WildcardUtils;
+    abstract protected function arrayDotKeys(array $array);
+    abstract protected function arrayToOneDimension(array $array);
+    abstract protected function varDump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false);
+    abstract protected function buildUrlQuery(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null);
+    abstract protected function wildcardPatternIn($wildcard, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null);
 
     /**
      * String replace (ONE time).
@@ -38,7 +38,7 @@ trait ReplaceUtils
      *
      * @return string Value of `$string` after ONE replacement.
      */
-    protected function ireplaceOnce($needle, $replace, $string)
+    protected function iReplaceOnce($needle, $replace, $string)
     {
         return $this->replaceOnceDeep($needle, $replace, (string) $string, true);
     }
@@ -55,7 +55,7 @@ trait ReplaceUtils
      *               Any values that were NOT strings|arrays|objects will be
      *               converted to strings by this routine.
      */
-    protected function ireplaceOnceDeep($needle, $replace, $value)
+    protected function iReplaceOnceDeep($needle, $replace, $value)
     {
         return $this->replaceOnceDeep($needle, $replace, $value, true);
     }
@@ -178,7 +178,7 @@ trait ReplaceUtils
      *
      * @return string String after replacing all codes.
      */
-    protected function ireplaceCodes($string, array $meta_vars = array(), array $vars = array(), $urlencode = false, $implode_non_scalars = '')
+    protected function iReplaceCodes($string, array $meta_vars = array(), array $vars = array(), $urlencode = false, $implode_non_scalars = '')
     {
         return $this->replaceCodesDeep((string) $string, $meta_vars, $vars, true, false, $urlencode, $implode_non_scalars);
     }
@@ -210,7 +210,7 @@ trait ReplaceUtils
      *               NOT strings|arrays|objects, will be converted to strings by this routine.
      *               Pass `$preserve_types` as `TRUE` to prevent this from occurring.
      */
-    protected function ireplaceCodesDeep($value, array $meta_vars = array(), array $vars = array(), $preserve_types = false, $urlencode = false, $implode_non_scalars = '')
+    protected function iReplaceCodesDeep($value, array $meta_vars = array(), array $vars = array(), $preserve_types = false, $urlencode = false, $implode_non_scalars = '')
     {
         return $this->replaceCodesDeep($value, $meta_vars, $vars, true, $preserve_types, $urlencode, $implode_non_scalars);
     }
@@ -267,14 +267,14 @@ trait ReplaceUtils
         $___vars     = array(); // Initialize.
         $___raw_vars = $meta_vars + $vars;
 
-        foreach ($___raw_vars + $this->dotKeys($___raw_vars) as $_key => $_value) {
+        foreach ($___raw_vars + $this->arrayDotKeys($___raw_vars) as $_key => $_value) {
             if (is_resource($_value)) {
                 continue;
             }
             if (!is_scalar($_value)) {
                 if ($implode_non_scalars) {
                     $_value = (array) $_value;
-                    $_value = $this->oneDimension($_value);
+                    $_value = $this->arrayToOneDimension($_value);
                     $_value = implode($implode_non_scalars, $_value);
                 } else {
                     $_value = json_encode($_value);
@@ -335,7 +335,7 @@ trait ReplaceUtils
             return $v; // Callback placeholder.
         };
         if (stripos($value, '%%__var_dump__%%') !== false) {
-            $value = $str_replace_('%%__var_dump__%%', $urlencode_($this->dump($___raw_vars)), $value);
+            $value = $str_replace_('%%__var_dump__%%', $urlencode_($this->varDump($___raw_vars)), $value);
         }
         if (stripos($value, '%%__serialize__%%') !== false) {
             $value = $str_replace_('%%__serialize__%%', $urlencode_(serialize($___raw_vars)), $value);
@@ -344,7 +344,7 @@ trait ReplaceUtils
             $value = $str_replace_('%%__json_encode__%%', $urlencode_(json_encode($___raw_vars)), $value);
         }
         if ($urlencode && stripos($value, '%%__query_string__%%') !== false) {
-            $value = $str_replace_('%%__query_string__%%', $this->queryBuild($___vars), $value);
+            $value = $str_replace_('%%__query_string__%%', $this->buildUrlQuery($___vars), $value);
         }
         $_iteration_counter = 1; // Check completion every 10th iteration to save time.
 
@@ -404,7 +404,7 @@ trait ReplaceUtils
                         unset($_key, $_value); // Housekeeping.
                     }
                     if ($m['delimiter'] === '&' && !$m['include_keys']) {
-                        return $this->queryBuild($values);
+                        return $this->buildUrlQuery($values);
                     }
                     return $urlencode_(implode($m['delimiter'], $values));
                 },

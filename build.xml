@@ -7,7 +7,7 @@
   <property name="project_sns" value="Core" />
 
   <property name="project_version" value="%y%m%d" />
-  <property name="project_php_required_version" value="5.4" />
+  <property name="project_php_required_version" value="5.4.7" />
   <property name="project_php_up_to_version" value="${php.version}" />
   <property name="project_wp_required_version" value="" />
   <property name="project_wp_up_to_version" value="" />

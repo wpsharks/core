@@ -2,13 +2,13 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Dot-Key Utilities.
+ * Array Dot-Key Utilities.
  *
  * @since 150424 Initial release.
  */
-trait DotKeyUtils
+trait ArrayDotKeyUtils
 {
-    use IteratorUtils;
+    abstract protected function arrayIterator(array $array);
 
     /**
      * Builds an array w/ ONE dimension; using DOT `.` keys (e.g., `key.ID`).
@@ -17,7 +17,7 @@ trait DotKeyUtils
      *
      * @return array An array w/ ONE dimension; using DOT `.` keys.
      */
-    protected function dotKeys(array $array)
+    protected function arrayDotKeys(array $array)
     {
         $iterator = $this->arrayIterator($array);
 
