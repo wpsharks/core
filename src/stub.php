@@ -1,6 +1,6 @@
 <?php
 /**
- * PHAR Stub.
+ * Stub.
  *
  * @since 150424 Initial release.
  */
