@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "49e0c2e7cce1fd425e334586db9a323b",
+    "hash": "d847e3dbe42c0b0a8433f89d999687aa",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -75,16 +75,16 @@
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "468d1e3da8bde049debee7f484a4f9c4b26b41ba"
+                "reference": "b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/468d1e3da8bde049debee7f484a4f9c4b26b41ba",
-                "reference": "468d1e3da8bde049debee7f484a4f9c4b26b41ba",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a",
+                "reference": "b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a",
                 "shasum": ""
             },
             "type": "library",
@@ -110,7 +110,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-03-18 18:44:57"
+            "time": "2015-04-29 20:22:24"
         },
         {
             "name": "erusev/parsedown-extra",
@@ -481,7 +481,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4",
+        "php": ">=5.4.7",
         "ext-openssl": "*",
         "ext-curl": "*",
         "ext-mbstring": "*"
