@@ -1,5 +1,5 @@
 <?php
-namespace WebSharks\Core\Classes;
+namespace WebSharks\Core\Traits;
 
 /**
  * Cache Utilities.

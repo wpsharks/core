@@ -170,15 +170,15 @@
         <echo msg="Rebranding: ${_vendor_dir}/websharks/core ..." />
         <reflexive>
           <fileset dir="${_vendor_dir}/websharks/core">
-            <include pattern="src/includes/interfaces/*.php" />
             <include pattern="src/includes/classes/*.php" />
+            <include pattern="src/includes/interfaces/*.php" />
             <include pattern="src/includes/traits/*.php" />
           </fileset>
           <filterchain>
             <replaceregexp>
-              <regexp pattern="\bnamespace\s+WebSharks\\Core(?:\\[^\\]+)?\\Classes\b" replace="namespace WebSharks\\Core\\${project_sns}\\Classes" />
-              <regexp pattern="\bnamespace\s+WebSharks\\Core(?:\\[^\\]+)?\\Interfaces\b" replace="namespace WebSharks\\Core\\${project_sns}\\Interfaces" />
-              <regexp pattern="\bnamespace\s+WebSharks\\Core(?:\\[^\\]+)?\\Traits\b" replace="namespace WebSharks\\Core\\${project_sns}\\Traits" />
+              <regexp pattern="\b(namespace|use)\s+WebSharks\\Core(?:\\[^\\]+)?\\Classes\b" replace="\1 WebSharks\\Core\\${project_sns}\\Classes" />
+              <regexp pattern="\b(namespace|use)\s+WebSharks\\Core(?:\\[^\\]+)?\\Interfaces\b" replace="\1 WebSharks\\Core\\${project_sns}\\Interfaces" />
+              <regexp pattern="\b(namespace|use)\s+WebSharks\\Core(?:\\[^\\]+)?\\Traits\b" replace="\1 WebSharks\\Core\\${project_sns}\\Traits" />
             </replaceregexp>
           </filterchain>
         </reflexive>
@@ -206,8 +206,8 @@
         <echo msg="Rebranding: ${_vendor_dir}/websharks/wp-core ..." />
         <reflexive>
           <fileset dir="${_vendor_dir}/websharks/wp-core">
-            <include pattern="src/includes/interfaces/*.php" />
             <include pattern="src/includes/classes/*.php" />
+            <include pattern="src/includes/interfaces/*.php" />
             <include pattern="src/includes/traits/*.php" />
           </fileset>
           <filterchain>
