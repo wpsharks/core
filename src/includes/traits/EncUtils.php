@@ -8,5 +8,10 @@ namespace WebSharks\Core\Traits;
  */
 trait EncUtils
 {
+    use EncBase64Utils;
+    use EncCookieUtils;
+    use EncKeygenUtils;
+    use EncRij256Utils;
     use EncShaUtils;
+    use EncXorUtils;
 }

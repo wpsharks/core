@@ -23,7 +23,7 @@ trait EncShaUtils
      *
      * @return string SHA-X signature key.
      */
-    protected function encShaXKey($key = '')
+    protected function encShaXSigKey($key = '')
     {
         $key = (string) $key;
 
@@ -49,7 +49,7 @@ trait EncShaUtils
     protected function encSha256Sig($string, $key = '')
     {
         $string = (string) $string;
-        $key    = $this->encShaXKey((string) $key);
+        $key    = $this->encShaXSigKey((string) $key);
 
         return hash_hmac('sha256', $string, $key);
     }
@@ -68,7 +68,7 @@ trait EncShaUtils
     protected function encSha256AddQuerySig($url_uri_qsl, $key = '', $sig_var = '')
     {
         $url_uri_qsl = (string) $url_uri_qsl;
-        $key         = $this->encShaXKey((string) $key);
+        $key         = $this->encShaXSigKey((string) $key);
 
         if (!($sig_var = (string) $sig_var)) {
             $sig_var = 'sig';
@@ -115,7 +115,7 @@ trait EncShaUtils
     protected function encSha256QuerySigOk($qs_url_uri, $key = '', $sig_var = '')
     {
         $qs_url_uri = (string) $qs_url_uri;
-        $key        = $this->encShaXKey((string) $key);
+        $key        = $this->encShaXSigKey((string) $key);
 
         if (!($sig_var = (string) $sig_var)) {
             $sig_var = 'sig';
@@ -140,7 +140,7 @@ trait EncShaUtils
     protected function encSha256QuerySig($qs_url_uri, $key = '', $sig_var = '')
     {
         $qs_url_uri = (string) $qs_url_uri;
-        $key        = $this->encShaXKey((string) $key);
+        $key        = $this->encShaXSigKey((string) $key);
 
         if (!($sig_var = (string) $sig_var)) {
             $sig_var = 'sig';
