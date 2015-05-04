@@ -24,14 +24,22 @@ trait HtmlToUtils
      *
      * @since 150424 Initial release.
      *
-     * @param string $string Input string to convert.
-     * @param array  $args   Any additional behavioral args.
+     * @param string $value Any input value.
+     * @param array  $args  Any additional behavioral args.
      *
      * @return string HTML markup converted to plain text.
      */
-    protected function htmlToText($string, array $args = array())
+    protected function htmlToText($value, array $args = array())
     {
-        if (!($string = trim((string) $string))) {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->htmlToText($_value, $args);
+            }
+            unset($_key, $_value); // Housekeeping.
+
+            return $value;
+        }
+        if (!($string = trim((string) $value))) {
             return $string; // Not possible.
         }
         $default_args = [
@@ -75,14 +83,22 @@ trait HtmlToUtils
      *
      * @since 150424 Initial release.
      *
-     * @param string $string Input string to convert.
-     * @param array  $args   Any additional behavioral args.
+     * @param string $value Any input value.
+     * @param array  $args  Any additional behavioral args.
      *
      * @return string HTML to rich text; w/ allowed tags only.
      */
-    protected function htmlToRichText($string, array $args = array())
+    protected function htmlToRichText($value, array $args = array())
     {
-        if (!($string = trim((string) $string))) {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->htmlToRichText($_value, $args);
+            }
+            unset($_key, $_value); // Housekeeping.
+
+            return $value;
+        }
+        if (!($string = trim((string) $value))) {
             return $string; // Not possible.
         }
         $default_args = [
@@ -152,14 +168,22 @@ trait HtmlToUtils
     /**
      * Converts HTML into structured text.
      *
-     * @param string $html Input HTML to convert.
-     * @param string $to   The Pandoc-compatible format.
+     * @param string $value Any input value.
+     * @param string $to    The Pandoc-compatible format.
      *
      * @return string The input HTML converted to structured text.
      */
-    protected function htmlToPandoc($html, $to)
+    protected function htmlToPandoc($value, $to)
     {
-        if (!($html = trim((string) $html))) {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->htmlToPandoc($_value, $to);
+            }
+            unset($_key, $_value); // Housekeeping.
+
+            return $value;
+        }
+        if (!($html = trim((string) $value))) {
             return $html; // Nothing to do.
         }
         if (!$this->htmlIs($html)) {

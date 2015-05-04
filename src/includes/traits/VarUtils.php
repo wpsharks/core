@@ -9,4 +9,5 @@ namespace WebSharks\Core\Traits;
 trait VarUtils
 {
     use VarDumpUtils;
+    use VarTypeUtils;
 }
