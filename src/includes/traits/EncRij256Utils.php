@@ -9,6 +9,7 @@ namespace WebSharks\Core\Traits;
 trait EncRij256Utils
 {
     abstract protected function encShaXSigKey($key = '');
+    abstract protected function envHasExtension($extension);
     abstract protected function encKeygenRandom($length = 15, $special_chars = true, $extra_special_chars = false);
     abstract protected function encBase64UrlSafeEncode($string, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=');
     abstract protected function encBase64UrlSafeDecode($base64_url_safe, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=');
@@ -28,6 +29,9 @@ trait EncRij256Utils
      */
     protected function encRij256Encrypt($string, $key = '', $w_md5_cs = true)
     {
+        if (!$this->envHasExtension('mcrypt')) {
+            throw new \Exception('Mcrypt extension missing.');
+        }
         $string = (string) $string;
         if (!isset($string[0])) {
             return ($base64 = '');
@@ -59,6 +63,9 @@ trait EncRij256Utils
      */
     protected function encRij256Decrypt($base64, $key = '')
     {
+        if (!$this->envHasExtension('mcrypt')) {
+            throw new \Exception('Mcrypt extension missing.');
+        }
         $base64 = (string) $base64;
         if (!isset($base64[0])) {
             return ($string = '');
