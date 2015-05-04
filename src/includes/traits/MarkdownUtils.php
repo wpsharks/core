@@ -8,6 +8,7 @@ namespace WebSharks\Core\Traits;
  */
 trait MarkdownUtils
 {
+    abstract protected function envHasFunction($function);
     abstract protected function &staticKey($function, $args = array());
     abstract protected function htmlTokenizeSpcsm($string, array $tokenize_only = array(), $marker = '');
     abstract protected function htmlTokensRestoreSpcsm(array $spcsm);
@@ -41,8 +42,9 @@ trait MarkdownUtils
         $breaks = (boolean) $args['breaks'];
         $no_p   = (boolean) $args['no_p'];
 
-        if ($oembed && strpos($string, '://') !== false // Running WordPress?
-                && function_exists('wp_embed_defaults') && function_exists('wp_oembed_get')) {
+        if ($oembed && strpos($string, '://') !== false
+                && $this->envHasFunction('wp_embed_defaults')
+                && $this->envHasFunction('wp_oembed_get')) {
             $_spcsm           = $this->htmlTokenizeSpcsm($string);
             $_oembed_args     = array_merge(wp_embed_defaults(), ['discover' => false]);
             $_spcsm['string'] = preg_replace_callback('/^\s*(https?:\/\/[^\s"]+)\s*$/im', function ($m) use ($_oembed_args) {

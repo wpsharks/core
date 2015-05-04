@@ -12,5 +12,6 @@ trait UrlUtils
     use UrlHashUtils;
     use UrlParseUtils;
     use UrlQueryUtils;
+    use UrlRemoteUtils;
     use UrlSchemeUtils;
 }

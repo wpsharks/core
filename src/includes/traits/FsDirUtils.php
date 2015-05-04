@@ -93,7 +93,9 @@ trait FsDirUtils
         }
         foreach ($possible_dirs as $_key => $_dir) {
             if (($_dir = trim((string) $_dir)) && @is_dir($_dir) && @is_writable($_dir)) {
-                return ($dir = $this->fsDirNSeps($_dir));
+                if (is_dir($_dir = $_dir.'/'.md5(__NAMESPACE__)) || mkdir($_dir, 0777, true)) {
+                    return ($dir = $this->fsDirNSeps($_dir));
+                }
             }
         }
         unset($_key, $_dir); // Housekeeping.

@@ -8,6 +8,7 @@ namespace WebSharks\Core\Traits;
  */
 trait HtmlBalanceUtils
 {
+    abstract protected function envHasExtension($extension);
     abstract protected function htmlTrim($value, $chars = '', $extra_chars = '', $side = '');
 
     /**
@@ -17,7 +18,9 @@ trait HtmlBalanceUtils
      *
      * @param mixed $value Any input value.
      *
-     * @return string|array|object Balanced value.
+     * @throws \Exception If missing DOM extension.
+     *
+     * @return string|array|object Balanced value (i.e., HTML markup).
      *
      * @note This works with HTML fragments only. No on a full document.
      * i.e., If the input contains `</html>` or `</body>` it is left as-is.
@@ -49,6 +52,9 @@ trait HtmlBalanceUtils
             '   </head>'.
             '   <body>'.$string.'</body>'.
             '</html>';
+        if (!$this->envHasExtension('dom')) {
+            throw new \Exception('DOM extension missing.');
+        }
         $dom = new \DOMDocument();
         $dom->loadHTML($html);
 

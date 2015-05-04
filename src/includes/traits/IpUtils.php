@@ -1,0 +1,214 @@
+<?php
+namespace WebSharks\Core\Traits;
+
+/**
+ * IP address utilities.
+ *
+ * @since 150424 Initial release.
+ */
+trait IpUtils
+{
+    abstract protected function fsDirTmp();
+    abstract protected function &staticKey($function, $args = array());
+    abstract protected function urlRemote($url, array $args = array());
+
+    /**
+     * Get the current visitor's real IP address.
+     *
+     * @since 150424 Initial release.
+     *
+     * @return string Real IP address; else `unknown` on failure.
+     *
+     * @note This supports both IPv4 and IPv6 addresses.
+     */
+    protected function ipCurrent()
+    {
+        if (!is_null($ip = &$this->staticKey(__FUNCTION__))) {
+            return $ip; // Already cached this.
+        }
+        $sources = array(
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_FORWARDED',
+            'HTTP_X_CLUSTER_CLIENT_IP',
+            'HTTP_FORWARDED_FOR',
+            'HTTP_FORWARDED',
+            'HTTP_VIA',
+            'REMOTE_ADDR',
+        );
+        foreach ($sources as $_source) {
+            if (!empty($_SERVER[$_source])) {
+                if (($_valid_public_ip = $this->ipGetValidPublicFrom($_SERVER[$_source]))) {
+                    return ($ip = $_valid_public_ip); // IPv4 or IPv6 address.
+                }
+            }
+            unset($_source, $_valid_public_ip); // Housekeeping.
+        }
+        if (!empty($_SERVER['REMOTE_ADDR'])) {
+            return ($ip = strtolower((string) $_SERVER['REMOTE_ADDR']));
+        }
+        return ($ip = 'unknown'); // Not possible.
+    }
+
+    /**
+     * Looks for a valid/public IP address.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param string $list_of_possible_ips A single IP, or a comma-delimited list of IPs.
+     *
+     * @return string A valid/public IP address (if one is found); else an empty string.
+     */
+    protected function ipGetValidPublicFrom($list_of_possible_ips)
+    {
+        if (!$list_of_possible_ips || !is_string($list_of_possible_ips)) {
+            return ''; // Empty or invalid data.
+        }
+        if (!($list_of_possible_ips = trim($list_of_possible_ips))) {
+            return ''; // Not possible; i.e., empty string.
+        }
+        foreach (preg_split('/[\s;,]+/', $list_of_possible_ips, null, PREG_SPLIT_NO_EMPTY) as $_possible_ip) {
+            if (($_valid_public_ip = filter_var(strtolower($_possible_ip), FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
+                return $_valid_public_ip; // A valid public IPv4 or IPv6 address.
+            }
+        }
+        unset($_possible_ip, $_valid_public_ip); // Housekeeping.
+
+        return ''; // Default return value.
+    }
+
+    /**
+     * Geographic region code for given IP address.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param string $ip An IP address to pull geographic data for.
+     *
+     * @return string Geographic region code for given IP address; if possible.
+     */
+    protected function ipRegion($ip)
+    {
+        if (($geo = $this->ipGeoData($ip))) {
+            return $geo->region;
+        }
+        return ''; // Empty string on failure.
+    }
+
+    /**
+     * Current user's geographic region code.
+     *
+     * @since 150424 Initial release.
+     *
+     * @return string Current user's geographic region code; if possible.
+     */
+    protected function ipCurrentRegion()
+    {
+        if (($geo = $this->ipGeoData($this->ipCurrent()))) {
+            return $geo->region;
+        }
+        return ''; // Empty string on failure.
+    }
+
+    /**
+     * Geographic country code for given IP address.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param string $ip An IP address to pull geographic data for.
+     *
+     * @return string Geographic country code for given IP address; if possible.
+     */
+    protected function ipCountry($ip)
+    {
+        if (($geo = $this->ipGeoData($ip))) {
+            return $geo->country;
+        }
+        return ''; // Empty string on failure.
+    }
+
+    /**
+     * Current user's geographic country code.
+     *
+     * @since 150424 Initial release.
+     *
+     * @return string Current user's geographic country code; if possible.
+     */
+    protected function ipCurrentCountry()
+    {
+        if (($geo = $this->ipGeoData($this->ipCurrent()))) {
+            return $geo->country;
+        }
+        return ''; // Empty string on failure.
+    }
+
+    /**
+     * Geographic location data from IP address.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param string $ip An IP address to query.
+     *
+     * @throws \exception If unable to create cache directory.
+     *
+     * @return \stdClass|bool Geo location data from IP address.
+     */
+    protected function ipGeoData($ip)
+    {
+        # Valid the input IP address; do we have one?
+
+        if (!($ip = trim(strtolower((string) $ip)))) {
+            return false; // Not possible.
+        }
+        # Check the static object cache.
+
+        if (!is_null($geo = &$this->staticKey(__FUNCTION__, $ip))) {
+            return $geo; // Already cached this.
+        }
+        # Check the filesystem cache; i.e., tmp directory.
+
+        $cache_dir  = $this->fsDirTmp().'/ip-geo-data';
+        $cache_file = $cache_dir.'/'.sha1($ip).'.json';
+
+        if (is_file($cache_file) && filemtime($cache_file) >= strtotime('-30 days')) {
+            return ($geo = json_decode(file_get_contents($cache_file)));
+        }
+        # Initialize request-related variables.
+
+        $region = $country = ''; // Initialize.
+
+        # Perform remote request to the geoPlugin service.
+
+        $response = $this->urlRemote(
+            'GET::http://www.geoplugin.net/json.gp?ip='.urlencode($ip),
+            ['max_con_secs' => 5, 'max_stream_secs' => 5]
+        );
+        if (!$response || !is_object($json = json_decode($response))) {
+            return ($geo = false); // Connection failure.
+        }
+        # Parse response from geoPlugin service.
+
+        if (!empty($json->geoplugin_regionCode)) {
+            $region = strtoupper(str_pad((string) $json->geoplugin_regionCode, 2, '0', STR_PAD_LEFT));
+        }
+        if (!empty($json->geoplugin_countryCode)) {
+            $country = strtoupper((string) $json->geoplugin_countryCode);
+        }
+        # Fill the object cache; based on data validation here.
+
+        $geo = (object) compact('region', 'country'); // Initialize.
+        if (strlen($geo->region) !== 2 || strlen($geo->country) !== 2) {
+            $geo = false; // Invalid (or insufficient) data.
+        }
+        # Cache validated response from geoPlugin service.
+
+        if (!is_dir($cache_dir) && !mkdir($cache_dir, 0777, true)) {
+            throw new \exception('Unable to create `ip-geo-data` cache directory.');
+        }
+        file_put_contents($cache_file, json_encode($geo));
+
+        # Return either an object or `FALSE` on failure.
+
+        return $geo; // An object (hopefully).
+    }
+}

@@ -8,6 +8,8 @@ namespace WebSharks\Core\Traits;
  */
 trait HtmlTokenUtils
 {
+    abstract protected function envHasFunction($function);
+
     /**
      * Shortcode/pre/code/samp/MD tokens.
      *
@@ -34,7 +36,7 @@ trait HtmlTokenUtils
             goto pre; // Not tokenizing these.
         }
         if (empty($GLOBALS['shortcode_tags']) || strpos($spcsm['string'], '[') === false
-            || !function_exists('get_shortcode_regex')) {
+            || !$this->envHasFunction('get_shortcode_regex')) {
             goto pre; // No `[` shortcodes.
         }
         $spcsm['string'] = preg_replace_callback('/'.get_shortcode_regex().'/s', function ($m) use (&$spcsm) {
