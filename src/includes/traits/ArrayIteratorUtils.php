@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Array Iterator Utilities.
+ * Array iterator utilities.
  *
  * @since 150424 Initial release.
  */

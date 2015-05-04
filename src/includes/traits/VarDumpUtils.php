@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Var Dump Utilities.
+ * Var dump utilities.
  *
  * @since 150424 Initial release.
  */
@@ -31,7 +31,7 @@ trait VarDumpUtils
      */
     protected function varDump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false)
     {
-        return $this->doVarDump($var, $echo, $indent_size, $dump_circular_ids);
+        return $this->varDumper($var, $echo, $indent_size, $dump_circular_ids);
     }
 
     /**
@@ -58,7 +58,7 @@ trait VarDumpUtils
      * @note This routine MUST be very careful that it does NOT write to any variables.
      *    Writing to a variable (or to a variable reference) could cause damage in other routines.
      */
-    protected function doVarDump(
+    protected function varDumper(
         &$var,
         $echo = false,
         $indent_size = 4,
@@ -143,7 +143,7 @@ trait VarDumpUtils
                             if (isset($___nested_circular_ids[$_nested_circular_id_key])) {
                                 $nested_dumps[$_nested_key_prop] = $_nested_real_type.'{} *circular*';
                             } elseif (($___nested_circular_ids[$_nested_circular_id_key] = -1)
-                                && ($_nested_dump = $this->doVarDump(
+                                && ($_nested_dump = $this->varDumper(
                                     $_nested_value,
                                     $this::NO_ECHO,
                                     $indent_size,
@@ -168,7 +168,7 @@ trait VarDumpUtils
                             if (isset($___nested_circular_ids[$_nested_circular_id_key])) {
                                 $nested_dumps[$_nested_key_prop] = $_nested_real_type.'() *circular*';
                             } elseif (($___nested_circular_ids[$_nested_circular_id_key] = -1)
-                                    && ($_nested_dump = $this->doVarDump(
+                                    && ($_nested_dump = $this->varDumper(
                                         $_nested_value,
                                         $this::NO_ECHO,
                                         $indent_size,

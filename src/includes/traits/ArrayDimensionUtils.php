@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Array Dimension Utilities.
+ * Array dimension utilities.
  *
  * @since 150424 Initial release.
  */
@@ -15,7 +15,7 @@ trait ArrayDimensionUtils
      *
      * @return array Output array, with only ONE dimension.
      */
-    protected function arrayToOneDimension(array $array)
+    protected function arrayDimensionOne(array $array)
     {
         foreach ($array as $_key => $_value) {
             if (is_array($_value) || is_object($_value)) {

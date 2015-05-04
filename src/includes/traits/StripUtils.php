@@ -2,42 +2,33 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Strip Utilities.
+ * Strip utilities.
  *
  * @since 150424 Initial release.
  */
 trait StripUtils
 {
     /**
-     * Strips slashes from a string value.
-     *
-     * @param string $string A string value.
-     *
-     * @return string Stripped string.
-     */
-    protected function strip($string)
-    {
-        return $this->stripDeep((string) $string);
-    }
-
-    /**
      * Strips slashes deeply.
      *
-     * @param mixed $value Any value can be converted into a stripped string.
-     *                     Actually, objects can't, but this recurses into objects.
+     * @since 150424 Initial release.
      *
-     * @return string|array|object Stripped string, array, object.
+     * @param mixed $value Any input value.
+     *
+     * @return string|array|object Stripped value.
      */
-    protected function stripDeep($value)
+    protected function strip($value)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->stripDeep($_value);
+                $_value = $this->strip($_value);
             }
             unset($_key, $_value); // Housekeeping.
 
             return $value;
         }
-        return stripslashes((string) $value);
+        $string = (string) $value;
+
+        return stripslashes($string);
     }
 }

@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Wildcard Pattern Utilities.
+ * Wildcard pattern utilities.
  *
  * @since 150424 Initial release.
  */
@@ -10,6 +10,8 @@ trait WildcardPatternUtils
 {
     /**
      * Match a wildcard pattern against other scalar values.
+     *
+     * @since 150424 Initial release.
      *
      * @param string   $wildcard          A wildcard pattern to look for.
      * @param mixed    $value             Any value can be converted into a string before comparison.
@@ -74,6 +76,8 @@ trait WildcardPatternUtils
     /**
      * Search values containing wildcard patterns against a string.
      *
+     * @since 150424 Initial release.
+     *
      * @param string   $string            String to search within.
      * @param mixed    $value             Any value can be converted into a wildcard pattern.
      *                                    Actually, objects can't, but this recurses into objects.
@@ -84,7 +88,7 @@ trait WildcardPatternUtils
      * @return bool|array Will return `TRUE` if any wildcard pattern finds a match.
      *                    If `$collect_key_props` is `TRUE`, this will return an array.
      */
-    protected function inWildcardPatterns($string, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null)
+    protected function wildcardPatternsMatch($string, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null)
     {
         if (isset($x_flags)) {
             $x_flags = (int) $x_flags;
@@ -99,7 +103,7 @@ trait WildcardPatternUtils
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key_prop => $_value) {
                 if (is_array($_value) || is_object($_value)) {
-                    $_matching_key_props = $this->inWildcardPatterns(
+                    $_matching_key_props = $this->wildcardPatternsMatch(
                         $string,
                         $_value,
                         $caSe_insensitive,

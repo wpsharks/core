@@ -2,12 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * FS utilities.
+ * Encryption utilities.
  *
  * @since 150424 Initial release.
  */
-trait FsUtils
+trait EncUtils
 {
-    use FsDirUtils;
-    use FsSizeUtils;
+    use EncShaUtils;
 }

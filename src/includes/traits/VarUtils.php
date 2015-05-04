@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Var Utilities.
+ * Var utilities.
  *
  * @since 150424 Initial release.
  */

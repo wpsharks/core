@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Wildcard Utilities.
+ * Wildcard utilities.
  *
  * @since 150424 Initial release.
  */

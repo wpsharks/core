@@ -2,14 +2,14 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Current URL Utilities.
+ * Current URL utilities.
  *
  * @since 150424 Initial release.
  */
 trait UrlCurrentUtils
 {
     abstract protected function envIsSsl();
-    abstract protected function setUrlScheme($url, $scheme = null);
+    abstract protected function urlSchemeSet($url, $scheme = null);
     abstract protected function &staticKey($function, $args = array());
 
     /**
@@ -19,7 +19,7 @@ trait UrlCurrentUtils
      *
      * @return string Current scheme; lowercase.
      */
-    protected function currentUrlScheme()
+    protected function urlCurrentScheme()
     {
         if (!is_null($scheme = &$this->staticKey(__FUNCTION__))) {
             return $scheme; // Cached this already.
@@ -43,7 +43,7 @@ trait UrlCurrentUtils
      *
      * @return string Current host name; lowercase.
      */
-    protected function currentUrlHost($no_port = false)
+    protected function urlCurrentHost($no_port = false)
     {
         if (!is_null($host = &$this->staticKey(__FUNCTION__, $no_port))) {
             return $host; // Cached this already.
@@ -65,7 +65,7 @@ trait UrlCurrentUtils
      *
      * @return string Current URI; with a leading `/`.
      */
-    protected function currentUrlUri()
+    protected function urlCurrentUri()
     {
         if (!is_null($uri = &$this->staticKey(__FUNCTION__))) {
             return $uri; // Cached this already.
@@ -86,12 +86,12 @@ trait UrlCurrentUtils
      *
      * @return string Current URI/path; with a leading `/`.
      */
-    protected function currentUrlPath()
+    protected function urlCurrentPath()
     {
         if (!is_null($path = &$this->staticKey(__FUNCTION__))) {
             return $path; // Cached this already.
         }
-        $path = (string) parse_url($this->currentUrlUri(), PHP_URL_PATH);
+        $path = (string) parse_url($this->urlCurrentUri(), PHP_URL_PATH);
         $path = '/'.ltrim($path, '/');
 
         return $path;
@@ -104,7 +104,7 @@ trait UrlCurrentUtils
      *
      * @return string e.g., `index.php/path/info`.
      */
-    protected function currentUrlPathInfo()
+    protected function urlCurrentPathInfo()
     {
         if (!is_null($path_info = &$this->staticKey(__FUNCTION__))) {
             return $path_info; // Cached this already.
@@ -131,13 +131,13 @@ trait UrlCurrentUtils
      *
      * @return string Current URL w/ specific scheme.
      */
-    protected function currentUrl($scheme = null)
+    protected function urlCurrent($scheme = null)
     {
         if (!is_null($url = &$this->staticKey(__FUNCTION__, $scheme))) {
             return $url; // Cached this already.
         }
-        $url = '//'.$this->currentUrlHost().$this->currentUrlUri();
-        $url = $this->setUrlScheme($url, $scheme);
+        $url = '//'.$this->urlCurrentHost().$this->urlCurrentUri();
+        $url = $this->urlSchemeSet($url, $scheme);
 
         return $url;
     }

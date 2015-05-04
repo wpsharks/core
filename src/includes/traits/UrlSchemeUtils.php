@@ -2,29 +2,29 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * URL Scheme Utilities.
+ * URL scheme utilities.
  *
  * @since 150424 Initial release.
  */
 trait UrlSchemeUtils
 {
-    abstract protected function currentUrlScheme();
+    abstract protected function urlCurrentScheme();
 
     /**
      * Set the scheme for a URL.
      *
      * @since 150424 Initial release.
      *
-     * @param string      $url    Absolute URL that includes a scheme.
+     * @param string      $url    Absolute URL that includes a scheme (or a `//` scheme).
      * @param null|string $scheme Optional; `//`, `relative`, `https`, or `http`.
      *
      * @return string $url URL w/ a specific scheme.
      */
-    protected function setUrlScheme($url, $scheme = null)
+    protected function urlSchemeSet($url, $scheme = null)
     {
         $url = (string) $url;
         if (!isset($scheme)) {
-            $scheme = $this->currentUrlScheme();
+            $scheme = $this->urlCurrentScheme();
         }
         $scheme = (string) $scheme;
 

@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * URL Hash Utilities.
+ * URL hash utilities.
  *
  * @since 150424 Initial release.
  */
@@ -13,16 +13,16 @@ trait UrlHashUtils
      *
      * @since 150424 Initial release.
      *
-     * @param string $url The input URL to work from.
+     * @param string $url_uri_qsl Input URL, URI, or query string w/ a leading `?`.
      *
      * @return string URL without a #hash/fragment.
      */
-    protected function stripUrlHash($url)
+    protected function urlHashStrip($url_uri_qsl)
     {
-        $url = (string) $url;
-        if (strpos($url, '#') !== false) {
-            $url = strstr($url, '#', true);
+        $url_uri_qsl = (string) $url_uri_qsl;
+        if (strpos($url_uri_qsl, '#') !== false) {
+            $url_uri_qsl = strstr($url_uri_qsl, '#', true);
         }
-        return $url;
+        return $url_uri_qsl;
     }
 }

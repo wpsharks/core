@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Filesystem Size Utilities.
+ * FS size utilities.
  *
  * @since 150424 Initial release.
  */
@@ -10,6 +10,8 @@ trait FsSizeUtils
 {
     /**
      * Abbreviated byte notation for a particular file.
+     *
+     * @since 150424 Initial release.
      *
      * @param string $file Absolute path to an existing file.
      *
@@ -23,18 +25,20 @@ trait FsSizeUtils
         if (!is_file($file) || !is_readable($file)) {
             return ''; // Not possible.
         }
-        return $this->fsBytesAbbr((float) filesize($file));
+        return $this->fsSizeBytesAbbr((float) filesize($file));
     }
 
     /**
      * Abbreviated byte notation for file sizes.
+     *
+     * @since 150424 Initial release.
      *
      * @param float $bytes     File size in bytes. A (float) value.
      * @param int   $precision Number of decimals to use.
      *
      * @return string Byte notation.
      */
-    protected function fsBytesAbbr($bytes, $precision = 2)
+    protected function fsSizeBytesAbbr($bytes, $precision = 2)
     {
         $bytes      = max(0.0, (float) $bytes);
         $precision  = max(0, (integer) $precision);
@@ -54,6 +58,8 @@ trait FsSizeUtils
     /**
      * Converts an abbreviated byte notation into bytes.
      *
+     * @since 150424 Initial release.
+     *
      * @param string $string A string value in byte notation.
      *
      * @return float A float indicating the number of bytes.
@@ -61,9 +67,9 @@ trait FsSizeUtils
     protected function fsSizeAbbrBytes($string)
     {
         $string   = (string) $string;
-        $notation = '/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/i';
+        $regex    = '/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/i';
 
-        if (!preg_match($notation, $string, $_m)) {
+        if (!preg_match($regex, $string, $_m)) {
             return (float) 0;
         }
         $value    = (float) $_m['value'];

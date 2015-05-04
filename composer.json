@@ -28,6 +28,7 @@
         "ext-openssl": "*",
         "ext-curl": "*",
         "ext-mbstring": "*",
+        "ryakad/pandoc-php": "1.*",
         "aws/aws-sdk-php": "2.*",
         "erusev/parsedown": "1.*",
         "erusev/parsedown-extra": "0.*",

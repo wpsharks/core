@@ -2,14 +2,14 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Environment Utilities.
+ * Environment utilities.
  *
  * @since 150424 Initial release.
  */
 trait EnvUtils
 {
     abstract protected function fsSizeAbbrBytes();
-    abstract protected function currentUrlHost($no_port = false);
+    abstract protected function urlCurrentHost($no_port = false);
     abstract protected function &staticKey($function, $args = array());
 
     /**
@@ -75,7 +75,7 @@ trait EnvUtils
         if (defined('LOCALHOST') && LOCALHOST) {
             return ($is = true);
         }
-        if (preg_match('/(?:localhost|127\.0\.0\.1)$/i', $this->currentUrlHost())) {
+        if (preg_match('/\b(?:localhost|127\.0\.0\.1)\b/i', $this->urlCurrentHost())) {
             return ($is = true);
         }
         return ($is = false);

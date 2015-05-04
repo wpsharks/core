@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * URL Parse Utilities.
+ * URL parse utilities.
  *
  * @since 150424 Initial release.
  */
@@ -13,24 +13,24 @@ trait UrlParseUtils
      *
      * @since 150424 Initial release.
      *
-     * @param string $url       Input URL to parse.
-     * @param int    $component Optional component to retrieve.
+     * @param string $url_uri_qsl Input URL, URI, or query string w/ a leading `?`.
+     * @param int    $component   Optional component to retrieve.
      *
-     * @return array|string|int|null Array, else string|int component value.
+     * @return array|string|int|null Array, else `string|int|null` component value.
      */
-    protected function parseUrl($url, $component = -1)
+    protected function urlParse($url_uri_qsl, $component = -1)
     {
-        $url       = (string) $url;
-        $component = (integer) $component;
-        ${'//'}    = strpos($url, '//') === 0;
+        $url_uri_qsl = (string) $url_uri_qsl;
+        $component   = (integer) $component;
+        ${'//'}      = strpos($url_uri_qsl, '//') === 0;
 
         if ($component > -1) {
             if (${'//'} && $component === PHP_URL_SCHEME) {
                 return ($part = '//');
             }
-            return ($part = parse_url($url, $component));
+            return ($part = parse_url($url_uri_qsl, $component));
         } else {
-            if (!is_array($parts = parse_url($url))) {
+            if (!is_array($parts = parse_url($url_uri_qsl))) {
                 return ($parts = array());
             }
             if (${'//'}) {
@@ -49,7 +49,7 @@ trait UrlParseUtils
      *
      * @return string Unparsed URL in string format.
      */
-    protected function unparseUrl(array $parts)
+    protected function urlParseUn(array $parts)
     {
         $scheme   = '';
         $host     = '';

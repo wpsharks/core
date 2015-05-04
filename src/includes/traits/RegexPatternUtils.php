@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Regex Pattern Utilities.
+ * Regex pattern utilities.
  *
  * @since 150424 Initial release.
  */
@@ -10,6 +10,8 @@ trait RegexPatternUtils
 {
     /**
      * Match a regex pattern against other values.
+     *
+     * @since 150424 Initial release.
      *
      * @param string $regex             A regular expression.
      * @param mixed  $value             Any value can be converted into a string before comparison.
@@ -60,6 +62,8 @@ trait RegexPatternUtils
     /**
      * Search values containing regex patterns against a string.
      *
+     * @since 150424 Initial release.
+     *
      * @param string $string            String to search within.
      * @param mixed  $value             Any value can be converted into a regex pattern.
      *                                  Actually, objects can't, but this recurses into objects.
@@ -68,7 +72,7 @@ trait RegexPatternUtils
      * @return bool|array Will return `TRUE` if any regex pattern finds a match.
      *                    If `$collect_key_props` is `TRUE`, this will return an array.
      */
-    protected function inRegexPatterns($string, $value, $collect_key_props = false)
+    protected function regexPatternsMatch($string, $value, $collect_key_props = false)
     {
         if (!strlen($string = (string) $string)) {
             return $collect_key_props ? array() : false;
@@ -78,7 +82,7 @@ trait RegexPatternUtils
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key_prop => $_value) {
                 if (is_array($_value) || is_object($_value)) {
-                    if (($_matching_key_props = $this->inRegexPatterns($string, $_value, $collect_key_props))) {
+                    if (($_matching_key_props = $this->regexPatternsMatch($string, $_value, $collect_key_props))) {
                         if ($collect_key_props) {
                             $matching_key_props[] = array($_key_prop => $_matching_key_props);
                         } else {

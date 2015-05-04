@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * URL Utilities.
+ * URL utilities.
  *
  * @since 150424 Initial release.
  */

@@ -5,7 +5,6 @@ namespace WebSharks\Core\Interfaces;
  * Constants.
  *
  * @since 150424 Initial release.
- * @see http://jas.xyz/1FvMslK
  */
 interface Constants
 {

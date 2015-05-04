@@ -2,11 +2,11 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Cache Utilities.
+ * Cache members.
  *
  * @since 150424 Initial release.
  */
-trait CacheUtils
+trait CacheMembers
 {
     /**
      * @type array Instance cache.
@@ -27,7 +27,7 @@ trait CacheUtils
      *
      * @since 15xxxx Initial release.
      */
-    protected static $global_static = array();
+    protected static $static_global = array();
 
     /**
      * Cache initializer.
@@ -38,10 +38,10 @@ trait CacheUtils
     {
         $class = get_called_class();
 
-        if (empty(static::$global_static[$class])) {
-            static::$global_static[$class] = array();
+        if (empty(static::$static_global[$class])) {
+            static::$static_global[$class] = array();
         }
-        $this->static = &static::$global_static[$class];
+        $this->static = &static::$static_global[$class];
     }
 
     /**
@@ -135,7 +135,7 @@ trait CacheUtils
      *
      * @param array $preserve Preserve certain keys?
      */
-    protected function unsetCacheKeys(array $preserve = array())
+    protected function cacheKeysUnset(array $preserve = array())
     {
         foreach ($this->cache as $_key => $_value) {
             if (!$preserve || !in_array($_key, $preserve, true)) {
@@ -152,7 +152,7 @@ trait CacheUtils
      *
      * @param array $preserve Preserve certain keys?
      */
-    protected function unsetStaticKeys(array $preserve = array())
+    protected function staticKeysUnset(array $preserve = array())
     {
         foreach ($this->static as $_key => $_value) {
             if (!$preserve || !in_array($_key, $preserve, true)) {

@@ -2,7 +2,7 @@
 namespace WebSharks\Core\Traits;
 
 /**
- * Array Dot-Key Utilities.
+ * Array dot-key utilities.
  *
  * @since 150424 Initial release.
  */
