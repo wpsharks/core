@@ -50,7 +50,7 @@ trait OverloadMembers
     {
         $property = (string) $property; // Force string.
 
-        if (array_key_exists($this->overload, $property)) {
+        if (array_key_exists($property, $this->overload)) {
             return $this->overload[$property];
         }
         throw new \Exception(sprintf('Undefined overload property: `%1$s`.', $property));
