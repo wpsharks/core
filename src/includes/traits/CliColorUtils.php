@@ -88,22 +88,9 @@ trait CliColorUtils
 
         $link_color = (string) $args['link_color'];
 
-        colorize_links: // Target point for link colorization.
+        colorize_string: // Target point for colorization.
 
-        if ($link_color && isset($this->cli_colors_fg[$link_color])) {
-            if ($link_color !== $fg_color && !$bg_color) {
-                $string = preg_replace_callback(
-                    '/(?<o>\<)(?P<link>'.substr($this->def_regex_valid_url, 2, -2).')(?<c>\>)/',
-                    function ($m) use ($link_color) {
-                        return $m['o']."\033".'['.$this->cli_colors_fg[$link_color].'m'.$m['link']."\033".'[0m'.$m['c'];
-                    },
-                    $string // e.g., `<http://colorized.link/path/?query>`
-                );
-            }
-        }
-        colorize_string: // Target point for overall colorization.
-
-        $colorized_string = ''; // Initialize colorized string.
+        $colorized_string = ''; // Initialize string.
 
         if ($fg_color && isset($this->cli_colors_fg[$fg_color])) {
             $colorized_string .= "\033".'['.$this->cli_colors_fg[$fg_color].'m';
@@ -115,6 +102,22 @@ trait CliColorUtils
 
         if ($fg_color || $bg_color) {
             $colorized_string .= "\033".'[0m'; // Reset color.
+        }
+        colorize_links: // Target point for link colorization.
+
+        if ($link_color && isset($this->cli_colors_fg[$link_color])) {
+            if ($link_color !== $fg_color && !$bg_color) {
+                $colorized_string = preg_replace_callback(
+                    '/(?<o>\<)(?P<link>'.substr($this->def_regex_valid_url, 2, -2).')(?<c>\>)/',
+                    function ($m) use ($fg_color, $link_color) {
+                        return $m['o']."\033".'['.$this->cli_colors_fg[$link_color].'m'.$m['link']."\033".'[0m'.
+                                ($fg_color && isset($this->cli_colors_fg[$fg_color])
+                                    ? "\033".'['.$this->cli_colors_fg[$fg_color].'m' : '').
+                                $m['c']; // Restore original color for `>` bracket.
+                    },
+                    $colorized_string // e.g., `<http://colorized.link/path/?query>`
+                );
+            }
         }
         finale: // Target for for grand finale.
 
