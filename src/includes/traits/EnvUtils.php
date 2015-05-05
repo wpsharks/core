@@ -8,8 +8,8 @@ namespace WebSharks\Core\Traits;
  */
 trait EnvUtils
 {
-    abstract protected function fsSizeAbbrBytes();
     abstract protected function urlCurrentHost($no_port = false);
+    abstract protected function fsSizeBytesAbbr($bytes, $precision = 2);
     abstract protected function &staticKey($function, $args = array());
 
     /**
