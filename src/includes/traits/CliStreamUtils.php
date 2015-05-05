@@ -8,7 +8,7 @@ namespace WebSharks\Core\Traits;
  */
 trait CliStreamUtils
 {
-    abstract protected function cliColorize($string, $fg_color = '', $bg_color = '');
+    abstract protected function cliColorize($string, $fg_color = '', $bg_color = '', array $args = []);
 
     /**
      * Read STDIN line.

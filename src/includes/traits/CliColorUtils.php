@@ -70,16 +70,40 @@ trait CliColorUtils
      * @param string $string   Input string to colorize.
      * @param string $fg_color Foreground color to use.
      * @param string $bg_color Background color to use.
+     * @param array  $args     Any additional argument values.
      *
      * @return string Colorized input string.
      */
-    protected function cliColorize($string, $fg_color = '', $bg_color = '')
+    protected function cliColorize($string, $fg_color = '', $bg_color = '', array $args = [])
     {
-        $string   = (string) $string;
-        $fg_color = (string) $fg_color;
-        $bg_color = (string) $bg_color;
+        $string           = (string) $string;
+        $fg_color         = (string) $fg_color;
+        $bg_color         = (string) $bg_color;
 
-        $colorized_string = ''; // Initialize.
+        $default_args = [
+            'link_color' => 'blue_underline',
+        ];
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
+
+        $link_color = (string) $args['link_color'];
+
+        colorize_links: // Target point for link colorization.
+
+        if ($link_color && isset($this->cli_colors_fg[$link_color])) {
+            if ($link_color !== $fg_color && !$bg_color) {
+                $string = preg_replace_callback(
+                    '/(?<o>\<)(?P<link>'.substr($this->def_regex_valid_url, 2, -2).')(?<c>\>)/',
+                    function ($m) {
+                        return $m['o']."\033".'['.$this->cli_colors_fg[$link_color].'m'.$m['link']."\033".'[0m'.$m['c'];
+                    },
+                    $string // e.g., `<http://colorized.link/path/?query>`
+                );
+            }
+        }
+        colorize_string: // Target point for overall colorization.
+
+        $colorized_string = ''; // Initialize colorized string.
 
         if ($fg_color && isset($this->cli_colors_fg[$fg_color])) {
             $colorized_string .= "\033".'['.$this->cli_colors_fg[$fg_color].'m';
@@ -87,11 +111,13 @@ trait CliColorUtils
         if ($bg_color && isset($this->cli_colors_bg[$bg_color])) {
             $colorized_string .= "\033".'['.$this->cli_colors_bg[$bg_color].'m';
         }
-        $colorized_string .= $string; // String itself.
+        $colorized_string .= $string; // Colored string value.
 
         if ($fg_color || $bg_color) {
-            $colorized_string .= "\033".'[0m';
+            $colorized_string .= "\033".'[0m'; // Reset color.
         }
+        finale: // Target for for grand finale.
+
         return $colorized_string;
     }
 }
