@@ -36,6 +36,9 @@ trait CliStreamUtils
         if (!($string = (string) $string)) {
             return; // Nothing to do.
         }
+        if (strpos($string, "\033".'[0m') === false) {
+            $string = $this->cliColorize($string);
+        }
         fwrite(STDOUT, $string."\n");
     }
 
