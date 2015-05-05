@@ -76,9 +76,9 @@ trait CliColorUtils
      */
     protected function cliColorize($string, $fg_color = '', $bg_color = '', array $args = [])
     {
-        $string           = (string) $string;
-        $fg_color         = (string) $fg_color;
-        $bg_color         = (string) $bg_color;
+        $string   = (string) $string;
+        $fg_color = (string) $fg_color;
+        $bg_color = (string) $bg_color;
 
         $default_args = [
             'link_color' => 'blue_underline',
@@ -94,7 +94,7 @@ trait CliColorUtils
             if ($link_color !== $fg_color && !$bg_color) {
                 $string = preg_replace_callback(
                     '/(?<o>\<)(?P<link>'.substr($this->def_regex_valid_url, 2, -2).')(?<c>\>)/',
-                    function ($m) {
+                    function ($m) use ($link_color) {
                         return $m['o']."\033".'['.$this->cli_colors_fg[$link_color].'m'.$m['link']."\033".'[0m'.$m['c'];
                     },
                     $string // e.g., `<http://colorized.link/path/?query>`
