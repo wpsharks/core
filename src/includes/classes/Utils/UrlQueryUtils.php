@@ -1,17 +1,27 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * URL query utilities.
  *
  * @since 150424 Initial release.
  */
-trait UrlQueryUtils
+class UrlQueryUtils extends AbsBase
 {
-    abstract protected function &staticKey($function, $args = array());
-    abstract protected function trim($value, $chars = '', $extra_chars = '', $side = '');
-    abstract protected function urlParse($url_uri_qsl, $component = -1);
-    abstract protected function urlParseUn(array $parts);
+    abstract public function &staticKey($function, $args = array());
+    abstract public function trim($value, $chars = '', $extra_chars = '', $side = '');
+    abstract public function urlParse($url_uri_qsl, $component = -1);
+    abstract public function urlParseUn(array $parts);
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Acquire/sanitize query string.
@@ -22,7 +32,7 @@ trait UrlQueryUtils
      *
      * @return string Query string (no leading `?`); and w/ normalized ampersands.
      */
-    protected function urlQueryString($qs_url_uri)
+    public function urlQueryString($qs_url_uri)
     {
         if (!($qs = (string) $qs_url_uri)) {
             return $qs; // Empty.
@@ -57,7 +67,7 @@ trait UrlQueryUtils
      *
      * @return array An array of query string args; based on the input `$qs_url_uri` value.
      */
-    protected function urlQueryParse($qs_url_uri, $convert_dots_spaces = true, $dec_type = self::RFC1738, array &$___parent_array = null)
+    public function urlQueryParse($qs_url_uri, $convert_dots_spaces = true, $dec_type = self::RFC1738, array &$___parent_array = null)
     {
         if (isset($___parent_array)) {
             $array = &$___parent_array;
@@ -130,7 +140,7 @@ trait UrlQueryUtils
      *
      * @return array An array of query string args; based on the input `$qs_url_uri` value.
      */
-    protected function urlQueryParseRaw($qs_url_uri, $convert_dots_spaces = true)
+    public function urlQueryParseRaw($qs_url_uri, $convert_dots_spaces = true)
     {
         return $this->urlQueryParse($qs_url_uri, $convert_dots_spaces, $this::RFC3986);
     }
@@ -145,7 +155,7 @@ trait UrlQueryUtils
      *
      * @return string Input `$url_uri_qsl` with new query arg(s).
      */
-    protected function urlQueryAddArgs(array $new_args, $url_uri_qsl)
+    public function urlQueryAddArgs(array $new_args, $url_uri_qsl)
     {
         $url_uri_qsl = (string) $url_uri_qsl;
         $url_uri_qsl = $this->urlParse($url_uri_qsl);
@@ -171,7 +181,7 @@ trait UrlQueryUtils
      *
      * @return string Input `$url_uri_qsl` without query arg(s).
      */
-    protected function urlQueryRemoveArgs(array $arg_keys, $url_uri_qsl)
+    public function urlQueryRemoveArgs(array $arg_keys, $url_uri_qsl)
     {
         $url_uri_qsl = (string) $url_uri_qsl;
         $url_uri_qsl = $this->urlParse($url_uri_qsl);
@@ -196,7 +206,7 @@ trait UrlQueryUtils
      *
      * @return string Input `$url_uri_qsl` without a query string.
      */
-    protected function urlQueryStrip($url_uri_qsl)
+    public function urlQueryStrip($url_uri_qsl)
     {
         $url_uri_qsl = (string) $url_uri_qsl;
         if (strpos($url_uri_qsl, '?') !== false) {
@@ -219,7 +229,7 @@ trait UrlQueryUtils
      *
      * @return string A (possibly raw) URL-encoded query string (without a leading `?`).
      */
-    protected function urlQueryBuild(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null)
+    public function urlQueryBuild(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null)
     {
         if (isset($numeric_prefix)) {
             $numeric_prefix = (string) $numeric_prefix;
@@ -273,7 +283,7 @@ trait UrlQueryUtils
      *
      * @return string A raw URL-encoded query string (without a leading `?`).
      */
-    protected function urlQueryBuildRaw(array $args, $numeric_prefix = null, $arg_separator = '&')
+    public function urlQueryBuildRaw(array $args, $numeric_prefix = null, $arg_separator = '&')
     {
         return $this->urlQueryBuild($args, $prefix, $separator, $this::RFC3986);
     }

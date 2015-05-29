@@ -1,21 +1,33 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * CLI stream utilities.
  *
  * @since 150424 Initial release.
  */
-trait CliStreamUtils
+class CliStreamUtils extends AbsBase
 {
-    abstract protected function cliColorize($string, $fg_color = '', $bg_color = '', array $args = []);
+    protected $CliColorUtils;
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct(CliColorUtils $CliColorUtils)
+    {
+        parent::__construct();
+
+        $this->CliColorUtils = $CliColorUtils;
+    }
 
     /**
      * Read STDIN line.
      *
      * @since 15xxxx Initial release.
      */
-    protected function cliStreamIn()
+    public function cliStreamIn()
     {
         $stdin = ''; // Initialize.
         while (($_line = fgets(STDIN)) !== false) {
@@ -31,13 +43,13 @@ trait CliStreamUtils
      *
      * @param string $string Output string.
      */
-    protected function cliStreamOut($string)
+    public function cliStreamOut($string)
     {
         if (!($string = (string) $string)) {
             return; // Nothing to do.
         }
         if (strpos($string, "\033".'[0m') === false) {
-            $string = $this->cliColorize($string);
+            $string = $this->CliColorUtils->cliColorize($string);
         }
         fwrite(STDOUT, $string."\n");
     }
@@ -49,13 +61,13 @@ trait CliStreamUtils
      *
      * @param string $string Output string.
      */
-    protected function cliStreamErr($string)
+    public function cliStreamErr($string)
     {
         if (!($string = (string) $string)) {
             return; // Nothing to do.
         }
         if (strpos($string, "\033".'[0m') === false) {
-            $string = $this->cliColorize($string, 'red_bold');
+            $string = $this->CliColorUtils->cliColorize($string, 'red_bold');
         }
         fwrite(STDERR, $string."\n");
     }

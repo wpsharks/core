@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * HTML conditional utilities.
  *
  * @since 150424 Initial release.
  */
-trait HtmlIsUtils
+class HtmlIsUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Is a string in HTML format?
      *
@@ -17,7 +27,7 @@ trait HtmlIsUtils
      *
      * @return bool `TRUE` if string is HTML.
      */
-    protected function htmlIs($string)
+    public function htmlIs($string)
     {
         if (!$string || !is_string($string)) {
             return false; // Not possible.

@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * PHP strip utilities.
  *
  * @since 150424 Initial release.
  */
-trait PhpStripUtils
+class PhpStripUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Strips PHP tags.
      *
@@ -17,7 +27,7 @@ trait PhpStripUtils
      *
      * @return string String w/ all PHP tags stripped away.
      */
-    protected function phpTagsStrip($string)
+    public function phpTagsStrip($string)
     {
         $string = (string) $string;
 

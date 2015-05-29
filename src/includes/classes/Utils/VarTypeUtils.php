@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Var type utilities.
  *
  * @since 150424 Initial release.
  */
-trait VarTypeUtils
+class VarTypeUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Var typify deeply.
      *
@@ -18,7 +28,7 @@ trait VarTypeUtils
      *
      * @return mixed|array|object Output value.
      */
-    protected function varTypify($value, $type)
+    public function varTypify($value, $type)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * HTML escape utilities.
  *
  * @since 150424 Initial release.
  */
-trait HtmlEscUtils
+class HtmlEscUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Escape HTML markup deeply.
      *
@@ -19,7 +29,7 @@ trait HtmlEscUtils
      *
      * @return mixed Value after having been escaped deeply.
      */
-    protected function htmlEsc($value, $double_encode = false, $flags = null)
+    public function htmlEsc($value, $double_encode = false, $flags = null)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -47,7 +57,7 @@ trait HtmlEscUtils
      *
      * @return mixed Value after having been unescaped deeply.
      */
-    protected function htmlEscUn($value, $flags = null)
+    public function htmlEscUn($value, $flags = null)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

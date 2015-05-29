@@ -1,16 +1,26 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * IP address utilities.
  *
  * @since 150424 Initial release.
  */
-trait IpUtils
+class IpUtils extends AbsBase
 {
-    abstract protected function fsDirTmp();
-    abstract protected function &staticKey($function, $args = array());
-    abstract protected function urlRemote($url, array $args = array());
+    abstract public function fsDirTmp();
+    abstract public function &staticKey($function, $args = array());
+    abstract public function urlRemote($url, array $args = array());
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Get the current visitor's real IP address.
@@ -21,7 +31,7 @@ trait IpUtils
      *
      * @note This supports both IPv4 and IPv6 addresses.
      */
-    protected function ipCurrent()
+    public function ipCurrent()
     {
         if (!is_null($ip = &$this->staticKey(__FUNCTION__))) {
             return $ip; // Already cached this.
@@ -60,7 +70,7 @@ trait IpUtils
      *
      * @return string A valid/public IP address (if one is found); else an empty string.
      */
-    protected function ipGetValidPublicFrom($list_of_possible_ips)
+    public function ipGetValidPublicFrom($list_of_possible_ips)
     {
         if (!$list_of_possible_ips || !is_string($list_of_possible_ips)) {
             return ''; // Empty or invalid data.
@@ -87,7 +97,7 @@ trait IpUtils
      *
      * @return string Geographic region code for given IP address; if possible.
      */
-    protected function ipRegion($ip)
+    public function ipRegion($ip)
     {
         if (($geo = $this->ipGeoData($ip))) {
             return $geo->region;
@@ -102,7 +112,7 @@ trait IpUtils
      *
      * @return string Current user's geographic region code; if possible.
      */
-    protected function ipCurrentRegion()
+    public function ipCurrentRegion()
     {
         if (($geo = $this->ipGeoData($this->ipCurrent()))) {
             return $geo->region;
@@ -119,7 +129,7 @@ trait IpUtils
      *
      * @return string Geographic country code for given IP address; if possible.
      */
-    protected function ipCountry($ip)
+    public function ipCountry($ip)
     {
         if (($geo = $this->ipGeoData($ip))) {
             return $geo->country;
@@ -134,7 +144,7 @@ trait IpUtils
      *
      * @return string Current user's geographic country code; if possible.
      */
-    protected function ipCurrentCountry()
+    public function ipCurrentCountry()
     {
         if (($geo = $this->ipGeoData($this->ipCurrent()))) {
             return $geo->country;
@@ -153,7 +163,7 @@ trait IpUtils
      *
      * @return \stdClass|bool Geo location data from IP address.
      */
-    protected function ipGeoData($ip)
+    public function ipGeoData($ip)
     {
         # Valid the input IP address; do we have one?
 

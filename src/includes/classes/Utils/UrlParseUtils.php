@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * URL parse utilities.
  *
  * @since 150424 Initial release.
  */
-trait UrlParseUtils
+class UrlParseUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Parses a URL.
      *
@@ -18,7 +28,7 @@ trait UrlParseUtils
      *
      * @return array|string|int|null Array, else `string|int|null` component value.
      */
-    protected function urlParse($url_uri_qsl, $component = -1)
+    public function urlParse($url_uri_qsl, $component = -1)
     {
         $url_uri_qsl = (string) $url_uri_qsl;
         $component   = (integer) $component;
@@ -49,7 +59,7 @@ trait UrlParseUtils
      *
      * @return string Unparsed URL in string format.
      */
-    protected function urlParseUn(array $parts)
+    public function urlParseUn(array $parts)
     {
         $scheme   = '';
         $host     = '';

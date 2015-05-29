@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Trim utilities.
  *
  * @since 150424 Initial release.
  */
-trait TrimUtils
+class TrimUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Trims a value deeply.
      *
@@ -20,7 +30,7 @@ trait TrimUtils
      *
      * @return string|array|object Trimmed value.
      */
-    protected function trim($value, $chars = '', $extra_chars = '', $side = '')
+    public function trim($value, $chars = '', $extra_chars = '', $side = '')
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -60,7 +70,7 @@ trait TrimUtils
      *
      * @return string|array|object Trimmed value.
      */
-    protected function trimLeft($value, $chars = '', $extra_chars = '')
+    public function trimLeft($value, $chars = '', $extra_chars = '')
     {
         return $this->trim($value, $chars, $extra_chars, 'l');
     }
@@ -76,7 +86,7 @@ trait TrimUtils
      *
      * @return string|array|object Trimmed value.
      */
-    protected function trimRight($value, $chars = '', $extra_chars = '')
+    public function trimRight($value, $chars = '', $extra_chars = '')
     {
         return $this->trim($value, $chars, $extra_chars, 'r');
     }

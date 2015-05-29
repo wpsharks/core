@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * CLI color utilities.
  *
  * @since 150424 Initial release.
  */
-trait CliColorUtils
+class CliColorUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Foreground colors.
      *
@@ -74,7 +84,7 @@ trait CliColorUtils
      *
      * @return string Colorized input string.
      */
-    protected function cliColorize($string, $fg_color = '', $bg_color = '', array $args = [])
+    public function cliColorize($string, $fg_color = '', $bg_color = '', array $args = [])
     {
         $string   = (string) $string;
         $fg_color = (string) $fg_color;

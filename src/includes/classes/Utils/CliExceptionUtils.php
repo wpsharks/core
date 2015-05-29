@@ -1,21 +1,33 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * CLI exception utilities.
  *
  * @since 150424 Initial release.
  */
-trait CliExceptionUtils
+class CliExceptionUtils extends AbsBase
 {
-    abstract protected function cliStreamErr($string);
+    protected $CliStreamUtils;
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct(CliStreamUtils $CliStreamUtils)
+    {
+        parent::__construct();
+
+        $this->CliStreamUtils = $CliStreamUtils;
+    }
 
     /**
      * Setup CLI exception handler.
      *
      * @since 150424 Initial release.
      */
-    protected function cliExceptionsHandle()
+    public function cliExceptionsHandle()
     {
         set_exception_handler(array($this, 'cliExceptionHandle'));
     }
@@ -29,6 +41,6 @@ trait CliExceptionUtils
      */
     public function cliExceptionHandle(\Exception $e)
     {
-        $this->cliStreamErr($e->getMessage());
+        $this->CliStreamUtils->cliStreamErr($e->getMessage());
     }
 }

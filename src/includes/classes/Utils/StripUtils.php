@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Strip utilities.
  *
  * @since 150424 Initial release.
  */
-trait StripUtils
+class StripUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Strips slashes deeply.
      *
@@ -17,7 +27,7 @@ trait StripUtils
      *
      * @return string|array|object Stripped value.
      */
-    protected function strip($value)
+    public function strip($value)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

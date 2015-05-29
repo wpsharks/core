@@ -1,14 +1,24 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * HTML strip utilities.
  *
  * @since 150424 Initial release.
  */
-trait HtmlTokenUtils
+class HtmlTokenUtils extends AbsBase
 {
-    abstract protected function envHasFunction($function);
+    abstract public function envHasFunction($function);
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Shortcode/pre/code/samp/MD tokens.
@@ -21,7 +31,7 @@ trait HtmlTokenUtils
      *
      * @return array Array with: `string`, `tokens`, `marker`.
      */
-    protected function htmlTokenizeSpcsm($string, array $tokenize_only = array(), $marker = '')
+    public function htmlTokenizeSpcsm($string, array $tokenize_only = array(), $marker = '')
     {
         $marker = str_replace('.', '', uniqid('', true)).($marker ? sha1($marker) : '');
 
@@ -156,7 +166,7 @@ trait HtmlTokenUtils
      *
      * @return string The `string` w/ tokens restored now.
      */
-    protected function htmlTokensRestoreSpcsm(array $spcsm)
+    public function htmlTokensRestoreSpcsm(array $spcsm)
     {
         if (!isset($spcsm['string'])) {
             return ''; // Not possible.

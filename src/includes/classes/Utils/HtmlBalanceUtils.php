@@ -1,15 +1,25 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * HTML normalizing utilities.
  *
  * @since 150424 Initial release.
  */
-trait HtmlBalanceUtils
+class HtmlBalanceUtils extends AbsBase
 {
-    abstract protected function envHasExtension($extension);
-    abstract protected function htmlTrim($value, $chars = '', $extra_chars = '', $side = '');
+    abstract public function envHasExtension($extension);
+    abstract public function htmlTrim($value, $chars = '', $extra_chars = '', $side = '');
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Balance HTML markup/tags.
@@ -25,7 +35,7 @@ trait HtmlBalanceUtils
      * @note This works with HTML fragments only. No on a full document.
      * i.e., If the input contains `</html>` or `</body>` it is left as-is.
      */
-    protected function htmlBalanceTags($value)
+    public function htmlBalanceTags($value)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

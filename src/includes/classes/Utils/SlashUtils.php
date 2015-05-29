@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Strip utilities.
  *
  * @since 150424 Initial release.
  */
-trait SlashUtils
+class SlashUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Adds slashes deeply.
      *
@@ -17,7 +27,7 @@ trait SlashUtils
      *
      * @return string|array|object Slashed value.
      */
-    protected function slash($value)
+    public function slash($value)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Array iterator utilities.
  *
  * @since 150424 Initial release.
  */
-trait ArrayIteratorUtils
+class ArrayIteratorUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Recursive iterator.
      *
@@ -15,7 +25,7 @@ trait ArrayIteratorUtils
      *
      * @return \RecursiveIteratorIterator|\RecursiveArrayIterator Recursive iterator.
      */
-    protected function arrayIterator(array $array)
+    public function arrayIterator(array $array)
     {
         return new \RecursiveIteratorIterator(new \RecursiveArrayIterator($array));
     }

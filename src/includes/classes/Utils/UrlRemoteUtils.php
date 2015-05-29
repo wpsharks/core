@@ -1,15 +1,25 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * URL remote utilities.
  *
  * @since 150424 Initial release.
  */
-trait UrlRemoteUtils
+class UrlRemoteUtils extends AbsBase
 {
-    abstract protected function envHasExtension($extension);
-    abstract protected function urlQueryBuild(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null);
+    abstract public function envHasExtension($extension);
+    abstract public function urlQueryBuild(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null);
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Remote HTTP communication.
@@ -19,7 +29,7 @@ trait UrlRemoteUtils
      *
      * @return string|array Output based on configured arguments.
      */
-    protected function urlRemote($url, array $args = array())
+    public function urlRemote($url, array $args = array())
     {
         if (!$this->envHasExtension('curl')) {
             throw new \Exception('cURL extension missing.');
@@ -41,7 +51,7 @@ trait UrlRemoteUtils
      *
      * @return string|array Output based on configured arguments.
      */
-    protected function urlRemoteCurl($url, array $args = array())
+    public function urlRemoteCurl($url, array $args = array())
     {
         # Parse arguments.
 

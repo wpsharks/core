@@ -1,15 +1,25 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * HTML normalizing utilities.
  *
  * @since 150424 Initial release.
  */
-trait HtmlNUtils
+class HtmlNUtils extends AbsBase
 {
-    abstract protected function eolsN($value);
-    abstract protected function &staticKey($function, $args = array());
+    abstract public function eolsN($value);
+    abstract public function &staticKey($function, $args = array());
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Normalizes HTML whitespace deeply.
@@ -20,7 +30,7 @@ trait HtmlNUtils
      *
      * @return string|array|object With normalized HTML whitespace deeply.
      */
-    protected function htmlNWhitespace($value)
+    public function htmlNWhitespace($value)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

@@ -6,8 +6,18 @@ namespace WebSharks\Core\Classes\Utils;
  *
  * @since 150424 Initial release.
  */
-class ArrayDimensionUtils
+class ArrayDimensionUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Forces an array to a single dimension.
      *
@@ -15,7 +25,7 @@ class ArrayDimensionUtils
      *
      * @return array Output array, with only ONE dimension.
      */
-    protected static function one(array $array)
+    public function one(array $array)
     {
         foreach ($array as $_key => $_value) {
             if (is_array($_value) || is_object($_value)) {

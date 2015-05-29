@@ -1,17 +1,27 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Markdown utilities.
  *
  * @since 150424 Initial release.
  */
-trait MarkdownUtils
+class MarkdownUtils extends AbsBase
 {
-    abstract protected function envHasFunction($function);
-    abstract protected function &staticKey($function, $args = array());
-    abstract protected function htmlTokenizeSpcsm($string, array $tokenize_only = array(), $marker = '');
-    abstract protected function htmlTokensRestoreSpcsm(array $spcsm);
+    abstract public function envHasFunction($function);
+    abstract public function &staticKey($function, $args = array());
+    abstract public function htmlTokenizeSpcsm($string, array $tokenize_only = array(), $marker = '');
+    abstract public function htmlTokensRestoreSpcsm(array $spcsm);
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * A very simple markdown parser.
@@ -21,7 +31,7 @@ trait MarkdownUtils
      *
      * @return string Markdown converted to HTML markup.
      */
-    protected function markdown($string, array $args = array())
+    public function markdown($string, array $args = array())
     {
         if (!($string = trim((string) $string))) {
             return $string; // Not possible.

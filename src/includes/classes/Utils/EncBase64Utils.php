@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Base64 encryption utilities.
  *
  * @since 150424 Initial release.
  */
-trait EncBase64Utils
+class EncBase64Utils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Base64 URL-safe encoding.
      *
@@ -22,7 +32,7 @@ trait EncBase64Utils
      *
      * @return string The base64 URL-safe encoded string.
      */
-    protected function encBase64UrlSafeEncode($string, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=')
+    public function encBase64UrlSafeEncode($string, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=')
     {
         $string             = (string) $string;
         $trim_padding_chars = (string) $trim_padding_chars;
@@ -50,7 +60,7 @@ trait EncBase64Utils
      *
      * @return string The decoded string value.
      */
-    protected function encBase64UrlSafeDecode($base64_url_safe, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=')
+    public function encBase64UrlSafeDecode($base64_url_safe, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=')
     {
         $base64_url_safe    = (string) $base64_url_safe;
         $trim_padding_chars = (string) $trim_padding_chars;

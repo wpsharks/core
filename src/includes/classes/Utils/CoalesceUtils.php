@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Coalesce utilities.
  *
  * @since 150424 Initial release.
  */
-trait CoalesceUtils
+class CoalesceUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Utility; `!empty()` coalesce.
      *
@@ -15,7 +25,7 @@ trait CoalesceUtils
      *
      * @return mixed First `!empty()`; else `NULL`.
      */
-    protected function coalesce()
+    public function coalesce()
     {
         foreach (func_get_args() as $var) {
             if (!empty($var)) {
@@ -34,7 +44,7 @@ trait CoalesceUtils
      *
      * @note This variation supports variables by reference; avoiding `E_NOTICE` errors.
      */
-    protected function coalesceByRef(&$a, &$b = null, &$c = null, &$d = null, &$e = null, &$f = null, &$g = null, &$h = null, &$i = null, &$j = null)
+    public function coalesceByRef(&$a, &$b = null, &$c = null, &$d = null, &$e = null, &$f = null, &$g = null, &$h = null, &$i = null, &$j = null)
     {
         foreach (func_get_args() as $var) {
             if (!empty($var)) {
@@ -51,7 +61,7 @@ trait CoalesceUtils
      *
      * @return mixed First `isset()`; else `NULL`.
      */
-    protected function coalesceIsset()
+    public function coalesceIsset()
     {
         foreach (func_get_args() as $var) {
             if (isset($var)) {
@@ -70,7 +80,7 @@ trait CoalesceUtils
      *
      * @note This variation supports variables by reference; avoiding `E_NOTICE` errors.
      */
-    protected function coalesceIssetByRef(&$a, &$b = null, &$c = null, &$d = null, &$e = null, &$f = null, &$g = null, &$h = null, &$i = null, &$j = null)
+    public function coalesceIssetByRef(&$a, &$b = null, &$c = null, &$d = null, &$e = null, &$f = null, &$g = null, &$h = null, &$i = null, &$j = null)
     {
         foreach (func_get_args() as $var) {
             if (isset($var)) {

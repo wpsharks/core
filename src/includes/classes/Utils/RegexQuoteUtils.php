@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Regex quote utilities.
  *
  * @since 150424 Initial release.
  */
-trait RegexQuoteUtils
+class RegexQuoteUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Quote regex meta chars deeply.
      *
@@ -18,7 +28,7 @@ trait RegexQuoteUtils
      *
      * @return string|array|object Quoted deeply.
      */
-    protected function regexQuote($value, $delimiter = '/')
+    public function regexQuote($value, $delimiter = '/')
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

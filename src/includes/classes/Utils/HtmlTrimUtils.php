@@ -1,15 +1,25 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * HTML trim utilities.
  *
  * @since 150424 Initial release.
  */
-trait HtmlTrimUtils
+class HtmlTrimUtils extends AbsBase
 {
-    abstract protected function &staticKey($function, $args = array());
-    abstract protected function trim($value, $chars = '', $extra_chars = '', $side = '');
+    abstract public function &staticKey($function, $args = array());
+    abstract public function trim($value, $chars = '', $extra_chars = '', $side = '');
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Trims HTML content deeply.
@@ -24,7 +34,7 @@ trait HtmlTrimUtils
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    protected function htmlTrim($value, $chars = '', $extra_chars = '', $side = '')
+    public function htmlTrim($value, $chars = '', $extra_chars = '', $side = '')
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -68,7 +78,7 @@ trait HtmlTrimUtils
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    protected function htmlTrimLeft($value, $chars = '', $extra_chars = '')
+    public function htmlTrimLeft($value, $chars = '', $extra_chars = '')
     {
         return $this->htmlTrim($value, $chars, $extra_chars, 'l');
     }
@@ -85,7 +95,7 @@ trait HtmlTrimUtils
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    protected function htmlTrimRight($value, $chars = '', $extra_chars = '')
+    public function htmlTrimRight($value, $chars = '', $extra_chars = '')
     {
         return $this->htmlTrim($value, $chars, $extra_chars, 'r');
     }

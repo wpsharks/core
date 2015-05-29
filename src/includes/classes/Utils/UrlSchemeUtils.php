@@ -1,14 +1,24 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * URL scheme utilities.
  *
  * @since 150424 Initial release.
  */
-trait UrlSchemeUtils
+class UrlSchemeUtils extends AbsBase
 {
-    abstract protected function urlCurrentScheme();
+    abstract public function urlCurrentScheme();
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Set the scheme for a URL.
@@ -20,7 +30,7 @@ trait UrlSchemeUtils
      *
      * @return string $url URL w/ a specific scheme.
      */
-    protected function urlSchemeSet($url, $scheme = null)
+    public function urlSchemeSet($url, $scheme = null)
     {
         $url = (string) $url;
         if (!isset($scheme)) {

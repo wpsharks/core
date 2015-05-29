@@ -1,14 +1,24 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Host-to utilities.
  *
  * @since 150424 Initial release.
  */
-trait HostToUtils
+class HostToUtils extends AbsBase
 {
-    abstract protected function &staticKey($function, $args = array());
+    abstract public function &staticKey($function, $args = array());
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Converts a host name into a slug.
@@ -19,7 +29,7 @@ trait HostToUtils
      *
      * @return string Slug representation of the `$host`; i.e., w/ dashes.
      */
-    protected function hostToSlug($host = '')
+    public function hostToSlug($host = '')
     {
         $host = (string) $host;
 
@@ -70,7 +80,7 @@ trait HostToUtils
      *
      * @return string Var representation of the `$host`; i.e., w/ underscores.
      */
-    protected function hostToVar($host = '')
+    public function hostToVar($host = '')
     {
         return str_replace('-', '_', $this->hostToSlug($host));
     }

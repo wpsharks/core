@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * YAML utilities.
  *
  * @since 150424 Initial release.
  */
-trait YamlUtils
+class YamlUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * YAML parser.
      *
@@ -17,7 +27,7 @@ trait YamlUtils
      *
      * @return array Output array.
      */
-    protected function yamlParse($yaml)
+    public function yamlParse($yaml)
     {
         if (!($yaml = (string) $yaml)) {
             return []; // Empty.

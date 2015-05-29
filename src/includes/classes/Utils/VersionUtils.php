@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Version utilities.
  *
  * @since 150424 Initial release.
  */
-trait VersionUtils
+class VersionUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Is it a valid version?
      *
@@ -17,7 +27,7 @@ trait VersionUtils
      *
      * @return bool `TRUE` if valid.
      */
-    protected function versionIsValid($version)
+    public function versionIsValid($version)
     {
         if (!($version = (string) $version)) {
             return false; // Nope.
@@ -34,7 +44,7 @@ trait VersionUtils
      *
      * @return bool `TRUE` if valid.
      */
-    protected function versionIsValidDev($version)
+    public function versionIsValidDev($version)
     {
         if (!($version = (string) $version)) {
             return false; // Nope.
@@ -51,7 +61,7 @@ trait VersionUtils
      *
      * @return bool `TRUE` if valid.
      */
-    protected function versionIsValidStable($version)
+    public function versionIsValidStable($version)
     {
         if (!($version = (string) $version)) {
             return false; // Nope.
@@ -68,7 +78,7 @@ trait VersionUtils
      *
      * @return bool `TRUE` if valid.
      */
-    protected function versionWsIsValid($version)
+    public function versionWsIsValid($version)
     {
         if (!($version = (string) $version)) {
             return false; // Nope.
@@ -85,7 +95,7 @@ trait VersionUtils
      *
      * @return bool `TRUE` if valid.
      */
-    protected function versionWsIsValidDev($version)
+    public function versionWsIsValidDev($version)
     {
         if (!($version = (string) $version)) {
             return false; // Nope.
@@ -102,7 +112,7 @@ trait VersionUtils
      *
      * @return bool `TRUE` if valid.
      */
-    protected function versionWsIsValidStable($version)
+    public function versionWsIsValidStable($version)
     {
         if (!($version = (string) $version)) {
             return false; // Nope.
@@ -119,7 +129,7 @@ trait VersionUtils
      *
      * @return int Timestamp, else `0` on failure.
      */
-    protected function versionWsTime($version)
+    public function versionWsTime($version)
     {
         if (!($version = (string) $version)) {
             return 0; // Not possible.

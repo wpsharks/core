@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Var dump utilities.
  *
  * @since 150424 Initial release.
  */
-trait VarDumpUtils
+class VarDumpUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * A better `var_dump()`.
      *
@@ -29,7 +39,7 @@ trait VarDumpUtils
      * @note This routine MUST be very careful that it does NOT write to any variables.
      *    Writing to a variable (or to a variable reference) could cause damage in other routines.
      */
-    protected function varDump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false)
+    public function varDump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false)
     {
         return $this->varDumper($var, $echo, $indent_size, $dump_circular_ids);
     }
@@ -58,7 +68,7 @@ trait VarDumpUtils
      * @note This routine MUST be very careful that it does NOT write to any variables.
      *    Writing to a variable (or to a variable reference) could cause damage in other routines.
      */
-    protected function varDumper(
+    public function varDumper(
         &$var,
         $echo = false,
         $indent_size = 4,

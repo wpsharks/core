@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Enc. keygen utilities.
  *
  * @since 150424 Initial release.
  */
-trait EncKeygenUtils
+class EncKeygenUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Generates a random key.
      *
@@ -19,7 +29,7 @@ trait EncKeygenUtils
      *
      * @return string The random key.
      */
-    protected function encKeygenRandom($length = 15, $special_chars = true, $extra_special_chars = false)
+    public function encKeygenRandom($length = 15, $special_chars = true, $extra_special_chars = false)
     {
         $length = max(0, (integer) $length);
 
@@ -59,7 +69,7 @@ trait EncKeygenUtils
      *
      * @return string A unique, unguessable, non-numeric, caSe-insensitive key (20 chars max).
      */
-    protected function encKeygenUunnci20Max()
+    public function encKeygenUunnci20Max()
     {
         $microtime_19_max = number_format(microtime(true), 9, '.', '');
         // e.g. `9999999999`.`999999999` (max decimals: `9`, max overall precision: `19`).

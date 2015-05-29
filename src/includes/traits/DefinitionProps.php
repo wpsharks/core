@@ -6,7 +6,7 @@ namespace WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-trait DefProps
+trait DefinitionProps
 {
     /**
      * Ampersand entities; keys are regex patterns.

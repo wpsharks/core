@@ -1,16 +1,28 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Encrypted cookie utilities.
  *
  * @since 150424 Initial release.
  */
-trait EncCookieUtils
+class EncCookieUtils extends AbsBase
 {
-    abstract protected function urlCurrentHost($no_port = false);
-    abstract protected function encRij256Encrypt($string, $key = '', $w_md5_cs = true);
-    abstract protected function encRij256Decrypt($base64, $key = '');
+    protected $UrlCurrentUtils;
+    protected $EncRij256Utils;
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct(UrlCurrentUtils $UrlCurrentUtils, EncRij256Utils $EncRij256Utils)
+    {
+        parent::__construct();
+
+        $this->UrlCurrentUtils = $UrlCurrentUtils;
+        $this->EncRij256Utils = $EncRij256Utils;
+    }
 
     /**
      * Sets an encrypted cookie.
@@ -24,7 +36,7 @@ trait EncCookieUtils
      *
      * @throws \Exception If headers have already been sent; i.e. if not possible.
      */
-    protected function encCookieSet($name, $value, $key = '', $expires_after = 31556926)
+    public function encCookieSet($name, $value, $key = '', $expires_after = 31556926)
     {
         if (headers_sent()) {
             throw new \Exception('Doing it wrong! Headers sent already.');
@@ -36,12 +48,12 @@ trait EncCookieUtils
         $expires_after = max(0, (integer) $expires_after);
         $key           = (string) $key; // Encryption key.
 
-        $value   = $value ? $this->encRij256Encrypt($value, $key) : '';
+        $value   = $value ? $this->EncRij256Utils->encRij256Encrypt($value, $key) : '';
         $expires = $expires_after ? time() + $expires_after : 0;
 
         $cookie_path      = defined('COOKIEPATH') ? (string) COOKIEPATH : '/';
         $site_cookie_path = defined('SITECOOKIEPATH') ? (string) SITECOOKIEPATH : '/';
-        $cookie_domain    = defined('COOKIE_DOMAIN') ? (string) COOKIE_DOMAIN : $this->urlCurrentHost(true);
+        $cookie_domain    = defined('COOKIE_DOMAIN') ? (string) COOKIE_DOMAIN : $this->UrlCurrentUtils->urlCurrentHost(true);
 
         setcookie($name, $value, $expires, $cookie_path, $cookie_domain);
         setcookie($name, $value, $expires, $site_cookie_path, $cookie_domain);
@@ -59,7 +71,7 @@ trait EncCookieUtils
      *
      * @return string Cookie string value (unencrypted).
      */
-    protected function encCookieGet($name, $key = '')
+    public function encCookieGet($name, $key = '')
     {
         if (!($name = (string) $name)) {
             return ''; // Not possible.
@@ -67,7 +79,7 @@ trait EncCookieUtils
         $key = (string) $key; // Encryption key.
 
         if (isset($_COOKIE[$name][0]) && is_string($_COOKIE[$name])) {
-            $value = $this->encRij256Decrypt($_COOKIE[$name], $key);
+            $value = $this->EncRij256Utils->encRij256Decrypt($_COOKIE[$name], $key);
         }
         return isset($value[0]) ? $value : '';
     }

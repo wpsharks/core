@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Regex pattern utilities.
  *
  * @since 150424 Initial release.
  */
-trait RegexPatternUtils
+class RegexPatternUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Match a regex pattern against other values.
      *
@@ -21,7 +31,7 @@ trait RegexPatternUtils
      * @return bool|array Will return `TRUE` if regex pattern finds a match.
      *                    If `$collect_key_props` is `TRUE`, this will return an array.
      */
-    protected function regexPatternIn($regex, $value, $collect_key_props = false)
+    public function regexPatternIn($regex, $value, $collect_key_props = false)
     {
         if (!strlen($regex = (string) $regex)) {
             return $collect_key_props ? array() : false;
@@ -72,7 +82,7 @@ trait RegexPatternUtils
      * @return bool|array Will return `TRUE` if any regex pattern finds a match.
      *                    If `$collect_key_props` is `TRUE`, this will return an array.
      */
-    protected function regexPatternsMatch($string, $value, $collect_key_props = false)
+    public function regexPatternsMatch($string, $value, $collect_key_props = false)
     {
         if (!strlen($string = (string) $string)) {
             return $collect_key_props ? array() : false;

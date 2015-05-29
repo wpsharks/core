@@ -1,16 +1,26 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * XOR encryption utilities.
  *
  * @since 150424 Initial release.
  */
-trait EncXorUtils
+class EncXorUtils extends AbsBase
 {
-    abstract protected function encShaXSigKey($key = '');
-    abstract protected function encBase64UrlSafeEncode($string, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=');
-    abstract protected function encBase64UrlSafeDecode($base64_url_safe, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=');
+    abstract public function encShaXSigKey($key = '');
+    abstract public function encBase64UrlSafeEncode($string, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=');
+    abstract public function encBase64UrlSafeDecode($base64_url_safe, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=');
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * XOR encryption with a base64 wrapper.
@@ -25,7 +35,7 @@ trait EncXorUtils
      *
      * @return string Encrypted string.
      */
-    protected function encXorEncrypt($string, $key = '', $w_md5_cs = true)
+    public function encXorEncrypt($string, $key = '', $w_md5_cs = true)
     {
         $string = (string) $string;
         if (!isset($string[0])) {
@@ -61,7 +71,7 @@ trait EncXorUtils
      *
      * @return string Decrypted string, or an empty string if validation fails.
      */
-    protected function encXorDecrypt($base64, $key = '')
+    public function encXorDecrypt($base64, $key = '')
     {
         $base64 = (string) $base64;
         if (!isset($base64[0])) {

@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Wildcard pattern utilities.
  *
  * @since 150424 Initial release.
  */
-trait WildcardPatternUtils
+class WildcardPatternUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Match a wildcard pattern against other scalar values.
      *
@@ -23,7 +33,7 @@ trait WildcardPatternUtils
      * @return bool|array Will return `TRUE` if wildcard pattern finds a match.
      *                    If `$collect_key_props` is `TRUE`, this will return an array.
      */
-    protected function wildcardPatternIn($wildcard, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null)
+    public function wildcardPatternIn($wildcard, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null)
     {
         if (isset($x_flags)) {
             $x_flags = (int) $x_flags;
@@ -88,7 +98,7 @@ trait WildcardPatternUtils
      * @return bool|array Will return `TRUE` if any wildcard pattern finds a match.
      *                    If `$collect_key_props` is `TRUE`, this will return an array.
      */
-    protected function wildcardPatternsMatch($string, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null)
+    public function wildcardPatternsMatch($string, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null)
     {
         if (isset($x_flags)) {
             $x_flags = (int) $x_flags;

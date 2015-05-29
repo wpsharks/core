@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * HTML strip utilities.
  *
  * @since 150424 Initial release.
  */
-trait HtmlStripUtils
+class HtmlStripUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Strips HTML attributes deeply.
      *
@@ -18,7 +28,7 @@ trait HtmlStripUtils
      *
      * @return string String w/ HTML attributes stripped.
      */
-    protected function htmlStripAttrs($value, array $args = array())
+    public function htmlStripAttrs($value, array $args = array())
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

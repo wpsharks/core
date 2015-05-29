@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * CLI option utilities.
  *
  * @since 150424 Initial release.
  */
-trait CliOptUtils
+class CliOptUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Get options.
      *
@@ -18,7 +28,7 @@ trait CliOptUtils
      *
      * @return \stdClass Options.
      */
-    protected function cliOptsGet($short, array $long = array())
+    public function cliOptsGet($short, array $long = array())
     {
         $short = (string) $short;
         if (!is_array($opts = getopt($short, $long))) {

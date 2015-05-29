@@ -1,14 +1,26 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Clip utilities.
  *
  * @since 150424 Initial release.
  */
-trait ClipUtils
+class ClipUtils extends AbsBase
 {
-    abstract protected function htmlToText($value, array $args = array());
+    protected $HtmlToUtils;
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct(HtmlToUtils $HtmlToUtils)
+    {
+        parent::__construct();
+
+        $this->HtmlToUtils = $HtmlToUtils;
+    }
 
     /**
      * Clips string(s) to X chars deeply.
@@ -21,7 +33,7 @@ trait ClipUtils
      *
      * @return string|array|object Clipped value.
      */
-    protected function clip($value, $max_length = 80, $force_ellipsis = false)
+    public function clip($value, $max_length = 80, $force_ellipsis = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -35,7 +47,7 @@ trait ClipUtils
             return $string; // Empty.
         }
         $max_length = max(4, (integer) $max_length);
-        $string     = $this->htmlToText($string, ['br2nl' => false]);
+        $string     = $this->HtmlToUtils->htmlToText($string, ['br2nl' => false]);
 
         if (strlen($string) > $max_length) {
             $string = (string) substr($string, 0, $max_length - 3).'...';
@@ -57,7 +69,7 @@ trait ClipUtils
      *
      * @return string|array|object Mid-clipped value.
      */
-    protected function clipMid($value, $max_length = 80)
+    public function clipMid($value, $max_length = 80)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -71,7 +83,7 @@ trait ClipUtils
             return $string; // Empty.
         }
         $max_length = max(4, (integer) $max_length);
-        $string     = $this->htmlToText($string, ['br2nl' => false]);
+        $string     = $this->HtmlToUtils->htmlToText($string, ['br2nl' => false]);
 
         if (strlen($string) <= $max_length) {
             return $string; // Nothing to do.

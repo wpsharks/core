@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * FS dir utilities.
  *
  * @since 150424 Initial release.
  */
-trait FsDirUtils
+class FsDirUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Removes a directory.
      *
@@ -18,7 +28,7 @@ trait FsDirUtils
      *
      * @return bool TRUE if the directory was removed successfully.
      */
-    protected function fsDirRm($dir, $recursively = false)
+    public function fsDirRm($dir, $recursively = false)
     {
         $dir = (string) $dir;
         if (!$dir || !is_dir($dir)) {
@@ -60,7 +70,7 @@ trait FsDirUtils
      *
      * @return string A readable/writable tmp directory.
      */
-    protected function fsDirTmp()
+    public function fsDirTmp()
     {
         if (!is_null($dir = &$this->staticKey(__FUNCTION__))) {
             return $dir; // Already cached this.
@@ -113,7 +123,7 @@ trait FsDirUtils
      *
      * @return string Normalized directory/file path.
      */
-    protected function fsDirNSeps($value, $allow_trailing_slash = false)
+    public function fsDirNSeps($value, $allow_trailing_slash = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -165,7 +175,7 @@ trait FsDirUtils
      *
      * @return \RegexIterator|\RecursiveDirectoryIterator[]
      */
-    protected function fsDirRegexIteration($dir, $regex)
+    public function fsDirRegexIteration($dir, $regex)
     {
         if (!($dir = (string) $dir) || !($regex = (string) $regex)) {
             throw new \Exception('Missing required `$dir` and/or `$regex` parameters.');

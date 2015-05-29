@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Replace once utilities.
  *
  * @since 150424 Initial release.
  */
-trait ReplaceOnceUtils
+class ReplaceOnceUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * String replace (ONE time) deeply.
      *
@@ -20,7 +30,7 @@ trait ReplaceOnceUtils
      *
      * @return string|array|object Values after ONE string replacement deeply.
      */
-    protected function replaceOnce($needle, $replace, $value, $caSe_insensitive = false)
+    public function replaceOnce($needle, $replace, $value, $caSe_insensitive = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -87,7 +97,7 @@ trait ReplaceOnceUtils
      *
      * @return string|array|object Values after ONE string replacement deeply.
      */
-    protected function replaceOnceI($needle, $replace, $value)
+    public function replaceOnceI($needle, $replace, $value)
     {
         return $this->replaceOnce($needle, $replace, $value, true);
     }

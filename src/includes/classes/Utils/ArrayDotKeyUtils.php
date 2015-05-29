@@ -1,14 +1,26 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Array dot-key utilities.
  *
  * @since 150424 Initial release.
  */
-trait ArrayDotKeyUtils
+class ArrayDotKeyUtils extends AbsBase
 {
-    abstract protected function arrayIterator(array $array);
+    protected $ArrayIteratorUtils;
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct(ArrayIteratorUtils $ArrayIteratorUtils)
+    {
+        parent::__construct();
+
+        $this->ArrayIteratorUtils = $ArrayIteratorUtils;
+    }
 
     /**
      * Builds an array w/ ONE dimension; using DOT `.` keys (e.g., `key.ID`).
@@ -17,9 +29,9 @@ trait ArrayDotKeyUtils
      *
      * @return array An array w/ ONE dimension; using DOT `.` keys.
      */
-    protected function arrayDotKeys(array $array)
+    public function arrayDotKeys(array $array)
     {
-        $iterator = $this->arrayIterator($array);
+        $iterator = $this->ArrayIteratorUtils->arrayIterator($array);
 
         foreach ($iterator as $_key => $_value) {
             $_keys = array(); // Initialize keys.

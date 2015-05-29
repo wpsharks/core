@@ -1,23 +1,33 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * HTML-To-Text utilities.
  *
  * @since 150424 Initial release.
  */
-trait HtmlToUtils
+class HtmlToUtils extends AbsBase
 {
-    abstract protected function eolsN($value);
-    abstract protected function htmlIs($string);
-    abstract protected function htmlNWhitespace($value);
-    abstract protected function htmlEscUn($value, $flags = null);
-    abstract protected function regexQuote($value, $delimiter = '/');
-    abstract protected function htmlStripAttrs($value, array $args = array());
-    abstract protected function htmlTrim($value, $chars = '', $extra_chars = '', $side = '');
-    abstract protected function htmlTokenizeSpcsm($string, array $tokenize_only = array(), $marker = '');
-    abstract protected function htmlTokensRestoreSpcsm(array $spcsm);
-    abstract protected function htmlBalanceTags($value);
+    abstract public function eolsN($value);
+    abstract public function htmlIs($string);
+    abstract public function htmlNWhitespace($value);
+    abstract public function htmlEscUn($value, $flags = null);
+    abstract public function regexQuote($value, $delimiter = '/');
+    abstract public function htmlStripAttrs($value, array $args = array());
+    abstract public function htmlTrim($value, $chars = '', $extra_chars = '', $side = '');
+    abstract public function htmlTokenizeSpcsm($string, array $tokenize_only = array(), $marker = '');
+    abstract public function htmlTokensRestoreSpcsm(array $spcsm);
+    abstract public function htmlBalanceTags($value);
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Convert HTML markup converted to plain text.
@@ -29,7 +39,7 @@ trait HtmlToUtils
      *
      * @return string HTML markup converted to plain text.
      */
-    protected function htmlToText($value, array $args = array())
+    public function htmlToText($value, array $args = array())
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -88,7 +98,7 @@ trait HtmlToUtils
      *
      * @return string HTML to rich text; w/ allowed tags only.
      */
-    protected function htmlToRichText($value, array $args = array())
+    public function htmlToRichText($value, array $args = array())
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -173,7 +183,7 @@ trait HtmlToUtils
      *
      * @return string The input HTML converted to structured text.
      */
-    protected function htmlToPandoc($value, $to)
+    public function htmlToPandoc($value, $to)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

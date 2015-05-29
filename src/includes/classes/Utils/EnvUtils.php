@@ -1,16 +1,26 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Environment utilities.
  *
  * @since 150424 Initial release.
  */
-trait EnvUtils
+class EnvUtils extends AbsBase
 {
-    abstract protected function urlCurrentHost($no_port = false);
-    abstract protected function fsSizeBytesAbbr($bytes, $precision = 2);
-    abstract protected function &staticKey($function, $args = array());
+    abstract public function urlCurrentHost($no_port = false);
+    abstract public function fsSizeBytesAbbr($bytes, $precision = 2);
+    abstract public function &staticKey($function, $args = array());
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Current request over SSL?
@@ -19,7 +29,7 @@ trait EnvUtils
      *
      * @return bool `TRUE` if over SSL.
      */
-    protected function envIsSsl()
+    public function envIsSsl()
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -49,7 +59,7 @@ trait EnvUtils
      *
      * @return bool `TRUE` if running in a command line interface.
      */
-    protected function envIsCli()
+    public function envIsCli()
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -67,7 +77,7 @@ trait EnvUtils
      *
      * @return bool `TRUE` if in a localhost environment.
      */
-    protected function envIsLocalhost()
+    public function envIsLocalhost()
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -88,7 +98,7 @@ trait EnvUtils
      *
      * @return bool `TRUE` if in a Unix environment.
      */
-    protected function envIsUnix()
+    public function envIsUnix()
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -106,7 +116,7 @@ trait EnvUtils
      *
      * @return bool `TRUE` if in a Windows environment.
      */
-    protected function envIsWindows()
+    public function envIsWindows()
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -122,7 +132,7 @@ trait EnvUtils
      *
      * @since 150424 Initial release.
      */
-    protected function envPrepForOutput()
+    public function envPrepForOutput()
     {
         @set_time_limit(0);
 
@@ -144,7 +154,7 @@ trait EnvUtils
      *
      * @return bool `TRUE` if doing an exit.
      */
-    protected function envDoingExit($doing = null)
+    public function envDoingExit($doing = null)
     {
         if (isset($doing)) {
             $GLOBALS[__NAMESPACE__.'_'.__FUNCTION__] = (boolean) $doing;
@@ -157,7 +167,7 @@ trait EnvUtils
      *
      * @since 150424 Initial release.
      */
-    protected function envMaximizeMemory($max = '256M')
+    public function envMaximizeMemory($max = '256M')
     {
         @ini_set('memory_limit', (string) $max);
     }
@@ -169,7 +179,7 @@ trait EnvUtils
      *
      * @return int Max execution time; in seconds.
      */
-    protected function envMaxExecutionTime()
+    public function envMaxExecutionTime()
     {
         return (integer) ini_get('max_execution_time');
     }
@@ -181,7 +191,7 @@ trait EnvUtils
      *
      * @return float A floating point number.
      */
-    protected function envMaxUploadSize()
+    public function envMaxUploadSize()
     {
         $limits = array(PHP_INT_MAX); // Initialize.
 
@@ -206,7 +216,7 @@ trait EnvUtils
      *
      * @return bool `TRUE` if the extension is loaded.
      */
-    protected function envHasExtension($extension)
+    public function envHasExtension($extension)
     {
         $extension = (string) $extension;
 
@@ -228,7 +238,7 @@ trait EnvUtils
      * @note This checks (among other things) if the function exists and that it's callable.
      *    It also checks the currently configured `disable_functions` and `suhosin.executor.func.blacklist`.
      */
-    protected function envHasFunction($function)
+    public function envHasFunction($function)
     {
         $function = (string) $function;
 

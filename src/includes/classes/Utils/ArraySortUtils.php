@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Array sort utilities.
  *
  * @since 150424 Initial release.
  */
-trait ArraySortUtils
+class ArraySortUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Sorts an array deeply by its keys.
      *
@@ -16,7 +26,7 @@ trait ArraySortUtils
      *
      * @return array Array sorted deeply by its keys.
      */
-    protected function arraySortByKey(array $array, $flags = SORT_REGULAR)
+    public function arraySortByKey(array $array, $flags = SORT_REGULAR)
     {
         ksort($array, $flags);
 

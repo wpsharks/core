@@ -1,18 +1,28 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * Replace utilities.
  *
  * @since 150424 Initial release.
  */
-trait ReplaceCodeUtils
+class ReplaceCodeUtils extends AbsBase
 {
-    abstract protected function arrayDotKeys(array $array);
-    abstract protected function arrayDimensionOne(array $array);
-    abstract protected function varDump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false);
-    abstract protected function urlQueryBuild(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null);
-    abstract protected function wildcardPatternIn($wildcard, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null);
+    abstract public function arrayDotKeys(array $array);
+    abstract public function arrayDimensionOne(array $array);
+    abstract public function varDump($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false);
+    abstract public function urlQueryBuild(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null);
+    abstract public function wildcardPatternIn($wildcard, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null);
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Process replacement codes deeply.
@@ -35,7 +45,7 @@ trait ReplaceCodeUtils
      *
      * @return string|array|object Value after replacing all codes deeply.
      */
-    protected function replaceCodes(
+    public function replaceCodes(
         $value,
         array $vars,
         $urlencode = false,
@@ -223,7 +233,7 @@ trait ReplaceCodeUtils
      *
      * @return string|array|object Value after replacing all codes deeply.
      */
-    protected function replaceCodesI($value, array $vars = array(), $urlencode = false, $implode_non_scalars = '')
+    public function replaceCodesI($value, array $vars = array(), $urlencode = false, $implode_non_scalars = '')
     {
         return $this->replaceCodes($value, $vars, $urlencode, $implode_non_scalars, true);
     }

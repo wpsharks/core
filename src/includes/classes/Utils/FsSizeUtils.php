@@ -1,13 +1,23 @@
 <?php
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 /**
  * FS size utilities.
  *
  * @since 150424 Initial release.
  */
-trait FsSizeUtils
+class FsSizeUtils extends AbsBase
 {
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx Initial release.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Abbreviated byte notation for a particular file.
      *
@@ -17,7 +27,7 @@ trait FsSizeUtils
      *
      * @return string If file exists, an abbreviated byte notation.
      */
-    protected function fsSizeAbbr($file)
+    public function fsSizeAbbr($file)
     {
         if (!($file = (string) $file)) {
             return ''; // Empty.
@@ -38,7 +48,7 @@ trait FsSizeUtils
      *
      * @return string Byte notation.
      */
-    protected function fsSizeBytesAbbr($bytes, $precision = 2)
+    public function fsSizeBytesAbbr($bytes, $precision = 2)
     {
         $bytes      = max(0.0, (float) $bytes);
         $precision  = max(0, (integer) $precision);
@@ -64,7 +74,7 @@ trait FsSizeUtils
      *
      * @return float A float indicating the number of bytes.
      */
-    protected function fsSizeAbbrBytes($string)
+    public function fsSizeAbbrBytes($string)
     {
         $string   = (string) $string;
         $regex    = '/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/i';
