@@ -15,8 +15,9 @@ class ClipUtils extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(HtmlToUtils $HtmlToUtils)
-    {
+    public function __construct(
+        HtmlToUtils $HtmlToUtils
+    ) {
         parent::__construct();
 
         $this->HtmlToUtils = $HtmlToUtils;

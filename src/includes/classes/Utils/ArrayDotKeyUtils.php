@@ -15,8 +15,9 @@ class ArrayDotKeyUtils extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(ArrayIteratorUtils $ArrayIteratorUtils)
-    {
+    public function __construct(
+        ArrayIteratorUtils $ArrayIteratorUtils
+    ) {
         parent::__construct();
 
         $this->ArrayIteratorUtils = $ArrayIteratorUtils;

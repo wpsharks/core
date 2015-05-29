@@ -15,8 +15,9 @@ class CliStreamUtils extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(CliColorUtils $CliColorUtils)
-    {
+    public function __construct(
+        CliColorUtils $CliColorUtils
+    ) {
         parent::__construct();
 
         $this->CliColorUtils = $CliColorUtils;

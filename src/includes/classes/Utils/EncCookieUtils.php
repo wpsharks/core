@@ -16,12 +16,14 @@ class EncCookieUtils extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(UrlCurrentUtils $UrlCurrentUtils, EncRij256Utils $EncRij256Utils)
-    {
+    public function __construct(
+        UrlCurrentUtils $UrlCurrentUtils,
+        EncRij256Utils $EncRij256Utils
+    ) {
         parent::__construct();
 
         $this->UrlCurrentUtils = $UrlCurrentUtils;
-        $this->EncRij256Utils = $EncRij256Utils;
+        $this->EncRij256Utils  = $EncRij256Utils;
     }
 
     /**

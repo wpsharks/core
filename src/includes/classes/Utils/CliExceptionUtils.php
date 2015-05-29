@@ -15,8 +15,9 @@ class CliExceptionUtils extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(CliStreamUtils $CliStreamUtils)
-    {
+    public function __construct(
+        CliStreamUtils $CliStreamUtils
+    ) {
         parent::__construct();
 
         $this->CliStreamUtils = $CliStreamUtils;
