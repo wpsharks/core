@@ -19,7 +19,7 @@ abstract class AbsCliBase extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public $Command;
+    public $command;
 
     /**
      * Constructor.
@@ -36,26 +36,37 @@ abstract class AbsCliBase extends AbsBase
 
         $this->CliExceptions->handle(); // Handle CLI exceptions.
 
-        $this->Command = (object) [
+        $this->command = (object) [
             'slug'       => '',
             'class'      => '',
             'class_path' => '',
         ];
         if (!empty($GLOBALS['argv'][1])) {
-            $this->Command->slug = (string) $GLOBALS['argv'][1];
-            $this->Command->slug = strtolower($this->Command->slug);
-            $this->Command->slug = preg_replace('/[^a-z0-9]+/', '-', $this->Command->slug);
-            $this->Command->slug = $this->Trim($this->Command->slug, '', '-');
+            $this->command->slug = (string) $GLOBALS['argv'][1];
+            $this->command->slug = strtolower($this->command->slug);
+            $this->command->slug = preg_replace('/[^a-z0-9]+/', '-', $this->command->slug);
+            $this->command->slug = $this->Trim($this->command->slug, '', '-');
 
-            $this->Command->class      = $this->commandClass($this->Command->slug);
-            $this->Command->class_path = $this->commandClassPath($this->Command->slug);
+            $this->command->class      = $this->commandClass($this->command->slug);
+            $this->command->class_path = $this->commandClassPath($this->command->slug);
         }
-        if ($this->Command->class_path && class_exists($this->Command->class_path)) {
-            $this->Dicer->get($this->Command->class_path, [$this], true);
+        if ($this->command->class_path && class_exists($this->command->class_path)) {
+            $this->initConfig(); // Initialize any config. values.
+            $this->Dicer->get($this->command->class_path, [$this], true);
         } else {
-            throw new \Exception('Unknown command: `'.$this->Command->slug.'`');
+            throw new \Exception('Unknown command: `'.$this->command->slug.'`');
             exit(1); // Error exit status.
         }
+    }
+
+    /**
+     * Initialize/config.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected function initConfig()
+    {
+        // For extenders.
     }
 
     /**
@@ -100,6 +111,6 @@ abstract class AbsCliBase extends AbsBase
         $slug  = (string) $slug;
         $class = $this->commandClass($slug);
 
-        return $class ? __NAMESPACE__.'\\Commands\\'.$class : '';
+        return $class ? get_class().'\\'.$class : '';
     }
 }

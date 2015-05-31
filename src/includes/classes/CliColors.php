@@ -15,7 +15,7 @@ class CliColors extends AbsBase
      *
      * @type \stdClass FG colors.
      */
-    public $Fg = [
+    public $fg = [
         'black'  => '0;30',
         'red'    => '0;31',
         'green'  => '0;32',
@@ -51,7 +51,7 @@ class CliColors extends AbsBase
      *
      * @type \stdClass BG colors.
      */
-    public $Bg = [
+    public $bg = [
         'black'      => '40',
         'red'        => '41',
         'green'      => '42',
@@ -71,7 +71,7 @@ class CliColors extends AbsBase
     {
         parent::__construct();
 
-        $this->Fg = (object) $this->Fg;
-        $this->Bg = (object) $this->Bg;
+        $this->fg = (object) $this->fg;
+        $this->bg = (object) $this->bg;
     }
 }
