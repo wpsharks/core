@@ -494,10 +494,12 @@
       <arg value="--title" />
       <arg value="${project_title}" />
 
+      <arg value="--exclude" />
+      <arg value="vendor" />
+
       <arg value="--download" />
       <arg value="--deprecated" />
       <arg value="--todo" />
-      <arg value="--php" />
       <arg value="--debug" />
     </exec>
     <echo msg="------------------------------------" />

@@ -2,6 +2,7 @@
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Dicer\Core as Dicer;
+use GetOptionKit\OptionCollection;
 
 /**
  * CLI primary command base.
@@ -30,7 +31,13 @@ abstract class AbsCliBase extends AbsBase
     {
         parent::__construct();
 
-        $this->Dicer         = new Dicer(['shared' => true]);
+        $this->Dicer = new Dicer([
+            'shared'        => true,
+            'new_instances' => [
+                CliOpts::class,
+                OptionCollection::class,
+            ],
+        ]);
         $this->Trim          = $this->Dicer->get(Trim::class);
         $this->CliExceptions = $this->Dicer->get(CliExceptions::class);
 

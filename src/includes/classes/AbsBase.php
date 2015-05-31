@@ -22,5 +22,6 @@ abstract class AbsBase implements Interfaces\Constants
     public function __construct()
     {
         $this->cacheInit();
+        $this->___extendConstruct();
     }
 }

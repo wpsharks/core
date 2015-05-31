@@ -8,38 +8,11 @@ namespace WebSharks\Core\Classes;
  */
 abstract class AbsCliCmdBase extends AbsBase
 {
-    protected $CliOpts;
     protected $CliStream;
     protected $CliColors;
     protected $CliColorize;
-
-    /**
-     * @type AbsCliBase
-     *
-     * @since 15xxxx Initial release.
-     */
+    protected $CliOpts;
     protected $Cli;
-
-    /**
-     * @type \stdClass Opts.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected $opts;
-
-    /**
-     * @type string Short opts.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected $short_opts = '';
-
-    /**
-     * @type array Long opts.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected $long_opts = [];
 
     /**
      * Constructor.
@@ -47,33 +20,34 @@ abstract class AbsCliCmdBase extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
-        CliOpts $CliOpts,
         CliStream $CliStream,
         CliColorize $CliColors,
         CliColorize $CliColorize,
+        CliOpts $CliOpts,
         AbsCliBase $Cli
     ) {
         parent::__construct();
 
-        $this->CliOpts     = $CliOpts;
         $this->CliStream   = $CliStream;
         $this->CliColors   = $CliColors;
         $this->CliColorize = $CliColorize;
-        $this->Cli         = $Cli; // Parent/primary.
-        $this->opts        = $this->CliOpts($this->short_opts, $this->long_opts);
+        $this->CliOpts     = $CliOpts;
+        $this->Cli         = $Cli;
 
-        $this->initDeps(); // Init dependencies; for extenders.
+        $this->CliOpts->add($this->optSpecs());
         $this->run(); // Run command; for extenders.
     }
 
     /**
-     * Initialize dependencies.
+     * Option specs.
      *
      * @since 15xxxx Initial release.
+     *
+     * @return array An array of opt. specs.
      */
-    protected function initDeps()
+    protected function optSpecs()
     {
-        // For extenders.
+        return []; // For extenders.
     }
 
     /**

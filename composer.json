@@ -30,6 +30,16 @@
     "ext-mbstring": "*",
     "websharks/dicer": "dev-master"
   },
+  "require-dev": {
+    "ryakad/pandoc-php": "1.*",
+    "aws/aws-sdk-php": "2.*",
+    "erusev/parsedown": "1.*",
+    "erusev/parsedown-extra": "0.*",
+    "michelf/php-markdown": "1.*",
+    "symfony/yaml": "2.*",
+    "lusitanian/oauth": "0.*",
+    "corneltek/getoptionkit": "2.*"
+  },
   "suggest": {
     "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc.",
     "aws/aws-sdk-php": "2.* :: Required by routines that make calls to the AWS API.",
@@ -37,7 +47,8 @@
     "erusev/parsedown-extra": "0.* :: Required by routines that convert Markdown.",
     "michelf/php-markdown": "1.* :: Required by routines that convert Markdown.",
     "symfony/yaml": "2.* :: Required by routines that convert YAML.",
-    "lusitanian/oauth": "0.* :: Required by routines that deal w/ oAuth."
+    "lusitanian/oauth": "0.* :: Required by routines that deal w/ oAuth.",
+    "corneltek/getoptionkit": "2.* :: Required for routines that parse CLI opts."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
