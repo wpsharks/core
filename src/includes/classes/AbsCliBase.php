@@ -111,6 +111,6 @@ abstract class AbsCliBase extends AbsBase
         $slug  = (string) $slug;
         $class = $this->commandClass($slug);
 
-        return $class ? get_class().'\\'.$class : '';
+        return $class ? get_class($this).'\\'.$class : '';
     }
 }
