@@ -1,54 +1,54 @@
 {
-    "name": "websharks/core",
-    "homepage": "https://github.com/websharks/core",
-    "description": "Core PHP library used by WebSharks, Inc.",
-    "keywords": ["websharks"],
-    "type": "library",
-    "license": "GPL-3.0+",
-    "authors": [{
-        "name": "websharks",
-        "homepage": "http://websharks-inc.com/",
-        "role": "company"
-    }, {
-        "name": "jaswsinc",
-        "homepage": "http://jaswsinc.com/",
-        "role": "developer"
-    }, {
-        "name": "raamdev",
-        "homepage": "http://raam.org/",
-        "role": "developer"
-    }],
-    "support": {
-        "source": "https://github.com/websharks/core",
-        "issues": "https://github.com/websharks/core/issues"
-    },
+  "name": "websharks/core",
+  "homepage": "https://github.com/websharks/core",
+  "description": "Core PHP library used by WebSharks, Inc.",
+  "keywords": ["websharks"],
+  "type": "library",
+  "license": "GPL-3.0+",
+  "authors": [{
+    "name": "websharks",
+    "homepage": "http://websharks-inc.com/",
+    "role": "company"
+  }, {
+    "name": "jaswsinc",
+    "homepage": "http://jaswsinc.com/",
+    "role": "developer"
+  }, {
+    "name": "raamdev",
+    "homepage": "http://raam.org/",
+    "role": "developer"
+  }],
+  "support": {
+    "source": "https://github.com/websharks/core",
+    "issues": "https://github.com/websharks/core/issues"
+  },
 
-    "require": {
-        "php": ">=5.4.7",
-        "ext-openssl": "*",
-        "ext-curl": "*",
-        "ext-mbstring": "*",
-        "websharks/dicer": "dev-master",
-        "ryakad/pandoc-php": "1.*",
-        "aws/aws-sdk-php": "2.*",
-        "erusev/parsedown": "1.*",
-        "erusev/parsedown-extra": "0.*",
-        "michelf/php-markdown": "1.*",
-        "symfony/yaml": "2.*",
-        "lusitanian/oauth": "0.*"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+  "require": {
+    "php": ">=5.4.7",
+    "ext-openssl": "*",
+    "ext-curl": "*",
+    "ext-mbstring": "*",
+    "websharks/dicer": "dev-master",
+    "ryakad/pandoc-php": "1.*",
+    "aws/aws-sdk-php": "2.*",
+    "erusev/parsedown": "1.*",
+    "erusev/parsedown-extra": "0.*",
+    "michelf/php-markdown": "1.*",
+    "symfony/yaml": "2.*",
+    "lusitanian/oauth": "0.*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
 
-    "autoload": {
-        "psr-4": {
-            "WebSharks\\Core\\Classes\\": "src/includes/classes",
-            "WebSharks\\Core\\Interfaces\\": "src/includes/interfaces",
-            "WebSharks\\Core\\Traits\\": "src/includes/traits"
-        }
-    },
-
-    "config": {
-        "vendor-dir": "src/vendor"
+  "autoload": {
+    "psr-4": {
+      "WebSharks\\Core\\Classes\\": "src/includes/classes",
+      "WebSharks\\Core\\Interfaces\\": "src/includes/interfaces",
+      "WebSharks\\Core\\Traits\\": "src/includes/traits"
     }
+  },
+
+  "config": {
+    "vendor-dir": "src/vendor"
+  }
 }
