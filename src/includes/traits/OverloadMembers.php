@@ -94,4 +94,26 @@ trait OverloadMembers
 
         throw new \Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
     }
+
+    /**
+     * Magic call handler.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string $method Method to call upon.
+     * @param array  $args   Arguments to pass to the method.
+     *
+     * @throws \Exception If a class property matching the method does not exist.
+     *
+     * @see http://php.net/manual/en/language.oop5.overloading.php
+     */
+    public function __call($method, array $args = [])
+    {
+        $method = (string) $method; // Force string.
+
+        if (isset($this->{$method}) && is_callable($this->{$method})) {
+            return call_user_func_array($this->{$method}, $args);
+        }
+        throw new \Exception(sprintf('Undefined method: `%1$s`.', $method));
+    }
 }
