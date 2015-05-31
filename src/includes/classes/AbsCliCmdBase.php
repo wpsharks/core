@@ -62,7 +62,18 @@ abstract class AbsCliCmdBase extends AbsBase
         $this->Cli         = $Cli; // Parent/primary.
         $this->opts        = $this->CliOpts($this->short_opts, $this->long_opts);
 
-        $this->run(); // Run the command.
+        $this->initDeps(); // Init dependencies; for extenders.
+        $this->run(); // Run command; for extenders.
+    }
+
+    /**
+     * Initialize dependencies.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected function initDeps()
+    {
+        // For extenders.
     }
 
     /**
