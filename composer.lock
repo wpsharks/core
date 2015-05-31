@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "905dd7960e78379c3ccad72b8b2f64b6",
+    "hash": "a16b900b27bd09552356560889af893a",
     "packages": [
         {
             "name": "websharks/dicer",
@@ -67,7 +67,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.7",
+        "php": ">=5.5",
         "ext-openssl": "*",
         "ext-curl": "*",
         "ext-mbstring": "*"
