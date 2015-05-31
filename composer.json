@@ -28,14 +28,16 @@
     "ext-openssl": "*",
     "ext-curl": "*",
     "ext-mbstring": "*",
-    "websharks/dicer": "dev-master",
-    "ryakad/pandoc-php": "1.*",
-    "aws/aws-sdk-php": "2.*",
-    "erusev/parsedown": "1.*",
-    "erusev/parsedown-extra": "0.*",
-    "michelf/php-markdown": "1.*",
-    "symfony/yaml": "2.*",
-    "lusitanian/oauth": "0.*"
+    "websharks/dicer": "dev-master"
+  },
+  "suggest": {
+    "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc.",
+    "aws/aws-sdk-php": "2.* :: Required by routines that make calls to the AWS API.",
+    "erusev/parsedown": "1.* :: Required by routines that convert Markdown.",
+    "erusev/parsedown-extra": "0.* :: Required by routines that convert Markdown.",
+    "michelf/php-markdown": "1.* :: Required by routines that convert Markdown.",
+    "symfony/yaml": "2.* :: Required by routines that convert YAML.",
+    "lusitanian/oauth": "0.* :: Required by routines that deal w/ oAuth."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
