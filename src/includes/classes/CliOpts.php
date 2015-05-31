@@ -59,7 +59,7 @@ class CliOpts extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @return OptionResult|Option[] Options.
+     * @return OptionResult|Option[] Opts.
      */
     public function parse()
     {

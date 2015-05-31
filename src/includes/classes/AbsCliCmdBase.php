@@ -15,6 +15,20 @@ abstract class AbsCliCmdBase extends AbsBase
     protected $Cli;
 
     /**
+     * @type OptionResult|Option[] Opts.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected $opts;
+
+    /**
+     * @type array Arguments.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected $args;
+
+    /**
      * Constructor.
      *
      * @since 15xxxx Initial release.
@@ -34,8 +48,26 @@ abstract class AbsCliCmdBase extends AbsBase
         $this->CliOpts     = $CliOpts;
         $this->Cli         = $Cli;
 
+        $this->initConfig(); // For extenders.
+
         $this->CliOpts->add($this->optSpecs());
-        $this->run(); // Run command; for extenders.
+        $this->opts = $this->CliOpts->parse();
+
+        $this->args = $this->opts->getArguments();
+        array_shift($this->arguments); // Remove binary.
+        array_shift($this->arguments); // Remove primary.
+
+        $this->runCommand(); // For extenders.
+    }
+
+    /**
+     * Initialize/config.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected function initConfig()
+    {
+        // For extenders.
     }
 
     /**
@@ -55,7 +87,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    protected function run()
+    protected function runCommand()
     {
         // For extenders.
     }
