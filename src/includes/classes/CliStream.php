@@ -82,7 +82,7 @@ class CliStream extends AbsBase
             return; // Nothing to do.
         }
         if ($colorize && strpos($string, "\033".'[0m') === false) {
-            $string = $this->CliColorize($string, 'red_bright');
+            $string = $this->CliColorize($string, 'red_strong');
         }
         fwrite(STDERR, $string."\n");
     }
