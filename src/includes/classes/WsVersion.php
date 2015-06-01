@@ -96,4 +96,25 @@ class WsVersion extends AbsBase
 
         return strtotime($Y.'-'.$m.'-'.$d);
     }
+
+    /**
+     * WS version to date.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param string $version Input version.
+     * @param string $format  Any valid date format string.
+     *
+     * @return string Date string, else empty string on failure.
+     */
+    public function date($version, $format = 'F jS, Y')
+    {
+        if (!($time = $this->time($version))) {
+            return ''; // Not possible.
+        }
+        if (!($format = (string) $format)) {
+            return ''; // Not possible.
+        }
+        return date($format, $time);
+    }
 }
