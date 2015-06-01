@@ -9,11 +9,36 @@ namespace WebSharks\Core\Traits;
 trait OverloadMembers
 {
     /**
-     * @type array Overload properties.
+     * @type \stdClass Overload properties.
      *
      * @since 15xxxx Initial release.
      */
-    protected $overload = [];
+    protected $overload;
+
+    /**
+     * Initialize overloads.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected function overloadInit($properties)
+    {
+        $this->overload = new \stdClass();
+    }
+
+    /**
+     * Setup overloads.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string|array $properties Property(s).
+     */
+    protected function overload($properties)
+    {
+        foreach ((array) $properties as $_key => $_property) {
+            $this->overload->{$_property} = &$this->{$_property};
+        }
+        unset($_key, $_property); // Housekeeping.
+    }
 
     /**
      * Magic/overload `isset()` checker.
@@ -22,7 +47,7 @@ trait OverloadMembers
      *
      * @param string $property Property to check.
      *
-     * @return bool TRUE if `isset($this->overload[$property])`.
+     * @return bool TRUE if `isset($this->overload{$property})`.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
@@ -30,7 +55,7 @@ trait OverloadMembers
     {
         $property = (string) $property; // Force string.
 
-        return isset($this->overload[$property]);
+        return isset($this->overload->{$property});
     }
 
     /**
@@ -42,7 +67,7 @@ trait OverloadMembers
      *
      * @throws \Exception If the `$overload` property is undefined.
      *
-     * @return mixed The value of `$this->overload[$property]`.
+     * @return mixed The value of `$this->overload{$property}`.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
@@ -50,8 +75,8 @@ trait OverloadMembers
     {
         $property = (string) $property; // Force string.
 
-        if (array_key_exists($property, $this->overload)) {
-            return $this->overload[$property];
+        if (property_exists($this->overload, $property)) {
+            return $this->overload->{$property};
         }
         throw new \Exception(sprintf('Undefined overload property: `%1$s`.', $property));
     }
@@ -113,6 +138,9 @@ trait OverloadMembers
 
         if (isset($this->{$method}) && is_callable($this->{$method})) {
             return call_user_func_array($this->{$method}, $args);
+        }
+        if (isset($this->overload{$method}) && is_callable($this->overload{$method})) {
+            return call_user_func_array($this->overload{$method}, $args);
         }
         throw new \Exception(sprintf('Undefined method: `%1$s`.', $method));
     }

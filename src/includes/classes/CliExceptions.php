@@ -43,5 +43,6 @@ class CliExceptions extends AbsBase
     public function handler(\Exception $e)
     {
         $this->CliStream->err($e->getMessage());
+        exit(1); // Exit status on exception.
     }
 }

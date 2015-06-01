@@ -15,6 +15,34 @@ abstract class AbsCliSubCmdBase extends AbsBase
     protected $CliColorize;
 
     /**
+     * @type string Version.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected $version;
+
+    /**
+     * @type \stdClass Config.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected $config;
+
+    /**
+     * @type \stdClass Command.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected $command;
+
+    /**
+     * @type \stdClass Sub-command.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected $sub_command;
+
+    /**
      * @type OptionResult|Option[] Opts.
      *
      * @since 15xxxx Initial release.
@@ -36,11 +64,41 @@ abstract class AbsCliSubCmdBase extends AbsBase
     protected $stdin;
 
     /**
+     * Initialize/config.
+     *
+     * @since 15xxxx Initial release.
+     */
+    abstract protected function initConfig();
+
+    /**
+     * Option specs.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @return array An array of opt. specs.
+     */
+    abstract protected function optSpecs();
+
+    /**
+     * Help output/display.
+     *
+     * @since 15xxxx Initial release.
+     */
+    abstract protected function showHelpExit();
+
+    /**
+     * Command runner.
+     *
+     * @since 15xxxx Initial release.
+     */
+    abstract protected function runOutputExit();
+
+    /**
      * Constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(
+    final public function __construct(
         AbsCliCmdBase $Primary,
         CliOpts $CliOpts,
         CliStream $CliStream,
@@ -55,7 +113,18 @@ abstract class AbsCliSubCmdBase extends AbsBase
         $this->CliColors   = $CliColors;
         $this->CliColorize = $CliColorize;
 
+        # Inherit these from primary.
+
+        $this->version     = $this->Primary->version;
+        $this->config      = $this->Primary->config;
+        $this->command     = $this->Primary->command;
+        $this->sub_command = $this->Primary->sub_command;
+
+        # Initialize any additional config. values.
+
         $this->initConfig(); // For extenders.
+
+        # Parse options, arguments, STDIN.
 
         $optSpecs         = $this->optSpecs();
         $optSpecs['help'] = ['desc' => 'Display help file.'];
@@ -68,52 +137,13 @@ abstract class AbsCliSubCmdBase extends AbsBase
 
         $this->stdin = $this->CliStream->in(0, $this::NON_BLOCKING);
 
+        # Maybe show help; else run the sub-command.
+
         if ($this->opts->help) {
-            $this->showHelp(); // Display help file.
-            exit(0); // All done here.
+            $this->showHelpExit(); // Display help file.
+            exit(0); // Default status for help file.
         }
-        $this->runCommand(); // For extenders.
-    }
-
-    /**
-     * Initialize/config.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected function initConfig()
-    {
-        // For extenders.
-    }
-
-    /**
-     * Help output/display.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected function showHelp()
-    {
-        // For extenders.
-    }
-
-    /**
-     * Option specs.
-     *
-     * @since 15xxxx Initial release.
-     *
-     * @return array An array of opt. specs.
-     */
-    protected function optSpecs()
-    {
-        return []; // For extenders.
-    }
-
-    /**
-     * Command runner.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected function runCommand()
-    {
-        // For extenders.
+        $this->runOutputExit(); // Run, output, and exit.
+        exit(1); // Command should exit(0) to prevent this.
     }
 }

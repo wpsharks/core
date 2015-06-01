@@ -27,11 +27,18 @@ abstract class AbsCliCmdBase extends AbsBase
     protected $version;
 
     /**
-     * @type string Primary command.
+     * @type \stdClass Config.
      *
      * @since 15xxxx Initial release.
      */
-    protected $command_slug;
+    protected $config;
+
+    /**
+     * @type \stdClass Command.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected $command;
 
     /**
      * @type \stdClass Sub-command.
@@ -41,13 +48,40 @@ abstract class AbsCliCmdBase extends AbsBase
     protected $sub_command;
 
     /**
+     * Version string.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @return string Version.
+     */
+    abstract protected function version();
+
+    /**
+     * Initialize/config.
+     *
+     * @since 15xxxx Initial release.
+     */
+    abstract protected function initConfig();
+
+    /**
+     * Available sub-commands.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @return array Available sub-commands.
+     */
+    abstract public function availableSubCommands();
+
+    /**
      * Constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
+    final public function __construct()
     {
         parent::__construct();
+
+        # Dependency injector.
 
         $this->Dicer = new Dicer([
             'shared'        => true,
@@ -63,59 +97,50 @@ abstract class AbsCliCmdBase extends AbsBase
         $this->CliStream     = $this->Dicer->get(CliStream::class);
         $this->CliExceptions = $this->Dicer->get(CliExceptions::class);
 
+        # Only run this if we are in fact on a CLI.
+
         if (!$this->Cli->is() || empty($GLOBALS['argv'][0])) {
             throw new \Exception('CLI processing out of context.');
         }
+        # Handle any CLI exceptions; i.e., print to STDERR.
+
         $this->CliExceptions->handle(); // Handle CLI exceptions.
 
-        $this->version      = (string) $this->version; // Force string.
-        $this->command_slug = basename(strtolower((string) $GLOBALS['argv'][0]));
-        $this->sub_command  = (object) ['slug' => '', 'class' => '', 'class_path' => ''];
+        # Initialize additional class properties.
+
+        $this->version     = $this->version(); // Abstract class member.
+        $this->config      = new \stdClass(); // Default config. object class.
+        $this->command     = (object) ['slug' => basename(strtolower((string) $GLOBALS['argv'][0]))];
+        $this->sub_command = (object) ['slug' => '', 'class' => '', 'class_path' => ''];
+
+        # Setup overloaded properties for read-only access.
+
+        $this->overload(['Dicer', 'version', 'config', 'command', 'sub_command']);
+
+        # Initialize any additional config. values.
+
+        $this->initConfig(); // For extenders.
+
+        # Fill the sub-command properties now; if possible.
 
         if (!empty($GLOBALS['argv'][1])) {
             $this->sub_command->slug       = $this->subCommandSlug('', $GLOBALS['argv'][1]);
             $this->sub_command->class      = $this->subCommandClass($this->sub_command->slug);
             $this->sub_command->class_path = $this->subCommandClassPath($this->sub_command->slug);
         }
+        # Display help/info (or run sub-command); else throw an exception.
+
         if (!$this->sub_command->slug || !$this->sub_command->class || !$this->sub_command->class_path
                 || in_array($this->sub_command->slug, ['help', 'version'], true)
                 || in_array('--version', $GLOBALS['argv'], true)) {
             $this->CliStream->out($this->helpVersionInfo());
             exit(0); // Help/version/info in this case.
         } elseif (class_exists($this->sub_command->class_path)) {
-            $this->overload['Dicer']        = $this->Dicer;
-            $this->overload['version']      = $this->version;
-            $this->overload['command_slug'] = $this->command_slug;
-            $this->overload['sub_command']  = $this->sub_command;
-            $this->initConfig(); // Initialize any config. values.
             $this->Dicer->get($this->sub_command->class_path, [$this], true);
-            exit(0); // Success unless the sub-command says otherwise.
+            exit(1); // Default status if sub-command fails to exit properly.
         } else {
             throw new \Exception('Unknown sub-command: `'.$this->sub_command->slug.'`');
-            exit(1); // Error exit status.
         }
-    }
-
-    /**
-     * Initialize/config.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected function initConfig()
-    {
-        // For extenders.
-    }
-
-    /**
-     * Available sub-commands.
-     *
-     * @since 15xxxx Initial release.
-     *
-     * @return array Available sub-commands.
-     */
-    public function availableSubCommands()
-    {
-        return []; // For extenders.
     }
 
     /**
@@ -125,7 +150,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Version help/info.
      */
-    public function helpVersionInfo()
+    final public function helpVersionInfo()
     {
         $version = $this->version;
         $name    = get_class($this);
@@ -135,7 +160,7 @@ abstract class AbsCliCmdBase extends AbsBase
 
         $info .= '**- SYNOPSIS ---**'."\n\n";
 
-        $info .= '$ `'.$this->command_slug.' [sub-command] --help`'."\n";
+        $info .= '$ `'.$this->command->slug.' [sub-command] --help`'."\n";
         $info .= 'Call sub-commands or get help for a specific sub-command.'."\n\n";
 
         $info .= '**- AVAILABLE SUB-COMMANDS ---**'."\n\n";
@@ -145,7 +170,7 @@ abstract class AbsCliCmdBase extends AbsBase
 
         foreach ($availableSubCommands as $_slug => $_desc) {
             if ($_slug && $_desc) {
-                $info .= '$ `'.$this->command_slug.' '.$_slug.'` : '.$_desc."\n";
+                $info .= '$ `'.$this->command->slug.' '.$_slug.'` : '.$_desc."\n";
             }
         }
         unset($_slug, $_desc); // Housekeeping.
@@ -163,7 +188,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Slug name; e.g., `sub-command`.
      */
-    public function subCommandSlug($class, $arg1 = '')
+    final public function subCommandSlug($class, $arg1 = '')
     {
         if (!($class = (string) $class) && !($arg1 = (string) $arg1)) {
             return ''; // Not possible.
@@ -186,7 +211,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Class name; e.g., `SubCommand`.
      */
-    public function subCommandClass($slug)
+    final public function subCommandClass($slug)
     {
         if (!($slug = (string) $slug)) {
             return ''; // Not possible.
@@ -207,7 +232,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Class path; e.g., `Namespace\Primary\SubCommand`.
      */
-    public function subCommandClassPath($slug)
+    final public function subCommandClassPath($slug)
     {
         if (!($slug = (string) $slug)) {
             return ''; // Not possible.
