@@ -16,6 +16,7 @@ abstract class AbsCliCmdBase extends AbsBase
     protected $Trim;
     protected $Coalesce;
     protected $WsVersion;
+    protected $CliStream;
     protected $CliExceptions;
 
     /**
@@ -59,6 +60,7 @@ abstract class AbsCliCmdBase extends AbsBase
         $this->Trim          = $this->Dicer->get(Trim::class);
         $this->Coalesce      = $this->Dicer->get(Coalesce::class);
         $this->WsVersion     = $this->Dicer->get(WsVersion::class);
+        $this->CliStream     = $this->Dicer->get(CliStream::class);
         $this->CliExceptions = $this->Dicer->get(CliExceptions::class);
 
         if (!$this->Cli->is() || empty($GLOBALS['argv'][0])) {
