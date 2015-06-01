@@ -55,7 +55,6 @@ abstract class AbsCliCmdBase extends AbsBase
 
         $this->args = $this->opts->getArguments();
         array_shift($this->args); // Remove binary.
-        array_shift($this->args); // Remove primary.
 
         $this->runCommand(); // For extenders.
     }
