@@ -20,7 +20,7 @@ trait OverloadMembers
      *
      * @since 15xxxx Initial release.
      */
-    protected function overloadInit($properties)
+    protected function overloadInit()
     {
         $this->overload = new \stdClass();
     }
