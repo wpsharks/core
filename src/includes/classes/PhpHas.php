@@ -31,7 +31,7 @@ class PhpHas extends AbsBase
     {
         $extension = (string) $extension;
 
-        if (!is_null($has = &$self->staticKey(__FUNCTION__, $extension))) {
+        if (!is_null($has = &$this->staticKey(__FUNCTION__, $extension))) {
             return $has; // Already cached this.
         }
         return ($has = (boolean) extension_loaded($extension));
@@ -53,10 +53,10 @@ class PhpHas extends AbsBase
     {
         $function = (string) $function;
 
-        if (!is_null($has = &$self->staticKey(__FUNCTION__, $function))) {
+        if (!is_null($has = &$this->staticKey(__FUNCTION__, $function))) {
             return $has; // Already cached this.
         }
-        if (is_null($disabled_functions = &$self->staticKey(__FUNCTION__.'_disabled_functions'))) {
+        if (is_null($disabled_functions = &$this->staticKey(__FUNCTION__.'_disabled_functions'))) {
             $disabled_functions = array(); // Initialize disabled/blacklisted functions.
 
             if (($disable_functions = trim(ini_get('disable_functions')))) {
