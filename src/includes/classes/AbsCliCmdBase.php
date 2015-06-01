@@ -131,21 +131,21 @@ abstract class AbsCliCmdBase extends AbsBase
         $name    = get_class($this);
         $date    = $this->WsVersion->date($this->version);
 
-        $info = sprintf('- %1$s v%2$s; released %3$s ---', $name, $version, $date)."\n\n";
+        $info = sprintf('_%1$s v%2$s; released %3$s_', $name, $version, $date)."\n\n";
 
-        $info .= '- SYNOPSIS ---'."\n\n";
+        $info .= '**- SYNOPSIS ---**'."\n\n";
 
         $info .= '$ `'.$this->command_slug.' [sub-command] --help`'."\n";
         $info .= 'Call sub-commands; or get help for a specific sub-command.'."\n\n";
 
-        $info .= '- AVAILABLE SUB-COMMANDS ---'."\n\n";
+        $info .= '**- AVAILABLE SUB-COMMANDS ---**'."\n\n";
 
         $availableSubCommands                 = $this->availableSubCommands();
         $availableSubCommands['help|version'] = 'Display main help file.';
 
         foreach ($availableSubCommands as $_slug => $_desc) {
             if ($_slug && $_desc) {
-                $info .= '`'.$_slug.'`: '.$_desc."\n";
+                $info .= '$ `'.$this->command_slug.' '.$_slug.'` : '.$_desc."\n";
             }
         }
         unset($_slug, $_desc); // Housekeeping.
