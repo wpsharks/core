@@ -29,6 +29,13 @@ abstract class AbsCliCmdBase extends AbsBase
     protected $args;
 
     /**
+     * @type string STDIN (if any).
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected $stdin;
+
+    /**
      * Constructor.
      *
      * @since 15xxxx Initial release.
@@ -55,6 +62,8 @@ abstract class AbsCliCmdBase extends AbsBase
 
         $this->args = $this->opts->getArguments();
         array_shift($this->args); // Remove binary.
+
+        $this->stdin = $this->CliStream->in(0, $this::NON_BLOCKING);
 
         $this->runCommand(); // For extenders.
     }

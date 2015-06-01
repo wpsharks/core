@@ -60,6 +60,8 @@ interface Constants
      */
     const RECONSIDER = true;
 
+    # Echo-related.
+
     /**
      * @type bool Yes, do echo.
      */
@@ -69,6 +71,18 @@ interface Constants
      * @type bool No echo.
      */
     const NO_ECHO = false;
+
+    # I/O stream-related.
+
+    /**
+     * @type string Represents `blocking`.
+     */
+    const BLOCKING = '___blocking___';
+
+    /**
+     * @type string Represents `non-blocking`.
+     */
+    const NON_BLOCKING = '___non_blocking___';
 
     # Data types.
 

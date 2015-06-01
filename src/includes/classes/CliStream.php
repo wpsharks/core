@@ -27,14 +27,26 @@ class CliStream extends AbsBase
      * Read STDIN line.
      *
      * @since 15xxxx Initial release.
+     *
+     * @param int    $max_lines Defaults to `0` (no limit).
+     * @param string $blocking  Blocking or non-blocking?
      */
-    public function in()
+    public function in($max_lines = 0, $blocking = self::BLOCKING)
     {
-        $stdin = ''; // Initialize.
+        $lines = 0; // Initialize lines read below.
+        $stdin = ''; // Initialize input string.
+
+        stream_set_blocking(STDIN, $blocking === $this::NON_BLOCKING ? 0 : 1);
+
         while (($_line = fgets(STDIN)) !== false) {
             $stdin .= $_line;
+            $lines++;
+
+            if ($max_lines && $lines >= $max_lines) {
+                break; // Stop here.
+            }
         }
-        return $stdin;
+        return trim($stdin);
     }
 
     /**
