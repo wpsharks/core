@@ -54,14 +54,15 @@ class CliStream extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param string $string Output string.
+     * @param string $string   Output string.
+     * @param bool   $colorize Colorize output?
      */
-    public function out($string)
+    public function out($string, $colorize = true)
     {
         if (!($string = (string) $string)) {
             return; // Nothing to do.
         }
-        if (strpos($string, "\033".'[0m') === false) {
+        if ($colorize && strpos($string, "\033".'[0m') === false) {
             $string = $this->CliColorize($string);
         }
         fwrite(STDOUT, $string."\n");
@@ -72,14 +73,15 @@ class CliStream extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param string $string Output string.
+     * @param string $string   Output string.
+     * @param bool   $colorize Colorize output?
      */
-    public function err($string)
+    public function err($string, $colorize = true)
     {
         if (!($string = (string) $string)) {
             return; // Nothing to do.
         }
-        if (strpos($string, "\033".'[0m') === false) {
+        if ($colorize && strpos($string, "\033".'[0m') === false) {
             $string = $this->CliColorize($string, 'red_bold');
         }
         fwrite(STDERR, $string."\n");

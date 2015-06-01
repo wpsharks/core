@@ -25,14 +25,23 @@ class CliColors extends AbsBase
         'cyan'   => '0;36',
         'white'  => '0;37',
 
-        'black_bold'  => '1;30',
-        'red_bold'    => '1;31',
-        'green_bold'  => '1;32',
-        'yellow_bold' => '1;33',
-        'blue_bold'   => '1;34',
-        'purple_bold' => '1;35',
-        'cyan_bold'   => '1;36',
-        'white_bold'  => '1;37',
+        'black_bright'  => '1;30',
+        'red_bright'    => '1;31',
+        'green_bright'  => '1;32',
+        'yellow_bright' => '1;33',
+        'blue_bright'   => '1;34',
+        'purple_bright' => '1;35',
+        'cyan_bright'   => '1;36',
+        'white_bright'  => '1;37',
+
+        'black_dim'  => '2;30',
+        'red_dim'    => '2;31',
+        'green_dim'  => '2;32',
+        'yellow_dim' => '2;33',
+        'blue_dim'   => '2;34',
+        'purple_dim' => '2;35',
+        'cyan_dim'   => '2;36',
+        'white_dim'  => '2;37',
 
         'black_underline'  => '4;30',
         'red_underline'    => '4;31',
@@ -42,6 +51,15 @@ class CliColors extends AbsBase
         'purple_underline' => '4;35',
         'cyan_underline'   => '4;36',
         'white_underline'  => '4;37',
+
+        'black_blink'  => '5;30',
+        'red_blink'    => '5;31',
+        'green_blink'  => '5;32',
+        'yellow_blink' => '5;33',
+        'blue_blink'   => '5;34',
+        'purple_blink' => '5;35',
+        'cyan_blink'   => '5;36',
+        'white_blink'  => '5;37',
     ];
 
     /**

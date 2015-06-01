@@ -46,13 +46,15 @@ class CliColorize extends AbsBase
         $bg_color = (string) $bg_color;
 
         $default_args = [
-            'italic_color' => 'black',
-            'code_color'   => 'cyan_bold',
+            'bold_color'   => 'white_bright',
+            'italic_color' => 'green_dim',
+            'code_color'   => 'cyan_bright',
             'link_color'   => 'blue_underline',
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
+        $bold_color   = (string) $args['bold_color'];
         $italic_color = (string) $args['italic_color'];
         $code_color   = (string) $args['code_color'];
         $link_color   = (string) $args['link_color'];
@@ -72,12 +74,27 @@ class CliColorize extends AbsBase
         if ($fg_color || $bg_color) {
             $colorized_string .= "\033".'[0m'; // Reset.
         }
-        colorize_italics: // Target point for italics colorization.
+        colorize_bolds: // Target point for bold colorization.
+
+        if ($bold_color && isset($this->CliColors->fg->{$bold_color})) {
+            if ($bold_color !== $fg_color && !$bg_color) {
+                $colorized_string = preg_replace_callback(
+                    '/(?<=^|\s)(\*{2})(?P<bold>[^*]+?)\\1(?=\s|$)/m',
+                    function ($m) use ($fg_color, $bold_color) {
+                        return "\033".'['.$this->CliColors->fg->{$bold_color}.'m'.$m['bold']."\033".'[0m'.
+                                ($fg_color && isset($this->CliColors->fg->{$fg_color}) ? "\033".'['.$this->CliColors->fg->{$fg_color}.'m' : '');
+                                // ↑ Restores original color; if there is a foreground color.
+                    },
+                    $colorized_string // e.g., `**This is a bold sentence.**`
+                );
+            }
+        }
+        colorize_italics: // Target point for italic colorization.
 
         if ($italic_color && isset($this->CliColors->fg->{$italic_color})) {
             if ($italic_color !== $fg_color && !$bg_color) {
                 $colorized_string = preg_replace_callback(
-                    '/(?<=^|\s)(_+)(?P<italic>[^_]*?)\\1(?=\s|$)/m',
+                    '/(?<=^|\s)(_)(?P<italic>[^_]+?)\\1(?=\s|$)/m',
                     function ($m) use ($fg_color, $italic_color) {
                         return "\033".'['.$this->CliColors->fg->{$italic_color}.'m'.$m['italic']."\033".'[0m'.
                                 ($fg_color && isset($this->CliColors->fg->{$fg_color}) ? "\033".'['.$this->CliColors->fg->{$fg_color}.'m' : '');
@@ -87,12 +104,12 @@ class CliColorize extends AbsBase
                 );
             }
         }
-        colorize_code_blocks: // Target point for code colorization.
+        colorize_codes: // Target point for code colorization.
 
         if ($code_color && isset($this->CliColors->fg->{$code_color})) {
             if ($code_color !== $fg_color && !$bg_color) {
                 $colorized_string = preg_replace_callback(
-                    '/(`+)(?P<code>[^`]*?)\\1/',
+                    '/(`+)(?P<code>[^`]+?)\\1/',
                     function ($m) use ($fg_color, $code_color) {
                         return "\033".'['.$this->CliColors->fg->{$code_color}.'m'.$m['code']."\033".'[0m'.
                                 ($fg_color && isset($this->CliColors->fg->{$fg_color}) ? "\033".'['.$this->CliColors->fg->{$fg_color}.'m' : '');
