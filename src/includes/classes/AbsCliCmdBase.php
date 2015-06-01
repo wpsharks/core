@@ -156,7 +156,7 @@ abstract class AbsCliCmdBase extends AbsBase
         $name    = get_class($this);
         $date    = $this->WsVersion->date($this->version);
 
-        $info = sprintf('_%1$s v%2$s; released %3$s_', $name, $version, $date)."\n\n";
+        $info = sprintf('_*%1$s v%2$s; released %3$s*_', $name, $version, $date)."\n\n";
 
         $info .= '**- SYNOPSIS ---**'."\n\n";
 
