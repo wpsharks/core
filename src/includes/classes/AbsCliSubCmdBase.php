@@ -57,7 +57,10 @@ abstract class AbsCliSubCmdBase extends AbsBase
 
         $this->initConfig(); // For extenders.
 
-        $this->CliOpts->add($this->optSpecs());
+        $optSpecs         = $this->optSpecs();
+        $optSpecs['help'] = ['desc' => 'Display help file.'];
+
+        $this->CliOpts->add($optSpecs);
         $this->opts = $this->CliOpts->parse();
 
         $this->args = $this->opts->getArguments();
@@ -65,6 +68,10 @@ abstract class AbsCliSubCmdBase extends AbsBase
 
         $this->stdin = $this->CliStream->in(0, $this::NON_BLOCKING);
 
+        if ($this->opts->help) {
+            $this->showHelp(); // Display help file.
+            exit(0); // All done here.
+        }
         $this->runCommand(); // For extenders.
     }
 
@@ -74,6 +81,16 @@ abstract class AbsCliSubCmdBase extends AbsBase
      * @since 15xxxx Initial release.
      */
     protected function initConfig()
+    {
+        // For extenders.
+    }
+
+    /**
+     * Help output/display.
+     *
+     * @since 15xxxx Initial release.
+     */
+    protected function showHelp()
     {
         // For extenders.
     }

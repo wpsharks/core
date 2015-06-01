@@ -40,18 +40,18 @@ class CliOpts extends AbsBase
      */
     public function add(array $specs)
     {
-        foreach ($specs as $_key => $_spec) {
-            if (!empty($_spec['spec']) && !empty($_spec['desc'])) {
-                $_Option = $this->OptionCollection->add($_spec['spec'], $_spec['desc']);
-                if (!empty($_spec['type'])) {
-                    $_Option->isa($_spec['type']);
+        foreach ($specs as $_spec => $_data) {
+            if ($_spec && is_string($_spec) && !empty($_data['desc'])) {
+                $_Option = $this->OptionCollection->add($_spec, $_data['desc']);
+                if (!empty($_data['type'])) {
+                    $_Option->isa($_data['type']);
                 }
-                if (isset($_spec['default'])) {
-                    $_Option->defaultValue($_spec['default']);
+                if (isset($_data['default'])) {
+                    $_Option->defaultValue($_data['default']);
                 }
             }
         }
-        unset($_key, $_spec, $_Option); // Housekeeping.
+        unset($_spec, $_data, $_Option); // Housekeeping.
     }
 
     /**

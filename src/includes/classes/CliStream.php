@@ -39,11 +39,11 @@ class CliStream extends AbsBase
         stream_set_blocking(STDIN, $blocking === $this::NON_BLOCKING ? 0 : 1);
 
         while (($_line = fgets(STDIN)) !== false) {
-            $stdin .= $_line;
-            $lines++;
+            $stdin .= $_line; // Collect line.
+            $lines++; // Increment line counter.
 
             if ($max_lines && $lines >= $max_lines) {
-                break; // Stop here.
+                break; // Got what we wanted :-)
             }
         }
         return trim($stdin);

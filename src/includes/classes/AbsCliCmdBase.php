@@ -136,7 +136,7 @@ abstract class AbsCliCmdBase extends AbsBase
         $info .= '**- SYNOPSIS ---**'."\n\n";
 
         $info .= '$ `'.$this->command_slug.' [sub-command] --help`'."\n";
-        $info .= 'Call sub-commands; or get help for a specific sub-command.'."\n\n";
+        $info .= 'Call sub-commands or get help for a specific sub-command.'."\n\n";
 
         $info .= '**- AVAILABLE SUB-COMMANDS ---**'."\n\n";
 
