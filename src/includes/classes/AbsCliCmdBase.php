@@ -158,12 +158,12 @@ abstract class AbsCliCmdBase extends AbsBase
 
         $info = sprintf('_*%1$s v%2$s; released %3$s*_', $name, $version, $date)."\n\n";
 
-        $info .= '**- SYNOPSIS ---**'."\n\n";
+        $info .= '**- SYNOPSIS -**'."\n\n";
 
         $info .= '$ `'.$this->command->slug.' [sub-command] --help`'."\n";
         $info .= 'Call sub-commands or get help for a specific sub-command.'."\n\n";
 
-        $info .= '**- AVAILABLE SUB-COMMANDS ---**'."\n\n";
+        $info .= '**- AVAILABLE SUB-COMMANDS -**'."\n\n";
 
         $availableSubCommands                 = $this->availableSubCommands();
         $availableSubCommands['help|version'] = 'Display main help file.';

@@ -65,6 +65,7 @@ class CliStream extends AbsBase
         if ($colorize && strpos($string, "\033".'[0m') === false) {
             $string = $this->CliColorize($string);
         }
+        stream_set_blocking(STDOUT, 1);
         fwrite(STDOUT, $string."\n");
     }
 
@@ -84,6 +85,7 @@ class CliStream extends AbsBase
         if ($colorize && strpos($string, "\033".'[0m') === false) {
             $string = $this->CliColorize($string, 'red_strong');
         }
+        stream_set_blocking(STDERR, 1);
         fwrite(STDERR, $string."\n");
     }
 }
