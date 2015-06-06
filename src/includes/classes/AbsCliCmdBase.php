@@ -79,7 +79,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return array Available sub-commands.
      */
-    abstract public function availableSubCommands();
+    abstract protected function availableSubCommands();
 
     /**
      * Constructor.
