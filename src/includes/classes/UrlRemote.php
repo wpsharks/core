@@ -72,7 +72,7 @@ class UrlRemote extends AbsBase
 
             'fail_on_error' => true,
             'return'        => STRING_TYPE,
-            // Or `ARRAY_A_TYPE` alternative.
+            // Or `$this::ARRAY_A_TYPE` alternative.
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
@@ -101,7 +101,7 @@ class UrlRemote extends AbsBase
             $custom_request_method = strtoupper($_m['method']);
 
             if ($custom_request_method === 'HEAD') {
-                $return = ARRAY_A_TYPE; // Force.
+                $return = $this::ARRAY_A_TYPE; // Force.
             }
         }
         unset($_m); // Housekeeping.
@@ -109,7 +109,7 @@ class UrlRemote extends AbsBase
         # Validate URL.
 
         if (!$url) {
-            return $return === ARRAY_A_TYPE
+            return $return === $this::ARRAY_A_TYPE
                 ? [] : ''; // Failure.
         }
         # Convert body to a string.
@@ -217,7 +217,7 @@ class UrlRemote extends AbsBase
 
         # Return final response; either an array or just the response body.
 
-        if ($return === ARRAY_A_TYPE) {
+        if ($return === $this::ARRAY_A_TYPE) {
             return [
                 'code'    => $curl_code,
                 'headers' => $curl_headers,
