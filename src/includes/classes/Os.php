@@ -30,7 +30,40 @@ class Os extends AbsBase
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
         }
-        if (stripos(PHP_OS, 'win') !== 0) {
+        return ($is = !$this->isWindows());
+    }
+
+    /**
+     * A Linux environment?
+     *
+     * @since 150424 Initial release.
+     *
+     * @return bool `TRUE` if in a Linux environment.
+     */
+    public function isLinux()
+    {
+        if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
+            return $is; // Cached this already.
+        }
+        if (stripos(PHP_OS, 'linux') === 0) {
+            return ($is = true);
+        }
+        return ($is = false);
+    }
+
+    /**
+     * A Mac environment?
+     *
+     * @since 150424 Initial release.
+     *
+     * @return bool `TRUE` if in a Mac environment.
+     */
+    public function isMac()
+    {
+        if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
+            return $is; // Cached this already.
+        }
+        if (stripos(PHP_OS, 'darwin') === 0) {
             return ($is = true);
         }
         return ($is = false);
