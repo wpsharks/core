@@ -71,7 +71,7 @@ class UrlRemote extends AbsBase
             'cookie_file' => '',
 
             'fail_on_error' => true,
-            'return'        => STRING_TYPE,
+            'return'        => $this::STRING_TYPE,
             // Or `$this::ARRAY_A_TYPE` alternative.
         ];
         $args = array_merge($default_args, $args);
