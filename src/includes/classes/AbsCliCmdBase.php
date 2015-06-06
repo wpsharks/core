@@ -64,6 +64,15 @@ abstract class AbsCliCmdBase extends AbsBase
     abstract protected function initConfig();
 
     /**
+     * Sub-command aliases.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @return array Sub-command aliases.
+     */
+    abstract protected function subCommandAliases();
+
+    /**
      * Available sub-commands.
      *
      * @since 15xxxx Initial release.
@@ -216,6 +225,10 @@ abstract class AbsCliCmdBase extends AbsBase
         if (!($slug = (string) $slug)) {
             return ''; // Not possible.
         }
+        $aliases = $this->subCommandAliases();
+        if (!empty($aliases[$slug])) {
+            $slug = $aliases[$slug];
+        }
         $parts = preg_split('/\-/', $slug, null, PREG_SPLIT_NO_EMPTY);
         $parts = array_map('ucfirst', array_map('strtolower', $parts));
         $class = implode('', $parts); // e.g., `SubCommand`.
@@ -236,6 +249,10 @@ abstract class AbsCliCmdBase extends AbsBase
     {
         if (!($slug = (string) $slug)) {
             return ''; // Not possible.
+        }
+        $aliases = $this->subCommandAliases();
+        if (!empty($aliases[$slug])) {
+            $slug = $aliases[$slug];
         }
         if (!($class = $this->subCommandClass($slug))) {
             return ''; // Not possible.
