@@ -78,7 +78,7 @@ class CliColorize extends AbsBase
 
         if ($em_color && isset($this->CliColors->fg->{$em_color})) {
             $colorized_string = preg_replace_callback(
-                '/_\*(?P<em>[^*]+?)\*_/',
+                '/_\*(?P<em>.+?)\*_/',
                 function ($m) use ($fg_color, $em_color) {
                     return "\033".'['.$this->CliColors->fg->{$em_color}.'m'.$m['em']."\033".'[0m'.
                             ($fg_color && isset($this->CliColors->fg->{$fg_color}) ? "\033".'['.$this->CliColors->fg->{$fg_color}.'m' : '');
@@ -91,7 +91,7 @@ class CliColorize extends AbsBase
 
         if ($strong_color && isset($this->CliColors->fg->{$strong_color})) {
             $colorized_string = preg_replace_callback(
-                '/(\*{2})(?P<strong>[^*]+?)\\1/',
+                '/(\*{2})(?P<strong>.+?)\\1/',
                 function ($m) use ($fg_color, $strong_color) {
                     return "\033".'['.$this->CliColors->fg->{$strong_color}.'m'.$m['strong']."\033".'[0m'.
                             ($fg_color && isset($this->CliColors->fg->{$fg_color}) ? "\033".'['.$this->CliColors->fg->{$fg_color}.'m' : '');
@@ -104,7 +104,7 @@ class CliColorize extends AbsBase
 
         if ($code_color && isset($this->CliColors->fg->{$code_color})) {
             $colorized_string = preg_replace_callback(
-                '/(`+)(?P<code>[^`]+?)\\1/',
+                '/(`+)(?P<code>.+?)\\1/',
                 function ($m) use ($fg_color, $code_color) {
                     return "\033".'['.$this->CliColors->fg->{$code_color}.'m'.$m['code']."\033".'[0m'.
                             ($fg_color && isset($this->CliColors->fg->{$fg_color}) ? "\033".'['.$this->CliColors->fg->{$fg_color}.'m' : '');
