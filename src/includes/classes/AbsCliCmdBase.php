@@ -119,7 +119,7 @@ abstract class AbsCliCmdBase extends AbsBase
 
         $this->version     = $this->version(); // Abstract class member.
         $this->config      = new \stdClass(); // Default config. object class.
-        $this->command     = (object) ['slug' => basename(strtolower((string) $GLOBALS['argv'][0]))];
+        $this->command     = (object) ['slug' => $this->commandSlug()]; // Primary.
         $this->sub_command = (object) ['slug' => '', 'class' => '', 'class_path' => ''];
 
         # Setup overloaded properties for read-only access.
@@ -197,7 +197,25 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Slug name; e.g., `sub-command`.
      */
-    final public function subCommandSlug($class, $arg1 = '')
+    final protected function commandSlug()
+    {
+        if (ini_get('___cli.phar_proxy')) {
+            return basename(strtolower((string) ini_get('___cli.phar_proxy')));
+        }
+        return basename(strtolower((string) $GLOBALS['argv'][0]));
+    }
+
+    /**
+     * Sub-command class|arg[1] to slug conversion.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string $class Input class name.
+     * @param string $arg1  Or, an input arg[1].
+     *
+     * @return string Slug name; e.g., `sub-command`.
+     */
+    final protected function subCommandSlug($class, $arg1 = '')
     {
         if (!($class = (string) $class) && !($arg1 = (string) $arg1)) {
             return ''; // Not possible.
@@ -220,7 +238,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Class name; e.g., `SubCommand`.
      */
-    final public function subCommandClass($slug)
+    final protected function subCommandClass($slug)
     {
         if (!($slug = (string) $slug)) {
             return ''; // Not possible.
@@ -245,7 +263,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Class path; e.g., `Namespace\Primary\SubCommand`.
      */
-    final public function subCommandClassPath($slug)
+    final protected function subCommandClassPath($slug)
     {
         if (!($slug = (string) $slug)) {
             return ''; // Not possible.
