@@ -199,8 +199,9 @@ abstract class AbsCliCmdBase extends AbsBase
      */
     final protected function commandSlug()
     {
-        if (ini_get('___cli.phar_proxy')) {
-            return basename(strtolower((string) ini_get('___cli.phar_proxy')));
+        if (strpos(($via = (string) ini_get('session.name')), 'cli-phar-via::') === 0) {
+            ini_set('session.name', 'PHPSESSID'); // Restore.
+            return basename(strtolower($via)); // Basename.
         }
         return basename(strtolower((string) $GLOBALS['argv'][0]));
     }
