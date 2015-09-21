@@ -51,7 +51,7 @@ class Coalesce extends AbsBase
      */
     public function notEmptyByRef(&...$vars)
     {
-        foreach (func_get_args() as $_var) {
+        foreach ($vars as $_var) {
             if (!empty($_var)) {
                 return $_var;
             }
@@ -83,15 +83,15 @@ class Coalesce extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @param mixed ...$vars Input vars.
+     * @param mixed &...$vars Input vars.
      *
      * @return mixed First `isset()`; else `NULL`.
      *
      * @note This variation supports variables by reference; avoiding `E_NOTICE` errors.
      */
-    public function notNullByRef(&$a, &$b = null, &$c = null, &$d = null, &$e = null, &$f = null, &$g = null, &$h = null, &$i = null, &$j = null)
+    public function notNullByRef(&...$vars)
     {
-        foreach (func_get_args() as $_var) {
+        foreach ($vars as $_var) {
             if (isset($_var)) {
                 return $_var;
             }
