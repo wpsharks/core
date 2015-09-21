@@ -33,11 +33,8 @@ class Base64 extends AbsBase
      *
      * @return string The base64 URL-safe encoded string.
      */
-    public function urlSafeEncode($string, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=')
+    public function urlSafeEncode(string $string, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), string $trim_padding_chars = '='): string
     {
-        $string             = (string) $string;
-        $trim_padding_chars = (string) $trim_padding_chars;
-
         if (!is_string($base64_url_safe = base64_encode($string))) {
             throw new \exception('Base64 encoding failed (`$base64_url_safe` is NOT a string).');
         }
@@ -61,11 +58,8 @@ class Base64 extends AbsBase
      *
      * @return string The decoded string value.
      */
-    public function urlSafeDecode($base64_url_safe, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), $trim_padding_chars = '=')
+    public function urlSafeDecode(string $base64_url_safe, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), string $trim_padding_chars = '='): string
     {
-        $base64_url_safe    = (string) $base64_url_safe;
-        $trim_padding_chars = (string) $trim_padding_chars;
-
         $string = isset($trim_padding_chars[0]) ? rtrim($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
         $string = isset($trim_padding_chars[0]) ? str_pad($string, strlen($string) % 4, '=', STR_PAD_RIGHT) : $string;
         $string = str_replace($url_safe_chars, $url_unsafe_chars, $string);
