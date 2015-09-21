@@ -28,10 +28,8 @@ class HostConvert extends AbsBase
      *
      * @return string Slug representation of the `$host`; i.e., w/ dashes.
      */
-    public function toSlug($host = '')
+    public function toSlug(string $host = ''): string
     {
-        $host = (string) $host;
-
         if (!$host && !empty($_SERVER['HTTP_HOST'])) {
             $host = (string) $_SERVER['HTTP_HOST'];
         } elseif (!$host && !empty($_SERVER['HOST_NAME'])) {
@@ -79,7 +77,7 @@ class HostConvert extends AbsBase
      *
      * @return string Var representation of the `$host`; i.e., w/ underscores.
      */
-    public function toVar($host = '')
+    public function toVar(string $host = ''): string
     {
         return str_replace('-', '_', $this->toSlug($host));
     }
