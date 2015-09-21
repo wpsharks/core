@@ -55,7 +55,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Version.
      */
-    abstract protected function version();
+    abstract protected function version(): string;
 
     /**
      * Initialize/config.
@@ -71,7 +71,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return array Sub-command aliases.
      */
-    abstract protected function subCommandAliases();
+    abstract protected function subCommandAliases(): array;
 
     /**
      * Available sub-commands.
@@ -80,7 +80,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return array Available sub-commands.
      */
-    abstract protected function availableSubCommands();
+    abstract protected function availableSubCommands(): array;
 
     /**
      * Constructor.
@@ -160,7 +160,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Version help/info.
      */
-    final public function helpVersionInfo()
+    final public function helpVersionInfo(): string
     {
         $version = $this->version;
         $name    = get_class($this);
@@ -189,16 +189,13 @@ abstract class AbsCliCmdBase extends AbsBase
     }
 
     /**
-     * Sub-command class|arg[1] to slug conversion.
+     * Command slug.
      *
      * @since 15xxxx Initial release.
      *
-     * @param string $class Input class name.
-     * @param string $arg1  Or, an input arg[1].
-     *
-     * @return string Slug name; e.g., `sub-command`.
+     * @return string Command slug; e.g., `command`.
      */
-    final protected function commandSlug()
+    final protected function commandSlug(): string
     {
         if (strpos(($via = (string) ini_get('session.name')), 'cli-phar-via::') === 0) {
             ini_set('session.name', 'PHPSESSID'); // Restore.
@@ -217,9 +214,9 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Slug name; e.g., `sub-command`.
      */
-    final protected function subCommandSlug($class, $arg1 = '')
+    final protected function subCommandSlug(string $class, string $arg1 = ''): string
     {
-        if (!($class = (string) $class) && !($arg1 = (string) $arg1)) {
+        if (!$class && !$arg1) {
             return ''; // Not possible.
         }
         $slug = $this->Coalesce->notEmpty($class, $arg1);
@@ -240,9 +237,9 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Class name; e.g., `SubCommand`.
      */
-    final protected function subCommandClass($slug)
+    final protected function subCommandClass(string $slug): string
     {
-        if (!($slug = (string) $slug)) {
+        if (!$slug) {
             return ''; // Not possible.
         }
         $aliases = $this->subCommandAliases();
@@ -265,9 +262,9 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @return string Class path; e.g., `Namespace\Primary\SubCommand`.
      */
-    final protected function subCommandClassPath($slug)
+    final protected function subCommandClassPath(string $slug): string
     {
-        if (!($slug = (string) $slug)) {
+        if (!$slug) {
             return ''; // Not possible.
         }
         $aliases = $this->subCommandAliases();
