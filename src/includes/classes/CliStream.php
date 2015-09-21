@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 /**
@@ -40,7 +41,7 @@ class CliStream extends AbsBase
 
         while (($_line = fgets(STDIN)) !== false) {
             $stdin .= $_line; // Collect line.
-            $lines++; // Increment line counter.
+            ++$lines; // Increment line counter.
 
             if ($max_lines && $lines >= $max_lines) {
                 break; // Got what we wanted :-)

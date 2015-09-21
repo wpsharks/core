@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 /**
@@ -156,7 +157,7 @@ class ReplaceCodes extends AbsBase
                     return $value;
                 }
             }
-            $_iteration_counter++; // Increment counter.
+            ++$_iteration_counter; // Increment counter.
         }
         unset($_iteration_counter, $_key, $_value); // Housekeeping.
 

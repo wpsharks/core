@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 /**
@@ -43,7 +44,7 @@ class Keygen extends AbsBase
             $chars .= '-_[]{}<>~`+=,.;:/?|';
         }
         $total_chars = strlen($chars);
-        for ($key = '', $_i = 0; $_i < $length; $_i++) {
+        for ($key = '', $_i = 0; $_i < $length; ++$_i) {
             $key .= substr($chars, mt_rand(0, $total_chars - 1), 1);
         }
         unset($_i); // Housekeeping.

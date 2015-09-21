@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 /**
@@ -48,7 +49,7 @@ class XorCipher extends AbsBase
         $string = '~xe|'.$string; // Identifier.
         $key    = $this->ShaSignatures->xKey((string) $key);
 
-        for ($_length = strlen($string), $_key_length = strlen($key), $_i = 1, $e = ''; $_i <= $_length; $_i++) {
+        for ($_length = strlen($string), $_key_length = strlen($key), $_i = 1, $e = ''; $_i <= $_length; ++$_i) {
             $_char     = (string) substr($string, $_i - 1, 1);
             $_key_char = (string) substr($key, ($_i % $_key_length) - 1, 1);
             $e .= chr(ord($_char) + ord($_key_char));
@@ -94,7 +95,7 @@ class XorCipher extends AbsBase
         if (isset($md5_e['md5'][0]) && $md5_e['md5'] !== md5($md5_e['e'])) {
             return ($string = ''); // Invalid checksum; automatic failure.
         }
-        for ($_length = strlen($md5_e['e']), $_key_length = strlen($key), $_i = 1, $string = ''; $_i <= $_length; $_i++) {
+        for ($_length = strlen($md5_e['e']), $_key_length = strlen($key), $_i = 1, $string = ''; $_i <= $_length; ++$_i) {
             $_char     = (string) substr($md5_e['e'], $_i - 1, 1);
             $_key_char = (string) substr($key, ($_i % $_key_length) - 1, 1);
             $string .= chr(ord($_char) - ord($_key_char));
