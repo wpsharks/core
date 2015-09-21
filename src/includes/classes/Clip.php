@@ -35,7 +35,7 @@ class Clip extends AbsBase
      *
      * @return string|array|object Clipped value.
      */
-    public function __invoke($value, $max_length = 80, $force_ellipsis = false)
+    public function __invoke($value, int $max_length = 80, bool $force_ellipsis = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -48,7 +48,7 @@ class Clip extends AbsBase
         if (!($string = (string) $value)) {
             return $string; // Empty.
         }
-        $max_length = max(4, (integer) $max_length);
+        $max_length = max(4, $max_length);
         $string     = $this->HtmlConvert->toText($string, ['br2nl' => false]);
 
         if (strlen($string) > $max_length) {
@@ -71,7 +71,7 @@ class Clip extends AbsBase
      *
      * @return string|array|object Mid-clipped value.
      */
-    public function mid($value, $max_length = 80)
+    public function mid($value, int $max_length = 80)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -84,7 +84,7 @@ class Clip extends AbsBase
         if (!($string = (string) $value)) {
             return $string; // Empty.
         }
-        $max_length = max(4, (integer) $max_length);
+        $max_length = max(4, $max_length);
         $string     = $this->HtmlConvert->toText($string, ['br2nl' => false]);
 
         if (strlen($string) <= $max_length) {
