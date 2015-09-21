@@ -40,12 +40,8 @@ class CliColorize extends AbsBase
      *
      * @return string Colorized input string.
      */
-    public function __invoke($string, $fg_color = 'default', $bg_color = 'default', array $args = [])
+    public function __invoke(string $string, string $fg_color = 'default', string $bg_color = 'default', array $args = []): string
     {
-        $string   = (string) $string;
-        $fg_color = (string) $fg_color;
-        $bg_color = (string) $bg_color;
-
         $default_args = [
             'em_color'     => 'default_em',
             'strong_color' => 'default_strong',
