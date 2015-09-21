@@ -27,7 +27,7 @@ class ArraySort extends AbsBase
      *
      * @return array Array sorted deeply by its keys.
      */
-    public function byKey(array $array, $flags = SORT_REGULAR)
+    public function byKey(array $array, int $flags = SORT_REGULAR): array
     {
         ksort($array, $flags);
 
