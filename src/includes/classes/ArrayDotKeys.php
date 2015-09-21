@@ -31,7 +31,7 @@ class ArrayDotKeys extends AbsBase
      *
      * @return array An array w/ ONE dimension; using DOT `.` keys.
      */
-    public function get(array $array)
+    public function get(array $array): array
     {
         $iterator = $this->ArrayIterators->recursive($array);
 
