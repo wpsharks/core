@@ -26,7 +26,7 @@ class ArrayIterators extends AbsBase
      *
      * @return \RecursiveIteratorIterator|\RecursiveArrayIterator Recursive iterator.
      */
-    public function recursive(array $array)
+    public function recursive(array $array): \RecursiveIteratorIterator
     {
         return new \RecursiveIteratorIterator(new \RecursiveArrayIterator($array));
     }
