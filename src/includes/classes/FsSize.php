@@ -28,9 +28,9 @@ class FsSize extends AbsBase
      *
      * @return string If file exists, an abbreviated byte notation.
      */
-    public function abbr($file)
+    public function abbr(string $file): string
     {
-        if (!($file = (string) $file)) {
+        if (!$file) {
             return ''; // Empty.
         }
         if (!is_file($file) || !is_readable($file)) {
@@ -49,10 +49,10 @@ class FsSize extends AbsBase
      *
      * @return string Byte notation.
      */
-    public function bytesAbbr($bytes, $precision = 2)
+    public function bytesAbbr(float $bytes, int $precision = 2): string
     {
+        $precision  = max(0, $precision);
         $bytes      = max(0.0, (float) $bytes);
-        $precision  = max(0, (integer) $precision);
         $units      = array('bytes', 'kbs', 'MB', 'GB', 'TB');
         $power      = floor(($bytes ? log($bytes) : 0) / log(1024));
         $abbr_bytes = round($bytes / pow(1024, $power), $precision);
@@ -75,13 +75,10 @@ class FsSize extends AbsBase
      *
      * @return float A float indicating the number of bytes.
      */
-    public function abbrBytes($string)
+    public function abbrBytes(string $string): float
     {
-        $string = (string) $string;
-        $regex  = '/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/i';
-
-        if (!preg_match($regex, $string, $_m)) {
-            return (float) 0;
+        if (!preg_match('/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/i', $string, $_m)) {
+            return (float) 0; // Force a value of `0.0`.
         }
         $value    = (float) $_m['value'];
         $modifier = strtolower($_m['modifier']);
