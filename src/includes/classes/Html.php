@@ -28,9 +28,9 @@ class Html extends AbsBase
      *
      * @return bool `TRUE` if string is HTML.
      */
-    public function is($string)
+    public function is(string $string): bool
     {
-        if (!$string || !is_string($string)) {
+        if (!$string) {
             return false; // Not possible.
         }
         return strpos($string, '<') !== false && preg_match('/\<[^<>]+\>/', $string);
