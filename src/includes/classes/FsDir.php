@@ -28,7 +28,7 @@ class FsDir extends AbsBase
      *
      * @return string A readable/writable tmp directory.
      */
-    public function tmp()
+    public function tmp(): string
     {
         if (!is_null($dir = &$this->staticKey(__FUNCTION__))) {
             return $dir; // Already cached this.
@@ -81,7 +81,7 @@ class FsDir extends AbsBase
      *
      * @return string Normalized directory/file path.
      */
-    public function normalize($value, $allow_trailing_slash = false)
+    public function normalize($value, bool $allow_trailing_slash = false): string
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -131,9 +131,8 @@ class FsDir extends AbsBase
      *
      * @return bool TRUE if the directory was removed successfully.
      */
-    public function remove($dir, $recursively = false)
+    public function remove(string $dir, bool $recursively = false): bool
     {
-        $dir = (string) $dir;
         if (!$dir || !is_dir($dir)) {
             return true;
         }
