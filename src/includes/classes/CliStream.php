@@ -25,14 +25,16 @@ class CliStream extends AbsBase
     }
 
     /**
-     * Read STDIN line.
+     * Read STDIN.
      *
      * @since 15xxxx Initial release.
      *
      * @param int    $max_lines Defaults to `0` (no limit).
      * @param string $blocking  Blocking or non-blocking?
+     *
+     * @return string Returns standard input string of X lines.
      */
-    public function in($max_lines = 0, $blocking = self::BLOCKING)
+    public function in(int $max_lines = 0, string $blocking = self::BLOCKING): string
     {
         $lines = 0; // Initialize lines read below.
         $stdin = ''; // Initialize input string.
@@ -58,9 +60,9 @@ class CliStream extends AbsBase
      * @param string $string   Output string.
      * @param bool   $colorize Colorize output?
      */
-    public function out($string, $colorize = true)
+    public function out(string $string, bool $colorize = true)
     {
-        if (!($string = (string) $string)) {
+        if (!$string) {
             return; // Nothing to do.
         }
         $string = $this->CliColorize($string);
@@ -77,9 +79,9 @@ class CliStream extends AbsBase
      * @param string $string   Output string.
      * @param bool   $colorize Colorize output?
      */
-    public function err($string, $colorize = true)
+    public function err(string $string, bool $colorize = true)
     {
-        if (!($string = (string) $string)) {
+        if (!$string) {
             return; // Nothing to do.
         }
         $string = $this->CliColorize($string, 'red_strong');
