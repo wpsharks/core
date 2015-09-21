@@ -31,9 +31,9 @@ class FsDirIterators extends AbsBase
      *
      * @return \RegexIterator|\RecursiveDirectoryIterator[]
      */
-    public function recursiveRegex($dir, $regex)
+    public function recursiveRegex(string $dir, string $regex): \RegexIterator
     {
-        if (!($dir = (string) $dir) || !($regex = (string) $regex)) {
+        if (!$dir || !$regex) {
             throw new \Exception('Missing required `$dir` and/or `$regex` parameters.');
         }
         $dir_iterator      = new \RecursiveDirectoryIterator($dir, \FilesystemIterator::KEY_AS_PATHNAME | \FilesystemIterator::CURRENT_AS_SELF | \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::UNIX_PATHS);
