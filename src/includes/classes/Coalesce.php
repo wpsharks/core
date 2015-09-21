@@ -24,13 +24,15 @@ class Coalesce extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
+     * @param mixed ...$vars Input vars.
+     *
      * @return mixed First `!empty()`; else `NULL`.
      */
-    public function notEmpty()
+    public function notEmpty(...$vars)
     {
-        foreach (func_get_args() as $var) {
-            if (!empty($var)) {
-                return $var;
+        foreach ($vars as $_var) {
+            if (!empty($_var)) {
+                return $_var;
             }
         }
         return;
@@ -41,15 +43,17 @@ class Coalesce extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
+     * @param mixed ...$vars Input vars.
+     *
      * @return mixed First `!empty()`; else `NULL`.
      *
      * @note This variation supports variables by reference; avoiding `E_NOTICE` errors.
      */
     public function notEmptyByRef(&$a, &$b = null, &$c = null, &$d = null, &$e = null, &$f = null, &$g = null, &$h = null, &$i = null, &$j = null)
     {
-        foreach (func_get_args() as $var) {
-            if (!empty($var)) {
-                return $var;
+        foreach (func_get_args() as $_var) {
+            if (!empty($_var)) {
+                return $_var;
             }
         }
         return;
@@ -59,14 +63,16 @@ class Coalesce extends AbsBase
      * Utility; `isset()` coalesce.
      *
      * @since 15xxxx Initial release.
+     *
+     * @param mixed ...$vars Input vars.
      *
      * @return mixed First `isset()`; else `NULL`.
      */
-    public function notNull()
+    public function notNull(...$vars)
     {
-        foreach (func_get_args() as $var) {
-            if (isset($var)) {
-                return $var;
+        foreach ($vars as $_var) {
+            if (isset($_var)) {
+                return $_var;
             }
         }
         return;
@@ -76,6 +82,8 @@ class Coalesce extends AbsBase
      * Utility; `isset()` coalesce.
      *
      * @since 15xxxx Initial release.
+     *
+     * @param mixed ...$vars Input vars.
      *
      * @return mixed First `isset()`; else `NULL`.
      *
@@ -83,9 +91,9 @@ class Coalesce extends AbsBase
      */
     public function notNullByRef(&$a, &$b = null, &$c = null, &$d = null, &$e = null, &$f = null, &$g = null, &$h = null, &$i = null, &$j = null)
     {
-        foreach (func_get_args() as $var) {
-            if (isset($var)) {
-                return $var;
+        foreach (func_get_args() as $_var) {
+            if (isset($_var)) {
+                return $_var;
             }
         }
         return;
