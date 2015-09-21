@@ -18,6 +18,7 @@ class Cli extends AbsBase
     {
         parent::__construct();
     }
+
     /**
      * Running in a command line interface?
      *
@@ -25,7 +26,7 @@ class Cli extends AbsBase
      *
      * @return bool `TRUE` if running in a command line interface.
      */
-    public function is()
+    public function is(): bool
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
