@@ -206,7 +206,7 @@ class HtmlConvert extends AbsBase
      *
      * @return string|array|object Converted value(s).
      */
-    public function toPandoc($value, $to)
+    public function toPandoc($value, string $to)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -222,7 +222,7 @@ class HtmlConvert extends AbsBase
         if (!$this->Html->is($html)) {
             return $html; // Not HTML markup.
         }
-        if (!($to = trim((string) $to))) {
+        if (!($to = trim($to))) {
             return $html; // Nothing to do.
         }
         try {
