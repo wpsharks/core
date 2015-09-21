@@ -26,7 +26,7 @@ class ArrayDimensions extends AbsBase
      *
      * @return array Output array, with only ONE dimension.
      */
-    public function one(array $array)
+    public function one(array $array): array
     {
         foreach ($array as $_key => $_value) {
             if (is_array($_value) || is_object($_value)) {
