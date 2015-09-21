@@ -59,16 +59,14 @@ trait CacheMembers
      * @param string      $___prop  For internal use only. This defaults to `cache`.
      *                              See also: {@link staticKey()} where a value of `static` is used instead.
      *
-     * @return mixed|null Returns the current value for the cache key.
-     *                    Or, this returns `NULL` if the key is not set yet.
+     * @return mixed|null Returns the current value for the cache key. Returns `NULL` if key is not set.
      *
      * @note This function returns by reference. The use of `&` is highly recommended when calling this utility.
      *    See also: <http://php.net/manual/en/language.references.return.php>
      */
-    protected function &cacheKey($function, $args = array(), $___prop = 'cache')
+    protected function &cacheKey(string $function, $args = array(), string $___prop = 'cache')
     {
-        $function = (string) $function;
-        $args     = (array) $args;
+        $args = (array) $args; // Force an array value.
 
         if (!isset($this->{$___prop}[$function])) {
             $this->{$___prop}[$function] = null;
@@ -122,7 +120,7 @@ trait CacheMembers
      * @note This function returns by reference. The use of `&` is highly recommended when calling this utility.
      *    See also: <http://php.net/manual/en/language.references.return.php>
      */
-    protected function &staticKey($function, $args = array())
+    protected function &staticKey(string $function, $args = array())
     {
         $key = &$this->cacheKey($function, $args, 'static');
 
@@ -136,7 +134,7 @@ trait CacheMembers
      *
      * @param array $preserve Preserve certain keys?
      */
-    protected function cacheKeysUnset(array $preserve = array())
+    protected function cacheKeysUnset(array $preserve = array()): array
     {
         foreach ($this->cache as $_key => $_value) {
             if (!$preserve || !in_array($_key, $preserve, true)) {
@@ -153,7 +151,7 @@ trait CacheMembers
      *
      * @param array $preserve Preserve certain keys?
      */
-    protected function staticKeysUnset(array $preserve = array())
+    protected function staticKeysUnset(array $preserve = array()): array
     {
         foreach ($this->static as $_key => $_value) {
             if (!$preserve || !in_array($_key, $preserve, true)) {

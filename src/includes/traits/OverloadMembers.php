@@ -52,10 +52,8 @@ trait OverloadMembers
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
-    public function __isset($property)
+    public function __isset(string $property): bool
     {
-        $property = (string) $property; // Force string.
-
         return isset($this->overload->{$property});
     }
 
@@ -72,10 +70,8 @@ trait OverloadMembers
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
-    public function __get($property)
+    public function __get(string $property)
     {
-        $property = (string) $property; // Force string.
-
         if (property_exists($this->overload, $property)) {
             return $this->overload->{$property};
         }
@@ -95,10 +91,8 @@ trait OverloadMembers
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
-    public function __set($property, $value)
+    public function __set(string $property, $value)
     {
-        $property = (string) $property; // Force string.
-
         throw new \Exception(sprintf('Refused to set overload property: `%1$s`.', $property));
     }
 
@@ -114,10 +108,8 @@ trait OverloadMembers
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
-    public function __unset($property)
+    public function __unset(string $property)
     {
-        $property = (string) $property; // Force string.
-
         throw new \Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
     }
 
@@ -133,10 +125,8 @@ trait OverloadMembers
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
-    public function __call($method, array $args = [])
+    public function __call(string $method, array $args = [])
     {
-        $method = (string) $method; // Force string.
-
         if (isset($this->{$method}) && is_callable($this->{$method})) {
             return call_user_func_array($this->{$method}, $args);
         }
