@@ -62,7 +62,7 @@ class CliOpts extends AbsBase
      *
      * @return OptionResult|Option[] Opts.
      */
-    public function parse()
+    public function parse(): OptionResult
     {
         $parser = new OptionParser($this->OptionCollection);
 
@@ -74,9 +74,9 @@ class CliOpts extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @return OptionResult|Option Options.
+     * @return string Specs as a string.
      */
-    public function specs()
+    public function specs(): string
     {
         $printer = new ConsoleOptionPrinter();
 
