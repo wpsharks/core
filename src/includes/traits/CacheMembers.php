@@ -134,7 +134,7 @@ trait CacheMembers
      *
      * @param array $preserve Preserve certain keys?
      */
-    protected function cacheKeysUnset(array $preserve = array()): array
+    protected function cacheKeysUnset(array $preserve = array())
     {
         foreach ($this->cache as $_key => $_value) {
             if (!$preserve || !in_array($_key, $preserve, true)) {
@@ -151,7 +151,7 @@ trait CacheMembers
      *
      * @param array $preserve Preserve certain keys?
      */
-    protected function staticKeysUnset(array $preserve = array()): array
+    protected function staticKeysUnset(array $preserve = array())
     {
         foreach ($this->static as $_key => $_value) {
             if (!$preserve || !in_array($_key, $preserve, true)) {
