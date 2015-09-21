@@ -78,7 +78,7 @@ abstract class AbsCliSubCmdBase extends AbsBase
      *
      * @return array An array of opt. specs.
      */
-    abstract protected function optSpecs();
+    abstract protected function optSpecs(): array;
 
     /**
      * Help output/display.
