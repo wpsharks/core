@@ -30,9 +30,9 @@ class CliUrl extends AbsBase
      *
      * @param string $url The URL to open.
      */
-    public function open($url)
+    public function open(string $url)
     {
-        if (!($url = trim((string) $url))) {
+        if (!($url = trim($url))) {
             return; // Not possible.
         }
         $url_arg = escapeshellarg($url);
