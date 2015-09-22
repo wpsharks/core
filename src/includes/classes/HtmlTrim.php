@@ -41,7 +41,7 @@ class HtmlTrim extends AbsBase
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    public function __invoke($value, $chars = '', $extra_chars = '', $side = '')
+    public function __invoke($value, string $chars = '', string $extra_chars = '', string $side = '')
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -52,7 +52,7 @@ class HtmlTrim extends AbsBase
             return $this->Trim($value, $chars, $extra_chars, $side);
         }
         $value = (string) $value;
-        $side  = strtolower((string) $side);
+        $side  = strtolower($side);
 
         if (is_null($whitespace = &$this->staticKey(__FUNCTION__.'_whitespace'))) {
             $whitespace = implode('|', array_keys($this->DEF_HTML_WHITESPACE));
@@ -85,7 +85,7 @@ class HtmlTrim extends AbsBase
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    public function left($value, $chars = '', $extra_chars = '')
+    public function left($value, string $chars = '', string $extra_chars = '')
     {
         return $this->__invoke($value, $chars, $extra_chars, 'l');
     }
@@ -102,7 +102,7 @@ class HtmlTrim extends AbsBase
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    public function right($value, $chars = '', $extra_chars = '')
+    public function right($value, string $chars = '', string $extra_chars = '')
     {
         return $this->__invoke($value, $chars, $extra_chars, 'r');
     }
