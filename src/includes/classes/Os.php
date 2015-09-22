@@ -26,7 +26,7 @@ class Os extends AbsBase
      *
      * @return bool `TRUE` if in a Unix environment.
      */
-    public function isUnix()
+    public function isUnix(): bool
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -41,7 +41,7 @@ class Os extends AbsBase
      *
      * @return bool `TRUE` if in a Linux environment.
      */
-    public function isLinux()
+    public function isLinux(): bool
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -59,7 +59,7 @@ class Os extends AbsBase
      *
      * @return bool `TRUE` if in a Mac environment.
      */
-    public function isMac()
+    public function isMac(): bool
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -77,7 +77,7 @@ class Os extends AbsBase
      *
      * @return bool `TRUE` if in a Windows environment.
      */
-    public function isWindows()
+    public function isWindows(): bool
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
