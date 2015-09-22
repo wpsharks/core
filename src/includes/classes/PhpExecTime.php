@@ -24,15 +24,15 @@ class PhpExecTime extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param null|int $max Seconds max; to set max execution time.
+     * @param int|null $max Seconds max; to set max execution time.
      *
      * @return int Max execution time; in seconds.
      */
-    public function max($max = null)
+    public function max(int $max = null): int
     {
-        if (isset($max) && ($max = (integer) $max) >= 0) {
+        if (isset($max) && $max >= 0) {
             @set_time_limit($max);
         }
-        return (integer) ini_get('max_execution_time');
+        return (int) ini_get('max_execution_time');
     }
 }
