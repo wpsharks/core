@@ -29,7 +29,7 @@ class HtmlStrip extends AbsBase
      *
      * @return string String w/ HTML attributes stripped.
      */
-    public function attributes($value, array $args = array())
+    public function attributes($value, array $args = array()): string
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
