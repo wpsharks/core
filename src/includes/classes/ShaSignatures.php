@@ -39,10 +39,8 @@ class ShaSignatures extends AbsBase
      *
      * @return string SHA-X signature key.
      */
-    public function xKey($key = '')
+    public function xKey(string $key = ''): string
     {
-        $key = (string) $key;
-
         if (!$key && !empty($_SERVER['SHAX_SIG_KEY'])) {
             $key = (string) $_SERVER['SHAX_SIG_KEY'];
         }
@@ -62,12 +60,9 @@ class ShaSignatures extends AbsBase
      *
      * @return string SHA-256 signature string.
      */
-    public function x256($string, $key = '')
+    public function x256(string $string, string $key = ''): string
     {
-        $string = (string) $string;
-        $key    = $this->xKey((string) $key);
-
-        return hash_hmac('sha256', $string, $key);
+        return hash_hmac('sha256', $string, $this->xKey($key));
     }
 
     /**
@@ -81,14 +76,12 @@ class ShaSignatures extends AbsBase
      *
      * @return string Input `$url_uri_qsl` w/ a SHA-256 signature var.
      */
-    public function x256QueryAdd($url_uri_qsl, $key = '', $sig_var = '')
+    public function x256QueryAdd(string $url_uri_qsl, string $key = '', string $sig_var = ''): string
     {
-        $url_uri_qsl = (string) $url_uri_qsl;
-        $key         = $this->xKey((string) $key);
-
-        if (!($sig_var = (string) $sig_var)) {
+        if (!$sig_var) {
             $sig_var = 'sig';
         }
+        $key         = $this->xKey($key);
         $sig         = $this->x256Query($url_uri_qsl, $key, $sig_var);
         $url_uri_qsl = $this->UrlQuery->addArgs([$sig_var => $sig], $url_uri_qsl);
 
@@ -105,11 +98,9 @@ class ShaSignatures extends AbsBase
      *
      * @return string Input `$url_uri_qsl` w/o a SHA-256 signature var.
      */
-    public function x256QueryRemove($url_uri_qsl, $sig_var = '')
+    public function x256QueryRemove(string $url_uri_qsl, string $sig_var = ''): string
     {
-        $url_uri_qsl = (string) $url_uri_qsl;
-
-        if (!($sig_var = (string) $sig_var)) {
+        if (!$sig_var) {
             $sig_var = 'sig';
         }
         $url_uri_qsl = $this->UrlQuery->removeArgs([$sig_var], $url_uri_qsl);
@@ -128,14 +119,12 @@ class ShaSignatures extends AbsBase
      *
      * @return bool `TRUE` if a valid signature exists.
      */
-    public function x256QueryOk($qs_url_uri, $key = '', $sig_var = '')
+    public function x256QueryOk(string $qs_url_uri, string $key = '', string $sig_var = ''): bool
     {
-        $qs_url_uri = (string) $qs_url_uri;
-        $key        = $this->xKey((string) $key);
-
-        if (!($sig_var = (string) $sig_var)) {
+        if (!$sig_var) {
             $sig_var = 'sig';
         }
+        $key  = $this->xKey($key);
         $args = $this->UrlQuery->parse($qs_url_uri);
         $sig  = $this->x256Query($qs_url_uri);
 
@@ -153,14 +142,12 @@ class ShaSignatures extends AbsBase
      *
      * @return string SHA-256 signature string.
      */
-    public function x256Query($qs_url_uri, $key = '', $sig_var = '')
+    public function x256Query(string $qs_url_uri, string $key = '', string $sig_var = ''): string
     {
-        $qs_url_uri = (string) $qs_url_uri;
-        $key        = $this->xKey((string) $key);
-
-        if (!($sig_var = (string) $sig_var)) {
+        if (!$sig_var) {
             $sig_var = 'sig';
         }
+        $key  = $this->xKey($key);
         $args = $this->UrlQuery->parse($qs_url_uri);
         unset($args[$sig_var]); // Exclude.
 
