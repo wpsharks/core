@@ -31,7 +31,7 @@ class ReplaceOnce extends AbsBase
      *
      * @return string|array|object Values after ONE string replacement deeply.
      */
-    public function __invoke($needle, $replace, $value, $caSe_insensitive = false)
+    public function __invoke($needle, $replace, $value, bool $caSe_insensitive = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
