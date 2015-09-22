@@ -28,14 +28,12 @@ class PhpHas extends AbsBase
      *
      * @return bool `TRUE` if the extension is loaded.
      */
-    public function extension($extension)
+    public function extension(string $extension): bool
     {
-        $extension = (string) $extension;
-
         if (!is_null($has = &$this->staticKey(__FUNCTION__, $extension))) {
             return $has; // Already cached this.
         }
-        return ($has = (boolean) extension_loaded($extension));
+        return ($has = (bool) extension_loaded($extension));
     }
 
     /**
@@ -45,15 +43,13 @@ class PhpHas extends AbsBase
      *
      * @param string $function A PHP function (or user function) to check.
      *
-     * @return string `TRUE` if the function is possible.
+     * @return bool `TRUE` if the function is possible.
      *
      * @note This checks (among other things) if the function exists and that it's callable.
      *    It also checks the currently configured `disable_functions` and `suhosin.executor.func.blacklist`.
      */
-    public function callableFunction($function)
+    public function callableFunction(string $function): bool
     {
-        $function = (string) $function;
-
         if (!is_null($has = &$this->staticKey(__FUNCTION__, $function))) {
             return $has; // Already cached this.
         }
