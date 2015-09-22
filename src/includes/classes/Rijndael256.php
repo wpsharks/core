@@ -46,16 +46,15 @@ class Rijndael256 extends AbsBase
      *
      * @return string Encrypted string.
      */
-    public function encrypt($string, $key = '', $w_md5_cs = true)
+    public function encrypt(string $string, string $key = '', bool $w_md5_cs = true): string
     {
         if (!$this->PhpHas->extension('mcrypt')) {
             throw new \Exception('Mcrypt extension missing.');
         }
-        $string = (string) $string;
         if (!isset($string[0])) {
             return ($base64 = '');
         }
-        $key    = $this->ShaSignatures->xKey((string) $key);
+        $key    = $this->ShaSignatures->xKey($key);
         $string = '~r2|'.$string; // A short `RIJNDAEL 256` identifier.
         $key    = (string) substr($key, 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
         $iv     = $this->Keygen->random(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), false);
@@ -80,16 +79,15 @@ class Rijndael256 extends AbsBase
      *
      * @return string Decrypted string, or an empty string if validation fails.
      */
-    public function decrypt($base64, $key = '')
+    public function decrypt(string $base64, string $key = ''): string
     {
         if (!$this->PhpHas->extension('mcrypt')) {
             throw new \Exception('Mcrypt extension missing.');
         }
-        $base64 = (string) $base64;
         if (!isset($base64[0])) {
             return ($string = '');
         }
-        $key = $this->ShaSignatures->xKey((string) $key);
+        $key = $this->ShaSignatures->xKey($key);
 
         if (!strlen($e = $this->Base64->urlSafeDecode($base64))
            || !preg_match('/^~r2\:(?P<iv>[a-zA-Z0-9]+)(?:\:(?P<md5>[a-zA-Z0-9]+))?\|(?P<e>.*)$/s', $e, $iv_md5_e)
