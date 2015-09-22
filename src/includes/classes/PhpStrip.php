@@ -28,10 +28,8 @@ class PhpStrip extends AbsBase
      *
      * @return string String w/ all PHP tags stripped away.
      */
-    public function tags($string)
+    public function tags(string $string): string
     {
-        $string = (string) $string;
-
         $regex = // Search for PHP tags.
 
         '/'.// Open pattern delimiter.
