@@ -30,9 +30,9 @@ class Keygen extends AbsBase
      *
      * @return string The random key.
      */
-    public function random($length = 15, $special_chars = true, $extra_special_chars = false)
+    public function random(int $length = 15, bool $special_chars = true, bool $extra_special_chars = false): string
     {
-        $length = max(0, (integer) $length);
+        $length = max(0, $length);
 
         $chars = 'abcdefghijklmnopqrstuvwxyz';
         $chars .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -64,13 +64,13 @@ class Keygen extends AbsBase
      *    will not be called after `Sat, 20 Nov 2286 17:46:39 GMT`.
      *    At which point a UNIX timestamp will grow in size.
      *
-     * @note Key always begins with a `k` to prevent PHP's `is_numeric()`
+     * @note Key always begins with an `x` to prevent PHP's `is_numeric()`
      *    function from ever thinking it's a number in a different representation.
      *    See: <http://php.net/manual/en/function.is-numeric.php> for further details.
      *
      * @return string A unique, unguessable, non-numeric, caSe-insensitive key (20 chars max).
      */
-    public function uunnci20Max()
+    public function uunnci20Max(): string
     {
         $microtime_19_max = number_format(microtime(true), 9, '.', '');
         // e.g. `9999999999`.`999999999` (max decimals: `9`, max overall precision: `19`).
@@ -82,8 +82,8 @@ class Keygen extends AbsBase
         $seconds_base36      = base_convert($seconds_10_max, '10', '36'); // e.g. max `9999999999`, to base 36.
         $microseconds_base36 = base_convert($microseconds_9_max, '10', '36'); // e.g. max `999999999`, to base 36.
         $mt_rand_base36      = base_convert(mt_rand(1, 999999999), '10', '36'); // e.g. max `999999999`, to base 36.
-        $key                 = 'k'.$mt_rand_base36.$seconds_base36.$microseconds_base36; // e.g. `kgjdgxr4ldqpdrgjdgxr`.
+        $key                 = 'x'.$mt_rand_base36.$seconds_base36.$microseconds_base36; // e.g. `xgjdgxr4ldqpdrgjdgxr`.
 
-        return $key; // Max possible value: `kgjdgxr4ldqpdrgjdgxr` (20 chars).
+        return $key; // Max possible value: `xgjdgxr4ldqpdrgjdgxr` (20 chars).
     }
 }
