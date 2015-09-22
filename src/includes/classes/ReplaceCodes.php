@@ -60,15 +60,13 @@ class ReplaceCodes extends AbsBase
     public function __invoke(
         $value,
         array $vars,
-        $urlencode = false,
-        $implode_non_scalars = '',
-        $caSe_insensitive = false,
-        $___raw_vars = null,
-        $___vars = null,
-        $___recursion = null
+        bool $urlencode = false,
+        string $implode_non_scalars = '',
+        bool $caSe_insensitive = false,
+        bool $___raw_vars = null,
+        bool $___vars = null,
+        bool $___recursion = null
     ) {
-        $implode_non_scalars = (string) $implode_non_scalars;
-
         if (isset($___raw_vars, $___vars)) {
             goto replace_codes_deep;
         }
@@ -245,7 +243,7 @@ class ReplaceCodes extends AbsBase
      *
      * @return string|array|object Value after replacing all codes deeply.
      */
-    public function i($value, array $vars = array(), $urlencode = false, $implode_non_scalars = '')
+    public function i($value, array $vars = array(), bool $urlencode = false, string $implode_non_scalars = '')
     {
         return $this->__invoke($value, $vars, $urlencode, $implode_non_scalars, true);
     }
