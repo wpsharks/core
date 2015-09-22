@@ -35,14 +35,13 @@ class HtmlSpcsm extends AbsBase
      *
      * @return array Array with: `string`, `tokens`, `marker`.
      */
-    public function tokenize($string, array $tokenize_only = array(), $marker = '')
+    public function tokenize(string $string, array $tokenize_only = array(), string $marker = ''): array
     {
-        $marker = str_replace('.', '', uniqid('', true)).($marker ? sha1($marker) : '');
-
-        if (!($string = trim((string) $string))) {
+        if (!($string = trim($string))) {
             return ['string' => $string, 'tokens' => array(), 'marker' => $marker];
         }
-        $spcsm = ['string' => $string, 'tokens' => array(), 'marker' => $marker];
+        $marker = str_replace('.', '', uniqid('', true)).($marker ? sha1($marker) : '');
+        $spcsm  = ['string' => $string, 'tokens' => array(), 'marker' => $marker];
 
         shortcodes: // Target point; `[shortcode][/shortcode]`.
 
@@ -170,7 +169,7 @@ class HtmlSpcsm extends AbsBase
      *
      * @return string The `string` w/ tokens restored now.
      */
-    public function restore(array $spcsm)
+    public function restore(array $spcsm): string
     {
         if (!isset($spcsm['string'])) {
             return ''; // Not possible.
