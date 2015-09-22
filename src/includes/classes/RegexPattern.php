@@ -32,9 +32,9 @@ class RegexPattern extends AbsBase
      * @return bool|array Will return `TRUE` if regex pattern finds a match.
      *                    If `$collect_key_props` is `TRUE`, this will return an array.
      */
-    public function in($regex, $value, $collect_key_props = false)
+    public function in(string $regex, $value, bool $collect_key_props = false)
     {
-        if (!strlen($regex = (string) $regex)) {
+        if (!$regex) { // Empty regex?
             return $collect_key_props ? array() : false;
         }
         $matching_key_props = array(); // Initialize.
