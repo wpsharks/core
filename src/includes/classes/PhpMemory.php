@@ -29,13 +29,13 @@ class PhpMemory extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param null|string $limit Size abbr.; to set memory limit.
+     * @param string|null $limit Size abbr.
      *
      * @return float Current max memory; in bytes.
      */
-    public function limit($limit = null)
+    public function limit(string $limit = null): float
     {
-        if (isset($limit) && ($limit = (string) $limit)) {
+        if (isset($limit) && $limit) {
             @ini_set('memory_limit', $limit);
         }
         return $this->FsSize->abbrBytes(ini_get('memory_limit'));
