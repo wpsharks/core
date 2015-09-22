@@ -36,7 +36,7 @@ class Ip extends AbsBase
      *
      * @note This supports both IPv4 and IPv6 addresses.
      */
-    public function current()
+    public function current(): string
     {
         if (!is_null($ip = &$this->staticKey(__FUNCTION__))) {
             return $ip; // Already cached this.
@@ -53,7 +53,7 @@ class Ip extends AbsBase
             'REMOTE_ADDR',
         );
         foreach ($sources as $_source) {
-            if (!empty($_SERVER[$_source])) {
+            if (!empty($_SERVER[$_source]) && is_string($_SERVER[$_source])) {
                 if (($_valid_public_ip = $this->getValidPublicFrom($_SERVER[$_source]))) {
                     return ($ip = $_valid_public_ip); // IPv4 or IPv6 address.
                 }
@@ -75,11 +75,8 @@ class Ip extends AbsBase
      *
      * @return string A valid/public IP address (if one is found); else an empty string.
      */
-    public function getValidPublicFrom($list_of_possible_ips)
+    public function getValidPublicFrom(string $list_of_possible_ips): string
     {
-        if (!$list_of_possible_ips || !is_string($list_of_possible_ips)) {
-            return ''; // Empty or invalid data.
-        }
         if (!($list_of_possible_ips = trim($list_of_possible_ips))) {
             return ''; // Not possible; i.e., empty string.
         }
@@ -102,7 +99,7 @@ class Ip extends AbsBase
      *
      * @return string Geographic region code for given IP address; if possible.
      */
-    public function region($ip)
+    public function region(string $ip): string
     {
         if (($geo = $this->geoData($ip))) {
             return $geo->region;
@@ -117,7 +114,7 @@ class Ip extends AbsBase
      *
      * @return string Current user's geographic region code; if possible.
      */
-    public function currentRegion()
+    public function currentRegion(): string
     {
         if (($geo = $this->geoData($this->current()))) {
             return $geo->region;
@@ -134,7 +131,7 @@ class Ip extends AbsBase
      *
      * @return string Geographic country code for given IP address; if possible.
      */
-    public function country($ip)
+    public function country(string $ip): string
     {
         if (($geo = $this->geoData($ip))) {
             return $geo->country;
@@ -149,7 +146,7 @@ class Ip extends AbsBase
      *
      * @return string Current user's geographic country code; if possible.
      */
-    public function currentCountry()
+    public function currentCountry(): string
     {
         if (($geo = $this->geoData($this->current()))) {
             return $geo->country;
@@ -168,11 +165,11 @@ class Ip extends AbsBase
      *
      * @return \stdClass|bool Geo location data from IP address.
      */
-    public function geoData($ip)
+    public function geoData(string $ip)
     {
         # Valid the input IP address; do we have one?
 
-        if (!($ip = trim(strtolower((string) $ip)))) {
+        if (!($ip = trim(strtolower($ip)))) {
             return false; // Not possible.
         }
         # Check the static object cache.
