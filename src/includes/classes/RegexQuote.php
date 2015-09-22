@@ -24,12 +24,12 @@ class RegexQuote extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param mixed       $value     Any input value.
-     * @param null|string $delimiter Delimiter to use. Defaults to `/`.
+     * @param mixed  $value     Any input value.
+     * @param string $delimiter Delimiter to use. Defaults to `/`.
      *
      * @return string|array|object Quoted deeply.
      */
-    public function __invoke($value, $delimiter = '/')
+    public function __invoke($value, string $delimiter = '/')
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
