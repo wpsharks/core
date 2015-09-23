@@ -41,9 +41,8 @@ class UrlQuery extends AbsBase
      *
      * @return string Input `$url_uri_qsl` without a query string.
      */
-    public function strip($url_uri_qsl)
+    public function strip(string $url_uri_qsl): string
     {
-        $url_uri_qsl = (string) $url_uri_qsl;
         if (strpos($url_uri_qsl, '?') !== false) {
             $url_uri_qsl = strstr($url_uri_qsl, '?', true);
         }
@@ -59,9 +58,9 @@ class UrlQuery extends AbsBase
      *
      * @return string Query string (no leading `?`); and w/ normalized ampersands.
      */
-    public function string($qs_url_uri)
+    public function string(string $qs_url_uri): string
     {
-        if (!($qs = (string) $qs_url_uri)) {
+        if (!($qs = $qs_url_uri)) {
             return $qs; // Empty.
         }
         if (is_null($regex_amps = &$this->staticKey(__FUNCTION__.'_regex_amps'))) {
@@ -86,22 +85,22 @@ class UrlQuery extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param string      $qs_url_uri          A query string (with or without a leading `?`), a URL, or URI.
-     * @param bool        $convert_dots_spaces Defaults to `TRUE` (just like PHP's {@link parse_str()} function).
-     * @param null|string $dec_type            Optional. Defaults to {@link RFC1738} indicating `urldecode()`.
-     *                                         Or, {@link RFC3986} indicating `rawurldecode()`.
-     * @param null|array  $___parent_array     Internal use only; for recursion.
+     * @param string     $qs_url_uri          A query string (with or without a leading `?`), a URL, or URI.
+     * @param bool       $convert_dots_spaces Defaults to `TRUE` (just like PHP's {@link parse_str()} function).
+     * @param string     $dec_type            Optional. Defaults to {@link RFC1738} indicating `urldecode()`.
+     *                                        Or, {@link RFC3986} indicating `rawurldecode()`.
+     * @param null|array $___parent_array     Internal use only; for recursion.
      *
      * @return array An array of query string args; based on the input `$qs_url_uri` value.
      */
-    public function parse($qs_url_uri, $convert_dots_spaces = true, $dec_type = self::RFC1738, array &$___parent_array = null)
+    public function parse(string $qs_url_uri, bool $convert_dots_spaces = true, string $dec_type = self::RFC1738, array &$___parent_array = null): array
     {
         if (isset($___parent_array)) {
             $array = &$___parent_array;
-            $qs    = (string) $qs_url_uri;
+            $qs    = $qs_url_uri;
         } else {
             $array = array(); // Initialize.
-            $qs    = $this->string((string) $qs_url_uri);
+            $qs    = $this->string($qs_url_uri);
         }
         foreach (explode('&', $qs) as $_name_value) {
             if (!isset($_name_value[0]) || $_name_value === '=') {
@@ -167,7 +166,7 @@ class UrlQuery extends AbsBase
      *
      * @return array An array of query string args; based on the input `$qs_url_uri` value.
      */
-    public function parseRaw($qs_url_uri, $convert_dots_spaces = true)
+    public function parseRaw(string $qs_url_uri, bool $convert_dots_spaces = true): array
     {
         return $this->parse($qs_url_uri, $convert_dots_spaces, $this::RFC3986);
     }
@@ -182,9 +181,8 @@ class UrlQuery extends AbsBase
      *
      * @return string Input `$url_uri_qsl` with new query arg(s).
      */
-    public function addArgs(array $new_args, $url_uri_qsl)
+    public function addArgs(array $new_args, string $url_uri_qsl): string
     {
-        $url_uri_qsl = (string) $url_uri_qsl;
         $url_uri_qsl = $this->UrlParse($url_uri_qsl);
         $args        = array(); // Initialize.
 
@@ -208,9 +206,8 @@ class UrlQuery extends AbsBase
      *
      * @return string Input `$url_uri_qsl` without query arg(s).
      */
-    public function removeArgs(array $arg_keys, $url_uri_qsl)
+    public function removeArgs(array $arg_keys, string $url_uri_qsl): string
     {
-        $url_uri_qsl = (string) $url_uri_qsl;
         $url_uri_qsl = $this->UrlParse($url_uri_qsl);
         $args        = array(); // Initialize.
 
@@ -231,23 +228,18 @@ class UrlQuery extends AbsBase
      *
      * @param array       $args           Input array of query args.
      * @param null|string $numeric_prefix Optional. Defaults to a `NULL` value.
-     * @param null|string $arg_separator  Optional. Defaults to `&`. Use `NULL` for INI `arg_separator.output`.
-     * @param null|string $enc_type       Optional. Defaults to {@link RFC1738} indicating `urlencode()`.
+     * @param string      $arg_separator  Optional. Defaults to `&`. Empty = INI `arg_separator.output`.
+     * @param string      $enc_type       Optional. Defaults to {@link RFC1738} indicating `urlencode()`.
      *                                    Or, {@link RFC3986} indicating `rawurlencode()`.
      * @param null|string $___nested_key  For internal use only.
      *
      * @return string A (possibly raw) URL-encoded query string (without a leading `?`).
      */
-    public function build(array $args, $numeric_prefix = null, $arg_separator = '&', $enc_type = self::RFC1738, $___nested_key = null)
+    public function build(array $args, string $numeric_prefix = null, string $arg_separator = '&', string $enc_type = self::RFC1738, string $___nested_key = null): string
     {
-        if (isset($numeric_prefix)) {
-            $numeric_prefix = (string) $numeric_prefix;
-        }
-        if (!isset($arg_separator)) {
+        if (!$arg_separator) { // Default separator?
             $arg_separator = ini_get('arg_separator.output');
         }
-        $arg_separator = (string) $arg_separator;
-
         $arg_pairs = array(); // Initialize pairs.
 
         foreach ($args as $_key => $_value) {
@@ -288,11 +280,11 @@ class UrlQuery extends AbsBase
      *
      * @param array       $args           Input array of query args.
      * @param null|string $numeric_prefix Optional. Defaults to a `NULL` value.
-     * @param null|string $separator      Optional. Defaults to `&`. Use `NULL` for INI `arg_separator.output`.
+     * @param string      $separator      Optional. Defaults to `&`. Empty = INI `arg_separator.output`.
      *
      * @return string A raw URL-encoded query string (without a leading `?`).
      */
-    public function buildRaw(array $args, $numeric_prefix = null, $arg_separator = '&')
+    public function buildRaw(array $args, string $numeric_prefix = null, string $arg_separator = '&'): string
     {
         return $this->build($args, $prefix, $separator, $this::RFC3986);
     }
