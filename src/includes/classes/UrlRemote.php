@@ -35,7 +35,7 @@ class UrlRemote extends AbsBase
      *
      * @return string|array Output based on configured arguments.
      */
-    public function request($url, array $args = array())
+    public function request(string $url, array $args = array())
     {
         if (!$this->PhpHas->extension('curl')) {
             throw new \Exception('cURL extension missing.');
@@ -57,7 +57,7 @@ class UrlRemote extends AbsBase
      *
      * @return string|array Output based on configured arguments.
      */
-    public function requestCurl($url, array $args = array())
+    public function requestCurl(string $url, array $args = array())
     {
         # Parse arguments.
 
@@ -80,16 +80,14 @@ class UrlRemote extends AbsBase
 
         # Extract and sanitize all args.
 
-        $custom_request_method = (string) '';
-        $url                   = (string) $url;
-
-        $body            = $args['body']; // Mixed.
-        $max_con_secs    = (integer) $args['max_con_secs'];
-        $max_stream_secs = (integer) $args['max_stream_secs'];
-        $headers         = (array) $args['headers'];
-        $cookie_file     = (string) $args['cookie_file'];
-        $fail_on_error   = (boolean) $args['fail_on_error'];
-        $return          = (string) $args['return'];
+        $custom_request_method = '';
+        $body                  = $args['body'];
+        $max_con_secs          = (integer) $args['max_con_secs'];
+        $max_stream_secs       = (integer) $args['max_stream_secs'];
+        $headers               = (array) $args['headers'];
+        $cookie_file           = (string) $args['cookie_file'];
+        $fail_on_error         = (boolean) $args['fail_on_error'];
+        $return                = (string) $args['return'];
 
         # Parse the URL for a possible request method; e.g., `POST::`.
 
