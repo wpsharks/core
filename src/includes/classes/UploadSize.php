@@ -31,7 +31,7 @@ class UploadSize extends AbsBase
      *
      * @return float A floating point number.
      */
-    public function limit()
+    public function limit(): float
     {
         $limits = array(PHP_INT_MAX); // Initialize.
 
