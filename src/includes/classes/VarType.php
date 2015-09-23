@@ -29,7 +29,7 @@ class VarType extends AbsBase
      *
      * @return mixed|array|object Output value.
      */
-    public function ify($value, $type)
+    public function ify($value, string $type)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -39,7 +39,6 @@ class VarType extends AbsBase
 
             return $value;
         }
-        $type = (string) $type;
         settype($value, $type);
 
         return $value;
