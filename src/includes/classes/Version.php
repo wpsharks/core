@@ -32,9 +32,9 @@ class Version extends AbsBase
      *
      * @return bool `TRUE` if valid.
      */
-    public function isValid($version)
+    public function isValid(string $version): bool
     {
-        if (!($version = (string) $version)) {
+        if (!$version) {
             return false; // Nope.
         }
         return (boolean) preg_match($this->DEF_VERSION_REGEX_VALID, $version);
@@ -49,9 +49,9 @@ class Version extends AbsBase
      *
      * @return bool `TRUE` if valid.
      */
-    public function isValidDev($version)
+    public function isValidDev(string $version): bool
     {
-        if (!($version = (string) $version)) {
+        if (!$version) {
             return false; // Nope.
         }
         return (boolean) preg_match($this->DEF_VERSION_REGEX_VALID_DEV, $version);
@@ -66,9 +66,9 @@ class Version extends AbsBase
      *
      * @return bool `TRUE` if valid.
      */
-    public function isValidStable($version)
+    public function isValidStable(string $version): bool
     {
-        if (!($version = (string) $version)) {
+        if (!$version) {
             return false; // Nope.
         }
         return (boolean) preg_match($this->DEF_VERSION_REGEX_VALID_STABLE, $version);
