@@ -18,7 +18,7 @@ Core PHP library used by WebSharks, Inc.
 ```json
 {
     "require": {
-        "php": ">=5.5",
+        "php": ">=7.0-RC3",
         "websharks/core": "dev-master"
     }
 }
