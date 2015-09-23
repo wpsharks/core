@@ -22,13 +22,13 @@ class VarDump extends AbsBase
     /**
      * A better `var_dump()`.
      *
-     * @param mixed $var               Any input variable/expression to dump.
-     * @param bool  $echo              Defaults to `FALSE`; i.e., do not echo.
-     * @param int   $indent_size       Defaults to `4`; for spaced indentation.
-     * @param int   $indent_char       Defaults to ` `; indentation using spaces.
-     * @param bool  $dump_circular_ids Defaults to a value of `FALSE` (cleaner output).
-     *                                 If `TRUE`, circular IDs for will be included in the dump.
-     *                                 Helpful when trying to determine the origin of circular references.
+     * @param mixed  $var               Any input variable/expression to dump.
+     * @param bool   $echo              Defaults to `FALSE`; i.e., do not echo.
+     * @param int    $indent_size       Defaults to `4`; for spaced indentation.
+     * @param string $indent_char       Defaults to ` `; indentation using spaces.
+     * @param bool   $dump_circular_ids Defaults to a value of `FALSE` (cleaner output).
+     *                                  If `TRUE`, circular IDs for will be included in the dump.
+     *                                  Helpful when trying to determine the origin of circular references.
      *
      * @return string A dump of the input `$var`.
      *
@@ -40,7 +40,7 @@ class VarDump extends AbsBase
      * @note This routine MUST be very careful that it does NOT write to any variables.
      *    Writing to a variable (or to a variable reference) could cause damage in other routines.
      */
-    public function __invoke($var, $echo = false, $indent_size = 4, $indent_char = ' ', $dump_circular_ids = false)
+    public function __invoke($var, bool $echo = false, int $indent_size = 4, string $indent_char = ' ', bool $dump_circular_ids = false): string
     {
         return $this->dump($var, $echo, $indent_size, $dump_circular_ids);
     }
@@ -48,16 +48,16 @@ class VarDump extends AbsBase
     /**
      * A better `var_dump()` (helper routine, by reference).
      *
-     * @param mixed $var                    Any input variable by reference.
-     * @param bool  $echo                   Defaults to `FALSE`; i.e., do not echo.
-     * @param int   $indent_size            Defaults to `4`; for spaced indentation.
-     * @param int   $indent_char            Defaults to ` `; indentation using spaces.
-     * @param bool  $dump_circular_ids      Defaults to a value of `FALSE` (cleaner output).
-     *                                      If `TRUE`, circular IDs for will be included in the dump.
-     *                                      Helpful when trying to determine the origin of circular references.
-     * @param int   $___current_indent_size Used in recursion. This is for internal use only.
-     * @param array $___nested_circular_ids Used in recursion. For internal use only.
-     * @param bool  $___recursion           Tracks recursion. For internal use only.
+     * @param mixed  $var                    Any input variable by reference.
+     * @param bool   $echo                   Defaults to `FALSE`; i.e., do not echo.
+     * @param int    $indent_size            Defaults to `4`; for spaced indentation.
+     * @param string $indent_char            Defaults to ` `; indentation using spaces.
+     * @param bool   $dump_circular_ids      Defaults to a value of `FALSE` (cleaner output).
+     *                                       If `TRUE`, circular IDs for will be included in the dump.
+     *                                       Helpful when trying to determine the origin of circular references.
+     * @param int    $___current_indent_size Used in recursion. This is for internal use only.
+     * @param array  $___nested_circular_ids Used in recursion. For internal use only.
+     * @param bool   $___recursion           Tracks recursion. For internal use only.
      *
      * @return string A dump of the input `$var` (always in string format).
      *
@@ -71,17 +71,16 @@ class VarDump extends AbsBase
      */
     protected function dump(
         &$var,
-        $echo = false,
-        $indent_size = 4,
-        $indent_char = ' ',
-        $dump_circular_ids = false,
-        $___current_indent_size = 0,
-        $___nested_circular_ids = array(),
-        $___recursion = false
-    ) {
+        bool $echo = false,
+        int $indent_size = 4,
+        string $indent_char = ' ',
+        bool $dump_circular_ids = false,
+        int $___current_indent_size = 0,
+        array $___nested_circular_ids = array(),
+        bool $___recursion = false
+    ): string {
         if (!$___recursion) {
             $indent_size = max(1, $indent_size);
-            $indent_char = (string) $indent_char;
         }
         switch (($type = $real_type = strtolower(gettype($var)))) {
 
