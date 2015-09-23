@@ -26,7 +26,7 @@ class UrlCurrent extends AbsBase
      *
      * @return string Current URL.
      */
-    public function __invoke()
+    public function __invoke(): string
     {
         if (!is_null($url = &$this->staticKey(__FUNCTION__, $scheme))) {
             return $url; // Cached this already.
@@ -43,7 +43,7 @@ class UrlCurrent extends AbsBase
      *
      * @return string Current scheme; lowercase.
      */
-    public function scheme()
+    public function scheme(): string
     {
         if (!is_null($scheme = &$this->staticKey(__FUNCTION__))) {
             return $scheme; // Cached this already.
@@ -67,7 +67,7 @@ class UrlCurrent extends AbsBase
      *
      * @return string Current host name; lowercase.
      */
-    public function host($no_port = false)
+    public function host(bool $no_port = false): string
     {
         if (!is_null($host = &$this->staticKey(__FUNCTION__, $no_port))) {
             return $host; // Cached this already.
@@ -89,7 +89,7 @@ class UrlCurrent extends AbsBase
      *
      * @return string Current URI; with a leading `/`.
      */
-    public function uri()
+    public function uri(): string
     {
         if (!is_null($uri = &$this->staticKey(__FUNCTION__))) {
             return $uri; // Cached this already.
@@ -110,7 +110,7 @@ class UrlCurrent extends AbsBase
      *
      * @return string Current URI/path; with a leading `/`.
      */
-    public function path()
+    public function path(): string
     {
         if (!is_null($path = &$this->staticKey(__FUNCTION__))) {
             return $path; // Cached this already.
@@ -128,7 +128,7 @@ class UrlCurrent extends AbsBase
      *
      * @return string e.g., `index.php/path/info`.
      */
-    public function pathInfo()
+    public function pathInfo(): string
     {
         if (!is_null($path_info = &$this->staticKey(__FUNCTION__))) {
             return $path_info; // Cached this already.
@@ -147,13 +147,13 @@ class UrlCurrent extends AbsBase
     }
 
     /**
-     * Current scheme; lowercase.
+     * Is an SSL scheme?
      *
      * @since 150424 Initial release.
      *
-     * @return string Current scheme; lowercase.
+     * @return bool Is an SSL scheme?
      */
-    public function isSsl()
+    public function isSsl(): bool
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
@@ -183,7 +183,7 @@ class UrlCurrent extends AbsBase
      *
      * @return bool `TRUE` if current URL is on a localhost.
      */
-    public function isLocalhost()
+    public function isLocalhost(): bool
     {
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
