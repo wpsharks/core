@@ -40,14 +40,13 @@ class XorCipher extends AbsBase
      *
      * @return string Encrypted string.
      */
-    public function encrypt($string, $key = '', $w_md5_cs = true)
+    public function encrypt(string $string, string $key = '', bool $w_md5_cs = true): string
     {
-        $string = (string) $string;
         if (!isset($string[0])) {
             return ($base64 = '');
         }
         $string = '~xe|'.$string; // Identifier.
-        $key    = $this->ShaSignatures->xKey((string) $key);
+        $key    = $this->ShaSignatures->xKey($key);
 
         for ($_length = strlen($string), $_key_length = strlen($key), $_i = 1, $e = ''; $_i <= $_length; ++$_i) {
             $_char     = (string) substr($string, $_i - 1, 1);
@@ -76,13 +75,12 @@ class XorCipher extends AbsBase
      *
      * @return string Decrypted string, or an empty string if validation fails.
      */
-    public function decrypt($base64, $key = '')
+    public function decrypt(string $base64, string $key = ''): string
     {
-        $base64 = (string) $base64;
         if (!isset($base64[0])) {
             return ($string = '');
         }
-        $key = $this->ShaSignatures->xKey((string) $key);
+        $key = $this->ShaSignatures->xKey($key);
 
         if (!strlen($e = $this->Base64->urlSafeDecode($base64))
            || !preg_match('/^~xe(?:\:(?P<md5>[a-zA-Z0-9]+))?\|(?P<e>.*)$/s', $e, $md5_e)
