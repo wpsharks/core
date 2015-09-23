@@ -28,9 +28,8 @@ class UrlHash extends AbsBase
      *
      * @return string URL without a #hash/fragment.
      */
-    public function strip($url_uri_qsl)
+    public function strip(string $url_uri_qsl): string
     {
-        $url_uri_qsl = (string) $url_uri_qsl;
         if (strpos($url_uri_qsl, '#') !== false) {
             $url_uri_qsl = strstr($url_uri_qsl, '#', true);
         }
