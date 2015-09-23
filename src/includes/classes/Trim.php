@@ -31,7 +31,7 @@ class Trim extends AbsBase
      *
      * @return string|array|object Trimmed value.
      */
-    public function __invoke($value, $chars = '', $extra_chars = '', $side = '')
+    public function __invoke($value, string $chars = '', string $extra_chars = '', string $side = '')
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -41,12 +41,10 @@ class Trim extends AbsBase
 
             return $value;
         }
-        $value       = (string) $value;
-        $chars       = (string) $chars;
-        $extra_chars = (string) $extra_chars;
-        $chars       = isset($chars[0]) ? $chars : " \r\n\t\0\x0B";
-        $chars       = $chars.$extra_chars;
-        $side        = strtolower((string) $side);
+        $value = (string) $value;
+        $chars = isset($chars[0]) ? $chars : " \r\n\t\0\x0B";
+        $chars = $chars.$extra_chars;
+        $side  = strtolower($side);
 
         switch ($side) {
             case 'l': // Left trim.
@@ -71,7 +69,7 @@ class Trim extends AbsBase
      *
      * @return string|array|object Trimmed value.
      */
-    public function left($value, $chars = '', $extra_chars = '')
+    public function left($value, string $chars = '', string $extra_chars = '')
     {
         return $this->__invoke($value, $chars, $extra_chars, 'l');
     }
@@ -87,7 +85,7 @@ class Trim extends AbsBase
      *
      * @return string|array|object Trimmed value.
      */
-    public function right($value, $chars = '', $extra_chars = '')
+    public function right($value, string $chars = '', string $extra_chars = '')
     {
         return $this->__invoke($value, $chars, $extra_chars, 'r');
     }
