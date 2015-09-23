@@ -861,7 +861,7 @@
   <!-- Default/visible build target. -->
   <!-- ============================================  -->
 
-  <target name="build" depends="-validate,-preamble,-prepare,-rtokens,-composer,-rebrand,-pots,-apigen,-packages,-distros,-lite-variation">
+  <target name="build" depends="-validate,-preamble,-prepare,-rtokens,-composer,-rebrand,-pots,-packages,-distros,-lite-variation">
 
     <echo msg="Build complete! :-)" />
 
