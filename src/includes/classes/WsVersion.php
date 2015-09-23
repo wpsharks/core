@@ -32,9 +32,9 @@ class WsVersion extends AbsBase
      *
      * @return bool `TRUE` if valid.
      */
-    public function isValid($version)
+    public function isValid(string $version): bool
     {
-        if (!($version = (string) $version)) {
+        if (!$version) {
             return false; // Nope.
         }
         return (boolean) preg_match($this->DEF_WS_VERSION_REGEX_VALID, $version);
@@ -49,9 +49,9 @@ class WsVersion extends AbsBase
      *
      * @return bool `TRUE` if valid.
      */
-    public function isValidDev($version)
+    public function isValidDev(string $version): bool
     {
-        if (!($version = (string) $version)) {
+        if (!$version) {
             return false; // Nope.
         }
         return (boolean) preg_match($this->DEF_WS_VERSION_REGEX_VALID_DEV, $version);
@@ -66,9 +66,9 @@ class WsVersion extends AbsBase
      *
      * @return bool `TRUE` if valid.
      */
-    public function isValidStable($version)
+    public function isValidStable(string $version): bool
     {
-        if (!($version = (string) $version)) {
+        if (!$version) {
             return false; // Nope.
         }
         return (boolean) preg_match($this->DEF_WS_VERSION_REGEX_VALID_STABLE, $version);
@@ -83,9 +83,9 @@ class WsVersion extends AbsBase
      *
      * @return int Timestamp, else `0` on failure.
      */
-    public function time($version)
+    public function time(string $version): int
     {
-        if (!($version = (string) $version)) {
+        if (!$version) {
             return 0; // Not possible.
         }
         if (!$this->isValid($version)) {
@@ -108,12 +108,12 @@ class WsVersion extends AbsBase
      *
      * @return string Date string, else empty string on failure.
      */
-    public function date($version, $format = 'F jS, Y')
+    public function date(string $version, string $format = 'F jS, Y'): string
     {
-        if (!($time = $this->time($version))) {
+        if (!$format) {
             return ''; // Not possible.
         }
-        if (!($format = (string) $format)) {
+        if (!($time = $this->time($version))) {
             return ''; // Not possible.
         }
         return date($format, $time);
