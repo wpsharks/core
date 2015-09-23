@@ -34,12 +34,9 @@ class WildcardPatterns extends AbsBase
      * @return bool|array Will return `TRUE` if any wildcard pattern finds a match.
      *                    If `$collect_key_props` is `TRUE`, this will return an array.
      */
-    public function match($string, $value, $caSe_insensitive = false, $collect_key_props = false, $x_flags = null)
+    public function match(string $string, $value, bool $caSe_insensitive = false, bool $collect_key_props = false, int $x_flags = null)
     {
-        if (isset($x_flags)) {
-            $x_flags = (int) $x_flags;
-        }
-        if (!strlen($string = (string) $string)) {
+        if (!isset($string[0])) {
             return $collect_key_props ? array() : false;
         }
         $matching_key_props = array(); // Initialize.
