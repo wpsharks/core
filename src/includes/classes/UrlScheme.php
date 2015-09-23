@@ -34,14 +34,11 @@ class UrlScheme extends AbsBase
      *
      * @return string $url URL w/ a specific scheme.
      */
-    public function set($url, $scheme = null)
+    public function set(string $url, string $scheme = null): string
     {
-        $url = (string) $url;
         if (!isset($scheme)) {
             $scheme = $this->UrlCurrent->scheme();
         }
-        $scheme = (string) $scheme;
-
         if (substr($url, 0, 2) === '//') {
             $url = 'http:'.$url;
         }
