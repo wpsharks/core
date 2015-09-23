@@ -27,9 +27,9 @@ class HtmlStrip extends AbsBase
      * @param mixed $value Any input value.
      * @param array $args  Any additional behavioral args.
      *
-     * @return string String w/ HTML attributes stripped.
+     * @return string|array|object String w/ HTML attributes stripped.
      */
-    public function attributes($value, array $args = array()): string
+    public function attributes($value, array $args = array())
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
