@@ -29,11 +29,9 @@ class UrlParse extends AbsBase
      *
      * @return array|string|int|null Array, else `string|int|null` component value.
      */
-    public function __invoke($url_uri_qsl, $component = -1)
+    public function __invoke(string $url_uri_qsl, int $component = -1)
     {
-        $url_uri_qsl = (string) $url_uri_qsl;
-        $component   = (integer) $component;
-        ${'//'}      = strpos($url_uri_qsl, '//') === 0;
+        ${'//'} = strpos($url_uri_qsl, '//') === 0;
 
         if ($component > -1) {
             if (${'//'} && $component === PHP_URL_SCHEME) {
@@ -60,7 +58,7 @@ class UrlParse extends AbsBase
      *
      * @return string Unparsed URL in string format.
      */
-    public function un(array $parts)
+    public function un(array $parts): string
     {
         $scheme   = '';
         $host     = '';
