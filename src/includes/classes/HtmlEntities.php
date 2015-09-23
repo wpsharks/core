@@ -28,7 +28,7 @@ class HtmlEntities extends AbsBase
      * @param bool     $double_encode Encode existing entities? Defaults to `FALSE`.
      * @param int|null $flags         Optional. Defaults to `ENT_HTML5 | ENT_QUOTES | ENT_SUBSTITUTE`.
      *
-     * @return mixed Value after having been escaped deeply.
+     * @return string|array|object Value after having been escaped deeply.
      */
     public function encode($value, bool $double_encode = false, int $flags = null)
     {
@@ -56,7 +56,7 @@ class HtmlEntities extends AbsBase
      * @param mixed $value Any input value.
      * @param int   $flags Optional. Defaults to `ENT_HTML5 | ENT_QUOTES`.
      *
-     * @return mixed Value after having been unescaped deeply.
+     * @return string|array|object Value after having been unescaped deeply.
      */
     public function decode($value, int $flags = null)
     {
