@@ -79,9 +79,9 @@ class FsDir extends AbsBase
      * @param mixed $value                Any input value.
      * @param bool  $allow_trailing_slash Optional; defaults to a FALSE value.
      *
-     * @return string Normalized directory/file path.
+     * @return string|array|object Normalized directory/file path.
      */
-    public function normalize($value, bool $allow_trailing_slash = false): string
+    public function normalize($value, bool $allow_trailing_slash = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
