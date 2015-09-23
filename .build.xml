@@ -538,7 +538,7 @@
     <echo msg="------------------------------------" />
 
     <echo msg="Creating ZIP file: ${project.basedir}/.~build/${project_slug}.zip" />
-    <zip basedir="${project.basedir}" destfile="${project.basedir}/.~build/${project_slug}.zip">
+    <zip basedir="${project.basedir}" prefix="${project_slug}/" includeemptydirs="false" destfile="${project.basedir}/.~build/${project_slug}.zip">
       <fileset refid="_zip_tgz_fileset" />
     </zip>
     <echo msg="------------------------------------" />
@@ -550,7 +550,7 @@
     <echo msg="------------------------------------" />
 
     <echo msg="Creating TGZ file: ${project.basedir}/.~build/${project_slug}.tar.gz" />
-    <tar basedir="${project.basedir}" destfile="${project.basedir}/.~build/${project_slug}.tar.gz" compression="gzip">
+    <tar basedir="${project.basedir}" prefix="${project_slug}/" includeemptydirs="false" destfile="${project.basedir}/.~build/${project_slug}.tar.gz" compression="gzip">
       <fileset refid="_zip_tgz_fileset" />
     </tar>
     <echo msg="------------------------------------" />
@@ -707,7 +707,8 @@
           </fileset>
           <filterchain>
             <replaceregexp>
-              <regexp pattern="\/\*\[pro strip\-from\=&quot;lite&quot;\]\*\/(?:.*?)\/\*\[\/pro\]\*\/" replace="" modifiers="s" />
+              <regexp pattern="\/\*\!\[pro strip\-from\=['&quot;]lite['&quot;]\]\*\/(?:.*?)\/\*\!\[\/pro\]\*\/" replace="" modifiers="s" />
+              <regexp pattern="\/\*\[pro strip\-from\=['&quot;]lite['&quot;]\]\*\/(?:.*?)\/\*\[\/pro\]\*\/" replace="" modifiers="s" />
             </replaceregexp>
           </filterchain>
         </reflexive>
