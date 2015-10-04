@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "48d11b0d1ac421ac52bcdcd5967b9bad",
-    "content-hash": "1c97f79d71773ad87913cf1c1f51c1be",
+    "hash": "a4cfe0c87d848ba2e81eed272dc2d014",
+    "content-hash": "2e0f32961c74d9c7c95725f181f25dbc",
     "packages": [
         {
             "name": "websharks/dicer",
-            "version": "dev-master",
+            "version": "151004",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
-                "reference": "60ae3c26ac7efce66e05005d7330cb764785a156"
+                "reference": "d12af7b40a997316845512e704fb6ebddc7bfab9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/dicer/zipball/60ae3c26ac7efce66e05005d7330cb764785a156",
-                "reference": "60ae3c26ac7efce66e05005d7330cb764785a156",
+                "url": "https://api.github.com/repos/websharks/dicer/zipball/d12af7b40a997316845512e704fb6ebddc7bfab9",
+                "reference": "d12af7b40a997316845512e704fb6ebddc7bfab9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.7"
+                "php": ">=7.0-RC3"
             },
             "type": "library",
             "autoload": {
@@ -56,7 +56,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2015-05-31 21:57:59"
+            "time": "2015-10-04 08:40:37"
         }
     ],
     "packages-dev": [
@@ -125,16 +125,16 @@
         },
         {
             "name": "corneltek/getoptionkit",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/c9s/GetOptionKit.git",
-                "reference": "cea0942f2164f1cfcf06f7b1785efe1449b19abe"
+                "reference": "c7170525314b587019c0b2a7b0354432b64b48e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/cea0942f2164f1cfcf06f7b1785efe1449b19abe",
-                "reference": "cea0942f2164f1cfcf06f7b1785efe1449b19abe",
+                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/c7170525314b587019c0b2a7b0354432b64b48e0",
+                "reference": "c7170525314b587019c0b2a7b0354432b64b48e0",
                 "shasum": ""
             },
             "require": {
@@ -163,7 +163,7 @@
             ],
             "description": "Powerful command-line option toolkit",
             "homepage": "http://github.com/c9s/GetOptionKit",
-            "time": "2015-07-13 17:19:26"
+            "time": "2015-10-02 07:53:43"
         },
         {
             "name": "erusev/parsedown",
@@ -345,16 +345,16 @@
         },
         {
             "name": "lusitanian/oauth",
-            "version": "v0.5.5",
+            "version": "v0.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
-                "reference": "916cff8e02df5d52e67aaddd57aa618205dd93c2"
+                "reference": "4e710c294f41857752b370f16aeff52ba76d48b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/916cff8e02df5d52e67aaddd57aa618205dd93c2",
-                "reference": "916cff8e02df5d52e67aaddd57aa618205dd93c2",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/4e710c294f41857752b370f16aeff52ba76d48b9",
+                "reference": "4e710c294f41857752b370f16aeff52ba76d48b9",
                 "shasum": ""
             },
             "require": {
@@ -408,7 +408,7 @@
                 "oauth",
                 "security"
             ],
-            "time": "2015-09-20 00:14:11"
+            "time": "2015-09-30 23:32:37"
         },
         {
             "name": "michelf/php-markdown",
@@ -489,16 +489,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "b58c916f1db03a611b72dd702564f30ad8fe83fa"
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/b58c916f1db03a611b72dd702564f30ad8fe83fa",
-                "reference": "b58c916f1db03a611b72dd702564f30ad8fe83fa",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
+                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
                 "shasum": ""
             },
             "require": {
@@ -543,20 +543,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-24 07:13:45"
+            "time": "2015-09-22 13:49:29"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Yaml.git",
-                "reference": "2dc7b06c065df96cc686c66da2705e5e18aef661"
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/2dc7b06c065df96cc686c66da2705e5e18aef661",
-                "reference": "2dc7b06c065df96cc686c66da2705e5e18aef661",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
+                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
                 "shasum": ""
             },
             "require": {
@@ -592,14 +592,12 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-24 07:13:45"
+            "time": "2015-09-14 14:14:09"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "websharks/dicer": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
