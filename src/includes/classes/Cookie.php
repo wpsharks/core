@@ -36,6 +36,8 @@ class Cookie extends AbsBase
      *                              Defaults to `31556926` (one year). If this is set to anything <= `0`,
      *                              the cookie will expire automatically after the current browser session.
      * @param string $domain        Optional input domain name to set the cookie for.
+     *                              Or, set this to `root` to use the root host name.
+     *                              e.g., `a.b.c.example.com` = `example.com`.
      * @param string $key           Optional. Key to use in cookie encryption.
      *
      * @throws \Exception If headers have already been sent; i.e. if not possible.
@@ -80,6 +82,9 @@ class Cookie extends AbsBase
             $cookie_domain = (string) $_SERVER['COOKIE_DOMAIN'];
         } else {
             $cookie_domain = $this->UrlCurrent->host(true);
+        }
+        if ($cookie_domain === 'root') {
+            $cookie_domain = '.'.$this->UrlCurrent->rootHost(true);
         }
         setcookie($name, $value, $expires, $cookie_path, $cookie_domain);
         setcookie($name, $value, $expires, $site_cookie_path, $cookie_domain);

@@ -28,7 +28,7 @@
     "ext-openssl": "*",
     "ext-curl": "*",
     "ext-mbstring": "*",
-    "websharks/dicer": "dev-master"
+    "websharks/dicer": "151004"
   },
   "require-dev": {
     "ryakad/pandoc-php": "1.*",

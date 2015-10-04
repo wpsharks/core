@@ -63,7 +63,7 @@ class UrlCurrent extends AbsBase
      * @note Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
      *    That SHOULD be left intact for URL generation in almost every scenario.
      *    However, in a few other edge cases it may be desirable to exclude the port number.
-     *    e.g. if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
+     *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
      *
      * @return string Current host name; lowercase.
      */
@@ -80,6 +80,32 @@ class UrlCurrent extends AbsBase
             $host = preg_replace('/\:[0-9]+$/', '', $host);
         }
         return $host;
+    }
+
+    /**
+     * Current root host name; lowercase.
+     *
+     * @since 151002 Adding root host support.
+     *
+     * @param bool $no_port No port number? Defaults to `FALSE`.
+     *
+     * @note Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
+     *    That SHOULD be left intact for URL generation in almost every scenario.
+     *    However, in a few other edge cases it may be desirable to exclude the port number.
+     *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
+     *
+     * @return string Current root host name; lowercase.
+     */
+    public function rootHost(bool $no_port = false): string
+    {
+        if (!is_null($root_host = &$this->staticKey(__FUNCTION__, $no_port))) {
+            return $root_host; // Cached this already.
+        }
+        $host      = $this->host($no_port);
+        $parts     = explode('.', $host);
+        $root_host = implode(array_slice($parts, -2));
+
+        return $root_host;
     }
 
     /**

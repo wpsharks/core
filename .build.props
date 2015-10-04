@@ -1,16 +1,12 @@
 project_title                = WebSharks Core
+
 project_org                  = websharks
 project_slug                 = core
+
 project_ns                   = WebSharks\\Core
 project_sns                  = Core
 
-project_lite_title           =
-project_lite_slug            =
-project_lite_ns              =
-project_lite_sns             =
-
 project_version              = %y%m%d
+
 project_php_required_version = 7.0-RC3
 project_php_up_to_version    = ${php.version}
-project_wp_required_version  =
-project_wp_up_to_version     =

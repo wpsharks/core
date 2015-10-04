@@ -146,7 +146,7 @@ abstract class AbsCliCmdBase extends AbsBase
             $this->CliStream->out($this->helpVersionInfo());
             exit(0); // Help/version/info in this case.
         } elseif (class_exists($this->sub_command->class_path)) {
-            $this->Dicer->get($this->sub_command->class_path, [$this], true);
+            $this->Dicer->get($this->sub_command->class_path, ['Primary' => $this], true);
             exit(1); // Default status if sub-command fails to exit properly.
         } else {
             throw new \Exception('Unknown sub-command: `'.$this->sub_command->slug.'`');
