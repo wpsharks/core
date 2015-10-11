@@ -60,13 +60,12 @@ class UrlParse extends AbsBase
      */
     public function un(array $parts): string
     {
+        $parts = array_map('strval', $parts);
+
         $scheme   = '';
-        $host     = '';
-        $port     = '';
-        $user     = '';
-        $pass     = '';
-        $path     = '';
-        $query    = '';
+        $host     = $port     = '';
+        $user     = $pass     = '';
+        $path     = $query     = '';
         $fragment = '';
 
         if (!empty($parts['scheme'])) {

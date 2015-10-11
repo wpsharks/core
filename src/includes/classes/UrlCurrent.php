@@ -101,11 +101,11 @@ class UrlCurrent extends AbsBase
         if (!is_null($root_host = &$this->staticKey(__FUNCTION__, $no_port))) {
             return $root_host; // Cached this already.
         }
-        $host      = $this->host($no_port);
-        $parts     = explode('.', $host);
-        $root_host = implode(array_slice($parts, -2));
+        $host  = $this->host($no_port);
+        $parts = explode('.', $host);
+        $root  = implode('.', array_slice($parts, -2));
 
-        return $root_host;
+        return $root;
     }
 
     /**

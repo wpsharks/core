@@ -19,13 +19,13 @@ trait OverloadMembers
     protected $overload;
 
     /**
-     * Overload is read-only?
+     * Writable overload properties.
      *
      * @since 15xxxx Initial release.
      *
-     * @type bool Overload is read-only?
+     * @type array Writable overload properties.
      */
-    protected $overload_read_only;
+    protected $writable_overload_properties;
 
     /**
      * Initialize overloads.
@@ -34,8 +34,8 @@ trait OverloadMembers
      */
     protected function overloadInit()
     {
-        $this->overload           = new \stdClass();
-        $this->overload_read_only = true;
+        $this->overload                     = new \stdClass();
+        $this->writable_overload_properties = [];
     }
 
     /**
@@ -51,30 +51,36 @@ trait OverloadMembers
      * @note Objects can be passed (always by reference) and each property value will be
      *  set by reference also. This allows for overload to contain nothing but references.
      *
-     * @param bool|null Overloaded properties are read-only?
+     * @param bool $writable Overloaded properties are writable?
      */
-    protected function overload($properties, bool $read_only = null)
+    protected function overload($properties, bool $writable = false)
     {
         if (!is_array($properties) && !is_object($properties)) {
             throw new \Exception(sprintf('Invalid parameter type: `%1$s`.', gettype($properties)));
         }
         foreach ($properties as $_key => &$_value) {
             if (is_string($_key)) {
-                if (isset($_key[0])) {
+                if (isset($_key[0]) && !property_exists($this, $_key)) {
                     $this->overload->{$_key} = &$_value;
+                    if ($writable) {
+                        $this->writable_overload_properties[$_key] = -1;
+                    } else {
+                        unset($this->writable_overload_properties[$_key]);
+                    }
                 }
             } elseif (is_string($_value)) {
                 $_property = $_value; // Property.
                 if (property_exists($this, $_property)) {
                     $this->overload->{$_property} = &$this->{$_property};
+                    if ($writable) {
+                        $this->writable_overload_properties[$_property] = -1;
+                    } else {
+                        unset($this->writable_overload_properties[$_property]);
+                    }
                 }
             }
         }
         unset($_key, $_value, $_property); // Housekeeping.
-
-        if (isset($read_only)) {
-            $this->overload_read_only = $read_only;
-        }
     }
 
     /**
@@ -126,7 +132,7 @@ trait OverloadMembers
      */
     public function __set(string $property, $value)
     {
-        if ($this->overload_read_only) {
+        if (!isset($this->writable_overload_properties[$property])) {
             throw new \Exception(sprintf('Refused to set overload property: `%1$s`.', $property));
         }
         $this->overload->{$_property} = $value;
@@ -143,7 +149,7 @@ trait OverloadMembers
      */
     public function __unset(string $property)
     {
-        if ($this->overload_read_only) {
+        if (!isset($this->writable_overload_properties[$property])) {
             throw new \Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
         }
         unset($this->overload->{$_property});

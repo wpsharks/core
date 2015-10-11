@@ -53,7 +53,7 @@ trait CacheMembers
      * @param string      $function `__FUNCTION__` is suggested here.
      *                              i.e. the calling function name in the calling class.
      * @param mixed|array $args     The arguments to the calling function.
-     *                              Using `func_get_args()` to the caller might suffice in some cases.
+     *                              Using `func_get_args()` to the caller might suffice.
      *                              That said, it's generally a good idea to customize this a bit.
      *                              This should include the cachable arguments only.
      * @param string      $___prop  For internal use only. This defaults to `cache`.
@@ -64,9 +64,9 @@ trait CacheMembers
      * @note This function returns by reference. The use of `&` is highly recommended when calling this utility.
      *    See also: <http://php.net/manual/en/language.references.return.php>
      */
-    protected function &cacheKey(string $function, $args = array(), string $___prop = 'cache')
+    protected function &cacheKey(string $function, $args = [], string $___prop = 'cache')
     {
-        $args = (array) $args; // Force an array value.
+        $args = (array) $args; // Force array.
 
         if (!isset($this->{$___prop}[$function])) {
             $this->{$___prop}[$function] = null;
@@ -128,20 +128,19 @@ trait CacheMembers
     }
 
     /**
-     * Unset cache keys.
+     * Unset cache.
      *
      * @since 15xxxx Initial release.
      *
-     * @param array $preserve Preserve certain keys?
+     * @param array $preserve_keys Preserve?
      */
-    protected function cacheKeysUnset(array $preserve = array())
+    protected function cacheUnset(array $preserve_keys = [])
     {
         foreach ($this->cache as $_key => $_value) {
-            if (!$preserve || !in_array($_key, $preserve, true)) {
+            if (!$preserve_keys || !in_array($_key, $preserve_keys, true)) {
                 unset($this->cache[$_key]);
             }
-        }
-        unset($_key, $_value); // Housekeeping.
+        } // unset($_key, $_value); // Housekeeping.
     }
 
     /**
@@ -149,15 +148,14 @@ trait CacheMembers
      *
      * @since 15xxxx Initial release.
      *
-     * @param array $preserve Preserve certain keys?
+     * @param array $preserve_keys Preserve?
      */
-    protected function staticKeysUnset(array $preserve = array())
+    protected function staticUnset(array $preserve_keys = [])
     {
         foreach ($this->static as $_key => $_value) {
-            if (!$preserve || !in_array($_key, $preserve, true)) {
+            if (!$preserve_keys || !in_array($_key, $preserve_keys, true)) {
                 unset($this->static[$_key]);
             }
-        }
-        unset($_key, $_value); // Housekeeping.
+        } // unset($_key, $_value); // Housekeeping.
     }
 }

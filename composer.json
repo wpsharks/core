@@ -38,7 +38,8 @@
     "michelf/php-markdown": "1.*",
     "symfony/yaml": "2.*",
     "lusitanian/oauth": "0.*",
-    "corneltek/getoptionkit": "2.*"
+    "corneltek/getoptionkit": "2.*",
+    "hashids/hashids": "1.*"
   },
   "suggest": {
     "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc.",
@@ -49,6 +50,7 @@
     "symfony/yaml": "2.* :: Required by routines that convert YAML.",
     "lusitanian/oauth": "0.* :: Required by routines that deal w/ oAuth.",
     "corneltek/getoptionkit": "2.* :: Required for routines that parse CLI opts."
+    "hashids/hashids": "1.* :: Required for routines that deal with hash IDs."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

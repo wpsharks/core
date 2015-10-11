@@ -1,0 +1,74 @@
+<?php
+declare (strict_types = 1);
+namespace WebSharks\Core\Classes;
+
+/**
+ * URL host utilities.
+ *
+ * @since 151002 Adding host parser.
+ */
+class UrlHost extends AbsBase
+{
+    /**
+     * Class constructor.
+     *
+     * @since 151002 Adding host parser.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Host parser.
+     *
+     * @since 151002 Adding host parser.
+     *
+     * @param string $host    The input host to parse.
+     * @param bool   $no_port No port number? Defaults to `FALSE`.
+     *
+     * @note Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
+     *    That SHOULD be left intact for URL generation in almost every scenario.
+     *    However, in a few other edge cases it may be desirable to exclude the port number.
+     *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
+     *
+     * @return array Host parts; i.e., `subs`, `sub`, `root`, `tld`.
+     */
+    public function parse(string $host, bool $no_port = false): array
+    {
+        if ($no_port) {
+            $host = preg_replace('/\:[0-9]+$/', '', $host);
+        }
+        $parts = explode('.', $host);
+        $subs  = array_slice($parts, 0, -2);
+        $sub   = implode('.', $subs); // `abc.xyz`
+        $root  = implode('.', array_slice($parts, -2));
+        $tld   = implode('.', array_slice($parts, -1));
+
+        return compact('subs', 'sub', 'root', 'tld');
+    }
+
+    /**
+     * Unparses a host.
+     *
+     * @since 151002 Adding host parser.
+     *
+     * @param array $parts Input host parts.
+     *
+     * @return string Unparsed host string.
+     */
+    public function unParse(array $parts): string
+    {
+        $parts = array_map('strval', $parts);
+
+        $sub = $root = ''; // Initialize.
+
+        if (isset($parts['sub'][0])) {
+            $sub = $parts['sub'];
+        }
+        if (!empty($parts['root'])) {
+            $root = $parts['root'];
+        }
+        return trim($sub.'.'.$host, '.');
+    }
+}
