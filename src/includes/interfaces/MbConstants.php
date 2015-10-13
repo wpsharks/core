@@ -3,11 +3,11 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
 /**
- * Definition properties.
+ * Multibyte-related constants.
  *
  * @since 150424 Initial release.
  */
-trait MbDefinitions
+interface MbConstants
 {
     /**
      * Multibyte detection order.
@@ -16,5 +16,5 @@ trait MbDefinitions
      *
      * @type array Default character encoding detections.
      */
-    protected $DEF_MB_DETECTION_ORDER = ['UTF-8', 'ISO-8859-1'];
+    const MB_DETECTION_ORDER = ['UTF-8', 'ISO-8859-1'];
 }

@@ -3,11 +3,11 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
 /**
- * Definition properties.
+ * Regex-related constants.
  *
  * @since 150424 Initial release.
  */
-trait RegexDefinitions
+interface RegexConstants
 {
     /**
      * Finds a double quoted value.
@@ -16,7 +16,7 @@ trait RegexDefinitions
      *
      * @type string Regular expression fragment (dot matches newline inside quotes).
      */
-    protected $DEF_REGEX_FRAG_DQ_VALUE = '(?P<open_dq>(?<!\\\\)")(?P<dq_value>(?s:\\\\.|[^\\\\"])*?)(?P<close_dq>")';
+    const REGEX_FRAG_DQ_VALUE = '(?P<open_dq>(?<!\\\\)")(?P<dq_value>(?s:\\\\.|[^\\\\"])*?)(?P<close_dq>")';
 
     /**
      * Finds a single quoted value.
@@ -25,7 +25,7 @@ trait RegexDefinitions
      *
      * @type string Regular expression fragment (dot matches newline inside quotes).
      */
-    protected $DEF_REGEX_FRAG_SQ_VALUE = '(?P<open_sq>(?<!\\\\)\')(?P<sq_value>(?s:\\\\.|[^\\\\\'])*?)(?P<close_sq>\')';
+    const REGEX_FRAG_SQ_VALUE = '(?P<open_sq>(?<!\\\\)\')(?P<sq_value>(?s:\\\\.|[^\\\\\'])*?)(?P<close_sq>\')';
 
     /**
      * Finds a single or double quoted value.
@@ -34,5 +34,5 @@ trait RegexDefinitions
      *
      * @type string Regular expression fragment (dot matches newline inside quotes).
      */
-    protected $DEF_REGEX_FRAG_DSQ_VALUE = '(?P<open_dsq>(?<!\\\\)["\'])(?P<dsq_value>(?s:\\\\.|(?!\\\\|(?P=open_dsq)).)*?)(?P<close_dsq>(?P=open_dsq))';
+    const REGEX_FRAG_DSQ_VALUE = '(?P<open_dsq>(?<!\\\\)["\'])(?P<dsq_value>(?s:\\\\.|(?!\\\\|(?P=open_dsq)).)*?)(?P<close_dsq>(?P=open_dsq))';
 }

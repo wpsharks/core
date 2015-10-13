@@ -24,14 +24,18 @@ class Uuid64 extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @param int $uuid Input UUID64 (64 bits signed max `9223372036854775807`).
+     * @param int      $uuid              Input UUID64 (64 bits signed max `9223372036854775807`).
+     * @param int|null $expecting_type_id Expected type ID.
      *
      * @return int Validated UUID64 (64-bits signed max `9223372036854775807`).
      */
-    public function validate(int $uuid): int
+    public function validate(int $uuid, int $expecting_type_id = null): int
     {
         if ($uuid < 1 || $uuid > 9223372036854775807) {
             throw new \Exception('UUID64 out of range.');
+        }
+        if (isset($expecting_type_id)) {
+            $this->typeIdIn($uuid, $expecting_type_id);
         }
         return $uuid;
     }
@@ -72,13 +76,19 @@ class Uuid64 extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @param int $uuid Input UUID64 (64 bits signed max `9223372036854775807`).
+     * @param int      $uuid              Input UUID64 (64 bits signed max `9223372036854775807`).
+     * @param int|null $expecting_type_id Expected type ID.
      *
      * @return int Type ID from UUID64 (8 bits unsigned max `255`).
      */
-    public function typeIdIn(int $uuid): int
+    public function typeIdIn(int $uuid, int $expecting_type_id = null): int
     {
-        return $this->validateTypeId(($uuid >> (64 - 2 - 16 - 8)) & 255);
+        $type_id = $this->validateTypeId(($uuid >> (64 - 2 - 16 - 8)) & 255);
+
+        if (isset($expecting_type_id)) {
+            $this->validateTypeId($type_id, $expecting_type_id);
+        }
+        return $type_id;
     }
 
     /**
@@ -86,14 +96,17 @@ class Uuid64 extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @param int $type_id Input type ID (8 bits unsigned max `255`).
+     * @param int      $type_id           Input type ID (8 bits unsigned max `255`).
+     * @param int|null $expecting_type_id Expected type ID.
      *
      * @return int Validated type ID (8 bits unsigned max `255`).
      */
-    public function validateTypeId(int $type_id): int
+    public function validateTypeId(int $type_id, int $expecting_type_id = null): int
     {
         if ($type_id < 0 || $type_id > 255) {
             throw new \Exception('Type ID out of range.');
+        } elseif (isset($expecting_type_id) && $type_id !== $expecting_type_id) {
+            throw new \Exception(sprintf('Type ID mismatch: `%1$s`/`%2$s`.', $type_id, $expecting_type_id));
         }
         return $type_id;
     }
@@ -134,7 +147,8 @@ class Uuid64 extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @param int $uuid Input UUID64 (64 bits signed max `9223372036854775807`).
+     * @param int      $uuid              Input UUID64 (64 bits signed max `9223372036854775807`).
+     * @param int|null $expecting_type_id Expected type ID.
      *
      * @return array IDs: `shard_id`, `type_id`, `local_id` from UUID64.
      *
@@ -142,12 +156,17 @@ class Uuid64 extends AbsBase
      *               - `type_id` (8 bits unsigned max `255`).
      *               - `local_id` (38 bits unsigned max `274877906943`).
      */
-    public function parse(int $uuid): array
+    public function parse(int $uuid, int $expecting_type_id = null): array
     {
+        $this->validate($uuid);
+
         $shard_id = $this->shardIdIn($uuid);
         $type_id  = $this->typeIdIn($uuid);
         $local_id = $this->localIdIn($uuid);
 
+        if (isset($expecting_type_id)) {
+            $this->validateTypeId($type_id, $expecting_type_id);
+        }
         return compact('shard_id', 'type_id', 'local_id');
     }
 

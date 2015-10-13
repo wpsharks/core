@@ -2,6 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use Symfony\Component\Yaml\Yaml as Parser;
+
 /**
  * YAML utilities.
  *
@@ -33,8 +35,7 @@ class Yaml extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->parse($_value, $args);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value);
 
             return $value;
         }
@@ -42,8 +43,8 @@ class Yaml extends AbsBase
             return []; // Empty.
         }
         try {
-            $array = \Symfony\Component\Yaml\Yaml::parse($yaml);
-        } catch (\Exception $exception) {
+            $array = Parser::parse($yaml);
+        } catch (\Exception $Exception) {
             $array = []; // Empty.
         }
         return is_array($array) ? $array : [];

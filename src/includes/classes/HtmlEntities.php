@@ -35,8 +35,7 @@ class HtmlEntities extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->encode($_value, $double_encode, $flags);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value); // Housekeeping.
 
             return $value;
         }
@@ -63,8 +62,7 @@ class HtmlEntities extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->decode($_value, $flags);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value); // Housekeeping.
 
             return $value;
         }

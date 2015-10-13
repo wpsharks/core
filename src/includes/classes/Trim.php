@@ -36,8 +36,7 @@ class Trim extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->__invoke($_value, $chars, $extra_chars, $side);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value); // Housekeeping.
 
             return $value;
         }

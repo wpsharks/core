@@ -44,11 +44,11 @@ abstract class AbsCliSubCmdBase extends AbsBase
     protected $sub_command;
 
     /**
-     * @type OptionResult|Option[] Opts.
+     * @type OptionResult Opts.
      *
      * @since 15xxxx Initial release.
      */
-    protected $opts;
+    protected $Opts;
 
     /**
      * @type array Arguments.
@@ -127,21 +127,21 @@ abstract class AbsCliSubCmdBase extends AbsBase
 
         # Parse options, arguments, STDIN.
 
-        $optSpecs         = $this->optSpecs();
-        $optSpecs['help'] = ['desc' => 'Display help file.'];
+        $opt_specs         = $this->optSpecs();
+        $opt_specs['help'] = ['desc' => 'Display help file.'];
 
-        $this->CliOpts->add($optSpecs);
-        $this->opts = $this->CliOpts->parse();
+        $this->CliOpts->add($opt_specs);
+        $this->Opts = $this->CliOpts->parse();
 
-        $this->args = $this->opts->getArguments();
+        $this->args = $this->Opts->getArguments();
         array_shift($this->args); // Remove binary.
 
         $this->stdin = $this->CliStream->in(0, $this::NON_BLOCKING);
 
         # Maybe show help; else run the sub-command.
 
-        if ($this->opts->help) {
-            $this->showHelpExit(); // Display help file.
+        if ($this->Opts->help) {
+            $this->showHelpExit(); // Display.
             exit(0); // Default status for help file.
         }
         $this->runOutputExit(); // Run, output, and exit.

@@ -2,18 +2,15 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Traits;
+use WebSharks\Core\Interfaces;
 
 /**
  * URL query utilities.
  *
  * @since 150424 Initial release.
  */
-class UrlQuery extends AbsBase
+class UrlQuery extends AbsBase implements Interfaces\UrlConstants, Interfaces\HtmlConstants
 {
-    use Traits\UrlDefinitions;
-    use Traits\HtmlDefinitions;
-
     protected $Trim;
     protected $UrlParse;
 
@@ -64,11 +61,11 @@ class UrlQuery extends AbsBase
             return $qs; // Empty.
         }
         if (is_null($regex_amps = &$this->staticKey(__FUNCTION__.'_regex_amps'))) {
-            $regex_amps = implode('|', array_keys($this->DEF_HTML_AMPERSAND_ENTITIES));
+            $regex_amps = implode('|', array_keys($this::HTML_AMPERSAND_ENTITIES));
         }
         $qs = preg_replace('/(?:'.$regex_amps.')/', '&', $qs);
 
-        if (preg_match('/^'.$this->DEF_URL_REGEX_FRAG_SCHEME.'/', $qs)) {
+        if (preg_match('/^'.$this::URL_REGEX_FRAG_SCHEME.'/', $qs)) {
             $qs = (string) $this->UrlParse($qs, PHP_URL_QUERY);
         } elseif (in_array($string[0], ['/', '?'], true)) {
             $qs = (string) $this->UrlParse($qs, PHP_URL_QUERY);
@@ -147,8 +144,7 @@ class UrlQuery extends AbsBase
                 }
                 $array[$_name] = $_value;
             }
-        }
-        unset($_name_value, $_name, $_value, $_m);
+        } // unset($_name_value, $_name, $_value, $_m);
 
         return $array; // Final array.
     }
@@ -264,8 +260,7 @@ class UrlQuery extends AbsBase
             } else {
                 $arg_pairs[] = $_key.'='.(string) $_value;
             }
-        }
-        unset($_key, $_value, $_nested_value); // Housekeeping.
+        } // unset($_key, $_value, $_nested_value); // Housekeeping.
 
         return $arg_pairs ? implode($arg_separator, $arg_pairs) : '';
     }

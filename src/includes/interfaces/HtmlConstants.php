@@ -3,11 +3,11 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
 /**
- * Definition properties.
+ * HTML-related constants.
  *
  * @since 150424 Initial release.
  */
-trait HtmlDefinitions
+interface HtmlConstants
 {
     /**
      * Ampersand entities; keys are regex patterns.
@@ -16,7 +16,7 @@ trait HtmlDefinitions
      *
      * @type array Ampersand entities; keys are regex patterns.
      */
-    protected $DEF_HTML_AMPERSAND_ENTITIES = [
+    const HTML_AMPERSAND_ENTITIES = [
         '&amp;'       => '&amp;',
         '&#0*38;'     => '&#38;',
         '&#[xX]0*26;' => '&#x26;',
@@ -29,7 +29,7 @@ trait HtmlDefinitions
      *
      * @type array HTML whitespace; keys are regex patterns.
      */
-    protected $DEF_HTML_WHITESPACE = [
+    const HTML_WHITESPACE = [
         '\0'                         => "\0",
         '\x0B'                       => "\x0B",
         '\s'                         => "\r\n\t ",
@@ -47,7 +47,7 @@ trait HtmlDefinitions
      *
      * @type array Quote entities; keys are regex patterns.
      */
-    protected $DEF_HTML_QUOTE_ENTITIES = [
+    const HTML_QUOTE_ENTITIES = [
         '&apos;'           => '&apos;',
         '&#0*39;'          => '&#39;',
         '&#[xX]0*27;'      => '&#x27;',
@@ -75,7 +75,7 @@ trait HtmlDefinitions
      *
      * @type array HTML5 invisible tags.
      */
-    protected $DEF_HTML_INVISIBLE_TAGS = [
+    const HTML_INVISIBLE_TAGS = [
         'head',
         'title',
         'style',
@@ -89,7 +89,7 @@ trait HtmlDefinitions
      *
      * @type array HTML5 block-level tags.
      */
-    protected $DEF_HTML_BLOCK_TAGS = [
+    const HTML_BLOCK_TAGS = [
         'address',
         'article',
         'aside',

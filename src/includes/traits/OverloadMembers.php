@@ -79,8 +79,7 @@ trait OverloadMembers
                     }
                 }
             }
-        }
-        unset($_key, $_value, $_property); // Housekeeping.
+        } // unset($_key, $_value, $_property); // Housekeeping.
     }
 
     /**

@@ -32,20 +32,23 @@ class UrlHost extends AbsBase
      *    However, in a few other edge cases it may be desirable to exclude the port number.
      *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
      *
-     * @return array Host parts; i.e., `subs`, `sub`, `root`, `tld`.
+     * @return array Host parts; i.e., `name`, `subs`, `sub`, `root`, `tld`.
+     *
+     * @note This allows an empty `$host` so that a caller can get the array elements even if empty.
      */
     public function parse(string $host, bool $no_port = false): array
     {
         if ($no_port) {
             $host = preg_replace('/\:[0-9]+$/', '', $host);
         }
-        $parts = explode('.', $host);
+        $name  = strtolower($host);
+        $parts = explode('.', $name);
         $subs  = array_slice($parts, 0, -2);
         $sub   = implode('.', $subs); // `abc.xyz`
         $root  = implode('.', array_slice($parts, -2));
         $tld   = implode('.', array_slice($parts, -1));
 
-        return compact('subs', 'sub', 'root', 'tld');
+        return compact('name', 'subs', 'sub', 'root', 'tld');
     }
 
     /**
@@ -59,16 +62,6 @@ class UrlHost extends AbsBase
      */
     public function unParse(array $parts): string
     {
-        $parts = array_map('strval', $parts);
-
-        $sub = $root = ''; // Initialize.
-
-        if (isset($parts['sub'][0])) {
-            $sub = $parts['sub'];
-        }
-        if (!empty($parts['root'])) {
-            $root = $parts['root'];
-        }
-        return trim($sub.'.'.$host, '.');
+        return !empty($parts['name']) ? (string) $parts['name'] : '';
     }
 }

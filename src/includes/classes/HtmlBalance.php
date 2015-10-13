@@ -71,10 +71,10 @@ class HtmlBalance extends AbsBase
         if (!$this->PhpHas->extension('dom')) {
             throw new \Exception('DOM extension missing.');
         }
-        $dom = new \DOMDocument();
-        $dom->loadHTML($html);
+        $Dom = new \DOMDocument();
+        $Dom->loadHTML($html);
 
-        $string = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
+        $string = $Dom->saveHTML($Dom->getElementsByTagName('body')->item(0));
         $string = str_ireplace(array('<body>', '</body>'), '', $string);
         $string = $this->HtmlTrim($string);
 

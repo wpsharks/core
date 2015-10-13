@@ -36,8 +36,7 @@ class ReplaceOnce extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->__invoke($needle, $replace, $_value, $caSe_insensitive);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value); // Housekeeping.
 
             return $value;
         }
@@ -53,8 +52,7 @@ class ReplaceOnce extends AbsBase
                         $_replace = isset($replace[$_key]) ? (string) $replace[$_key] : '';
                         $value    = substr_replace($value, $_replace, $_strpos, $_length);
                     }
-                }
-                unset($_key, $_needle, $_strpos, $_length, $_replace);
+                } // unset($_key, $_needle, $_strpos, $_length, $_replace);
 
                 return $value;
             } else {
@@ -65,8 +63,7 @@ class ReplaceOnce extends AbsBase
                         $_length = strlen($_needle);
                         $value   = substr_replace($value, $replace, $_strpos, $_length);
                     }
-                }
-                unset($_key, $_needle, $_strpos, $_length);
+                } // unset($_key, $_needle, $_strpos, $_length);
 
                 return $value;
             }
@@ -80,8 +77,7 @@ class ReplaceOnce extends AbsBase
                     $_replace = (string) $replace;
                 }
                 $value = substr_replace($value, $_replace, $_strpos, $_length);
-
-                unset($_strpos, $_length, $_replace);
+                // unset($_strpos, $_length, $_replace);
             }
             return $value;
         }

@@ -175,17 +175,17 @@ abstract class AbsCliCmdBase extends AbsBase
 
         $info .= '**- AVAILABLE SUB-COMMANDS -**'."\n\n";
 
-        $availableSubCommands                 = $this->availableSubCommands();
-        $availableSubCommands['help|version'] = 'Display main help file.';
+        $available_sub_commands                 = $this->availableSubCommands();
+        $available_sub_commands['help|version'] = 'Display main help file.';
 
-        foreach ($availableSubCommands as $_slug => $_desc) {
+        foreach ($available_sub_commands as $_slug => $_desc) {
             if ($_slug && $_desc) {
                 $info .= '$ `'.$this->command->slug.' '.$_slug.'` : '.$_desc."\n";
             }
         }
         unset($_slug, $_desc); // Housekeeping.
 
-        return trim($info); // Full info sheet.
+        return trim($info);
     }
 
     /**
@@ -212,7 +212,7 @@ abstract class AbsCliCmdBase extends AbsBase
      * @param string $class Input class name.
      * @param string $arg1  Or, an input arg[1].
      *
-     * @return string Slug name; e.g., `sub-command`.
+     * @return string Slug name; e.g., `sub-command`. All lowercase w/ dashes.
      */
     final protected function subCommandSlug(string $class, string $arg1 = ''): string
     {
@@ -225,7 +225,7 @@ abstract class AbsCliCmdBase extends AbsBase
         $slug = preg_replace('/[^a-z0-9]+/', '-', strtolower($slug));
         $slug = $this->Trim($slug, '', '-');
 
-        return $slug; // All lowercase w/ dashes.
+        return $slug;
     }
 
     /**
@@ -235,7 +235,7 @@ abstract class AbsCliCmdBase extends AbsBase
      *
      * @param string $slug Input slug to convert.
      *
-     * @return string Class name; e.g., `SubCommand`.
+     * @return string Class name; e.g., `SubCommand`. Now in TitleCase.
      */
     final protected function subCommandClass(string $slug): string
     {
@@ -250,7 +250,7 @@ abstract class AbsCliCmdBase extends AbsBase
         $parts = array_map('ucfirst', array_map('strtolower', $parts));
         $class = implode('', $parts); // e.g., `SubCommand`.
 
-        return $class; // Now in TitleCase.
+        return $class;
     }
 
     /**

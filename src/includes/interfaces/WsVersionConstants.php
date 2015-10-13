@@ -3,11 +3,11 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
 /**
- * Definition properties.
+ * WS version-related constants.
  *
  * @since 150424 Initial release.
  */
-trait WsVersionDefinitions
+interface WsVersionConstants
 {
     /**
      * Plugin version string validation pattern.
@@ -23,7 +23,7 @@ trait WsVersionDefinitions
      *       2. Must start with six digits.
      *       3. Must be all lowercase.
      */
-    protected $DEF_WS_VERSION_REGEX_VALID = '/^(?:[0-9]{6}(?:\.(?:[0-9](?:[0-9]|\.(?!\.))*[0-9]|[0-9]))?)(?:\-(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))?(?:\+(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))?$/';
+    const WS_VERSION_REGEX_VALID = '/^(?:[0-9]{6}(?:\.(?:[0-9](?:[0-9]|\.(?!\.))*[0-9]|[0-9]))?)(?:\-(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))?(?:\+(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))?$/';
 
     /**
      * Plugin dev version string validation pattern.
@@ -40,7 +40,7 @@ trait WsVersionDefinitions
      *       3. Must be all lowercase.
      *       4. Must have a development-state suffix; perhaps followed by an optional build suffix.
      */
-    protected $DEF_WS_VERSION_REGEX_VALID_DEV = '/^(?:[0-9]{6}(?:\.(?:[0-9](?:[0-9]|\.(?!\.))*[0-9]|[0-9]))?)(?:\-(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))(?:\+(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))?$/';
+    const WS_VERSION_REGEX_VALID_DEV = '/^(?:[0-9]{6}(?:\.(?:[0-9](?:[0-9]|\.(?!\.))*[0-9]|[0-9]))?)(?:\-(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))(?:\+(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))?$/';
 
     /**
      * Plugin stable version string validation pattern.
@@ -58,5 +58,5 @@ trait WsVersionDefinitions
      *       4. Must not contain a development-state suffix (i.e., it must be a stable version).
      *             However, it may contain an optional build suffix; and still be stable.
      */
-    protected $DEF_WS_VERSION_REGEX_VALID_STABLE = '/^(?:[0-9]{6}(?:\.(?:[0-9](?:[0-9]|\.(?!\.))*[0-9]|[0-9]))?)(?:\+(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))?$/';
+    const WS_VERSION_REGEX_VALID_STABLE = '/^(?:[0-9]{6}(?:\.(?:[0-9](?:[0-9]|\.(?!\.))*[0-9]|[0-9]))?)(?:\+(?:[a-z0-9](?:[a-z0-9]|[.\-](?![.\-]))*[a-z0-9]|[a-z0-9]))?$/';
 }

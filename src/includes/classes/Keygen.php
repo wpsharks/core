@@ -46,8 +46,7 @@ class Keygen extends AbsBase
         $total_chars = strlen($chars);
         for ($key = '', $_i = 0; $_i < $length; ++$_i) {
             $key .= substr($chars, mt_rand(0, $total_chars - 1), 1);
-        }
-        unset($_i); // Housekeeping.
+        } // unset($_i); // Housekeeping.
 
         return $key; // Generated randomly.
     }

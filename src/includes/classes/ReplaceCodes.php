@@ -75,7 +75,7 @@ class ReplaceCodes extends AbsBase
 
         foreach ($this->ArrayDotKeys->get($___raw_vars) as $_key => $_value) {
             if (is_resource($_value)) {
-                continue;
+                continue; // Not possible.
             }
             if (!is_scalar($_value)) {
                 if ($implode_non_scalars) {
@@ -89,8 +89,7 @@ class ReplaceCodes extends AbsBase
                 $_value = '0';
             }
             $___vars[$_key] = (string) $_value;
-        }
-        unset($_key, $_value); // Housekeeping.
+        } // unset($_key, $_value); // Housekeeping.
 
         replace_codes_deep: // Replacements.
 
@@ -106,8 +105,7 @@ class ReplaceCodes extends AbsBase
                     $___vars,
                     true
                 );
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value);
 
             if (!$___recursion) {
                 return $this->__invoke(
@@ -124,31 +122,31 @@ class ReplaceCodes extends AbsBase
             return $value;
         }
         if (!($value = (string) $value)) {
-            return $value;
+            return $value; // Nothing to do.
         }
         if (strpos($value, '%%') === false) {
-            return $value;
+            return $value; // Nothing to do.
         }
-        $str_replace_ = $caSe_insensitive ? 'str_ireplace' : 'str_replace';
-        $urlencode_   = $urlencode ? 'urlencode' : function ($v) {
-            return $v; // Callback placeholder.
+        $str_replace     = $caSe_insensitive ? 'str_ireplace' : 'str_replace';
+        $maybe_urlencode = $urlencode ? 'urlencode' : function ($v) {
+            return $v; // Do nothing; just a simply passthrough.
         };
         if (stripos($value, '%%__var_dump__%%') !== false) {
-            $value = $str_replace_('%%__var_dump__%%', $urlencode_($this->VarDump($___vars)), $value);
+            $value = $str_replace('%%__var_dump__%%', $maybe_urlencode($this->VarDump($___vars)), $value);
         }
         if (stripos($value, '%%__serialize__%%') !== false) {
-            $value = $str_replace_('%%__serialize__%%', $urlencode_(serialize($___vars)), $value);
+            $value = $str_replace('%%__serialize__%%', $maybe_urlencode(serialize($___vars)), $value);
         }
         if (stripos($value, '%%__json_encode__%%') !== false) {
-            $value = $str_replace_('%%__json_encode__%%', $urlencode_(json_encode($___vars)), $value);
+            $value = $str_replace('%%__json_encode__%%', $maybe_urlencode(json_encode($___vars)), $value);
         }
         if ($urlencode && stripos($value, '%%__query_string__%%') !== false) {
-            $value = $str_replace_('%%__query_string__%%', $this->UrlQuery->build($___vars), $value);
+            $value = $str_replace('%%__query_string__%%', $this->UrlQuery->build($___vars), $value);
         }
         $_iteration_counter = 1; // Check completion every 10th iteration to save time.
 
         foreach ($___vars as $_key => $_value) {
-            $value = $str_replace_('%%'.$_key.'%%', $urlencode_($_value), $value);
+            $value = $str_replace('%%'.$_key.'%%', $maybe_urlencode($_value), $value);
             if ($_iteration_counter >= 10) {
                 $_iteration_counter = 0;
                 if (strpos($value, '%%') === false) {
@@ -156,14 +154,13 @@ class ReplaceCodes extends AbsBase
                 }
             }
             ++$_iteration_counter; // Increment counter.
-        }
-        unset($_iteration_counter, $_key, $_value); // Housekeeping.
+        } // unset($_iteration_counter, $_key, $_value); // Housekeeping.
 
         if (strpos($value, '.*') !== false && strpos($value, '%%') !== false) {
             $value = preg_replace_callback(
                 '/%%(?P<pattern>.+?\.\*)(?:\|(?P<delimiter>.*?))?'.
                 '(?P<include_keys>\[(?P<key_delimiter>.*?)\])?%%/s',
-                function ($m) use ($caSe_insensitive, $___vars, $urlencode_) {
+                function ($m) use ($caSe_insensitive, $___vars, $maybe_urlencode) {
                     $values = array();
                     $___var_keys = array_keys($___vars);
                     $keys = $this->WildcardPattern->in(
@@ -174,8 +171,7 @@ class ReplaceCodes extends AbsBase
                     );
                     foreach ($keys as $_key) {
                         $values[$___var_keys[$_key]] = $___vars[$___var_keys[$_key]];
-                    }
-                    unset($_key); // Housekeeping.
+                    } // unset($_key); // Housekeeping.
 
                     if (empty($m['delimiter'])) {
                         $m['delimiter'] = ', ';
@@ -199,17 +195,15 @@ class ReplaceCodes extends AbsBase
                     if ($m['include_keys']) {
                         foreach ($values as $_key => &$_value) {
                             $_value = $_key.$m['key_delimiter'].$_value;
-                        }
-                        unset($_key, $_value); // Housekeeping.
+                        } // unset($_key, $_value); // Housekeeping.
                     }
                     if ($m['delimiter'] === '&' && !$m['include_keys']) {
                         return $this->UrlQuery->build($values);
                     }
-                    return $urlencode_(implode($m['delimiter'], $values));
+                    return $maybe_urlencode(implode($m['delimiter'], $values));
                 },
                 $value
             );
-            unset($_this); // Housekeeping.
         }
         if (!$___recursion) {
             return $this->__invoke(

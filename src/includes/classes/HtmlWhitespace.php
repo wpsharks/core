@@ -2,17 +2,15 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Traits;
+use WebSharks\Core\Interfaces;
 
 /**
  * HTML whitespace utilities.
  *
  * @since 150424 Initial release.
  */
-class HtmlWhitespace extends AbsBase
+class HtmlWhitespace extends AbsBase implements Interfaces\HtmlConstants
 {
-    use Traits\HtmlDefinitions;
-
     protected $Eols;
 
     /**
@@ -50,7 +48,7 @@ class HtmlWhitespace extends AbsBase
         $string = (string) $value;
 
         if (is_null($whitespace = &$this->staticKey(__FUNCTION__.'_whitespace'))) {
-            $whitespace = implode('|', array_keys($this->DEF_HTML_WHITESPACE));
+            $whitespace = implode('|', array_keys($this::HTML_WHITESPACE));
         }
         $string = preg_replace('/('.$whitespace.')('.$whitespace.')('.$whitespace.')+/i', '${1}${2}', $string);
 

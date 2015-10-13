@@ -2,17 +2,15 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Traits;
+use WebSharks\Core\Interfaces;
 
 /**
  * HTML trim utilities.
  *
  * @since 150424 Initial release.
  */
-class HtmlTrim extends AbsBase
+class HtmlTrim extends AbsBase implements Interfaces\HtmlConstants
 {
-    use Traits\HtmlDefinitions;
-
     protected $Trim;
 
     /**
@@ -55,7 +53,7 @@ class HtmlTrim extends AbsBase
         $side  = strtolower($side);
 
         if (is_null($whitespace = &$this->staticKey(__FUNCTION__.'_whitespace'))) {
-            $whitespace = implode('|', array_keys($this->DEF_HTML_WHITESPACE));
+            $whitespace = implode('|', array_keys($this::HTML_WHITESPACE));
         }
         switch ($side) {
             case 'l': // Left trim.

@@ -2,17 +2,15 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Traits;
+use WebSharks\Core\Interfaces;
 
 /**
  * HTML-To-Text utilities.
  *
  * @since 150424 Initial release.
  */
-class HtmlConvert extends AbsBase
+class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
 {
-    use Traits\HtmlDefinitions;
-
     protected $Eols;
     protected $Html;
     protected $HtmlTrim;
@@ -77,8 +75,8 @@ class HtmlConvert extends AbsBase
         }
         $default_args = [
             'br2nl'                 => true,
-            'strip_content_in_tags' => $this->DEF_HTML_INVISIBLE_TAGS,
-            'inject_eol_after_tags' => $this->DEF_HTML_BLOCK_TAGS,
+            'strip_content_in_tags' => $this::HTML_INVISIBLE_TAGS,
+            'inject_eol_after_tags' => $this::HTML_BLOCK_TAGS,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
@@ -149,8 +147,8 @@ class HtmlConvert extends AbsBase
                 'href',
             ],
 
-            'strip_content_in_tags' => $this->DEF_HTML_INVISIBLE_TAGS,
-            'inject_eol_after_tags' => $this->DEF_HTML_BLOCK_TAGS,
+            'strip_content_in_tags' => $this::HTML_INVISIBLE_TAGS,
+            'inject_eol_after_tags' => $this::HTML_BLOCK_TAGS,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
@@ -211,8 +209,7 @@ class HtmlConvert extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->toPandoc($_value, $to);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value);
 
             return $value;
         }
@@ -226,7 +223,7 @@ class HtmlConvert extends AbsBase
             return $html; // Nothing to do.
         }
         try {
-            $pandoc         = new \Pandoc\Pandoc();
+            $Pandoc         = new \Pandoc\Pandoc();
             $pandoc_options = array(
                 'from'          => 'html',
                 'to'            => $to,
@@ -235,8 +232,8 @@ class HtmlConvert extends AbsBase
                 'no-wrap'       => null,
                 'preserve-tabs' => null,
             );
-            return $pandoc->runWith($html, $pandoc_options);
-        } catch (\Exception $exception) {
+            return $Pandoc->runWith($html, $pandoc_options);
+        } catch (\Exception $Exception) {
             return ''; // Failure.
         }
     }

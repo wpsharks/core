@@ -2,8 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+use WebSharks\Core\Interfaces;
 
 /**
  * Base abstraction.

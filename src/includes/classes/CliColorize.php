@@ -2,17 +2,15 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Traits;
+use WebSharks\Core\Interfaces;
 
 /**
  * CLI colorizer.
  *
  * @since 150424 Initial release.
  */
-class CliColorize extends AbsBase
+class CliColorize extends AbsBase implements Interfaces\UrlConstants
 {
-    use Traits\UrlDefinitions;
-
     protected $CliColors;
 
     /**
@@ -114,7 +112,7 @@ class CliColorize extends AbsBase
 
         if ($link_color && isset($this->CliColors->fg->{$link_color})) {
             $colorized_string = preg_replace_callback(
-                '/(?P<o>\<)(?P<link>'.substr($this->DEF_URL_REGEX_VALID, 2, -2).')(?P<c>\>)/',
+                '/(?P<o>\<)(?P<link>'.substr($this::URL_REGEX_VALID, 2, -2).')(?P<c>\>)/',
                 function ($m) use ($fg_color, $link_color) {
                     return $m['o']."\033".'['.$this->CliColors->fg->{$link_color}.'m'.$m['link']."\033".'[0m'.
                             ($fg_color && isset($this->CliColors->fg->{$fg_color}) ? "\033".'['.$this->CliColors->fg->{$fg_color}.'m' : '').

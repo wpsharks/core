@@ -33,20 +33,20 @@ class ArrayDotKeys extends AbsBase
      */
     public function get(array $array): array
     {
-        $iterator = $this->ArrayIterators->recursive($array);
+        $dot_keys = []; // Initialize.
+        $Iterator = $this->ArrayIterators->recursive($array);
 
-        foreach ($iterator as $_key => $_value) {
+        foreach ($Iterator as $_key => $_value) {
             $_keys = array(); // Initialize keys.
 
-            foreach (range(0, $iterator->getDepth()) as $_depth) {
-                $_keys[] = $iterator->getSubIterator($_depth)->key();
+            foreach (range(0, $Iterator->getDepth()) as $_depth) {
+                $_keys[] = $Iterator->getSubIterator($_depth)->key();
             }
             $dot_keys[implode('.', $_keys)] = $_value;
 
-            unset($_keys, $_depth); // Housekeeping.
-        }
-        unset($_key, $_value); // Housekeeping.
+            // unset($_keys, $_depth); // Housekeeping.
+        } // unset($_key, $_value); // Housekeeping.
 
-        return !empty($dot_keys) ? $dot_keys : array();
+        return $dot_keys;
     }
 }

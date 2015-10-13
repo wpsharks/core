@@ -33,8 +33,7 @@ class Slashes extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->add($_value);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value);
 
             return $value;
         }
@@ -57,8 +56,7 @@ class Slashes extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->strip($_value);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value);
 
             return $value;
         }

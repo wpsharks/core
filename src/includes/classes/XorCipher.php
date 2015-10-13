@@ -52,8 +52,7 @@ class XorCipher extends AbsBase
             $_char     = (string) substr($string, $_i - 1, 1);
             $_key_char = (string) substr($key, ($_i % $_key_length) - 1, 1);
             $e .= chr(ord($_char) + ord($_key_char));
-        }
-        unset($_length, $_key_length, $_i, $_char, $_key_char); // Housekeeping.
+        } // unset($_length, $_key_length, $_i, $_char, $_key_char); // Housekeeping.
 
         if (!isset($e[0])) {
             throw new \Exception('String encryption failed; `$e` has no length.');
@@ -97,8 +96,7 @@ class XorCipher extends AbsBase
             $_char     = (string) substr($md5_e['e'], $_i - 1, 1);
             $_key_char = (string) substr($key, ($_i % $_key_length) - 1, 1);
             $string .= chr(ord($_char) - ord($_key_char));
-        }
-        unset($_length, $_key_length, $_i, $_char, $_key_char); // Housekeeping.
+        } // unset($_length, $_key_length, $_i, $_char, $_key_char); // Housekeeping.
 
         if (!isset($string[0])) {
             throw new \Exception('String decryption failed; `$string` has no length.');

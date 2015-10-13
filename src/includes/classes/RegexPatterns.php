@@ -35,9 +35,9 @@ class RegexPatterns extends AbsBase
     public function match(string $string, $value, bool $collect_key_props = false)
     {
         if (!isset($string[0])) { // Empty?
-            return $collect_key_props ? array() : false;
+            return $collect_key_props ? [] : false;
         }
-        $matching_key_props = array(); // Initialize.
+        $matching_key_props = []; // Initialize.
 
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key_prop => $_value) {
@@ -58,8 +58,7 @@ class RegexPatterns extends AbsBase
                         }
                     }
                 }
-            }
-            unset($_key_prop, $_value, $_matching_key_props);
+            } // unset($_key_prop, $_value, $_matching_key_props);
         } elseif (!$collect_key_props && is_string($value) && isset($value[0])) {
             if (@preg_match($value, $string)) {
                 return true;

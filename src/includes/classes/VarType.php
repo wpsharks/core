@@ -34,8 +34,7 @@ class VarType extends AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->ify($_value, $type);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value);
 
             return $value;
         }

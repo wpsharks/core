@@ -70,8 +70,7 @@ class WildcardPatterns extends AbsBase
                         }
                     }
                 }
-            }
-            unset($_key_prop, $_value, $_matching_key_props);
+            } // unset($_key_prop, $_value, $_matching_key_props);
         } elseif (!$collect_key_props) {
             $value = (string) $value;
             if (fnmatch($value, $string, $flags)) {

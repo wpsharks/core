@@ -158,7 +158,7 @@ class FsDir extends AbsBase
             }
         }
         closedir($opendir); // Close resource now.
-        unset($_dir_file); // Housekeeping.
+        unset($_dir_file); // Force deference.
 
         return rmdir($dir);
     }

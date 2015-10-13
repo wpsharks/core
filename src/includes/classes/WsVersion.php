@@ -2,17 +2,15 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Traits;
+use WebSharks\Core\Interfaces;
 
 /**
  * WS version utilities.
  *
  * @since 150424 Initial release.
  */
-class WsVersion extends AbsBase
+class WsVersion extends AbsBase implements Interfaces\WsVersionConstants
 {
-    use Traits\WsVersionDefinitions;
-
     /**
      * Class constructor.
      *
@@ -37,7 +35,7 @@ class WsVersion extends AbsBase
         if (!$version) {
             return false; // Nope.
         }
-        return (boolean) preg_match($this->DEF_WS_VERSION_REGEX_VALID, $version);
+        return (boolean) preg_match($this::WS_VERSION_REGEX_VALID, $version);
     }
 
     /**
@@ -54,7 +52,7 @@ class WsVersion extends AbsBase
         if (!$version) {
             return false; // Nope.
         }
-        return (boolean) preg_match($this->DEF_WS_VERSION_REGEX_VALID_DEV, $version);
+        return (boolean) preg_match($this::WS_VERSION_REGEX_VALID_DEV, $version);
     }
 
     /**
@@ -71,7 +69,7 @@ class WsVersion extends AbsBase
         if (!$version) {
             return false; // Nope.
         }
-        return (boolean) preg_match($this->DEF_WS_VERSION_REGEX_VALID_STABLE, $version);
+        return (boolean) preg_match($this::WS_VERSION_REGEX_VALID_STABLE, $version);
     }
 
     /**

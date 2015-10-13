@@ -57,9 +57,9 @@ class Ip extends AbsBase
                 if (($_valid_public_ip = $this->getValidPublicFrom($_SERVER[$_source]))) {
                     return ($ip = $_valid_public_ip); // IPv4 or IPv6 address.
                 }
-            }
-            unset($_source, $_valid_public_ip); // Housekeeping.
-        }
+            } // unset($_valid_public_ip); // Housekeeping.
+        } // unset($_source); // Housekeeping.
+
         if (!empty($_SERVER['REMOTE_ADDR'])) {
             return ($ip = strtolower((string) $_SERVER['REMOTE_ADDR']));
         }

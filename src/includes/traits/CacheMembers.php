@@ -103,7 +103,8 @@ trait CacheMembers
                 $cache_key[$_key] = null;
             }
             $cache_key = &$cache_key[$_key];
-        }
+        } // unset($_arg); // Housekeeping.
+
         return $cache_key;
     }
 

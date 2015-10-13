@@ -51,8 +51,7 @@ class CliOpts extends AbsBase
                     $_Option->defaultValue($_data['default']);
                 }
             }
-        }
-        unset($_spec, $_data, $_Option); // Housekeeping.
+        } // unset($_spec, $_data, $_Option);
     }
 
     /**
@@ -60,13 +59,13 @@ class CliOpts extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @return OptionResult|Option[] Opts.
+     * @return OptionResult Opts.
      */
     public function parse(): OptionResult
     {
-        $parser = new OptionParser($this->OptionCollection);
+        $Parser = new OptionParser($this->OptionCollection);
 
-        return $parser->parse($GLOBALS['argv']);
+        return $Parser->parse($GLOBALS['argv']);
     }
 
     /**
@@ -78,8 +77,8 @@ class CliOpts extends AbsBase
      */
     public function specs(): string
     {
-        $printer = new ConsoleOptionPrinter();
+        $Printer = new ConsoleOptionPrinter();
 
-        return $printer->render($this->OptionCollection);
+        return $Printer->render($this->OptionCollection);
     }
 }

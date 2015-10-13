@@ -2,6 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use Hashids\Hashids as Parser;
+
 /**
  * Hash IDs.
  *
@@ -27,7 +29,7 @@ class HashIds extends AbsBase
     ) {
         parent::__construct();
 
-        $this->HashIds = new \Hashids\Hashids($key, $min_chars, $alphabet);
+        $this->Parser = new Parser($key, $min_chars, $alphabet);
     }
 
     /**
@@ -41,7 +43,7 @@ class HashIds extends AbsBase
      */
     public function encode(int ...$integers): string
     {
-        return $this->HashIds->encode(...$integers);
+        return $this->Parser->encode(...$integers);
     }
 
     /**
@@ -55,6 +57,6 @@ class HashIds extends AbsBase
      */
     public function decode(string $hash_id): array
     {
-        return $this->HashIds->decode($hash_id);
+        return $this->Parser->decode($hash_id);
     }
 }

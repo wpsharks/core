@@ -100,16 +100,14 @@ class UrlRemote extends AbsBase
             $custom_request_method = strtoupper($_m['method']);
 
             if ($custom_request_method === 'HEAD') {
-                $return = $this::ARRAY_A_TYPE; // Force.
+                $return = $this::ARRAY_A_TYPE;
             }
-        }
-        unset($_m); // Housekeeping.
+        } // unset($_m); // Housekeeping.
 
         # Validate URL.
 
-        if (!$url) {
-            return $return === $this::ARRAY_A_TYPE
-                ? [] : ''; // Failure.
+        if (!$url) { // Failure.
+            return $return === $this::ARRAY_A_TYPE ? [] : '';
         }
         # Convert body to a string.
 
@@ -129,7 +127,7 @@ class UrlRemote extends AbsBase
 
         if (empty($has_user_agent)) {
             $headers[]      = 'User-Agent: '.__METHOD__;
-            $has_user_agent = true; // Does now! :-)
+            $has_user_agent = true; // Does now!
         }
         # Setup header collection sub-routine.
 
@@ -202,8 +200,7 @@ class UrlRemote extends AbsBase
                 list($_header, $_value)                   = explode(':', $_line, 2);
                 $curl_headers[strtolower(trim($_header))] = trim($_value);
             }
-        }
-        unset($_curl_headers, $_line, $_header, $_value); // Housekeeping.
+        } // unset($_curl_headers, $_line, $_header, $_value); // Housekeeping.
 
         # Check if failing on error. If so, empty the response body.
 

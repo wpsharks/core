@@ -2,6 +2,9 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use ParsedownExtra;
+use Michelf\MarkdownExtra;
+
 /**
  * Markdown utilities.
  *
@@ -51,7 +54,7 @@ class Markdown extends AbsBase
             return $string; // Not possible.
         }
         $default_args = [
-            'flavor' => 'php-markdown-extra',
+            'flavor' => 'markdown-extra',
             // `parsedown-extra` is faster, but buggy.
             // See: <https://github.com/erusev/parsedown-extra/issues/44>
             'oembed' => false,
@@ -79,18 +82,18 @@ class Markdown extends AbsBase
             unset($_spcsm, $_oembed_args); // Housekeeping.
         }
         if ($flavor === 'parsedown-extra') {
-            if (is_null($parsedown_extra = &$this->staticKey(__FUNCTION__, $flavor))) {
-                $parsedown_extra = new \ParsedownExtra();
+            if (is_null($ParsedownExtra = &$this->staticKey(__FUNCTION__, $flavor))) {
+                $ParsedownExtra = new ParsedownExtra();
             }
-            $parsedown_extra->setBreaksEnabled($breaks);
-            $html = $parsedown_extra->text($string);
+            $ParsedownExtra->setBreaksEnabled($breaks);
+            $html = $ParsedownExtra->text($string);
         } else {
-            $flavor = 'php-markdown-extra'; // Default flavor.
-            if (is_null($php_markdown_extra = &$this->staticKey(__FUNCTION__, $flavor))) {
-                $php_markdown_extra                    = new \Michelf\MarkdownExtra();
-                $php_markdown_extra->code_class_prefix = 'language-';
+            $flavor = 'markdown-extra'; // Default flavor.
+            if (is_null($MarkdownExtra = &$this->staticKey(__FUNCTION__, $flavor))) {
+                $MarkdownExtra                    = new MarkdownExtra();
+                $MarkdownExtra->code_class_prefix = 'language-';
             }
-            $html = $php_markdown_extra->transform($string);
+            $html = $MarkdownExtra->transform($string);
         }
         if ($no_p) {
             $html = preg_replace('/^\<p\>/i', '', $html);

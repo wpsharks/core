@@ -173,7 +173,7 @@ class VarDump extends AbsBase
                         case 'array': // Recurses into array values.
 
                             $_nested_circular_id_key = md5(serialize($_nested_value));
-                            $_nested_real_type       = $_nested_type.(($dump_circular_ids) ? '::'.$_nested_circular_id_key : '');
+                            $_nested_real_type       = $_nested_type.($dump_circular_ids ? '::'.$_nested_circular_id_key : '');
 
                             if (isset($___nested_circular_ids[$_nested_circular_id_key])) {
                                 $nested_dumps[$_nested_key_prop] = $_nested_real_type.'() *circular*';
