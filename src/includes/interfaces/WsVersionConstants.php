@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Interfaces;
 
 /**
  * WS version-related constants.
