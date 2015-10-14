@@ -11,7 +11,7 @@ use Hashids\Hashids as Parser;
  */
 class HashIds extends AbsBase
 {
-    protected $HashIds;
+    protected $Parser;
 
     /**
      * Class constructor.
