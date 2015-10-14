@@ -28,7 +28,7 @@ class UrlCurrent extends AbsBase
      */
     public function __invoke(): string
     {
-        if (!is_null($url = &$this->staticKey(__FUNCTION__, $scheme))) {
+        if (!is_null($url = &$this->staticKey(__FUNCTION__))) {
             return $url; // Cached this already.
         }
         $url = $this->scheme().'//'.$this->host().$this->uri();
