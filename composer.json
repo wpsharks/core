@@ -31,6 +31,7 @@
     "websharks/dicer": "151004"
   },
   "require-dev": {
+    "ramsey/uuid": "3.*",
     "ryakad/pandoc-php": "1.*",
     "aws/aws-sdk-php": "2.*",
     "erusev/parsedown": "1.*",
@@ -42,6 +43,7 @@
     "hashids/hashids": "1.*"
   },
   "suggest": {
+    "ramsey/uuid": "3.* :: Required by routines that generate UUIDs.",
     "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc.",
     "aws/aws-sdk-php": "2.* :: Required by routines that make calls to the AWS API.",
     "erusev/parsedown": "1.* :: Required by routines that convert Markdown.",

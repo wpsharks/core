@@ -51,7 +51,7 @@ class Cookie extends AbsBase
             return; // Not possible.
         }
         $expires_after = max(0, $expires_after);
-        $value         = $value ? $this->Rijndael256->encrypt($value, $key) : '';
+        $value         = isset($value[0]) ? $this->Rijndael256->encrypt($value, $key) : '';
         $expires       = $expires_after ? time() + $expires_after : 0;
 
         if (defined('COOKIE_PATH')) {
@@ -89,7 +89,7 @@ class Cookie extends AbsBase
         setcookie($name, $value, $expires, $cookie_path, $cookie_domain);
         setcookie($name, $value, $expires, $site_cookie_path, $cookie_domain);
 
-        if (stripos($name, 'test_') !== 0 && (!defined('TEST_COOKIE') || $name !== TEST_COOKIE)) {
+        if (stripos($name, '_test_') !== 0 && (!defined('TEST_COOKIE') || $name !== TEST_COOKIE)) {
             $_COOKIE[$name] = $value; // Update in real-time.
         }
     }
@@ -107,9 +107,9 @@ class Cookie extends AbsBase
         if (!($name = trim($name))) {
             return ''; // Not possible.
         }
-        if (isset($_COOKIE[$name][0]) && is_string($_COOKIE[$name])) {
+        if (isset($_COOKIE[$name]) && is_string($_COOKIE[$name])) {
             $value = $this->Rijndael256->decrypt($_COOKIE[$name], $key);
         }
-        return isset($value[0]) ? $value : '';
+        return $value ?? '';
     }
 }
