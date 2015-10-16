@@ -113,7 +113,7 @@ trait OverloadMembers
      */
     public function __get(string $property)
     {
-        if (property_exists($this->overload, $property)) {
+        if (isset($this->overload->{$property}) || property_exists($this->overload, $property)) {
             return $this->overload->{$property};
         }
         throw new \Exception(sprintf('Undefined overload property: `%1$s`.', $property));
