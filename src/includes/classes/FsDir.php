@@ -24,7 +24,7 @@ class FsDir extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @throws \Exception If unable to find a temporary directory.
+     * @throws Exception If unable to find a temporary directory.
      *
      * @return string A readable/writable tmp directory.
      */

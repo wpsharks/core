@@ -27,14 +27,14 @@ class FsDirIterators extends AbsBase
      * @param string $dir   Directory to scan.
      * @param string $regex Regular expression.
      *
-     * @throws \Exception If either of the input parameters are empty.
+     * @throws Exception If either of the input parameters are empty.
      *
      * @return \RegexIterator|\RecursiveDirectoryIterator[]
      */
     public function recursiveRegex(string $dir, string $regex): \RegexIterator
     {
         if (!$dir || !$regex) {
-            throw new \Exception('Missing required `$dir` and/or `$regex` parameters.');
+            throw new Exception('Missing required `$dir` and/or `$regex` parameters.');
         }
         $DirIterator      = new \RecursiveDirectoryIterator($dir, \FilesystemIterator::KEY_AS_PATHNAME | \FilesystemIterator::CURRENT_AS_SELF | \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::UNIX_PATHS);
         $IteratorIterator = new \RecursiveIteratorIterator($DirIterator, \RecursiveIteratorIterator::CHILD_FIRST);

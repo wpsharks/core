@@ -38,13 +38,13 @@ class UrlRemote extends AbsBase
     public function request(string $url, array $args = array())
     {
         if (!$this->PhpHas->extension('curl')) {
-            throw new \Exception('cURL extension missing.');
+            throw new Exception('cURL extension missing.');
         }
         if (!$this->PhpHas->extension('openssl')) {
-            throw new \Exception('OpenSSL extension missing.');
+            throw new Exception('OpenSSL extension missing.');
         }
         if (!is_array($curl = curl_version()) || !($curl['features'] & CURL_VERSION_SSL)) {
-            throw new \Exception('cURL not compiled w/ OpenSSL.');
+            throw new Exception('cURL not compiled w/ OpenSSL.');
         }
         return $this->requestCurl($url, $args);
     }

@@ -35,19 +35,22 @@ class ShaSignatures extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param string $key Defaults to `$_SERVER['SHAX_SIG_KEY']`.
+     * @param string $key The signature key.
      *
      * @return string SHA-X signature key.
      */
     public function xKey(string $key = ''): string
     {
-        if (!$key && !empty($_SERVER['SHAX_SIG_KEY'])) {
-            $key = (string) $_SERVER['SHAX_SIG_KEY'];
+        if ($key) {
+            return $key; // Highest precedent!
         }
-        if (!$key) {
-            throw new \Exception('Missing SHA-X key.');
+        if (defined(__NAMESPACE__.'\\SHAX_SIG_KEY') && SHAX_SIG_KEY) {
+            return (string) SHAX_SIG_KEY; // Higher precedent.
         }
-        return $key;
+        if (!empty($_SERVER['SHAX_SIG_KEY'])) {
+            return (string) $_SERVER['SHAX_SIG_KEY'];
+        }
+        throw new Exception('Missing SHA-X key.');
     }
 
     /**

@@ -161,7 +161,7 @@ class Ip extends AbsBase
      *
      * @param string $ip An IP address to query.
      *
-     * @throws \exception If unable to create cache directory.
+     * @throws Exception If unable to create cache directory.
      *
      * @return \stdClass|bool Geo location data from IP address.
      */
@@ -215,7 +215,7 @@ class Ip extends AbsBase
         # Cache validated response from geoPlugin service.
 
         if (!is_dir($cache_dir) && !mkdir($cache_dir, 0777, true)) {
-            throw new \exception('Unable to create `ip-geo-data` cache directory.');
+            throw new Exception('Unable to create `ip-geo-data` cache directory.');
         }
         file_put_contents($cache_file, json_encode($geo));
 

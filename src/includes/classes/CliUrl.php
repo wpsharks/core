@@ -44,7 +44,7 @@ class CliUrl extends AbsBase
         } elseif ($this->Os->isWindows()) {
             `start $url_arg`;
         } else {
-            throw new \Exception('Unable to open <'.$url.'>. Unsupported operating system.');
+            throw new Exception('Unable to open <'.$url.'>. Unsupported operating system.');
         }
     }
 }

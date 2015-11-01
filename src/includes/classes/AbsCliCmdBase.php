@@ -110,7 +110,7 @@ abstract class AbsCliCmdBase extends AbsBase
         # Only run this if we are in fact on a CLI.
 
         if (!$this->Cli->is() || empty($GLOBALS['argv'][0])) {
-            throw new \Exception('CLI processing out of context.');
+            throw new Exception('CLI processing out of context.');
         }
         # Handle any CLI exceptions; i.e., print to STDERR.
 
@@ -149,7 +149,7 @@ abstract class AbsCliCmdBase extends AbsBase
             $this->Dicer->get($this->sub_command->class_path, ['Primary' => $this], true);
             exit(1); // Default status if sub-command fails to exit properly.
         } else {
-            throw new \Exception('Unknown sub-command: `'.$this->sub_command->slug.'`');
+            throw new Exception('Unknown sub-command: `'.$this->sub_command->slug.'`');
         }
     }
 

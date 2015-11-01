@@ -101,4 +101,55 @@ class Markdown extends AbsBase
         }
         return $html; // Gotta love it! :-)
     }
+
+    /**
+     * Markdown stripper.
+     *
+     * @since 151029 Markdown stripper.
+     *
+     * @param mixed $value Any input value.
+     * @param array $args  Any additional behavioral args.
+     *
+     * @return string|array|object Stripped markdown value(s).
+     */
+    public function strip($value, array $args = array())
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->strip($_value, $args);
+            }
+            unset($_key, $_value); // Housekeeping.
+
+            return $value;
+        }
+        if (!($string = trim((string) $value))) {
+            return $string; // Not possible.
+        }
+        $default_args = []; // None at this time.
+
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
+
+        // Strip bold, italic, and strikethrough markers.
+        $string = preg_replace('/(\*+)([^*]*)\\1/', '${2}', $string);
+        $string = preg_replace('/(_+)([^_]*)\\1/', '${2}', $string);
+        $string = preg_replace('/(~+)([^~]*)\\1/', '${2}', $string);
+
+        // Strip inline code and/or code blocks.
+        $string = preg_replace('/(`+)(?:\w+'."[\r\n]".')?([^`]*)\\1'."[\r\n]".'?/', '${2}', $string);
+
+        // Strip blockquotes.
+        $string = preg_replace('/^\s*\>\s+/m', '', $string);
+
+        // Strip ATX-style headings.
+        $string = preg_replace('/^\s*#+\s+([^#]*)#*$/m', '${1}', $string);
+
+        // Strip line-based decorative headings.
+        $string = preg_replace('/^\s*[=\-]+\s*$/m', '', $string);
+
+        // Stripe images and links.
+        $string = preg_replace('/!?\[([^[\]]*)\]\([^()]*\)/', '${1}', $string);
+
+        return $string; // Gotta love it! :-)
+    }
 }

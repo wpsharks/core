@@ -36,7 +36,7 @@ class XorCipher extends AbsBase
      * @param string $key      Optional. Key to use in encryption.
      * @param bool   $w_md5_cs Optional. Defaults to `TRUE` (recommended).
      *
-     * @throws \Exception If string encryption fails.
+     * @throws Exception If string encryption fails.
      *
      * @return string Encrypted string.
      */
@@ -55,7 +55,7 @@ class XorCipher extends AbsBase
         } // unset($_length, $_key_length, $_i, $_char, $_key_char); // Housekeeping.
 
         if (!isset($e[0])) {
-            throw new \Exception('String encryption failed; `$e` has no length.');
+            throw new Exception('String encryption failed; `$e` has no length.');
         }
         $e = '~xe'.($w_md5_cs ? ':'.md5($e) : '').'|'.$e; // Pack components.
 
@@ -70,7 +70,7 @@ class XorCipher extends AbsBase
      * @param string $base64 A string of data to decrypt (still base64 encoded).
      * @param string $key    Optional. Key originally used for encryption.
      *
-     * @throws \Exception If a validated XOR string decryption fails.
+     * @throws Exception If a validated XOR string decryption fails.
      *
      * @return string Decrypted string, or an empty string if validation fails.
      */
@@ -99,7 +99,7 @@ class XorCipher extends AbsBase
         } // unset($_length, $_key_length, $_i, $_char, $_key_char); // Housekeeping.
 
         if (!isset($string[0])) {
-            throw new \Exception('String decryption failed; `$string` has no length.');
+            throw new Exception('String decryption failed; `$string` has no length.');
         }
         if (!strlen($string = preg_replace('/^~xe\|/', '', $string, 1, $xe)) || !$xe) {
             return ($string = '');  // Missing packed components.

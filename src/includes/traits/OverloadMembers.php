@@ -39,50 +39,6 @@ trait OverloadMembers
     }
 
     /**
-     * Setup overloads.
-     *
-     * @since 15xxxx Initial release.
-     *
-     * @param array|object $properties Property(s).
-     *
-     * @note This can be an associative array|object containing key/value pairs.
-     *  Or, it can simply be a numeric array of existing properties to make read-only.
-     *
-     * @note Objects can be passed (always by reference) and each property value will be
-     *  set by reference also. This allows for overload to contain nothing but references.
-     *
-     * @param bool $writable Overloaded properties are writable?
-     */
-    protected function overload($properties, bool $writable = false)
-    {
-        if (!is_array($properties) && !is_object($properties)) {
-            throw new \Exception(sprintf('Invalid parameter type: `%1$s`.', gettype($properties)));
-        }
-        foreach ($properties as $_key => &$_value) {
-            if (is_string($_key)) {
-                if (isset($_key[0]) && !property_exists($this, $_key)) {
-                    $this->overload->{$_key} = &$_value;
-                    if ($writable) {
-                        $this->writable_overload_properties[$_key] = -1;
-                    } else {
-                        unset($this->writable_overload_properties[$_key]);
-                    }
-                }
-            } elseif (is_string($_value)) {
-                $_property = $_value; // Property.
-                if (property_exists($this, $_property)) {
-                    $this->overload->{$_property} = &$this->{$_property};
-                    if ($writable) {
-                        $this->writable_overload_properties[$_property] = -1;
-                    } else {
-                        unset($this->writable_overload_properties[$_property]);
-                    }
-                }
-            }
-        } // unset($_key, $_value, $_property); // Housekeeping.
-    }
-
-    /**
      * Magic/overload `isset()` checker.
      *
      * @since 15xxxx Initial release.
@@ -105,7 +61,7 @@ trait OverloadMembers
      *
      * @param string $property Property to get.
      *
-     * @throws \Exception If the `$overload` property is undefined.
+     * @throws Exception If the `$overload` property is undefined.
      *
      * @return mixed The value of `$this->overload{$property}`.
      *
@@ -116,7 +72,7 @@ trait OverloadMembers
         if (isset($this->overload->{$property}) || property_exists($this->overload, $property)) {
             return $this->overload->{$property};
         }
-        throw new \Exception(sprintf('Undefined overload property: `%1$s`.', $property));
+        throw new Exception(sprintf('Undefined overload property: `%1$s`.', $property));
     }
 
     /**
@@ -132,7 +88,7 @@ trait OverloadMembers
     public function __set(string $property, $value)
     {
         if (!isset($this->writable_overload_properties[$property])) {
-            throw new \Exception(sprintf('Refused to set overload property: `%1$s`.', $property));
+            throw new Exception(sprintf('Refused to set overload property: `%1$s`.', $property));
         }
         $this->overload->{$_property} = $value;
     }
@@ -149,7 +105,7 @@ trait OverloadMembers
     public function __unset(string $property)
     {
         if (!isset($this->writable_overload_properties[$property])) {
-            throw new \Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
+            throw new Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
         }
         unset($this->overload->{$_property});
     }
@@ -162,7 +118,7 @@ trait OverloadMembers
      * @param string $method Method to call upon.
      * @param array  $args   Arguments to pass to the method.
      *
-     * @throws \Exception If a class property matching the method does not exist.
+     * @throws Exception If a class property matching the method does not exist.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
@@ -174,6 +130,59 @@ trait OverloadMembers
         if (isset($this->overload{$method}) && is_callable($this->overload{$method})) {
             return call_user_func_array($this->overload{$method}, $args);
         }
-        throw new \Exception(sprintf('Undefined method: `%1$s`.', $method));
+        throw new Exception(sprintf('Undefined method: `%1$s`.', $method));
+    }
+
+    /**
+     * Setup overloads.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param array|object $properties Property(s).
+     *
+     * @note This can be an associative array|object containing key/value pairs.
+     *  Or, it can simply be a numeric array of existing properties to make read-only.
+     *
+     * @note Objects can be passed (always by reference) and each property value will be
+     *  set by reference also. This allows for overload to contain nothing but references.
+     *
+     * @param bool $writable Overloaded properties are writable?
+     */
+    protected function overload($properties, bool $writable = false)
+    {
+        if (!is_array($properties) && !is_object($properties)) {
+            throw new Exception(sprintf('Invalid type: `%1$s`.', gettype($properties)));
+        }
+        foreach ($properties as $_key_prop => &$_val_prop) {
+
+            // Treat string keys as named property/value pairs.
+            // Only nonexistent properties can be overloaded in this way.
+
+            if (is_string($_key_prop)) {
+                if (isset($_key_prop[0]) && !property_exists($this, $_key_prop)) {
+                    $this->overload->{$_key_prop} = &$_val_prop;
+
+                    if ($writable) { // Is the property writable?
+                        $this->writable_overload_properties[$_key_prop] = -1;
+                    } else { // Remove it otherwise; i.e., NOT writable.
+                        unset($this->writable_overload_properties[$_key_prop]);
+                    }
+                }
+
+            // Check each array value is an existing property name.
+            //  Only existing properties can be overloaded in this way.
+            //
+            } elseif (is_string($_val_prop)) {
+                if (isset($_val_prop[0]) && property_exists($this, $_val_prop)) {
+                    $this->overload->{$_val_prop} = &$this->{$_val_prop};
+
+                    if ($writable) { // Is the property writable?
+                        $this->writable_overload_properties[$_val_prop] = -1;
+                    } else { // Remove it otherwise; i.e., NOT writable.
+                        unset($this->writable_overload_properties[$_val_prop]);
+                    }
+                }
+            }
+        } // unset($_key, $_value, $_property); // Housekeeping.
     }
 }

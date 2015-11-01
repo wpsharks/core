@@ -40,12 +40,12 @@ class Cookie extends AbsBase
      *                              e.g., `a.b.c.example.com` = `example.com`.
      * @param string $key           Optional. Key to use in cookie encryption.
      *
-     * @throws \Exception If headers have already been sent; i.e. if not possible.
+     * @throws Exception If headers have already been sent; i.e. if not possible.
      */
     public function set(string $name, string $value, int $expires_after = 31556926, string $domain = '', string $key = '')
     {
         if (headers_sent()) {
-            throw new \Exception('Doing it wrong! Headers sent already.');
+            throw new Exception('Doing it wrong! Headers sent already.');
         }
         if (!($name = trim($name))) {
             return; // Not possible.

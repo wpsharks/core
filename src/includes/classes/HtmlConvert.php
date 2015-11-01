@@ -51,7 +51,7 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
     }
 
     /**
-     * Convert HTML markup converted to plain text.
+     * Convert HTML markup to plain text.
      *
      * @since 150424 Initial release.
      *

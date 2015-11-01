@@ -29,14 +29,14 @@ class Base64 extends AbsBase
      * @param array  $url_safe_chars     Optional array of safe character replacements. Defaults to: `array('-', '_')`.
      * @param string $trim_padding_chars Optional string of padding chars to rtrim. Defaults to: `=`.
      *
-     * @throws \exception If the call to `base64_encode()` fails.
+     * @throws Exception If the call to `base64_encode()` fails.
      *
      * @return string The base64 URL-safe encoded string.
      */
     public function urlSafeEncode(string $string, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), string $trim_padding_chars = '='): string
     {
         if (!is_string($base64_url_safe = base64_encode($string))) {
-            throw new \exception('Base64 encoding failed (`$base64_url_safe` is NOT a string).');
+            throw new Exception('Base64 encoding failed (`$base64_url_safe` is NOT a string).');
         }
         $base64_url_safe = str_replace($url_unsafe_chars, $url_safe_chars, $base64_url_safe);
         $base64_url_safe = isset($trim_padding_chars[0]) ? rtrim($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
@@ -54,7 +54,7 @@ class Base64 extends AbsBase
      * @param array  $url_safe_chars     Optional array of safe character replacements. Defaults to: `array('-', '_')`.
      * @param string $trim_padding_chars Optional string of padding chars to rtrim. Defaults to: `=`.
      *
-     * @throws \exception If the call to `base64_decode()` fails.
+     * @throws Exception If the call to `base64_decode()` fails.
      *
      * @return string The decoded string value.
      */
@@ -65,7 +65,7 @@ class Base64 extends AbsBase
         $string = str_replace($url_safe_chars, $url_unsafe_chars, $string);
 
         if (!is_string($string = base64_decode($string, true))) {
-            throw new \exception('Base64 decoding failed (`$string` is NOT a string).');
+            throw new Exception('Base64 decoding failed (`$string` is NOT a string).');
         }
         return $string;
     }

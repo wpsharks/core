@@ -42,14 +42,14 @@ class Rijndael256 extends AbsBase
      * @param string $key      Optional. Key to use in encryption.
      * @param bool   $w_md5_cs Optional. Defaults to `TRUE` (recommended).
      *
-     * @throws \Exception If string encryption fails.
+     * @throws Exception If string encryption fails.
      *
      * @return string Encrypted string.
      */
     public function encrypt(string $string, string $key = '', bool $w_md5_cs = true): string
     {
         if (!$this->PhpHas->extension('mcrypt')) {
-            throw new \Exception('Mcrypt extension missing.');
+            throw new Exception('Mcrypt extension missing.');
         }
         if (!isset($string[0])) {
             return ($base64 = '');
@@ -60,7 +60,7 @@ class Rijndael256 extends AbsBase
         $iv     = $this->Keygen->random(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), false);
 
         if (!is_string($e = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $string, MCRYPT_MODE_CBC, $iv)) || !isset($e[0])) {
-            throw new \Exception('String encryption failed; `$e` is NOT string; or it has no length.');
+            throw new Exception('String encryption failed; `$e` is NOT string; or it has no length.');
         }
         $e = '~r2:'.$iv.($w_md5_cs ? ':'.md5($e) : '').'|'.$e; // Pack components.
 
@@ -75,14 +75,14 @@ class Rijndael256 extends AbsBase
      * @param string $base64 A string of data to decrypt (still base64 encoded).
      * @param string $key    Optional. Key originally used for encryption.
      *
-     * @throws \Exception If a validated RIJNDAEL 256 string decryption fails.
+     * @throws Exception If a validated RIJNDAEL 256 string decryption fails.
      *
      * @return string Decrypted string, or an empty string if validation fails.
      */
     public function decrypt(string $base64, string $key = ''): string
     {
         if (!$this->PhpHas->extension('mcrypt')) {
-            throw new \Exception('Mcrypt extension missing.');
+            throw new Exception('Mcrypt extension missing.');
         }
         if (!isset($base64[0])) {
             return ($string = '');
@@ -103,7 +103,7 @@ class Rijndael256 extends AbsBase
         $key = (string) substr($key, 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
 
         if (!is_string($string = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $iv_md5_e['e'], MCRYPT_MODE_CBC, $iv_md5_e['iv'])) || !isset($string[0])) {
-            throw new \Exception('String decryption failed; `$string` is NOT a string, or it has no length.');
+            throw new Exception('String decryption failed; `$string` is NOT a string, or it has no length.');
         }
         if (!strlen($string = preg_replace('/^~r2\|/', '', $string, 1, $r2)) || !$r2) {
             return ($string = ''); // Missing packed components.

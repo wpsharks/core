@@ -34,7 +34,7 @@ class HtmlBalance extends AbsBase
      *
      * @param mixed $value Any input value.
      *
-     * @throws \Exception If missing DOM extension.
+     * @throws Exception If missing DOM extension.
      *
      * @return string|array|object Balanced value (i.e., HTML markup).
      *
@@ -69,7 +69,7 @@ class HtmlBalance extends AbsBase
             '   <body>'.$string.'</body>'.
             '</html>';
         if (!$this->PhpHas->extension('dom')) {
-            throw new \Exception('DOM extension missing.');
+            throw new Exception('DOM extension missing.');
         }
         $Dom = new \DOMDocument();
         $Dom->loadHTML($html);
