@@ -12,6 +12,7 @@ use WebSharks\Core\Interfaces;
 class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
 {
     protected $Eols;
+    protected $Trim;
     protected $Html;
     protected $HtmlTrim;
     protected $HtmlStrip;
@@ -28,6 +29,7 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
      */
     public function __construct(
         Eols $Eols,
+        Trim $Trim,
         Html $Html,
         HtmlTrim $HtmlTrim,
         HtmlStrip $HtmlStrip,
@@ -40,6 +42,7 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
         parent::__construct();
 
         $this->Eols           = $Eols;
+        $this->Trim           = $Trim;
         $this->Html           = $Html;
         $this->HtmlTrim       = $HtmlTrim;
         $this->HtmlStrip      = $HtmlStrip;
@@ -70,7 +73,7 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
 
             return $value;
         }
-        if (!($string = trim((string) $value))) {
+        if (!($string = $this->Trim((string) $value))) {
             return $string; // Not possible.
         }
         $default_args = [
@@ -89,22 +92,22 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
         $inject_eol_after_tags            = (array) $args['inject_eol_after_tags'];
         $inject_eol_after_tags_regex_frag = implode('|', $this->RegexQuote($inject_eol_after_tags));
 
-        $string = preg_replace('/\<('.$strip_content_in_tags_regex_frag.')(?:\>|\s[^>]*\>).*?\<\/\\1\>/is', '', $string);
-        $string = preg_replace('/\<\/(?:'.$inject_eol_after_tags_regex_frag.')\>/i', '${0}'."\n", $string);
-        $string = preg_replace('/\<(?:'.$inject_eol_after_tags_regex_frag.')(?:\/\s*\>|\s[^\/>]*\/\s*\>)/i', '${0}'."\n", $string);
+        $string = preg_replace('/\<('.$strip_content_in_tags_regex_frag.')(?:\>|\s[^>]*\>).*?\<\/\\1\>/uis', '', $string);
+        $string = preg_replace('/\<\/(?:'.$inject_eol_after_tags_regex_frag.')\>/ui', '${0}'."\n", $string);
+        $string = preg_replace('/\<(?:'.$inject_eol_after_tags_regex_frag.')(?:\/\s*\>|\s[^\/>]*\/\s*\>)/ui', '${0}'."\n", $string);
 
         $string = strip_tags($string, $br2nl ? '<br>' : '');
         $string = $this->HtmlEntities->decode($string);
         $string = str_replace("\xC2\xA0", ' ', $string);
 
         if ($br2nl) {
-            $string = preg_replace('/\<br(?:\>|\/\s*\>|\s[^\/>]*\/\s*\>)/', "\n", $string);
+            $string = preg_replace('/\<br(?:\>|\/\s*\>|\s[^\/>]*\/\s*\>)/u', "\n", $string);
             $string = $this->Eols->normalize($string); // Normalize line breaks.
-            $string = preg_replace('/[ '."\t\x0B".']+/', ' ', $string);
+            $string = preg_replace('/[ '."\t\x0B".']+/u', ' ', $string);
         } else {
-            $string = preg_replace('/\s+/', ' ', $string);
+            $string = preg_replace('/\s+/u', ' ', $string);
         }
-        $string = trim($string); // Trim up.
+        $string = $this->Trim($string); // Trim up.
 
         return $string;
     }
@@ -129,7 +132,7 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
 
             return $value;
         }
-        if (!($string = trim((string) $value))) {
+        if (!($string = $this->Trim((string) $value))) {
             return $string; // Not possible.
         }
         $default_args = [
@@ -159,21 +162,21 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
         if ($br2nl) {
             $allowed_tags[] = 'br'; // Allow `<br>` in this case.
         }
-        $allowed_tags       = array_unique(array_map('strtolower', $allowed_tags));
+        $allowed_tags       = array_unique(array_map('mb_strtolower', $allowed_tags));
         $allowed_attributes = (array) $args['allowed_attributes'];
 
         $strip_content_in_tags            = (array) $args['strip_content_in_tags'];
-        $strip_content_in_tags            = array_map('strtolower', $strip_content_in_tags);
+        $strip_content_in_tags            = array_map('mb_strtolower', $strip_content_in_tags);
         $strip_content_in_tags            = array_diff($strip_content_in_tags, $allowed_tags);
         $strip_content_in_tags_regex_frag = implode('|', $this->RegexQuote($strip_content_in_tags));
 
         $inject_eol_after_tags            = (array) $args['inject_eol_after_tags'];
-        $inject_eol_after_tags            = array_map('strtolower', $inject_eol_after_tags);
+        $inject_eol_after_tags            = array_map('mb_strtolower', $inject_eol_after_tags);
         $inject_eol_after_tags_regex_frag = implode('|', $this->RegexQuote($inject_eol_after_tags));
 
-        $string = preg_replace('/\<('.$strip_content_in_tags_regex_frag.')(?:\>|\s[^>]*\>).*?\<\/\\1\>/is', '', $string);
-        $string = preg_replace('/\<\/(?:'.$inject_eol_after_tags_regex_frag.')\>/i', '${0}'."\n", $string);
-        $string = preg_replace('/\<(?:'.$inject_eol_after_tags_regex_frag.')(?:\/\s*\>|\s[^\/>]*\/\s*\>)/i', '${0}'."\n", $string);
+        $string = preg_replace('/\<('.$strip_content_in_tags_regex_frag.')(?:\>|\s[^>]*\>).*?\<\/\\1\>/uis', '', $string);
+        $string = preg_replace('/\<\/(?:'.$inject_eol_after_tags_regex_frag.')\>/ui', '${0}'."\n", $string);
+        $string = preg_replace('/\<(?:'.$inject_eol_after_tags_regex_frag.')(?:\/\s*\>|\s[^\/>]*\/\s*\>)/ui', '${0}'."\n", $string);
 
         $string = strip_tags($string, $allowed_tags ? '<'.implode('><', $allowed_tags).'>' : '');
         $string = $this->HtmlStrip->attributes($string, compact('allowed_attributes'));
@@ -183,11 +186,11 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
         $string = &$spcsm['string'];
 
         if ($br2nl) {
-            $string = preg_replace('/\<br(?:\>|\/\s*\>|\s[^\/>]*\/\s*\>)/', "\n", $string);
+            $string = preg_replace('/\<br(?:\>|\/\s*\>|\s[^\/>]*\/\s*\>)/u', "\n", $string);
             $string = $this->Eols->normalize($string); // Normalize line breaks.
-            $string = preg_replace('/[ '."\t\x0B".']+/', ' ', $string);
+            $string = preg_replace('/[ '."\t\x0B".']+/u', ' ', $string);
         } else {
-            $string = preg_replace('/\s+/', ' ', $string);
+            $string = preg_replace('/\s+/u', ' ', $string);
         }
         $string = $this->HtmlWhitespace->normalize($string);
         $string = $this->HtmlSpcsm->restore($spcsm);
@@ -213,13 +216,13 @@ class HtmlConvert extends AbsBase implements Interfaces\HtmlConstants
 
             return $value;
         }
-        if (!($html = trim((string) $value))) {
+        if (!($html = $this->Trim((string) $value))) {
             return $html; // Nothing to do.
         }
         if (!$this->Html->is($html)) {
             return $html; // Not HTML markup.
         }
-        if (!($to = trim($to))) {
+        if (!($to = $this->Trim($to))) {
             return $html; // Nothing to do.
         }
         try {

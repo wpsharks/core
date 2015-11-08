@@ -33,6 +33,6 @@ class Html extends AbsBase
         if (!$string) {
             return false; // Not possible.
         }
-        return strpos($string, '<') !== false && preg_match('/\<[^<>]+\>/', $string);
+        return mb_strpos($string, '<') !== false && preg_match('/\<[^<>]+\>/u', $string);
     }
 }

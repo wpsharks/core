@@ -24,7 +24,7 @@ class PhpExecTime extends AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param int|null $max Seconds max; to set max execution time.
+     * @param int|null $max Max execution time.
      *
      * @return int Max execution time; in seconds.
      */

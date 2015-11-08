@@ -9,6 +9,7 @@ namespace WebSharks\Core\Classes;
  */
 class Cookie extends AbsBase
 {
+    protected $Trim;
     protected $UrlCurrent;
     protected $Rijndael256;
 
@@ -18,11 +19,13 @@ class Cookie extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
+        Trim $Trim,
         UrlCurrent $UrlCurrent,
         Rijndael256 $Rijndael256
     ) {
         parent::__construct();
 
+        $this->Trim        = $Trim;
         $this->UrlCurrent  = $UrlCurrent;
         $this->Rijndael256 = $Rijndael256;
     }
@@ -47,7 +50,7 @@ class Cookie extends AbsBase
         if (headers_sent()) {
             throw new Exception('Doing it wrong! Headers sent already.');
         }
-        if (!($name = trim($name))) {
+        if (!($name = $this->Trim($name))) {
             return; // Not possible.
         }
         $expires_after = max(0, $expires_after);
@@ -89,7 +92,7 @@ class Cookie extends AbsBase
         setcookie($name, $value, $expires, $cookie_path, $cookie_domain);
         setcookie($name, $value, $expires, $site_cookie_path, $cookie_domain);
 
-        if (stripos($name, '_test_') !== 0 && (!defined('TEST_COOKIE') || $name !== TEST_COOKIE)) {
+        if (mb_stripos($name, '_test_') !== 0 && (!defined('TEST_COOKIE') || $name !== TEST_COOKIE)) {
             $_COOKIE[$name] = $value; // Update in real-time.
         }
     }
@@ -104,7 +107,7 @@ class Cookie extends AbsBase
      */
     public function get(string $name, string $key = ''): string
     {
-        if (!($name = trim($name))) {
+        if (!($name = $this->Trim($name))) {
             return ''; // Not possible.
         }
         if (isset($_COOKIE[$name]) && is_string($_COOKIE[$name])) {

@@ -50,7 +50,7 @@ class HtmlWhitespace extends AbsBase implements Interfaces\HtmlConstants
         if (is_null($whitespace = &$this->staticKey(__FUNCTION__.'_whitespace'))) {
             $whitespace = implode('|', array_keys($this::HTML_WHITESPACE));
         }
-        $string = preg_replace('/('.$whitespace.')('.$whitespace.')('.$whitespace.')+/i', '${1}${2}', $string);
+        $string = preg_replace('/('.$whitespace.')('.$whitespace.')('.$whitespace.')+/u', '${1}${2}', $string);
 
         return $this->Eols->normalize($string);
     }

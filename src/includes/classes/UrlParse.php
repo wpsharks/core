@@ -9,14 +9,19 @@ namespace WebSharks\Core\Classes;
  */
 class UrlParse extends AbsBase
 {
+    protected $Trim;
+
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
-    {
+    public function __construct(
+        Trim $Trim
+    ) {
         parent::__construct();
+
+        $this->Trim = $Trim;
     }
 
     /**
@@ -31,7 +36,7 @@ class UrlParse extends AbsBase
      */
     public function __invoke(string $url_uri_qsl, int $component = -1)
     {
-        ${'//'} = strpos($url_uri_qsl, '//') === 0;
+        ${'//'} = mb_strpos($url_uri_qsl, '//') === 0;
 
         if ($component > -1) {
             if (${'//'} && $component === PHP_URL_SCHEME) {
@@ -40,7 +45,7 @@ class UrlParse extends AbsBase
             return ($part = parse_url($url_uri_qsl, $component));
         } else {
             if (!is_array($parts = parse_url($url_uri_qsl))) {
-                return ($parts = array());
+                return ($parts = []);
             }
             if (${'//'}) {
                 $parts['scheme'] = '//';
@@ -91,7 +96,7 @@ class UrlParse extends AbsBase
             $pass .= '@';
         }
         if (!empty($parts['path'])) {
-            $path = '/'.ltrim($parts['path'], '/');
+            $path = '/'.$this->Trim->left($parts['path'], '/');
         }
         if (!empty($parts['query'])) {
             $query = '?'.$parts['query'];

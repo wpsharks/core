@@ -30,8 +30,8 @@ class UrlHash extends AbsBase
      */
     public function strip(string $url_uri_qsl): string
     {
-        if (strpos($url_uri_qsl, '#') !== false) {
-            $url_uri_qsl = strstr($url_uri_qsl, '#', true);
+        if (mb_strpos($url_uri_qsl, '#') !== false) {
+            $url_uri_qsl = mb_strstr($url_uri_qsl, '#', true);
         }
         return $url_uri_qsl;
     }

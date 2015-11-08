@@ -9,14 +9,19 @@ namespace WebSharks\Core\Classes;
  */
 class ReplaceOnce extends AbsBase
 {
+    protected $SubstrReplace;
+
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
-    {
+    public function __construct(
+        SubstrReplace $SubstrReplace
+    ) {
         parent::__construct();
+
+        $this->SubstrReplace = $SubstrReplace;
     }
 
     /**
@@ -40,44 +45,52 @@ class ReplaceOnce extends AbsBase
 
             return $value;
         }
-        $value  = (string) $value;
-        $strpos = $caSe_insensitive ? 'stripos' : 'strpos';
+        $value     = (string) $value; // Force string (always).
+        $mb_strpos = $caSe_insensitive ? 'mb_stripos' : 'mb_strpos';
 
-        if (is_array($needle)) {
-            if (is_array($replace)) {
+        if (is_array($needle) || is_object($needle)) {
+            $needle = (array) $needle; // Force array.
+
+            if (is_array($replace) || is_object($replace)) {
+                $replace = (array) $replace; // Force array.
+
                 foreach ($needle as $_key => $_needle) {
                     $_needle = (string) $_needle;
-                    if (($_strpos = $strpos($value, $_needle)) !== false) {
-                        $_length  = strlen($_needle);
-                        $_replace = isset($replace[$_key]) ? (string) $replace[$_key] : '';
-                        $value    = substr_replace($value, $_replace, $_strpos, $_length);
+                    if (($_mb_strpos = $mb_strpos($value, $_needle)) !== false) {
+                        $_mb_strlen = mb_strlen($_needle);
+                        $_replace   = isset($replace[$_key]) ? (string) $replace[$_key] : '';
+                        $value      = $this->SubstrReplace($value, $_replace, $_mb_strpos, $_mb_strlen);
                     }
-                } // unset($_key, $_needle, $_strpos, $_length, $_replace);
+                } // unset($_key, $_needle, $_mb_strpos, $_mb_strlen, $_replace);
 
                 return $value;
             } else {
-                $replace = (string) $replace;
+                $replace = (string) $replace; // Force string.
+
                 foreach ($needle as $_key => $_needle) {
                     $_needle = (string) $_needle;
-                    if (($_strpos = $strpos($value, $_needle)) !== false) {
-                        $_length = strlen($_needle);
-                        $value   = substr_replace($value, $replace, $_strpos, $_length);
+                    if (($_mb_strpos = $mb_strpos($value, $_needle)) !== false) {
+                        $_mb_strlen = mb_strlen($_needle);
+                        $value      = $this->SubstrReplace($value, $replace, $_mb_strpos, $_mb_strlen);
                     }
-                } // unset($_key, $_needle, $_strpos, $_length);
+                } // unset($_key, $_needle, $_mb_strpos, $_mb_strlen);
 
                 return $value;
             }
         } else {
-            $needle = (string) $needle;
-            if (($_strpos = $strpos($value, $needle)) !== false) {
-                $_length = strlen($needle);
-                if (is_array($replace)) {
+            $needle = (string) $needle; // Force string.
+
+            if (($_mb_strpos = $mb_strpos($value, $needle)) !== false) {
+                $_mb_strlen = mb_strlen($needle);
+
+                if (is_array($replace) || is_object($replace)) {
+                    $replace  = array_values((array) $replace); // Force array.
                     $_replace = isset($replace[0]) ? (string) $replace[0] : '';
                 } else {
-                    $_replace = (string) $replace;
+                    $_replace = (string) $replace; // Force string.
                 }
-                $value = substr_replace($value, $_replace, $_strpos, $_length);
-                // unset($_strpos, $_length, $_replace);
+                $value = $this->SubstrReplace($value, $_replace, $_mb_strpos, $_mb_strlen);
+                // unset($_mb_strpos, $_mb_strlen, $_replace);
             }
             return $value;
         }

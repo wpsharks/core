@@ -44,31 +44,32 @@ class HtmlTrim extends AbsBase implements Interfaces\HtmlConstants
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->__invoke($_value, $chars, $extra_chars, $side);
-            }
-            unset($_key, $_value); // Housekeeping.
+            } // unset($_key, $_value); // Housekeeping.
 
-            return $this->Trim($value, $chars, $extra_chars, $side);
+            return $value;
         }
-        $value = (string) $value;
-        $side  = strtolower($side);
+        $string = (string) $value;
 
+        if (!isset($string[0])) {
+            return $string;
+        }
         if (is_null($whitespace = &$this->staticKey(__FUNCTION__.'_whitespace'))) {
             $whitespace = implode('|', array_keys($this::HTML_WHITESPACE));
         }
         switch ($side) {
             case 'l': // Left trim.
-                $value = preg_replace('/^(?:'.$whitespace.')+/', '', $value);
+                $string = preg_replace('/^(?:'.$whitespace.')+/u', '', $string);
                 break; // Break switch handler.
 
             case 'r': // Right trim.
-                $value = preg_replace('/(?:'.$whitespace.')+$/', '', $value);
+                $string = preg_replace('/(?:'.$whitespace.')+$/u', '', $string);
                 break; // Break switch handler.
 
             default: // Both sides.
-                $value = preg_replace('/^(?:'.$whitespace.')+|(?:'.$whitespace.')+$/', '', $value);
+                $string = preg_replace('/^(?:'.$whitespace.')+|(?:'.$whitespace.')+$/u', '', $string);
                 break; // Break switch handler.
         }
-        return $this->Trim($value, $chars, $extra_chars, $side);
+        return $this->Trim($string, $chars, $extra_chars, $side);
     }
 
     /**

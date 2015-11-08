@@ -54,10 +54,10 @@ class HtmlBalance extends AbsBase
         if (!($string = (string) $value)) {
             return $string;
         }
-        if (stripos($string, '</html>') !== false) {
+        if (mb_stripos($string, '</html>') !== false) {
             return $string;
         }
-        if (stripos($string, '</body>') !== false) {
+        if (mb_stripos($string, '</body>') !== false) {
             return $string;
         }
         $html = // UTF-8 encoding.
@@ -75,7 +75,7 @@ class HtmlBalance extends AbsBase
         $Dom->loadHTML($html);
 
         $string = $Dom->saveHTML($Dom->getElementsByTagName('body')->item(0));
-        $string = str_ireplace(array('<body>', '</body>'), '', $string);
+        $string = preg_replace(['/\<body\>/ui', '/\<\/body\>/ui'], '', $string);
         $string = $this->HtmlTrim($string);
 
         return $string;

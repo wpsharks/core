@@ -39,9 +39,9 @@ class UrlHost extends AbsBase
     public function parse(string $host, bool $no_port = false): array
     {
         if ($no_port) {
-            $host = preg_replace('/\:[0-9]+$/', '', $host);
+            $host = preg_replace('/\:[0-9]+$/u', '', $host);
         }
-        $name  = strtolower($host);
+        $name  = mb_strtolower($host);
         $parts = explode('.', $name);
         $subs  = array_slice($parts, 0, -2);
         $sub   = implode('.', $subs); // `abc.xyz`

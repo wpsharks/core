@@ -30,14 +30,13 @@ interface HtmlConstants
      * @type array HTML whitespace; keys are regex patterns.
      */
     const HTML_WHITESPACE = [
-        '\0'                         => "\0",
-        '\x0B'                       => "\x0B",
-        '\s'                         => "\r\n\t ",
-        '\xC2\xA0'                   => "\xC2\xA0",
-        '&nbsp;'                     => '&nbsp;',
-        '\<br\>'                     => '<br>',
-        '\<br\s*\/\>'                => '<br/>',
-        '\<p\>(?:&nbsp;|\s)*\<\/p\>' => '<p></p>',
+        '\0'                               => "\0",
+        '\x0B'                             => "\x0B",
+        '\s'                               => "\r\n\t ",
+        '\xC2\xA0'                         => "\xC2\xA0",
+        '&nbsp;'                           => '&nbsp;',
+        '\<[Bb][Rr]\s*(?:\/\s*)?\>'        => '<br/>',
+        '\<[Pp]\>(?:&nbsp;|\s)*\<\/[Pp]\>' => '<p></p>',
     ];
 
     /**

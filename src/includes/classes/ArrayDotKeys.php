@@ -27,6 +27,8 @@ class ArrayDotKeys extends AbsBase
     /**
      * Builds an array w/ ONE dimension; using DOT `.` keys (e.g., `key.ID`).
      *
+     * @since 15xxxx Adding array utils.
+     *
      * @param array $array Any input array will do fine here.
      *
      * @return array An array w/ ONE dimension; using DOT `.` keys.

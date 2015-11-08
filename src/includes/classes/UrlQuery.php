@@ -40,8 +40,8 @@ class UrlQuery extends AbsBase implements Interfaces\UrlConstants, Interfaces\Ht
      */
     public function strip(string $url_uri_qsl): string
     {
-        if (strpos($url_uri_qsl, '?') !== false) {
-            $url_uri_qsl = strstr($url_uri_qsl, '?', true);
+        if (mb_strpos($url_uri_qsl, '?') !== false) {
+            $url_uri_qsl = mb_strstr($url_uri_qsl, '?', true);
         }
         return $url_uri_qsl;
     }
@@ -63,13 +63,13 @@ class UrlQuery extends AbsBase implements Interfaces\UrlConstants, Interfaces\Ht
         if (is_null($regex_amps = &$this->staticKey(__FUNCTION__.'_regex_amps'))) {
             $regex_amps = implode('|', array_keys($this::HTML_AMPERSAND_ENTITIES));
         }
-        $qs = preg_replace('/(?:'.$regex_amps.')/', '&', $qs);
+        $qs = preg_replace('/(?:'.$regex_amps.')/u', '&', $qs);
 
-        if (preg_match('/^'.$this::URL_REGEX_FRAG_SCHEME.'/', $qs)) {
+        if (preg_match('/^'.$this::URL_REGEX_FRAG_SCHEME.'/u', $qs)) {
             $qs = (string) $this->UrlParse($qs, PHP_URL_QUERY);
         } elseif (in_array($string[0], ['/', '?'], true)) {
             $qs = (string) $this->UrlParse($qs, PHP_URL_QUERY);
-        } elseif (strpos($qs, '?') !== false) {
+        } elseif (mb_strpos($qs, '?') !== false) {
             list(, $qs) = explode('?', $qs, 2);
         }
         $qs = $this->Trim($qs, '', '?=&');
@@ -96,7 +96,7 @@ class UrlQuery extends AbsBase implements Interfaces\UrlConstants, Interfaces\Ht
             $array = &$___parent_array;
             $qs    = $qs_url_uri;
         } else {
-            $array = array(); // Initialize.
+            $array = []; // Initialize.
             $qs    = $this->string($qs_url_uri);
         }
         foreach (explode('&', $qs) as $_name_value) {
@@ -115,8 +115,8 @@ class UrlQuery extends AbsBase implements Interfaces\UrlConstants, Interfaces\Ht
             if ($convert_dots_spaces) {
                 $_name = str_replace(array('.', ' '), '_', $_name);
             }
-            if (strpos($_name, '[') !== false // Quick check (optimization).
-                && preg_match('/^(?P<name>[^\[]+)\[(?P<nested_name>[^\]]*)\](?P<deep>.*)$/', $_name, $_m)) {
+            if (mb_strpos($_name, '[') !== false // Quick check (optimization).
+                && preg_match('/^(?P<name>[^\[]+)\[(?P<nested_name>[^\]]*)\](?P<deep>.*)$/u', $_name, $_m)) {
                 if (!isset($array[$_m['name']])) {
                     $array[$_m['name']] = array();
                 }

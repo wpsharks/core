@@ -9,11 +9,13 @@ namespace WebSharks\Core\Classes;
  */
 class ReplaceCodes extends AbsBase
 {
+    protected $WdRegex;
     protected $VarDump;
     protected $UrlQuery;
+    protected $RegexQuote;
+    protected $RegexPattern;
     protected $ArrayDotKeys;
     protected $ArrayDimensions;
-    protected $WildcardPattern;
 
     /**
      * Class constructor.
@@ -21,57 +23,54 @@ class ReplaceCodes extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
+        WdRegex $WdRegex,
         VarDump $VarDump,
         UrlQuery $UrlQuery,
+        RegexQuote $RegexQuote,
+        RegexPattern $RegexPattern,
         ArrayDotKeys $ArrayDotKeys,
-        ArrayDimensions $ArrayDimensions,
-        WildcardPattern $WildcardPattern
+        ArrayDimensions $ArrayDimensions
     ) {
         parent::__construct();
 
+        $this->WdRegex         = $WdRegex;
         $this->VarDump         = $VarDump;
         $this->UrlQuery        = $UrlQuery;
+        $this->RegexQuote      = $RegexQuote;
+        $this->RegexPattern    = $RegexPattern;
         $this->ArrayDotKeys    = $ArrayDotKeys;
         $this->ArrayDimensions = $ArrayDimensions;
-        $this->WildcardPattern = $WildcardPattern;
     }
 
     /**
-     * Process replacement codes deeply.
+     * Fill replacement codes deeply.
      *
      * @since 150424 Initial release.
      *
      * @param mixed  $value               Any value will do just fine here.
      * @param array  $vars                Vars that will be used to fill replacement codes.
-     * @param bool   $urlencode           Optional. Defaults to a `FALSE` value. If this is `TRUE`, all replacement
-     *                                    code values will be urlencoded automatically. Setting this to a `TRUE` value
-     *                                    also enables some additional magic replacement codes.
-     * @param string $implode_non_scalars Optional. By default, any non-scalar values in `$meta_vars` and/or `$vars`
-     *                                    will be JSON encoded by this routine before replacements are performed.
-     *                                    However, this behavior can be modified by passing this parameter
-     *                                    with a non-empty string value to implode such values by.
-     * @param bool   $caSe_insensitive    CaSe insensitive? Defaults to a `FALSE` value.
-     * @param bool   $___raw_vars         Internal use only.
-     * @param bool   $___vars             Internal use only.
-     * @param bool   $___recursion        Internal use only.
+     *                                    Variable keys may NOT contain these characters: `%`, `/`
+     * @param bool   $urlencode           Optional. If this is `true`, all replacement code values will be urlencoded automatically.
+     * @param string $implode_non_scalars Optional. By default, any non-scalar values will be JSON-encoded by this routine, before replacements occur.
+     *                                    However, this behavior can be modified by passing this parameter with a non-empty string value to implode such values by.
+     * @param bool   $___raw_vars         Internal use only; during recursion.
+     * @param bool   $___vars             Internal use only; during recursion.
      *
-     * @return string|array|object Value after replacing all codes deeply.
+     * @return string|array|object After replacing all codes deeply.
      */
     public function __invoke(
         $value,
         array $vars,
         bool $urlencode = false,
         string $implode_non_scalars = '',
-        bool $caSe_insensitive = false,
         bool $___raw_vars = null,
-        bool $___vars = null,
-        bool $___recursion = null
+        bool $___vars = null
     ) {
         if (isset($___raw_vars, $___vars)) {
             goto replace_codes_deep;
         }
-        $___raw_vars = $vars; // Copy of input vars.
-        $___vars     = array(); // Initialize.
+        $___raw_vars = $vars; // Copy.
+        $___vars     = []; // Initialize.
 
         foreach ($this->ArrayDotKeys->get($___raw_vars) as $_key => $_value) {
             if (is_resource($_value)) {
@@ -100,87 +99,78 @@ class ReplaceCodes extends AbsBase
                     $vars,
                     $urlencode,
                     $implode_non_scalars,
-                    $caSe_insensitive,
                     $___raw_vars,
-                    $___vars,
-                    true
+                    $___vars
                 );
             } // unset($_key, $_value);
 
-            if (!$___recursion) {
-                return $this->__invoke(
-                    $value,
-                    $vars,
-                    $urlencode,
-                    $implode_non_scalars,
-                    $caSe_insensitive,
-                    $___raw_vars,
-                    $___vars,
-                    true
-                );
-            }
             return $value;
         }
-        if (!($value = (string) $value)) {
-            return $value; // Nothing to do.
+        if (!($string = (string) $value)) {
+            return $string; // Nothing to do.
         }
-        if (strpos($value, '%%') === false) {
-            return $value; // Nothing to do.
+        if (mb_strpos($string, '%%') === false) {
+            return $string; // Nothing to do.
         }
-        $str_replace     = $caSe_insensitive ? 'str_ireplace' : 'str_replace';
         $maybe_urlencode = $urlencode ? 'urlencode' : function ($v) {
-            return $v; // Do nothing; just a simply passthrough.
+            return $v; // Do nothing; passthrough.
         };
-        if (stripos($value, '%%__var_dump__%%') !== false) {
-            $value = $str_replace('%%__var_dump__%%', $maybe_urlencode($this->VarDump($___vars)), $value);
+        if (mb_stripos($string, '%%__var_dump__%%') !== false) {
+            $string = preg_replace_callback('/%%__var_dump__%%/ui', function () use (&$maybe_urlencode, &$___vars) {
+                return $maybe_urlencode($this->VarDump($___vars));
+            }, $string);
         }
-        if (stripos($value, '%%__serialize__%%') !== false) {
-            $value = $str_replace('%%__serialize__%%', $maybe_urlencode(serialize($___vars)), $value);
+        if (mb_stripos($string, '%%__serialize__%%') !== false) {
+            $string = preg_replace_callback('/%%__serialize__%%/ui', function () use (&$maybe_urlencode, &$___vars) {
+                return $maybe_urlencode(serialize($___vars));
+            }, $string);
         }
-        if (stripos($value, '%%__json_encode__%%') !== false) {
-            $value = $str_replace('%%__json_encode__%%', $maybe_urlencode(json_encode($___vars)), $value);
+        if (mb_stripos($string, '%%__json_encode__%%') !== false) {
+            $string = preg_replace_callback('/%%__json_encode__%%/ui', function () use (&$maybe_urlencode, &$___vars) {
+                return $maybe_urlencode(json_encode($___vars));
+            }, $string);
         }
-        if ($urlencode && stripos($value, '%%__query_string__%%') !== false) {
-            $value = $str_replace('%%__query_string__%%', $this->UrlQuery->build($___vars), $value);
+        if ($urlencode && mb_stripos($string, '%%__query_string__%%') !== false) {
+            $string = preg_replace_callback('/%%__query_string__%%/ui', function () use (&$___vars) {
+                return $this->UrlQuery->build($___vars);
+            }, $string);
         }
-        $_iteration_counter = 1; // Check completion every 10th iteration to save time.
+        $_iteration_counter = 0; // Check completion every 5th iteration to save time.
 
         foreach ($___vars as $_key => $_value) {
-            $value = $str_replace('%%'.$_key.'%%', $maybe_urlencode($_value), $value);
-            if ($_iteration_counter >= 10) {
+            $string = preg_replace_callback('/%%'.$this->RegexQuote($_key).'%%/ui', function () use (&$maybe_urlencode, &$_value) {
+                return $maybe_urlencode($_value); // Fill replacement codes.
+            }, $string); // Note that these are all caSe-insensitive.
+
+            if (++$_iteration_counter >= 5) {
                 $_iteration_counter = 0;
-                if (strpos($value, '%%') === false) {
-                    return $value;
+                if (mb_strpos($string, '%%') === false) {
+                    return $string;
                 }
             }
-            ++$_iteration_counter; // Increment counter.
         } // unset($_iteration_counter, $_key, $_value); // Housekeeping.
 
-        if (strpos($value, '.*') !== false && strpos($value, '%%') !== false) {
-            $value = preg_replace_callback(
-                '/%%(?P<pattern>.+?\.\*)(?:\|(?P<delimiter>.*?))?'.
-                '(?P<include_keys>\[(?P<key_delimiter>.*?)\])?%%/s',
-                function ($m) use ($caSe_insensitive, $___vars, $maybe_urlencode) {
-                    $values = array();
-                    $___var_keys = array_keys($___vars);
-                    $keys = $this->WildcardPattern->in(
-                        $m['pattern'],
-                        $___var_keys,
-                        $caSe_insensitive,
-                        true
-                    );
-                    foreach ($keys as $_key) {
+        if (mb_strpos($string, '%%/') !== false) { // Watered-down regex-based codes?
+            $___var_keys = array_keys($___vars); // One-time only; may need these down below.
+
+            $string = preg_replace_callback(
+                '/%%\/(?P<pattern>[^%\/]+?)(?:\/(?P<delimiter>[^%\/]*?))?(?:\/(?P<key_delimiter>[^%\/]*?))?%%/u',
+                function ($m) use (&$maybe_urlencode, &$___vars, &$___var_keys) {
+                    $values = []; // Initialize.
+                    $regex = $this->WdRegex($m['pattern'], '.');
+
+                    if (!($keys = $this->RegexPattern->in($regex, $___var_keys, true))) {
+                        return; // No matching keys.
+                    }
+                    foreach ($keys as $_key) { // Matching keys.
                         $values[$___var_keys[$_key]] = $___vars[$___var_keys[$_key]];
                     } // unset($_key); // Housekeeping.
 
                     if (empty($m['delimiter'])) {
                         $m['delimiter'] = ', ';
                     }
-                    if (empty($m['include_keys'])) {
-                        $m['include_keys'] = '';
-                    }
                     if (empty($m['key_delimiter'])) {
-                        $m['key_delimiter'] = ' = ';
+                        $m['key_delimiter'] = '';
                     }
                     $m['delimiter'] = str_replace(
                         array('\r', '\n', '\t'),
@@ -192,53 +182,19 @@ class ReplaceCodes extends AbsBase
                         array("\r", "\n", "\t"),
                         $m['key_delimiter']
                     );
-                    if ($m['include_keys']) {
+                    if ($m['delimiter'] === '&' && $m['key_delimiter'] === '=') {
+                        return $this->UrlQuery->build($values);
+                    }
+                    if ($m['key_delimiter']) {
                         foreach ($values as $_key => &$_value) {
                             $_value = $_key.$m['key_delimiter'].$_value;
                         } // unset($_key, $_value); // Housekeeping.
                     }
-                    if ($m['delimiter'] === '&' && !$m['include_keys']) {
-                        return $this->UrlQuery->build($values);
-                    }
                     return $maybe_urlencode(implode($m['delimiter'], $values));
                 },
-                $value
+                $string
             );
         }
-        if (!$___recursion) {
-            return $this->__invoke(
-                $value,
-                $vars,
-                $urlencode,
-                $implode_non_scalars,
-                $caSe_insensitive,
-                $___raw_vars,
-                $___vars,
-                true
-            );
-        }
-        return preg_replace('/%%.+?%%/', '', $value);
-    }
-
-    /**
-     * Process replacement codes deeply (caSe insensitive).
-     *
-     * @since 150424 Initial release.
-     *
-     * @param mixed  $value               Any value will do just fine here.
-     * @param array  $vars                Vars that will be used to fill replacement codes.
-     * @param bool   $urlencode           Optional. Defaults to a `FALSE` value. If this is `TRUE`, all replacement
-     *                                    code values will be urlencoded automatically. Setting this to a `TRUE` value
-     *                                    also enables some additional magic replacement codes.
-     * @param string $implode_non_scalars Optional. By default, any non-scalar values in `$meta_vars` and/or `$vars`
-     *                                    will be JSON encoded by this routine before replacements are performed.
-     *                                    However, this behavior can be modified by passing this parameter
-     *                                    with a non-empty string value to implode such values by.
-     *
-     * @return string|array|object Value after replacing all codes deeply.
-     */
-    public function i($value, array $vars = array(), bool $urlencode = false, string $implode_non_scalars = '')
-    {
-        return $this->__invoke($value, $vars, $urlencode, $implode_non_scalars, true);
+        return preg_replace('/%%.+?%%/us', '', $string);
     }
 }

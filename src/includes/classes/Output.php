@@ -10,7 +10,6 @@ namespace WebSharks\Core\Classes;
 class Output extends AbsBase
 {
     protected $PhpHas;
-    protected $PhpExecTime;
 
     /**
      * Class constructor.
@@ -18,27 +17,12 @@ class Output extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
-        PhpHas $PhpHas,
-        PhpExecTime $PhpExecTime
+        PhpHas $PhpHas
     ) {
         parent::__construct();
 
-        $this->PhpHas      = $PhpHas;
-        $this->PhpExecTime = $PhpExecTime;
+        $this->PhpHas = $PhpHas;
     }
-
-    /**
-     * Prepares for output delivery.
-     *
-     * @since 150424 Initial release.
-     */
-    public function prep()
-    {
-        $this->PhpExecTime->max(0);
-        $this->gZipCompressionOff();
-        $this->buffersEndClean();
-    }
-
     /**
      * Disables GZIP compression.
      *
@@ -46,6 +30,9 @@ class Output extends AbsBase
      */
     public function gZipCompressionOff()
     {
+        if (headers_sent()) {
+            throw new Exception('Heading already sent!');
+        }
         @ini_set('zlib.output_compression', 0);
         if ($this->PhpHas->callableFunction('apache_setenv')) {
             @apache_setenv('no-gzip', '1');
@@ -59,8 +46,11 @@ class Output extends AbsBase
      */
     public function buffersEndClean()
     {
+        if (headers_sent()) {
+            throw new Exception('Heading already sent!');
+        }
         while (@ob_end_clean()) {
-            // Clean buffers :-)
+            // End & clean any open buffers.
         }
     }
 }

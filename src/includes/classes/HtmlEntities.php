@@ -41,6 +41,9 @@ class HtmlEntities extends AbsBase
         }
         $string = (string) $value;
 
+        if (!isset($string[0])) {
+            return $string;
+        }
         if (!isset($flags)) {
             $flags = ENT_HTML5 | ENT_QUOTES | ENT_SUBSTITUTE;
         }
@@ -68,6 +71,9 @@ class HtmlEntities extends AbsBase
         }
         $string = (string) $value;
 
+        if (!isset($string[0])) {
+            return $string;
+        }
         if (!isset($flags)) {
             $flags = ENT_HTML5 | ENT_QUOTES;
         }

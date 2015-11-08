@@ -39,15 +39,15 @@ class UrlScheme extends AbsBase
         if (!isset($scheme)) {
             $scheme = $this->UrlCurrent->scheme();
         }
-        if (substr($url, 0, 2) === '//') {
+        if (mb_substr($url, 0, 2) === '//') {
             $url = 'http:'.$url;
         }
         if ($scheme === '//') {
-            $url = preg_replace('/^\w+\:\/\//', '//', $url);
+            $url = preg_replace('/^\w+\:\/\//u', '//', $url);
         } elseif ($scheme === 'relative') {
-            $url = preg_replace('/^\w+\:\/\/[^\/]*/', '', $url);
+            $url = preg_replace('/^\w+\:\/\/[^\/]*/u', '', $url);
         } else {
-            $url = preg_replace('/^\w+\:\/\//', $scheme.'://', $url);
+            $url = preg_replace('/^\w+\:\/\//u', $scheme.'://', $url);
         }
         return $url;
     }

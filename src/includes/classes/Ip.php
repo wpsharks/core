@@ -9,7 +9,9 @@ namespace WebSharks\Core\Classes;
  */
 class Ip extends AbsBase
 {
+    protected $Trim;
     protected $FsDir;
+    protected $StrPad;
     protected $UrlRemote;
 
     /**
@@ -18,12 +20,16 @@ class Ip extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
+        Trim $Trim,
         FsDir $FsDir,
+        StrPad $StrPad,
         UrlRemote $UrlRemote
     ) {
         parent::__construct();
 
+        $this->Trim      = $Trim;
         $this->FsDir     = $FsDir;
+        $this->StrPad    = $StrPad;
         $this->UrlRemote = $UrlRemote;
     }
 
@@ -61,7 +67,7 @@ class Ip extends AbsBase
         } // unset($_source); // Housekeeping.
 
         if (!empty($_SERVER['REMOTE_ADDR'])) {
-            return ($ip = strtolower((string) $_SERVER['REMOTE_ADDR']));
+            return ($ip = mb_strtolower((string) $_SERVER['REMOTE_ADDR']));
         }
         return ($ip = 'unknown'); // Not possible.
     }
@@ -77,11 +83,11 @@ class Ip extends AbsBase
      */
     public function getValidPublicFrom(string $list_of_possible_ips): string
     {
-        if (!($list_of_possible_ips = trim($list_of_possible_ips))) {
+        if (!($list_of_possible_ips = $this->Trim($list_of_possible_ips))) {
             return ''; // Not possible; i.e., empty string.
         }
-        foreach (preg_split('/[\s;,]+/', $list_of_possible_ips, null, PREG_SPLIT_NO_EMPTY) as $_possible_ip) {
-            if (($_valid_public_ip = filter_var(strtolower($_possible_ip), FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
+        foreach (preg_split('/[\s;,]+/u', $list_of_possible_ips, -1, PREG_SPLIT_NO_EMPTY) as $_possible_ip) {
+            if (($_valid_public_ip = filter_var(mb_strtolower($_possible_ip), FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
                 return $_valid_public_ip; // A valid public IPv4 or IPv6 address.
             }
         }
@@ -169,7 +175,7 @@ class Ip extends AbsBase
     {
         # Valid the input IP address; do we have one?
 
-        if (!($ip = trim(strtolower($ip)))) {
+        if (!($ip = $this->Trim(mb_strtolower($ip)))) {
             return false; // Not possible.
         }
         # Check the static object cache.
@@ -201,10 +207,10 @@ class Ip extends AbsBase
         # Parse response from geoPlugin service.
 
         if (!empty($json->geoplugin_regionCode)) {
-            $region = strtoupper(str_pad((string) $json->geoplugin_regionCode, 2, '0', STR_PAD_LEFT));
+            $region = mb_strtoupper($this->StrPad((string) $json->geoplugin_regionCode, 2, '0', STR_PAD_LEFT));
         }
         if (!empty($json->geoplugin_countryCode)) {
-            $country = strtoupper((string) $json->geoplugin_countryCode);
+            $country = mb_strtoupper((string) $json->geoplugin_countryCode);
         }
         # Fill the object cache; based on data validation here.
 

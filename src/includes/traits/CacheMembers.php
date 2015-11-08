@@ -74,18 +74,21 @@ trait CacheMembers
         $cache_key = &$this->{$___prop}[$function];
 
         foreach ($args as $_arg) {
-            switch (strtolower(gettype($_arg))) {
+            switch (mb_strtolower(gettype($_arg))) {
+                case 'int':
                 case 'integer':
-                    $_key = (integer) $_arg;
+                    $_key = (int) $_arg;
                     break; // Break switch handler.
 
                 case 'double':
                 case 'float':
+                case 'real':
                     $_key = (string) $_arg;
                     break; // Break switch handler.
 
+                case 'bool':
                 case 'boolean':
-                    $_key = (integer) $_arg;
+                    $_key = (int) $_arg;
                     break; // Break switch handler.
 
                 case 'array':

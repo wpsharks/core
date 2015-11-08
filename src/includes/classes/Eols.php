@@ -40,7 +40,7 @@ class Eols extends AbsBase
         }
         $string = (string) $value;
         $string = str_replace(array("\r\n", "\r"), "\n", $string);
-        $string = preg_replace('/'."\n".'{3,}/', "\n\n", $string);
+        $string = preg_replace('/'."\n".'{3,}/u', "\n\n", $string);
 
         return $string;
     }

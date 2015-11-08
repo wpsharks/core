@@ -13,8 +13,10 @@ use GetOptionKit\OptionCollection;
 abstract class AbsCliCmdBase extends AbsBase
 {
     protected $Dicer;
+
     protected $Cli;
     protected $Trim;
+    protected $UcFirst;
     protected $Coalesce;
     protected $WsVersion;
     protected $CliStream;
@@ -102,6 +104,7 @@ abstract class AbsCliCmdBase extends AbsBase
         ]);
         $this->Cli           = $this->Dicer->get(Cli::class);
         $this->Trim          = $this->Dicer->get(Trim::class);
+        $this->UcFirst       = $this->Dicer->get(UcFirst::class);
         $this->Coalesce      = $this->Dicer->get(Coalesce::class);
         $this->WsVersion     = $this->Dicer->get(WsVersion::class);
         $this->CliStream     = $this->Dicer->get(CliStream::class);
@@ -185,7 +188,7 @@ abstract class AbsCliCmdBase extends AbsBase
         }
         unset($_slug, $_desc); // Housekeeping.
 
-        return trim($info);
+        return $this->Trim($info);
     }
 
     /**
@@ -197,11 +200,11 @@ abstract class AbsCliCmdBase extends AbsBase
      */
     final protected function commandSlug(): string
     {
-        if (strpos(($via = (string) ini_get('session.name')), 'cli-phar-via::') === 0) {
+        if (mb_strpos(($via = (string) ini_get('session.name')), 'cli-phar-via::') === 0) {
             ini_set('session.name', 'PHPSESSID'); // Restore.
-            return basename(strtolower($via)); // Basename.
+            return basename(mb_strtolower($via));
         }
-        return basename(strtolower((string) $GLOBALS['argv'][0]));
+        return basename(mb_strtolower((string) $GLOBALS['argv'][0]));
     }
 
     /**
@@ -221,8 +224,8 @@ abstract class AbsCliCmdBase extends AbsBase
         }
         $slug = $this->Coalesce->notEmpty($class, $arg1);
         $slug = $class ? basename(str_replace('\\', '/', $slug)) : $slug;
-        $slug = $class ? preg_replace('/([A-Z])/', '-${1}', $slug) : $slug;
-        $slug = preg_replace('/[^a-z0-9]+/', '-', strtolower($slug));
+        $slug = $class ? preg_replace('/([A-Z])/u', '-${1}', $slug) : $slug;
+        $slug = preg_replace('/[^a-z0-9]+/u', '-', mb_strtolower($slug));
         $slug = $this->Trim($slug, '', '-');
 
         return $slug;
@@ -246,8 +249,8 @@ abstract class AbsCliCmdBase extends AbsBase
         if (!empty($aliases[$slug])) {
             $slug = $aliases[$slug];
         }
-        $parts = preg_split('/\-/', $slug, null, PREG_SPLIT_NO_EMPTY);
-        $parts = array_map('ucfirst', array_map('strtolower', $parts));
+        $parts = explode('-', $slug); // Explode into parts.
+        $parts = $this->UcFirst(array_map('mb_strtolower', $parts));
         $class = implode('', $parts); // e.g., `SubCommand`.
 
         return $class;

@@ -9,6 +9,7 @@ namespace WebSharks\Core\Classes;
  */
 class CliStream extends AbsBase
 {
+    protected $Trim;
     protected $CliColorize;
 
     /**
@@ -17,10 +18,12 @@ class CliStream extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
+        Trim $Trim,
         CliColorize $CliColorize
     ) {
         parent::__construct();
 
+        $this->Trim        = $Trim;
         $this->CliColorize = $CliColorize;
     }
 
@@ -49,7 +52,7 @@ class CliStream extends AbsBase
                 break; // Got what we wanted :-)
             }
         }
-        return trim($stdin);
+        return $this->Trim($stdin);
     }
 
     /**

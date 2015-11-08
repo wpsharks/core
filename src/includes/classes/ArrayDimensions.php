@@ -22,6 +22,8 @@ class ArrayDimensions extends AbsBase
     /**
      * Forces an array to a single dimension.
      *
+     * @since 15xxxx Adding array utils.
+     *
      * @param array $array Input array.
      *
      * @return array Output array, with only ONE dimension.

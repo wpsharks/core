@@ -40,6 +40,11 @@ class RegexQuote extends AbsBase
         }
         $string = (string) $value;
 
+        if (!isset($string[0])) {
+            return $string;
+        }
         return preg_quote($string, $delimiter);
+
+        // Multibyte safe. See: http://jas.xyz/1PvQJty
     }
 }

@@ -22,6 +22,8 @@ class ArraySort extends AbsBase
     /**
      * Sorts an array deeply by its keys.
      *
+     * @since 15xxxx Adding array utils.
+     *
      * @param array $array Input array to sort.
      * @param int   $flags Optional; defaults to `SORT_REGULAR`.
      *
@@ -35,8 +37,7 @@ class ArraySort extends AbsBase
             if (is_array($_value)) {
                 $_value = $this->byKey($_value, $flags);
             }
-        }
-        unset($_key, $_value); // Housekeeping.
+        } // unset($_key, $_value); // Housekeeping.
 
         return $array;
     }

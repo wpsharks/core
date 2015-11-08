@@ -9,14 +9,19 @@ namespace WebSharks\Core\Classes;
  */
 class FsDir extends AbsBase
 {
+    protected $Trim;
+
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
-    {
+    public function __construct(
+        Trim $Trim
+    ) {
         parent::__construct();
+
+        $this->Trim = $Trim;
     }
 
     /**
@@ -50,17 +55,17 @@ class FsDir extends AbsBase
         if (!empty($_SERVER['TMP'])) {
             $possible_dirs[] = (string) $_SERVER['TMP'];
         }
-        if (stripos(PHP_OS, 'win') === 0) {
+        if (mb_stripos(PHP_OS, 'win') === 0) {
             $possible_dirs[] = 'C:/Temp';
         }
-        if (stripos(PHP_OS, 'win') !== 0) {
+        if (mb_stripos(PHP_OS, 'win') !== 0) {
             $possible_dirs[] = '/tmp';
         }
         if (defined('WP_CONTENT_DIR')) {
             $possible_dirs[] = (string) WP_CONTENT_DIR;
         }
         foreach ($possible_dirs as $_key => $_dir) {
-            if (($_dir = trim((string) $_dir)) && @is_dir($_dir) && @is_writable($_dir)) {
+            if (($_dir = $this->Trim((string) $_dir)) && @is_dir($_dir) && @is_writable($_dir)) {
                 if (is_dir($_dir = $_dir.'/'.md5(__NAMESPACE__)) || mkdir($_dir, 0777, true)) {
                     return ($dir = $this->normalize($_dir));
                 }
@@ -95,28 +100,28 @@ class FsDir extends AbsBase
         if (!isset($string[0])) {
             return ''; // Empty.
         }
-        if (strpos($string, '://' !== false)) {
-            if (preg_match('/^(?P<stream_wrapper>[a-zA-Z0-9]+)\:\/\//', $string, $stream_wrapper)) {
-                $string = preg_replace('/^(?P<stream_wrapper>[a-zA-Z0-9]+)\:\/\//', '', $string);
+        if (mb_strpos($string, '://' !== false)) {
+            if (preg_match('/^(?P<stream_wrapper>[a-zA-Z0-9]+)\:\/\//u', $string, $stream_wrapper)) {
+                $string = preg_replace('/^(?P<stream_wrapper>[a-zA-Z0-9]+)\:\/\//u', '', $string);
             }
         }
-        if (strpos($string, ':' !== false)) {
-            if (preg_match('/^(?P<drive_letter>[a-zA-Z])\:[\/\\\\]/', $string)) {
+        if (mb_strpos($string, ':' !== false)) {
+            if (preg_match('/^(?P<drive_letter>[a-zA-Z])\:[\/\\\\]/u', $string)) {
                 $string = preg_replace_callback(
-                    '/^(?P<drive_letter>[a-zA-Z])\:[\/\\\\]/',
+                    '/^(?P<drive_letter>[a-zA-Z])\:[\/\\\\]/u',
                     function ($m) {
-                        return strtoupper($m[0]);
+                        return mb_strtoupper($m[0]);
                     },
                     $string
                 );
             }
         }
         $string = str_replace(array(DIRECTORY_SEPARATOR, '\\', '/'), '/', $string);
-        $string = preg_replace('/\/+/', '/', $string);
-        $string = $allow_trailing_slash ? $string : rtrim($string, '/');
+        $string = preg_replace('/\/+/u', '/', $string);
+        $string = $allow_trailing_slash ? $string : $this->Trim->right($string, '/');
 
         if (!empty($stream_wrapper[0])) {
-            $string = strtolower($stream_wrapper[0]).$string;
+            $string = mb_strtolower($stream_wrapper[0]).$string;
         }
         return $string;
     }

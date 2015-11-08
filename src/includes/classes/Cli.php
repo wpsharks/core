@@ -9,14 +9,19 @@ namespace WebSharks\Core\Classes;
  */
 class Cli extends AbsBase
 {
+    protected $StrCaseCmp;
+
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
-    {
+    public function __construct(
+        StrCaseCmp $StrCaseCmp
+    ) {
         parent::__construct();
+
+        $this->StrCaseCmp = $StrCaseCmp;
     }
 
     /**
@@ -31,7 +36,7 @@ class Cli extends AbsBase
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
         }
-        if (strcasecmp(PHP_SAPI, 'cli') === 0) {
+        if ($this->StrCaseCmp(PHP_SAPI, 'cli') === 0) {
             return ($is = true);
         }
         return ($is = false);

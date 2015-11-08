@@ -22,6 +22,8 @@ class ArrayIterators extends AbsBase
     /**
      * Recursive iterator.
      *
+     * @since 15xxxx Adding array utils.
+     *
      * @param array $array Any input array will do fine here.
      *
      * @return \RecursiveIteratorIterator|\RecursiveArrayIterator Recursive iterator.

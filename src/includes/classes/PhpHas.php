@@ -9,14 +9,19 @@ namespace WebSharks\Core\Classes;
  */
 class PhpHas extends AbsBase
 {
+    protected $Trim;
+
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
-    {
+    public function __construct(
+        Trim $Trim
+    ) {
         parent::__construct();
+
+        $this->Trim = $Trim;
     }
 
     /**
@@ -56,17 +61,17 @@ class PhpHas extends AbsBase
         if (is_null($disabled_functions = &$this->staticKey(__FUNCTION__.'_disabled_functions'))) {
             $disabled_functions = array(); // Initialize disabled/blacklisted functions.
 
-            if (($disable_functions = trim(ini_get('disable_functions')))) {
-                $disabled_functions = array_merge($disabled_functions, preg_split('/[\s;,]+/', strtolower($disable_functions), null, PREG_SPLIT_NO_EMPTY));
+            if (($disable_functions = $this->Trim(ini_get('disable_functions')))) {
+                $disabled_functions = array_merge($disabled_functions, preg_split('/[\s;,]+/u', mb_strtolower($disable_functions), -1, PREG_SPLIT_NO_EMPTY));
             }
-            if (($blacklist_functions = trim(ini_get('suhosin.executor.func.blacklist')))) {
-                $disabled_functions = array_merge($disabled_functions, preg_split('/[\s;,]+/', strtolower($blacklist_functions), null, PREG_SPLIT_NO_EMPTY));
+            if (($blacklist_functions = $this->Trim(ini_get('suhosin.executor.func.blacklist')))) {
+                $disabled_functions = array_merge($disabled_functions, preg_split('/[\s;,]+/u', mb_strtolower($blacklist_functions), -1, PREG_SPLIT_NO_EMPTY));
             }
         }
         if (!function_exists($function) || !is_callable($function)) {
             return ($has = false); // Not possible.
         }
-        if ($disabled_functions && in_array(strtolower($function), $disabled_functions, true)) {
+        if ($disabled_functions && in_array(mb_strtolower($function), $disabled_functions, true)) {
             return ($has = false); // Not possible.
         }
         return ($has = true);

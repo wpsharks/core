@@ -9,14 +9,22 @@ namespace WebSharks\Core\Classes;
  */
 class UrlCurrent extends AbsBase
 {
+    protected $Trim;
+    protected $StrCaseCmp;
+
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
-    {
+    public function __construct(
+        Trim $Trim,
+        StrCaseCmp $StrCaseCmp
+    ) {
         parent::__construct();
+
+        $this->Trim       = $Trim;
+        $this->StrCaseCmp = $StrCaseCmp;
     }
 
     /**
@@ -74,10 +82,10 @@ class UrlCurrent extends AbsBase
         }
         $host = ''; // Initialize.
         if (!empty($_SERVER['HTTP_HOST'])) {
-            $host = strtolower((string) $_SERVER['HTTP_HOST']);
+            $host = mb_strtolower((string) $_SERVER['HTTP_HOST']);
         }
         if ($no_port) {
-            $host = preg_replace('/\:[0-9]+$/', '', $host);
+            $host = preg_replace('/\:[0-9]+$/u', '', $host);
         }
         return $host;
     }
@@ -124,7 +132,7 @@ class UrlCurrent extends AbsBase
         if (!empty($_SERVER['REQUEST_URI'])) {
             $uri = (string) $_SERVER['REQUEST_URI'];
         }
-        $uri = '/'.ltrim($uri, '/');
+        $uri = '/'.$this->Trim->left($uri, '/');
 
         return $uri;
     }
@@ -142,7 +150,7 @@ class UrlCurrent extends AbsBase
             return $path; // Cached this already.
         }
         $path = (string) parse_url($this->uri(), PHP_URL_PATH);
-        $path = '/'.ltrim($path, '/');
+        $path = '/'.$this->Trim->left($path, '/');
 
         return $path;
     }
@@ -163,10 +171,10 @@ class UrlCurrent extends AbsBase
         if (isset($_SERVER['PATH_INFO'])) {
             $path_info = (string) $_SERVER['PATH_INFO'];
         }
-        if (strpos($path_info, '?') !== false) {
+        if (mb_strpos($path_info, '?') !== false) {
             list($path_info) = explode('?', $path_info, 2);
         }
-        $path_info = trim($path_info, '/');
+        $path_info = $this->Trim($path_info, '/');
         $path_info = str_replace('%', '%25', $path_info);
 
         return $path_info;
@@ -195,7 +203,7 @@ class UrlCurrent extends AbsBase
             }
         }
         if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
-            if (strcasecmp($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0) {
+            if ($this->StrCaseCmp($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0) {
                 return ($is = true);
             }
         }
@@ -217,7 +225,7 @@ class UrlCurrent extends AbsBase
         if (defined('LOCALHOST') && LOCALHOST) {
             return ($is = true);
         }
-        if (preg_match('/\b(?:localhost|127\.0\.0\.1)\b/i', $this->host())) {
+        if (preg_match('/\b(?:localhost|127\.0\.0\.1)\b/ui', $this->host())) {
             return ($is = true);
         }
         return ($is = false);

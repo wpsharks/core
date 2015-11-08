@@ -10,17 +10,21 @@ namespace WebSharks\Core\Classes;
 class CliUrl extends AbsBase
 {
     protected $Os;
+    protected $Trim;
 
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(Os $Os)
-    {
+    public function __construct(
+        Os $Os,
+        Trim $Trim
+    ) {
         parent::__construct();
 
-        $this->Os = $Os;
+        $this->Os   = $Os;
+        $this->Trim = $Trim;
     }
 
     /**
@@ -32,7 +36,7 @@ class CliUrl extends AbsBase
      */
     public function open(string $url)
     {
-        if (!($url = trim($url))) {
+        if (!($url = $this->Trim($url))) {
             return; // Not possible.
         }
         $url_arg = escapeshellarg($url);

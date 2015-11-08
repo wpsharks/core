@@ -9,6 +9,7 @@ namespace WebSharks\Core\Classes;
  */
 class HtmlSpcsm extends AbsBase
 {
+    protected $Trim;
     protected $PhpHas;
 
     /**
@@ -17,10 +18,12 @@ class HtmlSpcsm extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
+        Trim $Trim,
         PhpHas $PhpHas
     ) {
         parent::__construct();
 
+        $this->Trim   = $Trim;
         $this->PhpHas = $PhpHas;
     }
 
@@ -37,7 +40,7 @@ class HtmlSpcsm extends AbsBase
      */
     public function tokenize(string $string, array $tokenize_only = array(), string $marker = ''): array
     {
-        if (!($string = trim($string))) {
+        if (!($string = $this->Trim($string))) {
             return ['string' => $string, 'tokens' => array(), 'marker' => $marker];
         }
         $marker = str_replace('.', '', uniqid('', true)).($marker ? sha1($marker) : '');
@@ -48,11 +51,11 @@ class HtmlSpcsm extends AbsBase
         if ($tokenize_only && !in_array('shortcodes', $tokenize_only, true)) {
             goto pre; // Not tokenizing these.
         }
-        if (empty($GLOBALS['shortcode_tags']) || strpos($spcsm['string'], '[') === false
+        if (empty($GLOBALS['shortcode_tags']) || mb_strpos($spcsm['string'], '[') === false
             || !$this->PhpHas->callableFunction('get_shortcode_regex')) {
             goto pre; // No `[` shortcodes.
         }
-        $spcsm['string'] = preg_replace_callback('/'.get_shortcode_regex().'/s', function ($m) use (&$spcsm) {
+        $spcsm['string'] = preg_replace_callback('/'.get_shortcode_regex().'/us', function ($m) use (&$spcsm) {
             $spcsm['tokens'][] = $m[0]; // Tokenize.
             return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%';
         }, $spcsm['string']); // Shortcodes replaced by tokens.
@@ -62,7 +65,7 @@ class HtmlSpcsm extends AbsBase
         if ($tokenize_only && !in_array('pre', $tokenize_only, true)) {
             goto code; // Not tokenizing these.
         }
-        if (stripos($spcsm['string'], '<pre') === false) {
+        if (mb_stripos($spcsm['string'], '<pre') === false) {
             goto code; // Nothing to tokenize here.
         }
         $pre = // HTML `<pre>` tags.
@@ -70,7 +73,7 @@ class HtmlSpcsm extends AbsBase
             '(?P<tag_open_name>pre)'.// Tag name; e.g. a `pre` tag.
             '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'.// Attributes & `>`.
             '(?P<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</pre>` tag.
+            '(?P<tag_close>\<\/\\2\>)/uis'; // e.g. closing `</pre>` tag.
 
         $spcsm['string'] = preg_replace_callback($pre, function ($m) use (&$spcsm) {
             $spcsm['tokens'][] = $m[0]; // Tokenize.
@@ -82,7 +85,7 @@ class HtmlSpcsm extends AbsBase
         if ($tokenize_only && !in_array('code', $tokenize_only, true)) {
             goto samp; // Not tokenizing these.
         }
-        if (stripos($spcsm['string'], '<code') === false) {
+        if (mb_stripos($spcsm['string'], '<code') === false) {
             goto samp; // Nothing to tokenize here.
         }
         $code = // HTML `<code>` tags.
@@ -90,7 +93,7 @@ class HtmlSpcsm extends AbsBase
             '(?P<tag_open_name>code)'.// Tag name; e.g. a `code` tag.
             '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'.// Attributes & `>`.
             '(?P<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</code>` tag.
+            '(?P<tag_close>\<\/\\2\>)/uis'; // e.g. closing `</code>` tag.
 
         $spcsm['string'] = preg_replace_callback($code, function ($m) use (&$spcsm) {
             $spcsm['tokens'][] = $m[0]; // Tokenize.
@@ -102,7 +105,7 @@ class HtmlSpcsm extends AbsBase
         if ($tokenize_only && !in_array('samp', $tokenize_only, true)) {
             goto md_fences; // Not tokenizing these.
         }
-        if (stripos($spcsm['string'], '<samp') === false) {
+        if (mb_stripos($spcsm['string'], '<samp') === false) {
             goto md_fences; // Nothing to tokenize here.
         }
         $samp = // HTML `<samp>` tags.
@@ -110,7 +113,7 @@ class HtmlSpcsm extends AbsBase
             '(?P<tag_open_name>samp)'.// Tag name; e.g. a `samp` tag.
             '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'.// Attributes & `>`.
             '(?P<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</samp>` tag.
+            '(?P<tag_close>\<\/\\2\>)/uis'; // e.g. closing `</samp>` tag.
 
         $spcsm['string'] = preg_replace_callback($samp, function ($m) use (&$spcsm) {
             $spcsm['tokens'][] = $m[0]; // Tokenize.
@@ -122,13 +125,13 @@ class HtmlSpcsm extends AbsBase
         if ($tokenize_only && !in_array('md_fences', $tokenize_only, true)) {
             goto md_links; // Not tokenizing these.
         }
-        if (strpos($spcsm['string'], '~') === false && strpos($spcsm['string'], '`') === false) {
+        if (mb_strpos($spcsm['string'], '~') === false && mb_strpos($spcsm['string'], '`') === false) {
             goto md_links; // Nothing to tokenize here.
         }
         $md_fences = // Markdown pre/code fences.
             '/(?P<fence_open>~{3,}|`{3,}|`)'.// Opening fence.
             '(?P<fence_contents>.*?)'.// Contents (multiline possible).
-            '(?P<fence_close>\\1)/is'; // Closing fence; ~~~, ```, `.
+            '(?P<fence_close>\\1)/uis'; // Closing fence; ~~~, ```, `.
 
         $spcsm['string'] = preg_replace_callback($md_fences, function ($m) use (&$spcsm) {
             $spcsm['tokens'][] = $m[0]; // Tokenize.
@@ -147,8 +150,8 @@ class HtmlSpcsm extends AbsBase
             goto finale; // Not tokenizing these.
         }
         $spcsm['string'] = preg_replace_callback(
-            array('/^[ ]*(?:\[[^\]]+\])+[ ]*\:[ ]*(?:\<[^>]+\>|\S+)(?:[ ]+.+)?$/m',
-                    '/\!?\[(?:(?R)|[^\]]*)\]\([^)]+\)(?:\{[^}]*\})?/', ),
+            array('/^[ ]*(?:\[[^\]]+\])+[ ]*\:[ ]*(?:\<[^>]+\>|\S+)(?:[ ]+.+)?$/um',
+                    '/\!?\[(?:(?R)|[^\]]*)\]\([^)]+\)(?:\{[^}]*\})?/u', ),
             function ($m) use (&$spcsm) {
                 $spcsm['tokens'][] = $m[0]; // Tokenize.
                 return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%';
@@ -174,13 +177,13 @@ class HtmlSpcsm extends AbsBase
         if (!isset($spcsm['string'])) {
             return ''; // Not possible.
         }
-        if (!($string = trim((string) $spcsm['string']))) {
+        if (!($string = $this->Trim((string) $spcsm['string']))) {
             return $string; // Nothing to restore.
         }
         $tokens = isset($spcsm['tokens']) ? (array) $spcsm['tokens'] : array();
         $marker = isset($spcsm['marker']) ? (string) $spcsm['marker'] : '';
 
-        if (!$tokens || !$marker || strpos($string, '%#%') === false) {
+        if (!$tokens || !$marker || mb_strpos($string, '%#%') === false) {
             return $string; // Nothing to restore in this case.
         }
         foreach (array_reverse($tokens, true) as $_token => $_value) {

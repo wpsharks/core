@@ -77,11 +77,11 @@ class FsSize extends AbsBase
      */
     public function abbrBytes(string $string): float
     {
-        if (!preg_match('/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/i', $string, $_m)) {
+        if (!preg_match('/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/ui', $string, $_m)) {
             return (float) 0; // Force a value of `0.0`.
         }
         $value    = (float) $_m['value'];
-        $modifier = strtolower($_m['modifier']);
+        $modifier = mb_strtolower($_m['modifier']);
         unset($_m); // Housekeeping.
 
         switch ($modifier) {

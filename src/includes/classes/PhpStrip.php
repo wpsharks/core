@@ -50,7 +50,7 @@ class PhpStrip extends AbsBase
 
         ')'.// Close 'Any of these'.
 
-        '/is'; // End pattern.
+        '/uis'; // End pattern.
 
         return preg_replace($regex, '', $string);
     }

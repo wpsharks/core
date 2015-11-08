@@ -9,6 +9,7 @@ namespace WebSharks\Core\Classes;
  */
 class UrlRemote extends AbsBase
 {
+    protected $Trim;
     protected $PhpHas;
     protected $UrlQuery;
 
@@ -18,11 +19,13 @@ class UrlRemote extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
+        Trim $Trim,
         PhpHas $PhpHas,
         UrlQuery $UrlQuery
     ) {
         parent::__construct();
 
+        $this->Trim     = $Trim;
         $this->PhpHas   = $PhpHas;
         $this->UrlQuery = $UrlQuery;
     }
@@ -93,11 +96,11 @@ class UrlRemote extends AbsBase
 
         $custom_request_methods       = ['HEAD','GET','POST','PUT','PATCH','DELETE'];
         $custom_request_methods_regex = // e.g.,`HEAD::http://www.example.com/path/to/my.php`
-            '/^(?P<method>(?:'.implode('|', $custom_request_methods).'))\:{2}(?P<url>.+)/i';
+            '/^(?P<method>(?:'.implode('|', $custom_request_methods).'))\:{2}(?P<url>.+)/ui';
 
         if (preg_match($custom_request_methods_regex, $url, $_m)) {
             $url                   = $_m['url']; // URL after `::`.
-            $custom_request_method = strtoupper($_m['method']);
+            $custom_request_method = mb_strtoupper($_m['method']);
 
             if ($custom_request_method === 'HEAD') {
                 $return = $this::ARRAY_A_TYPE;
@@ -119,7 +122,7 @@ class UrlRemote extends AbsBase
         # Make sure we always have a `User-Agent`.
 
         foreach ($headers as $_header) {
-            if (stripos($_header, 'User-Agent:') === 0) {
+            if (mb_stripos($_header, 'User-Agent:') === 0) {
                 $has_user_agent = true;
             }
         }
@@ -178,7 +181,7 @@ class UrlRemote extends AbsBase
 
         $curl = curl_init(); // Initialize.
         curl_setopt_array($curl, $curl_opts);
-        $curl_body = trim((string) curl_exec($curl));
+        $curl_body = $this->Trim((string) curl_exec($curl));
 
         # Collect cURL info after request is complete.
 
@@ -188,17 +191,17 @@ class UrlRemote extends AbsBase
 
         # Parse the headers that we collected, if any.
 
-        $curl_headers = explode("\r\n\r\n", trim($curl_headers));
+        $curl_headers = explode("\r\n\r\n", $this->Trim($curl_headers));
         $curl_headers = $curl_headers[count($curl_headers) - 1];
         // ↑ Last set of headers; in case of location redirects.
 
         $_curl_headers = $curl_headers; // Temp.
         $curl_headers  = []; // Initialize array.
 
-        foreach (preg_split('/['."\r\n".']+/', $_curl_headers, null, PREG_SPLIT_NO_EMPTY) as $_line) {
-            if (isset($_line[0]) && strpos($_line, ':', 1) !== false) {
-                list($_header, $_value)                   = explode(':', $_line, 2);
-                $curl_headers[strtolower(trim($_header))] = trim($_value);
+        foreach (preg_split('/['."\r\n".']+/u', $_curl_headers, -1, PREG_SPLIT_NO_EMPTY) as $_line) {
+            if (isset($_line[0]) && mb_strpos($_line, ':', 1) !== false) {
+                list($_header, $_value)                             = explode(':', $_line, 2);
+                $curl_headers[mb_strtolower($this->Trim($_header))] = $this->Trim($_value);
             }
         } // unset($_curl_headers, $_line, $_header, $_value); // Housekeeping.
 

@@ -9,6 +9,7 @@ namespace WebSharks\Core\Classes;
  */
 class WebPurify extends AbsBase
 {
+    protected $Trim;
     protected $FsDir;
     protected $Sha1Mod;
     protected $UrlQuery;
@@ -23,6 +24,7 @@ class WebPurify extends AbsBase
      * @since 15xxxx Badwords checker.
      */
     public function __construct(
+        Trim $Trim,
         FsDir $FsDir,
         Sha1Mod $Sha1Mod,
         UrlQuery $UrlQuery,
@@ -33,6 +35,7 @@ class WebPurify extends AbsBase
     ) {
         parent::__construct();
 
+        $this->Trim      = $Trim;
         $this->FsDir     = $FsDir;
         $this->Sha1Mod   = $Sha1Mod;
         $this->UrlQuery  = $UrlQuery;
@@ -51,13 +54,13 @@ class WebPurify extends AbsBase
      *
      * @since 15xxxx Badwords checker.
      *
-     * @return string Real IP address; else `unknown` on failure.
+     * @return bool True if slug contains bad words.
      */
-    public function checkSlug(string $slug)
+    public function checkSlug(string $slug): bool
     {
         $text = mb_strtolower($slug);
-        $text = preg_replace('/[^a-z0-9]/i', ' ', $text);
-        $text = preg_replace('/\s+/', ' ', $text);
+        $text = preg_replace('/[^\p{L}\p{N}]/ui', ' ', $text);
+        $text = preg_replace('/\s+/u', ' ', $text);
 
         return $this->check($text);
     }
@@ -77,7 +80,7 @@ class WebPurify extends AbsBase
     {
         # The text is empty?
 
-        if (!($text = trim($text))) {
+        if (!($text = $this->Trim($text))) {
             return false; // Nothing to do.
         }
         # Already cached this in memory?
@@ -139,6 +142,7 @@ class WebPurify extends AbsBase
         }
         $check = (bool) $json->rsp->found; // `> 0` = `true`.
         file_put_contents($cache_file, (string) (int) $check);
+
         return $check; // True or false.
     }
 }

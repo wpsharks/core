@@ -3,24 +3,29 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 /**
- * Trim utilities.
+ * Trim (multibyte-safe).
  *
  * @since 150424 Initial release.
  */
 class Trim extends AbsBase
 {
+    protected $RegexQuote;
+
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
-    {
+    public function __construct(
+        RegexQuote $RegexQuote
+    ) {
         parent::__construct();
+
+        $this->RegexQuote = $RegexQuote;
     }
 
     /**
-     * Trims a value deeply.
+     * Trim (multibyte-safe).
      *
      * @since 150424 Initial release.
      *
@@ -40,25 +45,28 @@ class Trim extends AbsBase
 
             return $value;
         }
-        $value = (string) $value;
+        $string = (string) $value;
+
+        if (!isset($string[0])) {
+            return $string;
+        }
         $chars = isset($chars[0]) ? $chars : " \r\n\t\0\x0B";
-        $chars = $chars.$extra_chars;
-        $side  = strtolower($side);
+        $chars = $this->RegexQuote($chars.$extra_chars);
 
         switch ($side) {
             case 'l': // Left trim.
-                return ltrim($value, $chars);
+                return preg_replace('/^['.$chars.']+/u', '', $string);
 
             case 'r': // Right trim.
-                return rtrim($value, $chars);
+                return preg_replace('/['.$chars.']+$/u', '', $string);
 
             default: // Both sides.
-                return trim($value, $chars);
+                return preg_replace('/^['.$chars.']+|['.$chars.']+$/u', '', $string);
         }
     }
 
     /**
-     * Trims a value deeply (on left).
+     * Trim (multibyte-safe) on left.
      *
      * @since 150424 Initial release.
      *
@@ -74,7 +82,7 @@ class Trim extends AbsBase
     }
 
     /**
-     * Trims a value deeply (on right).
+     * Trim (multibyte-safe) on right.
      *
      * @since 150424 Initial release.
      *

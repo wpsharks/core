@@ -9,6 +9,7 @@ namespace WebSharks\Core\Classes;
  */
 class Rijndael256 extends AbsBase
 {
+    protected $Trim;
     protected $PhpHas;
     protected $Keygen;
     protected $Base64;
@@ -20,6 +21,7 @@ class Rijndael256 extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
+        Trim $Trim,
         PhpHas $PhpHas,
         Keygen $Keygen,
         Base64 $Base64,
@@ -27,6 +29,7 @@ class Rijndael256 extends AbsBase
     ) {
         parent::__construct();
 
+        $this->Trim          = $Trim;
         $this->PhpHas        = $PhpHas;
         $this->Keygen        = $Keygen;
         $this->Base64        = $Base64;
@@ -108,6 +111,6 @@ class Rijndael256 extends AbsBase
         if (!strlen($string = preg_replace('/^~r2\|/', '', $string, 1, $r2)) || !$r2) {
             return ($string = ''); // Missing packed components.
         }
-        return ($string = rtrim($string, "\0\4")); // See: <http://www.asciitable.com/>.
+        return ($string = $this->Trim->right($string, "\0\4")); // See: <http://www.asciitable.com/>.
     }
 }

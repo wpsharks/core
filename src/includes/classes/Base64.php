@@ -9,14 +9,19 @@ namespace WebSharks\Core\Classes;
  */
 class Base64 extends AbsBase
 {
+    protected $Trim;
+
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
-    {
+    public function __construct(
+        Trim $Trim
+    ) {
         parent::__construct();
+
+        $this->Trim = $Trim;
     }
 
     /**
@@ -27,7 +32,7 @@ class Base64 extends AbsBase
      * @param string $string             Input string to be base64 encoded.
      * @param array  $url_unsafe_chars   Optional array of un-safe characters. Defaults to: `array('+', '/')`.
      * @param array  $url_safe_chars     Optional array of safe character replacements. Defaults to: `array('-', '_')`.
-     * @param string $trim_padding_chars Optional string of padding chars to rtrim. Defaults to: `=`.
+     * @param string $trim_padding_chars Optional string of padding chars to right-trim. Defaults to: `=`.
      *
      * @throws Exception If the call to `base64_encode()` fails.
      *
@@ -39,7 +44,7 @@ class Base64 extends AbsBase
             throw new Exception('Base64 encoding failed (`$base64_url_safe` is NOT a string).');
         }
         $base64_url_safe = str_replace($url_unsafe_chars, $url_safe_chars, $base64_url_safe);
-        $base64_url_safe = isset($trim_padding_chars[0]) ? rtrim($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
+        $base64_url_safe = isset($trim_padding_chars[0]) ? $this->Trim->right($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
 
         return $base64_url_safe;
     }
@@ -52,7 +57,7 @@ class Base64 extends AbsBase
      * @param string $base64_url_safe    Input string to be base64 decoded.
      * @param array  $url_unsafe_chars   Optional array of un-safe characters. Defaults to: `array('+', '/')`.
      * @param array  $url_safe_chars     Optional array of safe character replacements. Defaults to: `array('-', '_')`.
-     * @param string $trim_padding_chars Optional string of padding chars to rtrim. Defaults to: `=`.
+     * @param string $trim_padding_chars Optional string of padding chars to right-trim. Defaults to: `=`.
      *
      * @throws Exception If the call to `base64_decode()` fails.
      *
@@ -60,7 +65,7 @@ class Base64 extends AbsBase
      */
     public function urlSafeDecode(string $base64_url_safe, array $url_unsafe_chars = array('+', '/'), array $url_safe_chars = array('-', '_'), string $trim_padding_chars = '='): string
     {
-        $string = isset($trim_padding_chars[0]) ? rtrim($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
+        $string = isset($trim_padding_chars[0]) ? $this->Trim->right($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
         $string = isset($trim_padding_chars[0]) ? str_pad($string, strlen($string) % 4, '=', STR_PAD_RIGHT) : $string;
         $string = str_replace($url_safe_chars, $url_unsafe_chars, $string);
 

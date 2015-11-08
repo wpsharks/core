@@ -23,9 +23,9 @@ class Exception extends \Exception
 
         $this->code = $code; // String code.
 
-        if (strpos($this->code, '.') !== false) {
-            $this->error_code  = strstr($this->code, '.', true);
-            $this->reason_code = substr(strstr($this->code, '.'), 1);
+        if (mb_strpos($this->code, '.') !== false) {
+            $this->error_code  = mb_strstr($this->code, '.', true);
+            $this->reason_code = mb_substr(mb_strstr($this->code, '.'), 1);
         } else {
             $this->error_code = $this->reason_code = '';
         }

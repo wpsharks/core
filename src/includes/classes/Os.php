@@ -46,7 +46,7 @@ class Os extends AbsBase
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
         }
-        if (stripos(PHP_OS, 'linux') === 0) {
+        if (mb_stripos(PHP_OS, 'linux') === 0) {
             return ($is = true);
         }
         return ($is = false);
@@ -64,7 +64,7 @@ class Os extends AbsBase
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
         }
-        if (stripos(PHP_OS, 'darwin') === 0) {
+        if (mb_stripos(PHP_OS, 'darwin') === 0) {
             return ($is = true);
         }
         return ($is = false);
@@ -82,7 +82,7 @@ class Os extends AbsBase
         if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
             return $is; // Cached this already.
         }
-        if (stripos(PHP_OS, 'win') === 0) {
+        if (mb_stripos(PHP_OS, 'win') === 0) {
             return ($is = true);
         }
         return ($is = false);

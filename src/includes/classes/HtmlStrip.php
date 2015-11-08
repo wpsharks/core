@@ -39,7 +39,11 @@ class HtmlStrip extends AbsBase
 
             return $value;
         }
-        $string       = (string) $value;
+        $string = (string) $value;
+
+        if (!isset($string[0])) {
+            return $string;
+        }
         $default_args = array(
             'allowed_attributes' => [],
         );
@@ -47,14 +51,14 @@ class HtmlStrip extends AbsBase
         $args = array_intersect_key($args, $default_args);
 
         $allowed_attributes = // Force lowercase.
-            array_map('strtolower', (array) $args['allowed_attributes']);
+            array_map('mb_strtolower', (array) $args['allowed_attributes']);
 
-        $regex_tags  = '/(?P<open>\<[\w\-]+)(?P<attrs>[^>]+)(?P<close>\>)/i';
-        $regex_attrs = '/\s+(?P<attr>[\w\-]+)(?:\s*\=\s*(["\']).*?\\2|\s*\=[^\s]*)?/is';
+        $regex_tags  = '/(?P<open>\<[\w\-]+)(?P<attrs>[^>]+)(?P<close>\>)/ui';
+        $regex_attrs = '/\s+(?P<attr>[\w\-]+)(?:\s*\=\s*(["\']).*?\\2|\s*\=[^\s]*)?/uis';
 
         return preg_replace_callback($regex_tags, function ($m) use ($allowed_attributes, $regex_attrs) {
             return $m['open'].preg_replace_callback($regex_attrs, function ($m) use ($allowed_attributes) {
-                return in_array(strtolower($m['attr']), $allowed_attributes, true) ? $m[0] : '';
+                return in_array(mb_strtolower($m['attr']), $allowed_attributes, true) ? $m[0] : '';
             }, $m['attrs']).$m['close']; // With modified attributes.
 
         }, $string); // Removes attributes; leaving only those allowed explicitly.

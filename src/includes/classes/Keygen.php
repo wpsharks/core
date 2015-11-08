@@ -43,46 +43,11 @@ class Keygen extends AbsBase
         if ($extra_special_chars) {
             $chars .= '-_[]{}<>~`+=,.;:/?|';
         }
-        $total_chars = strlen($chars);
+        $total_chars = mb_strlen($chars);
         for ($key = '', $_i = 0; $_i < $length; ++$_i) {
-            $key .= substr($chars, mt_rand(0, $total_chars - 1), 1);
+            $key .= mb_substr($chars, mt_rand(0, $total_chars - 1), 1);
         } // unset($_i); // Housekeeping.
 
-        return $key; // Generated randomly.
-    }
-
-    /**
-     * A unique, unguessable, non-numeric, caSe-insensitive key (20 chars max).
-     *
-     * @since 150424 Initial release.
-     *
-     * @note 32-bit systems usually have `PHP_INT_MAX` = `2147483647`.
-     *    We limit `mt_rand()` to a max of `999999999`.
-     *
-     * @note A max possible length of 20 chars assumes this function
-     *    will not be called after `Sat, 20 Nov 2286 17:46:39 GMT`.
-     *    At which point a UNIX timestamp will grow in size.
-     *
-     * @note Key always begins with an `x` to prevent PHP's `is_numeric()`
-     *    function from ever thinking it's a number in a different representation.
-     *    See: <http://php.net/manual/en/function.is-numeric.php> for further details.
-     *
-     * @return string A unique, unguessable, non-numeric, caSe-insensitive key (20 chars max).
-     */
-    public function uunnci20Max(): string
-    {
-        $microtime_19_max = number_format(microtime(true), 9, '.', '');
-        // e.g. `9999999999`.`999999999` (max decimals: `9`, max overall precision: `19`).
-        // Assuming timestamp is never > 10 digits; i.e. before `Sat, 20 Nov 2286 17:46:39 GMT`.
-
-        list($seconds_10_max, $microseconds_9_max) = explode('.', $microtime_19_max, 2);
-        // e.g. `array(`9999999999`, `999999999`)`. Max total digits combined: `19`.
-
-        $seconds_base36      = base_convert($seconds_10_max, '10', '36'); // e.g. max `9999999999`, to base 36.
-        $microseconds_base36 = base_convert($microseconds_9_max, '10', '36'); // e.g. max `999999999`, to base 36.
-        $mt_rand_base36      = base_convert(mt_rand(1, 999999999), '10', '36'); // e.g. max `999999999`, to base 36.
-        $key                 = 'x'.$mt_rand_base36.$seconds_base36.$microseconds_base36; // e.g. `xgjdgxr4ldqpdrgjdgxr`.
-
-        return $key; // Max possible value: `xgjdgxr4ldqpdrgjdgxr` (20 chars).
+        return $key;
     }
 }
