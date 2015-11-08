@@ -100,12 +100,12 @@ class FsDir extends AbsBase
         if (!isset($string[0])) {
             return ''; // Empty.
         }
-        if (mb_strpos($string, '://' !== false)) {
+        if (mb_strpos($string, '://') !== false) {
             if (preg_match('/^(?P<stream_wrapper>[a-zA-Z0-9]+)\:\/\//u', $string, $stream_wrapper)) {
                 $string = preg_replace('/^(?P<stream_wrapper>[a-zA-Z0-9]+)\:\/\//u', '', $string);
             }
         }
-        if (mb_strpos($string, ':' !== false)) {
+        if (mb_strpos($string, ':') !== false) {
             if (preg_match('/^(?P<drive_letter>[a-zA-Z])\:[\/\\\\]/u', $string)) {
                 $string = preg_replace_callback(
                     '/^(?P<drive_letter>[a-zA-Z])\:[\/\\\\]/u',
