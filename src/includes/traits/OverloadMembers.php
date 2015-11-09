@@ -2,6 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
+use WebSharks\Core\Classes\Exception;
+
 /**
  * Overload members.
  *
@@ -69,7 +71,9 @@ trait OverloadMembers
      */
     public function __get(string $property)
     {
-        if (isset($this->overload->{$property}) || property_exists($this->overload, $property)) {
+        if (isset($this->overload->{$property})) {
+            return $this->overload->{$property};
+        } elseif (property_exists($this->overload, $property)) {
             return $this->overload->{$property};
         }
         throw new Exception(sprintf('Undefined overload property: `%1$s`.', $property));
@@ -90,7 +94,7 @@ trait OverloadMembers
         if (!isset($this->writable_overload_properties[$property])) {
             throw new Exception(sprintf('Refused to set overload property: `%1$s`.', $property));
         }
-        $this->overload->{$_property} = $value;
+        $this->overload->{$property} = $value;
     }
 
     /**
@@ -107,7 +111,7 @@ trait OverloadMembers
         if (!isset($this->writable_overload_properties[$property])) {
             throw new Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
         }
-        unset($this->overload->{$_property});
+        unset($this->overload->{$property});
     }
 
     /**

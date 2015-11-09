@@ -2,6 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
+use WebSharks\Core\Classes\Exception;
+
 /**
  * Cache members.
  *

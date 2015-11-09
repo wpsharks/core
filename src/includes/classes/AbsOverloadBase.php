@@ -3,16 +3,15 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Traits;
-use WebSharks\Core\Interfaces;
 
 /**
- * Base abstraction.
+ * Base abstraction w/ overload members.
  *
- * @since 150424 Initial release.
+ * @since 15xxxx Adding an additional base class.
  */
-abstract class AbsBase implements Interfaces\Constants
+abstract class AbsOverloadBase extends AbsBase
 {
-    use Traits\CacheMembers;
+    use Traits\OverloadMembers;
 
     /**
      * Class constructor.
@@ -21,6 +20,7 @@ abstract class AbsBase implements Interfaces\Constants
      */
     public function __construct()
     {
-        $this->cacheInit();
+        parent::__construct();
+        $this->overloadInit();
     }
 }

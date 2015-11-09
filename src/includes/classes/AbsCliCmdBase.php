@@ -10,7 +10,7 @@ use GetOptionKit\OptionCollection;
  *
  * @since 15xxxx Initial release.
  */
-abstract class AbsCliCmdBase extends AbsBase
+abstract class AbsCliCmdBase extends AbsOverloadBase
 {
     protected $Dicer;
 
