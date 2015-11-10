@@ -33,7 +33,7 @@ class Output extends AbsBase
         if (headers_sent()) {
             throw new Exception('Heading already sent!');
         }
-        @ini_set('zlib.output_compression', 0);
+        @ini_set('zlib.output_compression', 'off');
         if ($this->PhpHas->callableFunction('apache_setenv')) {
             @apache_setenv('no-gzip', '1');
         }

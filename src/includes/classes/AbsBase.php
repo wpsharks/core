@@ -10,9 +10,10 @@ use WebSharks\Core\Interfaces;
  *
  * @since 150424 Initial release.
  */
-abstract class AbsBase implements Interfaces\Constants
+abstract class AbsBase implements Interfaces\Constants, \Serializable, \JsonSerializable
 {
     use Traits\CacheMembers;
+    use Traits\OverloadMembers;
 
     /**
      * Class constructor.

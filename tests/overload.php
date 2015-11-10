@@ -1,49 +1,43 @@
 <?php
+declare (strict_types = 1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes as Classes;
-use WebSharks\Dicer\Core as Dicer;
+use WebSharks\Dicer\Core as Di;
 
-ini_set('error_reporting', -1);
-ini_set('display_errors', true);
+error_reporting(-1);
+ini_set('display_errors', 'yes');
 
 require_once dirname(dirname(__FILE__)).'/src/includes/stub.php';
 
 class overload extends Classes\AbsBase
 {
-    protected $data;
-
-    public function __construct()
+    public function __construct($obj)
     {
         parent::__construct();
-        
-        $this->data = (object) [
-            'a' => 'a!',
-        ];
-        $this->public_overload($this->data);
-    }
 
-    protected function public_overload($properties)
-    {
-        if (!is_array($properties) && !is_object($properties)) {
-            throw new Exception(sprintf('Invalid type: `%1$s`.', gettype($properties)));
-        }
-        foreach ($properties as $_key_prop => &$_val_prop) {
-
-            // Treat string keys as named property/value pairs.
-            // Only nonexistent properties can be overloaded in this way.
-
-            if (is_string($_key_prop)) {
-                if (isset($_key_prop[0]) && !property_exists($this, $_key_prop)) {
-                    $this->{$_key_prop} = &$_val_prop;
-                }
-            }
-        } // unset($_key, $_value, $_property); // Housekeeping.
+        $this->overload($obj, true);
     }
 }
 
-$Di          = new Dicer();
-$overload    = $Di->get(overload::class);
-$overload->a = 'Abc';
-echo $overload->a."\n";
-echo $overload->getA()."\n";
+$obj = (object) [
+    'var' => '_',
+    'hi'  => 'hi!',
+];
+$Di       = new Di();
+$overload = $Di->get(overload::class, ['obj' => $obj]);
+
+$obj->var = '1';
+echo $obj->var;
+echo $overload->var;
+echo $overload->overload->var."\n";
+
+$overload->overload->var = '2';
+echo $obj->var;
+echo $overload->var;
+echo $overload->overload->var."\n";
+
+$overload->overload->var = '3';
+echo $obj->var;
+echo $overload->var;
+echo $overload->overload->var."\n";

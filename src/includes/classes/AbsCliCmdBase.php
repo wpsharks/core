@@ -2,7 +2,7 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Dicer\Core as Dicer;
+use WebSharks\Dicer\Core as Di;
 use GetOptionKit\OptionCollection;
 
 /**
@@ -10,10 +10,9 @@ use GetOptionKit\OptionCollection;
  *
  * @since 15xxxx Initial release.
  */
-abstract class AbsCliCmdBase extends AbsOverloadBase
+abstract class AbsCliCmdBase extends AbsBase
 {
-    protected $Dicer;
-
+    protected $Di;
     protected $Cli;
     protected $Trim;
     protected $UcFirst;
@@ -95,20 +94,20 @@ abstract class AbsCliCmdBase extends AbsOverloadBase
 
         # Dependency injector.
 
-        $this->Dicer = new Dicer([
+        $this->Di = new Di([
             'shared'        => true,
             'new_instances' => [
                 CliOpts::class,
                 OptionCollection::class,
             ],
         ]);
-        $this->Cli           = $this->Dicer->get(Cli::class);
-        $this->Trim          = $this->Dicer->get(Trim::class);
-        $this->UcFirst       = $this->Dicer->get(UcFirst::class);
-        $this->Coalesce      = $this->Dicer->get(Coalesce::class);
-        $this->WsVersion     = $this->Dicer->get(WsVersion::class);
-        $this->CliStream     = $this->Dicer->get(CliStream::class);
-        $this->CliExceptions = $this->Dicer->get(CliExceptions::class);
+        $this->Cli           = $this->Di->get(Cli::class);
+        $this->Trim          = $this->Di->get(Trim::class);
+        $this->UcFirst       = $this->Di->get(UcFirst::class);
+        $this->Coalesce      = $this->Di->get(Coalesce::class);
+        $this->WsVersion     = $this->Di->get(WsVersion::class);
+        $this->CliStream     = $this->Di->get(CliStream::class);
+        $this->CliExceptions = $this->Di->get(CliExceptions::class);
 
         # Only run this if we are in fact on a CLI.
 
@@ -128,7 +127,7 @@ abstract class AbsCliCmdBase extends AbsOverloadBase
 
         # Setup overloaded properties for read-only access.
 
-        $this->overload(['Dicer', 'version', 'config', 'command', 'sub_command']);
+        $this->overload(['Di', 'version', 'config', 'command', 'sub_command']);
 
         # Initialize any additional config. values.
 
@@ -149,7 +148,7 @@ abstract class AbsCliCmdBase extends AbsOverloadBase
             $this->CliStream->out($this->helpVersionInfo());
             exit(0); // Help/version/info in this case.
         } elseif (class_exists($this->sub_command->class_path)) {
-            $this->Dicer->get($this->sub_command->class_path, ['Primary' => $this], true);
+            $this->Di->get($this->sub_command->class_path, ['Primary' => $this], true);
             exit(1); // Default status if sub-command fails to exit properly.
         } else {
             throw new Exception('Unknown sub-command: `'.$this->sub_command->slug.'`');
