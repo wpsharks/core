@@ -9,8 +9,6 @@ namespace WebSharks\Core\Classes;
  */
 class Ascii extends AbsBase
 {
-    protected $Transliterator;
-
     /**
      * Class constructor.
      *
@@ -19,8 +17,6 @@ class Ascii extends AbsBase
     public function __construct()
     {
         parent::__construct();
-
-        $this->Transliterator = Transliterator::create($rule);
     }
 
     /**
@@ -46,6 +42,6 @@ class Ascii extends AbsBase
         if (!isset($string[0])) {
             return $string;
         }
-        return (string) $this->Transliterator->transliterate('Any-Latin; Latin-ASCII', $string);
+        return (string) transliterator_transliterate('Any-Latin; Latin-ASCII', $string);
     }
 }

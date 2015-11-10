@@ -29,15 +29,8 @@ $overload = $Di->get(overload::class, ['obj' => $obj]);
 
 $obj->var = '1';
 echo $obj->var;
-echo $overload->var;
-echo $overload->overload->var."\n";
+echo $overload->var."\n";
 
-$overload->overload->var = '2';
+$overload->var = '2';
 echo $obj->var;
-echo $overload->var;
-echo $overload->overload->var."\n";
-
-$overload->overload->var = '3';
-echo $obj->var;
-echo $overload->var;
-echo $overload->overload->var."\n";
+echo $overload->var."\n";

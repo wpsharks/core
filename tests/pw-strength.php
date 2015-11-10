@@ -10,11 +10,7 @@ ini_set('display_errors', 'yes');
 
 require_once dirname(dirname(__FILE__)).'/src/includes/stub.php';
 
-$Di           = new Di();
-$ReplaceCodes = $Di->get(Classes\ReplaceCodes::class);
+$Di         = new Di();
+$PwStrength = $Di->get(Classes\PwStrength::class);
 
-$vars = [
-    'hello'     => 'hi!',
-    'world.abc' => 'earth :-)',
-];
-echo $ReplaceCodes('%%hello%% %%/^w**$%%', $vars);
+echo $PwStrength('0aA!');
