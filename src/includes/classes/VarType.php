@@ -31,7 +31,11 @@ class VarType extends AbsBase
      */
     public function ify($value, string $type)
     {
-        if (is_array($value) || is_object($value)) {
+        if ((is_array($value) || is_object($value))
+            // If converting to array|object, do not iterate.
+            && !in_array($type, ['array', 'object'], true)) {
+            // e.g., allow array to become an object.
+
             foreach ($value as $_key => &$_value) {
                 $_value = $this->ify($_value, $type);
             } // unset($_key, $_value);

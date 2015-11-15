@@ -24,11 +24,11 @@
   },
 
   "require": {
-    "php": ">=7.0-RC3",
+    "php": ">=7.0.0-RC7",
     "ext-openssl": "*",
     "ext-curl": "*",
     "ext-mbstring": "*",
-    "websharks/dicer": "151004"
+    "websharks/dicer": "151115"
   },
   "require-dev": {
     "ramsey/uuid": "3.*",

@@ -2,8 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core;
 
+use WebSharks\Dicer\Di;
 use WebSharks\Core\Classes;
-use WebSharks\Dicer\Core as Di;
 
 error_reporting(-1);
 ini_set('display_errors', 'yes');

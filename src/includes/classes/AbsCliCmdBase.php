@@ -2,7 +2,7 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Dicer\Core as Di;
+use WebSharks\Dicer\Di;
 use GetOptionKit\OptionCollection;
 
 /**
@@ -95,7 +95,6 @@ abstract class AbsCliCmdBase extends AbsBase
         # Dependency injector.
 
         $this->Di = new Di([
-            'shared'        => true,
             'new_instances' => [
                 CliOpts::class,
                 OptionCollection::class,
