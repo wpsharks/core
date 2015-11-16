@@ -1,6 +1,6 @@
 ## WebSharks™ Core
 
-<img src="https://cdn.websharks-inc.com/websharks/uploads/2013/11/sharks-logo.png" width="150" align="right" />
+<img src="https://cdn.websharks-inc.com/websharks/uploads/2013/11/sharks-logo.png" width="150" align="left" />
 
 Core PHP library used by WebSharks, Inc.
 
