@@ -8,7 +8,7 @@ use WebSharks\Core\Classes;
 error_reporting(-1);
 ini_set('display_errors', 'yes');
 
-require_once dirname(dirname(__FILE__)).'/src/includes/stub.php';
+require_once dirname(__FILE__, 2).'/src/includes/stub.php';
 
 $Di         = new Di();
 $PwStrength = $Di->get(Classes\PwStrength::class);

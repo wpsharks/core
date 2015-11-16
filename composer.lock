@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f714a0ce221315aed85920818c545cbe",
-    "content-hash": "c34534851f499f0d776694f2e1168840",
+    "hash": "af6186a4b3ad104ed6c6e7db51efd280",
+    "content-hash": "deb5d63ccacdc524e8d8cde68ba720af",
     "packages": [
         {
             "name": "websharks/dicer",
-            "version": "151115",
+            "version": "151116",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
-                "reference": "a9b6245dc5cf23f198d47dbfc98fa25b6342f106"
+                "reference": "be998d78ceb277a710380d69e29a29382ac7766a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/dicer/zipball/a9b6245dc5cf23f198d47dbfc98fa25b6342f106",
-                "reference": "a9b6245dc5cf23f198d47dbfc98fa25b6342f106",
+                "url": "https://api.github.com/repos/websharks/dicer/zipball/be998d78ceb277a710380d69e29a29382ac7766a",
+                "reference": "be998d78ceb277a710380d69e29a29382ac7766a",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2015-11-15 17:36:14"
+            "time": "2015-11-16 12:47:32"
         }
     ],
     "packages-dev": [
