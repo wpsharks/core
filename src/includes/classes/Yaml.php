@@ -12,16 +12,6 @@ use Symfony\Component\Yaml\Yaml as Parser;
 class Yaml extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * YAML parser.
      *
      * @since 150424 Initial release.

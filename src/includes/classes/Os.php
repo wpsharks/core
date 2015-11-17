@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class Os extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * A Unix environment?
      *
      * @since 150424 Initial release.

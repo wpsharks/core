@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class ArrayRemoveNulls extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Adding array utils.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Remove null values.
      *
      * @since 15xxxx Adding array utils.

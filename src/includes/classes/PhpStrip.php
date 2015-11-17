@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class PhpStrip extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Strips PHP tags.
      *
      * @since 150424 Initial release.

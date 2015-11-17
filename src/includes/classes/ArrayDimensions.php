@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class ArrayDimensions extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Forces an array to a single dimension.
      *
      * @since 15xxxx Adding array utils.

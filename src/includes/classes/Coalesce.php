@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class Coalesce extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Utility; `!empty()` coalesce.
      *
      * @since 15xxxx Initial release.

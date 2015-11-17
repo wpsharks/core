@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class UrlHost extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 151002 Adding host parser.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Host parser.
      *
      * @since 151002 Adding host parser.

@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class SpellCheck extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Adding password strength.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Checks spelling.
      *
      * @since 15xxxx Adding password strength.

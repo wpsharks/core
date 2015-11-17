@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class ArrayRemoveEmpties extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Adding array utils.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Remove empty values.
      *
      * @since 15xxxx Adding array utils.

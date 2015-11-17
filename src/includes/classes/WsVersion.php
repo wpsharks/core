@@ -12,16 +12,6 @@ use WebSharks\Core\Interfaces;
 class WsVersion extends AbsBase implements Interfaces\WsVersionConstants
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Is it a valid WS version?
      *
      * @since 150424 Initial release.

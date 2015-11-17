@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class UrlHash extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * URL without a #hash/fragment.
      *
      * @since 150424 Initial release.

@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class RegexPatterns extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Search values containing regex patterns against a string.
      *
      * @since 150424 Initial release.

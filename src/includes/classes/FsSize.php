@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class FsSize extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Abbreviated byte notation for a particular file.
      *
      * @since 150424 Initial release.

@@ -8,8 +8,6 @@ use GetOptionKit\OptionResult;
 use GetOptionKit\OptionCollection;
 use GetOptionKit\OptionPrinter\ConsoleOptionPrinter;
 
-// ↑ See: <http://jas.xyz/1Jc60ya>
-
 /**
  * CLI option utilities.
  *

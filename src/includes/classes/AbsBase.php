@@ -23,5 +23,6 @@ abstract class AbsBase implements Interfaces\Constants, \Serializable, \JsonSeri
     public function __construct()
     {
         $this->cacheInit();
+        $this->overloadInit();
     }
 }

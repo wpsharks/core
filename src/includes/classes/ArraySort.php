@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class ArraySort extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Sorts an array deeply by its keys.
      *
      * @since 15xxxx Adding array utils.

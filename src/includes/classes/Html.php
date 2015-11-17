@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class Html extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Is a string in HTML format?
      *
      * @since 150424 Initial release.

@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class Ascii extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Multibyte support.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Convert to ASCII.
      *
      * @since 15xxxx Multibyte support.

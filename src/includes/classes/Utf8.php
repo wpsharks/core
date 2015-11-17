@@ -12,16 +12,6 @@ class Utf8 extends AbsBase
     const BOM = "\xEF\xBB\xBF";
 
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Enhancing multibyte support.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Is valid UTF-8?
      *
      * @since 15xxxx Enhancing multibyte support.

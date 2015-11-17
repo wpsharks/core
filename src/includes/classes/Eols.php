@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class Eols extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Normalizes end of line chars deeply.
      *
      * @since 150424 Initial release.

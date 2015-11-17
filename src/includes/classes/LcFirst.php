@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class LcFirst extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Enhancing multibyte support.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Multibyte `lcfirst()`.
      *
      * @since 15xxxx Enhancing multibyte support.

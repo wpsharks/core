@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class ArrayIterators extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Recursive iterator.
      *
      * @since 15xxxx Adding array utils.

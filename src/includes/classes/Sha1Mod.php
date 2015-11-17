@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class Sha1Mod extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx SHA-1 modulus.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * SHA-1 modulus.
      *
      * @since 15xxxx SHA-1 modulus.

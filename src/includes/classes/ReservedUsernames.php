@@ -10,16 +10,6 @@ namespace WebSharks\Core\Classes;
 class ReservedUsernames extends AbsBase
 {
     /**
-     * Class constructor.
-     *
-     * @since 15xxxx Reserved usernames.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Is username reserved?
      *
      * @since 15xxxx Reserved usernames.
