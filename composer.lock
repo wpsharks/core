@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af6186a4b3ad104ed6c6e7db51efd280",
-    "content-hash": "deb5d63ccacdc524e8d8cde68ba720af",
+    "hash": "cf3a51d07eed77ecb347401d19c80917",
+    "content-hash": "99346fcceb15eb1be045b9b8c1adb80e",
     "packages": [
         {
             "name": "websharks/dicer",
-            "version": "151116",
+            "version": "151118",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
-                "reference": "be998d78ceb277a710380d69e29a29382ac7766a"
+                "reference": "1ed5d7dbbe9e3e9b81620d4860d4e8a54b067de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/dicer/zipball/be998d78ceb277a710380d69e29a29382ac7766a",
-                "reference": "be998d78ceb277a710380d69e29a29382ac7766a",
+                "url": "https://api.github.com/repos/websharks/dicer/zipball/1ed5d7dbbe9e3e9b81620d4860d4e8a54b067de4",
+                "reference": "1ed5d7dbbe9e3e9b81620d4860d4e8a54b067de4",
                 "shasum": ""
             },
             "require": {
@@ -56,22 +56,22 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2015-11-16 12:47:32"
+            "time": "2015-11-18 09:00:56"
         }
     ],
     "packages-dev": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.8.23",
+            "version": "2.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e35cb161da83e39453e3ac9c27536e102b008fb8"
+                "reference": "54b67f902bb2c5bbab481bc3c46537752a018830"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e35cb161da83e39453e3ac9c27536e102b008fb8",
-                "reference": "e35cb161da83e39453e3ac9c27536e102b008fb8",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/54b67f902bb2c5bbab481bc3c46537752a018830",
+                "reference": "54b67f902bb2c5bbab481bc3c46537752a018830",
                 "shasum": ""
             },
             "require": {
@@ -121,7 +121,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-11-03 00:09:15"
+            "time": "2015-11-16 22:34:08"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -402,16 +402,16 @@
         },
         {
             "name": "lusitanian/oauth",
-            "version": "v0.8.2",
+            "version": "v0.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
-                "reference": "f81b0f4988d8613a96857ff317a80d95d126b4e4"
+                "reference": "d47849e3838a7ea738111e3f1d7c810cc950539a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/f81b0f4988d8613a96857ff317a80d95d126b4e4",
-                "reference": "f81b0f4988d8613a96857ff317a80d95d126b4e4",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/d47849e3838a7ea738111e3f1d7c810cc950539a",
+                "reference": "d47849e3838a7ea738111e3f1d7c810cc950539a",
                 "shasum": ""
             },
             "require": {
@@ -465,7 +465,7 @@
                 "oauth",
                 "security"
             ],
-            "time": "2015-10-29 22:57:59"
+            "time": "2015-11-17 21:54:31"
         },
         {
             "name": "michelf/php-markdown",

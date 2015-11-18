@@ -28,7 +28,7 @@
     "ext-openssl": "*",
     "ext-curl": "*",
     "ext-mbstring": "*",
-    "websharks/dicer": "151116"
+    "websharks/dicer": "151118"
   },
   "require-dev": {
     "ramsey/uuid": "3.*",

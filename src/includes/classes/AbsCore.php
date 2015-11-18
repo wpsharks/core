@@ -23,7 +23,7 @@ abstract class AbsCore implements Interfaces\Constants, \Serializable, \JsonSeri
      *
      * @type string Version.
      */
-    const VERSION = '151115'; //v//
+    const VERSION = '151118'; //v//
 
     /**
      * Class constructor.
