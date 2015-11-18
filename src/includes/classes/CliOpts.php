@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes;
+namespace WebSharks\Core\Classes\Utils;
 
 use GetOptionKit\Option;
 use GetOptionKit\OptionParser;
@@ -23,9 +23,10 @@ class CliOpts extends AbsBase
      * @since 15xxxx Initial release.
      */
     public function __construct(
+        AbsApp $App,
         OptionCollection $OptionCollection
     ) {
-        parent::__construct();
+        parent::__construct($App);
 
         $this->OptionCollection = $OptionCollection;
     }

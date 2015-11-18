@@ -16,21 +16,21 @@ trait CacheMembers
      *
      * @since 15xxxx Initial release.
      */
-    protected $cache = array();
+    protected $cache = [];
 
     /**
      * @type array Global static cache ref.
      *
      * @since 15xxxx Initial release.
      */
-    protected $static = array();
+    protected $static = [];
 
     /**
      * @type array Global static cache.
      *
      * @since 15xxxx Initial release.
      */
-    protected static $static_global = array();
+    protected static $static_global = [];
 
     /**
      * Cache initializer.
@@ -39,12 +39,13 @@ trait CacheMembers
      */
     protected function cacheInit()
     {
-        $class = get_called_class();
+        $class_name = get_class($this);
+        $class_key  = mb_strtolower($class_name);
 
-        if (empty(static::$static_global[$class])) {
-            static::$static_global[$class] = array();
+        if (empty(static::$static_global[$class_key])) {
+            static::$static_global[$class_key] = [];
         }
-        $this->static = &static::$static_global[$class];
+        $this->static = &static::$static_global[$class_key];
     }
 
     /**

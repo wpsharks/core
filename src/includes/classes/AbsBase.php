@@ -2,27 +2,51 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Traits;
-use WebSharks\Core\Interfaces;
-
 /**
  * Base abstraction.
  *
  * @since 150424 Initial release.
  */
-abstract class AbsBase implements Interfaces\Constants, \Serializable, \JsonSerializable
+abstract class AbsBase extends AbsCore
 {
-    use Traits\CacheMembers;
-    use Traits\OverloadMembers;
+    /**
+     * Dicer.
+     *
+     * @since 15xxxx
+     *
+     * @type AppDi
+     */
+    protected $Di;
+
+    /**
+     * App.
+     *
+     * @since 15xxxx
+     *
+     * @type AbsApp
+     */
+    protected $App;
+
+    /**
+     * Utilities.
+     *
+     * @since 15xxxx
+     *
+     * @type AppUtils
+     */
+    protected $Utils;
 
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct()
+    public function __construct(AbsApp $App)
     {
-        $this->cacheInit();
-        $this->overloadInit();
+        parent::__construct();
+
+        $this->App   = $App;
+        $this->Di    = $App->Di;
+        $this->Utils = $App->Utils;
     }
 }

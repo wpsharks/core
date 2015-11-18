@@ -9,15 +9,34 @@ namespace WebSharks\Core\Classes;
  */
 class Exception extends \Exception
 {
+    /**
+     * Error code.
+     *
+     * @since 15xxxx
+     *
+     * @type string Error code.
+     */
     protected $error_code;
+
+    /**
+     * Error reason.
+     *
+     * @since 15xxxx
+     *
+     * @type string Error reason.
+     */
     protected $reason_code;
 
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
+     *
+     * @param string          $message  Message.
+     * @param string          $code     Exception code.
+     * @param \Exception|null $previous Previous exception.
      */
-    public function __construct(string $message, string $code = '', Exception $previous = null)
+    public function __construct(string $message, string $code = '', \Exception $previous = null)
     {
         parent::__construct($message, 0, $previous);
 
