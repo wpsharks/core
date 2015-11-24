@@ -2,6 +2,10 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
+
 /**
  * Base abstraction.
  *
@@ -10,20 +14,11 @@ namespace WebSharks\Core\Classes;
 abstract class AbsBase extends AbsCore
 {
     /**
-     * Dicer.
-     *
-     * @since 15xxxx
-     *
-     * @type AppDi
-     */
-    protected $Di;
-
-    /**
      * App.
      *
      * @since 15xxxx
      *
-     * @type AbsApp
+     * @type App
      */
     protected $App;
 
@@ -41,12 +36,11 @@ abstract class AbsBase extends AbsCore
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(AbsApp $App)
+    public function __construct(App $App)
     {
         parent::__construct();
 
         $this->App   = $App;
-        $this->Di    = $App->Di;
         $this->Utils = $App->Utils;
     }
 }

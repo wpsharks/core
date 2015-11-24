@@ -2,7 +2,10 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
+use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\AppUtils;
 use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
 
 /**
  * Cache members.
@@ -12,157 +15,270 @@ use WebSharks\Core\Classes\Exception;
 trait CacheMembers
 {
     /**
+     * Instance cache.
+     *
+     * @since 15xxxx Initial release.
+     *
      * @type array Instance cache.
-     *
-     * @since 15xxxx Initial release.
      */
-    protected $cache = [];
+    protected $¤cache = [];
 
     /**
-     * @type array Global static cache ref.
+     * Set a cache sub-key.
      *
      * @since 15xxxx Initial release.
-     */
-    protected $static = [];
-
-    /**
-     * @type array Global static cache.
      *
-     * @since 15xxxx Initial release.
-     */
-    protected static $static_global = [];
-
-    /**
-     * Cache initializer.
+     * @param string     $primary_key Primary key.
+     * @param string|int $sub_key     Sub-key to set.
+     * @param mixed      $value       New cache key value.
      *
-     * @since 15xxxx Initial release.
+     * @return mixed|null Value (by reference) for the cache sub-key.
+     *
+     * @note Returns by reference. The use of `&` is highly recommended when calling this utility.
+     *    See also: <http://php.net/manual/en/language.references.return.php>
      */
-    protected function cacheInit()
+    protected function &cacheSet(string $primary_key, $sub_key, $value)
     {
-        $class_name = get_class($this);
-        $class_key  = mb_strtolower($class_name);
-
-        if (empty(static::$static_global[$class_key])) {
-            static::$static_global[$class_key] = [];
+        if ($primary_key === '¤keys' || $primary_key === '¤refs') {
+            throw new Exception('Attempting to set a reserved primary key.');
         }
-        $this->static = &static::$static_global[$class_key];
+        $sub_key                              = (string) $sub_key;
+        $this->¤cache[$primary_key][$sub_key] = $value;
+        return $this->¤cache[$primary_key][$sub_key];
     }
 
     /**
-     * Construct and acquire a cache key.
+     * Get a cache sub-key.
      *
      * @since 15xxxx Initial release.
      *
-     * @param string      $function `__FUNCTION__` is suggested here.
-     *                              i.e. the calling function name in the calling class.
-     * @param mixed|array $args     The arguments to the calling function.
-     *                              Using `func_get_args()` to the caller might suffice.
-     *                              That said, it's generally a good idea to customize this a bit.
-     *                              This should include the cachable arguments only.
-     * @param string      $___prop  For internal use only. This defaults to `cache`.
-     *                              See also: {@link staticKey()} where a value of `static` is used instead.
+     * @param string     $primary_key Primary key.
+     * @param string|int $sub_key     Sub-key to get.
      *
-     * @return mixed|null Returns the current value for the cache key. Returns `NULL` if key is not set.
+     * @return mixed|null Value (by reference) for the cache sub-key.
      *
-     * @note This function returns by reference. The use of `&` is highly recommended when calling this utility.
+     * @note Returns by reference. The use of `&` is suggested when calling this utility.
      *    See also: <http://php.net/manual/en/language.references.return.php>
      */
-    protected function &cacheKey(string $function, $args = [], string $___prop = 'cache')
+    protected function &cacheGet(string $primary_key, $sub_key)
     {
-        $args = (array) $args; // Force array.
-
-        if (!isset($this->{$___prop}[$function])) {
-            $this->{$___prop}[$function] = null;
+        if ($primary_key === '¤keys' || $primary_key === '¤refs') {
+            throw new Exception('Attempting to get a reserved primary key.');
         }
-        $cache_key = &$this->{$___prop}[$function];
+        $sub_key = (string) $sub_key; // Force string.
+
+        if (isset($this->¤cache[$primary_key][$sub_key])) {
+            return $this->¤cache[$primary_key][$sub_key];
+        } else {
+            $this->¤cache[$primary_key][$sub_key] = null;
+            return $this->¤cache[$primary_key][$sub_key];
+        }
+    }
+
+    /**
+     * Unset a cache sub-key.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string     $primary_key Primary key.
+     * @param string|int $sub_key     Sub-key to unset.
+     */
+    protected function cacheUnset(string $primary_key, $sub_key)
+    {
+        if ($primary_key === '¤keys' || $primary_key === '¤refs') {
+            throw new Exception('Attempting to unset a reserved primary key.');
+        }
+        $sub_key                              = (string) $sub_key;
+        $this->¤cache[$primary_key][$sub_key] = null;
+        unset($this->¤cache[$primary_key][$sub_key]);
+    }
+
+    /**
+     * Unset a cache sub-key pattern.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string $primary_key     Primary key.
+     * @param string $sub_key_pattern Sub-key pattern (watered-down regex).
+     */
+    protected function cacheUnsetPattern(string $primary_key, string $sub_key_pattern)
+    {
+        if ($primary_key === '¤keys' || $primary_key === '¤refs') {
+            throw new Exception('Attempting to unset a reserved primary key.');
+        }
+        if (empty($this->¤cache[$primary_key])) {
+            return; // Nothing to do here.
+        }
+        $sub_key_regex = // Allow `**` to indicate everything quickly.
+            $sub_key_pattern === '**' ? '' : $this->Utils->WdRegex($sub_key_pattern);
+
+        if (!$sub_key_regex && $sub_key_pattern !== '**') {
+            return; // Nothing to do; i.e., no regex.
+        }
+        foreach (array_keys($this->¤cache[$primary_key]) as $_sub_key) {
+            if ($sub_key_pattern === '**' || preg_match($sub_key_regex, (string) $_sub_key)) {
+                $this->¤cache[$primary_key][$_sub_key] = null;
+                unset($this->¤cache[$primary_key][$_sub_key]);
+            }
+        } // unset($_sub_key); // Housekeeping.
+    }
+
+    /**
+     * Add a new cache ref-key.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string     $primary_key Primary key.
+     * @param string|int $ref_key     Ref-key to set.
+     * @param mixed      $value       New value (by reference).
+     */
+    protected function cacheAddByRef(string $primary_key, $ref_key, &$value)
+    {
+        $ref_key                                         = (string) $ref_key;
+        $this->¤cache['¤refs'][$primary_key][$ref_key][] = &$value;
+    }
+
+    /**
+     * Unset a cache ref-key.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string     $primary_key Primary key.
+     * @param string|int $ref_key     Ref-key to unset.
+     */
+    protected function cacheUnsetByRef(string $primary_key, $ref_key)
+    {
+        $ref_key = (string) $ref_key; // Force string.
+
+        if (empty($this->¤cache['¤refs'][$primary_key][$ref_key])) {
+            return; // Nothing to do here.
+        }
+        foreach (array_keys($this->¤cache['¤refs'][$primary_key][$ref_key]) as $_key) {
+            $this->¤cache['¤refs'][$primary_key][$ref_key][$_key] = null;
+        } // unset($_key); // Housekeeping.
+        unset($this->¤cache['¤refs'][$primary_key][$ref_key]);
+    }
+
+    /**
+     * Unset a cache ref-key pattern.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string $primary_key     Primary key.
+     * @param string $ref_key_pattern Ref-key pattern (watered-down regex).
+     */
+    protected function cacheUnsetByRefPattern(string $primary_key, string $ref_key_pattern)
+    {
+        if (empty($this->¤cache['¤refs'][$primary_key])) {
+            return; // Nothing to do here.
+        }
+        $ref_key_regex = // Allow `**` to indicate everything quickly.
+            $ref_key_pattern === '**' ? '' : $this->Utils->WdRegex($ref_key_pattern);
+
+        if (!$ref_key_regex && $ref_key_pattern !== '**') {
+            return; // Nothing to do; i.e., no regex.
+        }
+        foreach (array_keys($this->¤cache['¤refs'][$primary_key]) as $_ref_key) {
+            if ($ref_key_pattern === '**' || preg_match($ref_key_regex, (string) $_ref_key)) {
+                foreach (array_keys($this->¤cache['¤refs'][$primary_key][$_ref_key]) as $_key) {
+                    $this->¤cache['¤refs'][$primary_key][$_ref_key][$_key] = null;
+                } // unset($_key); // Housekeeping.
+                unset($this->¤cache['¤refs'][$primary_key][$_ref_key]);
+            }
+        } // unset($_ref_key); // Housekeeping.
+    }
+
+    /**
+     * Cache key (or sub-key) based on args.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string      $primary_key Primary key.
+     * @param mixed|array $args        Args to base key on.
+     *
+     * @return mixed|null Value (by reference) for the cache key. Default is `null`.
+     *
+     * @note Returns by reference. The use of `&` is highly recommended when calling this utility.
+     *    See also: <http://php.net/manual/en/language.references.return.php>
+     */
+    protected function &cacheKey(string $primary_key, $args = [])
+    {
+        $args = (array) $args; // Force an array of args.
+
+        if (!isset($this->¤cache['¤keys'][$primary_key])) {
+            $this->¤cache['¤keys'][$primary_key] = null;
+        }
+        $cache_key = &$this->¤cache['¤keys'][$primary_key];
 
         foreach ($args as $_arg) {
-            switch (mb_strtolower(gettype($_arg))) {
+            switch (($_arg_type = gettype($_arg))) {
                 case 'int':
                 case 'integer':
                     $_key = (int) $_arg;
+                    // Only integer key.
                     break; // Break switch handler.
 
                 case 'double':
                 case 'float':
                 case 'real':
                     $_key = (string) $_arg;
+                    // Only numeric string.
                     break; // Break switch handler.
 
                 case 'bool':
                 case 'boolean':
-                    $_key = (int) $_arg;
+                    $_key = $_arg ? 'true' : 'false';
+                    // Only string not sha1 or numeric.
+                    break; // Break switch handler.
+
+                case 'string':
+                    $_key = sha1($_arg_type.$_arg);
                     break; // Break switch handler.
 
                 case 'array':
-                case 'object':
-                    $_key = sha1(serialize($_arg));
+                    $_key = sha1($_arg_type.serialize($_arg));
+                    break; // Break switch handler.
+
+                case 'object': // See: <http://php.net/manual/en/function.spl-object-hash.php>
+                    $_key = spl_object_hash($_arg).sha1($_arg_type.get_class($_arg).serialize($_arg));
                     break; // Break switch handler.
 
                 case 'null':
+                case 'NULL':
                 case 'resource':
+                case 'unknown':
                 case 'unknown type':
+                    $_key = "\0".sha1($_arg_type.(string) $_arg);
+                    break; // Break switch handler.
+
                 default: // Default case handler.
-                    $_key = "\0".(string) $_arg;
+                    throw new Exception(sprintf('Unexpected arg type: `%1$s`.', $_arg_type));
             }
             if (!isset($cache_key[$_key])) {
                 $cache_key[$_key] = null;
             }
             $cache_key = &$cache_key[$_key];
-        } // unset($_arg); // Housekeeping.
+        } // unset($_arg, $_arg_type); // Housekeeping.
 
         return $cache_key;
     }
 
     /**
-     * Construct and acquire a static key.
+     * Clear cache (everything).
      *
      * @since 15xxxx Initial release.
-     *
-     * @param string      $function See {@link cache_key()}.
-     * @param mixed|array $args     See {@link cache_key()}.
-     *
-     * @return mixed|null See {@link cache_key()}.
-     *
-     * @note This function returns by reference. The use of `&` is highly recommended when calling this utility.
-     *    See also: <http://php.net/manual/en/language.references.return.php>
      */
-    protected function &staticKey(string $function, $args = array())
+    protected function cacheClear()
     {
-        $key = &$this->cacheKey($function, $args, 'static');
-
-        return $key; // By reference.
-    }
-
-    /**
-     * Unset cache.
-     *
-     * @since 15xxxx Initial release.
-     *
-     * @param array $preserve_keys Preserve?
-     */
-    protected function cacheUnset(array $preserve_keys = [])
-    {
-        foreach ($this->cache as $_key => $_value) {
-            if (!$preserve_keys || !in_array($_key, $preserve_keys, true)) {
-                unset($this->cache[$_key]);
-            }
-        } // unset($_key, $_value); // Housekeeping.
-    }
-
-    /**
-     * Unset static keys.
-     *
-     * @since 15xxxx Initial release.
-     *
-     * @param array $preserve_keys Preserve?
-     */
-    protected function staticUnset(array $preserve_keys = [])
-    {
-        foreach ($this->static as $_key => $_value) {
-            if (!$preserve_keys || !in_array($_key, $preserve_keys, true)) {
-                unset($this->static[$_key]);
-            }
-        } // unset($_key, $_value); // Housekeeping.
+        if (!empty($this->¤cache['¤refs'])) { // Nullify underliers.
+            foreach (array_keys($this->¤cache['¤refs']) as $_primary_key) {
+                foreach (array_keys($this->¤cache['¤refs'][$_primary_key]) as $_ref_key) {
+                    foreach (array_keys($this->¤cache['¤refs'][$_primary_key][$_ref_key]) as $_key) {
+                        $this->¤cache['¤refs'][$_primary_key][$_ref_key][$_key] = null;
+                    } // unset($_key); // Housekeeping.
+                } // unset($_ref_key); // Housekeeping.
+            } // unset($_primary_key); // Housekeeping.
+        }
+        $this->¤cache = []; // Clean slate.
     }
 }

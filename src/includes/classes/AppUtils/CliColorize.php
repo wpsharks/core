@@ -1,9 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * CLI colorizer.
@@ -63,7 +65,7 @@ class CliColorize extends Classes\AbsBase implements Interfaces\UrlConstants
 
         if ($em_color && isset($this::FG[$em_color])) {
             $colorized_string = preg_replace_callback(
-                '/_\*(?P<em>.+?)\*_/u',
+                '/_\*(?<em>.+?)\*_/u',
                 function ($m) use ($fg_color, $em_color) {
                     return "\033".'['.$this::FG[$em_color].'m'.$m['em']."\033".'[0m'.
                             ($fg_color && isset($this::FG[$fg_color]) ? "\033".'['.$this::FG[$fg_color].'m' : '');
@@ -76,7 +78,7 @@ class CliColorize extends Classes\AbsBase implements Interfaces\UrlConstants
 
         if ($strong_color && isset($this::FG[$strong_color])) {
             $colorized_string = preg_replace_callback(
-                '/(\*{2})(?P<strong>.+?)\\1/u',
+                '/(\*{2})(?<strong>.+?)\\1/u',
                 function ($m) use ($fg_color, $strong_color) {
                     return "\033".'['.$this::FG[$strong_color].'m'.$m['strong']."\033".'[0m'.
                             ($fg_color && isset($this::FG[$fg_color]) ? "\033".'['.$this::FG[$fg_color].'m' : '');
@@ -89,7 +91,7 @@ class CliColorize extends Classes\AbsBase implements Interfaces\UrlConstants
 
         if ($code_color && isset($this::FG[$code_color])) {
             $colorized_string = preg_replace_callback(
-                '/(`+)(?P<code>.+?)\\1/u',
+                '/(`+)(?<code>.+?)\\1/u',
                 function ($m) use ($fg_color, $code_color) {
                     return "\033".'['.$this::FG[$code_color].'m'.$m['code']."\033".'[0m'.
                             ($fg_color && isset($this::FG[$fg_color]) ? "\033".'['.$this::FG[$fg_color].'m' : '');
@@ -102,7 +104,7 @@ class CliColorize extends Classes\AbsBase implements Interfaces\UrlConstants
 
         if ($link_color && isset($this::FG[$link_color])) {
             $colorized_string = preg_replace_callback(
-                '/(?P<o>\<)(?P<link>'.mb_substr($this::URL_REGEX_VALID, 2, -3).')(?P<c>\>)/u',
+                '/(?<o>\<)(?<link>'.mb_substr($this::URL_REGEX_VALID, 2, -3).')(?<c>\>)/u',
                 function ($m) use ($fg_color, $link_color) {
                     return $m['o']."\033".'['.$this::FG[$link_color].'m'.$m['link']."\033".'[0m'.
                             ($fg_color && isset($this::FG[$fg_color]) ? "\033".'['.$this::FG[$fg_color].'m' : '').

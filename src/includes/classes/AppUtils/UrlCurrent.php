@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * Current URL utilities.
@@ -20,7 +23,7 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function __invoke(): string
     {
-        if (!is_null($url = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($url = &$this->cacheKey(__FUNCTION__))) {
             return $url; // Cached this already.
         }
         $url = $this->scheme().'//'.$this->host().$this->uri();
@@ -37,7 +40,7 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function scheme(): string
     {
-        if (!is_null($scheme = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($scheme = &$this->cacheKey(__FUNCTION__))) {
             return $scheme; // Cached this already.
         }
         $scheme = $this->isSsl() ? 'https' : 'http';
@@ -61,7 +64,7 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function host(bool $no_port = false): string
     {
-        if (!is_null($host = &$this->staticKey(__FUNCTION__, $no_port))) {
+        if (!is_null($host = &$this->cacheKey(__FUNCTION__, $no_port))) {
             return $host; // Cached this already.
         }
         $host = ''; // Initialize.
@@ -90,7 +93,7 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function rootHost(bool $no_port = false): string
     {
-        if (!is_null($root_host = &$this->staticKey(__FUNCTION__, $no_port))) {
+        if (!is_null($root_host = &$this->cacheKey(__FUNCTION__, $no_port))) {
             return $root_host; // Cached this already.
         }
         $host  = $this->host($no_port);
@@ -109,7 +112,7 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function uri(): string
     {
-        if (!is_null($uri = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($uri = &$this->cacheKey(__FUNCTION__))) {
             return $uri; // Cached this already.
         }
         $uri = ''; // Initialize.
@@ -130,7 +133,7 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function path(): string
     {
-        if (!is_null($path = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($path = &$this->cacheKey(__FUNCTION__))) {
             return $path; // Cached this already.
         }
         $path = (string) parse_url($this->uri(), PHP_URL_PATH);
@@ -148,7 +151,7 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function pathInfo(): string
     {
-        if (!is_null($path_info = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($path_info = &$this->cacheKey(__FUNCTION__))) {
             return $path_info; // Cached this already.
         }
         $path_info = ''; // Initialize.
@@ -173,11 +176,11 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function isSsl(): bool
     {
-        if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($is = &$this->cacheKey(__FUNCTION__))) {
             return $is; // Cached this already.
         }
         if (!empty($_SERVER['SERVER_PORT'])) {
-            if ((integer) $_SERVER['SERVER_PORT'] === 443) {
+            if ((int) $_SERVER['SERVER_PORT'] === 443) {
                 return ($is = true);
             }
         }
@@ -203,7 +206,7 @@ class UrlCurrent extends Classes\AbsBase
      */
     public function isLocalhost(): bool
     {
-        if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($is = &$this->cacheKey(__FUNCTION__))) {
             return $is; // Cached this already.
         }
         if (defined('LOCALHOST') && LOCALHOST) {

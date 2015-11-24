@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * IP address utilities.
@@ -22,7 +25,7 @@ class Ip extends Classes\AbsBase
      */
     public function current(): string
     {
-        if (!is_null($ip = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($ip = &$this->cacheKey(__FUNCTION__))) {
             return $ip; // Already cached this.
         }
         $sources = array(
@@ -158,7 +161,7 @@ class Ip extends Classes\AbsBase
         }
         # Check the static object cache.
 
-        if (!is_null($geo = &$this->staticKey(__FUNCTION__, $ip))) {
+        if (!is_null($geo = &$this->cacheKey(__FUNCTION__, $ip))) {
             return $geo; // Already cached this.
         }
         # Check the filesystem cache; i.e., tmp directory.

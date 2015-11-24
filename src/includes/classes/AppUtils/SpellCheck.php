@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * Spellcheck Utils.
@@ -23,7 +26,7 @@ class SpellCheck extends Classes\AbsBase
      */
     public function __invoke(string $word, int $flags = PSPELL_NORMAL): bool
     {
-        if (is_null($dictionary = &$this->staticKey(__FUNCTION__, $flags))) {
+        if (is_null($dictionary = &$this->cacheKey(__FUNCTION__, $flags))) {
             $dictionary = pspell_new('en', '', '', 'utf-8', $flags);
         }
         return pspell_check($dictionary, $word);

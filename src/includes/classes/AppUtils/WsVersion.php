@@ -1,9 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * WS version utilities.
@@ -26,7 +28,7 @@ class WsVersion extends Classes\AbsBase implements Interfaces\WsVersionConstants
         if (!$version) {
             return false; // Nope.
         }
-        return (boolean) preg_match($this::WS_VERSION_REGEX_VALID, $version);
+        return (bool) preg_match($this::WS_VERSION_REGEX_VALID, $version);
     }
 
     /**
@@ -43,7 +45,7 @@ class WsVersion extends Classes\AbsBase implements Interfaces\WsVersionConstants
         if (!$version) {
             return false; // Nope.
         }
-        return (boolean) preg_match($this::WS_VERSION_REGEX_VALID_DEV, $version);
+        return (bool) preg_match($this::WS_VERSION_REGEX_VALID_DEV, $version);
     }
 
     /**
@@ -60,7 +62,7 @@ class WsVersion extends Classes\AbsBase implements Interfaces\WsVersionConstants
         if (!$version) {
             return false; // Nope.
         }
-        return (boolean) preg_match($this::WS_VERSION_REGEX_VALID_STABLE, $version);
+        return (bool) preg_match($this::WS_VERSION_REGEX_VALID_STABLE, $version);
     }
 
     /**

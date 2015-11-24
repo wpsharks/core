@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * XOR encryption utilities.
@@ -66,7 +69,7 @@ class XorCipher extends Classes\AbsBase
         $key = $this->Utils->ShaSignatures->xKey($key);
 
         if (!strlen($e = $this->Utils->Base64->urlSafeDecode($base64))
-           || !preg_match('/^~xe(?:\:(?P<md5>[a-zA-Z0-9]+))?\|(?P<e>.*)$/s', $e, $md5_e)
+           || !preg_match('/^~xe(?:\:(?<md5>[a-zA-Z0-9]+))?\|(?<e>.*)$/s', $e, $md5_e)
         ) {
             return ($string = ''); // Not possible; unable to decrypt in this case.
         }

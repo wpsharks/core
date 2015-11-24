@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * HTML normalizing utilities.
@@ -52,9 +55,6 @@ class HtmlBalance extends Classes\AbsBase
             '   </head>'.
             '   <body>'.$string.'</body>'.
             '</html>';
-        if (!$this->Utils->PhpHas->extension('dom')) {
-            throw new Exception('DOM extension missing.');
-        }
         $Dom = new \DOMDocument();
         $Dom->loadHTML($html);
 

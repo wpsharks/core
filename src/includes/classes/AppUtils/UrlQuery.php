@@ -1,9 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * URL query utilities.
@@ -43,7 +45,7 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
         if (!($qs = $qs_url_uri)) {
             return $qs; // Empty.
         }
-        if (is_null($regex_amps = &$this->staticKey(__FUNCTION__.'_regex_amps'))) {
+        if (is_null($regex_amps = &$this->cacheKey(__FUNCTION__.'_regex_amps'))) {
             $regex_amps = implode('|', array_keys($this::HTML_AMPERSAND_ENTITIES));
         }
         $qs = preg_replace('/(?:'.$regex_amps.')/u', '&', $qs);
@@ -67,13 +69,13 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
      *
      * @param string     $qs_url_uri          A query string (with or without a leading `?`), a URL, or URI.
      * @param bool       $convert_dots_spaces Defaults to `TRUE` (just like PHP's {@link parse_str()} function).
-     * @param string     $dec_type            Optional. Defaults to {@link RFC1738} indicating `urldecode()`.
-     *                                        Or, {@link RFC3986} indicating `rawurldecode()`.
+     * @param string     $dec_type            Optional. Defaults to {@link URL_RFC1738} indicating `urldecode()`.
+     *                                        Or, {@link URL_RFC3986} indicating `rawurldecode()`.
      * @param null|array $___parent_array     Internal use only; for recursion.
      *
      * @return array An array of query string args; based on the input `$qs_url_uri` value.
      */
-    public function parse(string $qs_url_uri, bool $convert_dots_spaces = true, string $dec_type = self::RFC1738, array &$___parent_array = null): array
+    public function parse(string $qs_url_uri, bool $convert_dots_spaces = true, string $dec_type = self::URL_RFC1738, array &$___parent_array = null): array
     {
         if (isset($___parent_array)) {
             $array = &$___parent_array;
@@ -90,25 +92,25 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
             $_name       = $_name_value[0]; // Always has length.
             $_value      = isset($_name_value[1]) ? $_name_value[1] : '';
 
-            if ($dec_type === $this::RFC1738) {
+            if ($dec_type === $this::URL_RFC1738) {
                 $_name = urldecode($_name);
-            } elseif ($dec_type === $this::RFC3986) {
+            } elseif ($dec_type === $this::URL_RFC3986) {
                 $_name = rawurldecode($_name);
             }
             if ($convert_dots_spaces) {
                 $_name = str_replace(array('.', ' '), '_', $_name);
             }
             if (mb_strpos($_name, '[') !== false // Quick check (optimization).
-                && preg_match('/^(?P<name>[^\[]+)\[(?P<nested_name>[^\]]*)\](?P<deep>.*)$/u', $_name, $_m)) {
+                && preg_match('/^(?<name>[^\[]+)\[(?<nested_name>[^\]]*)\](?<deep>.*)$/u', $_name, $_m)) {
                 if (!isset($array[$_m['name']])) {
                     $array[$_m['name']] = array();
                 }
                 if (!isset($_m['nested_name'][0])) {
                     $_m['nested_name'] = count($array[$_m['name']]);
                 }
-                if ($dec_type === $this::RFC1738) {
+                if ($dec_type === $this::URL_RFC1738) {
                     $_value = urlencode($_m['nested_name'].$_m['deep']).'='.$_value;
-                } elseif ($dec_type === $this::RFC3986) {
+                } elseif ($dec_type === $this::URL_RFC3986) {
                     $_value = rawurlencode($_m['nested_name'].$_m['deep']).'='.$_value;
                 } else {
                     $_value = $_m['nested_name'].$_m['deep'].'='.$_value;
@@ -120,9 +122,9 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
                     $array[$_m['name']]
                 );
             } else {
-                if ($dec_type === $this::RFC1738) {
+                if ($dec_type === $this::URL_RFC1738) {
                     $_value = urldecode($_value);
-                } elseif ($dec_type === $this::RFC3986) {
+                } elseif ($dec_type === $this::URL_RFC3986) {
                     $_value = rawurldecode($_value);
                 }
                 $array[$_name] = $_value;
@@ -137,7 +139,7 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
      *
      * @since 150424 Initial release.
      *
-     * @note This method is an alias for {@link parse()} with `$dec_type` set to: {@link RFC3986}.
+     * @note This method is an alias for {@link parse()} with `$dec_type` set to: {@link URL_RFC3986}.
      *    Please check the {@link parse()} method for further details.
      *
      * @param string $qs_url_uri          A query string (with or without a leading `?`), a URL, or URI.
@@ -147,7 +149,7 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
      */
     public function parseRaw(string $qs_url_uri, bool $convert_dots_spaces = true): array
     {
-        return $this->parse($qs_url_uri, $convert_dots_spaces, $this::RFC3986);
+        return $this->parse($qs_url_uri, $convert_dots_spaces, $this::URL_RFC3986);
     }
 
     /**
@@ -208,13 +210,13 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
      * @param array       $args           Input array of query args.
      * @param null|string $numeric_prefix Optional. Defaults to a `NULL` value.
      * @param string      $arg_separator  Optional. Defaults to `&`. Empty = INI `arg_separator.output`.
-     * @param string      $enc_type       Optional. Defaults to {@link RFC1738} indicating `urlencode()`.
-     *                                    Or, {@link RFC3986} indicating `rawurlencode()`.
+     * @param string      $enc_type       Optional. Defaults to {@link URL_RFC1738} indicating `urlencode()`.
+     *                                    Or, {@link URL_RFC3986} indicating `rawurlencode()`.
      * @param null|string $___nested_key  For internal use only.
      *
      * @return string A (possibly raw) URL-encoded query string (without a leading `?`).
      */
-    public function build(array $args, string $numeric_prefix = null, string $arg_separator = '&', string $enc_type = self::RFC1738, string $___nested_key = null): string
+    public function build(array $args, string $numeric_prefix = null, string $arg_separator = '&', string $enc_type = self::URL_RFC1738, string $___nested_key = null): string
     {
         if (!$arg_separator) { // Default separator?
             $arg_separator = ini_get('arg_separator.output');
@@ -236,9 +238,9 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
                 if (strlen($_nested_value = $this->build($_value, null, $arg_separator, $enc_type, $_key))) {
                     $arg_pairs[] = $_nested_value;
                 }
-            } elseif ($enc_type === $this::RFC1738) {
+            } elseif ($enc_type === $this::URL_RFC1738) {
                 $arg_pairs[] = urlencode($_key).'='.urlencode((string) $_value);
-            } elseif ($enc_type === $this::RFC3986) {
+            } elseif ($enc_type === $this::URL_RFC3986) {
                 $arg_pairs[] = rawurlencode($_key).'='.rawurlencode((string) $_value);
             } else {
                 $arg_pairs[] = $_key.'='.(string) $_value;
@@ -253,7 +255,7 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
      *
      * @since 150424 Initial release.
      *
-     * @note This method is an alias for {@link build()} with `$enc_type` set to: {@link RFC3986}.
+     * @note This method is an alias for {@link build()} with `$enc_type` set to: {@link URL_RFC3986}.
      *    Please check the {@link build()} method for further details.
      *
      * @param array       $args           Input array of query args.
@@ -264,6 +266,6 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
      */
     public function buildRaw(array $args, string $numeric_prefix = null, string $arg_separator = '&'): string
     {
-        return $this->build($args, $prefix, $separator, $this::RFC3986);
+        return $this->build($args, $prefix, $separator, $this::URL_RFC3986);
     }
 }

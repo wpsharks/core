@@ -2,6 +2,10 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Utils;
 
+use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
+#
 use GetOptionKit\Option;
 use GetOptionKit\OptionParser;
 use GetOptionKit\OptionResult;
@@ -22,13 +26,11 @@ class CliOpts extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(
-        AbsApp $App,
-        OptionCollection $OptionCollection
-    ) {
+    public function __construct(App $App)
+    {
         parent::__construct($App);
 
-        $this->OptionCollection = $OptionCollection;
+        $this->OptionCollection = new OptionCollection();
     }
 
     /**

@@ -2,28 +2,22 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Traits;
+use WebSharks\Core\Classes\AppUtils;
 use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * Core abstraction.
  *
  * @since 150424 Initial release.
  */
-abstract class AbsCore implements Interfaces\Constants, \Serializable, \JsonSerializable
+abstract class AbsCore implements \Serializable, \JsonSerializable
 {
     use Traits\CacheMembers;
     use Traits\OverloadMembers;
-    use Traits\TranslationMembers;
 
-    /**
-     * Version.
-     *
-     * @since 15xxxx
-     *
-     * @type string Version.
-     */
-    const VERSION = '151118'; //v//
+    use Traits\QuickEscMembers;
+    use Traits\QuickI18nMembers;
 
     /**
      * Class constructor.
@@ -32,6 +26,5 @@ abstract class AbsCore implements Interfaces\Constants, \Serializable, \JsonSeri
      */
     public function __construct()
     {
-        $this->cacheInit();
     }
 }

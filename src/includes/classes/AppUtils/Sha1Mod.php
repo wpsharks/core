@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * SHA-1 Modulus.
@@ -11,6 +14,20 @@ use WebSharks\Core\Classes;
  */
 class Sha1Mod extends Classes\AbsBase
 {
+    protected $total_shards;
+
+    /**
+     * Class constructor.
+     *
+     * @since 15xxxx SHA-1 modulus.
+     */
+    public function __construct(App $App)
+    {
+        parent::__construct($App);
+
+        $this->total_shards = count($this->App->Config->db_shards->dbs);
+    }
+
     /**
      * SHA-1 modulus.
      *
@@ -55,5 +72,23 @@ class Sha1Mod extends Classes\AbsBase
     public function shardId(string $string, bool $is_sha1 = false, int $total_shards = 65536): int
     {
         return $this->__invoke($string, $total_shards, $is_sha1);
+    }
+
+    /**
+     * Assign shard ID.
+     *
+     * @since 15xxxx SHA-1 modulus.
+     *
+     * @param string $string  String or a SHA-1 hash.
+     * @param bool   $is_sha1 String is already a SHA-1 hash?
+     *
+     * @return int Assigned shard ID; based on `sha1($string)`.
+     *
+     * @note This one is based on the actual number of configured shards;
+     *  i.e., not on the upper limit of the shard ID itself. `65536` is not used here.
+     */
+    public function assignShardId(string $string, bool $is_sha1 = false)
+    {
+        return $this->shardId($string, $is_sha1, $this->total_shards);
     }
 }

@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * WebPurify.
@@ -23,7 +26,7 @@ class WebPurify extends Classes\AbsBase
      * @param string $cache_dir Cache directory?
      */
     public function __construct(
-        AbsApp $App,
+        Classes\App $App,
         string $api_key,
         string $cache_dir = ''
     ) {
@@ -89,7 +92,7 @@ class WebPurify extends Classes\AbsBase
         $request_args = [
             'max_con_secs'    => 3,
             'max_stream_secs' => 3,
-            'return'          => $this::ARRAY_A_TYPE,
+            'return_array'    => true,
         ];
         $endpoint = 'http://api1.webpurify.com/services/rest/';
         $endpoint = $this->Utils->UrlQuery->addArgs($endpoint_args, $endpoint);

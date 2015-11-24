@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * RIJNDAEL 256 encryption utilities.
@@ -26,9 +29,6 @@ class Rijndael256 extends Classes\AbsBase
      */
     public function encrypt(string $string, string $key = '', bool $w_md5_cs = true): string
     {
-        if (!$this->Utils->PhpHas->extension('mcrypt')) {
-            throw new Exception('Mcrypt extension missing.');
-        }
         if (!isset($string[0])) {
             return ($base64 = '');
         }
@@ -59,16 +59,13 @@ class Rijndael256 extends Classes\AbsBase
      */
     public function decrypt(string $base64, string $key = ''): string
     {
-        if (!$this->Utils->PhpHas->extension('mcrypt')) {
-            throw new Exception('Mcrypt extension missing.');
-        }
         if (!isset($base64[0])) {
             return ($string = '');
         }
         $key = $this->Utils->ShaSignatures->xKey($key);
 
         if (!strlen($e = $this->Utils->Base64->urlSafeDecode($base64))
-           || !preg_match('/^~r2\:(?P<iv>[a-zA-Z0-9]+)(?:\:(?P<md5>[a-zA-Z0-9]+))?\|(?P<e>.*)$/s', $e, $iv_md5_e)
+           || !preg_match('/^~r2\:(?<iv>[a-zA-Z0-9]+)(?:\:(?<md5>[a-zA-Z0-9]+))?\|(?<e>.*)$/s', $e, $iv_md5_e)
         ) {
             return ($string = ''); // Not possible; unable to decrypt in this case.
         }

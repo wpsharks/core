@@ -2,6 +2,11 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
+use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Traits;
+
 /**
  * HTML-related constants.
  *
@@ -14,7 +19,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array Ampersand entities; keys are regex patterns.
+     * @type array Ampersand entities; keys are regex for use in `preg_match()`.
      */
     const HTML_AMPERSAND_ENTITIES = [
         '&amp;'       => '&amp;',
@@ -27,7 +32,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array HTML whitespace; keys are regex patterns.
+     * @type array HTML whitespace; keys are regex for use in `preg_match()`.
      */
     const HTML_WHITESPACE = [
         '\0'                               => "\0",
@@ -44,7 +49,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array Quote entities; keys are regex patterns.
+     * @type array Quote entities; keys are regex for use in `preg_match()`.
      */
     const HTML_QUOTE_ENTITIES = [
         '&apos;'           => '&apos;',

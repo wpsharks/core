@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * URL remote utilities.
@@ -15,21 +18,12 @@ class UrlRemote extends Classes\AbsBase
      * Remote HTTP communication.
      *
      * @param string $url  A URL to connect to.
-     * @param array  $args Connection arguments; i.e., new behavior.
+     * @param array  $args Connection arguments.
      *
-     * @return string|array Output based on configured arguments.
+     * @return string|array Based on arguments.
      */
-    public function request(string $url, array $args = array())
+    public function request(string $url, array $args = [])
     {
-        if (!$this->Utils->PhpHas->extension('curl')) {
-            throw new Exception('cURL extension missing.');
-        }
-        if (!$this->Utils->PhpHas->extension('openssl')) {
-            throw new Exception('OpenSSL extension missing.');
-        }
-        if (!is_array($curl = curl_version()) || !($curl['features'] & CURL_VERSION_SSL)) {
-            throw new Exception('cURL not compiled w/ OpenSSL.');
-        }
         return $this->requestCurl($url, $args);
     }
 
@@ -37,61 +31,57 @@ class UrlRemote extends Classes\AbsBase
      * cURL for remote HTTP communication.
      *
      * @param string $url  A URL to connect to.
-     * @param array  $args Connection arguments; i.e., new behavior.
+     * @param array  $args Connection arguments.
      *
-     * @return string|array Output based on configured arguments.
+     * @return string|array Based on arguments.
      */
-    public function requestCurl(string $url, array $args = array())
+    protected function requestCurl(string $url, array $args = [])
     {
         # Parse arguments.
 
         $default_args = [
-            'body' => '',
-
+            'headers'         => [],
+            'body'            => '',
+            'cookie_file'     => '',
+            'max_redirects'   => 5,
             'max_con_secs'    => 20,
             'max_stream_secs' => 20,
-
-            'headers' => array(),
-
-            'cookie_file' => '',
-
-            'fail_on_error' => true,
-            'return'        => $this::STRING_TYPE,
-            // Or `$this::ARRAY_A_TYPE` alternative.
+            'fail_on_error'   => true,
+            'return_array'    => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
         # Extract and sanitize all args.
 
-        $custom_request_method = '';
-        $body                  = $args['body'];
-        $max_con_secs          = (integer) $args['max_con_secs'];
-        $max_stream_secs       = (integer) $args['max_stream_secs'];
-        $headers               = (array) $args['headers'];
-        $cookie_file           = (string) $args['cookie_file'];
-        $fail_on_error         = (boolean) $args['fail_on_error'];
-        $return                = (string) $args['return'];
+        extract($args); // Typify args.
+        $headers         = (array) $headers;
+        $cookie_file     = (string) $cookie_file;
+        $max_redirects   = max(0, (int) $max_redirects);
+        $max_con_secs    = max(1, (int) $max_con_secs);
+        $max_stream_secs = max(1, (int) $max_stream_secs);
+        $fail_on_error   = (bool) $fail_on_error;
+        $return_array    = (bool) $return_array;
 
         # Parse the URL for a possible request method; e.g., `POST::`.
 
+        $custom_request_method        = ''; // Initialize.
         $custom_request_methods       = ['HEAD','GET','POST','PUT','PATCH','DELETE'];
-        $custom_request_methods_regex = // e.g.,`HEAD::http://www.example.com/path/to/my.php`
-            '/^(?P<method>(?:'.implode('|', $custom_request_methods).'))\:{2}(?P<url>.+)/ui';
+        $custom_request_methods_regex = '/^(?<method>(?:'.implode('|', $custom_request_methods).'))\:{2}(?<url>.+)/ui';
 
         if (preg_match($custom_request_methods_regex, $url, $_m)) {
             $url                   = $_m['url']; // URL after `::`.
             $custom_request_method = mb_strtoupper($_m['method']);
 
             if ($custom_request_method === 'HEAD') {
-                $return = $this::ARRAY_A_TYPE;
+                $return_array = true;
             }
         } // unset($_m); // Housekeeping.
 
         # Validate URL.
 
         if (!$url) { // Failure.
-            return $return === $this::ARRAY_A_TYPE ? [] : '';
+            return $return_array ? [] : '';
         }
         # Convert body to a string.
 
@@ -100,17 +90,16 @@ class UrlRemote extends Classes\AbsBase
         } else {
             $body = (string) $body;
         }
-        # Make sure we always have a `User-Agent`.
+        # Make sure we always have a `user-agent`.
 
-        foreach ($headers as $_header) {
-            if (mb_stripos($_header, 'User-Agent:') === 0) {
+        foreach ($headers as $_key => $_header) {
+            if (mb_stripos($_header, 'user-agent:') === 0) {
                 $has_user_agent = true;
             }
-        }
-        unset($_header); // Housekeeping.
+        } // unset($_key, $_header); // Housekeeping.
 
         if (empty($has_user_agent)) {
-            $headers[]      = 'User-Agent: '.__METHOD__;
+            $headers[]      = 'user-agent: '.__METHOD__;
             $has_user_agent = true; // Does now!
         }
         # Setup header collection sub-routine.
@@ -122,29 +111,29 @@ class UrlRemote extends Classes\AbsBase
         };
         # Determine if we can follow location headers.
 
-        $can_follow = !filter_var(ini_get('safe_mode'), FILTER_VALIDATE_BOOLEAN)
-                      && !ini_get('open_basedir'); // Possible?
+        $follow_location = $max_redirects > 0
+            && !filter_var(ini_get('safe_mode'), FILTER_VALIDATE_BOOLEAN)
+            && !ini_get('open_basedir');
+        $max_redirects = !$follow_location ? 0 : $max_redirects;
 
         # Configure cURL options.
 
         $curl_opts = [
             CURLOPT_URL            => $url,
-            CURLOPT_HTTPHEADER     => $headers,
             CURLOPT_CONNECTTIMEOUT => $max_con_secs,
             CURLOPT_TIMEOUT        => $max_stream_secs,
+
+            CURLOPT_ENCODING   => '',
+            CURLOPT_HTTPHEADER => $headers,
+
+            CURLOPT_FAILONERROR    => $fail_on_error,
+            CURLOPT_FOLLOWLOCATION => $follow_location,
+            CURLOPT_MAXREDIRS      => $max_redirects,
 
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
             CURLOPT_HEADERFUNCTION => $collect_output_headers,
             CURLOPT_NOBODY         => $custom_request_method === 'HEAD',
-
-            CURLOPT_FOLLOWLOCATION => $can_follow,
-            CURLOPT_MAXREDIRS      => $can_follow ? 5 : 0,
-
-            CURLOPT_ENCODING       => '',
-            CURLOPT_VERBOSE        => false,
-            CURLOPT_FAILONERROR    => $fail_on_error,
-            CURLOPT_SSL_VERIFYPEER => false,
         ];
         if ($body && $custom_request_method !== 'HEAD') {
             if ($custom_request_method) {
@@ -168,7 +157,7 @@ class UrlRemote extends Classes\AbsBase
 
         $curl_info = curl_getinfo($curl); // All information.
         $curl_info = is_array($curl_info) ? $curl_info : []; // Empty.
-        $curl_code = isset($curl_info['http_code']) ? (integer) $curl_info['http_code'] : 0;
+        $curl_code = isset($curl_info['http_code']) ? (int) $curl_info['http_code'] : 0;
 
         # Parse the headers that we collected, if any.
 
@@ -176,8 +165,8 @@ class UrlRemote extends Classes\AbsBase
         $curl_headers = $curl_headers[count($curl_headers) - 1];
         // ↑ Last set of headers; in case of location redirects.
 
-        $_curl_headers = $curl_headers; // Temp.
-        $curl_headers  = []; // Initialize array.
+        $_curl_headers = $curl_headers;
+        $curl_headers  = []; // Initialize.
 
         foreach (preg_split('/['."\r\n".']+/u', $_curl_headers, -1, PREG_SPLIT_NO_EMPTY) as $_line) {
             if (isset($_line[0]) && mb_strpos($_line, ':', 1) !== false) {
@@ -193,17 +182,14 @@ class UrlRemote extends Classes\AbsBase
         }
         # Close cURL resource handle.
 
-        curl_close($curl); // We can close the cURL resource handle now.
+        curl_close($curl); // Close cURL resource now.
 
-        # Return final response; either an array or just the response body.
+        # Return final response; array or just the body.
 
-        if ($return === $this::ARRAY_A_TYPE) {
-            return [
-                'code'    => $curl_code,
-                'headers' => $curl_headers,
-                'body'    => $curl_body,
-            ];
-        }
-        return $curl_body;
+        return $return_array ? [
+            'code'    => $curl_code,
+            'headers' => $curl_headers,
+            'body'    => $curl_body,
+        ] : $curl_body;
     }
 }

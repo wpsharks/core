@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * PHP has-check utilities.
@@ -22,7 +25,7 @@ class PhpHas extends Classes\AbsBase
      */
     public function extension(string $extension): bool
     {
-        if (!is_null($has = &$this->staticKey(__FUNCTION__, $extension))) {
+        if (!is_null($has = &$this->cacheKey(__FUNCTION__, $extension))) {
             return $has; // Already cached this.
         }
         return ($has = (bool) extension_loaded($extension));
@@ -42,10 +45,10 @@ class PhpHas extends Classes\AbsBase
      */
     public function callableFunction(string $function): bool
     {
-        if (!is_null($has = &$this->staticKey(__FUNCTION__, $function))) {
+        if (!is_null($has = &$this->cacheKey(__FUNCTION__, $function))) {
             return $has; // Already cached this.
         }
-        if (is_null($disabled_functions = &$this->staticKey(__FUNCTION__.'_disabled_functions'))) {
+        if (is_null($disabled_functions = &$this->cacheKey(__FUNCTION__.'_disabled_functions'))) {
             $disabled_functions = array(); // Initialize disabled/blacklisted functions.
 
             if (($disable_functions = $this->Utils->Trim(ini_get('disable_functions')))) {

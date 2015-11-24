@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * CLI utilities.
@@ -20,7 +23,7 @@ class Cli extends Classes\AbsBase
      */
     public function is(): bool
     {
-        if (!is_null($is = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($is = &$this->cacheKey(__FUNCTION__))) {
             return $is; // Cached this already.
         }
         if ($this->Utils->StrCaseCmp(PHP_SAPI, 'cli') === 0) {

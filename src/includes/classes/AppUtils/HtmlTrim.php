@@ -1,9 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * HTML trim utilities.
@@ -39,7 +41,7 @@ class HtmlTrim extends Classes\AbsBase implements Interfaces\HtmlConstants
         if (!isset($string[0])) {
             return $string;
         }
-        if (is_null($whitespace = &$this->staticKey(__FUNCTION__.'_whitespace'))) {
+        if (is_null($whitespace = &$this->cacheKey(__FUNCTION__.'_whitespace'))) {
             $whitespace = implode('|', array_keys($this::HTML_WHITESPACE));
         }
         switch ($side) {

@@ -1,8 +1,12 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
+#
 use Hashids\Hashids as Parser;
 
 /**
@@ -24,7 +28,7 @@ class HashIds extends Classes\AbsBase
      * @param string $alphabet  Chars to use in ID.
      */
     public function __construct(
-        AbsApp $App,
+        Classes\App $App,
         string $key,
         int $min_chars = 0,
         string $alphabet = ''

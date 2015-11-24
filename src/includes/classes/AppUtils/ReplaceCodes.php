@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * Replace utilities.
@@ -84,9 +87,9 @@ class ReplaceCodes extends Classes\AbsBase
         $maybe_urlencode = $urlencode ? 'urlencode' : function ($v) {
             return $v; // Do nothing; passthrough.
         };
-        if (mb_stripos($string, '%%__var_dump__%%') !== false) {
+        if (mb_stripos($string, '%%__dump__%%') !== false) {
             $string = preg_replace_callback('/%%__var_dump__%%/ui', function () use (&$maybe_urlencode, &$___vars) {
-                return $maybe_urlencode($this->Utils->VarDump($___vars));
+                return $maybe_urlencode($this->Utils->Dump($___vars, true));
             }, $string);
         }
         if (mb_stripos($string, '%%__serialize__%%') !== false) {
@@ -123,7 +126,7 @@ class ReplaceCodes extends Classes\AbsBase
             $___var_keys = array_keys($___vars); // One-time only; may need these down below.
 
             $string = preg_replace_callback(
-                '/%%\/(?P<pattern>[^%\/]+?)(?:\/(?P<delimiter>[^%\/]*?))?(?:\/(?P<key_delimiter>[^%\/]*?))?%%/u',
+                '/%%\/(?<pattern>[^%\/]+?)(?:\/(?<delimiter>[^%\/]*?))?(?:\/(?<key_delimiter>[^%\/]*?))?%%/u',
                 function ($m) use (&$maybe_urlencode, &$___vars, &$___var_keys) {
                     $values = []; // Initialize.
                     $regex = $this->Utils->WdRegex($m['pattern'], '.');

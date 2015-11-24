@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * EOL utilities.
@@ -25,9 +28,7 @@ class Eols extends Classes\AbsBase
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->normalize($_value);
-            }
-            unset($_key, $_value); // Housekeeping.
-
+            } // unset($_key, $_value);
             return $value;
         }
         $string = (string) $value;

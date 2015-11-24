@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * FS dir utilities.
@@ -22,7 +25,7 @@ class FsDir extends Classes\AbsBase
      */
     public function tmp(): string
     {
-        if (!is_null($dir = &$this->staticKey(__FUNCTION__))) {
+        if (!is_null($dir = &$this->cacheKey(__FUNCTION__))) {
             return $dir; // Already cached this.
         }
         $possible_dirs = []; // Initialize.
@@ -88,14 +91,14 @@ class FsDir extends Classes\AbsBase
             return ''; // Empty.
         }
         if (mb_strpos($string, '://') !== false) {
-            if (preg_match('/^(?P<stream_wrapper>[a-zA-Z0-9]+)\:\/\//u', $string, $stream_wrapper)) {
-                $string = preg_replace('/^(?P<stream_wrapper>[a-zA-Z0-9]+)\:\/\//u', '', $string);
+            if (preg_match('/^(?<stream_wrapper>[a-zA-Z0-9]+)\:\/\//u', $string, $stream_wrapper)) {
+                $string = preg_replace('/^(?<stream_wrapper>[a-zA-Z0-9]+)\:\/\//u', '', $string);
             }
         }
         if (mb_strpos($string, ':') !== false) {
-            if (preg_match('/^(?P<drive_letter>[a-zA-Z])\:[\/\\\\]/u', $string)) {
+            if (preg_match('/^(?<drive_letter>[a-zA-Z])\:[\/\\\\]/u', $string)) {
                 $string = preg_replace_callback(
-                    '/^(?P<drive_letter>[a-zA-Z])\:[\/\\\\]/u',
+                    '/^(?<drive_letter>[a-zA-Z])\:[\/\\\\]/u',
                     function ($m) {
                         return mb_strtoupper($m[0]);
                     },

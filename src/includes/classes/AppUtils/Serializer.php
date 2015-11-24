@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * Serializer.
@@ -71,7 +74,7 @@ class Serializer extends Classes\AbsBase
      */
     public function checkSetType($value, string $expected_type)
     {
-        switch (($expected_type = mb_strtolower($expected_type))) {
+        switch ($expected_type) {
             case 'bool':
             case 'boolean':
                 $expected_type = 'bool';

@@ -2,14 +2,17 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
+use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\AppUtils;
 use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
 
 /**
- * Translation members.
+ * Quick i18n members.
  *
  * @since 150424 Initial release.
  */
-trait TranslationMembers
+trait QuickI18nMembers
 {
     /**
      * Translate a string.
@@ -22,6 +25,9 @@ trait TranslationMembers
      */
     protected function __(string $string): string
     {
+        if (!empty($this->App->Config->text_domain)) {
+            return $string;
+        }
         return $string;
     }
 }

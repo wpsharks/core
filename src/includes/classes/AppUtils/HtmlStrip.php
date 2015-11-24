@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * HTML strip utilities.
@@ -45,8 +48,8 @@ class HtmlStrip extends Classes\AbsBase
         $allowed_attributes = // Force lowercase.
             array_map('mb_strtolower', (array) $args['allowed_attributes']);
 
-        $regex_tags  = '/(?P<open>\<[\w\-]+)(?P<attrs>[^>]+)(?P<close>\>)/ui';
-        $regex_attrs = '/\s+(?P<attr>[\w\-]+)(?:\s*\=\s*(["\']).*?\\2|\s*\=[^\s]*)?/uis';
+        $regex_tags  = '/(?<open>\<[\w\-]+)(?<attrs>[^>]+)(?<close>\>)/ui';
+        $regex_attrs = '/\s+(?<attr>[\w\-]+)(?:\s*\=\s*(["\']).*?\\2|\s*\=[^\s]*)?/uis';
 
         return preg_replace_callback($regex_tags, function ($m) use ($allowed_attributes, $regex_attrs) {
             return $m['open'].preg_replace_callback($regex_attrs, function ($m) use ($allowed_attributes) {

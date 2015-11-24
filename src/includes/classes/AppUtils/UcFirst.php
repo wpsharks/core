@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * Multibyte `ucfirst()`.
@@ -26,7 +29,6 @@ class UcFirst extends Classes\AbsBase
             foreach ($value as $_key => &$_value) {
                 $_value = $this->__invoke($_value);
             } // unset($_key, $_value);
-
             return $value;
         }
         $string = (string) $value;

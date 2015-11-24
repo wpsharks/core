@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * HTML escape utilities.
@@ -11,6 +14,28 @@ use WebSharks\Core\Classes;
  */
 class HtmlEntities extends Classes\AbsBase
 {
+    /**
+     * Escape HTML markup.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param mixed    $value         Any input value.
+     * @param bool     $double_encode Encode existing entities? Defaults to `FALSE`.
+     * @param int|null $flags         Optional. Defaults to `ENT_HTML5 | ENT_QUOTES | ENT_SUBSTITUTE`.
+     *
+     * @return string With HTML markup escaped now.
+     */
+    public function esc(string $string, bool $double_encode = false, int $flags = null)
+    {
+        if (!$string) { // Save time; check empty.
+            return $string; // Nothing to do.
+        }
+        if (!isset($flags)) {
+            $flags = ENT_HTML5 | ENT_QUOTES | ENT_SUBSTITUTE;
+        }
+        return htmlspecialchars($string, $flags, 'UTF-8', $double_encode);
+    }
+
     /**
      * Escape HTML markup deeply.
      *
@@ -28,13 +53,10 @@ class HtmlEntities extends Classes\AbsBase
             foreach ($value as $_key => &$_value) {
                 $_value = $this->encode($_value, $double_encode, $flags);
             } // unset($_key, $_value); // Housekeeping.
-
             return $value;
         }
-        $string = (string) $value;
-
-        if (!isset($string[0])) {
-            return $string;
+        if (!($string = (string) $value)) {
+            return $string; // Nothing to do.
         }
         if (!isset($flags)) {
             $flags = ENT_HTML5 | ENT_QUOTES | ENT_SUBSTITUTE;
@@ -58,13 +80,10 @@ class HtmlEntities extends Classes\AbsBase
             foreach ($value as $_key => &$_value) {
                 $_value = $this->decode($_value, $flags);
             } // unset($_key, $_value); // Housekeeping.
-
             return $value;
         }
-        $string = (string) $value;
-
-        if (!isset($string[0])) {
-            return $string;
+        if (!($string = (string) $value)) {
+            return $string; // Nothing to do.
         }
         if (!isset($flags)) {
             $flags = ENT_HTML5 | ENT_QUOTES;

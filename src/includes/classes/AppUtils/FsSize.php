@@ -1,8 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Utils;
+namespace WebSharks\Core\Classes\AppUtils;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
  * FS size utilities.
@@ -69,7 +72,7 @@ class FsSize extends Classes\AbsBase
      */
     public function abbrBytes(string $string): float
     {
-        if (!preg_match('/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/ui', $string, $_m)) {
+        if (!preg_match('/^(?<value>[0-9\.]+)\s*(?<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/ui', $string, $_m)) {
             return (float) 0; // Force a value of `0.0`.
         }
         $value    = (float) $_m['value'];

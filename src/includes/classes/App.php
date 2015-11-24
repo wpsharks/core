@@ -2,21 +2,25 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
+
 /**
- * Application abstraction.
+ * Application.
  *
  * @since 15xxxx Initial release.
  */
-abstract class AbsApp extends AbsCore
+class App extends AbsCore
 {
     /**
-     * Instance.
+     * Config.
      *
      * @since 15xxxx
      *
-     * @type \stdClass
+     * @type Config
      */
-    public $instance;
+    public $Config;
 
     /**
      * Dicer.
@@ -37,19 +41,28 @@ abstract class AbsApp extends AbsCore
     public $Utils;
 
     /**
+     * Version.
+     *
+     * @since 15xxxx
+     *
+     * @type string Version.
+     */
+    const VERSION = '151118'; //v//
+
+    /**
      * Constructor.
      *
      * @since 15xxxx Initial release.
      *
-     * @param array $args Instance args.
+     * @param array $instance Instance args.
      */
-    public function __construct(array $args)
+    public function __construct(array $instance = [])
     {
         parent::__construct();
 
-        $this->instance = (object) $args;
+        $this->Config = new AppConfig($instance);
 
-        $this->Di = new AppDi(); // Dependency injector.
+        $this->Di = new AppDi($this->Config->di_default_rule);
         $this->Di->addInstances([self::class => $this, $this]);
 
         $this->Utils = $this->Di->get(AppUtils::class);
