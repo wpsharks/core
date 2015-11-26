@@ -15,68 +15,36 @@ use WebSharks\Core\Traits;
 class Cookie extends Classes\AbsBase
 {
     /**
-     * Sets an encrypted cookie.
+     * Sets a cookie.
      *
-     * @param string $name          Name of the cookie.
-     * @param string $value         Value for this cookie (empty to delete).
-     * @param int    $expires_after Optional. Time (in seconds) this cookie should last for.
-     *                              Defaults to `31556926` (one year). If this is set to anything <= `0`,
-     *                              the cookie will expire automatically after the current browser session.
-     * @param string $domain        Optional input domain name to set the cookie for.
-     *                              Or, set this to `root` to use the root host name.
-     *                              e.g., `a.b.c.example.com` = `example.com`.
-     * @param string $key           Optional. Key to use in cookie encryption.
-     *
-     * @throws Exception If headers have already been sent; i.e. if not possible.
+     * @param string      $name          Name of the cookie.
+     * @param string      $value         Cookie value (empty to delete).
+     * @param string      $key           Encryption key. See {@link Rijndael256}
+     * @param int|null    $expires_after Time (in seconds) this cookie should last for.
+     * @param string|null $domain        Domain name to set the cookie for.
+     * @param string|null $path          Path to set the cookie for.
      */
-    public function set(string $name, string $value, int $expires_after = 31556926, string $domain = '', string $key = '')
+    public function set(string $name, string $value, string $key, int $expires_after = null, string $domain = null, string $path = null)
     {
         if (headers_sent()) {
             throw new Exception('Doing it wrong! Headers sent already.');
         }
-        if (!($name = $this->Utils->Trim($name))) {
+        if (!$name) {
             return; // Not possible.
         }
-        $expires_after = max(0, $expires_after);
-        $value         = isset($value[0]) ? $this->Utils->Rijndael256->encrypt($value, $key) : '';
+        if (isset($value[0])) { // Encrypt if not empty.
+            $value = $this->Utils->Rijndael256->encrypt($value, $key);
+        }
+        $expires_after = max(0, $expires_after ?? 31556926);
         $expires       = $expires_after ? time() + $expires_after : 0;
 
-        if (defined('COOKIE_PATH')) {
-            $cookie_path = (string) COOKIE_PATH;
-        } elseif (defined('COOKIEPATH')) {
-            $cookie_path = (string) COOKIEPATH;
-        } elseif (!empty($_SERVER['COOKIE_PATH'])) {
-            $cookie_path = (string) $_SERVER['COOKIE_PATH'];
-        } else {
-            $cookie_path = '/';
-        }
-        if (defined('SITE_COOKIE_PATH')) {
-            $site_cookie_path = (string) SITE_COOKIE_PATH;
-        } elseif (defined('SITECOOKIEPATH')) {
-            $site_cookie_path = (string) SITECOOKIEPATH;
-        } elseif (!empty($_SERVER['SITE_COOKIE_PATH'])) {
-            $site_cookie_path = (string) $_SERVER['SITE_COOKIE_PATH'];
-        } else {
-            $site_cookie_path = '/';
-        }
-        if ($domain) {
-            $cookie_domain = $domain;
-        } elseif (defined('COOKIE_DOMAIN')) {
-            $cookie_domain = (string) COOKIE_DOMAIN;
-        } elseif (defined('COOKIEDOMAIN')) {
-            $cookie_domain = (string) COOKIEDOMAIN;
-        } elseif (!empty($_SERVER['COOKIE_DOMAIN'])) {
-            $cookie_domain = (string) $_SERVER['COOKIE_DOMAIN'];
-        } else {
-            $cookie_domain = $this->Utils->UrlCurrent->host(true);
-        }
-        if ($cookie_domain === 'root') {
-            $cookie_domain = '.'.$this->Utils->UrlCurrent->rootHost(true);
-        }
-        setcookie($name, $value, $expires, $cookie_path, $cookie_domain);
-        setcookie($name, $value, $expires, $site_cookie_path, $cookie_domain);
+        $domain = $domain ?? $this->Utils->UrlCurrent->host(true);
+        $domain = $domain === 'root' ? '.'.$this->Utils->UrlCurrent->rootHost(true) : $domain;
+        $path   = $path ?? '/'; // Default path covers the entire site.
 
-        if (mb_stripos($name, '_test_') !== 0 && (!defined('TEST_COOKIE') || $name !== TEST_COOKIE)) {
+        setcookie($name, $value, $expires, $path, $domain);
+
+        if (mb_stripos($name, '_test_') === false) {
             $_COOKIE[$name] = $value; // Update in real-time.
         }
     }
@@ -85,18 +53,15 @@ class Cookie extends Classes\AbsBase
      * Gets an encrypted cookie value.
      *
      * @param string $name Name of the cookie.
-     * @param string $key  Optional. Key originally used in encryption.
+     * @param string $key  Encryption key. See {@link Rijndael256}
      *
-     * @return string Cookie string value (unencrypted).
+     * @return string Cookie value (unencrypted).
      */
-    public function get(string $name, string $key = ''): string
+    public function get(string $name, string $key): string
     {
-        if (!($name = $this->Utils->Trim($name))) {
-            return ''; // Not possible.
+        if ($name && isset($_COOKIE[$name]) && is_string($_COOKIE[$name])) {
+            return $this->Utils->Rijndael256->decrypt($_COOKIE[$name], $key);
         }
-        if (isset($_COOKIE[$name]) && is_string($_COOKIE[$name])) {
-            $value = $this->Utils->Rijndael256->decrypt($_COOKIE[$name], $key);
-        }
-        return $value ?? '';
+        return ''; // Missing cookie.
     }
 }

@@ -19,15 +19,15 @@ class Keygen extends Classes\AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param int  $length              Length of the key. Default is `15`.
-     * @param bool $special_chars       Include standard special characters? Defaults to `TRUE`.
-     * @param bool $extra_special_chars Include extra special characters? Defaults to `FALSE`.
+     * @param int  $char_size           Key char size. Default is `15`.
+     * @param bool $special_chars       Include standard special characters? Defaults to `true`.
+     * @param bool $extra_special_chars Include extra special characters? Defaults to `false`.
      *
      * @return string The random key.
      */
-    public function random(int $length = 15, bool $special_chars = true, bool $extra_special_chars = false): string
+    public function random(int $char_size = 15, bool $special_chars = true, bool $extra_special_chars = false): string
     {
-        $length = max(0, $length);
+        $char_size = max(0, $char_size);
 
         $chars = 'abcdefghijklmnopqrstuvwxyz';
         $chars .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -35,11 +35,12 @@ class Keygen extends Classes\AbsBase
         if ($special_chars) {
             $chars .= '!@#$%^&*()';
         }
-        if ($extra_special_chars) {
+        if ($special_chars && $extra_special_chars) {
             $chars .= '-_[]{}<>~`+=,.;:/?|';
         }
         $total_chars = mb_strlen($chars);
-        for ($key = '', $_i = 0; $_i < $length; ++$_i) {
+
+        for ($key = '', $_i = 0; $_i < $char_size; ++$_i) {
             $key .= mb_substr($chars, mt_rand(0, $total_chars - 1), 1);
         } // unset($_i); // Housekeeping.
 

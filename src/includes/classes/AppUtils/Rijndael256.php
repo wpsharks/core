@@ -14,33 +14,50 @@ use WebSharks\Core\Traits;
  */
 class Rijndael256 extends Classes\AbsBase
 {
+    protected $iv_size;
+    protected $key_size;
+
+    /**
+     * Class constructor.
+     *
+     * @since 150424 Initial release.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        $this->iv_size  = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+        $this->key_size = mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+    }
+
     /**
      * RIJNDAEL 256 encryption with a URL-safe base64 wrapper.
      *
      * @since 150424 Initial release.
      *
-     * @param string $string   A string of data to encrypt.
-     * @param string $key      Optional. Key to use in encryption.
-     * @param bool   $w_md5_cs Optional. Defaults to `TRUE` (recommended).
+     * @param string $string String to encrypt.
+     * @param string $key    Encryption key (required always).
+     * @param bool   $sha1   Defaults to `true` (recommended).
      *
-     * @throws Exception If string encryption fails.
-     *
-     * @return string Encrypted string.
+     * @return string Encrypted string (URL-safe base64).
      */
-    public function encrypt(string $string, string $key = '', bool $w_md5_cs = true): string
+    public function encrypt(string $string, string $key, bool $sha1 = true): string
     {
         if (!isset($string[0])) {
             return ($base64 = '');
         }
-        $key    = $this->Utils->ShaSignatures->xKey($key);
-        $string = '~r2|'.$string; // A short `RIJNDAEL 256` identifier.
-        $key    = (string) substr($key, 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
-        $iv     = $this->Utils->Keygen->random(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), false);
+        $string = '~r2|'.$string; // `RIJNDAEL 256` identifier.
 
-        if (!is_string($e = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $string, MCRYPT_MODE_CBC, $iv)) || !isset($e[0])) {
-            throw new Exception('String encryption failed; `$e` is NOT string; or it has no length.');
+        if (strlen($key = (string) substr($key, 0, $this->key_size)) < $this->key_size) {
+            throw new Exception(sprintf('Key too short. Minimum length: `%1$s`.', $this->key_size));
         }
-        $e = '~r2:'.$iv.($w_md5_cs ? ':'.md5($e) : '').'|'.$e; // Pack components.
+        if (strlen($iv = $this->Utils->Keygen->random($this->iv_size, false)) < $this->iv_size) {
+            throw new Exception(sprintf('IV too short. Minimum length: `%1$s`.', $this->iv_size));
+        }
+        if (!is_string($e = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $string, MCRYPT_MODE_CBC, $iv)) || !isset($e[0])) {
+            throw new Exception('String encryption failed; `$e` is not a string; or it has no length.');
+        }
+        $e = '~r2:'.$iv.($sha1 ? ':'.sha1($e) : '').'|'.$e; // Pack components.
 
         return ($base64 = $this->Utils->Base64->urlSafeEncode($e));
     }
@@ -50,38 +67,42 @@ class Rijndael256 extends Classes\AbsBase
      *
      * @since 150424 Initial release.
      *
-     * @param string $base64 A string of data to decrypt (still base64 encoded).
-     * @param string $key    Optional. Key originally used for encryption.
+     * @param string $base64 String to decrypt (URL-safe base64).
+     * @param string $key    Encryption key (required always).
      *
-     * @throws Exception If a validated RIJNDAEL 256 string decryption fails.
-     *
-     * @return string Decrypted string, or an empty string if validation fails.
+     * @return string Decrypted string; or empty string on failure.
      */
-    public function decrypt(string $base64, string $key = ''): string
+    public function decrypt(string $base64, string $key): string
     {
         if (!isset($base64[0])) {
             return ($string = '');
         }
-        $key = $this->Utils->ShaSignatures->xKey($key);
+        $regex = // Matches a valid encryption.
 
-        if (!strlen($e = $this->Utils->Base64->urlSafeDecode($base64))
-           || !preg_match('/^~r2\:(?<iv>[a-zA-Z0-9]+)(?:\:(?<md5>[a-zA-Z0-9]+))?\|(?<e>.*)$/s', $e, $iv_md5_e)
-        ) {
-            return ($string = ''); // Not possible; unable to decrypt in this case.
+          '/^'.// Beginning of the strong.
+            '~r2'.// Required RIJNDAEL 256 marker.
+            '\:(?<iv>[a-zA-Z0-9]{'.$this->iv_size.'})'.// Required IV.
+            '(?:\:(?<sha1>[a-zA-Z0-9]{40}))?'.// Optional checksum.
+            '\|(?<e>.+)'.// Encrypted string (not empty).
+          '$/s'; // End of string.
+
+        if (!($e = $this->Utils->Base64->urlSafeDecode($base64))) {
+            return ($string = ''); // Not possible.
         }
-        if (!isset($iv_md5_e['iv'][0], $iv_md5_e['e'][0])) {
-            return ($string = ''); // Components missing.
+        if (!preg_match($regex, $e, $iv_sha1_e)) {
+            return ($string = ''); // Not possible.
         }
-        if (isset($iv_md5_e['md5'][0]) && $iv_md5_e['md5'] !== md5($iv_md5_e['e'])) {
+        if (!empty($iv_sha1_e['sha1']) && $iv_sha1_e['sha1'] !== sha1($iv_sha1_e['e'])) {
             return ($string = ''); // Invalid checksum; automatic failure.
         }
-        $key = (string) substr($key, 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
-
-        if (!is_string($string = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $iv_md5_e['e'], MCRYPT_MODE_CBC, $iv_md5_e['iv'])) || !isset($string[0])) {
+        if (strlen($key = (string) substr($key, 0, $this->key_size)) < $this->key_size) {
+            throw new Exception(sprintf('Key too short. Minimum length: `%1$s`.', $this->key_size));
+        }
+        if (!is_string($string = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $iv_sha1_e['e'], MCRYPT_MODE_CBC, $iv_sha1_e['iv'])) || !isset($string[0])) {
             throw new Exception('String decryption failed; `$string` is NOT a string, or it has no length.');
         }
         if (!strlen($string = preg_replace('/^~r2\|/', '', $string, 1, $r2)) || !$r2) {
-            return ($string = ''); // Missing packed components.
+            return ($string = ''); // Missing packed component identifier.
         }
         return ($string = $this->Utils->Trim->r($string, "\0\4")); // See: <http://www.asciitable.com/>.
     }

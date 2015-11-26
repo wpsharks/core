@@ -23,7 +23,7 @@ class Pdo extends Classes\AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(App $App)
+    public function __construct(Classes\App $App)
     {
         parent::__construct($App);
 
