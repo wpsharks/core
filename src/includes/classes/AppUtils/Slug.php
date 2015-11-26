@@ -12,8 +12,22 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Slug extends Classes\AbsBase
+class Slug extends Classes\AbsBase implements Interfaces\SlugConstants
 {
+    /**
+     * Validate slug.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string $slug Slug to validate.
+     *
+     * @return bool True if slug is valid.
+     */
+    public function isValid(string $slug): bool
+    {
+        return (bool) preg_match($this::SLUG_REGEX_VALID, $slug);
+    }
+
     /**
      * Convert slug to name.
      *
