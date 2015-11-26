@@ -41,13 +41,13 @@ class Pdo extends Classes\AbsBase
             \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
             \PDO::ATTR_ERRMODE                  => \PDO::ERRMODE_EXCEPTION,
         ];
-        $this->common = $this->App->Config->db_shards['common'];
+        $this->common = &$this->App->Config->db_shards['common'];
 
-        if ($this->common->ssl_enable) {
-            $this->options[\PDO::MYSQL_ATTR_SSL_CA]     = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common->ssl_ca);
-            $this->options[\PDO::MYSQL_ATTR_SSL_CERT]   = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common->ssl_crt);
-            $this->options[\PDO::MYSQL_ATTR_SSL_KEY]    = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common->ssl_key);
-            $this->options[\PDO::MYSQL_ATTR_SSL_CIPHER] = $this->common->ssl_cipher;
+        if ($this->common['ssl_enable']) {
+            $this->options[\PDO::MYSQL_ATTR_SSL_CA]     = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common['ssl_ca']);
+            $this->options[\PDO::MYSQL_ATTR_SSL_CERT]   = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common['ssl_crt']);
+            $this->options[\PDO::MYSQL_ATTR_SSL_KEY]    = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common['ssl_key']);
+            $this->options[\PDO::MYSQL_ATTR_SSL_CIPHER] = $this->common['ssl_cipher'];
         }
     }
 
@@ -72,17 +72,17 @@ class Pdo extends Classes\AbsBase
         } // Now we acquire the configuration.
         $shard_db = $this->shardDbConfig($shard_id);
 
-        if (is_null($Pdo = &$this->cacheKey(__FUNCTION__, $shard_db->host))) {
+        if (is_null($Pdo = &$this->cacheKey(__FUNCTION__, $shard_db['host']))) {
             $Pdo = new \PDO(
-                'mysql:host='.$shard_db->host.';'.
-                'port='.$this->common->port.';'.
-                'charset='.$this->common->charset,
-                $this->common->username,
-                $this->common->password,
+                'mysql:host='.$shard_db['host'].';'.
+                'port='.$this->common['port'].';'.
+                'charset='.$this->common['charset'],
+                $this->common['username'],
+                $this->common['password'],
                 $this->options
             );
         }
-        $Pdo->exec('use `'.$shard_db->name.'`');
+        $Pdo->exec('use `'.$shard_db['name'].'`');
         $this->current_Pdo = $Pdo;
 
         return $Pdo;
@@ -95,16 +95,16 @@ class Pdo extends Classes\AbsBase
      *
      * @param int $shard_id Shard ID.
      *
-     * @return \stdClass Shard DB config properties.
+     * @return array Shard DB config properties.
      */
-    public function shardDbConfig(int $shard_id): \stdClass
+    public function shardDbConfig(int $shard_id): array
     {
         if (!is_null($properties = &$this->cacheKey(__FUNCTION__, $shard_id))) {
             return $properties; // Cached this already.
         }
         foreach ($this->App->Config->db_shards['dbs'] as $_key => $_db) {
-            if ($shard_id >= $_db->range->from && $shard_id <= $_db->range->to) {
-                return ($properties = $_db->properties);
+            if ($shard_id >= $_db['range']['from'] && $shard_id <= $_db['range']['to']) {
+                return ($properties = $_db['properties']);
             }
         } // unset($_key, $_db); // Houskeeping.
         throw new Exception(sprintf('Missing DB info for shard ID: `%1$s`.', $shard_id));
