@@ -92,7 +92,7 @@ interface UrlConstants
     const URL_REGEX_FRAG_URI_HASH = // Very complex.
 
         '(?:\/(?!\/)'.// A slash `/`, but not two `//` together.
-            '(?:[^\x{00}-\x{7F}\p{Z}\p{C}]|[a-zA-Z0-9_.~+%\-])*'.// `path` name.
+            '(?:[^\x{00}-\x{7F}\p{Z}\p{C}]|[a-zA-Z0-9=_.~+%\-])*'.// `path` name.
         ')*'.// The `[/paths]` are completely optional at all times.
 
         '(?:\?'.// Possible query string; i.e., `?[key[=value]]`

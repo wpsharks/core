@@ -32,11 +32,11 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
      */
     public function __invoke($to, string $subject, string $message, array $headers = [], array $attachments = [], bool $throw = false)
     {
-        $from_name  = $this->App->Config->email_from_name;
-        $from_email = $this->App->Config->email_from_email;
+        $from_name  = $this->App->Config->email['from_name'];
+        $from_email = $this->App->Config->email['from_email'];
 
-        $reply_to_name  = $this->App->Config->email_reply_to_name;
-        $reply_to_email = $this->App->Config->email_reply_to_email;
+        $reply_to_name  = $this->App->Config->email['reply_to_name'];
+        $reply_to_email = $this->App->Config->email['reply_to_email'];
 
         $recipients = $this->parseAddresses($to);
 
@@ -62,7 +62,7 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
         if (!$from_email || !$recipients || !$subject || !$message_html || !$message_text) {
             return false; // Not possible. Missing vital argument value(s).
         }
-        if (!$this->App->Config->email_smtp_host || !$this->App->Config->email_smtp_port) {
+        if (!$this->App->Config->email['smtp_host'] || !$this->App->Config->email['smtp_port']) {
             return false; // Not possible. Missing vital config value(s).
         }
         try { // Maybe catch exceptions.
@@ -72,13 +72,13 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
 
             $mailer->SingleTo = count($recipients) > 1;
 
-            $mailer->Host       = $this->App->Config->email_smtp_host;
-            $mailer->Port       = $this->App->Config->email_smtp_port;
-            $mailer->SMTPSecure = $this->App->Config->email_smtp_secure;
+            $mailer->Host       = $this->App->Config->email['smtp_host'];
+            $mailer->Port       = $this->App->Config->email['smtp_port'];
+            $mailer->SMTPSecure = $this->App->Config->email['smtp_secure'];
 
-            $mailer->SMTPAuth = (bool) $this->App->Config->email_smtp_username;
-            $mailer->Username = $this->App->Config->email_smtp_username;
-            $mailer->Password = $this->App->Config->email_smtp_password;
+            $mailer->SMTPAuth = (bool) $this->App->Config->email['smtp_username'];
+            $mailer->Username = $this->App->Config->email['smtp_username'];
+            $mailer->Password = $this->App->Config->email['smtp_password'];
 
             $mailer->SetFrom($from_email, $from_name);
 

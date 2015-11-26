@@ -28,7 +28,7 @@
     "ext-openssl": "*",
     "ext-curl": "*",
     "ext-mbstring": "*",
-    "websharks/dicer": "151120"
+    "websharks/dicer": "151124"
   },
   "require-dev": {
     "ramsey/uuid": "3.*",
@@ -41,7 +41,8 @@
     "lusitanian/oauth": "0.*",
     "corneltek/getoptionkit": "2.*",
     "hashids/hashids": "1.*",
-    "phpmailer/phpmailer": "5.*"
+    "phpmailer/phpmailer": "5.*",
+    "embedly/embedly-php": "0.*"
   },
   "suggest": {
     "ramsey/uuid": "3.* :: Required by routines that generate UUIDs.",
@@ -54,7 +55,8 @@
     "lusitanian/oauth": "0.* :: Required by routines that deal w/ oAuth.",
     "corneltek/getoptionkit": "2.* :: Required for routines that parse CLI opts.",
     "hashids/hashids": "1.* :: Required for routines that deal with hash IDs.",
-    "phpmailer/phpmailer": "5.* :: Require for routine that deal with mail."
+    "phpmailer/phpmailer": "5.* :: Required for routine that deal with mail.",
+    "embedly/embedly-php": "0.* :: Required for routines that deal with oEmbed."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

@@ -86,4 +86,28 @@ class Name extends Classes\AbsBase
 
         return ($last_out = $name);
     }
+
+    /**
+     * Convert name to slug.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string $name Full name.
+     *
+     * @return string Slug; based on name.
+     */
+    public function toSlug(string $name): string
+    {
+        $name = $this->stripClean($name);
+
+        $slug = $name; // Working copy.
+        $slug = mb_strtolower($this->Utils->Ascii($slug));
+        $slug = preg_replace('/[^a-z0-9]+/u', '-', $slug);
+        $slug = $this->Utils->Trim($slug, '', '-');
+
+        if ($slug && !preg_match('/^[a-z]/u', $slug)) {
+            $slug = 'x'.$slug; // Force `^[a-z]`.
+        }
+        return $slug;
+    }
 }

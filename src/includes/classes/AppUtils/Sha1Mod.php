@@ -21,11 +21,11 @@ class Sha1Mod extends Classes\AbsBase
      *
      * @since 15xxxx SHA-1 modulus.
      */
-    public function __construct(App $App)
+    public function __construct(Classes\App $App)
     {
         parent::__construct($App);
 
-        $this->total_shards = count($this->App->Config->db_shards->dbs);
+        $this->total_shards = count($this->App->Config->db_shards['dbs']);
     }
 
     /**

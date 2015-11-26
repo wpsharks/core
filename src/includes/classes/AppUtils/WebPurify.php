@@ -14,30 +14,21 @@ use WebSharks\Core\Traits;
  */
 class WebPurify extends Classes\AbsBase
 {
-    protected $api_key;
     protected $cache_dir;
 
     /**
      * Class constructor.
      *
      * @since 15xxxx Badwords checker.
-     *
-     * @param string $api_key   API key.
-     * @param string $cache_dir Cache directory?
      */
-    public function __construct(
-        Classes\App $App,
-        string $api_key,
-        string $cache_dir = ''
-    ) {
+    public function __construct(Classes\App $App)
+    {
         parent::__construct($App);
 
-        $this->api_key   = $api_key; // WebPurify API.
-        $this->cache_dir = $this->Utils->FsDir->normalize($cache_dir);
-
-        if (!$this->cache_dir || !is_dir($this->cache_dir)) {
-            $this->cache_dir = $this->Utils->FsDir->tmp().'/webpurify';
+        if (!$this->App->Config->webpurify['api_key']) {
+            throw new Exception('Missing WebPurify API key.');
         }
+        $this->cache_dir = $this->App->Config->cache_dir.'/webpurify';
     }
 
     /**
@@ -83,7 +74,7 @@ class WebPurify extends Classes\AbsBase
 
         $endpoint_args = [
             'method'  => 'webpurify.live.check',
-            'api_key' => $this->api_key,
+            'api_key' => $this->App->Config->webpurify['api_key'],
             'text'    => $text,
             'format'  => 'json',
             'lang'    => 'en',
@@ -99,7 +90,8 @@ class WebPurify extends Classes\AbsBase
 
         # Determine sharded cache directory and file.
 
-        $cache_dir  = $this->cache_dir.'/'.$this->Utils->Sha1Mod->shardId($endpoint);
+        $cache_dir = $this->cache_dir;
+        $cache_dir .= '/'.$this->Utils->Sha1Mod->shardId($endpoint);
         $cache_file = $cache_dir.'/'.sha1($endpoint);
 
         # Use cached response if at all possible.
@@ -129,7 +121,7 @@ class WebPurify extends Classes\AbsBase
         # Cache and return response.
 
         if (!is_dir($cache_dir)) {
-            mkdir($cache_dir, 0775, true);
+            mkdir($cache_dir, 0755, true);
         }
         $check = (bool) $json->rsp->found; // `> 0` = `true`.
         file_put_contents($cache_file, (string) (int) $check);

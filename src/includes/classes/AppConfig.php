@@ -24,9 +24,10 @@ class AppConfig extends AbsCore
     {
         parent::__construct();
 
-        $default_instance = [
-            'debug'             => false,
-            'debug_test_config' => false,
+        # Instance base.
+
+        $instance_base = [
+            'debug' => false,
 
             'di_default_rule' => [
                 'new_instances' => [
@@ -37,25 +38,23 @@ class AppConfig extends AbsCore
                     Exception::class,
                 ],
             ],
-            'locales'     => ['en_US.UTF-8', 'C'],
-            'text_domain' => '', // Off by default.
 
-            'email_from_name'  => '',
-            'email_from_email' => '',
+            'email' => [
+                'from_name'  => '',
+                'from_email' => '',
 
-            'email_reply_to_name'  => '',
-            'email_reply_to_email' => '',
+                'reply_to_name'  => '',
+                'reply_to_email' => '',
 
-            'email_smtp_host'     => '',
-            'email_smtp_port'     => 587,
-            'email_smtp_secure'   => 'tls',
-            'email_smtp_username' => '',
-            'email_smtp_password' => '',
+                'smtp_host'     => '',
+                'smtp_port'     => 587,
+                'smtp_secure'   => 'tls',
+                'smtp_username' => '',
+                'smtp_password' => '',
+            ],
 
-            'assets_dir' => dirname(__FILE__, 4).'/assets',
-
-            'db_shards' => (object) [
-                'common' => (object) [
+            'db_shards' => [
+                'common' => [
                     'port'    => 3306,
                     'charset' => 'utf8mb4',
 
@@ -69,39 +68,73 @@ class AppConfig extends AbsCore
                     'ssl_cipher' => '',
                 ],
                 'dbs' => [
-                    (object) [
-                        'range' => (object) [
+                    [
+                        'range' => [
                             'from' => 0,
                             'to'   => 65535,
                         ],
-                        'properties' => (object) [
+                        'properties' => [
                             'host' => '127.0.0.1',
                             'name' => 'db0',
                         ],
                     ],
                 ],
             ],
-        ];
-        if (isset($instance['di_default_rule']['new_instances'])) {
-            $di_new_instances         = &$instance['di_default_rule']['new_instances'];
-            $default_di_new_instances = &$default_instance['di_default_rule']['new_instances'];
-            $di_new_instances         = array_unique(array_merge($default_di_new_instances, $di_new_instances));
-        }
-        $instance = array_merge($default_instance, $instance); // Merge w/ defaults.
 
-        if ($instance['debug'] && $instance['debug_test_config']) {
-            $file = $instance['assets_dir'].'/config-test.json';
-        } else {
-            $file = $instance['assets_dir'].'/config.json';
+            'embedly' => [
+                'api_key' => '',
+            ],
+
+            'web_purify' => [
+                'api_key' => '',
+            ],
+
+            'locales'     => ['en_US.UTF-8', 'C'],
+            'text_domain' => '', // Off by default.
+
+            'assets_dir'  => dirname(__FILE__, 4).'/assets',
+            'cache_dir'   => dirname(__FILE__, 4).'/.~cache',
+            'config_file' => dirname(__FILE__, 4).'/assets/.~config.json',
+        ];
+        # Merge instance base w/ constructor instance.
+
+        if (isset($instance['di_default_rule']['new_instances'])) {
+            $instance['di_default_rule']['new_instances'] = array_unique(array_merge(
+                $instance_base['di_default_rule']['new_instances'],
+                $instance['di_default_rule']['new_instances']
+            )); // Merge; i.e., do not override base.
         }
-        if (!is_file($file)) { // Config. file must exist (always).
-            throw new Exception(sprintf('Missing config file: `%1$s`.', $file));
-        } elseif (!is_array($config = json_decode(file_get_contents($file), true))) {
-            throw new Exception(sprintf('Invalid config file: `%1$s`.', $file));
+        if (isset($instance['locales'])) {
+            $instance_base['locales'] = $instance['locales'];
         }
-        // Do not allow these instance-only keys to be overridden by the config. file.
-        unset($config['debug'], $config['debug_test_config'], $config['assets_dir'], $config['di_default_rule']);
-        $this->overload((object) array_merge($instance, $config), true); // Config takes precedence.
+        if (isset($instance['db_shards']['dbs'])) {
+            $instance_base['db_shards']['dbs'] = $instance['db_shards']['dbs'];
+        }
+        $instance = array_replace_recursive($instance_base, $instance);
+
+        # Merge the configuration file also now.
+
+        if (!is_file($instance['config_file'])) {
+            throw new Exception(sprintf('Missing config file: `%1$s`.', $instance['config_file']));
+        } elseif (!is_array($config = json_decode(file_get_contents($instance['config_file']), true))) {
+            throw new Exception(sprintf('Invalid config file: `%1$s`.', $instance['config_file']));
+        }
+        unset($config['config_file']);
+        unset($config['di_default_rule']);
+
+        if (isset($config['locales'])) {
+            $instance['locales'] = $config['locales'];
+        }
+        if (isset($config['db_shards']['dbs'])) {
+            $instance['db_shards']['dbs'] = $config['db_shards']['dbs'];
+        }
+        $config = (object) array_replace_recursive($instance, $config);
+
+        # Overload the final config value.
+
+        $this->overload($config, true);
+
+        # Initialize.
 
         $this->maybeDebug();
         $this->maybeSetLocales();

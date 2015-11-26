@@ -46,7 +46,7 @@ class HtmlTokenizer extends Classes\AbsBase
         }
         $tokenized['string'] = preg_replace_callback('/'.get_shortcode_regex().'/us', function ($m) use (&$tokenized) {
             $tokenized['tokens'][] = $m[0]; // Tokenize.
-            return '%#%token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
+            return '%#%html-token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
         }, $tokenized['string']); // Shortcodes replaced by tokens.
 
         pre: // Target point; HTML `<pre>` tags.
@@ -66,7 +66,7 @@ class HtmlTokenizer extends Classes\AbsBase
 
         $tokenized['string'] = preg_replace_callback($pre, function ($m) use (&$tokenized) {
             $tokenized['tokens'][] = $m[0]; // Tokenize.
-            return '%#%token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
+            return '%#%html-token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
         }, $tokenized['string']); // Tags replaced by tokens.
 
         code: // Target point; HTML `<code>` tags.
@@ -86,7 +86,7 @@ class HtmlTokenizer extends Classes\AbsBase
 
         $tokenized['string'] = preg_replace_callback($code, function ($m) use (&$tokenized) {
             $tokenized['tokens'][] = $m[0]; // Tokenize.
-            return '%#%token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
+            return '%#%html-token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
         }, $tokenized['string']); // Tags replaced by tokens.
 
         samp: // Target point; HTML `<samp>` tags.
@@ -106,7 +106,7 @@ class HtmlTokenizer extends Classes\AbsBase
 
         $tokenized['string'] = preg_replace_callback($samp, function ($m) use (&$tokenized) {
             $tokenized['tokens'][] = $m[0]; // Tokenize.
-            return '%#%token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
+            return '%#%html-token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
         }, $tokenized['string']); // Tags replaced by tokens.
 
         a: // Target point; HTML `<a>` tags.
@@ -126,7 +126,7 @@ class HtmlTokenizer extends Classes\AbsBase
 
         $tokenized['string'] = preg_replace_callback($a, function ($m) use (&$tokenized) {
             $tokenized['tokens'][] = $m[0]; // Tokenize.
-            return '%#%token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
+            return '%#%html-token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
         }, $tokenized['string']); // Tags replaced by tokens.
 
         tags: // Target point; HTML `<a-z0-9>` tags.
@@ -144,7 +144,7 @@ class HtmlTokenizer extends Classes\AbsBase
 
         $tokenized['string'] = preg_replace_callback($tags, function ($m) use (&$tokenized) {
             $tokenized['tokens'][] = $m[0]; // Tokenize.
-            return '%#%token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
+            return '%#%html-token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
         }, $tokenized['string']); // Tags replaced by tokens.
 
         md_fences: // Target point; Markdown pre/code fences.
@@ -162,7 +162,7 @@ class HtmlTokenizer extends Classes\AbsBase
 
         $tokenized['string'] = preg_replace_callback($md_fences, function ($m) use (&$tokenized) {
             $tokenized['tokens'][] = $m[0]; // Tokenize.
-            return '%#%token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
+            return '%#%html-token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
         }, $tokenized['string']); // Fences replaced by tokens.
 
         md_links: // Target point; [Markdown](links).
@@ -181,7 +181,7 @@ class HtmlTokenizer extends Classes\AbsBase
                     '/\!?\[(?:(?R)|[^\]]*)\]\([^)]+\)(?:\{[^}]*\})?/u', ),
             function ($m) use (&$tokenized) {
                 $tokenized['tokens'][] = $m[0]; // Tokenize.
-                return '%#%token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
+                return '%#%html-token-'.$tokenized['marker'].'-'.(count($tokenized['tokens']) - 1).'%#%';
             },
             $tokenized['string'] // Shortcodes replaced by tokens.
         );
@@ -211,7 +211,7 @@ class HtmlTokenizer extends Classes\AbsBase
         }
         foreach (array_reverse($tokens, true) as $_token => $_value) {
             // Must go in reverse order so nested tokens unfold properly.
-            $string = str_replace('%#%token-'.$marker.'-'.$_token.'%#%', $_value, $string);
+            $string = str_replace('%#%html-token-'.$marker.'-'.$_token.'%#%', $_value, $string);
         } // unset($_token, $_value); // Housekeeping.
 
         return $string;
