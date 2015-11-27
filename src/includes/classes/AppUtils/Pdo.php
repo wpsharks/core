@@ -41,7 +41,7 @@ class Pdo extends Classes\AbsBase
             \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
             \PDO::ATTR_ERRMODE                  => \PDO::ERRMODE_EXCEPTION,
         ];
-        $this->common = &$this->App->Config->db_shards['common'];
+        $this->common = $this->App->Config->db_shards['common'];
 
         if ($this->common['ssl_enable']) {
             $this->options[\PDO::MYSQL_ATTR_SSL_CA]     = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common['ssl_ca']);

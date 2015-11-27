@@ -97,7 +97,11 @@ class Dump extends Classes\AbsBase
                 }
                 $var_dump = $display_type."\n".$dump_indents.$opening_encap."\n";
 
-                foreach ($var as $_nested_key_prop => $_nested_value /* Not by reference. */) {
+                foreach (
+                    $type === 'object' && method_exists($var, '__debugInfo')
+                        ? $var->__debugInfo() // Use magic properties.
+                        : $var as $_nested_key_prop => $_nested_value) {
+                    // See: <http://php.net/manual/en/language.oop5.magic.php#object.debuginfo>
                     // Do NOT use `&`. Some iterators CANNOT be iterated by reference.
                     if (is_string($_nested_key_prop)) {
                         $_nested_key_prop = "'".$_nested_key_prop."'";

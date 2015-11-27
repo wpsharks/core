@@ -71,6 +71,25 @@ trait OverloadMembers
     }
 
     /**
+     * Properties to dump.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @return array Properties to dump.
+     */
+    public function __debugInfo(): array
+    {
+        // This returns public properties only.
+        $props = call_user_func('get_object_vars', $this);
+
+        unset($props['Di']);
+        unset($props['App']);
+        unset($props['Utils']);
+
+        return $props;
+    }
+
+    /**
      * Magic/overload `isset()` checker.
      *
      * @since 15xxxx Initial release.
