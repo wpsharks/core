@@ -44,6 +44,7 @@ class Template extends AbsBase
     public function parse(array $vars = []): string
     {
         extract($vars);
+        $template = $this;
 
         ob_start();
         require $this->file;
