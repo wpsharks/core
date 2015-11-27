@@ -27,7 +27,7 @@ class Dump extends Classes\AbsBase
      *
      * @return string A dump of the input `$var`.
      */
-    public function __invoke($var, bool $return_only = false, int $indent_size = 4, string $indent_char = ' ', bool $dump_circular_ids = false): string
+    public function __invoke($var, bool $return_only = false, int $indent_size = 2, string $indent_char = ' ', bool $dump_circular_ids = false): string
     {
         return $this->dump($var, $return_only, $indent_size, $indent_char, $dump_circular_ids);
     }
@@ -73,7 +73,6 @@ class Dump extends Classes\AbsBase
 
             case 'object': // Iterates each object property.
             case 'array': // Or, each array key (if this is an array).
-
                 $longest_nested_key_prop_length = 0;
                 $nested_dumps                   = [];
 
@@ -84,21 +83,18 @@ class Dump extends Classes\AbsBase
                 $dump_indents        = $current_indents.str_repeat($indent_char, $dump_indent_size);
                 $nested_dump_indents = $current_indents.str_repeat($indent_char, $nested_dump_indent_size);
 
-                $opening_encap          = $type === 'object' ? '{' : '(';
-                $closing_encap          = $type === 'object' ? '}' : ')';
-                $opening_key_prop_encap = $type === 'object' ? '{' : '[';
-                $closing_key_prop_encap = $type === 'object' ? '}' : ']';
-                $key_prop_value_sep     = ' => '; // Same for both :-)
+                $opening_encap      = $type === 'object' ? '{' : '[';
+                $closing_encap      = $type === 'object' ? '}' : ']';
+                $key_prop_value_sep = $type === 'object' ? ': ' : ' => ';
 
                 if ($type === 'object') {
-                    $display_type = 'object'.($dump_circular_ids ? '::'.spl_object_hash($var) : '').'::'.get_class($var);
+                    $display_type = ($dump_circular_ids ? spl_object_hash($var).' ' : '').get_class($var).' object';
                 } elseif ($type === 'array') {
-                    $display_type = 'array'.($dump_circular_ids ? '::'.md5(serialize($var)) : '');
+                    $display_type = ($dump_circular_ids ? sha1(serialize($var)).' ' : '').'array';
                 }
                 $var_dump = $display_type."\n".$dump_indents.$opening_encap."\n";
 
-                foreach (
-                    $type === 'object' && method_exists($var, '__debugInfo')
+                foreach ($type === 'object' && method_exists($var, '__debugInfo')
                         ? $var->__debugInfo() // Use magic properties.
                         : $var as $_nested_key_prop => $_nested_value) {
                     // See: <http://php.net/manual/en/language.oop5.magic.php#object.debuginfo>
@@ -135,7 +131,6 @@ class Dump extends Classes\AbsBase
                             break; // Break switch.
 
                         case 'object': // Recurses into object values.
-
                             $_nested_circular_id_key = spl_object_hash($_nested_value);
                             $_nested_display_type .= ($dump_circular_ids ? '::'.$_nested_circular_id_key : '').'::'.get_class($_nested_value);
 
@@ -161,8 +156,7 @@ class Dump extends Classes\AbsBase
                             break; // Break switch.
 
                         case 'array': // Recurses into array values.
-
-                            $_nested_circular_id_key = md5(serialize($_nested_value));
+                            $_nested_circular_id_key = sha1(serialize($_nested_value));
                             $_nested_display_type .= ($dump_circular_ids ? '::'.$_nested_circular_id_key : '');
 
                             if (isset($___nested_circular_ids[$_nested_circular_id_key])) {
@@ -210,7 +204,7 @@ class Dump extends Classes\AbsBase
                 if (!empty($nested_dumps)) {
                     foreach ($nested_dumps as $_nested_key_prop => $_nested_dump) {
                         $_aligning_spaces = str_repeat(' ', $longest_nested_key_prop_length - mb_strlen((string) $_nested_key_prop));
-                        $var_dump .= $nested_dump_indents.$opening_key_prop_encap.$_nested_key_prop.$closing_key_prop_encap.$_aligning_spaces.$key_prop_value_sep.$_nested_dump."\n";
+                        $var_dump .= $nested_dump_indents.$_nested_key_prop.$_aligning_spaces.$key_prop_value_sep.$_nested_dump."\n";
                     }
                     unset($_nested_key_prop, $_nested_dump, $_aligning_spaces);
 
@@ -232,7 +226,7 @@ class Dump extends Classes\AbsBase
             case 'double':
             case 'float':
                 $display_type = 'float';
-                $var_dump     = (string) $var;
+                $var_dump     = '(float) '.(string) $var;
                 break; // Break switch.
 
             case 'bool':
