@@ -29,12 +29,15 @@ class HashIds extends Classes\AbsBase
      */
     public function __construct(
         Classes\App $App,
-        string $key,
+        string $key = '',
         int $min_chars = 0,
         string $alphabet = ''
     ) {
         parent::__construct($App);
 
+        if (!$key) { // Use global app key?
+            $key = $this->App->Config->hash_ids['key'];
+        }
         $this->Parser = new Parser($key, $min_chars, $alphabet);
     }
 

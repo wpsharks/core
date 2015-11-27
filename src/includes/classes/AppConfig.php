@@ -36,6 +36,7 @@ class AppConfig extends AbsCore
                     AppUtils::class,
                     CliOpts::class,
                     Exception::class,
+                    Template::class,
                 ],
             ],
 
@@ -81,6 +82,10 @@ class AppConfig extends AbsCore
                 ],
             ],
 
+            'hash_ids' => [
+                'key' => '',
+            ],
+
             'embedly' => [
                 'api_key' => '',
             ],
@@ -92,9 +97,10 @@ class AppConfig extends AbsCore
             'locales'     => ['en_US.UTF-8', 'C'],
             'text_domain' => '', // Off by default.
 
-            'assets_dir'  => dirname(__FILE__, 4).'/assets',
-            'cache_dir'   => dirname(__FILE__, 4).'/.~cache',
-            'config_file' => dirname(__FILE__, 4).'/assets/.~config.json',
+            'assets_dir'    => dirname(__FILE__, 4).'/assets',
+            'cache_dir'     => dirname(__FILE__, 4).'/.~cache',
+            'templates_dir' => dirname(__FILE__, 2).'/templates',
+            'config_file'   => dirname(__FILE__, 4).'/assets/.~config.json',
         ];
         # Merge instance base w/ constructor instance.
 
