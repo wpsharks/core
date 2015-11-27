@@ -21,11 +21,11 @@ class Template extends Classes\AbsBase
      *
      * @param string $file Template file (relative to templates dir).
      *
-     * @return Classes\Template Class instance.
+     * @return Classes\Template instance.
      */
     public function get(string $file): Classes\Template
     {
         $file = $this->App->Config->templates_dir.'/'.$file;
-        return $this->App->Di->get(Classes\Template::class, compact('file', 'vars'));
+        return $this->App->Di->get(Classes\Template::class, ['file' => $file]);
     }
 }
