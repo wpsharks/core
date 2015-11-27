@@ -132,7 +132,7 @@ class Dump extends Classes\AbsBase
 
                         case 'object': // Recurses into object values.
                             $_nested_circular_id_key = spl_object_hash($_nested_value);
-                            $_nested_display_type .= ($dump_circular_ids ? '::'.$_nested_circular_id_key : '').'::'.get_class($_nested_value);
+                            $_nested_display_type    = ($dump_circular_ids ? $_nested_circular_id_key.' ' : '').get_class($_nested_value).' object';
 
                             if (isset($___nested_circular_ids[$_nested_circular_id_key])) {
                                 $nested_dumps[$_nested_key_prop] = $_nested_display_type.'{} *circular*';
@@ -157,10 +157,10 @@ class Dump extends Classes\AbsBase
 
                         case 'array': // Recurses into array values.
                             $_nested_circular_id_key = sha1(serialize($_nested_value));
-                            $_nested_display_type .= ($dump_circular_ids ? '::'.$_nested_circular_id_key : '');
+                            $_nested_display_type .= $dump_circular_ids ? $_nested_circular_id_key : '';
 
                             if (isset($___nested_circular_ids[$_nested_circular_id_key])) {
-                                $nested_dumps[$_nested_key_prop] = $_nested_display_type.'() *circular*';
+                                $nested_dumps[$_nested_key_prop] = $_nested_display_type.'[] *circular*';
                             } elseif (($___nested_circular_ids[$_nested_circular_id_key] = -1)
                                     && ($_nested_dump = $this->dump(
                                         $_nested_value,
@@ -174,7 +174,7 @@ class Dump extends Classes\AbsBase
                                     ))) {
                                 $nested_dumps[$_nested_key_prop] = $_nested_dump;
                             } else {
-                                $nested_dumps[$_nested_key_prop] = $_nested_display_type.'()';
+                                $nested_dumps[$_nested_key_prop] = $_nested_display_type.'[]';
                             }
                             unset($_nested_display_type, $_nested_circular_id_key, $_nested_dump);
                             break; // Break switch.
