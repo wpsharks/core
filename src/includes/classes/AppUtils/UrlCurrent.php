@@ -26,7 +26,7 @@ class UrlCurrent extends Classes\AbsBase
         if (!is_null($url = &$this->cacheKey(__FUNCTION__))) {
             return $url; // Cached this already.
         }
-        $url = $this->scheme().'//'.$this->host().$this->uri();
+        $url = $this->scheme().'://'.$this->host().$this->uri();
 
         return $url;
     }
