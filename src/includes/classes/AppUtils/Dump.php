@@ -90,7 +90,7 @@ class Dump extends Classes\AbsBase
                 if ($type === 'object') {
                     $display_type = ($dump_circular_ids ? spl_object_hash($var).' ' : '').get_class($var).' object';
                 } elseif ($type === 'array') {
-                    $display_type = ($dump_circular_ids ? sha1(serialize($var)).' ' : '').'array';
+                    $display_type = $dump_circular_ids ? sha1(serialize($var)) : '';
                 }
                 $var_dump = $display_type."\n".$dump_indents.$opening_encap."\n";
 
@@ -210,7 +210,7 @@ class Dump extends Classes\AbsBase
 
                     $var_dump = $var_dump.$dump_indents.$closing_encap;
                 } else {
-                    $var_dump = $opening_encap.$closing_encap; // i.e., `{}` or `[]`.
+                    $var_dump = $this->Utils->Trim->r($var_dump, "\n".$indent_char.$opening_encap).$opening_encap.$closing_encap;
                 }
                 break; // Break switch.
 
