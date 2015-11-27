@@ -201,7 +201,7 @@ class Dump extends Classes\AbsBase
                 }
                 unset($_nested_key_prop, $_nested_value, $_nested_type, $_nested_key_prop_length);
 
-                if (!empty($nested_dumps)) {
+                if ($nested_dumps) {
                     foreach ($nested_dumps as $_nested_key_prop => $_nested_dump) {
                         $_aligning_spaces = str_repeat(' ', $longest_nested_key_prop_length - mb_strlen((string) $_nested_key_prop));
                         $var_dump .= $nested_dump_indents.$_nested_key_prop.$_aligning_spaces.$key_prop_value_sep.$_nested_dump."\n";
@@ -210,7 +210,7 @@ class Dump extends Classes\AbsBase
 
                     $var_dump = $var_dump.$dump_indents.$closing_encap;
                 } else {
-                    $var_dump = $this->Utils->Trim->r($var_dump, "\n".$indent_char.$opening_encap).$opening_encap.$closing_encap;
+                    $var_dump = $opening_encap.$closing_encap; // i.e., `{}` or `[]`.
                 }
                 break; // Break switch.
 
