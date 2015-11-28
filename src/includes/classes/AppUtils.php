@@ -79,8 +79,8 @@ class AppUtils extends AbsCore
      */
     public function __call(string $method, array $args = [])
     {
-        if (isset($this->¤overload[$method])) {
-            return $this->¤overload[$method](...$args);
+        if (isset($this->¤¤overload[$method])) {
+            return $this->¤¤overload[$method](...$args);
         } elseif (class_exists($utility = $this->app_ns.'\\AppUtils\\'.$method)) {
             $utility = $this->App->Di->get($utility);
             $this->overload((object) [$method => $utility], true);

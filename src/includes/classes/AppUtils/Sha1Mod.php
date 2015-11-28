@@ -89,6 +89,9 @@ class Sha1Mod extends Classes\AbsBase
      */
     public function assignShardId(string $string, bool $is_sha1 = false)
     {
+        if ($this->total_shards < 1) {
+            throw new Exception('No DB shards available.');
+        }
         return $this->shardId($string, $is_sha1, $this->total_shards);
     }
 }

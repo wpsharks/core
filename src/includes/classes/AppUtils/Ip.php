@@ -154,6 +154,10 @@ class Ip extends Classes\AbsBase
      */
     public function geoData(string $ip)
     {
+        # Require a valid cache directory.
+        if (!$this->App->Config->fs_paths['cache_dir']) {
+            throw new Exception('Missing cache directory.');
+        }
         # Valid the input IP address; do we have one?
 
         if (!($ip = $this->Utils->Trim(mb_strtolower($ip)))) {
@@ -166,7 +170,7 @@ class Ip extends Classes\AbsBase
         }
         # Check the filesystem cache; i.e., tmp directory.
 
-        $cache_dir  = $this->Utils->FsDir->tmp().'/ip-geo-data';
+        $cache_dir  = $this->App->Config->fs_paths['cache_dir'].'/ip-geo-data';
         $cache_file = $cache_dir.'/'.sha1($ip).'.json';
 
         if (is_file($cache_file) && filemtime($cache_file) >= strtotime('-30 days')) {
@@ -201,8 +205,8 @@ class Ip extends Classes\AbsBase
         }
         # Cache validated response from geoPlugin service.
 
-        if (!is_dir($cache_dir) && !mkdir($cache_dir, 0777, true)) {
-            throw new Exception('Unable to create `ip-geo-data` cache directory.');
+        if (!is_dir($cache_dir)) {
+            mkdir($cache_dir, 0755, true);
         }
         file_put_contents($cache_file, json_encode($geo));
 

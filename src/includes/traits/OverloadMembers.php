@@ -21,7 +21,7 @@ trait OverloadMembers
      *
      * @type array Overload properties.
      */
-    protected $¤overload = [];
+    protected $¤¤overload = [];
 
     /**
      * Writable overload properties.
@@ -30,7 +30,7 @@ trait OverloadMembers
      *
      * @type array Writable overload properties.
      */
-    protected $¤writable_overload_properties = [];
+    protected $¤¤writable_overload_properties = [];
 
     /**
      * Serialized properties.
@@ -41,7 +41,7 @@ trait OverloadMembers
      */
     public function serialize(): string
     {
-        return serialize((object) $this->¤overload);
+        return serialize((object) $this->¤¤overload);
     }
 
     /**
@@ -55,7 +55,7 @@ trait OverloadMembers
      */
     public function unserialize(/* string */$serialized)
     {
-        $this->¤overload = (array) unserialize($serialized);
+        $this->¤¤overload = (array) unserialize($serialized);
     }
 
     /**
@@ -67,7 +67,7 @@ trait OverloadMembers
      */
     public function jsonSerialize()
     {
-        return (object) $this->¤overload;
+        return (object) $this->¤¤overload;
     }
 
     /**
@@ -96,13 +96,13 @@ trait OverloadMembers
      *
      * @param string $property Property to check.
      *
-     * @return bool TRUE if `isset($this->¤overload{$property})`.
+     * @return bool TRUE if `isset($this->¤¤overload{$property})`.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __isset(string $property): bool
     {
-        return isset($this->¤overload[$property]);
+        return isset($this->¤¤overload[$property]);
     }
 
     /**
@@ -112,16 +112,16 @@ trait OverloadMembers
      *
      * @param string $property Property to get.
      *
-     * @return mixed The value of `$this->¤overload{$property}`.
+     * @return mixed The value of `$this->¤¤overload{$property}`.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __get(string $property)
     {
-        if (isset($this->¤overload[$property])) {
-            return $this->¤overload[$property];
-        } elseif (array_key_exists($property, $this->¤overload)) {
-            return $this->¤overload[$property];
+        if (isset($this->¤¤overload[$property])) {
+            return $this->¤¤overload[$property];
+        } elseif (array_key_exists($property, $this->¤¤overload)) {
+            return $this->¤¤overload[$property];
         }
         throw new Exception(sprintf('Undefined overload property: `%1$s`.', $property));
     }
@@ -138,13 +138,13 @@ trait OverloadMembers
      */
     public function __set(string $property, $value)
     {
-        if (isset($this->¤writable_overload_properties[$property])) {
-            if ($this->¤writable_overload_properties[$property] === 1) {
+        if (isset($this->¤¤writable_overload_properties[$property])) {
+            if ($this->¤¤writable_overload_properties[$property] === 1) {
                 $this->{$property} = $value; // Direct access.
                 // See also: {@link overload()} below.
                 return; // Null return value.
             } else {
-                $this->¤overload[$property] = $value;
+                $this->¤¤overload[$property] = $value;
                 return; // Null return value.
             }
         }
@@ -186,8 +186,8 @@ trait OverloadMembers
      */
     public function __call(string $method, array $args = [])
     {
-        if (isset($this->¤overload[$method])) {
-            return $this->¤overload[$method](...$args);
+        if (isset($this->¤¤overload[$method])) {
+            return $this->¤¤overload[$method](...$args);
         }
         throw new Exception(sprintf('Undefined overload method: `%1$s`.', $method));
     }
@@ -221,13 +221,13 @@ trait OverloadMembers
                     throw new Exception(sprintf('Property: `%1$s` exists already.', $_property));
                 }
                 if ($writable) { // Is the property writable?
-                    $this->¤writable_overload_properties[$_property] = 1;
-                    $this->{$_property}                              = null;
-                    $this->{$_property}                              = &$_value;
-                    $this->¤overload[$_property]                     = &$this->{$_property};
+                    $this->¤¤writable_overload_properties[$_property] = 1;
+                    $this->{$_property}                               = null;
+                    $this->{$_property}                               = &$_value;
+                    $this->¤¤overload[$_property]                     = &$this->{$_property};
                 } else { // Remove it otherwise; i.e., NOT writable.
-                    unset($this->¤writable_overload_properties[$_property]);
-                    $this->¤overload[$_property] = &$_value;
+                    unset($this->¤¤writable_overload_properties[$_property]);
+                    $this->¤¤overload[$_property] = &$_value;
                 }
             } // unset($_property, $_value); // Housekeeping.
 
@@ -242,11 +242,11 @@ trait OverloadMembers
                     throw new Exception(sprintf('Property: `%1$s` does not exist.', $_property));
                 }
                 if ($writable) { // Is the property writable?
-                    $this->¤writable_overload_properties[$_property] = 2;
-                    $this->¤overload[$_property]                     = &$this->{$_property};
+                    $this->¤¤writable_overload_properties[$_property] = 2;
+                    $this->¤¤overload[$_property]                     = &$this->{$_property};
                 } else { // Remove it otherwise; i.e., NOT writable.
-                    unset($this->¤writable_overload_properties[$_property]);
-                    $this->¤overload[$_property] = &$this->{$_property};
+                    unset($this->¤¤writable_overload_properties[$_property]);
+                    $this->¤¤overload[$_property] = &$this->{$_property};
                 }
             } // unset($_key, $_property); // Housekeeping.
 

@@ -36,7 +36,9 @@ class HashIds extends Classes\AbsBase
         parent::__construct($App);
 
         if (!$key) { // Use global app key?
-            $key = $this->App->Config->hash_ids['key'];
+            if (!($key = $this->App->Config->hash_ids['key'])) {
+                throw new Exception('Missing HashIds key.');
+            }
         }
         $this->Parser = new Parser($key, $min_chars, $alphabet);
     }

@@ -27,7 +27,10 @@ class OEmbed extends Classes\AbsBase implements Interfaces\UrlConstants
     {
         parent::__construct($App);
 
-        $this->cache_dir = $this->App->Config->cache_dir.'/oembed';
+        if (!$this->App->Config->fs_paths['cache_dir']) {
+            throw new Exception('Missing cache directory.');
+        }
+        $this->cache_dir = $this->App->Config->fs_paths['cache_dir'].'/oembed';
     }
 
     /**

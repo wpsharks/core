@@ -25,7 +25,7 @@ trait QuickI18nMembers
      */
     protected function __(string $string): string
     {
-        if (!empty($this->App->Config->text_domain)) {
+        if ($this->App->Config->i18n['text_domain']) {
             return $string;
         }
         return $string;

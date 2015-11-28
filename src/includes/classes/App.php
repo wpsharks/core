@@ -60,9 +60,9 @@ class App extends AbsCore
     {
         parent::__construct();
 
-        $this->Config = new AppConfig($instance);
+        $this->Config = new AppConfig($this, $instance);
 
-        $this->Di = new AppDi($this->Config->di_default_rule);
+        $this->Di = new AppDi($this->Config->di['default_rule']);
         $this->Di->addInstances([self::class => $this, $this]);
 
         $this->Utils = $this->Di->get(AppUtils::class);

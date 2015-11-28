@@ -32,6 +32,9 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
      */
     public function __invoke($to, string $subject, string $message, array $headers = [], array $attachments = [], bool $throw = false)
     {
+        if (!$this->App->Config->email['smtp_host'] || !$this->App->Config->email['smtp_port']) {
+            throw new Exception('Missing require email config values.');
+        }
         $from_name  = $this->App->Config->email['from_name'];
         $from_email = $this->App->Config->email['from_email'];
 
@@ -61,9 +64,6 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
 
         if (!$from_email || !$recipients || !$subject || !$message_html || !$message_text) {
             return false; // Not possible. Missing vital argument value(s).
-        }
-        if (!$this->App->Config->email['smtp_host'] || !$this->App->Config->email['smtp_port']) {
-            return false; // Not possible. Missing vital config value(s).
         }
         try { // Maybe catch exceptions.
 

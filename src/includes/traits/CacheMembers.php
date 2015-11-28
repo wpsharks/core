@@ -21,7 +21,7 @@ trait CacheMembers
      *
      * @type array Instance cache.
      */
-    protected $¤cache = [];
+    protected $¤¤cache = [];
 
     /**
      * Set a cache sub-key.
@@ -39,12 +39,12 @@ trait CacheMembers
      */
     protected function &cacheSet(string $primary_key, $sub_key, $value)
     {
-        if ($primary_key === '¤keys' || $primary_key === '¤refs') {
+        if ($primary_key === '¤¤keys' || $primary_key === '¤¤refs') {
             throw new Exception('Attempting to set a reserved primary key.');
         }
-        $sub_key                              = (string) $sub_key;
-        $this->¤cache[$primary_key][$sub_key] = $value;
-        return $this->¤cache[$primary_key][$sub_key];
+        $sub_key                               = (string) $sub_key;
+        $this->¤¤cache[$primary_key][$sub_key] = $value;
+        return $this->¤¤cache[$primary_key][$sub_key];
     }
 
     /**
@@ -62,16 +62,16 @@ trait CacheMembers
      */
     protected function &cacheGet(string $primary_key, $sub_key)
     {
-        if ($primary_key === '¤keys' || $primary_key === '¤refs') {
+        if ($primary_key === '¤¤keys' || $primary_key === '¤¤refs') {
             throw new Exception('Attempting to get a reserved primary key.');
         }
         $sub_key = (string) $sub_key; // Force string.
 
-        if (isset($this->¤cache[$primary_key][$sub_key])) {
-            return $this->¤cache[$primary_key][$sub_key];
+        if (isset($this->¤¤cache[$primary_key][$sub_key])) {
+            return $this->¤¤cache[$primary_key][$sub_key];
         } else {
-            $this->¤cache[$primary_key][$sub_key] = null;
-            return $this->¤cache[$primary_key][$sub_key];
+            $this->¤¤cache[$primary_key][$sub_key] = null;
+            return $this->¤¤cache[$primary_key][$sub_key];
         }
     }
 
@@ -85,12 +85,12 @@ trait CacheMembers
      */
     protected function cacheUnset(string $primary_key, $sub_key)
     {
-        if ($primary_key === '¤keys' || $primary_key === '¤refs') {
+        if ($primary_key === '¤¤keys' || $primary_key === '¤¤refs') {
             throw new Exception('Attempting to unset a reserved primary key.');
         }
-        $sub_key                              = (string) $sub_key;
-        $this->¤cache[$primary_key][$sub_key] = null;
-        unset($this->¤cache[$primary_key][$sub_key]);
+        $sub_key                               = (string) $sub_key;
+        $this->¤¤cache[$primary_key][$sub_key] = null;
+        unset($this->¤¤cache[$primary_key][$sub_key]);
     }
 
     /**
@@ -103,10 +103,10 @@ trait CacheMembers
      */
     protected function cacheUnsetPattern(string $primary_key, string $sub_key_pattern)
     {
-        if ($primary_key === '¤keys' || $primary_key === '¤refs') {
+        if ($primary_key === '¤¤keys' || $primary_key === '¤¤refs') {
             throw new Exception('Attempting to unset a reserved primary key.');
         }
-        if (empty($this->¤cache[$primary_key])) {
+        if (empty($this->¤¤cache[$primary_key])) {
             return; // Nothing to do here.
         }
         $sub_key_regex = // Allow `**` to indicate everything quickly.
@@ -115,10 +115,10 @@ trait CacheMembers
         if (!$sub_key_regex && $sub_key_pattern !== '**') {
             return; // Nothing to do; i.e., no regex.
         }
-        foreach (array_keys($this->¤cache[$primary_key]) as $_sub_key) {
+        foreach (array_keys($this->¤¤cache[$primary_key]) as $_sub_key) {
             if ($sub_key_pattern === '**' || preg_match($sub_key_regex, (string) $_sub_key)) {
-                $this->¤cache[$primary_key][$_sub_key] = null;
-                unset($this->¤cache[$primary_key][$_sub_key]);
+                $this->¤¤cache[$primary_key][$_sub_key] = null;
+                unset($this->¤¤cache[$primary_key][$_sub_key]);
             }
         } // unset($_sub_key); // Housekeeping.
     }
@@ -134,8 +134,8 @@ trait CacheMembers
      */
     protected function cacheAddByRef(string $primary_key, $ref_key, &$value)
     {
-        $ref_key                                         = (string) $ref_key;
-        $this->¤cache['¤refs'][$primary_key][$ref_key][] = &$value;
+        $ref_key                                           = (string) $ref_key;
+        $this->¤¤cache['¤¤refs'][$primary_key][$ref_key][] = &$value;
     }
 
     /**
@@ -150,13 +150,13 @@ trait CacheMembers
     {
         $ref_key = (string) $ref_key; // Force string.
 
-        if (empty($this->¤cache['¤refs'][$primary_key][$ref_key])) {
+        if (empty($this->¤¤cache['¤¤refs'][$primary_key][$ref_key])) {
             return; // Nothing to do here.
         }
-        foreach (array_keys($this->¤cache['¤refs'][$primary_key][$ref_key]) as $_key) {
-            $this->¤cache['¤refs'][$primary_key][$ref_key][$_key] = null;
+        foreach (array_keys($this->¤¤cache['¤¤refs'][$primary_key][$ref_key]) as $_key) {
+            $this->¤¤cache['¤¤refs'][$primary_key][$ref_key][$_key] = null;
         } // unset($_key); // Housekeeping.
-        unset($this->¤cache['¤refs'][$primary_key][$ref_key]);
+        unset($this->¤¤cache['¤¤refs'][$primary_key][$ref_key]);
     }
 
     /**
@@ -169,7 +169,7 @@ trait CacheMembers
      */
     protected function cacheUnsetByRefPattern(string $primary_key, string $ref_key_pattern)
     {
-        if (empty($this->¤cache['¤refs'][$primary_key])) {
+        if (empty($this->¤¤cache['¤¤refs'][$primary_key])) {
             return; // Nothing to do here.
         }
         $ref_key_regex = // Allow `**` to indicate everything quickly.
@@ -178,12 +178,12 @@ trait CacheMembers
         if (!$ref_key_regex && $ref_key_pattern !== '**') {
             return; // Nothing to do; i.e., no regex.
         }
-        foreach (array_keys($this->¤cache['¤refs'][$primary_key]) as $_ref_key) {
+        foreach (array_keys($this->¤¤cache['¤¤refs'][$primary_key]) as $_ref_key) {
             if ($ref_key_pattern === '**' || preg_match($ref_key_regex, (string) $_ref_key)) {
-                foreach (array_keys($this->¤cache['¤refs'][$primary_key][$_ref_key]) as $_key) {
-                    $this->¤cache['¤refs'][$primary_key][$_ref_key][$_key] = null;
+                foreach (array_keys($this->¤¤cache['¤¤refs'][$primary_key][$_ref_key]) as $_key) {
+                    $this->¤¤cache['¤¤refs'][$primary_key][$_ref_key][$_key] = null;
                 } // unset($_key); // Housekeeping.
-                unset($this->¤cache['¤refs'][$primary_key][$_ref_key]);
+                unset($this->¤¤cache['¤¤refs'][$primary_key][$_ref_key]);
             }
         } // unset($_ref_key); // Housekeeping.
     }
@@ -205,10 +205,10 @@ trait CacheMembers
     {
         $args = (array) $args; // Force an array of args.
 
-        if (!isset($this->¤cache['¤keys'][$primary_key])) {
-            $this->¤cache['¤keys'][$primary_key] = null;
+        if (!isset($this->¤¤cache['¤¤keys'][$primary_key])) {
+            $this->¤¤cache['¤¤keys'][$primary_key] = null;
         }
-        $cache_key = &$this->¤cache['¤keys'][$primary_key];
+        $cache_key = &$this->¤¤cache['¤¤keys'][$primary_key];
 
         foreach ($args as $_arg) {
             switch (($_arg_type = gettype($_arg))) {
@@ -270,15 +270,15 @@ trait CacheMembers
      */
     protected function cacheClear()
     {
-        if (!empty($this->¤cache['¤refs'])) { // Nullify underliers.
-            foreach (array_keys($this->¤cache['¤refs']) as $_primary_key) {
-                foreach (array_keys($this->¤cache['¤refs'][$_primary_key]) as $_ref_key) {
-                    foreach (array_keys($this->¤cache['¤refs'][$_primary_key][$_ref_key]) as $_key) {
-                        $this->¤cache['¤refs'][$_primary_key][$_ref_key][$_key] = null;
+        if (!empty($this->¤¤cache['¤¤refs'])) { // Nullify underliers.
+            foreach (array_keys($this->¤¤cache['¤¤refs']) as $_primary_key) {
+                foreach (array_keys($this->¤¤cache['¤¤refs'][$_primary_key]) as $_ref_key) {
+                    foreach (array_keys($this->¤¤cache['¤¤refs'][$_primary_key][$_ref_key]) as $_key) {
+                        $this->¤¤cache['¤¤refs'][$_primary_key][$_ref_key][$_key] = null;
                     } // unset($_key); // Housekeeping.
                 } // unset($_ref_key); // Housekeeping.
             } // unset($_primary_key); // Housekeeping.
         }
-        $this->¤cache = []; // Clean slate.
+        $this->¤¤cache = []; // Clean slate.
     }
 }

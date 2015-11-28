@@ -25,10 +25,12 @@ class WebPurify extends Classes\AbsBase
     {
         parent::__construct($App);
 
-        if (!$this->App->Config->webpurify['api_key']) {
+        if (!$this->App->Config->fs_paths['cache_dir']) {
+            throw new Exception('Missing cache directory.');
+        } elseif (!$this->App->Config->webpurify['api_key']) {
             throw new Exception('Missing WebPurify API key.');
         }
-        $this->cache_dir = $this->App->Config->cache_dir.'/webpurify';
+        $this->cache_dir = $this->App->Config->fs_paths['cache_dir'].'/webpurify';
     }
 
     /**

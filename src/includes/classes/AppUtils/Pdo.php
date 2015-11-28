@@ -41,12 +41,18 @@ class Pdo extends Classes\AbsBase
             \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
             \PDO::ATTR_ERRMODE                  => \PDO::ERRMODE_EXCEPTION,
         ];
+        if (!$this->common['port']
+                || !$this->common['charset']
+                || !$this->common['username']
+                || !$this->App->Config->db_shards['dbs']) {
+            throw new Exception('Missing required DB config values.');
+        }
         $this->common = $this->App->Config->db_shards['common'];
 
         if ($this->common['ssl_enable']) {
-            $this->options[\PDO::MYSQL_ATTR_SSL_CA]     = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common['ssl_ca']);
-            $this->options[\PDO::MYSQL_ATTR_SSL_CERT]   = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common['ssl_crt']);
-            $this->options[\PDO::MYSQL_ATTR_SSL_KEY]    = str_replace('%%assets_dir%%', $this->App->Config->assets_dir, $this->common['ssl_key']);
+            $this->options[\PDO::MYSQL_ATTR_SSL_CA]     = $this->common['ssl_ca'];
+            $this->options[\PDO::MYSQL_ATTR_SSL_CERT]   = $this->common['ssl_crt'];
+            $this->options[\PDO::MYSQL_ATTR_SSL_KEY]    = $this->common['ssl_key'];
             $this->options[\PDO::MYSQL_ATTR_SSL_CIPHER] = $this->common['ssl_cipher'];
         }
     }
@@ -71,17 +77,15 @@ class Pdo extends Classes\AbsBase
             }
         } // Now we acquire the configuration.
         $shard_db = $this->shardDbConfig($shard_id);
-
-        if (is_null($Pdo = &$this->cacheKey(__FUNCTION__, $shard_db['host']))) {
-            $Pdo = new \PDO(
-                'mysql:host='.$shard_db['host'].';'.
-                'port='.$this->common['port'].';'.
-                'charset='.$this->common['charset'],
-                $this->common['username'],
-                $this->common['password'],
-                $this->options
-            );
-        }
+        $Pdo      = &$this->cacheKey(__FUNCTION__, $shard_db['host']);
+        $Pdo      = $Pdo ?? new \PDO(
+            'mysql:host='.$shard_db['host'].';'.
+            'port='.$this->common['port'].';'.
+            'charset='.$this->common['charset'],
+            $this->common['username'],
+            $this->common['password'],
+            $this->options
+        );
         $Pdo->exec('use `'.$shard_db['name'].'`');
         $this->current_Pdo = $Pdo;
 
