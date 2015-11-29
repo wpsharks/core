@@ -6,6 +6,4 @@ require_once dirname(__FILE__).'/includes/bootstrap.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-$a = ['hi' => 'hi!', 'hello' => 'hello!'];
-extract(array_replace_recursive(['hello' => 'world'], $a));
-echo $hello;
+$App->Utils->Dump($App->Utils->Email('jas+test@myinbox.ws', 'Testing™ •', '<p>Hello world!™ •</p><p>hi!</p>'));

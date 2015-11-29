@@ -1,11 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Test;
+namespace WebSharks\Core;
 
 require_once dirname(__FILE__).'/includes/bootstrap.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-$a = ['hi' => 'hi!', 'hello' => 'hello!'];
-extract(array_replace_recursive(['hello' => 'world'], $a));
-echo $hello;
+$App->Utils->Benchmark->start();
+$App->Utils->Dump($App->Utils->Slug->isReserved('disney'));
+$App->Utils->Benchmark->stopPrint();

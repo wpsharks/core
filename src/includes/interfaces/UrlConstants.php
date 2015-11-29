@@ -38,8 +38,10 @@ interface UrlConstants
      * @since 150424 Initial release.
      *
      * @type string Regex fragment for use in `preg_match()`.
+     *
+     * @see http://jas.xyz/1TjZ0kA for details about valid schemes.
      */
-    const URL_REGEX_FRAG_SCHEME = '(?:[a-zA-Z0-9]+\:)?\/\/';
+    const URL_REGEX_FRAG_SCHEME = '(?:[a-zA-Z][a-zA-Z0-9+.\-]*\:)?\/\/';
 
     /**
      * Regex matches `[user:pass@]`.
@@ -57,19 +59,35 @@ interface UrlConstants
     ')?'; // All optional.
 
     /**
+     * Regex matches a `host` name.
+     *
+     * @since 150424 Initial release.
+     *
+     * @type string Regex fragment for use in `preg_match()`.
+     */
+    const URL_REGEX_FRAG_HOST = // Punycode-compatible.
+        '(?:xn\-\-)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*'.// `[xn--]a[-b][-c]`
+            '(?:\.(?:xn\-\-)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*)*?';// `.[xn--]a[-b][-c]`
+
+    /**
      * Regex matches a `host.tld` name.
      *
      * @since 150424 Initial release.
      *
      * @type string Regex fragment for use in `preg_match()`.
-     *
-     * @note This can be used in MySQL by outputting the following:
-     *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/UrlConstants::URL_REGEX_FRAG_HOST);`
      */
-    const URL_REGEX_FRAG_HOST = // Punycode-compatible.
-        '(?:xn\-\-)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*'.// `[xn--]a[-b][-c]`
-            '(?:\.(?:xn\-\-)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*)*?'.// `.[xn--]a[-b][-c]`
+    const URL_REGEX_FRAG_HOST_TLD = // Punycode-compatible.
+        self::URL_REGEX_FRAG_HOST.// `[xn--]a[-b][-c].[xn--]a[-b][-c]`
         '(?:\.(?:xn\-\-)?[a-zA-Z][a-zA-Z0-9]+)';// `.[xn--]tld`
+
+    /**
+     * Regex matches a `[:port]`.
+     *
+     * @since 150424 Initial release.
+     *
+     * @type string Regex fragment for use in `preg_match()`.
+     */
+    const URL_REGEX_FRAG_PORT = '(?:\:[0-9]+)?';
 
     /**
      * Regex matches a `host.tld[:port]` (punycode-compatible).
@@ -78,7 +96,7 @@ interface UrlConstants
      *
      * @type string Regex fragment for use in `preg_match()`.
      */
-    const URL_REGEX_FRAG_HOST_PORT = self::URL_REGEX_FRAG_HOST.'(?:\:[0-9]+)?';
+    const URL_REGEX_FRAG_HOST_TLD_PORT = self::URL_REGEX_FRAG_HOST_TLD.self::URL_REGEX_FRAG_PORT;
 
     /**
      * Regex matches a `[/path][?query][#hash]`.
@@ -123,5 +141,5 @@ interface UrlConstants
      * @note This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/UrlConstants::URL_REGEX_VALID);`
      */
-    const URL_REGEX_VALID = '/^'.self::URL_REGEX_FRAG_SCHEME.self::URL_REGEX_FRAG_USER_PASS.self::URL_REGEX_FRAG_HOST_PORT.self::URL_REGEX_FRAG_URI_HASH.'$/u';
+    const URL_REGEX_VALID = '/^'.self::URL_REGEX_FRAG_SCHEME.self::URL_REGEX_FRAG_USER_PASS.self::URL_REGEX_FRAG_HOST_TLD_PORT.self::URL_REGEX_FRAG_URI_HASH.'$/u';
 }

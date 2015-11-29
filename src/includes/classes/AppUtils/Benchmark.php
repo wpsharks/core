@@ -22,6 +22,20 @@ class Benchmark extends Classes\AbsBase
     protected $stats     = [];
 
     /**
+     * Class constructor.
+     *
+     * @since 150424 Initial release.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        if (!$this->Utils->Cli->is()) {
+            throw new Exception('Requires CLI mode.');
+        }
+    }
+
+    /**
      * Start (initialize).
      *
      * @since 15xxxx Benchmarking.
@@ -46,7 +60,7 @@ class Benchmark extends Classes\AbsBase
      *
      * @param bool $full_report Full report?
      */
-    public function print(bool $full_report = false)
+    public function stopPrint(bool $full_report = false)
     {
         $this->stopped   = microtime(true);
         $this->this_time = $this->stopped - $this->started;
@@ -100,9 +114,6 @@ class Benchmark extends Classes\AbsBase
      */
     protected function printStatistics()
     {
-        if (!$this->Utils->Cli->is()) {
-            throw new Exception('Not a CLI process.');
-        }
         $longest_label_chars = 0; // Initialize.
 
         foreach ($this->stats as $_label => $_value) {

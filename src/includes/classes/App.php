@@ -14,6 +14,24 @@ use WebSharks\Core\Traits;
 class App extends AbsCore
 {
     /**
+     * Namespace.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    public $ns;
+
+    /**
+     * Dir.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    public $dir;
+
+    /**
      * Config.
      *
      * @since 15xxxx
@@ -59,6 +77,10 @@ class App extends AbsCore
     public function __construct(array $instance = [])
     {
         parent::__construct();
+
+        $Reflection = new \ReflectionClass($this);
+        $this->ns   = $Reflection->getNamespaceName();
+        $this->dir  = dirname($Reflection->getFileName(), 3);
 
         $this->Config = new AppConfig($this, $instance);
 

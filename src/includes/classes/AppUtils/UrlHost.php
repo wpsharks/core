@@ -27,7 +27,7 @@ class UrlHost extends Classes\AbsBase
      *    However, in a few other edge cases it may be desirable to exclude the port number.
      *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
      *
-     * @return array Host parts; i.e., `name`, `subs`, `sub`, `root`, `tld`.
+     * @return array Host parts; i.e., `name`, `subs`, `sub`, `root`, `root_basename`, `root_as_name`, `tld`.
      *
      * @note This allows an empty `$host` so that a caller can get the array elements even if empty.
      */
@@ -36,14 +36,19 @@ class UrlHost extends Classes\AbsBase
         if ($no_port) {
             $host = preg_replace('/\:[0-9]+$/u', '', $host);
         }
-        $name  = mb_strtolower($host);
-        $parts = explode('.', $name);
-        $subs  = array_slice($parts, 0, -2);
-        $sub   = implode('.', $subs); // `abc.xyz`
-        $root  = implode('.', array_slice($parts, -2));
-        $tld   = implode('.', array_slice($parts, -1));
+        $name  = mb_strtolower($host); // `abc.xyz.example.com`
+        $parts = explode('.', $name); // `[abc,xyz,example,com]`
 
-        return compact('name', 'subs', 'sub', 'root', 'tld');
+        $subs = array_slice($parts, 0, -2); // `[abc,xyz]`
+        $sub  = implode('.', $subs); // `abc.xyz`
+
+        $root          = implode('.', array_slice($parts, -2)); // `example.com`
+        $root_basename = implode('.', array_slice($parts, -2, 1)); // `example`
+        $root_as_name  = $this->Utils->Slug->toName($root_basename); // `Example`
+
+        $tld = implode('.', array_slice($parts, -1)); // `com`
+
+        return compact('name', 'subs', 'sub', 'root', 'root_basename', 'root_as_name', 'tld');
     }
 
     /**

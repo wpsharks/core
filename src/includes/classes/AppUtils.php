@@ -23,15 +23,6 @@ class AppUtils extends AbsCore
     protected $App;
 
     /**
-     * App namespace.
-     *
-     * @since 15xxxx
-     *
-     * @type string
-     */
-    protected $app_ns;
-
-    /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
@@ -40,8 +31,7 @@ class AppUtils extends AbsCore
     {
         parent::__construct();
 
-        $this->App    = $App; // And parse namespace.
-        $this->app_ns = mb_strrchr(get_class($this->App), '\\', true);
+        $this->App = $App;
     }
 
     /**
@@ -55,12 +45,12 @@ class AppUtils extends AbsCore
      */
     public function __get(string $property)
     {
-        if (class_exists($utility = $this->app_ns.'\\AppUtils\\'.$property)) {
-            $utility = $this->App->Di->get($utility);
+        if (class_exists($this->App->ns.'\\AppUtils\\'.$property)) {
+            $utility = $this->App->Di->get($this->App->ns.'\\AppUtils\\'.$property);
             $this->overload((object) [$property => $utility], true);
             return $utility;
-        } elseif (class_exists($utility = __NAMESPACE__.'\\AppUtils\\'.$property)) {
-            $utility = $this->App->Di->get($utility);
+        } elseif (class_exists(__NAMESPACE__.'\\AppUtils\\'.$property)) {
+            $utility = $this->App->Di->get(__NAMESPACE__.'\\AppUtils\\'.$property);
             $this->overload((object) [$property => $utility], true);
             return $utility;
         }
@@ -81,12 +71,12 @@ class AppUtils extends AbsCore
     {
         if (isset($this->¤¤overload[$method])) {
             return $this->¤¤overload[$method](...$args);
-        } elseif (class_exists($utility = $this->app_ns.'\\AppUtils\\'.$method)) {
-            $utility = $this->App->Di->get($utility);
+        } elseif (class_exists($this->App->ns.'\\AppUtils\\'.$method)) {
+            $utility = $this->App->Di->get($this->App->ns.'\\AppUtils\\'.$method);
             $this->overload((object) [$method => $utility], true);
             return $utility(...$args);
-        } elseif (class_exists($utility = __NAMESPACE__.'\\AppUtils\\'.$method)) {
-            $utility = $this->App->Di->get($utility);
+        } elseif (class_exists(__NAMESPACE__.'\\AppUtils\\'.$method)) {
+            $utility = $this->App->Di->get(__NAMESPACE__.'\\AppUtils\\'.$method);
             $this->overload((object) [$method => $utility], true);
             return $utility(...$args);
         }

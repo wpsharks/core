@@ -31,4 +31,16 @@ class Cli extends Classes\AbsBase
         }
         return ($is = false);
     }
+
+    /**
+     * CLI is an interactive terminal?
+     *
+     * @since 150424 Initial release.
+     *
+     * @return bool `TRUE` CLI is an interactive terminal.
+     */
+    public function isInteractive(): bool
+    {
+        return $this->is() && !empty($_SERVER['TERM']);
+    }
 }

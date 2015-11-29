@@ -28,6 +28,9 @@ class Ip extends Classes\AbsBase
         if (!is_null($ip = &$this->cacheKey(__FUNCTION__))) {
             return $ip; // Already cached this.
         }
+        if ($this->Utils->Cli->is()) {
+            throw new Exception('Not possible in CLI mode.');
+        }
         $sources = array(
             'HTTP_CF_CONNECTING_IP',
             'HTTP_CLIENT_IP',

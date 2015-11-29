@@ -30,6 +30,9 @@ class CliOpts extends AbsBase
     {
         parent::__construct($App);
 
+        if (!$this->Utils->Cli->is()) {
+            throw new Exception('Requires CLI mode.');
+        }
         $this->OptionCollection = new OptionCollection();
     }
 

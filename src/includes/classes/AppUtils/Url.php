@@ -15,6 +15,57 @@ use WebSharks\Core\Traits;
 class Url extends Classes\AbsBase implements Interfaces\UrlConstants
 {
     /**
+     * Build app URL.
+     *
+     * @since 151121 URL utilities.
+     *
+     * @param string $uri        URI to append.
+     * @param string $scheme     Specific scheme?
+     * @param bool   $cdn_filter CDN filter?
+     *
+     * @return string Output URL.
+     */
+    public function toApp(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
+    {
+        if (!($host = $this->App->Config->urls['hosts']['app'])) {
+            throw new Exception('App host is empty.');
+        }
+        $uri = $uri ? $this->Utils->Trim->l($uri, '/') : '';
+        $url = $this->Utils->UrlScheme->set('//'.$host.'/'.$uri, $scheme);
+
+        if ($uri && $cdn_filter) {
+            $url = $this->Utils->Cdn->filter($url);
+        }
+        return $url;
+    }
+
+    /**
+     * Build URL w/ current host.
+     *
+     * @since 151121 URL utilities.
+     *
+     * @param string $uri        URI to append.
+     * @param string $scheme     Specific scheme?
+     * @param bool   $cdn_filter CDN filter?
+     *
+     * @return string Output URL w/ current host.
+     */
+    public function toCur(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
+    {
+        if (!$scheme) { // Empty = `current` here.
+            $scheme = 'current';
+        }
+        $host = $this->Utils->UrlCurrent->host();
+        $uri  = $uri ? $this->Utils->Trim->l($uri, '/') : '';
+        $url  = $this->Utils->UrlScheme->set('//'.$host.'/'.$uri, $scheme);
+
+        if ($uri && $cdn_filter) {
+            $url = $this->Utils->Cdn->filter($url);
+        }
+        return $url;
+    }
+
+    /**
      * Valid URL?
      *
      * @since 151121 URL utilities.

@@ -17,11 +17,11 @@ class Template extends Classes\AbsBase
     /**
      * Gets template.
      *
-     * @since 151121 Header utilities.
+     * @since 151121 Template utilities.
      *
-     * @param string $file Template file (relative to templates dir).
+     * @param string $file Relative to templates dir.
      *
-     * @return Classes\Template instance.
+     * @return Classes\Template Template instance.
      */
     public function get(string $file): Classes\Template
     {
@@ -29,8 +29,12 @@ class Template extends Classes\AbsBase
             throw new Exception('Missing templates dir.');
         }
         $file = $this->Utils->Trim->l($file, '/');
-        $file = $this->App->Config->templates_dir.'/'.$file;
 
+        if (is_file($this->App->Config->templates_dir.'/'.$file)) {
+            $file = $this->App->Config->templates_dir.'/'.$file;
+        } else {
+            $file = dirname(__FILE__, 3).'/templates/'.$file;
+        }
         return $this->App->Di->get(Classes\Template::class, ['file' => $file]);
     }
 }

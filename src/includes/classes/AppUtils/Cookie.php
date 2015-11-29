@@ -15,6 +15,20 @@ use WebSharks\Core\Traits;
 class Cookie extends Classes\AbsBase
 {
     /**
+     * Class constructor.
+     *
+     * @since 150424 Initial release.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        if ($this->Utils->Cli->is()) {
+            throw new Exception('Not possible in CLI mode.');
+        }
+    }
+
+    /**
      * Sets a cookie.
      *
      * @param string      $name          Name of the cookie.
@@ -27,7 +41,7 @@ class Cookie extends Classes\AbsBase
     public function set(string $name, string $value, string $key, int $expires_after = null, string $domain = null, string $path = null)
     {
         if (headers_sent()) {
-            throw new Exception('Doing it wrong! Headers sent already.');
+            throw new Exception('Headers already sent.');
         }
         if (!$name) {
             return; // Not possible.

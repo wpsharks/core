@@ -192,7 +192,7 @@ class HtmlConvert extends Classes\AbsBase implements Interfaces\EmailConstants, 
             );
             $Pandoc = new Pandoc();
             return $Pandoc->runWith($string, $options);
-        } catch (\Exception $Exception) {
+        } catch (\Throwable $Exception) {
             return ''; // Failure.
         }
     }
@@ -225,7 +225,11 @@ class HtmlConvert extends Classes\AbsBase implements Interfaces\EmailConstants, 
             return $m['before'].'<a href="'.$this->escUrl($m['url']).'">'.$this->escHtml($m['url']).'</a>';
         }, $string); // Converts full URLs into clickable links using advanced regex.
 
-        $string = preg_replace_callback('/(?<before>^|[\s<])(?<host>(?:www|ftp)\.'.$this::URL_REGEX_FRAG_HOST_PORT.')/u', function ($m) {
+        $string = preg_replace_callback('/(?<before>^|[\s<])(?<host>(?:www|ftp)\.'.$this::URL_REGEX_FRAG_HOST_TLD_PORT.')/u', function ($m) {
+            return $m['before'].'<a href="'.$this->escUrl('http://'.$m['host'].'/').'">'.$this->escHtml($m['host']).'</a>';
+        }, $string); // Converts obvious domain name references into clickable links.
+
+        $string = preg_replace_callback('/(?<before>^|[\s<])(?<host>'.$this::URL_REGEX_FRAG_HOST.'\.(?:com|net|org)'.$this::URL_REGEX_FRAG_PORT.')/u', function ($m) {
             return $m['before'].'<a href="'.$this->escUrl('http://'.$m['host'].'/').'">'.$this->escHtml($m['host']).'</a>';
         }, $string); // Converts obvious domain name references into clickable links.
 

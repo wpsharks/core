@@ -15,6 +15,20 @@ use WebSharks\Core\Traits;
 class CliUrl extends Classes\AbsBase
 {
     /**
+     * Class constructor.
+     *
+     * @since 150424 Initial release.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        if (!$this->Utils->Cli->is()) {
+            throw new Exception('Requires CLI mode.');
+        }
+    }
+
+    /**
      * Open a URL from the command line.
      *
      * @since 150424 Initial release.

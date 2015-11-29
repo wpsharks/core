@@ -15,19 +15,38 @@ use WebSharks\Core\Traits;
 class UrlCurrent extends Classes\AbsBase
 {
     /**
+     * Class constructor.
+     *
+     * @since 150424 Initial release.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        if ($this->Utils->Cli->is()) {
+            throw new Exception('Not possible in CLI mode.');
+        }
+    }
+
+    /**
      * Current URL.
      *
      * @since 150424 Initial release.
      *
+     * @param bool $canonical Canonical?
+     *
      * @return string Current URL.
      */
-    public function __invoke(): string
+    public function __invoke(bool $canonical = false): string
     {
-        if (!is_null($url = &$this->cacheKey(__FUNCTION__))) {
+        if (!is_null($url = &$this->cacheKey(__FUNCTION__, $canonical))) {
             return $url; // Cached this already.
         }
         $url = $this->scheme().'://'.$this->host().$this->uri();
 
+        if ($canonical) { // Strip it down.
+            $url = preg_split('/[?#]/', $url, 2)[0];
+        }
         return $url;
     }
 
@@ -67,10 +86,8 @@ class UrlCurrent extends Classes\AbsBase
         if (!is_null($host = &$this->cacheKey(__FUNCTION__, $no_port))) {
             return $host; // Cached this already.
         }
-        $host = ''; // Initialize.
-        if (!empty($_SERVER['HTTP_HOST'])) {
-            $host = mb_strtolower((string) $_SERVER['HTTP_HOST']);
-        }
+        $host = mb_strtolower($_SERVER['HTTP_HOST']);
+
         if ($no_port) {
             $host = preg_replace('/\:[0-9]+$/u', '', $host);
         }
@@ -115,10 +132,7 @@ class UrlCurrent extends Classes\AbsBase
         if (!is_null($uri = &$this->cacheKey(__FUNCTION__))) {
             return $uri; // Cached this already.
         }
-        $uri = ''; // Initialize.
-        if (!empty($_SERVER['REQUEST_URI'])) {
-            $uri = (string) $_SERVER['REQUEST_URI'];
-        }
+        $uri = $_SERVER['REQUEST_URI'];
         $uri = '/'.$this->Utils->Trim->l($uri, '/');
 
         return $uri;
@@ -156,7 +170,7 @@ class UrlCurrent extends Classes\AbsBase
         }
         $path_info = ''; // Initialize.
         if (isset($_SERVER['PATH_INFO'])) {
-            $path_info = (string) $_SERVER['PATH_INFO'];
+            $path_info = $_SERVER['PATH_INFO'];
         }
         if (mb_strpos($path_info, '?') !== false) {
             list($path_info) = explode('?', $path_info, 2);
@@ -211,8 +225,7 @@ class UrlCurrent extends Classes\AbsBase
         }
         if (defined('LOCALHOST') && LOCALHOST) {
             return ($is = true);
-        }
-        if (preg_match('/\b(?:localhost|127\.0\.0\.1)\b/ui', $this->host())) {
+        } elseif (preg_match('/(?:\b(?:localhost|127\.0\.0\.1)\b|\.vm)$/ui', $this->host())) {
             return ($is = true);
         }
         return ($is = false);

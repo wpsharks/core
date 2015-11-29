@@ -89,7 +89,7 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
                 $mailer->AddAddress($_recipient->email, $_recipient->name);
             } // unset($_email, $_recipient);
 
-            $mailer->CharSet = 'UTF-8';
+            $mailer->CharSet = 'utf-8';
             $mailer->Subject = $subject;
 
             $mailer->MsgHTML($message_html);
@@ -104,7 +104,7 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
             } // unset($_file_path, $_attachment);
 
             return ($response = (bool) $mailer->Send());
-        } catch (\Exception $Exception) {
+        } catch (\Throwable $Exception) {
             if ($throw) {
                 throw $Exception;
             }
@@ -138,7 +138,21 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
     public function isRoleBased(string $email): bool
     {
         $user = mb_strtolower(mb_strstr($email, '@', true));
-        return in_array($user, $this::EMAIL_ROLE_BASED_USERS, true);
+        $user = str_replace(['-', '_', '.'], '', $user);
+
+        if (!is_null($is = &$this->cacheKey(__FUNCTION__, $user))) {
+            return $is; // Cached this already.
+        }
+        if (in_array($user, $this::EMAIL_ROLE_BASED_STRINGS, true)) {
+            return ($is = true);
+        }
+        foreach ($this::EMAIL_ROLE_BASED_REGEX_FRAGS as $_regex_frag) {
+            if (preg_match('/^'.$_regex_frag.'$/ui', $user)) {
+                return ($is = true);
+            }
+        } // unset($_regex_frag); // Housekeeping.
+
+        return ($is = false);
     }
 
     /**
@@ -166,7 +180,7 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
         $delimiter                   = mb_strpos($string, ';') !== false ? ';' : ',';
         $regex_delimitation_splitter = '/'.$delimiter.'+/u'; // `RegexQuote()` unnecessary.
 
-        $possible_addresses = preg_split($regex_delimitation_splitter, $string, null, PREG_SPLIT_NO_EMPTY);
+        $possible_addresses = preg_split($regex_delimitation_splitter, $string, -1, PREG_SPLIT_NO_EMPTY);
         $possible_addresses = $this->Utils->Trim($possible_addresses);
 
         foreach ($possible_addresses as $_address) {
@@ -210,7 +224,6 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
             switch ($_header) { // Maybe populate refs.
 
                 case 'from':
-
                     if (array_key_exists('from_name', $refs) && array_key_exists('from_email', $refs)) {
                         if (($_from_addresses = $this->parseAddresses($_value, $strict))) {
                             $_from              = array_shift($_from_addresses);
@@ -223,7 +236,6 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
                     break; // Break switch.
 
                 case 'reply-to':
-
                     if (array_key_exists('reply_to_name', $refs) && array_key_exists('reply_to_email', $refs)) {
                         if (($_reply_to_addresses = $this->parseAddresses($_value, $strict))) {
                             $_reply_to              = array_shift($_reply_to_addresses);
@@ -237,7 +249,6 @@ class Email extends Classes\AbsBase implements Interfaces\EmailConstants
 
                 case 'cc':
                 case 'bcc':
-
                     if (array_key_exists('recipients', $refs)) {
                         if (($_recipient_addresses = $this->parseAddresses($_value, $strict))) {
                             $refs['recipients'] = array_merge($refs['recipients'], $_recipient_addresses);

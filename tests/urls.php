@@ -6,6 +6,4 @@ require_once dirname(__FILE__).'/includes/bootstrap.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-$a = ['hi' => 'hi!', 'hello' => 'hello!'];
-extract(array_replace_recursive(['hello' => 'world'], $a));
-echo $hello;
+echo $App->Utils->Url->toApp('/client-s/test.js?v=34#core');

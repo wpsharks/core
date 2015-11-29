@@ -39,7 +39,7 @@ class Yaml extends Classes\AbsBase
         }
         try {
             $array = Parser::parse($yaml);
-        } catch (\Exception $Exception) {
+        } catch (\Throwable $Exception) {
             $array = []; // Empty.
         }
         return is_array($array) ? $array : [];

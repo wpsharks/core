@@ -14,6 +14,7 @@ use WebSharks\Core\Traits;
 class Template extends AbsBase
 {
     protected $file;
+    protected $slug;
 
     /**
      * Class constructor.
@@ -30,6 +31,9 @@ class Template extends AbsBase
             throw new Exception('Missing template file.');
         }
         $this->file = $file;
+        $this->slug = $this->App->Utils->Name->toSlug(
+            str_replace($this->App->Config->fs_paths['templates_dir'], $this->file)
+        );
     }
 
     /**
@@ -37,14 +41,19 @@ class Template extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @param array $vars Template vars.
+     * @param array $¤vars Template vars.
      *
      * @return string Parsed template contents.
      */
-    public function parse(array $vars = []): string
+    public function parse(array $¤vars = []): string
     {
-        extract($vars);
-        $template = $this;
+        unset($¤vars['¤this'], $¤vars['this']);
+        unset($¤vars['¤defaults'], $¤vars['¤vars']);
+
+        $¤this = $this; // Puts `$this` in the symbol table.
+        // i.e., Strange magic makes it possible for `$this` to be used from
+        // inside the template file also. We just need to reference it here.
+        // See also: <http://stackoverflow.com/a/4994799/1219741>
 
         ob_start();
         require $this->file;
