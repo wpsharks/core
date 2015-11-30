@@ -80,7 +80,7 @@ class App extends AbsCore
 
         $Reflection = new \ReflectionClass($this);
         $this->ns   = $Reflection->getNamespaceName();
-        $this->dir  = dirname($Reflection->getFileName(), 3);
+        $this->dir  = dirname($Reflection->getFileName(), 4);
 
         $this->Config = new AppConfig($this, $instance);
 
