@@ -32,7 +32,7 @@ class Template extends AbsBase
         }
         $this->file = $file;
         $this->slug = $this->App->Utils->Name->toSlug(
-            str_replace($this->App->Config->fs_paths['templates_dir'], $this->file)
+            str_replace($this->App->Config->fs_paths['templates_dir'], '', $this->file)
         );
     }
 
