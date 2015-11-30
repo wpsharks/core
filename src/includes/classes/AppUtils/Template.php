@@ -30,8 +30,8 @@ class Template extends Classes\AbsBase
         }
         $file = $this->Utils->Trim->l($file, '/');
 
-        if (is_file($this->App->Config->templates_dir.'/'.$file)) {
-            $file = $this->App->Config->templates_dir.'/'.$file;
+        if (is_file($this->App->Config->fs_paths['templates_dir'].'/'.$file)) {
+            $file = $this->App->Config->fs_paths['templates_dir'].'/'.$file;
         } else {
             $file = dirname(__FILE__, 3).'/templates/'.$file;
         }
