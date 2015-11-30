@@ -25,7 +25,7 @@ class Template extends Classes\AbsBase
      */
     public function get(string $file): Classes\Template
     {
-        if (!($this->App->Config->templates_dir)) {
+        if (!($this->App->Config->fs_paths['templates_dir'])) {
             throw new Exception('Missing templates dir.');
         }
         $file = $this->Utils->Trim->l($file, '/');
