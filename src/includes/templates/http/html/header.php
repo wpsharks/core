@@ -4,9 +4,8 @@
  */
 $¤defaults = [
     'html' => [
-        'lang'   => 'en-US',
-        'class'  => 'tpl-'.$this->slug,
-        'extras' => '',
+        'lang'  => 'en-US',
+        'class' => 'tpl-'.$this->slug,
     ],
     'head' => [
         'robots'    => 'noindex,follow',
@@ -24,10 +23,10 @@ $¤defaults = [
             'description' => '',
             'url'         => '',
             'type'        => 'website',
-            'image'       => $this->App->Config->brand['screenshot'],
+            'image'       => $this->Utils->Url->toCur($this->App->Config->brand['screenshot']),
         ],
         'canonical' => $this->Utils->UrlCurrent(true),
-        'favicon'   => $this->Utils->Url->toCur('/favicon.ico'),
+        'favicon'   => $this->Utils->Url->toCur($this->App->Config->brand['favicon']),
         'shortlink' => '', // Defaults to canonical below.
 
         'styles' => [
@@ -36,9 +35,9 @@ $¤defaults = [
         'extras' => '',
     ],
     'body' => [
-        'class'  => '',
-        'extras' => '',
+        'class' => 'tpl-'.$this->slug,
     ],
+    'nav' => [],
 ];
 extract(array_replace_recursive($¤defaults, $¤vars));
 /*
@@ -66,8 +65,9 @@ if (!$head['shortlink']) {
 <html lang="<?= $html['lang'] ?>" class="<?= $html['class'] ?>">
     <head>
         <meta charset="utf-8" />
-        <meta name="generator" content="<?= $this->escAttr($head['generator']) ?>" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="<?= $this->escAttr($head['viewport']) ?>" />
+        <meta name="generator" content="<?= $this->escAttr($head['generator']) ?>" />
         <meta name="robots" content="<?= $this->escAttr($head['robots']) ?>" />
 
         <title>
@@ -93,7 +93,8 @@ if (!$head['shortlink']) {
         <?= $head['extras'] ?>
     </head>
 
-    <?= $html['extras'] ?>
-
     <body class="<?= $body['class'] ?>">
-        <?= $body['extras'] ?>
+
+        <?= $this->Utils->Template->get('http/html/header-nav.php')->parse($nav) ?>
+
+        <div class="ui main text container">

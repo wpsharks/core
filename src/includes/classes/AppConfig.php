@@ -86,6 +86,8 @@ class AppConfig extends AbsCore
                 'description' => '',
                 'tagline'     => '',
                 'screenshot'  => '',
+                'favicon'     => '',
+                'logo'        => '',
             ],
             'urls' => [
                 'hosts' => [
