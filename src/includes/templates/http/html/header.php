@@ -37,7 +37,7 @@ $¤defaults = [
     'body' => [
         'class' => 'tpl-'.$this->slug,
     ],
-    'nav' => [],
+    'inc' => [],
 ];
 extract(array_replace_recursive($¤defaults, $¤vars));
 /*
@@ -95,4 +95,4 @@ if (!$head['shortlink']) {
 
     <body class="<?= $body['class'] ?>">
 
-        <?= $this->Utils->Template->get('http/html/header-nav.php')->parse($nav) ?>
+        <?= $this->Utils->Template->get('http/html/header.inc.php')->parse($nav) ?>
