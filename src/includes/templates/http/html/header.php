@@ -96,5 +96,3 @@ if (!$head['shortlink']) {
     <body class="<?= $body['class'] ?>">
 
         <?= $this->Utils->Template->get('http/html/header-nav.php')->parse($nav) ?>
-
-        <div class="ui main text container">
