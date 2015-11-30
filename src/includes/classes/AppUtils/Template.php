@@ -20,17 +20,23 @@ class Template extends Classes\AbsBase
      * @since 151121 Template utilities.
      *
      * @param string $file Relative to templates dir.
+     * @param string $dir  From a specific directory?
      *
      * @return Classes\Template Template instance.
      */
-    public function get(string $file): Classes\Template
+    public function get(string $file, string $dir = ''): Classes\Template
     {
-        if (!($this->App->Config->fs_paths['templates_dir'])) {
+        if ($dir === 'core') {
+            $dir = dirname(__FILE__, 3).'/templates';
+        }
+        if (!$dir && !$this->App->Config->fs_paths['templates_dir']) {
             throw new Exception('Missing templates dir.');
         }
         $file = $this->Utils->Trim->l($file, '/');
 
-        if (is_file($this->App->Config->fs_paths['templates_dir'].'/'.$file)) {
+        if ($dir && is_file($dir.'/'.$file)) {
+            $file = $dir.'/'.$file;
+        } elseif (is_file($this->App->Config->fs_paths['templates_dir'].'/'.$file)) {
             $file = $this->App->Config->fs_paths['templates_dir'].'/'.$file;
         } else {
             $file = dirname(__FILE__, 3).'/templates/'.$file;

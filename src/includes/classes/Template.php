@@ -14,7 +14,6 @@ use WebSharks\Core\Traits;
 class Template extends AbsBase
 {
     protected $file;
-    protected $slug;
 
     /**
      * Class constructor.
@@ -31,9 +30,6 @@ class Template extends AbsBase
             throw new Exception('Missing template file.');
         }
         $this->file = $file;
-        $this->slug = $this->App->Utils->Name->toSlug(
-            str_replace($this->App->Config->fs_paths['templates_dir'], '', $this->file)
-        );
     }
 
     /**

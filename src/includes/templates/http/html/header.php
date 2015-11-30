@@ -5,7 +5,7 @@
 $¤defaults = [
     'html' => [
         'lang'  => 'en-US',
-        'class' => 'tpl-'.$this->slug,
+        'class' => '',
     ],
     'head' => [
         'robots'    => 'noindex,follow',
@@ -35,7 +35,7 @@ $¤defaults = [
         'extras' => '',
     ],
     'body' => [
-        'class' => 'tpl-'.$this->slug,
+        'class' => '',
     ],
     'inc' => [],
 ];
@@ -65,7 +65,7 @@ if (!$head['shortlink']) {
 <html lang="<?= $html['lang'] ?>" class="<?= $html['class'] ?>">
     <head>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="x-ua-compatible" content="IE=edge" />
         <meta name="viewport" content="<?= $this->escAttr($head['viewport']) ?>" />
         <meta name="generator" content="<?= $this->escAttr($head['generator']) ?>" />
         <meta name="robots" content="<?= $this->escAttr($head['robots']) ?>" />
@@ -95,4 +95,4 @@ if (!$head['shortlink']) {
 
     <body class="<?= $body['class'] ?>">
 
-        <?= $this->Utils->Template->get('http/html/header.inc.php')->parse($nav) ?>
+        <?= $this->Utils->Template->get('http/html/header.inc.php')->parse($inc) ?>
