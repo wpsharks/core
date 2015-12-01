@@ -70,10 +70,7 @@ if (!$head['shortlink']) {
         <meta name="generator" content="<?= $this->escAttr($head['generator']) ?>" />
         <meta name="robots" content="<?= $this->escAttr($head['robots']) ?>" />
 
-        <title>
-            <?= $this->escHtml($head['title']); ?>
-            <?= $this->escHtml($head['site'] ? ' | '.$head['site'] : ''); ?>
-        </title>
+        <title><?= $this->escHtml($head['title'].($head['site'] ? ' | '.$head['site'] : '')) ?></title>
         <meta name="keywords" content="<?= $this->escAttr(implode(',', $head['keywords'])) ?>" />
         <meta name="description" content="<?= $this->escAttr($head['description']) ?>" />
 
