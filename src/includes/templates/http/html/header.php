@@ -23,10 +23,10 @@ $¤defaults = [
             'description' => '',
             'url'         => '',
             'type'        => 'website',
-            'image'       => $this->Utils->Url->toApp($this->App->Config->brand['screenshot']),
+            'image'       => $this->Utils->Url->toApp($this->App->Config->brand['screenshot'], 'current'),
         ],
         'canonical' => $this->Utils->UrlCurrent(true),
-        'favicon'   => $this->Utils->Url->toApp($this->App->Config->brand['favicon']),
+        'favicon'   => $this->Utils->Url->toApp($this->App->Config->brand['favicon'], 'current'),
         'shortlink' => '', // Defaults to canonical below.
 
         'styles' => [
