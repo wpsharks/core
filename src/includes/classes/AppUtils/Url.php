@@ -52,9 +52,6 @@ class Url extends Classes\AbsBase implements Interfaces\UrlConstants
      */
     public function toCur(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        if (!$scheme) { // Empty = `current` here.
-            $scheme = 'current';
-        }
         $host = $this->Utils->UrlCurrent->host();
         $uri  = $uri ? $this->Utils->Trim->l($uri, '/') : '';
         $url  = $this->Utils->UrlScheme->set('//'.$host.'/'.$uri, $scheme);

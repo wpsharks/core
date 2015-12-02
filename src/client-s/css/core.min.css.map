@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "core.min.css",
+	"sources": [
+		"core.scss"
+	],
+	"mappings": "CAAA,AAAA,WAAC,AAAA,CAAY,MAAM,AAAA,2BAA2B,AAAC,CAC7C,UAAU,CAAkB,sBAAuB,CACnD,OAAO,CAAqB,CAAE,CAC/B",
+	"names": []
+}

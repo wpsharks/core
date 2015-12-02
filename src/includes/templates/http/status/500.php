@@ -16,7 +16,7 @@ extract(array_replace_recursive($¤defaults, $¤vars));
  */ ?>
 <?= $this->Utils->Template->get('header.php')->parse($header) ?>
 
-<img src="<?= $this->escUrl($this->Utils->Url->toCur('/vendor/websharks/core/src/client-s/http/status/500.png')) ?>" alt="" />
+<img src="<?= $this->escUrl($this->Utils->Url->toApp('/vendor/websharks/core/src/client-s/http/status/500.png')) ?>" />
 
 Unexpected error. Please contact us if you need help.
 

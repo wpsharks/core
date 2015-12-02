@@ -20,22 +20,21 @@ class UrlScheme extends Classes\AbsBase implements Interfaces\UrlConstants
      * @since 150424 Initial release.
      *
      * @param string $url    Absolute URL that includes a scheme (or a `//` scheme).
-     * @param string $scheme ``|`default`, `current`, `//`, `relative`, `https`, `http`, or another.
+     * @param string $scheme ``|`//`, `current`, `default`, `relative`, `https`, `http`, or another.
      *
      * @return string $url URL w/ a specific scheme.
      */
-    public function set(string $url, string $scheme = 'default'): string
+    public function set(string $url, string $scheme = ''): string
     {
-        if (!$scheme || $scheme === 'default') {
-            $scheme = $this->App->Config->urls['default_scheme'];
+        if (!$scheme || $scheme === '//') {
+            $scheme = '//'; # Inherits.
         } elseif ($scheme === 'current') {
             $scheme = $this->Utils->UrlCurrent->scheme();
+        } elseif ($scheme === 'default') {
+            $scheme = $this->App->Config->urls['default_scheme'];
         }
         if (!$scheme) {
             throw new Exception('Empty scheme.');
-        }
-        if (mb_substr($url, 0, 2) === '//') {
-            $url = 'foobar:'.$url;
         }
         if ($scheme === '//') {
             $url = preg_replace('/^'.$this::URL_REGEX_FRAG_SCHEME.'/u', '//', $url);

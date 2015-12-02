@@ -23,10 +23,10 @@ $¤defaults = [
             'description' => '',
             'url'         => '',
             'type'        => 'website',
-            'image'       => $this->Utils->Url->toCur($this->App->Config->brand['screenshot']),
+            'image'       => $this->Utils->Url->toApp($this->App->Config->brand['screenshot']),
         ],
         'canonical' => $this->Utils->UrlCurrent(true),
-        'favicon'   => $this->Utils->Url->toCur($this->App->Config->brand['favicon']),
+        'favicon'   => $this->Utils->Url->toApp($this->App->Config->brand['favicon']),
         'shortlink' => '', // Defaults to canonical below.
 
         'styles' => [
@@ -85,7 +85,9 @@ if (!$head['shortlink']) {
         <link rel="shortcut icon" href="<?= $this->escUrl($head['favicon']) ?>" />
         <link rel='shortlink' href='<?= $this->escUrl($head['shortlink']) ?>' />
 
-        <link type="text/css" rel="stylesheet" href="<?= $this->escUrl($this->Utils->Url->toCur('/client-s/semantic/semantic.min.css?v='.urlencode($head['styles']['v']))) ?>" />
+        <link type="text/css" rel="stylesheet" href="<?= $this->escUrl($this->Utils->UrlScheme->set('//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.css')) ?>" />
+        <link type="text/css" rel="stylesheet" href="<?= $this->escUrl($this->Utils->Url->toApp('/vendor/websharks/core/src/client-s/css/core.min.css?v='.urlencode($head['styles']['v']))) ?>" />
+        <link type="text/css" rel="stylesheet" href="<?= $this->escUrl($this->Utils->Url->toApp('/client-s/css/app.min.css?v='.urlencode($head['styles']['v']))) ?>" />
 
         <?= $head['extras'] ?>
     </head>
