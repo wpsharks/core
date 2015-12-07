@@ -19,28 +19,29 @@ class Template extends Classes\AbsBase
      *
      * @since 151121 Template utilities.
      *
-     * @param string $file Relative to templates dir.
-     * @param string $dir  From a specific directory?
+     * @param string $file    Relative to templates dir.
+     * @param string $dir     From a specific directory?
+     * @param array  $parents Parent template files.
      *
      * @return Classes\Template Template instance.
      */
-    public function get(string $file, string $dir = ''): Classes\Template
+    public function get(string $file, string $dir = '', array $parents = []): Classes\Template
     {
         if ($dir === 'core') {
-            $dir = dirname(__FILE__, 3).'/templates';
+            $dir = $this->¤core_dir.'/src/includes/templates';
+        } elseif (!$dir && $this->App->Config->fs_paths['templates_dir']) {
+            $dir = $this->App->Config->fs_paths['templates_dir'];
         }
-        if (!$dir && !$this->App->Config->fs_paths['templates_dir']) {
+        if (!$dir) { // Must have a directory.
             throw new Exception('Missing templates dir.');
         }
         $file = $this->Utils->Trim->l($file, '/');
 
-        if ($dir && is_file($dir.'/'.$file)) {
+        if (is_file($dir.'/'.$file)) {
             $file = $dir.'/'.$file;
-        } elseif (is_file($this->App->Config->fs_paths['templates_dir'].'/'.$file)) {
-            $file = $this->App->Config->fs_paths['templates_dir'].'/'.$file;
         } else {
-            $file = dirname(__FILE__, 3).'/templates/'.$file;
+            $file = $this->¤core_dir.'/src/includes/templates/'.$file;
         }
-        return $this->App->Di->get(Classes\Template::class, ['file' => $file]);
+        return $this->App->Di->get(Classes\Template::class, compact('file', 'parents'));
     }
 }

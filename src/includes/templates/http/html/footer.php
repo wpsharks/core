@@ -9,13 +9,12 @@ $¤defaults = [
         ],
         'extras' => '',
     ],
-    'inc' => [],
 ];
-extract(array_replace_recursive($¤defaults, $¤vars));
+extract($this->setVars($¤defaults, $¤vars));
 /*
  * Output template contents.
  */ ?>
-        <?= $this->Utils->Template->get('http/html/footer.inc.php')->parse($inc) ?>
+        <?= $this->inc('http/html/footer.inc.php') ?>
 
         <script type="text/javascript" src="<?= $this->escUrl($this->Utils->UrlScheme->set('//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js')) ?>"></script>
         <script type="text/javascript" src="<?= $this->escUrl($this->Utils->UrlScheme->set('//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js')) ?>"></script>

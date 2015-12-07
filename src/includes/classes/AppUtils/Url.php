@@ -52,9 +52,15 @@ class Url extends Classes\AbsBase implements Interfaces\UrlConstants
      */
     public function toCur(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        $host = $this->Utils->UrlCurrent->host();
-        $uri  = $uri ? $this->Utils->Trim->l($uri, '/') : '';
-        $url  = $this->Utils->UrlScheme->set('//'.$host.'/'.$uri, $scheme);
+        static $checked_cli = false;
+
+        if (!$checked_cli && $this->Utils->Cli->is()) {
+            throw new Exception('Not possible in CLI mode.');
+        }
+        $checked_cli = true; // Flag as done.
+        $host        = $this->Utils->UrlCurrent->host();
+        $uri         = $uri ? $this->Utils->Trim->l($uri, '/') : '';
+        $url         = $this->Utils->UrlScheme->set('//'.$host.'/'.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
             $url = $this->Utils->Cdn->filter($url);

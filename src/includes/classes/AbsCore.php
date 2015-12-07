@@ -20,11 +20,21 @@ abstract class AbsCore implements \Serializable, \JsonSerializable
     use Traits\QuickI18nMembers;
 
     /**
+     * Core dir.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    protected $¤core_dir;
+
+    /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
     public function __construct()
     {
+        $this->¤core_dir = dirname(__FILE__, 4);
     }
 }

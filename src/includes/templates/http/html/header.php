@@ -37,9 +37,8 @@ $¤defaults = [
     'body' => [
         'class' => '',
     ],
-    'inc' => [],
 ];
-extract(array_replace_recursive($¤defaults, $¤vars));
+extract($this->setVars($¤defaults, $¤vars));
 /*
  * A few easy fallbacks.
  */
@@ -81,9 +80,9 @@ if (!$head['shortlink']) {
         <meta property="og:image" content="<?= $this->escAttr($head['og']['image']) ?>" />
         <meta property="og:type" content="<?= $this->escAttr($head['og']['type']) ?>" />
 
-        <link rel='canonical' href='<?= $this->escUrl($head['canonical']) ?>' />
+        <link rel="canonical" href="<?= $this->escUrl($head['canonical']) ?>" />
         <link rel="shortcut icon" href="<?= $this->escUrl($head['favicon']) ?>" />
-        <link rel='shortlink' href='<?= $this->escUrl($head['shortlink']) ?>' />
+        <link rel="shortlink" href="<?= $this->escUrl($head['shortlink']) ?>" />
 
         <link type="text/css" rel="stylesheet" href="<?= $this->escUrl($this->Utils->UrlScheme->set('//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.css')) ?>" />
         <link type="text/css" rel="stylesheet" href="<?= $this->escUrl($this->Utils->Url->toApp('/vendor/websharks/core/src/client-s/css/core.min.css?v='.urlencode($head['styles']['v']))) ?>" />
@@ -94,4 +93,4 @@ if (!$head['shortlink']) {
 
     <body class="<?= $body['class'] ?>">
 
-        <?= $this->Utils->Template->get('http/html/header.inc.php')->parse($inc) ?>
+        <?= $this->inc('http/html/header.inc.php') ?>
