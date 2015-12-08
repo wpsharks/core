@@ -61,7 +61,7 @@ if (!$head['shortlink']) {
  * Output template contents.
  */
 ?><!DOCTYPE html>
-<html lang="<?= $html['lang'] ?>" class="<?= $html['class'] ?>">
+<html id="app" class="<?= $html['class'] ?>" lang="<?= $html['lang'] ?>">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="IE=edge" />
@@ -91,6 +91,6 @@ if (!$head['shortlink']) {
         <?= $head['extras'] ?>
     </head>
 
-    <body id="app" class="<?= $body['class'] ?>">
+    <body class="<?= $body['class'] ?>">
 
         <?= $this->inc('http/html/header.inc.php') ?>
