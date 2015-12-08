@@ -52,7 +52,7 @@ class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants, Inter
 
         if (preg_match('/^'.$this::URL_REGEX_FRAG_SCHEME.'/u', $qs)) {
             $qs = (string) $this->Utils->UrlParse($qs, PHP_URL_QUERY);
-        } elseif (in_array($string[0], ['/', '?'], true)) {
+        } elseif (in_array($qs[0], ['/', '?'], true)) {
             $qs = (string) $this->Utils->UrlParse($qs, PHP_URL_QUERY);
         } elseif (mb_strpos($qs, '?') !== false) {
             list(, $qs) = explode('?', $qs, 2);
