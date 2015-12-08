@@ -91,6 +91,6 @@ if (!$head['shortlink']) {
         <?= $head['extras'] ?>
     </head>
 
-    <body class="<?= $body['class'] ?>">
+    <body class="<?= $body['class'] ?> app">
 
         <?= $this->inc('http/html/header.inc.php') ?>
