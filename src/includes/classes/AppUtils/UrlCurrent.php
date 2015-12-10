@@ -42,11 +42,8 @@ class UrlCurrent extends Classes\AbsBase
         if (!is_null($url = &$this->cacheKey(__FUNCTION__, $canonical))) {
             return $url; // Cached this already.
         }
-        $url = $this->scheme().'://'.$this->host().$this->uri();
+        $url = $this->scheme().'://'.$this->host().$this->uri($canonical);
 
-        if ($canonical) { // Strip it down.
-            $url = preg_split('/[?#]/', $url, 2)[0];
-        }
         return $url;
     }
 
@@ -125,16 +122,21 @@ class UrlCurrent extends Classes\AbsBase
      *
      * @since 150424 Initial release.
      *
+     * @param bool $canonical Canonical?
+     *
      * @return string Current URI; with a leading `/`.
      */
-    public function uri(): string
+    public function uri(bool $canonical = false): string
     {
-        if (!is_null($uri = &$this->cacheKey(__FUNCTION__))) {
+        if (!is_null($uri = &$this->cacheKey(__FUNCTION__, $canonical))) {
             return $uri; // Cached this already.
         }
         $uri = $_SERVER['REQUEST_URI'];
         $uri = '/'.$this->Utils->Trim->l($uri, '/');
 
+        if ($canonical) { // Strip query/frag.
+            $uri = preg_split('/[?#]/u', $uri, 2)[0];
+        }
         return $uri;
     }
 
@@ -195,20 +197,20 @@ class UrlCurrent extends Classes\AbsBase
         }
         if (!empty($_SERVER['SERVER_PORT'])) {
             if ((int) $_SERVER['SERVER_PORT'] === 443) {
-                return ($is = true);
+                return $is = true;
             }
         }
         if (!empty($_SERVER['HTTPS'])) {
             if (filter_var($_SERVER['HTTPS'], FILTER_VALIDATE_BOOLEAN)) {
-                return ($is = true);
+                return $is = true;
             }
         }
         if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
             if ($this->Utils->StrCaseCmp($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0) {
-                return ($is = true);
+                return $is = true;
             }
         }
-        return ($is = false);
+        return $is = false;
     }
 
     /**
@@ -224,10 +226,10 @@ class UrlCurrent extends Classes\AbsBase
             return $is; // Cached this already.
         }
         if (defined('LOCALHOST') && LOCALHOST) {
-            return ($is = true);
+            return $is = true;
         } elseif (preg_match('/(?:\b(?:localhost|127\.0\.0\.1)\b|\.vm)$/ui', $this->host())) {
-            return ($is = true);
+            return $is = true;
         }
-        return ($is = false);
+        return $is = false;
     }
 }

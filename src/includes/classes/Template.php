@@ -15,6 +15,7 @@ class Template extends AbsBase
 {
     protected $file;
     protected $parents;
+    protected $parent_vars;
     protected $current_vars;
 
     /**
@@ -22,11 +23,16 @@ class Template extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @param string $file    Template file.
-     * @param array  $parents Parent template files.
+     * @param string $file        Template file.
+     * @param array  $parents     Parent template files.
+     * @param array  $parent_vars Parent template vars.
      */
-    public function __construct(App $App, string $file, array $parents = [])
-    {
+    public function __construct(
+        App $App,
+        string $file,
+        array $parents = [],
+        array $parent_vars = []
+    ) {
         parent::__construct($App);
 
         if (!$file || !is_file($file)) {
@@ -34,6 +40,7 @@ class Template extends AbsBase
         }
         $this->file         = $file;
         $this->parents      = $parents;
+        $this->parent_vars  = $parent_vars;
         $this->current_vars = [];
     }
 
@@ -72,28 +79,89 @@ class Template extends AbsBase
      *
      * @return array Current vars.
      */
-    public function setVars(array $defaults, array ...$vars): array
+    protected function setVars(array $defaults, array ...$vars): array
     {
         return $this->current_vars = array_replace_recursive($defaults, ...$vars);
     }
 
     /**
-     * Include a child template.
+     * Get a child template.
      *
      * @since 15xxxx Initial release.
      *
      * @param string $file Relative to templates dir.
+     * @param array  $vars Template vars for the include.
      * @param string $dir  From a specific directory?
      *
      * @return string Parsed template contents.
      */
-    public function inc(string $file, string $dir = ''): string
+    protected function get(string $file, array $vars = [], string $dir = ''): string
     {
-        if (!preg_match('/\.inc\.[^.]+$/u', $file)) {
-            throw new Exception('Includes must end w/ `.inc.[ext]` please.');
-        }
-        $Template = $this->Utils->Template->get($file, $dir, array_merge($this->parents, [$this->file]));
+        $parents     = array_merge($this->parents, [$this->file]);
+        $parent_vars = array_merge($this->parent_vars, [$this->file => &$this->current_vars]);
+        $Template    = $this->Utils->Template->get($file, $dir, $parents, $parent_vars);
 
-        return $Template->parse($this->current_vars);
+        if (isset($this->current_vars[$file])) {
+            $vars = array_replace_recursive($this->current_vars[$file], $vars);
+        }
+        return $Template->parse($vars);
+    }
+
+    /**
+     * Has a parent template?
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string $file Relative to templates dir.
+     *
+     * @return bool True if child has the parent template file.
+     */
+    protected function hasParent(string $file): bool
+    {
+        return in_array($file, $this->parents, true);
+    }
+
+    /**
+     * Parent template vars.
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param string $file Relative to templates dir.
+     *
+     * @return array Parent template vars.
+     */
+    protected function parentVars(string $file): array
+    {
+        return $this->parent_vars[$file] ?? [];
+    }
+
+    /**
+     * Checked?
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param mixed $a Input variable a.
+     * @param mixed $b Input variable b.
+     *
+     * @return string ` checked` if true.
+     */
+    protected function checked($a, $b)
+    {
+        return (string) $a === (string) $b ? ' checked' : '';
+    }
+
+    /**
+     * Selected?
+     *
+     * @since 15xxxx Initial release.
+     *
+     * @param mixed $a Input variable a.
+     * @param mixed $b Input variable b.
+     *
+     * @return string ` selected` if true.
+     */
+    protected function selected($a, $b)
+    {
+        return (string) $a === (string) $b ? ' selected' : '';
     }
 }

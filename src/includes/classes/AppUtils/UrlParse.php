@@ -30,16 +30,19 @@ class UrlParse extends Classes\AbsBase
 
         if ($component > -1) {
             if (${'//'} && $component === PHP_URL_SCHEME) {
-                return ($part = '//');
+                return $part = '//';
             }
-            return ($part = parse_url($url_uri_qsl, $component));
+            return $part = parse_url($url_uri_qsl, $component);
         } else {
             if (!is_array($parts = parse_url($url_uri_qsl))) {
-                return ($parts = []);
+                return $parts = [];
             }
             if (${'//'}) {
                 $parts['scheme'] = '//';
             }
+            $parts['full']      = $url_uri_qsl;
+            $parts['canonical'] = preg_split('/[?#]/u', $url_uri_qsl, 2)[0];
+
             return $parts;
         }
     }

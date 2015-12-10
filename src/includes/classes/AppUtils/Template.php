@@ -19,14 +19,19 @@ class Template extends Classes\AbsBase
      *
      * @since 151121 Template utilities.
      *
-     * @param string $file    Relative to templates dir.
-     * @param string $dir     From a specific directory?
-     * @param array  $parents Parent template files.
+     * @param string $file        Relative to templates dir.
+     * @param string $dir         From a specific directory?
+     * @param array  $parents     Parent template files.
+     * @param array  $parent_vars Parent template vars.
      *
      * @return Classes\Template Template instance.
      */
-    public function get(string $file, string $dir = '', array $parents = []): Classes\Template
-    {
+    public function get(
+        string $file,
+        string $dir = '',
+        array $parents = [],
+        array $parent_vars = []
+    ): Classes\Template {
         if ($dir === 'core') {
             $dir = $this->¤core_dir.'/src/includes/templates';
         } elseif (!$dir && $this->App->Config->fs_paths['templates_dir']) {
@@ -42,6 +47,6 @@ class Template extends Classes\AbsBase
         } else {
             $file = $this->¤core_dir.'/src/includes/templates/'.$file;
         }
-        return $this->App->Di->get(Classes\Template::class, compact('file', 'parents'));
+        return $this->App->Di->get(Classes\Template::class, compact('file', 'parents', 'parent_vars'));
     }
 }

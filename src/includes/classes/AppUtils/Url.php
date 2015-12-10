@@ -40,6 +40,26 @@ class Url extends Classes\AbsBase implements Interfaces\UrlConstants
     }
 
     /**
+     * Build app core URL.
+     *
+     * @since 151121 URL utilities.
+     *
+     * @param string $uri        URI to append.
+     * @param string $scheme     Specific scheme?
+     * @param bool   $cdn_filter CDN filter?
+     *
+     * @return string Output URL.
+     */
+    public function toAppCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
+    {
+        if ($this->¤core_dir_is_vendor) {
+            $uri = $uri ? $this->Utils->Trim->l($uri, '/') : '';
+            $uri = '/vendor/websharks/core/src/'.$uri;
+        }
+        return $this->toApp($uri, $scheme, $cdn_filter);
+    }
+
+    /**
      * Build URL w/ current host.
      *
      * @since 151121 URL utilities.
@@ -50,7 +70,7 @@ class Url extends Classes\AbsBase implements Interfaces\UrlConstants
      *
      * @return string Output URL w/ current host.
      */
-    public function toCur(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
+    public function toCurrent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
         static $checked_cli = false;
 
