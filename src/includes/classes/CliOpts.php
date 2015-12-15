@@ -2,7 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Classes\Utils;
+use WebSharks\Core\Functions as c;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -19,6 +20,13 @@ use GetOptionKit\OptionPrinter\ConsoleOptionPrinter;
  */
 class CliOpts extends AbsBase
 {
+    /**
+     * Options.
+     *
+     * @since 15xxxx
+     *
+     * @type OptionCollection
+     */
     protected $OptionCollection;
 
     /**
@@ -30,7 +38,7 @@ class CliOpts extends AbsBase
     {
         parent::__construct($App);
 
-        if (!$this->Utils->Cli->is()) {
+        if (!c\is_cli()) {
             throw new Exception('Requires CLI mode.');
         }
         $this->OptionCollection = new OptionCollection();

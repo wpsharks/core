@@ -2,7 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Classes\Utils;
+use WebSharks\Core\Functions as c;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -45,12 +46,12 @@ class AppUtils extends AbsCore
      */
     public function __get(string $property)
     {
-        if (class_exists($this->App->ns.'\\AppUtils\\'.$property)) {
-            $utility = $this->App->Di->get($this->App->ns.'\\AppUtils\\'.$property);
+        if (class_exists($this->App->ns.'\\Utils\\'.$property)) {
+            $utility = $this->App->Di->get($this->App->ns.'\\Utils\\'.$property);
             $this->overload((object) [$property => $utility], true);
             return $utility;
-        } elseif (class_exists(__NAMESPACE__.'\\AppUtils\\'.$property)) {
-            $utility = $this->App->Di->get(__NAMESPACE__.'\\AppUtils\\'.$property);
+        } elseif (class_exists(__NAMESPACE__.'\\Utils\\'.$property)) {
+            $utility = $this->App->Di->get(__NAMESPACE__.'\\Utils\\'.$property);
             $this->overload((object) [$property => $utility], true);
             return $utility;
         }
@@ -71,12 +72,12 @@ class AppUtils extends AbsCore
     {
         if (isset($this->¤¤overload[$method])) {
             return $this->¤¤overload[$method](...$args);
-        } elseif (class_exists($this->App->ns.'\\AppUtils\\'.$method)) {
-            $utility = $this->App->Di->get($this->App->ns.'\\AppUtils\\'.$method);
+        } elseif (class_exists($this->App->ns.'\\Utils\\'.$method)) {
+            $utility = $this->App->Di->get($this->App->ns.'\\Utils\\'.$method);
             $this->overload((object) [$method => $utility], true);
             return $utility(...$args);
-        } elseif (class_exists(__NAMESPACE__.'\\AppUtils\\'.$method)) {
-            $utility = $this->App->Di->get(__NAMESPACE__.'\\AppUtils\\'.$method);
+        } elseif (class_exists(__NAMESPACE__.'\\Utils\\'.$method)) {
+            $utility = $this->App->Di->get(__NAMESPACE__.'\\Utils\\'.$method);
             $this->overload((object) [$method => $utility], true);
             return $utility(...$args);
         }

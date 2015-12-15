@@ -2,11 +2,6 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
-use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\AppUtils;
-use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Traits;
-
 /**
  * URL-related constants.
  *
@@ -14,24 +9,6 @@ use WebSharks\Core\Traits;
  */
 interface UrlConstants
 {
-    /**
-     * Indicates `RFC1738`.
-     *
-     * @since 150424 Initial release.
-     *
-     * @type string Indicates `urlencode()`.
-     */
-    const URL_RFC1738 = 'url_rfc1738';
-
-    /**
-     * Indicates `RFC3986`.
-     *
-     * @since 150424 Initial release.
-     *
-     * @type string Indicates `rawurlencode()`.
-     */
-    const URL_RFC3986 = 'url_rfc3986';
-
     /**
      * Regex matches a `[scheme:]//`.
      *

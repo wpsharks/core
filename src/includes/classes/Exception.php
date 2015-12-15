@@ -2,7 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Classes\Utils;
+use WebSharks\Core\Functions as c;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 

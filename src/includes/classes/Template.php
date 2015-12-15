@@ -2,7 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Classes\Utils;
+use WebSharks\Core\Functions as c;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -13,9 +14,49 @@ use WebSharks\Core\Traits;
  */
 class Template extends AbsBase
 {
+    /**
+     * Directory.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    protected $dir;
+
+    /**
+     * File path.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
     protected $file;
+
+    /**
+     * Parent files.
+     *
+     * @since 15xxxx
+     *
+     * @type array
+     */
     protected $parents;
+
+    /**
+     * Parent vars.
+     *
+     * @since 15xxxx
+     *
+     * @type array
+     */
     protected $parent_vars;
+
+    /**
+     * Current vars.
+     *
+     * @since 15xxxx
+     *
+     * @type array
+     */
     protected $current_vars;
 
     /**
@@ -23,21 +64,33 @@ class Template extends AbsBase
      *
      * @since 15xxxx Initial release.
      *
+     * @param string $dir         Template dir.
      * @param string $file        Template file.
      * @param array  $parents     Parent template files.
      * @param array  $parent_vars Parent template vars.
      */
     public function __construct(
         App $App,
+        string $dir,
         string $file,
         array $parents = [],
         array $parent_vars = []
     ) {
         parent::__construct($App);
 
-        if (!$file || !is_file($file)) {
-            throw new Exception('Missing template file.');
+        $dir  = c\mb_rtrim($dir, '/');
+        $file = c\mb_trim($file, '/');
+
+        if (!$dir) { // Use default templates directory?
+            $dir = $this->App->Config->fs_paths['templates_dir'];
         }
+        if (!$dir || $dir === 'core' || ($file && !is_file($dir.'/'.$file))) {
+            $dir = $this->App->core_dir.'/src/includes/templates';
+        }
+        if (!$dir || !$file) { // Empty?
+            throw new Exception('Empty arg(s).');
+        }
+        $this->dir          = $dir;
         $this->file         = $file;
         $this->parents      = $parents;
         $this->parent_vars  = $parent_vars;
@@ -62,10 +115,11 @@ class Template extends AbsBase
 
         unset($¤this, $¤vars['¤this'], $¤vars['this']);
         unset($¤vars['¤defaults'], $¤vars['¤vars']);
+
         $this->current_vars = $¤vars;
 
-        ob_start();
-        require $this->file;
+        ob_start(); // Output buffer.
+        require $this->dir.'/'.$this->file;
         return ob_get_clean();
     }
 
@@ -99,9 +153,15 @@ class Template extends AbsBase
     {
         $parents     = array_merge($this->parents, [$this->file]);
         $parent_vars = array_merge($this->parent_vars, [$this->file => &$this->current_vars]);
-        $Template    = $this->Utils->Template->get($file, $dir, $parents, $parent_vars);
+        $Template    = c\get_template($file, $dir, $parents, $parent_vars);
 
-        if (isset($this->current_vars[$file])) {
+        foreach (array_reverse($this->parent_vars, true) as $_parent_file => $_parent_vars) {
+            if (isset($_parent_vars[$file]) && is_array($_parent_vars[$file])) {
+                $vars = array_replace_recursive($_parent_vars[$file], $vars);
+            } // Merge those from parents who have file-specific vars.
+        } // unset($_parent_file, $_parent_vars); // Housekeeping.
+
+        if (isset($this->current_vars[$file]) && is_array($this->current_vars[$file])) {
             $vars = array_replace_recursive($this->current_vars[$file], $vars);
         }
         return $Template->parse($vars);
@@ -133,35 +193,5 @@ class Template extends AbsBase
     protected function parentVars(string $file): array
     {
         return $this->parent_vars[$file] ?? [];
-    }
-
-    /**
-     * Checked?
-     *
-     * @since 15xxxx Initial release.
-     *
-     * @param mixed $a Input variable a.
-     * @param mixed $b Input variable b.
-     *
-     * @return string ` checked` if true.
-     */
-    protected function checked($a, $b)
-    {
-        return (string) $a === (string) $b ? ' checked' : '';
-    }
-
-    /**
-     * Selected?
-     *
-     * @since 15xxxx Initial release.
-     *
-     * @param mixed $a Input variable a.
-     * @param mixed $b Input variable b.
-     *
-     * @return string ` selected` if true.
-     */
-    protected function selected($a, $b)
-    {
-        return (string) $a === (string) $b ? ' selected' : '';
     }
 }

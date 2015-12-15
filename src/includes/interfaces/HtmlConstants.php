@@ -2,11 +2,6 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
-use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\AppUtils;
-use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Traits;
-
 /**
  * HTML-related constants.
  *

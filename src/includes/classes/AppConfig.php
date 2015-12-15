@@ -2,7 +2,8 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Classes\Utils;
+use WebSharks\Core\Functions as c;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -27,9 +28,10 @@ class AppConfig extends AbsCore
      *
      * @since 15xxxx Initial release.
      *
-     * @param array $instance Instance properties.
+     * @param array $instance_base Instance base.
+     * @param array $instance      Instance args (highest precedence).
      */
-    public function __construct(App $App, array $instance = [])
+    public function __construct(App $App, array $instance_base = [], array $instance = [])
     {
         parent::__construct();
 
@@ -37,18 +39,20 @@ class AppConfig extends AbsCore
 
         # Instance base (i.e., default config).
 
-        $instance_base = [
-            'debug' => false,
+        $default_instance_base = [
+            'debug'             => false,
+            'handle_exceptions' => true,
 
             'di' => [
                 'default_rule' => [
                     'new_instances' => [
                         self::class,
                         AppDi::class,
-                        AppUtils::class,
+                        Utils::class,
                         CliOpts::class,
                         Exception::class,
                         Template::class,
+                        Tokenizer::class,
                     ],
                 ],
             ],
@@ -99,11 +103,16 @@ class AppConfig extends AbsCore
                     'cdn_s3' => '',
                 ],
                 'default_scheme' => '',
+                'sig_key'        => '',
             ],
             'fs_paths' => [
                 'cache_dir'     => '',
                 'templates_dir' => '',
                 'config_file'   => '',
+            ],
+            'fs_permissions' => [
+                'transient_dirs' => 0777,
+                // `0777` = `511` integer.
             ],
             'i18n' => [
                 'locales'     => ['en_US.UTF-8', 'C'],
@@ -122,12 +131,18 @@ class AppConfig extends AbsCore
                 'smtp_username' => '',
                 'smtp_password' => '',
             ],
-            'aws' => [
-                'access_key' => '',
-                'secret_key' => '',
+            'cookies' => [
+                'key' => '',
             ],
             'hash_ids' => [
                 'key' => '',
+            ],
+            'passwords' => [
+                'key' => '',
+            ],
+            'aws' => [
+                'access_key' => '',
+                'secret_key' => '',
             ],
             'embedly' => [
                 'api_key' => '',
@@ -136,32 +151,31 @@ class AppConfig extends AbsCore
                 'api_key' => '',
             ],
         ];
-        # Merge instance base w/ constructor instance.
+        # Merge instance bases together now.
 
-        $instance = $config = static::merge($instance_base, $instance);
+        $instance_base = $this->merge($default_instance_base, $instance_base);
 
         # Merge a possible JSON configuration file also.
+        // @TODO Store config in memory to avoid repeated disk reads.
 
-        if ($instance['fs_paths']['config_file']) {
-            if (!is_file($instance['fs_paths']['config_file'])) {
-                throw new Exception(sprintf('Missing config file: `%1$s`.', $instance['fs_paths']['config_file']));
-            } elseif (!is_array($config = json_decode(file_get_contents($instance['fs_paths']['config_file']), true))) {
-                throw new Exception(sprintf('Invalid config file: `%1$s`.', $instance['fs_paths']['config_file']));
+        if (($config_file = (string) ($instance['fs_paths']['config_file'] ?? ''))) {
+            if (!is_file($config_file)) {
+                throw new Exception(sprintf('Missing config file: `%1$s`.', $config_file));
+            } elseif (!is_array($config = json_decode(file_get_contents($config_file), true))) {
+                throw new Exception(sprintf('Invalid config file: `%1$s`.', $config_file));
             }
-            $config = static::merge($instance, $config, true);
+            $config = $this->merge($instance_base, $config, true);
+            $config = $this->merge($config, $instance);
+        } else {
+            $config = $this->merge($instance_base, $instance);
         }
         # Fill replacement codes and overload the config properties.
 
-        $this->overload(($config = (object) $this->fillReplacementCodes($config)), true);
-
-        # Initialize.
-
-        $this->maybeDebug();
-        $this->maybeSetLocales();
+        $this->overload((object) $this->fillReplacementCodes($config), true);
     }
 
     /**
-     * Merge config into a base.
+     * Merge config arrays.
      *
      * @since 15xxxx Initial release.
      *
@@ -170,10 +184,8 @@ class AppConfig extends AbsCore
      * @param bool  $is_config Is config file?
      *
      * @return array The resuling array after merging.
-     *
-     * @note This is static so that app extenders can use it too.
      */
-    public static function merge(array $base, array $merge, bool $is_config = false): array
+    protected function merge(array $base, array $merge, bool $is_config = false): array
     {
         if ($is_config) { // Disallow these instance-only keys.
             unset($merge['di'], $merge['fs_paths']['config_file']);
@@ -182,35 +194,35 @@ class AppConfig extends AbsCore
             $base_di_default_rule_new_instances = $base['di']['default_rule']['new_instances'];
         } // Save new instances before emptying numeric arrays.
 
-        $base = static::mergeMaybeEmptyNumericArrays($base, $merge);
+        $base = $this->maybeEmptyNumericArrays($base, $merge); // Maybe empty numeric arrays.
 
         if (isset($base_di_default_rule_new_instances, $merge['di']['default_rule']['new_instances'])) {
             $merge['di']['default_rule']['new_instances'] = array_merge($base_di_default_rule_new_instances, $merge['di']['default_rule']['new_instances']);
         }
-        return ($merged = array_replace_recursive($base, $merge)); // See: <http://php.net/manual/en/function.array-replace-recursive.php>
+        return $merged = array_replace_recursive($base, $merge);
     }
 
     /**
-     * Empty numeric arrays being extended.
+     * Empty numeric arrays.
      *
      * @since 15xxxx Initial release.
      *
      * @param array $base  Base array.
      * @param array $merge Array to merge.
      *
-     * @return array `$base` w/ empty numeric arrays being extended by `$merge`.
+     * @return array The `$base` w/ possibly-empty numeric arrays.
      */
-    protected static function mergeMaybeEmptyNumericArrays(array $base, array $merge): array
+    protected function maybeEmptyNumericArrays(array $base, array $merge): array
     {
         if (!$merge) { // Save time. Merge is empty?
             return $base; // Nothing to do here.
         }
         foreach ($base as $_key => &$_value) {
-            if (array_key_exists($_key, $merge) && is_array($_value)) {
+            if (is_array($_value) && array_key_exists($_key, $merge)) {
                 if (!$_value || $_value === array_values($_value)) {
-                    $_value = []; // Replace all keys in numeric arrays.
-                } elseif ($merge[$_key] && is_array($merge[$_key])) { // Recursive.
-                    $_value = static::mergeMaybeEmptyNumericArrays($_value, $merge[$_key]);
+                    $_value = []; // Empty numeric arrays.
+                } elseif ($merge[$_key] && is_array($merge[$_key])) {
+                    $_value = $this->maybeEmptyNumericArrays($_value, $merge[$_key]);
                 }
             }
         } // unset($_key, $_value); // Housekeeping.
@@ -218,11 +230,11 @@ class AppConfig extends AbsCore
     }
 
     /**
-     * Maybe setup debugging.
+     * Fill replacement codes.
      *
      * @since 15xxxx Initial release.
      *
-     * @param mixed Input value to iterate.
+     * @param mixed $value Input value.
      *
      * @return mixed string|array|object Output value.
      */
@@ -234,46 +246,11 @@ class AppConfig extends AbsCore
             } // unset($_key, $_value); // Housekeeping.
         } elseif (is_string($value)) {
             $value = str_replace(
-                ['%%app_ns%%', '%%app_dir%%'],
-                [$this->App->ns, $this->App->dir],
+                ['%%app_ns%%', '%%app_dir%%', '%%core_dir%%'],
+                [$this->App->ns, $this->App->dir, $this->App->core_dir],
                 $value
             );
         }
-        return $value; // With replacement codes filled now.
-    }
-
-    /**
-     * Maybe setup debugging.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected function maybeDebug()
-    {
-        if ($this->debug) {
-            // All errros.
-            error_reporting(E_ALL);
-
-            // Display errors.
-            ini_set('display_errors', 'yes');
-
-            // Fail softly, because it can only go from `0` to `1`.
-            // If the current value is `-1` this will trigger a warning.
-            @ini_set('zend.assertions', '1');
-        }
-    }
-
-    /**
-     * Maybe setup locales.
-     *
-     * @since 15xxxx Initial release.
-     */
-    protected function maybeSetLocales()
-    {
-        if ($this->i18n['locales']) {
-
-            // Try locale codes in a specific order.
-            // See: <http://php.net/manual/en/function.setlocale.php>
-            setlocale(LC_ALL, $this->i18n['locales']);
-        }
+        return $value;
     }
 }

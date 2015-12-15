@@ -1,0 +1,66 @@
+<?php
+declare (strict_types = 1);
+namespace WebSharks\Core\Classes\Utils;
+
+use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Functions as c;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
+
+/**
+ * Multibyte `substr_replace()`.
+ *
+ * @since 15xxxx Enhancing multibyte support.
+ */
+class SubstrReplace extends Classes\AbsBase
+{
+    /**
+     * Multibyte `substr_replace()`.
+     *
+     * @since 15xxxx Enhancing multibyte.
+     *
+     * @param mixed    $value   Input value.
+     * @param string   $replace Replacement string.
+     * @param int      $start   Substring start position.
+     * @param int|null $length  Substring length.
+     *
+     * @return string|array|object Output value.
+     *
+     * @see http://php.net/manual/en/function.substr-replace.php
+     *
+     * @warning Does NOT support mixed `$replace`, `$start`, `$length` params like `substr_replace()` does.
+     */
+    public function __invoke($value, string $replace, int $start, int $length = null): string
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->__invoke($_value, $replace, $start, $length);
+            } // unset($_key, $_value);
+            return $value;
+        }
+        $string = (string) $value;
+
+        if (!isset($string[0])) {
+            return $string; // Nothing to do.
+        }
+        $mb_strlen = mb_strlen($string);
+
+        if ($start < 0) {
+            $start = max(0, $mb_strlen + $start);
+        } elseif ($start > $mb_strlen) {
+            $start = $mb_strlen;
+        }
+        if ($length < 0) {
+            $length = max(0, $mb_strlen - $start + $length);
+        } elseif (!isset($length) || $length > $mb_strlen) {
+            $length = $mb_strlen;
+        }
+        if ($start + $length > $mb_strlen) {
+            $length = $mb_strlen - $start;
+        }
+        return mb_substr($string, 0, $start).
+                $replace.// The replacement string.
+            mb_substr($string, $start + $length, $mb_strlen - $start - $length);
+    }
+}

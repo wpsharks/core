@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\AppUtils;
+use WebSharks\Core\Classes\Utils;
 use WebSharks\Core\Classes\Exception;
 
 /*
@@ -14,16 +14,18 @@ $¤defaults = [
 
     'http/html/header.php' => [
         'head' => [
-            'title' => $this->__('Internal Server Error'),
+            'title' => c\__('Internal Server Error'),
         ],
     ],
 ];
 extract($this->setVars($¤defaults, $¤vars));
 /*
- * Output template contents.
+ * Output template contents. @TODO Improve and test this.
  */ ?>
 <?= $this->get('http/html/header.php') ?>
 
-<img src="<?= $this->escUrl($this->Utils->Url->toAppCore('/client-s/http/status/500.png')) ?>" />
+<p>
+    <?= c\__('Internal server error. Please contact us for assistance.'); ?>
+</p>
 
 <?= $this->get('http/html/footer.php') ?>

@@ -24,13 +24,62 @@
   },
 
   "require": {
-    "php": ">=7.0.0-RC7",
-    "ext-openssl": "*",
-    "ext-curl": "*",
+    "php-64bit": ">=7.0.0",
+
+    "ext-SPL": "*",
+    "ext-Phar": "*",
+    "ext-Reflection": "*",
+
+    "ext-ctype": "*",
+    "ext-date": "*",
+    "ext-fileinfo": "*",
+    "ext-filter": "*",
+    "ext-gd": "*",
+    "ext-hash": "*",
+    "ext-json": "*",
     "ext-mbstring": "*",
+    "ext-mcrypt": "*",
+    "ext-posix": "*",
+    "ext-session": "*",
+    "ext-tokenizer": "*",
+    "ext-zlib": "*",
+
+    "lib-pcre": "*",
+    "ext-pcre": "*",
+
+    "lib-openssl": "*",
+    "ext-openssl": "*",
+
+    "lib-curl": "*",
+    "ext-curl": "*",
+
+    "lib-ICU": "*",
+    "ext-intl": "*",
+
+    "lib-iconv": "*",
+    "ext-iconv": "*",
+
+    "ext-PDO": "*",
+    "ext-mysqlnd": "*",
+    "ext-pdo_mysql": "*",
+
+    "lib-libxml": "*",
+    "ext-dom": "*",
+    "ext-xml": "*",
+    "ext-libxml": "*",
+    "ext-xmlreader": "*",
+    "ext-xmlwriter": "*",
+    "ext-SimpleXML": "*",
+
     "websharks/dicer": "151124"
   },
   "require-dev": {
+    "ext-Zend-OPcache": "*",
+    "ext-zip": "*",
+    "ext-gmp": "*",
+    "ext-bcmath": "*",
+    "ext-pspell": "*",
+
     "ramsey/uuid": "3.*",
     "ryakad/pandoc-php": "1.*",
     "aws/aws-sdk-php": "2.*",
@@ -45,6 +94,12 @@
     "embedly/embedly-php": "0.*"
   },
   "suggest": {
+    "ext-Zend-OPcache": "* :: Highly recommended for faster processing.",
+    "ext-zip": "* :: Required by routines that deal with ZIP files.",
+    "ext-gmp": "* :: Required by routines that deal with large numbers.",
+    "ext-bcmath": "* :: Required by routines that deal with large numbers.",
+    "ext-pspell": "* :: Required by routines that deal with spellcheck.",
+
     "ramsey/uuid": "3.* :: Required by routines that generate UUIDs.",
     "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc.",
     "aws/aws-sdk-php": "2.* :: Required by routines that make calls to the AWS API.",
@@ -66,7 +121,8 @@
       "WebSharks\\Core\\Classes\\": "src/includes/classes",
       "WebSharks\\Core\\Interfaces\\": "src/includes/interfaces",
       "WebSharks\\Core\\Traits\\": "src/includes/traits"
-    }
+    },
+    "files": ["src/includes/functions/_load.php"]
   },
 
   "config": {

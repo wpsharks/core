@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "037832ee62898f83643e45ee06633f25",
-    "content-hash": "619aecb4532acff35b8d102a3e39a95e",
+    "hash": "47ed954506b89bd0a7e0ba9c138cf54e",
+    "content-hash": "422aa65802e73f9bd117db8682b387e0",
     "packages": [
         {
             "name": "websharks/dicer",
@@ -722,16 +722,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.7",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "7e2f9c31645680026c2372edf66f863fc7757af5"
+                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/7e2f9c31645680026c2372edf66f863fc7757af5",
-                "reference": "7e2f9c31645680026c2372edf66f863fc7757af5",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a5eb815363c0388e83247e7e9853e5dbc14999cc",
+                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc",
                 "shasum": ""
             },
             "require": {
@@ -739,10 +739,10 @@
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.0,>=2.0.5",
-                "symfony/dependency-injection": "~2.6",
-                "symfony/expression-language": "~2.6",
-                "symfony/stopwatch": "~2.3"
+                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+                "symfony/dependency-injection": "~2.6|~3.0.0",
+                "symfony/expression-language": "~2.6|~3.0.0",
+                "symfony/stopwatch": "~2.3|~3.0.0"
             },
             "suggest": {
                 "symfony/dependency-injection": "",
@@ -751,7 +751,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -778,7 +778,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:10:21"
+            "time": "2015-10-30 20:15:42"
         },
         {
             "name": "symfony/yaml",
@@ -836,10 +836,49 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0.0-RC7",
+        "php-64bit": ">=7.0.0",
+        "ext-spl": "*",
+        "ext-phar": "*",
+        "ext-reflection": "*",
+        "ext-ctype": "*",
+        "ext-date": "*",
+        "ext-fileinfo": "*",
+        "ext-filter": "*",
+        "ext-gd": "*",
+        "ext-hash": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-mcrypt": "*",
+        "ext-posix": "*",
+        "ext-session": "*",
+        "ext-tokenizer": "*",
+        "ext-zlib": "*",
+        "lib-pcre": "*",
+        "ext-pcre": "*",
+        "lib-openssl": "*",
         "ext-openssl": "*",
+        "lib-curl": "*",
         "ext-curl": "*",
-        "ext-mbstring": "*"
+        "lib-icu": "*",
+        "ext-intl": "*",
+        "lib-iconv": "*",
+        "ext-iconv": "*",
+        "ext-pdo": "*",
+        "ext-mysqlnd": "*",
+        "ext-pdo_mysql": "*",
+        "lib-libxml": "*",
+        "ext-dom": "*",
+        "ext-xml": "*",
+        "ext-libxml": "*",
+        "ext-xmlreader": "*",
+        "ext-xmlwriter": "*",
+        "ext-simplexml": "*"
     },
-    "platform-dev": []
+    "platform-dev": {
+        "ext-zend-opcache": "*",
+        "ext-zip": "*",
+        "ext-gmp": "*",
+        "ext-bcmath": "*",
+        "ext-pspell": "*"
+    }
 }

@@ -6,9 +6,9 @@ use WebSharks\Core\Classes;
 
 require_once dirname(__FILE__, 3).'/src/includes/stub.php';
 
-$App = new Classes\App([
+$App = new Classes\App([], [
     'debug'    => true,
-    'fs_paths' => [
+    'fs_paths' => [ // Use config. file.
         'config_file' => dirname(__FILE__, 3).'/assets/.~config.json',
     ],
 ]);
