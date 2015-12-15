@@ -84,7 +84,7 @@ class App extends AbsCore
      *
      * @type string Version.
      */
-    const VERSION = '151126'; //v//
+    const VERSION = '151215'; //v//
 
     /**
      * Constructor.

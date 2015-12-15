@@ -447,16 +447,16 @@
         },
         {
             "name": "lusitanian/oauth",
-            "version": "v0.8.3",
+            "version": "v0.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
-                "reference": "d47849e3838a7ea738111e3f1d7c810cc950539a"
+                "reference": "798260e55ac994636a9fa8b61adfdb67aab389c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/d47849e3838a7ea738111e3f1d7c810cc950539a",
-                "reference": "d47849e3838a7ea738111e3f1d7c810cc950539a",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/798260e55ac994636a9fa8b61adfdb67aab389c9",
+                "reference": "798260e55ac994636a9fa8b61adfdb67aab389c9",
                 "shasum": ""
             },
             "require": {
@@ -510,7 +510,7 @@
                 "oauth",
                 "security"
             ],
-            "time": "2015-11-17 21:54:31"
+            "time": "2015-12-10 05:40:17"
         },
         {
             "name": "michelf/php-markdown",
@@ -782,16 +782,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.7.7",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "4cfcd7a9fceba662b3c036b7d9a91f6197af046c"
+                "reference": "f79824187de95064a2f5038904c4d7f0227fedb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/4cfcd7a9fceba662b3c036b7d9a91f6197af046c",
-                "reference": "4cfcd7a9fceba662b3c036b7d9a91f6197af046c",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/f79824187de95064a2f5038904c4d7f0227fedb5",
+                "reference": "f79824187de95064a2f5038904c4d7f0227fedb5",
                 "shasum": ""
             },
             "require": {
@@ -800,7 +800,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -827,7 +827,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-18 13:41:01"
+            "time": "2015-11-30 12:35:10"
         }
     ],
     "aliases": [],
