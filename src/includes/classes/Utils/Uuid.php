@@ -22,11 +22,24 @@ class Uuid extends Classes\AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @return string Version 1 UUID.
+     * @param bool $optimize Optimize?
+     *
+     * @return string Version 1 UUID (32 bytes optimized).
+     *                Or 36 bytes unoptimized; i.e., w/ dashes.
      */
-    public function v1(): string
+    public function v1(bool $optimize = true): string
     {
-        return UuidGen::uuid1()->toString();
+        $uuid = UuidGen::uuid1()->toString();
+
+        if ($optimize) {
+            // See: <http://jas.xyz/1ODZilT>
+            $uuid = substr($uuid, 14, 4).
+                substr($uuid, 9, 4).
+                substr($uuid, 0, 8).
+                substr($uuid, 19, 4).
+                substr($uuid, 24);
+        }
+        return $uuid; // Possibly optimized now.
     }
 
     /**
@@ -36,12 +49,38 @@ class Uuid extends Classes\AbsBase
      *
      * @param string $namespace  Namespace.
      * @param string $identifier Identifier.
+     * @param bool   $optimize   Optimize?
      *
-     * @return string Version 3 UUID.
+     * @return string Version 3 UUID (32 bytes optimized).
+     *                Or 36 bytes unoptimized; i.e., w/ dashes.
+     *
+     * @note {@link v5()} is a suggested alternative, as this version uses MD5.
      */
-    public function v3(string $namespace, string $identifier): string
+    public function v3(string $namespace, string $identifier, bool $optimize = true): string
     {
-        return UuidGen::uuid3($namespace, $identifier)->toString();
+        switch ($namespace) {
+            case 'dns':
+                $namespace = UuidGen::NAMESPACE_DNS;
+                break; // Stop here.
+
+            case 'url':
+                $namespace = UuidGen::NAMESPACE_URL;
+                break; // Stop here.
+
+            case 'oid':
+                $namespace = UuidGen::NAMESPACE_OID;
+                break; // Stop here.
+
+            case 'x500':
+                $namespace = UuidGen::NAMESPACE_X500;
+                break; // Stop here.
+
+            default:
+                throw new Exception('Invalid namespace.');
+        }
+        $uuid = UuidGen::uuid3($namespace, $identifier)->toString();
+
+        return $optimize ? str_replace('-', '', $uuid) : $uuid;
     }
 
     /**
@@ -49,11 +88,16 @@ class Uuid extends Classes\AbsBase
      *
      * @since 15xxxx Initial release.
      *
-     * @return string Version 4 UUID.
+     * @param bool $optimize Optimize?
+     *
+     * @return string Version 4 UUID (32 bytes optimized).
+     *                Or 36 bytes unoptimized; i.e., w/ dashes.
      */
-    public function v4(): string
+    public function v4(bool $optimize = true): string
     {
-        return UuidGen::uuid4()->toString();
+        $uuid = UuidGen::uuid4()->toString();
+
+        return $optimize ? str_replace('-', '', $uuid) : $uuid;
     }
 
     /**
@@ -63,11 +107,35 @@ class Uuid extends Classes\AbsBase
      *
      * @param string $namespace  Namespace.
      * @param string $identifier Identifier.
+     * @param bool   $optimize   Optimize?
      *
-     * @return string Version 5 UUID.
+     * @return string Version 5 UUID (32 bytes optimized).
+     *                Or 36 bytes unoptimized; i.e., w/ dashes.
      */
-    public function v5(string $namespace, string $identifier): string
+    public function v5(string $namespace, string $identifier, bool $optimize = true): string
     {
-        return UuidGen::uuid5($namespace, $identifier)->toString();
+        switch ($namespace) {
+            case 'dns':
+                $namespace = UuidGen::NAMESPACE_DNS;
+                break; // Stop here.
+
+            case 'url':
+                $namespace = UuidGen::NAMESPACE_URL;
+                break; // Stop here.
+
+            case 'oid':
+                $namespace = UuidGen::NAMESPACE_OID;
+                break; // Stop here.
+
+            case 'x500':
+                $namespace = UuidGen::NAMESPACE_X500;
+                break; // Stop here.
+
+            default:
+                throw new Exception('Invalid namespace.');
+        }
+        $uuid = UuidGen::uuid5($namespace, $identifier)->toString();
+
+        return $optimize ? str_replace('-', '', $uuid) : $uuid;
     }
 }

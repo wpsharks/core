@@ -46,8 +46,8 @@ class AppUtils extends AbsCore
      */
     public function __get(string $property)
     {
-        if (class_exists($this->App->ns.'\\Utils\\'.$property)) {
-            $utility = $this->App->Di->get($this->App->ns.'\\Utils\\'.$property);
+        if (class_exists($this->App->namespace.'\\Utils\\'.$property)) {
+            $utility = $this->App->Di->get($this->App->namespace.'\\Utils\\'.$property);
             $this->overload((object) [$property => $utility], true);
             return $utility;
         } elseif (class_exists(__NAMESPACE__.'\\Utils\\'.$property)) {
@@ -72,8 +72,8 @@ class AppUtils extends AbsCore
     {
         if (isset($this->¤¤overload[$method])) {
             return $this->¤¤overload[$method](...$args);
-        } elseif (class_exists($this->App->ns.'\\Utils\\'.$method)) {
-            $utility = $this->App->Di->get($this->App->ns.'\\Utils\\'.$method);
+        } elseif (class_exists($this->App->namespace.'\\Utils\\'.$method)) {
+            $utility = $this->App->Di->get($this->App->namespace.'\\Utils\\'.$method);
             $this->overload((object) [$method => $utility], true);
             return $utility(...$args);
         } elseif (class_exists(__NAMESPACE__.'\\Utils\\'.$method)) {

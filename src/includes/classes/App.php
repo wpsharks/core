@@ -21,7 +21,16 @@ class App extends AbsCore
      *
      * @type string
      */
-    public $ns;
+    public $namespace;
+
+    /**
+     * Namespace SHA-1.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    public $namespace_sha1;
 
     /**
      * Dir.
@@ -103,8 +112,9 @@ class App extends AbsCore
         $GLOBALS[self::class]       = $this;
         $GLOBALS[$Class->getName()] = $this;
 
-        $this->ns  = $Class->getNamespaceName();
-        $this->dir = dirname($Class->getFileName(), 4);
+        $this->namespace      = $Class->getNamespaceName();
+        $this->namespace_sha1 = sha1($this->namespace);
+        $this->dir            = dirname($Class->getFileName(), 4);
 
         $this->core_dir       = dirname(__FILE__, 4);
         $this->core_is_vendor = mb_stripos($this->core_dir, '/vendor/') !== false;

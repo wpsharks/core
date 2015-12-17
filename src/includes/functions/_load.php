@@ -22,6 +22,7 @@ require_once __DIR__.'/i18n.php';
 require_once __DIR__.'/ips.php';
 require_once __DIR__.'/iterators.php';
 require_once __DIR__.'/markdown.php';
+require_once __DIR__.'/memcache.php';
 require_once __DIR__.'/multibyte.php';
 require_once __DIR__.'/names.php';
 require_once __DIR__.'/oembed.php';

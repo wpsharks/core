@@ -57,7 +57,7 @@ class DirTmp extends Classes\AbsBase
 
         foreach ($possible_dirs as $_key => $_dir) {
             if (($_dir = c\mb_trim((string) $_dir)) && @is_dir($_dir) && @is_writable($_dir)) {
-                $_dir = $_dir.'/'.sha1($this->App->ns); // For this application.
+                $_dir = $_dir.'/'.$this->App->namespace_sha1; // For this application.
                 if (is_dir($_dir) || mkdir($_dir, $permissions, true)) {
                     return $dir = $_dir;
                 }

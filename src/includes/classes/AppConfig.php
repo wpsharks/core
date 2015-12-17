@@ -114,6 +114,17 @@ class AppConfig extends AbsCore
                 'transient_dirs' => 0777,
                 // `0777` = `511` integer.
             ],
+            'memcache' => [
+                'enabled'   => true,
+                'namespace' => 'app',
+                'servers'   => [
+                    [
+                        'host'   => '127.0.0.1',
+                        'port'   => 11211,
+                        'weight' => 0,
+                    ],
+                ],
+            ],
             'i18n' => [
                 'locales'     => ['en_US.UTF-8', 'C'],
                 'text_domain' => '', // Off by default.
@@ -243,11 +254,23 @@ class AppConfig extends AbsCore
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->fillReplacementCodes($_value);
-            } // unset($_key, $_value); // Housekeeping.
-        } elseif (is_string($value)) {
+            } // unset($_key, $_value);
+            return $value;
+        }
+        if ($value && is_string($value)) {
             $value = str_replace(
-                ['%%app_ns%%', '%%app_dir%%', '%%core_dir%%'],
-                [$this->App->ns, $this->App->dir, $this->App->core_dir],
+                [
+                    '%%app_namespace%%',
+                    '%%app_namespace_sha1%%',
+                    '%%app_dir%%',
+                    '%%core_dir%%',
+                ],
+                [
+                    $this->App->namespace,
+                    $this->App->namespace_sha1,
+                    $this->App->dir,
+                    $this->App->core_dir,
+                ],
                 $value
             );
         }
