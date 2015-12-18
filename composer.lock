@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "47ed954506b89bd0a7e0ba9c138cf54e",
+    "hash": "5c8cea435f4872318484c76f22982963",
     "content-hash": "422aa65802e73f9bd117db8682b387e0",
     "packages": [
         {
@@ -626,16 +626,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.0.1",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "3c84b9e2965a5fa666dec8617a3a66a8179c6ca8"
+                "reference": "3cc2dd253e296ce05f99635b2f633048adfbaa96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/3c84b9e2965a5fa666dec8617a3a66a8179c6ca8",
-                "reference": "3c84b9e2965a5fa666dec8617a3a66a8179c6ca8",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/3cc2dd253e296ce05f99635b2f633048adfbaa96",
+                "reference": "3cc2dd253e296ce05f99635b2f633048adfbaa96",
                 "shasum": ""
             },
             "require": {
@@ -692,7 +692,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2015-10-21 16:27:25"
+            "time": "2015-12-17 15:21:44"
         },
         {
             "name": "ryakad/pandoc-php",

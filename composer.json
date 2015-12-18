@@ -119,6 +119,7 @@
   "autoload": {
     "psr-4": {
       "WebSharks\\Core\\Classes\\": "src/includes/classes",
+      "WebSharks\\Core\\Functions\\": "src/includes/functions",
       "WebSharks\\Core\\Interfaces\\": "src/includes/interfaces",
       "WebSharks\\Core\\Traits\\": "src/includes/traits"
     },

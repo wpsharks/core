@@ -131,7 +131,7 @@ class Memcache extends Classes\AbsBase
      *
      * @param string     $primary_key   Primary key.
      * @param string|int $sub_key       Sub-key to set.
-     * @param string     $value         Value to cache.
+     * @param string     $value         Value to cache (1MB max).
      * @param int        $expires_after Expires after (in seconds).
      *
      * @return bool True on success.
