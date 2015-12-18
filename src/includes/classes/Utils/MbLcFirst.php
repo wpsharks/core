@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Enhancing multibyte support.
  */
-class MbLcFirst extends Classes\AbsBase
+class MbLcFirst extends Classes\AppBase
 {
     /**
      * Multibyte `lcfirst()`.

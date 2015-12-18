@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class ReplaceOnce extends Classes\AbsBase
+class ReplaceOnce extends Classes\AppBase
 {
     /**
      * String replace (ONE time) deeply.

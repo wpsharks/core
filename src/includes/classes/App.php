@@ -119,13 +119,16 @@ class App extends AbsCore
         $this->core_dir       = dirname(__FILE__, 4);
         $this->core_is_vendor = mb_stripos($this->core_dir, '/vendor/') !== false;
 
-        $this->Config = new AppConfig($this, $instance_base, $instance);
+        $this->Config = new AppConfig($instance_base, $instance);
+        $this->Di     = new AppDi($this->Config->di['default_rule']);
+        $this->Utils  = new AppUtils(); // Utility class access.
 
-        $this->Di = new AppDi($this->Config->di['default_rule']);
-        $this->Di->addInstances([self::class => $this, $this]);
-
-        $this->Utils = $this->Di->get(AppUtils::class);
-
+        $this->Di->addInstances([
+            self::class => $this,
+            $this, // Extender.
+            $this->Config,
+            $this->Utils,
+        ]);
         $this->maybeDebug();
         $this->maybeSetLocales();
         $this->maybeHandleExceptions();
@@ -139,7 +142,7 @@ class App extends AbsCore
     protected function maybeDebug()
     {
         if ($this->Config->debug) {
-            // All errros.
+            // All errors.
             error_reporting(E_ALL);
 
             // Display errors.

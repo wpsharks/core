@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class ReplaceCodes extends Classes\AbsBase
+class ReplaceCodes extends Classes\AppBase
 {
     /**
      * Fill replacement codes deeply.

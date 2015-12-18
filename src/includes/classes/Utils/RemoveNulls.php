@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151312 Enhance utils.
  */
-class RemoveNulls extends Classes\AbsBase
+class RemoveNulls extends Classes\AppBase
 {
     /**
      * Remove null values.

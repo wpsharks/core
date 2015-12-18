@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Uuid64 extends Classes\AbsBase
+class Uuid64 extends Classes\AppBase
 {
     /**
      * UUID64 validator.

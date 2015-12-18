@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Dump extends Classes\AbsBase
+class Dump extends Classes\AppBase
 {
     /**
      * A better `var_dump()`.

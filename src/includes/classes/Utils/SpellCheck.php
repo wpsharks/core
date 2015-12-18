@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Adding password strength.
  */
-class SpellCheck extends Classes\AbsBase
+class SpellCheck extends Classes\AppBase
 {
     /**
      * Checks spelling.

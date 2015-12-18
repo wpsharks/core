@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class UrlParse extends Classes\AbsBase
+class UrlParse extends Classes\AppBase
 {
     /**
      * Parses a URL.

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx SHA-1 modulus.
  */
-class Sha1Mod extends Classes\AbsBase
+class Sha1Mod extends Classes\AppBase
 {
     /**
      * Total shards.
@@ -29,9 +29,9 @@ class Sha1Mod extends Classes\AbsBase
      *
      * @since 15xxxx SHA-1 modulus.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         $this->total_shards = count($this->App->Config->db_shards['dbs']);
     }

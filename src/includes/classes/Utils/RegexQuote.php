@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class RegexQuote extends Classes\AbsBase
+class RegexQuote extends Classes\AppBase
 {
     /**
      * Quote regex meta chars deeply.

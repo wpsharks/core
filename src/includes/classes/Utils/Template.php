@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151121 Template utilities.
  */
-class Template extends Classes\AbsBase
+class Template extends Classes\AppBase
 {
     /**
      * Gets template.
@@ -34,6 +34,6 @@ class Template extends Classes\AbsBase
         array $parent_vars = []
     ): Classes\Template {
         $args = compact('dir', 'file', 'parents', 'parent_vars');
-        return $this->App->Di->get(Classes\Template::class, $args);
+        return c\di_get(Classes\Template::class, $args);
     }
 }

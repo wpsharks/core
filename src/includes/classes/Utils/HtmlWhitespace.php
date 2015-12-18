@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlWhitespace extends Classes\AbsBase implements Interfaces\HtmlConstants
+class HtmlWhitespace extends Classes\AppBase implements Interfaces\HtmlConstants
 {
     /**
      * Normalizes HTML whitespace deeply.

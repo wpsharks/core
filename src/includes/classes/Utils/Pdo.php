@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Initial release.
  */
-class Pdo extends Classes\AbsBase
+class Pdo extends Classes\AppBase
 {
     /**
      * DB shards.
@@ -56,9 +56,9 @@ class Pdo extends Classes\AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         $this->options = [
             \PDO::ATTR_TIMEOUT => 5,

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Initial release.
  */
-class Serializer extends Classes\AbsBase
+class Serializer extends Classes\AppBase
 {
     /**
      * Marker.

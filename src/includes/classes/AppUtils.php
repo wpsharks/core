@@ -28,11 +28,11 @@ class AppUtils extends AbsCore
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(App $App)
+    public function __construct()
     {
         parent::__construct();
 
-        $this->App = $App;
+        $this->App = $GLOBALS[App::class];
     }
 
     /**

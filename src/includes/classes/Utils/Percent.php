@@ -14,7 +14,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Percentage utils.
  */
-class Percent extends Classes\AbsBase
+class Percent extends Classes\AppBase
 {
     /**
      * Calculates percentage difference.

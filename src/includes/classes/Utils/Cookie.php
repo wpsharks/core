@@ -13,16 +13,16 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Cookie extends Classes\AbsBase
+class Cookie extends Classes\AppBase
 {
     /**
      * Class constructor.
      *
      * @since 150424 Initial release.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         if (c\is_cli()) {
             throw new Exception('Not possible in CLI mode.');

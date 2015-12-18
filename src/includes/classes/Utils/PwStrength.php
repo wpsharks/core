@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Adding password strength.
  */
-class PwStrength extends Classes\AbsBase
+class PwStrength extends Classes\AppBase
 {
     /**
      * Password strength.

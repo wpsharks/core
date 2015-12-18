@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Trim extends Classes\AbsBase
+class Trim extends Classes\AppBase
 {
     /**
      * Trim (multibyte-safe).

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class RegexPatterns extends Classes\AbsBase
+class RegexPatterns extends Classes\AppBase
 {
     /**
      * Search values containing regex patterns against a string.

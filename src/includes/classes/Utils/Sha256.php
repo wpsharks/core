@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Sha256 extends Classes\AbsBase
+class Sha256 extends Classes\AppBase
 {
     /**
      * Generates a keyed SHA-256 signature.

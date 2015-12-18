@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Eols extends Classes\AbsBase
+class Eols extends Classes\AppBase
 {
     /**
      * Normalizes end of line chars deeply.

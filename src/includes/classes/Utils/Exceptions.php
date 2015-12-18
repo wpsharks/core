@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Exceptions extends Classes\AbsBase
+class Exceptions extends Classes\AppBase
 {
     /**
      * Setup exception handler.

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Slashes extends Classes\AbsBase
+class Slashes extends Classes\AppBase
 {
     /**
      * Add slashes deeply.

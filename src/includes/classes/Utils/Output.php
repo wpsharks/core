@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Output extends Classes\AbsBase
+class Output extends Classes\AppBase
 {
     /**
      * Disables GZIP compression.

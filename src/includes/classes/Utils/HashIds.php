@@ -15,7 +15,7 @@ use Hashids\Hashids as Parser;
  *
  * @since 150424 Initial release.
  */
-class HashIds extends Classes\AbsBase
+class HashIds extends Classes\AppBase
 {
     /**
      * Parser.
@@ -36,12 +36,11 @@ class HashIds extends Classes\AbsBase
      * @param string $alphabet  Chars to use in ID.
      */
     public function __construct(
-        Classes\App $App,
         string $key = '',
         int $min_chars = 0,
         string $alphabet = ''
     ) {
-        parent::__construct($App);
+        parent::__construct();
 
         if (!$key && !($key = $this->App->Config->hash_ids['key'])) {
             throw new Exception('Missing HashIds key.');

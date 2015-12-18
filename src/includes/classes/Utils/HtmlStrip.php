@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlStrip extends Classes\AbsBase
+class HtmlStrip extends Classes\AppBase
 {
     /**
      * Strips HTML attributes deeply.

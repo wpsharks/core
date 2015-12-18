@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class UploadSize extends Classes\AbsBase
+class UploadSize extends Classes\AppBase
 {
     /**
      * Max allowed file upload size.

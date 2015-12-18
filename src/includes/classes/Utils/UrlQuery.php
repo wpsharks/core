@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class UrlQuery extends Classes\AbsBase implements Interfaces\UrlConstants
+class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
 {
     /**
      * Default.

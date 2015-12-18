@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Version extends Classes\AbsBase implements Interfaces\VersionConstants
+class Version extends Classes\AppBase implements Interfaces\VersionConstants
 {
     /**
      * Is it a valid version?

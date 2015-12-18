@@ -12,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Template extends AbsBase
+class Template extends AppBase
 {
     /**
      * Directory.
@@ -70,13 +70,12 @@ class Template extends AbsBase
      * @param array  $parent_vars Parent template vars.
      */
     public function __construct(
-        App $App,
         string $dir,
         string $file,
         array $parents = [],
         array $parent_vars = []
     ) {
-        parent::__construct($App);
+        parent::__construct();
 
         $dir  = c\mb_rtrim($dir, '/');
         $file = c\mb_trim($file, '/');

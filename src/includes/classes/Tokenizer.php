@@ -12,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Tokenizer extends AbsBase
+class Tokenizer extends AppBase
 {
     /**
      * String.
@@ -61,11 +61,10 @@ class Tokenizer extends AbsBase
      * @return string The tokenized string.
      */
     public function __construct(
-        App $App,
         string $string,
         array $tokenize
     ) {
-        parent::__construct($App);
+        parent::__construct();
 
         $this->string   = $string;
         $this->tokenize = $tokenize;

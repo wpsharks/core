@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class PhpStrip extends Classes\AbsBase
+class PhpStrip extends Classes\AppBase
 {
     /**
      * Strips PHP tags.

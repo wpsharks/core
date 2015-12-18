@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Ip extends Classes\AbsBase
+class Ip extends Classes\AppBase
 {
     /**
      * Get the current visitor's real IP address.

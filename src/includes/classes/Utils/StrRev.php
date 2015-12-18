@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Enhancing multibyte support.
  */
-class StrRev extends Classes\AbsBase
+class StrRev extends Classes\AppBase
 {
     /**
      * Multibyte `strrev()`.

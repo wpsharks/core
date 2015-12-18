@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class PhpHas extends Classes\AbsBase
+class PhpHas extends Classes\AppBase
 {
     /**
      * Is a particular function possible?

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlTrim extends Classes\AbsBase implements Interfaces\HtmlConstants
+class HtmlTrim extends Classes\AppBase implements Interfaces\HtmlConstants
 {
     /**
      * Trims HTML content deeply.

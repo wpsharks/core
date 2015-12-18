@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Enhancing multibyte support.
  */
-class StrCaseCmp extends Classes\AbsBase
+class StrCaseCmp extends Classes\AppBase
 {
     /**
      * Multibyte `strcasecmp()`.

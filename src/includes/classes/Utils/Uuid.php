@@ -15,7 +15,7 @@ use Ramsey\Uuid\Uuid as UuidGen;
  *
  * @since 150424 Initial release.
  */
-class Uuid extends Classes\AbsBase
+class Uuid extends Classes\AppBase
 {
     /**
      * UUID v1 generator.

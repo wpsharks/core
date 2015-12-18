@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class RandomKey extends Classes\AbsBase
+class RandomKey extends Classes\AppBase
 {
     /**
      * Generates a random key.

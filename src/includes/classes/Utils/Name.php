@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Name extends Classes\AbsBase
+class Name extends Classes\AppBase
 {
     /**
      * First from full name.

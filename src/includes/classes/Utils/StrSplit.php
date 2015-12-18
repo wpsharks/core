@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Enhancing multibyte support.
  */
-class StrSplit extends Classes\AbsBase
+class StrSplit extends Classes\AppBase
 {
     /**
      * Multibyte `str_split()`.

@@ -15,7 +15,7 @@ use Pandoc\Pandoc;
  *
  * @since 150424 Initial release.
  */
-class Html2Pandoc extends Classes\AbsBase
+class Html2Pandoc extends Classes\AppBase
 {
     /**
      * Converts HTML into structured text.

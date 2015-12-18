@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class UrlFragment extends Classes\AbsBase
+class UrlFragment extends Classes\AppBase
 {
     /**
      * URL without a #hash/fragment.

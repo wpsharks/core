@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlAnchorize extends Classes\AbsBase implements Interfaces\EmailConstants, Interfaces\UrlConstants
+class HtmlAnchorize extends Classes\AppBase implements Interfaces\EmailConstants, Interfaces\UrlConstants
 {
     /**
      * Links in text to HTML anchors.

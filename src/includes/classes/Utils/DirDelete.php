@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class DirDelete extends Classes\AbsBase
+class DirDelete extends Classes\AppBase
 {
     /**
      * Deletes a directory.

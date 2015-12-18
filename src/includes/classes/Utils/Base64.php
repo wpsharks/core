@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Base64 extends Classes\AbsBase
+class Base64 extends Classes\AppBase
 {
     /**
      * Base64 URL-safe encoding.

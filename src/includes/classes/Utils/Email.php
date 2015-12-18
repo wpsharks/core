@@ -15,7 +15,7 @@ use PHPMailer;
  *
  * @since 151121 Email utilities.
  */
-class Email extends Classes\AbsBase implements Interfaces\EmailConstants
+class Email extends Classes\AppBase implements Interfaces\EmailConstants
 {
     /**
      * Send an email.

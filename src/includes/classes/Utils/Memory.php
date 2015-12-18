@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Memory extends Classes\AbsBase
+class Memory extends Classes\AppBase
 {
     /**
      * Get/set available memory.

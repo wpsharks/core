@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Cdn extends Classes\AbsBase implements Interfaces\MimeConstants
+class Cdn extends Classes\AppBase implements Interfaces\MimeConstants
 {
     /**
      * Extensions.
@@ -29,9 +29,9 @@ class Cdn extends Classes\AbsBase implements Interfaces\MimeConstants
      *
      * @since 150424 Initial release.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         $this->static_exts = array_keys($this::MIME_TYPES);
         $this->static_exts = array_diff($this->static_exts, ['php']);

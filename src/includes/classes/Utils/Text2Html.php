@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151121 Text conversions.
  */
-class Text2Html extends Classes\AbsBase
+class Text2Html extends Classes\AppBase
 {
     /**
      * Text to HTML markup.

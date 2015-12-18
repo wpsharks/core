@@ -18,7 +18,7 @@ use GetOptionKit\OptionPrinter\ConsoleOptionPrinter;
  *
  * @since 150424 Initial release.
  */
-class CliOpts extends AbsBase
+class CliOpts extends AppBase
 {
     /**
      * Options.
@@ -34,9 +34,9 @@ class CliOpts extends AbsBase
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         if (!c\is_cli()) {
             throw new Exception('Requires CLI mode.');

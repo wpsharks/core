@@ -19,7 +19,7 @@ class Exception extends \Exception
      *
      * @since 15xxxx
      *
-     * @type string Error code.
+     * @type string
      */
     protected $error_code;
 
@@ -28,7 +28,7 @@ class Exception extends \Exception
      *
      * @since 15xxxx
      *
-     * @type string Error reason.
+     * @type string
      */
     protected $reason_code;
 

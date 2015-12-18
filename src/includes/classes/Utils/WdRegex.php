@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Adding watered-down regex.
  */
-class WdRegex extends Classes\AbsBase
+class WdRegex extends Classes\AppBase
 {
     /**
      * Convert watered-down regex to real regex.

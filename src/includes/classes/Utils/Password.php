@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Password extends Classes\AbsBase
+class Password extends Classes\AppBase
 {
     /**
      * Generates a password hash.

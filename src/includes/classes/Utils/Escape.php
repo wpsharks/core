@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Escape utils.
  */
-class Escape extends Classes\AbsBase
+class Escape extends Classes\AppBase
 {
     /**
      * Escape HTML markup (other).
@@ -26,7 +26,7 @@ class Escape extends Classes\AbsBase
      */
     public function html($value)
     {
-        return $this->Utils->HtmlEntities->encode($value);
+        return $this->App->Utils->HtmlEntities->encode($value);
     }
 
     /**
@@ -40,7 +40,7 @@ class Escape extends Classes\AbsBase
      */
     public function textarea($value): string
     {
-        return $this->Utils->HtmlEntities->encode($value);
+        return $this->App->Utils->HtmlEntities->encode($value);
     }
 
     /**
@@ -54,7 +54,7 @@ class Escape extends Classes\AbsBase
      */
     public function attr($value): string
     {
-        return $this->Utils->HtmlEntities->encode($value);
+        return $this->App->Utils->HtmlEntities->encode($value);
     }
 
     /**
@@ -68,7 +68,7 @@ class Escape extends Classes\AbsBase
      */
     public function url($value): string
     {
-        return $this->Utils->HtmlEntities->encode($value);
+        return $this->App->Utils->HtmlEntities->encode($value);
     }
 
     // NOTE: SQL-related escapes are in the PDO class.

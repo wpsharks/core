@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Html extends Classes\AbsBase
+class Html extends Classes\AppBase
 {
     /**
      * Is a string in HTML format?

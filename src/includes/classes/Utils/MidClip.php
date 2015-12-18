@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class MidClip extends Classes\AbsBase
+class MidClip extends Classes\AppBase
 {
     /**
      * Mid-clips string(s) to X chars deeply.

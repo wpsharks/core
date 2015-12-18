@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class DotKeys extends Classes\AbsBase
+class DotKeys extends Classes\AppBase
 {
     /**
      * `.` keys (e.g., `key.ID`).

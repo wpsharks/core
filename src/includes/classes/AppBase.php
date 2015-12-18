@@ -8,11 +8,11 @@ use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
- * Base abstraction.
+ * App base abstraction.
  *
  * @since 150424 Initial release.
  */
-abstract class AbsBase extends AbsCore
+abstract class AppBase extends AbsCore
 {
     /**
      * App.
@@ -24,24 +24,14 @@ abstract class AbsBase extends AbsCore
     protected $App;
 
     /**
-     * Utilities.
-     *
-     * @since 15xxxx
-     *
-     * @type Utils
-     */
-    protected $Utils;
-
-    /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      */
-    public function __construct(App $App)
+    public function __construct()
     {
         parent::__construct();
 
-        $this->App   = $App;
-        $this->Utils = $App->Utils;
+        $this->App = $GLOBALS[App::class];
     }
 }

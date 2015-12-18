@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151216 Memcached utilities.
  */
-class Memcache extends Classes\AbsBase
+class Memcache extends Classes\AppBase
 {
     /**
      * Pool.
@@ -65,9 +65,9 @@ class Memcache extends Classes\AbsBase
      *
      * @since 151216 Memcached utilities.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         $this->enabled   = $this->App->Config->memcache['enabled'];
         $this->namespace = $this->App->Config->memcache['namespace'];

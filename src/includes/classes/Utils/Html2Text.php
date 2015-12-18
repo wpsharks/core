@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Html2Text extends Classes\AbsBase implements Interfaces\HtmlConstants
+class Html2Text extends Classes\AppBase implements Interfaces\HtmlConstants
 {
     /**
      * Convert HTML markup to plain text.

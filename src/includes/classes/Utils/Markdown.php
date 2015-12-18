@@ -16,7 +16,7 @@ use Michelf\MarkdownExtra;
  *
  * @since 150424 Initial release.
  */
-class Markdown extends Classes\AbsBase
+class Markdown extends Classes\AppBase
 {
     /**
      * A very simple markdown parser.

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class ExecTime extends Classes\AbsBase
+class ExecTime extends Classes\AppBase
 {
     /**
      * Max execution time.

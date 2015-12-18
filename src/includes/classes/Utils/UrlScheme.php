@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class UrlScheme extends Classes\AbsBase implements Interfaces\UrlConstants
+class UrlScheme extends Classes\AppBase implements Interfaces\UrlConstants
 {
     /**
      * Set the scheme for a URL.

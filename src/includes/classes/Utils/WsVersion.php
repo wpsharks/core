@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class WsVersion extends Classes\AbsBase implements Interfaces\WsVersionConstants
+class WsVersion extends Classes\AppBase implements Interfaces\WsVersionConstants
 {
     /**
      * Is it a valid WS version?

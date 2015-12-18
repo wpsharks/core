@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151121 Header utilities.
  */
-class Headers extends Classes\AbsBase implements Interfaces\HttpStatusConstants
+class Headers extends Classes\AppBase implements Interfaces\HttpStatusConstants
 {
     /**
      * Status header.

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Clip extends Classes\AbsBase
+class Clip extends Classes\AppBase
 {
     /**
      * Clips string(s) to X chars deeply.

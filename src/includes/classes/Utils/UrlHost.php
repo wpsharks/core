@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151002 Adding host parser.
  */
-class UrlHost extends Classes\AbsBase
+class UrlHost extends Classes\AppBase
 {
     /**
      * Host parser.

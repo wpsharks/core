@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlEntities extends Classes\AbsBase
+class HtmlEntities extends Classes\AppBase
 {
     /**
      * Escape HTML markup deeply.

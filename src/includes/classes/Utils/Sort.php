@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Sort extends Classes\AbsBase
+class Sort extends Classes\AppBase
 {
     /**
      * Sorts by key.

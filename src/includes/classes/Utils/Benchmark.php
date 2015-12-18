@@ -14,7 +14,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Benchmarking.
  */
-class Benchmark extends Classes\AbsBase
+class Benchmark extends Classes\AppBase
 {
     /**
      * Start time.
@@ -66,9 +66,9 @@ class Benchmark extends Classes\AbsBase
      *
      * @since 150424 Initial release.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         if (!c\is_cli()) {
             throw new Exception('Requires CLI mode.');

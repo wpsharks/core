@@ -15,7 +15,7 @@ use Embedly\Embedly;
  *
  * @since 151125 OEmbed utilities.
  */
-class OEmbed extends Classes\AbsBase implements Interfaces\UrlConstants
+class OEmbed extends Classes\AppBase implements Interfaces\UrlConstants
 {
     /**
      * Cache directory.
@@ -31,9 +31,9 @@ class OEmbed extends Classes\AbsBase implements Interfaces\UrlConstants
      *
      * @since 151125 OEmbed utilities.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         if (!$this->App->Config->fs_paths['cache_dir']) {
             throw new Exception('Missing cache directory.');

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class UrlRemote extends Classes\AbsBase
+class UrlRemote extends Classes\AppBase
 {
     /**
      * Remote HTTP communication.

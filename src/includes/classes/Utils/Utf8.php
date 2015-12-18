@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Enhancing multibyte support.
  */
-class Utf8 extends Classes\AbsBase
+class Utf8 extends Classes\AppBase
 {
     /**
      * Marker.

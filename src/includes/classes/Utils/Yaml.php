@@ -15,7 +15,7 @@ use Symfony\Component\Yaml\Yaml as Parser;
  *
  * @since 150424 Initial release.
  */
-class Yaml extends Classes\AbsBase
+class Yaml extends Classes\AppBase
 {
     /**
      * YAML parser.

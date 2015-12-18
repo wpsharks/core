@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151121 URL utilities.
  */
-class Url extends Classes\AbsBase implements Interfaces\UrlConstants, Interfaces\HtmlConstants
+class Url extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces\HtmlConstants
 {
     /**
      * Build app URL.

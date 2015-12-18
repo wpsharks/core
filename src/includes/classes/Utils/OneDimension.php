@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class OneDimension extends Classes\AbsBase
+class OneDimension extends Classes\AppBase
 {
     /**
      * One dimension only.

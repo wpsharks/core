@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Os extends Classes\AbsBase
+class Os extends Classes\AppBase
 {
     /**
      * A Unix environment?

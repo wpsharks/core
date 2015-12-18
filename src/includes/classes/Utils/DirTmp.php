@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class DirTmp extends Classes\AbsBase
+class DirTmp extends Classes\AppBase
 {
     /**
      * Readable/writable tmp dir.

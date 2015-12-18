@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Badwords checker.
  */
-class WebPurify extends Classes\AbsBase
+class WebPurify extends Classes\AppBase
 {
     /**
      * Cache directory.
@@ -29,9 +29,9 @@ class WebPurify extends Classes\AbsBase
      *
      * @since 15xxxx Badwords checker.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         if (!$this->App->Config->fs_paths['cache_dir']) {
             throw new Exception('Missing cache directory.');

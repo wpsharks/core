@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Cli extends Classes\AbsBase
+class Cli extends Classes\AppBase
 {
     /**
      * Running in a CLI?

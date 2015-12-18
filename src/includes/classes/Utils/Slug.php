@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Slug extends Classes\AbsBase implements Interfaces\SlugConstants
+class Slug extends Classes\AppBase implements Interfaces\SlugConstants
 {
     /**
      * Validate slug.

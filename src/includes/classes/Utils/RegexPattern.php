@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class RegexPattern extends Classes\AbsBase
+class RegexPattern extends Classes\AppBase
 {
     /**
      * Match a regex pattern against other values.

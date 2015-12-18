@@ -31,11 +31,11 @@ class AppConfig extends AbsCore
      * @param array $instance_base Instance base.
      * @param array $instance      Instance args (highest precedence).
      */
-    public function __construct(App $App, array $instance_base = [], array $instance = [])
+    public function __construct(array $instance_base = [], array $instance = [])
     {
         parent::__construct();
 
-        $this->App = $App;
+        $this->App = $GLOBALS[App::class];
 
         # Instance base (i.e., default config).
 
@@ -46,9 +46,6 @@ class AppConfig extends AbsCore
             'di' => [
                 'default_rule' => [
                     'new_instances' => [
-                        self::class,
-                        AppDi::class,
-                        Utils::class,
                         CliOpts::class,
                         Exception::class,
                         Template::class,

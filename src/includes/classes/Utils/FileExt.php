@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class FileExt extends Classes\AbsBase
+class FileExt extends Classes\AppBase
 {
     /**
      * File extension.

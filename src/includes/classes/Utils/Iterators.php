@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Iterators extends Classes\AbsBase
+class Iterators extends Classes\AppBase
 {
     /**
      * Recursive array iterator.

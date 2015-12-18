@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class FileSize extends Classes\AbsBase
+class FileSize extends Classes\AppBase
 {
     /**
      * Abbreviated byte notation for a particular file.

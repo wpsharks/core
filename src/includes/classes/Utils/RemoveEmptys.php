@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151312 Enhance utils.
  */
-class RemoveEmptys extends Classes\AbsBase
+class RemoveEmptys extends Classes\AppBase
 {
     /**
      * Remove empty values.

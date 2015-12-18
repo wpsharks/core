@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Html2RichText extends Classes\AbsBase implements Interfaces\HtmlConstants
+class Html2RichText extends Classes\AppBase implements Interfaces\HtmlConstants
 {
     /**
      * Convert HTML to rich text; w/ allowed tags only.

@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Enhancing multibyte support.
  */
-class SubstrReplace extends Classes\AbsBase
+class SubstrReplace extends Classes\AppBase
 {
     /**
      * Multibyte `substr_replace()`.

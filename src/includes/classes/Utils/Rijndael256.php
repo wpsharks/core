@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Rijndael256 extends Classes\AbsBase
+class Rijndael256 extends Classes\AppBase
 {
     /**
      * IV size.
@@ -38,9 +38,9 @@ class Rijndael256 extends Classes\AbsBase
      *
      * @since 150424 Initial release.
      */
-    public function __construct(Classes\App $App)
+    public function __construct()
     {
-        parent::__construct($App);
+        parent::__construct();
 
         $this->iv_size  = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
         $this->key_size = mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);

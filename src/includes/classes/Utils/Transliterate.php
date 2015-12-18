@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Multibyte support.
  */
-class Transliterate extends Classes\AbsBase
+class Transliterate extends Classes\AppBase
 {
     /**
      * Convert to ASCII.

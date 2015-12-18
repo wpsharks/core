@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Enhancing multibyte support.
  */
-class StrPad extends Classes\AbsBase
+class StrPad extends Classes\AppBase
 {
     /**
      * Multibyte `str_pad()`.

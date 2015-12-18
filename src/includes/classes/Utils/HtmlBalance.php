@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlBalance extends Classes\AbsBase
+class HtmlBalance extends Classes\AppBase
 {
     /**
      * Balance HTML markup/tags.
