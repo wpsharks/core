@@ -60,7 +60,13 @@ class Pdo extends Classes\AppBase
     {
         parent::__construct();
 
-        $this->options = [
+        $this->common = &$this->App->Config->db_shards['common'];
+        $this->dbs    = &$this->App->Config->db_shards['dbs'];
+
+        if (!$this->common['port'] || !$this->common['username'] || !$this->dbs) {
+            throw new Exception('Missing required DB config values.');
+        }
+        $this->options = [ // Build the initial array of options.
             \PDO::ATTR_TIMEOUT => 5,
 
             \PDO::ATTR_AUTOCOMMIT       => true,
@@ -74,11 +80,12 @@ class Pdo extends Classes\AppBase
             \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
             \PDO::ATTR_ERRMODE                  => \PDO::ERRMODE_EXCEPTION,
         ];
-        $this->common = &$this->App->Config->db_shards['common'];
-        $this->dbs    = &$this->App->Config->db_shards['dbs'];
+        if ($this->common['charset']) { // Use a specific charset?
+            $this->options[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \''.$this->common['charset'].'\'';
 
-        if (!$this->common['port'] || !$this->common['charset'] || !$this->common['username'] || !$this->dbs) {
-            throw new Exception('Missing required DB config values.');
+            if ($this->common['collate']) { // Also a specific collation?
+                $this->options[\PDO::MYSQL_ATTR_INIT_COMMAND] .= ' COLLATE \''.$this->common['collate'].'\'';
+            }
         }
         if ($this->common['ssl_enable']) {
             $this->options[\PDO::MYSQL_ATTR_SSL_CA]     = $this->common['ssl_ca'];
@@ -111,10 +118,11 @@ class Pdo extends Classes\AppBase
         $Pdo      = &$this->cacheKey(__FUNCTION__, $shard_db['host']);
         $Pdo      = $Pdo ?? new \PDO(
             'mysql:host='.$shard_db['host'].';'.
-            'port='.$this->common['port'].';'.
-            'charset='.$this->common['charset'],
+            'port='.$this->common['port'],
+            //
             $this->common['username'],
             $this->common['password'],
+            //
             $this->options
         );
         $Pdo->exec('use `'.$shard_db['name'].'`');

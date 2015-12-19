@@ -40,9 +40,14 @@ class AppConfig extends AbsCore
         # Instance base (i.e., default config).
 
         $default_instance_base = [
-            'debug'             => false,
-            'handle_exceptions' => true,
-
+            'debug'             => $_SERVER['DEBUG'] ?? false,
+            'handle_exceptions' => $_SERVER['HANDLE_EXCEPTIONS'] ?? false,
+            'contacts'          => [
+                'admin' => [
+                    'name'  => $_SERVER['ADMIN_NAME'] ?? 'Admin',
+                    'email' => $_SERVER['ADMIN_EMAIL'] ?? 'admin@'.$this->App->server_name,
+                ],
+            ],
             'di' => [
                 'default_rule' => [
                     'new_instances' => [
@@ -55,17 +60,18 @@ class AppConfig extends AbsCore
             ],
             'db_shards' => [
                 'common' => [
-                    'port'    => 0,
-                    'charset' => '',
+                    'port'    => $_SERVER['MYSQL_DB_PORT'] ?? 3306,
+                    'charset' => $_SERVER['MYSQL_DB_CHARSET'] ?? 'utf8mb4',
+                    'collate' => $_SERVER['MYSQL_DB_COLLATE'] ?? 'utf8mb4_unicode_ci',
 
-                    'username' => '',
-                    'password' => '',
+                    'username' => $_SERVER['MYSQL_DB_USER'] ?? 'root',
+                    'password' => $_SERVER['MYSQL_DB_PASSWORD'] ?? '',
 
-                    'ssl_enable' => false,
-                    'ssl_ca'     => '',
-                    'ssl_crt'    => '',
-                    'ssl_key'    => '',
-                    'ssl_cipher' => '',
+                    'ssl_enable' => $_SERVER['MYSQL_SSL_ENABLE'] ?? false,
+                    'ssl_ca'     => $_SERVER['MYSQL_SSL_CA'] ?? '%%app_dir%%/assets/ssl/ca.vm.crt',
+                    'ssl_crt'    => $_SERVER['MYSQL_SSL_CRT'] ?? '%%app_dir%%/assets/ssl/client.crt',
+                    'ssl_key'    => $_SERVER['MYSQL_SSL_KEY'] ?? '%%app_dir%%/assets/ssl/client.key',
+                    'ssl_cipher' => $_SERVER['MYSQL_SSL_CIPHER'] ?? 'CAMELLIA256-SHA',
                 ],
                 'dbs' => [
                     [
@@ -74,89 +80,90 @@ class AppConfig extends AbsCore
                             'to'   => 65535,
                         ],
                         'properties' => [
-                            'host' => '',
-                            'name' => '',
+                            'host' => $_SERVER['MYSQL_DB_HOST'] ?? '127.0.0.1',
+                            'name' => $_SERVER['MYSQL_DB_NAME'] ?? 'db0',
                         ],
                     ],
                 ],
             ],
             'brand' => [
-                'name'        => '',
-                'acronym'     => '',
-                'keywords'    => [],
-                'description' => '',
-                'tagline'     => '',
-                'screenshot'  => '',
-                'favicon'     => '',
-                'logo'        => '',
+                'acronym'     => $_SERVER['BRAND_ACRONYM'] ?? 'APP',
+                'name'        => $_SERVER['BRAND_NAME'] ?? $this->App->server_name,
+                'keywords'    => $_SERVER['BRAND_KEYWORDS'] ?? [$this->App->server_name],
+                'description' => $_SERVER['BRAND_DESCRIPTION'] ?? 'Just another site powered by the websharks/core.',
+                'tagline'     => $_SERVER['BRAND_TAGLINE'] ?? 'Powered by the websharks/core.',
+                'screenshot'  => $_SERVER['BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png',
+                'favicon'     => $_SERVER['BRAND_FAVICON'] ?? '/client-s/images/favicon.ico',
+                'logo'        => $_SERVER['BRAND_LOGO'] ?? '/client-s/images/logo.png',
             ],
             'urls' => [
                 'hosts' => [
                     'roots' => [
-                        'app' => '',
+                        'app' => $_SERVER['APP_ROOT_HOST'] ?? $this->server_root_name,
                     ],
-                    'app'    => '',
-                    'cdn'    => '',
-                    'cdn_s3' => '',
+                    'app'    => $_SERVER['APP_HOST'] ?? $this->server_name,
+                    'cdn'    => $_SERVER['CDN_HOST'] ?? 'cdn.'.$this->server_root_name,
+                    'cdn_s3' => $_SERVER['CDN_S3_HOST'] ?? 'cdn-s3.'.$this->server_root_name,
                 ],
-                'default_scheme' => '',
-                'sig_key'        => '',
+                'default_scheme' => $_SERVER['DEFAULT_URL_SCHEME'] ?? 'https',
+                'sig_key'        => $_SERVER['URL_SIG_KEY'] ?? '',
             ],
             'fs_paths' => [
-                'cache_dir'     => '',
-                'templates_dir' => '',
-                'config_file'   => '',
+                'cache_dir'     => $_SERVER['CACHE_DIR'] ?? '%%app_dir%%/.~cache',
+                'templates_dir' => $_SERVER['TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates',
+                'config_file'   => $_SERVER['CONFIG_FILE'] ?? '',
             ],
             'fs_permissions' => [
-                'transient_dirs' => 0777,
+                'transient_dirs' => $_SERVER['TRANSIENT_DIR_PERMISSIONS'] ?? 0777,
                 // `0777` = `511` integer.
             ],
             'memcache' => [
-                'enabled'   => true,
-                'namespace' => 'app',
+                'enabled'   => $_SERVER['MEMCACHE_ENABLED'] ?? true,
+                'namespace' => $_SERVER['MEMCACHE_NAMESPACE'] ?? 'app',
                 'servers'   => [
                     [
-                        'host'   => '127.0.0.1',
-                        'port'   => 11211,
-                        'weight' => 0,
+                        'host'   => $_SERVER['MEMCACHE_HOST'] ?? '127.0.0.1',
+                        'port'   => $_SERVER['MEMCACHE_PORT'] ?? 11211,
+                        'weight' => $_SERVER['MEMCACHE_WEIGHT'] ?? 0,
                     ],
                 ],
             ],
             'i18n' => [
-                'locales'     => ['en_US.UTF-8', 'C'],
-                'text_domain' => '', // Off by default.
+                'locales'     => $_SERVER['LOCALES'] ?? ['en_US.UTF-8', 'C'],
+                'text_domain' => $_SERVER['I18N_TEXT_DOMAIN'] ?? 'app',
             ],
             'email' => [
-                'from_name'  => '',
-                'from_email' => '',
+                'from_name'  => $_SERVER['EMAIL_FROM_NAME'] ?? 'App',
+                'from_email' => $_SERVER['EMAIL_FROM_EMAIL'] ?? 'app@'.$this->App->server_name,
 
-                'reply_to_name'  => '',
-                'reply_to_email' => '',
+                'reply_to_name'  => $_SERVER['EMAIL_REPLY_TO_NAME'] ?? '',
+                'reply_to_email' => $_SERVER['EMAIL_REPLY_TO_EMAIL'] ?? '',
 
-                'smtp_host'     => '',
-                'smtp_port'     => 0,
-                'smtp_secure'   => '',
-                'smtp_username' => '',
-                'smtp_password' => '',
+                'smtp_host'   => $_SERVER['EMAIL_SMTP_HOST'] ?? '127.0.0.1',
+                'smtp_port'   => $_SERVER['EMAIL_SMTP_PORT'] ?? 25,
+                'smtp_secure' => $_SERVER['EMAIL_SMTP_SECURE'] ?? '',
+
+                'smtp_username' => $_SERVER['EMAIL_SMTP_USERNAME'] ?? '',
+                'smtp_password' => $_SERVER['EMAIL_SMTP_PASSWORD'] ?? '',
             ],
             'cookies' => [
-                'key' => '',
+                'key' => $_SERVER['COOKIES_KEY'] ?? '',
             ],
             'hash_ids' => [
-                'key' => '',
+                'key' => $_SERVER['HASH_IDS_KEY'] ?? '',
             ],
             'passwords' => [
-                'key' => '',
+                'key' => $_SERVER['PASSWORDS_KEY'] ?? '',
             ],
             'aws' => [
-                'access_key' => '',
-                'secret_key' => '',
+                'access_key' => $_SERVER['AWS_ACCESS_KEY'] ?? '',
+                'secret_key' => $_SERVER['AWS_SECRET_KEY'] ?? '',
             ],
             'embedly' => [
-                'api_key' => '',
+                'api_key' => $_SERVER['EMBEDLY_KEY'] ?? '',
             ],
             'web_purify' => [
-                'api_key' => '',
+                'api_key' => $_SERVER['WEBPURIFY_KEY'] ?? '',
             ],
         ];
         # Merge instance bases together now.

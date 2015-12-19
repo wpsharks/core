@@ -80,7 +80,9 @@ class Memcache extends Classes\AppBase
             $this->servers[$_host.':'.$_port] = [$_host, $_port, $_weight];
         } // unset($_server, $_host, $_port, $_weight);
 
-        if (!$this->enabled || !$this->namespace || !$this->servers) {
+        if (!class_exists('Memcached')) {
+            return; // Not possible.
+        } elseif (!$this->enabled || !$this->namespace || !$this->servers) {
             return; // Disabled or lacking config values.
         }
         $this->Pool = new \Memcached($this->App->namespace_sha1);

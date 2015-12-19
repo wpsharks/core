@@ -25,13 +25,13 @@ class Email extends Classes\AppBase implements Interfaces\EmailConstants
      * @param string|array $to          Address(es).
      * @param string       $subject     Subject line.
      * @param string       $message     Message contents.
-     * @param array        $headers     Additional headers.
      * @param array        $attachments Files to attach.
+     * @param array        $headers     Additional headers.
      * @param bool         $throw       Throw exceptions?
      *
      * @return bool True if the email was sent successfully.
      */
-    public function __invoke($to, string $subject, string $message, array $headers = [], array $attachments = [], bool $throw = false)
+    public function __invoke($to, string $subject, string $message, array $attachments = [], array $headers = [], bool $throw = false)
     {
         if (!$this->App->Config->email['smtp_host'] || !$this->App->Config->email['smtp_port']) {
             throw new Exception('Missing require email config values.');

@@ -15,6 +15,24 @@ use WebSharks\Core\Traits;
 class App extends AbsCore
 {
     /**
+     * Server name.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    public $server_name;
+
+    /**
+     * Server root name.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    public $server_root_name;
+
+    /**
      * Namespace.
      *
      * @since 15xxxx
@@ -112,9 +130,15 @@ class App extends AbsCore
         $GLOBALS[self::class]       = $this;
         $GLOBALS[$Class->getName()] = $this;
 
+        $this->server_name      = mb_strtolower(php_uname('n'));
+        $this->server_root_name = $this->server_name
+            ? implode('.', array_slice(explode('.', $this->server_name), -2))
+            : ''; // Not possible in this case.
+
         $this->namespace      = $Class->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
-        $this->dir            = dirname($Class->getFileName(), 4);
+
+        $this->dir = dirname($Class->getFileName(), 4);
 
         $this->core_dir       = dirname(__FILE__, 4);
         $this->core_is_vendor = mb_stripos($this->core_dir, '/vendor/') !== false;
