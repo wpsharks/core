@@ -99,11 +99,11 @@ class AppConfig extends AbsCore
             'urls' => [
                 'hosts' => [
                     'roots' => [
-                        'app' => $_SERVER['APP_ROOT_HOST'] ?? $this->server_root_name,
+                        'app' => $_SERVER['APP_ROOT_HOST'] ?? $this->App->server_root_name,
                     ],
-                    'app'    => $_SERVER['APP_HOST'] ?? $this->server_name,
-                    'cdn'    => $_SERVER['CDN_HOST'] ?? 'cdn.'.$this->server_root_name,
-                    'cdn_s3' => $_SERVER['CDN_S3_HOST'] ?? 'cdn-s3.'.$this->server_root_name,
+                    'app'    => $_SERVER['APP_HOST'] ?? $this->App->server_name,
+                    'cdn'    => $_SERVER['CDN_HOST'] ?? 'cdn.'.$this->App->server_root_name,
+                    'cdn_s3' => $_SERVER['CDN_S3_HOST'] ?? 'cdn-s3.'.$this->App->server_root_name,
                 ],
                 'default_scheme' => $_SERVER['DEFAULT_URL_SCHEME'] ?? 'https',
                 'sig_key'        => $_SERVER['URL_SIG_KEY'] ?? '',
