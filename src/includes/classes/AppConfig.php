@@ -40,12 +40,12 @@ class AppConfig extends AbsCore
         # Instance base (i.e., default config).
 
         $default_instance_base = [
-            'debug'             => $_SERVER['DEBUG'] ?? false,
-            'handle_exceptions' => $_SERVER['HANDLE_EXCEPTIONS'] ?? false,
+            'debug'             => (bool) ($_SERVER['CFG_DEBUG'] ?? false),
+            'handle_exceptions' => (bool) ($_SERVER['CFG_HANDLE_EXCEPTIONS'] ?? false),
             'contacts'          => [
                 'admin' => [
-                    'name'  => $_SERVER['ADMIN_NAME'] ?? 'Admin',
-                    'email' => $_SERVER['ADMIN_EMAIL'] ?? 'admin@'.$this->App->server_name,
+                    'name'  => (string) ($_SERVER['CFG_ADMIN_NAME'] ?? 'Admin'),
+                    'email' => (string) ($_SERVER['CFG_ADMIN_EMAIL'] ?? 'admin@'.$this->App->server_name),
                 ],
             ],
             'di' => [
@@ -60,18 +60,18 @@ class AppConfig extends AbsCore
             ],
             'db_shards' => [
                 'common' => [
-                    'port'    => $_SERVER['MYSQL_DB_PORT'] ?? 3306,
-                    'charset' => $_SERVER['MYSQL_DB_CHARSET'] ?? 'utf8mb4',
-                    'collate' => $_SERVER['MYSQL_DB_COLLATE'] ?? 'utf8mb4_unicode_ci',
+                    'port'    => (int) ($_SERVER['CFG_MYSQL_DB_PORT'] ?? 3306),
+                    'charset' => (string) ($_SERVER['CFG_MYSQL_DB_CHARSET'] ?? 'utf8mb4'),
+                    'collate' => (string) ($_SERVER['CFG_MYSQL_DB_COLLATE'] ?? 'utf8mb4_unicode_ci'),
 
-                    'username' => $_SERVER['MYSQL_DB_USER'] ?? 'root',
-                    'password' => $_SERVER['MYSQL_DB_PASSWORD'] ?? '',
+                    'username' => (string) ($_SERVER['CFG_MYSQL_DB_USER'] ?? 'root'),
+                    'password' => (string) ($_SERVER['CFG_MYSQL_DB_PASSWORD'] ?? ''),
 
-                    'ssl_enable' => $_SERVER['MYSQL_SSL_ENABLE'] ?? false,
-                    'ssl_ca'     => $_SERVER['MYSQL_SSL_CA'] ?? '%%app_dir%%/assets/ssl/ca.vm.crt',
-                    'ssl_crt'    => $_SERVER['MYSQL_SSL_CRT'] ?? '%%app_dir%%/assets/ssl/client.crt',
-                    'ssl_key'    => $_SERVER['MYSQL_SSL_KEY'] ?? '%%app_dir%%/assets/ssl/client.key',
-                    'ssl_cipher' => $_SERVER['MYSQL_SSL_CIPHER'] ?? 'CAMELLIA256-SHA',
+                    'ssl_enable' => (bool) ($_SERVER['CFG_MYSQL_SSL_ENABLE'] ?? false),
+                    'ssl_ca'     => (string) ($_SERVER['CFG_MYSQL_SSL_CA'] ?? '%%app_dir%%/assets/ssl/ca.vm.crt'),
+                    'ssl_crt'    => (string) ($_SERVER['CFG_MYSQL_SSL_CRT'] ?? '%%app_dir%%/assets/ssl/client.crt'),
+                    'ssl_key'    => (string) ($_SERVER['CFG_MYSQL_SSL_KEY'] ?? '%%app_dir%%/assets/ssl/client.key'),
+                    'ssl_cipher' => (string) ($_SERVER['CFG_MYSQL_SSL_CIPHER'] ?? 'CAMELLIA256-SHA'),
                 ],
                 'dbs' => [
                     [
@@ -80,90 +80,90 @@ class AppConfig extends AbsCore
                             'to'   => 65535,
                         ],
                         'properties' => [
-                            'host' => $_SERVER['MYSQL_DB_HOST'] ?? '127.0.0.1',
-                            'name' => $_SERVER['MYSQL_DB_NAME'] ?? 'db0',
+                            'host' => (string) ($_SERVER['CFG_MYSQL_DB_HOST'] ?? '127.0.0.1'),
+                            'name' => (string) ($_SERVER['CFG_MYSQL_DB_NAME'] ?? 'db0'),
                         ],
                     ],
                 ],
             ],
             'brand' => [
-                'acronym'     => $_SERVER['BRAND_ACRONYM'] ?? 'APP',
-                'name'        => $_SERVER['BRAND_NAME'] ?? $this->App->server_name,
-                'keywords'    => $_SERVER['BRAND_KEYWORDS'] ?? [$this->App->server_name],
-                'description' => $_SERVER['BRAND_DESCRIPTION'] ?? 'Just another site powered by the websharks/core.',
-                'tagline'     => $_SERVER['BRAND_TAGLINE'] ?? 'Powered by the websharks/core.',
-                'screenshot'  => $_SERVER['BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png',
-                'favicon'     => $_SERVER['BRAND_FAVICON'] ?? '/client-s/images/favicon.ico',
-                'logo'        => $_SERVER['BRAND_LOGO'] ?? '/client-s/images/logo.png',
+                'acronym'     => (string) ($_SERVER['CFG_BRAND_ACRONYM'] ?? 'APP'),
+                'name'        => (string) ($_SERVER['CFG_BRAND_NAME'] ?? $this->App->server_name),
+                'keywords'    => (string) ($_SERVER['CFG_BRAND_KEYWORDS'] ?? [$this->App->server_name]),
+                'description' => (string) ($_SERVER['CFG_BRAND_DESCRIPTION'] ?? 'Just another site powered by the websharks/core.'),
+                'tagline'     => (string) ($_SERVER['CFG_BRAND_TAGLINE'] ?? 'Powered by the websharks/core.'),
+                'screenshot'  => (string) ($_SERVER['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
+                'favicon'     => (string) ($_SERVER['CFG_BRAND_FAVICON'] ?? '/client-s/images/favicon.ico'),
+                'logo'        => (string) ($_SERVER['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
             ],
             'urls' => [
                 'hosts' => [
                     'roots' => [
-                        'app' => $_SERVER['APP_ROOT_HOST'] ?? $this->App->server_root_name,
+                        'app' => (string) ($_SERVER['CFG_APP_ROOT_HOST'] ?? $this->App->server_root_name),
                     ],
-                    'app'    => $_SERVER['APP_HOST'] ?? $this->App->server_name,
-                    'cdn'    => $_SERVER['CDN_HOST'] ?? 'cdn.'.$this->App->server_root_name,
-                    'cdn_s3' => $_SERVER['CDN_S3_HOST'] ?? 'cdn-s3.'.$this->App->server_root_name,
+                    'app'    => (string) ($_SERVER['CFG_APP_HOST'] ?? $this->App->server_name),
+                    'cdn'    => (string) ($_SERVER['CFG_CDN_HOST'] ?? 'cdn.'.$this->App->server_root_name),
+                    'cdn_s3' => (string) ($_SERVER['CFG_CDN_S3_HOST'] ?? 'cdn-s3.'.$this->App->server_root_name),
                 ],
-                'default_scheme' => $_SERVER['DEFAULT_URL_SCHEME'] ?? 'https',
-                'sig_key'        => $_SERVER['URL_SIG_KEY'] ?? '',
+                'default_scheme' => (string) ($_SERVER['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),
+                'sig_key'        => (string) ($_SERVER['CFG_URL_SIG_KEY'] ?? ''),
             ],
             'fs_paths' => [
-                'cache_dir'     => $_SERVER['CACHE_DIR'] ?? '%%app_dir%%/.~cache',
-                'templates_dir' => $_SERVER['TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates',
-                'config_file'   => $_SERVER['CONFIG_FILE'] ?? '',
+                'cache_dir'     => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '%%app_dir%%/.~cache'),
+                'templates_dir' => (string) ($_SERVER['CFG_TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates'),
+                'config_file'   => (string) ($_SERVER['CFG_CONFIG_FILE'] ?? ''),
             ],
             'fs_permissions' => [
-                'transient_dirs' => $_SERVER['TRANSIENT_DIR_PERMISSIONS'] ?? 0777,
-                // `0777` = `511` integer.
+                'transient_dirs' => (int) ($_SERVER['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 0777),
+                // `0777` = `511` integer, which is just fine for `chmod()`.
             ],
             'memcache' => [
-                'enabled'   => $_SERVER['MEMCACHE_ENABLED'] ?? true,
-                'namespace' => $_SERVER['MEMCACHE_NAMESPACE'] ?? 'app',
+                'enabled'   => (bool) ($_SERVER['CFG_MEMCACHE_ENABLED'] ?? true),
+                'namespace' => (string) ($_SERVER['CFG_MEMCACHE_NAMESPACE'] ?? 'app'),
                 'servers'   => [
                     [
-                        'host'   => $_SERVER['MEMCACHE_HOST'] ?? '127.0.0.1',
-                        'port'   => $_SERVER['MEMCACHE_PORT'] ?? 11211,
-                        'weight' => $_SERVER['MEMCACHE_WEIGHT'] ?? 0,
+                        'host'   => (string) ($_SERVER['CFG_MEMCACHE_HOST'] ?? '127.0.0.1'),
+                        'port'   => (int) ($_SERVER['CFG_MEMCACHE_PORT'] ?? 11211),
+                        'weight' => (int) ($_SERVER['CFG_MEMCACHE_WEIGHT'] ?? 0),
                     ],
                 ],
             ],
             'i18n' => [
-                'locales'     => $_SERVER['LOCALES'] ?? ['en_US.UTF-8', 'C'],
-                'text_domain' => $_SERVER['I18N_TEXT_DOMAIN'] ?? 'app',
+                'locales'     => (array) ($_SERVER['CFG_LOCALES'] ?? ['en_US.UTF-8', 'C']),
+                'text_domain' => (string) ($_SERVER['CFG_I18N_TEXT_DOMAIN'] ?? 'app'),
             ],
             'email' => [
-                'from_name'  => $_SERVER['EMAIL_FROM_NAME'] ?? 'App',
-                'from_email' => $_SERVER['EMAIL_FROM_EMAIL'] ?? 'app@'.$this->App->server_name,
+                'from_name'  => (string) ($_SERVER['CFG_EMAIL_FROM_NAME'] ?? 'App'),
+                'from_email' => (string) ($_SERVER['CFG_EMAIL_FROM_EMAIL'] ?? 'app@'.$this->App->server_name),
 
-                'reply_to_name'  => $_SERVER['EMAIL_REPLY_TO_NAME'] ?? '',
-                'reply_to_email' => $_SERVER['EMAIL_REPLY_TO_EMAIL'] ?? '',
+                'reply_to_name'  => (string) ($_SERVER['CFG_EMAIL_REPLY_TO_NAME'] ?? ''),
+                'reply_to_email' => (string) ($_SERVER['CFG_EMAIL_REPLY_TO_EMAIL'] ?? ''),
 
-                'smtp_host'   => $_SERVER['EMAIL_SMTP_HOST'] ?? '127.0.0.1',
-                'smtp_port'   => $_SERVER['EMAIL_SMTP_PORT'] ?? 25,
-                'smtp_secure' => $_SERVER['EMAIL_SMTP_SECURE'] ?? '',
+                'smtp_host'   => (string) ($_SERVER['CFG_EMAIL_SMTP_HOST'] ?? '127.0.0.1'),
+                'smtp_port'   => (int) ($_SERVER['CFG_EMAIL_SMTP_PORT'] ?? 25),
+                'smtp_secure' => (string) ($_SERVER['CFG_EMAIL_SMTP_SECURE'] ?? ''),
 
-                'smtp_username' => $_SERVER['EMAIL_SMTP_USERNAME'] ?? '',
-                'smtp_password' => $_SERVER['EMAIL_SMTP_PASSWORD'] ?? '',
+                'smtp_username' => (string) ($_SERVER['CFG_EMAIL_SMTP_USERNAME'] ?? ''),
+                'smtp_password' => (string) ($_SERVER['CFG_EMAIL_SMTP_PASSWORD'] ?? ''),
             ],
             'cookies' => [
-                'key' => $_SERVER['COOKIES_KEY'] ?? '',
+                'key' => (string) ($_SERVER['CFG_COOKIES_KEY'] ?? ''),
             ],
             'hash_ids' => [
-                'key' => $_SERVER['HASH_IDS_KEY'] ?? '',
+                'key' => (string) ($_SERVER['CFG_HASH_IDS_KEY'] ?? ''),
             ],
             'passwords' => [
-                'key' => $_SERVER['PASSWORDS_KEY'] ?? '',
+                'key' => (string) ($_SERVER['CFG_PASSWORDS_KEY'] ?? ''),
             ],
             'aws' => [
-                'access_key' => $_SERVER['AWS_ACCESS_KEY'] ?? '',
-                'secret_key' => $_SERVER['AWS_SECRET_KEY'] ?? '',
+                'access_key' => (string) ($_SERVER['CFG_AWS_ACCESS_KEY'] ?? ''),
+                'secret_key' => (string) ($_SERVER['CFG_AWS_SECRET_KEY'] ?? ''),
             ],
             'embedly' => [
-                'api_key' => $_SERVER['EMBEDLY_KEY'] ?? '',
+                'api_key' => (string) ($_SERVER['CFG_EMBEDLY_KEY'] ?? ''),
             ],
             'web_purify' => [
-                'api_key' => $_SERVER['WEBPURIFY_KEY'] ?? '',
+                'api_key' => (string) ($_SERVER['CFG_WEBPURIFY_KEY'] ?? ''),
             ],
         ];
         # Merge instance bases together now.
