@@ -168,6 +168,9 @@ class AppConfig extends AbsCore
             'web_purify' => [
                 'api_key' => (string) ($_SERVER['CFG_WEBPURIFY_KEY'] ?? ''),
             ],
+            'bitly' => [
+                'api_key' => (string) ($_SERVER['CFG_BITLY_KEY'] ?? ''),
+            ],
         ];
         # Merge instance bases together now.
 
