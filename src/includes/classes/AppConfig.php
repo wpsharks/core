@@ -267,7 +267,7 @@ class AppConfig extends AbsCore
             } // unset($_key, $_value);
             return $value;
         }
-        if ($value && is_string($value)) {
+        if ($value && is_string($value) && mb_strpos($value, '%%') !== false) {
             $value = str_replace(
                 [
                     '%%app_namespace%%',
@@ -283,6 +283,11 @@ class AppConfig extends AbsCore
                 ],
                 $value
             );
+            if (mb_stripos($value, '%%CFG_') !== false) {
+                $value = preg_replace_callback('/%%(?<cfg_key>CFG_[^%]+)%%/ui', function ($m) {
+                    return (string) ($_SERVER[$m['cfg_key']] ?? '');
+                });
+            }
         }
         return $value;
     }
