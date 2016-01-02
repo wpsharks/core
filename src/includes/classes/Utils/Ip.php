@@ -16,13 +16,13 @@ use WebSharks\Core\Traits;
 class Ip extends Classes\AppBase
 {
     /**
-     * Get the current visitor's real IP address.
+     * Current visitor's IP address.
      *
      * @since 150424 Initial release.
      *
-     * @return string Real IP address; else `unknown` on failure.
+     * @return string Current visitor's IP address.
      *
-     * @note This supports both IPv4 and IPv6 addresses.
+     * @note Supports both IPv4 & IPv6 addresses.
      */
     public function current(): string
     {
@@ -58,13 +58,13 @@ class Ip extends Classes\AppBase
     }
 
     /**
-     * Geographic region code for given IP address.
+     * Region code for IP address.
      *
      * @since 150424 Initial release.
      *
-     * @param string $ip An IP address to pull geographic data for.
+     * @param string $ip An IP address.
      *
-     * @return string Geographic region code for given IP address; if possible.
+     * @return string Region code for IP address.
      */
     public function region(string $ip): string
     {
@@ -75,16 +75,21 @@ class Ip extends Classes\AppBase
     }
 
     /**
-     * Geographic country code for given IP address.
+     * Country code for IP address.
      *
      * @since 150424 Initial release.
      *
-     * @param string $ip An IP address to pull geographic data for.
+     * @param string $ip An IP address.
      *
-     * @return string Geographic country code for given IP address; if possible.
+     * @return string Country code for IP address.
      */
     public function country(string $ip): string
     {
+        if (!empty($_SERVER['HTTP_CF_IPCOUNTRY']) // Save time.
+            && $ip === $_SERVER['HTTP_CF_CONNECTING_IP'] ?? '' && $ip === $this->current()
+            && mb_strlen((string) $_SERVER['HTTP_CF_IPCOUNTRY']) === 2) {
+            return (string) $_SERVER['HTTP_CF_IPCOUNTRY'];
+        }
         if (($geo = $this->geoData($ip))) {
             return $geo->country;
         }
@@ -92,13 +97,13 @@ class Ip extends Classes\AppBase
     }
 
     /**
-     * Geographic location data from IP address.
+     * Geo data for IP address.
      *
      * @since 150424 Initial release.
      *
-     * @param string $ip An IP address to query.
+     * @param string $ip An IP address.
      *
-     * @return \stdClass|bool Geo location data from IP address.
+     * @return \stdClass|bool Geo data for IP address.
      */
     protected function geoData(string $ip)
     {
@@ -154,7 +159,7 @@ class Ip extends Classes\AppBase
         # Fill object cache; i.e., `\stdClass` or `false`.
 
         $geo = (object) compact('region', 'country');
-        if (strlen($geo->region) !== 2 || strlen($geo->country) !== 2) {
+        if (mb_strlen($geo->region) !== 2 || mb_strlen($geo->country) !== 2) {
             $geo = false; // Invalid (or insufficient) data.
         }
         # Cache geo data; i.e., `\stdClass` or `false`.

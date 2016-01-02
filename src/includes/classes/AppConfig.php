@@ -44,8 +44,9 @@ class AppConfig extends AbsCore
             'handle_exceptions' => (bool) ($_SERVER['CFG_HANDLE_EXCEPTIONS'] ?? false),
             'contacts'          => [
                 'admin' => [
-                    'name'  => (string) ($_SERVER['CFG_ADMIN_NAME'] ?? 'Admin'),
-                    'email' => (string) ($_SERVER['CFG_ADMIN_EMAIL'] ?? 'admin@'.$this->App->server_name),
+                    'name'         => (string) ($_SERVER['CFG_ADMIN_NAME'] ?? 'Admin'),
+                    'email'        => (string) ($_SERVER['CFG_ADMIN_EMAIL'] ?? 'admin@'.$this->App->server_root_host),
+                    'public_email' => (string) ($_SERVER['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$this->App->server_root_host),
                 ],
             ],
             'di' => [
@@ -58,22 +59,24 @@ class AppConfig extends AbsCore
                     ],
                 ],
             ],
-            'db_shards' => [
-                'common' => [
-                    'port'    => (int) ($_SERVER['CFG_MYSQL_DB_PORT'] ?? 3306),
-                    'charset' => (string) ($_SERVER['CFG_MYSQL_DB_CHARSET'] ?? 'utf8mb4'),
-                    'collate' => (string) ($_SERVER['CFG_MYSQL_DB_COLLATE'] ?? 'utf8mb4_unicode_ci'),
+            'mysql_db' => [
+                'hosts' => [
+                    (string) ($_SERVER['CFG_MYSQL_DB_HOST'] ?? '127.0.0.1') => [
+                        'port'    => (int) ($_SERVER['CFG_MYSQL_DB_PORT'] ?? 3306),
+                        'charset' => (string) ($_SERVER['CFG_MYSQL_DB_CHARSET'] ?? 'utf8mb4'),
+                        'collate' => (string) ($_SERVER['CFG_MYSQL_DB_COLLATE'] ?? 'utf8mb4_unicode_ci'),
 
-                    'username' => (string) ($_SERVER['CFG_MYSQL_DB_USER'] ?? 'root'),
-                    'password' => (string) ($_SERVER['CFG_MYSQL_DB_PASSWORD'] ?? ''),
+                        'username' => (string) ($_SERVER['CFG_MYSQL_DB_USER'] ?? 'root'),
+                        'password' => (string) ($_SERVER['CFG_MYSQL_DB_PASSWORD'] ?? ''),
 
-                    'ssl_enable' => (bool) ($_SERVER['CFG_MYSQL_SSL_ENABLE'] ?? false),
-                    'ssl_ca'     => (string) ($_SERVER['CFG_MYSQL_SSL_CA'] ?? '%%app_dir%%/assets/ssl/ca.vm.crt'),
-                    'ssl_crt'    => (string) ($_SERVER['CFG_MYSQL_SSL_CRT'] ?? '%%app_dir%%/assets/ssl/client.crt'),
-                    'ssl_key'    => (string) ($_SERVER['CFG_MYSQL_SSL_KEY'] ?? '%%app_dir%%/assets/ssl/client.key'),
-                    'ssl_cipher' => (string) ($_SERVER['CFG_MYSQL_SSL_CIPHER'] ?? 'CAMELLIA256-SHA'),
+                        'ssl_enable' => (bool) ($_SERVER['CFG_MYSQL_SSL_ENABLE'] ?? false),
+                        'ssl_key'    => (string) ($_SERVER['CFG_MYSQL_SSL_KEY'] ?? ''),
+                        'ssl_crt'    => (string) ($_SERVER['CFG_MYSQL_SSL_CRT'] ?? ''),
+                        'ssl_ca'     => (string) ($_SERVER['CFG_MYSQL_SSL_CA'] ?? ''),
+                        'ssl_cipher' => (string) ($_SERVER['CFG_MYSQL_SSL_CIPHER'] ?? ''),
+                    ],
                 ],
-                'dbs' => [
+                'shards' => [
                     [
                         'range' => [
                             'from' => 0,
@@ -88,8 +91,8 @@ class AppConfig extends AbsCore
             ],
             'brand' => [
                 'acronym'     => (string) ($_SERVER['CFG_BRAND_ACRONYM'] ?? 'APP'),
-                'name'        => (string) ($_SERVER['CFG_BRAND_NAME'] ?? $this->App->server_name),
-                'keywords'    => (string) ($_SERVER['CFG_BRAND_KEYWORDS'] ?? [$this->App->server_name]),
+                'name'        => (string) ($_SERVER['CFG_BRAND_NAME'] ?? $this->App->server_host),
+                'keywords'    => (string) ($_SERVER['CFG_BRAND_KEYWORDS'] ?? [$this->App->server_host]),
                 'description' => (string) ($_SERVER['CFG_BRAND_DESCRIPTION'] ?? 'Just another site powered by the websharks/core.'),
                 'tagline'     => (string) ($_SERVER['CFG_BRAND_TAGLINE'] ?? 'Powered by the websharks/core.'),
                 'screenshot'  => (string) ($_SERVER['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
@@ -99,11 +102,11 @@ class AppConfig extends AbsCore
             'urls' => [
                 'hosts' => [
                     'roots' => [
-                        'app' => (string) ($_SERVER['CFG_APP_ROOT_HOST'] ?? $this->App->server_root_name),
+                        'app' => (string) ($_SERVER['CFG_APP_ROOT_HOST'] ?? $this->App->server_root_host),
                     ],
-                    'app'    => (string) ($_SERVER['CFG_APP_HOST'] ?? $this->App->server_name),
-                    'cdn'    => (string) ($_SERVER['CFG_CDN_HOST'] ?? 'cdn.'.$this->App->server_root_name),
-                    'cdn_s3' => (string) ($_SERVER['CFG_CDN_S3_HOST'] ?? 'cdn-s3.'.$this->App->server_root_name),
+                    'app'    => (string) ($_SERVER['CFG_APP_HOST'] ?? $this->App->server_host),
+                    'cdn'    => (string) ($_SERVER['CFG_CDN_HOST'] ?? 'cdn.'.$this->App->server_root_host),
+                    'cdn_s3' => (string) ($_SERVER['CFG_CDN_S3_HOST'] ?? 'cdn-s3.'.$this->App->server_root_host),
                 ],
                 'default_scheme' => (string) ($_SERVER['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),
                 'sig_key'        => (string) ($_SERVER['CFG_URL_SIG_KEY'] ?? ''),
@@ -114,8 +117,8 @@ class AppConfig extends AbsCore
                 'config_file'   => (string) ($_SERVER['CFG_CONFIG_FILE'] ?? ''),
             ],
             'fs_permissions' => [
-                'transient_dirs' => (int) ($_SERVER['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 0777),
-                // `0777` = `511` integer, which is just fine for `chmod()`.
+                'transient_dirs' => (int) ($_SERVER['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 0775),
+                // `0775` = `509` integer, which is just fine for `chmod()`.
             ],
             'memcache' => [
                 'enabled'   => (bool) ($_SERVER['CFG_MEMCACHE_ENABLED'] ?? true),
@@ -134,7 +137,7 @@ class AppConfig extends AbsCore
             ],
             'email' => [
                 'from_name'  => (string) ($_SERVER['CFG_EMAIL_FROM_NAME'] ?? 'App'),
-                'from_email' => (string) ($_SERVER['CFG_EMAIL_FROM_EMAIL'] ?? 'app@'.$this->App->server_name),
+                'from_email' => (string) ($_SERVER['CFG_EMAIL_FROM_EMAIL'] ?? 'app@'.$this->App->server_root_host),
 
                 'reply_to_name'  => (string) ($_SERVER['CFG_EMAIL_REPLY_TO_NAME'] ?? ''),
                 'reply_to_email' => (string) ($_SERVER['CFG_EMAIL_REPLY_TO_EMAIL'] ?? ''),

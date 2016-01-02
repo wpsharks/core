@@ -15,22 +15,22 @@ use WebSharks\Core\Traits;
 class App extends AbsCore
 {
     /**
-     * Server name.
+     * Server host.
      *
      * @since 15xxxx
      *
      * @type string
      */
-    public $server_name;
+    public $server_host;
 
     /**
-     * Server root name.
+     * Server root host.
      *
      * @since 15xxxx
      *
      * @type string
      */
-    public $server_root_name;
+    public $server_root_host;
 
     /**
      * Namespace.
@@ -130,10 +130,8 @@ class App extends AbsCore
         $GLOBALS[self::class]       = $this;
         $GLOBALS[$Class->getName()] = $this;
 
-        $this->server_name      = mb_strtolower(php_uname('n'));
-        $this->server_root_name = $this->server_name
-            ? implode('.', array_slice(explode('.', $this->server_name), -2))
-            : ''; // Not possible in this case.
+        $this->server_host      = mb_strtolower(php_uname('n'));
+        $this->server_root_host = implode('.', array_slice(explode('.', $this->server_host), -2));
 
         $this->namespace      = $Class->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
