@@ -39,15 +39,18 @@ class AppConfig extends AbsCore
 
         # Instance base (i.e., default config).
 
+        $host      = $_SERVER['CFG_HOST'] ?? mb_strtolower(php_uname('n'));
+        $root_host = $_SERVER['CFG_ROOT_HOST'] ?? implode('.', array_slice(explode('.', $host), -2));
+
         $default_instance_base = [
             'debug'             => (bool) ($_SERVER['CFG_DEBUG'] ?? false),
             'handle_exceptions' => (bool) ($_SERVER['CFG_HANDLE_EXCEPTIONS'] ?? false),
 
             'contacts' => [
                 'admin' => [
-                    'name'         => (string) ($_SERVER['CFG_ADMIN_NAME'] ?? 'Admin'),
-                    'email'        => (string) ($_SERVER['CFG_ADMIN_EMAIL'] ?? 'admin@'.$this->App->server_root_host),
-                    'public_email' => (string) ($_SERVER['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$this->App->server_root_host),
+                    'name'         => (string) ($_SERVER['CFG_ADMIN_NAME'] ?? $_SERVER['CFG_ADMIN_USERNAME'] ?? 'admin'),
+                    'email'        => (string) ($_SERVER['CFG_ADMIN_EMAIL'] ?? $_SERVER['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
+                    'public_email' => (string) ($_SERVER['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
                 ],
             ],
             'di' => [
@@ -67,7 +70,7 @@ class AppConfig extends AbsCore
                         'charset' => (string) ($_SERVER['CFG_MYSQL_DB_CHARSET'] ?? 'utf8mb4'),
                         'collate' => (string) ($_SERVER['CFG_MYSQL_DB_COLLATE'] ?? 'utf8mb4_unicode_ci'),
 
-                        'username' => (string) ($_SERVER['CFG_MYSQL_DB_USER'] ?? 'root'),
+                        'username' => (string) ($_SERVER['CFG_MYSQL_DB_USER'] ?? 'client'),
                         'password' => (string) ($_SERVER['CFG_MYSQL_DB_PASSWORD'] ?? ''),
 
                         'ssl_enable' => (bool) ($_SERVER['CFG_MYSQL_SSL_ENABLE'] ?? false),
@@ -91,9 +94,9 @@ class AppConfig extends AbsCore
                 ],
             ],
             'brand' => [
+                'name'        => (string) ($_SERVER['CFG_BRAND_NAME'] ?? $host),
                 'acronym'     => (string) ($_SERVER['CFG_BRAND_ACRONYM'] ?? 'APP'),
-                'name'        => (string) ($_SERVER['CFG_BRAND_NAME'] ?? $this->App->server_host),
-                'keywords'    => (string) ($_SERVER['CFG_BRAND_KEYWORDS'] ?? [$this->App->server_host]),
+                'keywords'    => (string) ($_SERVER['CFG_BRAND_KEYWORDS'] ?? [$host]),
                 'description' => (string) ($_SERVER['CFG_BRAND_DESCRIPTION'] ?? 'Just another site powered by the websharks/core.'),
                 'tagline'     => (string) ($_SERVER['CFG_BRAND_TAGLINE'] ?? 'Powered by the websharks/core.'),
                 'screenshot'  => (string) ($_SERVER['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
@@ -103,17 +106,19 @@ class AppConfig extends AbsCore
             'urls' => [
                 'hosts' => [
                     'roots' => [
-                        'app' => (string) ($_SERVER['CFG_APP_ROOT_HOST'] ?? $this->App->server_root_host),
+                        'app' => (string) ($_SERVER['CFG_ROOT_HOST'] ?? $root_host),
                     ],
-                    'app'    => (string) ($_SERVER['CFG_APP_HOST'] ?? $this->App->server_host),
-                    'cdn'    => (string) ($_SERVER['CFG_CDN_HOST'] ?? 'cdn.'.$this->App->server_root_host),
-                    'cdn_s3' => (string) ($_SERVER['CFG_CDN_S3_HOST'] ?? 'cdn-s3.'.$this->App->server_root_host),
+                    'app'    => (string) ($_SERVER['CFG_HOST'] ?? $host),
+                    'cdn'    => (string) ($_SERVER['CFG_CDN_HOST'] ?? 'cdn.'.$root_host),
+                    'cdn_s3' => (string) ($_SERVER['CFG_CDN_S3_HOST'] ?? 'cdn-s3.'.$root_host),
                 ],
-                'default_scheme' => (string) ($_SERVER['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),
-                'sig_key'        => (string) ($_SERVER['CFG_URL_SIG_KEY'] ?? ''),
+                'cdn_filter_enable' => (bool) ($_SERVER['CFG_CDN_FILTER_ENABLE'] ?? false),
+                'default_scheme'    => (string) ($_SERVER['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),
+                'sig_key'           => (string) ($_SERVER['CFG_URL_SIG_KEY'] ?? ''),
             ],
             'fs_paths' => [
-                'cache_dir'     => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '%%app_dir%%/.~cache'),
+                'logs_dir'      => (string) ($_SERVER['CFG_LOGS_DIR'] ?? '/var/log/app'),
+                'cache_dir'     => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '/ramdisks/app'),
                 'templates_dir' => (string) ($_SERVER['CFG_TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates'),
                 'config_file'   => (string) ($_SERVER['CFG_CONFIG_FILE'] ?? '%%app_dir%%/.config.json'),
             ],
@@ -134,11 +139,11 @@ class AppConfig extends AbsCore
             ],
             'i18n' => [
                 'locales'     => (array) ($_SERVER['CFG_LOCALES'] ?? ['en_US.UTF-8', 'C']),
-                'text_domain' => (string) ($_SERVER['CFG_I18N_TEXT_DOMAIN'] ?? 'app'),
+                'text_domain' => (string) ($_SERVER['CFG_I18N_TEXT_DOMAIN'] ?? $_SERVER['CFG_SLUG'] ?? 'app'),
             ],
             'email' => [
-                'from_name'  => (string) ($_SERVER['CFG_EMAIL_FROM_NAME'] ?? 'App'),
-                'from_email' => (string) ($_SERVER['CFG_EMAIL_FROM_EMAIL'] ?? 'app@'.$this->App->server_root_host),
+                'from_name'  => (string) ($_SERVER['CFG_EMAIL_FROM_NAME'] ?? $_SERVER['CFG_BRAND_NAME'] ?? $_SERVER['CFG_HOST'] ?? 'App'),
+                'from_email' => (string) ($_SERVER['CFG_EMAIL_FROM_EMAIL'] ?? $_SERVER['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'app@'.$root_host),
 
                 'reply_to_name'  => (string) ($_SERVER['CFG_EMAIL_REPLY_TO_NAME'] ?? ''),
                 'reply_to_email' => (string) ($_SERVER['CFG_EMAIL_REPLY_TO_EMAIL'] ?? ''),
@@ -216,7 +221,11 @@ class AppConfig extends AbsCore
             $base_di_default_rule_new_instances = $base['di']['default_rule']['new_instances'];
         } // Save new instances before emptying numeric arrays.
 
-        $base = $this->maybeEmptyNumericArrays($base, $merge); // Maybe empty numeric arrays.
+        if (isset($merge['mysql_db']['hosts'])) {
+            unset($base['mysql_db']['hosts']);
+        } // Override base array. Replace w/ new hosts only.
+
+        $base = $this->maybeEmptyNumericArrays($base, $merge);
 
         if (isset($base_di_default_rule_new_instances, $merge['di']['default_rule']['new_instances'])) {
             $merge['di']['default_rule']['new_instances'] = array_merge($base_di_default_rule_new_instances, $merge['di']['default_rule']['new_instances']);
@@ -273,12 +282,14 @@ class AppConfig extends AbsCore
                 [
                     '%%app_namespace%%',
                     '%%app_namespace_sha1%%',
+
                     '%%app_dir%%',
                     '%%core_dir%%',
                 ],
                 [
                     $this->App->namespace,
                     $this->App->namespace_sha1,
+
                     $this->App->dir,
                     $this->App->core_dir,
                 ],

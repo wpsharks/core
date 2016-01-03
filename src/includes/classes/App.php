@@ -15,24 +15,6 @@ use WebSharks\Core\Traits;
 class App extends AbsCore
 {
     /**
-     * Server host.
-     *
-     * @since 15xxxx
-     *
-     * @type string
-     */
-    public $server_host;
-
-    /**
-     * Server root host.
-     *
-     * @since 15xxxx
-     *
-     * @type string
-     */
-    public $server_root_host;
-
-    /**
      * Namespace.
      *
      * @since 15xxxx
@@ -129,9 +111,6 @@ class App extends AbsCore
 
         $GLOBALS[self::class]       = $this;
         $GLOBALS[$Class->getName()] = $this;
-
-        $this->server_host      = mb_strtolower(php_uname('n'));
-        $this->server_root_host = implode('.', array_slice(explode('.', $this->server_host), -2));
 
         $this->namespace      = $Class->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);

@@ -92,6 +92,9 @@ class Cdn extends Classes\AppBase implements Interfaces\MimeConstants
      */
     public function filter(string $url_uri_qsl): string
     {
+        if (!$this->App->Config->urls['cdn_filter_enable']) {
+            return $url_uri_qsl; // Nothing to do.
+        }
         if (!$this->App->Config->urls['hosts']['cdn']) {
             return $url_uri_qsl; // Nothing to do.
         }

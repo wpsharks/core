@@ -4,9 +4,9 @@ project_org                  = websharks
 project_slug                 = core
 
 project_ns                   = WebSharks\\Core
-project_sns                  = Core
+project_sns                  = WebSharksCore
 
 project_version              = %y%m%d
 
-project_php_required_version = 7.0.0-RC7
+project_php_required_version = 7.0
 project_php_up_to_version    = ${php.version}

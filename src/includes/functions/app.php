@@ -5,11 +5,11 @@ namespace WebSharks\Core\Functions;
 use WebSharks\Core\Classes\App;
 
 /**
- * @since 160102 Config.
+ * @since 160102 App.
  */
-function config_object()
+function app() // App instance.
 {
-    return $GLOBALS[App::class]->Config;
+    return $GLOBALS[App::class];
 }
 
 /**
