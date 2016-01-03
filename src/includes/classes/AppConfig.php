@@ -42,7 +42,8 @@ class AppConfig extends AbsCore
         $default_instance_base = [
             'debug'             => (bool) ($_SERVER['CFG_DEBUG'] ?? false),
             'handle_exceptions' => (bool) ($_SERVER['CFG_HANDLE_EXCEPTIONS'] ?? false),
-            'contacts'          => [
+
+            'contacts' => [
                 'admin' => [
                     'name'         => (string) ($_SERVER['CFG_ADMIN_NAME'] ?? 'Admin'),
                     'email'        => (string) ($_SERVER['CFG_ADMIN_EMAIL'] ?? 'admin@'.$this->App->server_root_host),
@@ -114,11 +115,11 @@ class AppConfig extends AbsCore
             'fs_paths' => [
                 'cache_dir'     => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '%%app_dir%%/.~cache'),
                 'templates_dir' => (string) ($_SERVER['CFG_TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates'),
-                'config_file'   => (string) ($_SERVER['CFG_CONFIG_FILE'] ?? ''),
+                'config_file'   => (string) ($_SERVER['CFG_CONFIG_FILE'] ?? '%%app_dir%%/.config.json'),
             ],
             'fs_permissions' => [
-                'transient_dirs' => (int) ($_SERVER['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 0775),
-                // `0775` = `509` integer, which is just fine for `chmod()`.
+                'transient_dirs' => (int) ($_SERVER['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 02775),
+                // `octdec(02775)` = 1533 as an integer.
             ],
             'memcache' => [
                 'enabled'   => (bool) ($_SERVER['CFG_MEMCACHE_ENABLED'] ?? true),
@@ -179,10 +180,10 @@ class AppConfig extends AbsCore
         # Merge a possible JSON configuration file also.
         // @TODO Store config in memory to avoid repeated disk reads.
 
-        if (($config_file = (string) ($instance['fs_paths']['config_file'] ?? ''))) {
-            if (!is_file($config_file)) {
-                throw new Exception(sprintf('Missing config file: `%1$s`.', $config_file));
-            } elseif (!is_array($config = json_decode(file_get_contents($config_file), true))) {
+        $config_file = $instance['fs_paths']['config_file'] ?? $instance_base['fs_paths']['config_file'];
+
+        if ($config_file && is_file($config_file)) { // Has a config file?
+            if (!is_array($config = json_decode(file_get_contents($config_file), true))) {
                 throw new Exception(sprintf('Invalid config file: `%1$s`.', $config_file));
             }
             $config = $this->merge($instance_base, $config, true);
@@ -283,9 +284,17 @@ class AppConfig extends AbsCore
                 ],
                 $value
             );
-            if (mb_stripos($value, '%%CFG_') !== false) {
-                $value = preg_replace_callback('/%%(?<cfg_key>CFG_[^%]+)%%/ui', function ($m) {
-                    return (string) ($_SERVER[$m['cfg_key']] ?? '');
+            if (mb_strpos($value, '%%env[') !== false) {
+                // e.g., `%%(int)env[CFG_MYSQL_DB_PORT]%%`, `%%(array)env[CFG_LOCALES]%%`.
+                $value = preg_replace_callback('/%%(\((?<type>[^()]+)\))?env\[(?<key>[^%[\]]+)\]%%/u', function ($m) {
+                    $env_key_value = $_SERVER[$m['key']] ?? '';
+
+                    if (!empty($m['type'])) {
+                        settype($env_key_value, $m['type']);
+                    } else {
+                        $env_key_value = (string) $env_key_value;
+                    }
+                    return $env_key_value;
                 });
             }
         }
