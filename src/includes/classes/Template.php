@@ -33,6 +33,15 @@ class Template extends AppBase
     protected $file;
 
     /**
+     * File ext.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    protected $file_ext;
+
+    /**
      * Parent files.
      *
      * @since 15xxxx
@@ -89,8 +98,13 @@ class Template extends AppBase
         if (!$dir || !$file) { // Empty?
             throw new Exception('Empty arg(s).');
         }
-        $this->dir          = $dir;
-        $this->file         = $file;
+        if (!is_file($dir.'/'.$file)) { // Missing?
+            throw new Exception(sprintf('Missing template: `%1$s`.', $dir.'/'.$file));
+        }
+        $this->dir      = $dir;
+        $this->file     = $file;
+        $this->file_ext = c\file_ext($file);
+
         $this->parents      = $parents;
         $this->parent_vars  = $parent_vars;
         $this->current_vars = [];
@@ -107,19 +121,23 @@ class Template extends AppBase
      */
     public function parse(array $¤vars = []): string
     {
-        $¤this = $this; // `$this` in symbol table.
-        // ↑ Strange magic makes it possible for `$this` to be used from
-        // inside the template file also. We just need to reference it here.
-        // See: <http://stackoverflow.com/a/4994799/1219741>
+        if ($this->file_ext === 'php') {
+            $¤this = $this; // `$this` in symbol table.
+            // ↑ Strange magic makes it possible for `$this` to be used from
+            // inside the template file also. We just need to reference it here.
+            // See: <http://stackoverflow.com/a/4994799/1219741>
 
-        unset($¤this, $¤vars['¤this'], $¤vars['this']);
-        unset($¤vars['¤defaults'], $¤vars['¤vars']);
+            unset($¤this, $¤vars['¤this'], $¤vars['this']);
+            unset($¤vars['¤defaults'], $¤vars['¤vars']);
 
-        $this->current_vars = $¤vars;
+            $this->current_vars = $¤vars;
 
-        ob_start(); // Output buffer.
-        require $this->dir.'/'.$this->file;
-        return ob_get_clean();
+            ob_start(); // Output buffer.
+            require $this->dir.'/'.$this->file;
+            return ob_get_clean();
+        } else {
+            return file_get_contents($this->dir.'/'.$this->file);
+        }
     }
 
     /**

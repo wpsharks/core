@@ -27,8 +27,8 @@ class Password extends Classes\AppBase
      */
     public function sha256(string $string, string $key = ''): string
     {
-        if (!$key && !($key = $this->App->Config->passwords['key'])) {
-            throw new Exception('Missing password key.');
+        if (!$key && !($key = $this->App->Config->passwords['hash_key'])) {
+            throw new Exception('Missing password hash key.');
         }
         return c\sha256_keyed_hash($string, $key);
     }

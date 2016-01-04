@@ -7,6 +7,14 @@ use WebSharks\Core\Classes\App;
 /**
  * @since 151214 Adding functions.
  */
+function regex_frag(...$args)
+{
+    return $GLOBALS[App::class]->Utils->RegexFrag->__invoke(...$args);
+}
+
+/**
+ * @since 151214 Adding functions.
+ */
 function regex_pattern_in(...$args)
 {
     return $GLOBALS[App::class]->Utils->RegexPattern->in(...$args);

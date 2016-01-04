@@ -94,14 +94,17 @@ class AppConfig extends AbsCore
                 ],
             ],
             'brand' => [
-                'name'        => (string) ($_SERVER['CFG_BRAND_NAME'] ?? $host),
-                'acronym'     => (string) ($_SERVER['CFG_BRAND_ACRONYM'] ?? 'APP'),
-                'keywords'    => (string) ($_SERVER['CFG_BRAND_KEYWORDS'] ?? [$host]),
+                'acronym' => (string) ($_SERVER['CFG_BRAND_ACRONYM'] ?? 'APP'),
+                'slug'    => (string) ($_SERVER['CFG_BRAND_SLUG'] ?? $_SERVER['CFG_SLUG'] ?? 'app'),
+                'name'    => (string) ($_SERVER['CFG_BRAND_NAME'] ?? $_SERVER['CFG_HOST'] ?? $host),
+
+                'keywords'    => (string) ($_SERVER['CFG_BRAND_KEYWORDS'] ?? $_SERVER['CFG_HOST'] ?? [$host]),
                 'description' => (string) ($_SERVER['CFG_BRAND_DESCRIPTION'] ?? 'Just another site powered by the websharks/core.'),
                 'tagline'     => (string) ($_SERVER['CFG_BRAND_TAGLINE'] ?? 'Powered by the websharks/core.'),
-                'screenshot'  => (string) ($_SERVER['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
-                'favicon'     => (string) ($_SERVER['CFG_BRAND_FAVICON'] ?? '/client-s/images/favicon.ico'),
-                'logo'        => (string) ($_SERVER['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
+
+                'screenshot' => (string) ($_SERVER['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
+                'favicon'    => (string) ($_SERVER['CFG_BRAND_FAVICON'] ?? '/client-s/images/favicon.ico'),
+                'logo'       => (string) ($_SERVER['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
             ],
             'urls' => [
                 'hosts' => [
@@ -156,13 +159,13 @@ class AppConfig extends AbsCore
                 'smtp_password' => (string) ($_SERVER['CFG_EMAIL_SMTP_PASSWORD'] ?? ''),
             ],
             'cookies' => [
-                'key' => (string) ($_SERVER['CFG_COOKIES_KEY'] ?? ''),
+                'encryption_key' => (string) ($_SERVER['CFG_COOKIES_KEY'] ?? ''),
             ],
             'hash_ids' => [
-                'key' => (string) ($_SERVER['CFG_HASH_IDS_KEY'] ?? ''),
+                'hash_key' => (string) ($_SERVER['CFG_HASH_IDS_KEY'] ?? ''),
             ],
             'passwords' => [
-                'key' => (string) ($_SERVER['CFG_PASSWORDS_KEY'] ?? ''),
+                'hash_key' => (string) ($_SERVER['CFG_PASSWORDS_KEY'] ?? ''),
             ],
             'aws' => [
                 'access_key' => (string) ($_SERVER['CFG_AWS_ACCESS_KEY'] ?? ''),

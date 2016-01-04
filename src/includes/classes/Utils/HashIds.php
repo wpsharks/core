@@ -42,8 +42,8 @@ class HashIds extends Classes\AppBase
     ) {
         parent::__construct();
 
-        if (!$key && !($key = $this->App->Config->hash_ids['key'])) {
-            throw new Exception('Missing HashIds key.');
+        if (!$key && !($key = $this->App->Config->hash_ids['hash_key'])) {
+            throw new Exception('Missing HashIds hash key.');
         }
         $this->Parser = new Parser($key, $min_chars, $alphabet);
     }
