@@ -44,7 +44,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
         $lines = 0; // Initialize lines read below.
         $stdin = ''; // Initialize input string.
 
-        stream_set_blocking(STDIN, (int) $blocking);
+        stream_set_blocking(STDIN, $blocking);
 
         while (($_line = fgets(STDIN)) !== false) {
             $stdin .= $_line; // Collect line.
@@ -73,7 +73,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
         if ($colorize) {
             $string = $this->colorize($string);
         }
-        stream_set_blocking(STDOUT, 1);
+        stream_set_blocking(STDOUT, true);
         fwrite(STDOUT, $string."\n");
     }
 
@@ -93,7 +93,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
         if ($colorize) {
             $string = $this->colorize($string, 'red_strong');
         }
-        stream_set_blocking(STDERR, 1);
+        stream_set_blocking(STDERR, true);
         fwrite(STDERR, $string."\n");
     }
 
