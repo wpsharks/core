@@ -71,5 +71,28 @@ class Escape extends Classes\AppBase
         return $this->App->Utils->HtmlEntities->encode($value);
     }
 
+    /**
+     * Escape shell arg(s).
+     *
+     * @since 160110 Escapes.
+     *
+     * @param mixed Input value.
+     *
+     * @return string|array|object Output value.
+     */
+    public function shell_arg($value): string
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->shell_arg($_value);
+            } // unset($_key, $_value);
+            return $value;
+        }
+        if (!($string = (string) $value)) {
+            return $string; // Nothing to do.
+        }
+        return escapeshellarg($string);
+    }
+
     // NOTE: SQL-related escapes are in the PDO class.
 }

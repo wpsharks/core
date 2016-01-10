@@ -45,6 +45,14 @@ function esc_url(...$args)
 }
 
 /**
+ * @since 160110 Adding shell arg escape.
+ */
+function esc_shell_arg(...$args)
+{
+    return $GLOBALS[App::class]->Utils->Escape->shell_arg(...$args);
+}
+
+/**
  * @since 151214 Adding functions.
  */
 function esc_sql_name(...$args)
