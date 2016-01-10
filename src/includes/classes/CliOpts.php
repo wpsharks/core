@@ -50,12 +50,14 @@ class CliOpts extends AppBase
      * @since 15xxxx Initial release.
      *
      * @param array $specs An array of option specs.
+     *
+     * @see https://github.com/c9s/GetOptionKit
      */
     public function add(array $specs)
     {
         foreach ($specs as $_spec => $_data) {
-            if ($_spec && is_string($_spec) && !empty($_data['desc'])) {
-                $_Option = $this->OptionCollection->add($_spec, $_data['desc']);
+            if ($_spec && is_string($_spec) && !empty($_data['description'])) {
+                $_Option = $this->OptionCollection->add($_spec, $_data['description']);
                 if (!empty($_data['type'])) {
                     $_Option->isa($_data['type']);
                 }
@@ -71,13 +73,15 @@ class CliOpts extends AppBase
      *
      * @since 15xxxx Initial release.
      *
+     * @param array|null $args Args to parse.
+     *
      * @return OptionResult Opts.
      */
-    public function parse(): OptionResult
+    public function parse(array $args = null): OptionResult
     {
         $Parser = new OptionParser($this->OptionCollection);
 
-        return $Parser->parse($GLOBALS['argv']);
+        return $Parser->parse($args ?? $GLOBALS['argv']);
     }
 
     /**
