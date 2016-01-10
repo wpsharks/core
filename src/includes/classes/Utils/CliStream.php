@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces\CliColorConstants
+class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces\CliConstants
 {
     /**
      * Class constructor.
@@ -86,7 +86,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
      */
     public function outHr(bool $colorize = true)
     {
-        $this->out($this::HR, $colorize);
+        $this->out($this::CLI_HR, $colorize);
     }
 
     /**
@@ -118,7 +118,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
      */
     public function errHr(bool $colorize = true)
     {
-        $this->out($this::HR, $colorize);
+        $this->out($this::CLI_HR, $colorize);
     }
 
     /**
@@ -174,9 +174,9 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
 
         if ($hr_color && isset($this::CLI_FG_COLORS[$hr_color])) {
             $colorized_string = preg_replace_callback(
-                '/^(?:[—\-]{3,})$/u', // `$this::HR`.
+                '/^(?:[—\-]{3,})$/um', // `$this::HR`.
                 function ($m) use ($fg_color, $hr_color) {
-                    return "\033".'['.$this::CLI_FG_COLORS[$hr_color].'m'.$this::HR."\033".'[0m'.
+                    return "\033".'['.$this::CLI_FG_COLORS[$hr_color].'m'.$this::CLI_HR."\033".'[0m'.
                             ($fg_color && isset($this::CLI_FG_COLORS[$fg_color]) ? "\033".'['.$this::CLI_FG_COLORS[$fg_color].'m' : '');
                             // ↑ Restores original color; if there is a foreground color.
                 },
@@ -239,13 +239,4 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
 
         return $colorized_string;
     }
-
-    /**
-     * Horizontal rule.
-     *
-     * @since 160110 Initial release.
-     *
-     * @type string
-     */
-    const HR = '——————————————————————————————————————————————————————————————————————';
 }

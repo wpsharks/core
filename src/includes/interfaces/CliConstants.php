@@ -3,16 +3,16 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
 /**
- * CLI color constants.
+ * CLI constants.
  *
- * @since 151213 CLI colors.
+ * @since 151213 Colors.
  */
-interface CliColorConstants
+interface CliConstants
 {
     /**
      * Background colors.
      *
-     * @since 151213 CLI colors.
+     * @since 151213 Colors.
      *
      * @type array
      */
@@ -31,7 +31,7 @@ interface CliColorConstants
     /**
      * Foreground colors.
      *
-     * @since 151213 CLI colors.
+     * @since 151213 Colors.
      *
      * @type array
      */
@@ -73,4 +73,13 @@ interface CliColorConstants
         'white_underline'   => '4;37',
         'default_underline' => '4;39',
     ];
+
+    /**
+     * Horizontal rule.
+     *
+     * @since 160110 HR.
+     *
+     * @type string
+     */
+    const CLI_HR = '——————————————————————————————————————————————————————————————————————';
 }
