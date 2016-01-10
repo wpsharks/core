@@ -39,9 +39,25 @@ function write_stdout(...$args)
 /**
  * @since 151214 Adding functions.
  */
+function write_stdout_div(...$args)
+{
+    return $GLOBALS[App::class]->Utils->CliStream->outDiv(...$args);
+}
+
+/**
+ * @since 151214 Adding functions.
+ */
 function write_stderr(...$args)
 {
     return $GLOBALS[App::class]->Utils->CliStream->err(...$args);
+}
+
+/**
+ * @since 151214 Adding functions.
+ */
+function write_stderr_div(...$args)
+{
+    return $GLOBALS[App::class]->Utils->CliStream->errDiv(...$args);
 }
 
 /**

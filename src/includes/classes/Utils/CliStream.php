@@ -78,6 +78,18 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
     }
 
     /**
+     * Output divider to STDOUT.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param bool $colorize Colorize output?
+     */
+    public function outDiv(bool $colorize = true)
+    {
+        $this->out(str_repeat('—', 70), $colorize);
+    }
+
+    /**
      * Output to STDERR.
      *
      * @since 150424 Initial release.
@@ -95,6 +107,18 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
         }
         stream_set_blocking(STDERR, true);
         fwrite(STDERR, $string."\n");
+    }
+
+    /**
+     * Output divider to STDERR.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param bool $colorize Colorize output?
+     */
+    public function errDiv(bool $colorize = true)
+    {
+        $this->out(str_repeat('—', 70), $colorize);
     }
 
     /**
