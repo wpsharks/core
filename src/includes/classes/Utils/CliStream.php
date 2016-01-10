@@ -78,15 +78,15 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
     }
 
     /**
-     * Output divider to STDOUT.
+     * Output HR to STDOUT.
      *
      * @since 150424 Initial release.
      *
      * @param bool $colorize Colorize output?
      */
-    public function outDiv(bool $colorize = true)
+    public function outHr(bool $colorize = true)
     {
-        $this->out(str_repeat('—', 70), $colorize);
+        $this->out($this::HR, $colorize);
     }
 
     /**
@@ -110,15 +110,15 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
     }
 
     /**
-     * Output divider to STDERR.
+     * Output HR to STDERR.
      *
      * @since 150424 Initial release.
      *
      * @param bool $colorize Colorize output?
      */
-    public function errDiv(bool $colorize = true)
+    public function errHr(bool $colorize = true)
     {
-        $this->out(str_repeat('—', 70), $colorize);
+        $this->out($this::HR, $colorize);
     }
 
     /**
@@ -140,6 +140,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
         array $args = []
     ): string {
         $default_args = [
+            'hr_color'     => 'black',
             'em_color'     => 'default_em',
             'strong_color' => 'default_strong',
             'code_color'   => 'green_strong',
@@ -148,6 +149,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
+        $hr_color     = (string) $args['hr_color'];
         $em_color     = (string) $args['em_color'];
         $strong_color = (string) $args['strong_color'];
         $code_color   = (string) $args['code_color'];
@@ -167,6 +169,19 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
 
         if ($fg_color || $bg_color) {
             $colorized_string .= "\033".'[0m'; // Reset.
+        }
+        colorize_hrs: // Target point for HR colorization.
+
+        if ($hr_color && isset($this::CLI_FG_COLORS[$hr_color])) {
+            $colorized_string = preg_replace_callback(
+                '/^(?:[—\-]{3,})$/u', // `$this::HR`.
+                function ($m) use ($fg_color, $hr_color) {
+                    return "\033".'['.$this::CLI_FG_COLORS[$hr_color].'m'.$this::HR."\033".'[0m'.
+                            ($fg_color && isset($this::CLI_FG_COLORS[$fg_color]) ? "\033".'['.$this::CLI_FG_COLORS[$fg_color].'m' : '');
+                            // ↑ Restores original color; if there is a foreground color.
+                },
+                $colorized_string // e.g., `[—-]` (3 or more).
+            );
         }
         colorize_ems: // Target point for emphasis colorization.
 
@@ -224,4 +239,13 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
 
         return $colorized_string;
     }
+
+    /**
+     * Horizontal rule.
+     *
+     * @since 160110 Initial release.
+     *
+     * @type string
+     */
+    const HR = '——————————————————————————————————————————————————————————————————————';
 }

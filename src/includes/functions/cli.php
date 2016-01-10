@@ -39,9 +39,9 @@ function write_stdout(...$args)
 /**
  * @since 151214 Adding functions.
  */
-function write_stdout_div(...$args)
+function write_stdout_hr(...$args)
 {
-    return $GLOBALS[App::class]->Utils->CliStream->outDiv(...$args);
+    return $GLOBALS[App::class]->Utils->CliStream->outHr(...$args);
 }
 
 /**
@@ -55,9 +55,9 @@ function write_stderr(...$args)
 /**
  * @since 151214 Adding functions.
  */
-function write_stderr_div(...$args)
+function write_stderr_hr(...$args)
 {
-    return $GLOBALS[App::class]->Utils->CliStream->errDiv(...$args);
+    return $GLOBALS[App::class]->Utils->CliStream->errHr(...$args);
 }
 
 /**
