@@ -38,7 +38,7 @@ class Escape extends Classes\AppBase
      *
      * @return string|array|object Output value.
      */
-    public function textarea($value): string
+    public function textarea($value)
     {
         return $this->App->Utils->HtmlEntities->encode($value);
     }
@@ -52,7 +52,7 @@ class Escape extends Classes\AppBase
      *
      * @return string|array|object Output value.
      */
-    public function attr($value): string
+    public function attr($value)
     {
         return $this->App->Utils->HtmlEntities->encode($value);
     }
@@ -66,7 +66,7 @@ class Escape extends Classes\AppBase
      *
      * @return string|array|object Output value.
      */
-    public function url($value): string
+    public function url($value)
     {
         return $this->App->Utils->HtmlEntities->encode($value);
     }
@@ -80,7 +80,7 @@ class Escape extends Classes\AppBase
      *
      * @return string|array|object Output value.
      */
-    public function shell_arg($value): string
+    public function shell_arg($value)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
