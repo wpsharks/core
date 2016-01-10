@@ -194,6 +194,11 @@ class AppConfig extends AbsCore
             if (!is_array($config = json_decode(file_get_contents($config_file), true))) {
                 throw new Exception(sprintf('Invalid config file: `%1$s`.', $config_file));
             }
+            if (!empty($config['core_app'])) {
+                $config = (array) $config['core_app'];
+            } elseif (!empty($config['app'])) {
+                $config = (array) $config['app'];
+            }
             $config = $this->merge($instance_base, $config, true);
             $config = $this->merge($config, $instance);
         } else {
@@ -288,6 +293,7 @@ class AppConfig extends AbsCore
 
                     '%%app_dir%%',
                     '%%core_dir%%',
+                    '%%home_dir%%',
                 ],
                 [
                     $this->App->namespace,
@@ -295,6 +301,7 @@ class AppConfig extends AbsCore
 
                     $this->App->dir,
                     $this->App->core_dir,
+                    (string) ($_SERVER['HOME'] ?? ''),
                 ],
                 $value
             );
