@@ -4,24 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e516fdc9535be2a447d2c1775b209057",
+    "hash": "4be2f662c65e2416e94907ebb554ff10",
+    "content-hash": "0125eb3708610d5287ad98de536fe34f",
     "packages": [
         {
             "name": "websharks/dicer",
-            "version": "dev-master",
+            "version": "dev-original",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
-                "reference": "60ae3c26ac7efce66e05005d7330cb764785a156"
+                "reference": "958e00422e3719e27c6b59bd108fbfd8adf97cf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/dicer/zipball/60ae3c26ac7efce66e05005d7330cb764785a156",
-                "reference": "60ae3c26ac7efce66e05005d7330cb764785a156",
+                "url": "https://api.github.com/repos/websharks/dicer/zipball/958e00422e3719e27c6b59bd108fbfd8adf97cf3",
+                "reference": "958e00422e3719e27c6b59bd108fbfd8adf97cf3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.7"
+                "php": ">=5.5"
             },
             "type": "library",
             "autoload": {
@@ -31,7 +32,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-2-Clause"
+                "GPL-3.0+"
             ],
             "authors": [
                 {
@@ -55,22 +56,22 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2015-05-31 21:57:59"
+            "time": "2016-01-10 09:26:12"
         }
     ],
     "packages-dev": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.8.8",
+            "version": "2.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "2b62281500f0c4671000f90255a73e6570d7a36a"
+                "reference": "54b67f902bb2c5bbab481bc3c46537752a018830"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2b62281500f0c4671000f90255a73e6570d7a36a",
-                "reference": "2b62281500f0c4671000f90255a73e6570d7a36a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/54b67f902bb2c5bbab481bc3c46537752a018830",
+                "reference": "54b67f902bb2c5bbab481bc3c46537752a018830",
                 "shasum": ""
             },
             "require": {
@@ -82,6 +83,7 @@
                 "ext-openssl": "*",
                 "monolog/monolog": "~1.4",
                 "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit-mock-objects": "2.3.1",
                 "symfony/yaml": "~2.1"
             },
             "suggest": {
@@ -119,20 +121,20 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-05-29 00:35:23"
+            "time": "2015-11-16 22:34:08"
         },
         {
             "name": "corneltek/getoptionkit",
-            "version": "2.1.1",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/c9s/GetOptionKit.git",
-                "reference": "8be6d5d4666d371d006d59b56519453d26040e08"
+                "reference": "c7170525314b587019c0b2a7b0354432b64b48e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/8be6d5d4666d371d006d59b56519453d26040e08",
-                "reference": "8be6d5d4666d371d006d59b56519453d26040e08",
+                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/c7170525314b587019c0b2a7b0354432b64b48e0",
+                "reference": "c7170525314b587019c0b2a7b0354432b64b48e0",
                 "shasum": ""
             },
             "require": {
@@ -161,20 +163,20 @@
             ],
             "description": "Powerful command-line option toolkit",
             "homepage": "http://github.com/c9s/GetOptionKit",
-            "time": "2015-05-06 06:06:47"
+            "time": "2015-10-02 07:53:43"
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.5.3",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a"
+                "reference": "3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a",
-                "reference": "b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7",
+                "reference": "3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7",
                 "shasum": ""
             },
             "type": "library",
@@ -200,20 +202,20 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-04-29 20:22:24"
+            "time": "2015-10-04 16:44:32"
         },
         {
             "name": "erusev/parsedown-extra",
-            "version": "0.7.0",
+            "version": "0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown-extra.git",
-                "reference": "11a44e076d02ffcc4021713398a60cd73f78b6f5"
+                "reference": "0db5cce7354e4b76f155d092ab5eb3981c21258c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/11a44e076d02ffcc4021713398a60cd73f78b6f5",
-                "reference": "11a44e076d02ffcc4021713398a60cd73f78b6f5",
+                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/0db5cce7354e4b76f155d092ab5eb3981c21258c",
+                "reference": "0db5cce7354e4b76f155d092ab5eb3981c21258c",
                 "shasum": ""
             },
             "require": {
@@ -244,7 +246,7 @@
                 "parsedown",
                 "parser"
             ],
-            "time": "2015-01-25 14:52:34"
+            "time": "2015-11-01 10:19:22"
         },
         {
             "name": "guzzle/guzzle",
@@ -343,16 +345,16 @@
         },
         {
             "name": "lusitanian/oauth",
-            "version": "v0.3.5",
+            "version": "v0.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
-                "reference": "ac5a1cd5a4519143728dce2213936eea302edf8a"
+                "reference": "769fea1bb53845c7b03cca97cbdd0708e9ec26da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/ac5a1cd5a4519143728dce2213936eea302edf8a",
-                "reference": "ac5a1cd5a4519143728dce2213936eea302edf8a",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/769fea1bb53845c7b03cca97cbdd0708e9ec26da",
+                "reference": "769fea1bb53845c7b03cca97cbdd0708e9ec26da",
                 "shasum": ""
             },
             "require": {
@@ -361,6 +363,7 @@
             "require-dev": {
                 "phpunit/phpunit": "3.7.*",
                 "predis/predis": "0.8.*@dev",
+                "squizlabs/php_codesniffer": "2.*",
                 "symfony/http-foundation": "~2.1"
             },
             "suggest": {
@@ -390,6 +393,10 @@
                     "email": "david@daviddesberg.com"
                 },
                 {
+                    "name": "Elliot Chance",
+                    "email": "elliotchance@gmail.com"
+                },
+                {
                     "name": "Pieter Hordijk",
                     "email": "info@pieterhordijk.com"
                 }
@@ -401,20 +408,20 @@
                 "oauth",
                 "security"
             ],
-            "time": "2014-09-05 15:19:58"
+            "time": "2015-12-21 00:06:34"
         },
         {
             "name": "michelf/php-markdown",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/michelf/php-markdown.git",
-                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9"
+                "reference": "156e56ee036505ec637d761ee62dc425d807183c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/e1aabe18173231ebcefc90e615565742fc1c7fd9",
-                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9",
+                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/156e56ee036505ec637d761ee62dc425d807183c",
+                "reference": "156e56ee036505ec637d761ee62dc425d807183c",
                 "shasum": ""
             },
             "require": {
@@ -437,14 +444,14 @@
             ],
             "authors": [
                 {
-                    "name": "John Gruber",
-                    "homepage": "http://daringfireball.net/"
-                },
-                {
                     "name": "Michel Fortin",
                     "email": "michel.fortin@michelf.ca",
                     "homepage": "https://michelf.ca/",
                     "role": "Developer"
+                },
+                {
+                    "name": "John Gruber",
+                    "homepage": "https://daringfireball.net/"
                 }
             ],
             "description": "PHP Markdown",
@@ -452,7 +459,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2015-03-01 12:03:08"
+            "time": "2015-12-24 01:37:31"
         },
         {
             "name": "ryakad/pandoc-php",
@@ -482,16 +489,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "687039686d0e923429ba6e958d0baa920cd5d458"
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/687039686d0e923429ba6e958d0baa920cd5d458",
-                "reference": "687039686d0e923429ba6e958d0baa920cd5d458",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a5eb815363c0388e83247e7e9853e5dbc14999cc",
+                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc",
                 "shasum": ""
             },
             "require": {
@@ -499,11 +506,10 @@
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.0,>=2.0.5",
-                "symfony/dependency-injection": "~2.6",
-                "symfony/expression-language": "~2.6",
-                "symfony/phpunit-bridge": "~2.7",
-                "symfony/stopwatch": "~2.3"
+                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+                "symfony/dependency-injection": "~2.6|~3.0.0",
+                "symfony/expression-language": "~2.6|~3.0.0",
+                "symfony/stopwatch": "~2.3|~3.0.0"
             },
             "suggest": {
                 "symfony/dependency-injection": "",
@@ -512,13 +518,16 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\EventDispatcher\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -536,38 +545,38 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:21:08"
+            "time": "2015-10-30 20:15:42"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.7.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Yaml.git",
-                "reference": "4a29a5248aed4fb45f626a7bbbd330291492f5c3"
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "ac84cbb98b68a6abbc9f5149eb96ccc7b07b8966"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/4a29a5248aed4fb45f626a7bbbd330291492f5c3",
-                "reference": "4a29a5248aed4fb45f626a7bbbd330291492f5c3",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/ac84cbb98b68a6abbc9f5149eb96ccc7b07b8966",
+                "reference": "ac84cbb98b68a6abbc9f5149eb96ccc7b07b8966",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
             },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
-            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Yaml\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -585,7 +594,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:21:08"
+            "time": "2015-12-26 13:37:56"
         }
     ],
     "aliases": [],
