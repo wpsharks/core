@@ -73,15 +73,28 @@ class CliOpts extends AppBase
      *
      * @since 15xxxx Initial release.
      *
-     * @param array|null $args Args to parse.
+     * @param bool       $extract Extract into an array after parsing?
+     * @param array|null $args    Args to parse; default is `$GLOBALS['argv']`.
      *
-     * @return OptionResult Opts.
+     * @return array|OptionResult|Option[] Associative array, or the result set of Option objs.
      */
-    public function parse(array $args = null): OptionResult
+    public function parse(bool $extract = true, array $args = null)
     {
         $Parser = new OptionParser($this->OptionCollection);
 
-        return $Parser->parse($args ?? $GLOBALS['argv']);
+        $OptionResult = $Options = $Parser->parse($args ?? $GLOBALS['argv']);
+
+        if (!$extract) { // This contains some additional information for each option.
+            return $OptionResult = $Options; // OptionResult|Option[]
+        } else {
+            $options = []; // Associative array (default behavior).
+
+            foreach ($Options as $_key => $_Option) {
+                $options[str_replace('-', '_', $_key)] = $_Option->getValue();
+            } // unset($_key, $_Option); // Housekeeping.
+
+            return $options; // Suitable for `extract()` now.
+        }
     }
 
     /**
