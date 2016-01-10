@@ -167,20 +167,20 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
         }
         $colorized_string .= $string; // The string we are coloring now.
 
-        if ($fg_color || $bg_color) { // If either of the above apply.
-            $colorized_string .= "\033".'[0m'; // Reset.
+        if ($fg_color || $bg_color) { // Either of the above apply?
+            $colorized_string .= "\033".'[0m'; // Reset color.
         }
         colorize_hrs: // Target point for HR colorization.
 
         if ($hr_color && isset($this::CLI_FG_COLORS[$hr_color])) {
             $colorized_string = preg_replace_callback(
-                '/^(?<o>'."\033".'\[[0-9;]+m)?(?:[—\-]{3,})(?<c>'."\033".'\[0m)?$/um',
+                '/^(?<o>(?:'."\033".'\[[0-9;]+m)+)?(?<hr>\-{3,})(?<c>'."\033".'\[0m)?$/um',
                 function ($m) use ($fg_color, $hr_color) {
                     return ($m['o'] ?? '')."\033".'['.$this::CLI_FG_COLORS[$hr_color].'m'.$this::CLI_HR."\033".'[0m'.
                             ($fg_color && isset($this::CLI_FG_COLORS[$fg_color]) ? "\033".'['.$this::CLI_FG_COLORS[$fg_color].'m' : '').
                             ($m['c'] ?? ''); // ↑ Restores original color; if there is a foreground color.
                 },
-                $colorized_string // e.g., `[—-]` (3 or more).
+                $colorized_string // e.g., `---` (3 or more).
             );
         }
         colorize_ems: // Target point for emphasis colorization.
