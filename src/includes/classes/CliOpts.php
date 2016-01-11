@@ -56,13 +56,17 @@ class CliOpts extends AppBase
     public function add(array $specs)
     {
         foreach ($specs as $_spec => $_data) {
-            if ($_spec && is_string($_spec) && !empty($_data['description'])) {
-                $_Option = $this->OptionCollection->add($_spec, $_data['description']);
+            if ($_spec && is_string($_spec) && !empty($_data['desc'])) {
+                $_Option = $this->OptionCollection->add($_spec, $_data['desc']);
+
                 if (!empty($_data['type'])) {
                     $_Option->isa($_data['type']);
                 }
                 if (isset($_data['default'])) {
                     $_Option->defaultValue($_data['default']);
+                }
+                if (isset($_data['valid_values'])) {
+                    $_Option->validValues($_data['valid_values']);
                 }
             }
         } // unset($_spec, $_data, $_Option);
@@ -90,8 +94,10 @@ class CliOpts extends AppBase
             $options = []; // Associative array (default behavior).
 
             foreach ($Options as $_key => $_Option) {
-                $options[str_replace('-', '_', $_key)] = $_Option->getValue();
-            } // unset($_key, $_Option); // Housekeeping.
+                $_key           = preg_replace('/[^a-z0-9]/ui', '_', $_key);
+                $_value         = $_Option->getValue();
+                $options[$_key] = $_value;
+            } // unset($_key, $_value, $_Option);
 
             return $options; // Suitable for `extract()` now.
         }
