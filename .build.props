@@ -1,12 +1,12 @@
-project_title                = WebSharks Core
+project_title                   = WebSharks Core
 
-project_org                  = websharks
-project_slug                 = core
+project_owner                   = websharks
+project_slug                    = core
 
-project_ns                   = WebSharks\\Core
-project_sns                  = WebSharksCore
+project_namespace               = WebSharks\\Core
+project_sub_namespace           = WebSharksCore
 
-project_version              = %y%m%d
+project_version                 = %y%m%d
 
-project_php_required_version = 7.0
-project_php_up_to_version    = ${php.version}
+project_php_required_version    = 7.0
+project_php_tested_up_to_version = ${php.version}
