@@ -102,9 +102,9 @@ class AppConfig extends AbsCore
                 'description' => (string) ($_SERVER['CFG_BRAND_DESCRIPTION'] ?? 'Just another site powered by the websharks/core.'),
                 'tagline'     => (string) ($_SERVER['CFG_BRAND_TAGLINE'] ?? 'Powered by the websharks/core.'),
 
-                'screenshot' => (string) ($_SERVER['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
-                'favicon'    => (string) ($_SERVER['CFG_BRAND_FAVICON'] ?? '/client-s/images/favicon.ico'),
+                'favicon'    => (string) ($_SERVER['CFG_BRAND_FAVICON'] ?? '/favicon.ico'),
                 'logo'       => (string) ($_SERVER['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
+                'screenshot' => (string) ($_SERVER['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
             ],
             'urls' => [
                 'hosts' => [
