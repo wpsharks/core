@@ -71,12 +71,12 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
      * @param array       $args           Input array of query args.
      * @param null|string $numeric_prefix Defaults to an empty string.
      * @param string      $arg_separator  Defaults to `&`. Empty = INI `arg_separator.output`.
-     * @param string      $enc_type       Defaults to {@link PHP_QUERY_RFC1738} indicating `urlencode()`.
+     * @param int         $enc_type       Defaults to {@link PHP_QUERY_RFC1738} indicating `urlencode()`.
      *                                    Or, {@link PHP_QUERY_RFC3986} indicating `rawurlencode()`.
      *
      * @return string A (possibly raw) URL-encoded query string (w/o a leading `?`).
      */
-    public function build(array $args, string $numeric_prefix = '', string $arg_separator = '&', string $enc_type = PHP_QUERY_RFC1738): string
+    public function build(array $args, string $numeric_prefix = '', string $arg_separator = '&', int $enc_type = PHP_QUERY_RFC1738): string
     {
         if (!isset($arg_separator[0])) {
             $arg_separator = ini_get('arg_separator.output');
