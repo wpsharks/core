@@ -23,7 +23,7 @@ trait I18nMembers
      *
      * @return string Translated string.
      */
-    protected function /* @codingStandardsIgnoreStart */ __ /*@codingStandardsIgnoreEnd*/(string $string): string
+    public function /* @codingStandardsIgnoreStart */ __ /*@codingStandardsIgnoreEnd*/(string $string): string
     {
         if ($this->App->Config->i18n['text_domain']) {
             return $string;
