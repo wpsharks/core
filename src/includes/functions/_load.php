@@ -17,6 +17,7 @@ require_once __DIR__.'/eols.php';
 require_once __DIR__.'/escapes.php';
 require_once __DIR__.'/exceptions.php';
 require_once __DIR__.'/files.php';
+require_once __DIR__.'/gravatar.php';
 require_once __DIR__.'/headers.php';
 require_once __DIR__.'/html.php';
 require_once __DIR__.'/i18n.php';
