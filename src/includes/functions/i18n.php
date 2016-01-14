@@ -9,5 +9,5 @@ use WebSharks\Core\Classes\App;
  */
 function __(...$args)
 {
-    return $GLOBALS[App::class]->__(...$args);
+    return $GLOBALS[App::class]->Utils->I18n->__(...$args);
 }

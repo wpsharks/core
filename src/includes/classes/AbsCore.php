@@ -15,7 +15,6 @@ use WebSharks\Core\Traits;
 abstract class AbsCore implements \Serializable, \JsonSerializable
 {
     use Traits\CacheMembers;
-    use Traits\I18nMembers;
     use Traits\OverloadMembers;
 
     /**

@@ -1,18 +1,19 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Traits;
+namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Utils;
 use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Functions as c;
 use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
 
 /**
- * i18n members.
+ * i18n utilities.
  *
- * @since 150424 Initial release.
+ * @since 160113 Initial release.
  */
-trait I18nMembers
+class I18n extends Classes\AppBase
 {
     /**
      * Translate a string.
