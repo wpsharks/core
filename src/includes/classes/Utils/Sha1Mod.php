@@ -33,7 +33,7 @@ class Sha1Mod extends Classes\AppBase
     {
         parent::__construct();
 
-        $this->total_shards = count($this->App->Config->db_shards['dbs']);
+        $this->total_shards = count($this->App->Config->mysql_db['shards']);
     }
 
     /**
