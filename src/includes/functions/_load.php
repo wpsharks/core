@@ -5,6 +5,7 @@ namespace WebSharks\Core\Functions;
 require_once __DIR__.'/app.php';
 require_once __DIR__.'/base64.php';
 require_once __DIR__.'/benchmark.php';
+require_once __DIR__.'/bitly.php';
 require_once __DIR__.'/cli.php';
 require_once __DIR__.'/clippers.php';
 require_once __DIR__.'/cookies.php';
