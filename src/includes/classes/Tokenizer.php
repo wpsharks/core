@@ -107,12 +107,12 @@ class Tokenizer extends AppBase
      */
     public function &restoreGetString(): string
     {
-        if (!$this->tokens || mb_strpos($this->string, '%#%') === false) {
+        if (!$this->tokens || mb_strpos($this->string, '¤%#%¤') === false) {
             return $this->string; // Nothing to restore in this case.
         }
         foreach (array_reverse($this->tokens, true) as $_token => $_value) {
             // Must go in reverse order so nested tokens unfold properly.
-            $this->string = str_replace('%#%html-token-'.$this->marker.'-'.$_token.'%#%', $_value, $this->string);
+            $this->string = str_replace('¤%#%¤html-token-'.$this->marker.'-'.$_token.'¤%#%¤', $_value, $this->string);
         } // unset($_token, $_value); // Housekeeping.
 
         return $this->string;
@@ -136,7 +136,7 @@ class Tokenizer extends AppBase
         }
         $this->string = preg_replace_callback('/'.get_shortcode_regex().'/us', function ($m) {
             $this->tokens[] = $m[0]; // Tokenize.
-            return '%#%html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'%#%';
+            return '¤%#%¤html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'¤%#%¤';
         }, $this->string); // Shortcodes replaced by tokens.
     }
 
@@ -162,7 +162,7 @@ class Tokenizer extends AppBase
 
         $this->string = preg_replace_callback($pre, function ($m) {
             $this->tokens[] = $m[0]; // Tokenize.
-            return '%#%html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'%#%';
+            return '¤%#%¤html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'¤%#%¤';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -188,7 +188,7 @@ class Tokenizer extends AppBase
 
         $this->string = preg_replace_callback($code, function ($m) {
             $this->tokens[] = $m[0]; // Tokenize.
-            return '%#%html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'%#%';
+            return '¤%#%¤html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'¤%#%¤';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -214,7 +214,7 @@ class Tokenizer extends AppBase
 
         $this->string = preg_replace_callback($samp, function ($m) {
             $this->tokens[] = $m[0]; // Tokenize.
-            return '%#%html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'%#%';
+            return '¤%#%¤html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'¤%#%¤';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -240,7 +240,7 @@ class Tokenizer extends AppBase
 
         $this->string = preg_replace_callback($a, function ($m) {
             $this->tokens[] = $m[0]; // Tokenize.
-            return '%#%html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'%#%';
+            return '¤%#%¤html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'¤%#%¤';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -264,7 +264,7 @@ class Tokenizer extends AppBase
 
         $this->string = preg_replace_callback($tags, function ($m) {
             $this->tokens[] = $m[0]; // Tokenize.
-            return '%#%html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'%#%';
+            return '¤%#%¤html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'¤%#%¤';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -288,7 +288,7 @@ class Tokenizer extends AppBase
 
         $this->string = preg_replace_callback($md_fences, function ($m) {
             $this->tokens[] = $m[0]; // Tokenize.
-            return '%#%html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'%#%';
+            return '¤%#%¤html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'¤%#%¤';
         }, $this->string); // Fences replaced by tokens.
     }
 
@@ -316,7 +316,7 @@ class Tokenizer extends AppBase
             ],
             function ($m) {
                 $this->tokens[] = $m[0]; // Tokenize.
-                return '%#%html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'%#%';
+                return '¤%#%¤html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'¤%#%¤';
             },
             $this->string // Shortcodes replaced by tokens.
         );
