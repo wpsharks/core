@@ -43,17 +43,19 @@ class Markdown extends Classes\AppBase
             'flavor' => 'markdown-extra',
             // `parsedown-extra` is faster, but buggy.
             // See: <https://github.com/erusev/parsedown-extra/issues/44>
-            'breaks'    => true, // Parsedown only.
-            'anchorize' => false,
-            'no_p'      => false,
+            'breaks'      => true, // Parsedown only.
+            'anchorize'   => false,
+            'anchor_rels' => [],
+            'no_p'        => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $flavor    = (string) $args['flavor'];
-        $breaks    = (bool) $args['breaks'];
-        $no_p      = (bool) $args['no_p'];
-        $anchorize = (bool) $args['anchorize'];
+        $flavor      = (string) $args['flavor'];
+        $breaks      = (bool) $args['breaks'];
+        $no_p        = (bool) $args['no_p'];
+        $anchorize   = (bool) $args['anchorize'];
+        $anchor_rels = (array) $args['anchor_rels'];
 
         if ($flavor === 'parsedown-extra') {
             if (is_null($ParsedownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
@@ -71,6 +73,9 @@ class Markdown extends Classes\AppBase
         }
         if ($anchorize) {
             $string = c\html_anchorize($string);
+        }
+        if ($anchor_rels) {
+            $string = c\html_anchor_rels($string, $anchor_rels);
         }
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);

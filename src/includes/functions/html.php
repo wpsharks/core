@@ -71,6 +71,14 @@ function html_anchorize(...$args)
 /**
  * @since 151214 Adding functions.
  */
+function html_anchor_rels(...$args)
+{
+    return $GLOBALS[App::class]->Utils->HtmlAnchorRels->__invoke(...$args);
+}
+
+/**
+ * @since 151214 Adding functions.
+ */
 function html_trim(...$args)
 {
     return $GLOBALS[App::class]->Utils->HtmlTrim->__invoke(...$args);

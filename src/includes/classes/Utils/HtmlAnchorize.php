@@ -9,7 +9,7 @@ use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
- * HtmlAnchorize utilities.
+ * Html anchorize utilities.
  *
  * @since 150424 Initial release.
  */
@@ -28,14 +28,14 @@ class HtmlAnchorize extends Classes\AppBase implements Interfaces\EmailConstants
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->__invoke($_value, $to);
+                $_value = $this->__invoke($_value);
             } // unset($_key, $_value);
             return $value;
         }
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        $Tokenizer = c\tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'anchors', 'tags']);
+        $Tokenizer = c\tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'anchors', 'tags', 'md_fences', 'md_links']);
         $string    = &$Tokenizer->getString(); // Now get string by reference.
 
         $string = preg_replace_callback('/(?<before>^|[\s<])(?<url>'.c\regex_frag($this::URL_REGEX_VALID).')/u', function ($m) {
