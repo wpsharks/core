@@ -106,7 +106,7 @@ interface UrlConstants
 
         ')?'.// The entire query string is always optional.
 
-        '(?:#[^\s]*)?'; // `#hash` (i.e., anything not whitespace).
+        '(?:#[^\s&?<>\/]*)?'; // `#hash` (i.e., almost anything).
 
     /**
      * Regex matches a valid `[scheme:]//[user:pass@]host.tld[:port][/uri][?query][#hash]`.

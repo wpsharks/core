@@ -38,7 +38,7 @@ class HtmlAnchorize extends Classes\AppBase implements Interfaces\EmailConstants
         $Tokenizer = c\tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'anchors', 'tags']);
         $string    = &$Tokenizer->getString(); // Now get string by reference.
 
-        $string = preg_replace_callback('/(?<before>^|[\s<])(?<url>'.mb_substr($this::URL_REGEX_VALID, 2, -3).')/u', function ($m) {
+        $string = preg_replace_callback('/(?<before>^|[\s<])(?<url>'.c\regex_frag($this::URL_REGEX_VALID).')/u', function ($m) {
             return $m['before'].'<a href="'.c\esc_url($m['url']).'">'.c\esc_html($m['url']).'</a>';
         }, $string); // Converts full URLs into clickable links using advanced regex.
 
@@ -50,7 +50,7 @@ class HtmlAnchorize extends Classes\AppBase implements Interfaces\EmailConstants
             return $m['before'].'<a href="'.c\esc_url('http://'.$m['host'].'/').'">'.c\esc_html($m['host']).'</a>';
         }, $string); // Converts obvious domain name references into clickable links.
 
-        $string = preg_replace_callback('/(?<before>^|[\s<])(?<email>'.mb_substr($this::EMAIL_REGEX_VALID, 2, -3).')/u', function ($m) {
+        $string = preg_replace_callback('/(?<before>^|[\s<])(?<email>'.c\regex_frag($this::EMAIL_REGEX_VALID).')/u', function ($m) {
             return $m['before'].'<a href="'.c\esc_url('mailto:'.$m['email']).'">'.c\esc_html($m['email']).'</a>';
         }, $string); // Converts email address into clickable `mailto:` links.
 
