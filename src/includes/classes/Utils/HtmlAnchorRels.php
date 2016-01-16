@@ -38,7 +38,7 @@ class HtmlAnchorRels extends Classes\AppBase
         $Tokenizer = c\tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'md_fences', 'md_links']);
         $string    = &$Tokenizer->getString(); // Now get string by reference.
 
-        $string = preg_replace_callback('/\<a\s[^>]*\>/ui', function ($m) use ($rels, $args) {
+        $string = preg_replace_callback('/\<a\s[^>]*\>/ui', function ($m) use ($rels) {
             if (preg_match('/\srel\s*\=\s*([\'"])(?<existing_rels>.*?)\\1/ui', $m[0], $_m)) {
                 $existing_rels = preg_split('/\s+/u', mb_strtolower($_m['existing_rels']), -1, PREG_SPLIT_NO_EMPTY);
                 $anchor = preg_replace('/\srel\s*\=\s*([\'"]).*?\\1/ui', '', $m[0]);
