@@ -43,15 +43,17 @@ class Markdown extends Classes\AppBase
             'flavor' => 'markdown-extra',
             // `parsedown-extra` is faster, but buggy.
             // See: <https://github.com/erusev/parsedown-extra/issues/44>
-            'breaks' => true,
-            'no_p'   => false,
+            'breaks'    => true, // Parsedown only.
+            'anchorize' => false,
+            'no_p'      => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $flavor = (string) $args['flavor'];
-        $breaks = (bool) $args['breaks'];
-        $no_p   = (bool) $args['no_p'];
+        $flavor    = (string) $args['flavor'];
+        $breaks    = (bool) $args['breaks'];
+        $no_p      = (bool) $args['no_p'];
+        $anchorize = (bool) $args['anchorize'];
 
         if ($flavor === 'parsedown-extra') {
             if (is_null($ParsedownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
@@ -67,7 +69,10 @@ class Markdown extends Classes\AppBase
             }
             $string = $MarkdownExtra->transform($string);
         }
-        if ($no_p) { // Strip `^<p>`, `</p>$` tags?
+        if ($anchorize) {
+            $string = c\html_anchorize($string);
+        }
+        if ($no_p) { // Strip `^<p>|</p>$` tags?
             $string = preg_replace('/^\<p\>|\<\/p\>$/ui', '', $string);
         }
         return $string;
