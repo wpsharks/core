@@ -72,8 +72,8 @@ class Markdown extends Classes\AppBase
         if ($anchorize) {
             $string = c\html_anchorize($string);
         }
-        if ($no_p) { // Strip `^<p>|</p>$` tags?
-            $string = preg_replace('/^\<p\>|\<\/p\>$/ui', '', $string);
+        if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
+            $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);
         }
         return $string;
     }
