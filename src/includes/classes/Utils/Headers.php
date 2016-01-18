@@ -54,7 +54,8 @@ class Headers extends Classes\AppBase implements Interfaces\HttpStatusConstants
         ];
         foreach ($headers as $_header => $_value) {
             header($_header.': '.$_value);
-        }
+        } // unset($_header, $_value);
+
         header_remove('last-modified');
     }
 
