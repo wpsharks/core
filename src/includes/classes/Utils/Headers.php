@@ -38,6 +38,27 @@ class Headers extends Classes\AppBase implements Interfaces\HttpStatusConstants
     }
 
     /**
+     * No-cache headers.
+     *
+     * @since 160118 Adding no-cache headers.
+     */
+    public function sendNoCache()
+    {
+        if (headers_sent()) {
+            throw new Exception('Headers already sent.');
+        }
+        $headers = [
+            'expires'       => 'Wed, 11 Jan 1984 05:00:00 GMT',
+            'cache-control' => 'no-cache, must-revalidate, max-age=0',
+            'pragma'        => 'no-cache',
+        ];
+        foreach ($headers as $_header => $_value) {
+            header($_header.': '.$_value);
+        }
+        header_remove('last-modified');
+    }
+
+    /**
      * Parses headers.
      *
      * @since 151121 Header utilities.

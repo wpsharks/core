@@ -13,6 +13,14 @@ function status_header(...$args)
 }
 
 /**
+ * @since 160118 Adding no-cache headers.
+ */
+function no_cache_headers(...$args)
+{
+    return $GLOBALS[App::class]->Utils->Headers->sendNoCache(...$args);
+}
+
+/**
  * @since 151214 Adding functions.
  */
 function parse_headers(...$args)
