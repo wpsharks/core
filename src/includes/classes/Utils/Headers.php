@@ -16,14 +16,48 @@ use WebSharks\Core\Traits;
 class Headers extends Classes\AppBase implements Interfaces\HttpStatusConstants
 {
     /**
+     * No-cache headers.
+     *
+     * @since 160118 Adding no-cache headers.
+     */
+    public function sendNoCache()
+    {
+        if (headers_sent()) {
+            throw new Exception('Headers already sent.');
+        }
+        $headers = [
+            'expires'       => 'wed, 11 jan 1984 05:00:00 gmt',
+            'cache-control' => 'no-cache, must-revalidate, max-age=0',
+            'pragma'        => 'no-cache',
+        ];
+        foreach ($headers as $_header => $_value) {
+            header($_header.': '.$_value);
+        } // unset($_header, $_value);
+
+        header_remove('last-modified');
+    }
+
+    /**
      * Status header.
      *
      * @since 151121 Header utilities.
      *
-     * @param int $status The HTTP status code.
+     * @param int   $status The HTTP status code.
+     * @param array $args   Any additional behavioral args.
      */
-    public function sendStatus(int $status)
+    public function sendStatus(int $status, array $args = [])
     {
+        $default_args = [
+            'display_error'      => false,
+            'display_error_page' => 'default',
+        ];
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
+
+        $display_error      = (bool) $args['display_error'];
+        $display_error_page = (string) $args['display_error_page'];
+        $errors_dir         = $this->App->Config->fs_paths['errors_dir'];
+
         if (headers_sent()) {
             throw new Exception('Headers already sent.');
         } elseif (empty($this::HTTP_STATUSES[$status])) {
@@ -35,28 +69,24 @@ class Headers extends Classes\AppBase implements Interfaces\HttpStatusConstants
             $protocol = 'HTTP/1.1'; // Default fallback.
         }
         header($protocol.' '.$status.' '.$this::HTTP_STATUSES[$status], true, $status);
-    }
 
-    /**
-     * No-cache headers.
-     *
-     * @since 160118 Adding no-cache headers.
-     */
-    public function sendNoCache()
-    {
-        if (headers_sent()) {
-            throw new Exception('Headers already sent.');
+        if ($status >= 400 && $display_error) {
+            if ($errors_dir && $display_error_page) {
+                $error_page = $errors_dir.'/'.$status.'/'.$display_error_page.'/index.html';
+            } elseif ($errors_dir) {
+                $error_page = $errors_dir.'/'.$status.'/index.html';
+            } else {
+                $error_page = ''; // No errors directory.
+            }
+            $this->sendNoCache(); // Don't cache errors.
+            header('content-type: text/html; charset=utf-8');
+
+            if ($error_page && is_file($error_page)) {
+                readfile($error_page);
+            } else {
+                echo '<h1>'.c\esc_html($this::HTTP_STATUSES[$status]).'</h1>';
+            }
         }
-        $headers = [
-            'expires'       => 'Wed, 11 Jan 1984 05:00:00 GMT',
-            'cache-control' => 'no-cache, must-revalidate, max-age=0',
-            'pragma'        => 'no-cache',
-        ];
-        foreach ($headers as $_header => $_value) {
-            header($_header.': '.$_value);
-        } // unset($_header, $_value);
-
-        header_remove('last-modified');
     }
 
     /**

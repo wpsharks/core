@@ -39,7 +39,7 @@ class Template extends AppBase
      *
      * @type string
      */
-    protected $file_ext;
+    protected $ext;
 
     /**
      * Parent files.
@@ -78,32 +78,16 @@ class Template extends AppBase
      * @param array  $parents     Parent template files.
      * @param array  $parent_vars Parent template vars.
      */
-    public function __construct(
-        string $dir,
-        string $file,
-        array $parents = [],
-        array $parent_vars = []
-    ) {
+    public function __construct(string $dir, string $file, array $parents = [], array $parent_vars = [])
+    {
         parent::__construct();
 
-        $dir  = c\mb_rtrim($dir, '/');
-        $file = c\mb_trim($file, '/');
-
-        if (!$dir) { // Use default templates directory?
-            $dir = $this->App->Config->fs_paths['templates_dir'];
-        }
-        if (!$dir || $dir === 'core' || ($file && !is_file($dir.'/'.$file))) {
-            $dir = $this->App->core_dir.'/src/includes/templates';
-        }
-        if (!$dir || !$file) { // Empty?
-            throw new Exception('Empty arg(s).');
-        }
-        if (!is_file($dir.'/'.$file)) { // Missing?
+        if (!($template = c\locate_template($file, $dir))) {
             throw new Exception(sprintf('Missing template: `%1$s`.', $dir.'/'.$file));
         }
-        $this->dir      = $dir;
-        $this->file     = $file;
-        $this->file_ext = c\file_ext($file);
+        $this->dir  = $template['dir'];
+        $this->file = $template['file'];
+        $this->ext  = $template['ext'];
 
         $this->parents      = $parents;
         $this->parent_vars  = $parent_vars;
@@ -121,7 +105,7 @@ class Template extends AppBase
      */
     public function parse(array $¤vars = []): string
     {
-        if ($this->file_ext === 'php') {
+        if ($this->ext === 'php') {
             $¤this = $this; // `$this` in symbol table.
             // ↑ Strange magic makes it possible for `$this` to be used from
             // inside the template file also. We just need to reference it here.
