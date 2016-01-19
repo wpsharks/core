@@ -59,18 +59,34 @@ class Template extends Classes\AppBase
     public function locateRoute(string $route = '', string $dir = '', array $args = []): array
     {
         $default_args = [
-            'protocol' => 'http',
-            'ext'      => 'php',
+            'protocol'                => 'http',
+            'ext'                     => 'php',
+            'redirect_trailing_slash' => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $protocol = (string) $args['protocol'];
-        $ext      = (string) $args['ext'];
+        $protocol                = (string) $args['protocol'];
+        $ext                     = (string) $args['ext'];
+        $redirect_trailing_slash = (bool) $args['redirect_trailing_slash'];
 
-        $route = c\mb_trim($route ?: c\current_path(), '/');
-        $route = !isset($route[0]) ? 'index' : $route;
-
+        if (!isset($route[0])) {
+            $route = c\current_path(); // Use current URL path.
+            if ($redirect_trailing_slash && $route !== '/' && mb_substr($route, -1) === '/') {
+                $current_url         = c\parse_url(c\current_url());
+                $current_url['path'] = c\mb_rtrim($current_url['path'], '/');
+                $current_url         = c\unparse_url($current_url);
+                header('location: '.$current_url, true, 301);
+                exit; // Stop here on redirection.
+            }
+        }
+        $route = c\mb_trim($route, '/');
+        if (!isset($route[0])) {
+            $route = 'index';
+        }
+        if (!$protocol || !$ext) {
+            return []; // Fail on missing data.
+        }
         return $this->locate($protocol.'/routes/'.$route.'.'.$ext, $dir);
     }
 
@@ -89,20 +105,24 @@ class Template extends Classes\AppBase
     {
         $default_args = [
             'display_error' => true,
-            'locate'        => [],
-            'status_header' => [],
+            'locate'        => [
+                'redirect_trailing_slash' => true,
+            ],
+            'status_header' => [
+                'display_error' => true,
+            ],
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $display_error = (bool) $args['display_error'];
+        $display_error                          = (bool) $args['display_error'];
+        $args['status_header']['display_error'] = $display_error;
 
         if (($template = $this->locateRoute($route, $dir, $args['locate']))) {
             echo $this->get($template['file'], $template['dir'])->parse();
             return true; // Loaded successfully.
         } else {
             if ($display_error) {
-                $args['status_header']['display_error'] = true;
                 c\status_header(404, $args['status_header']);
             }
             return false; // Failure.
