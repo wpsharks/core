@@ -80,7 +80,7 @@ class Template extends Classes\AppBase
         $args = array_merge($default_args, $args);
 
         if (($template = $this->locateRoute($route, $dir))) {
-            echo $this->get($template['file'], $template['dir']);
+            echo $this->get($template['file'], $template['dir'])->parse();
             return true; // Loaded successfully.
         } else {
             if ($args['display_error']) {
