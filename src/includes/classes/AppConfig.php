@@ -120,12 +120,11 @@ class AppConfig extends AbsCore
                 'sig_key'           => (string) ($_SERVER['CFG_URL_SIG_KEY'] ?? ''),
             ],
             'fs_paths' => [
-                'logs_dir'                 => (string) ($_SERVER['CFG_LOGS_DIR'] ?? '/var/log/app'),
-                'cache_dir'                => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '/ram/app'),
-                'templates_dir'            => (string) ($_SERVER['CFG_TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates'),
-                'templates_routes_sub_dir' => (string) ($_SERVER['CFG_TEMPLATES_ROUTES_SUB_DIR'] ?? 'http/html/routes'),
-                'errors_dir'               => (string) ($_SERVER['CFG_ERRORS_DIR'] ?? '/bootstrap/src/html/errors'),
-                'config_file'              => (string) ($_SERVER['CFG_CONFIG_FILE'] ?? '%%app_dir%%/.config.json'),
+                'logs_dir'      => (string) ($_SERVER['CFG_LOGS_DIR'] ?? '/var/log/app'),
+                'cache_dir'     => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '/ram/app'),
+                'templates_dir' => (string) ($_SERVER['CFG_TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates'),
+                'errors_dir'    => (string) ($_SERVER['CFG_ERRORS_DIR'] ?? '/bootstrap/src/html/errors'),
+                'config_file'   => (string) ($_SERVER['CFG_CONFIG_FILE'] ?? '%%app_dir%%/.config.json'),
             ],
             'fs_permissions' => [
                 'transient_dirs' => (int) ($_SERVER['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 02775),

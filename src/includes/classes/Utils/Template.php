@@ -52,13 +52,26 @@ class Template extends Classes\AppBase
      *
      * @param string $route A URL path/route.
      * @param string $dir   From a specific directory?
+     * @param array  $args  Any additional behavioral args.
      *
      * @return array Route template `dir`, `file`, and `ext`.
      */
-    public function locateRoute(string $route = '', string $dir = ''): array
+    public function locateRoute(string $route = '', string $dir = '', array $args = []): array
     {
-        $sub_dir = $this->App->Config->fs_paths['templates_routes_sub_dir'];
-        return $this->locate($sub_dir.'/'.c\mb_trim($route ?: c\current_path(), '/').'.php', $dir);
+        $default_args = [
+            'protocol' => 'http',
+            'ext'      => 'php',
+        ];
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
+
+        $protocol = (string) $args['protocol'];
+        $ext      = (string) $args['ext'];
+
+        $route = c\mb_trim($route ?: c\current_path(), '/');
+        $route = !isset($route[0]) ? 'index' : $route;
+
+        return $this->locate($protocol.'/routes/'.$route.'.'.$ext, $dir);
     }
 
     /**
@@ -76,15 +89,21 @@ class Template extends Classes\AppBase
     {
         $default_args = [
             'display_error' => true,
+            'locate'        => [],
+            'status_header' => [],
         ];
         $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        if (($template = $this->locateRoute($route, $dir))) {
+        $display_error = (bool) $args['display_error'];
+
+        if (($template = $this->locateRoute($route, $dir, $args['locate']))) {
             echo $this->get($template['file'], $template['dir'])->parse();
             return true; // Loaded successfully.
         } else {
-            if ($args['display_error']) {
-                c\status_header(404, $args);
+            if ($display_error) {
+                $args['status_header']['display_error'] = true;
+                c\status_header(404, $args['status_header']);
             }
             return false; // Failure.
         }

@@ -66,7 +66,7 @@ class Exceptions extends Classes\AppBase
                 c\ob_end_clean_all();
                 c\status_header(500);
 
-                echo c\get_template('http/status/500.php')
+                echo c\get_template('http/html/status/500.php')
                     ->parse(['Exception' => $Exception]);
                 //
             } catch (\Throwable $InnerException) {
