@@ -50,14 +50,14 @@ class Template extends Classes\AppBase
      *
      * @since 160118 Router templates.
      *
-     * @param string $route A URI route.
+     * @param string $route A URL path/route.
      * @param string $dir   From a specific directory?
      *
      * @return array Route template `dir`, `file`, and `ext`.
      */
     public function locateRoute(string $route = '', string $dir = ''): array
     {
-        return $this->locate(c\mb_trim($route ?: c\current_path(), '/').'.php', $dir);
+        return $this->locate('routes/'.c\mb_trim($route ?: c\current_path(), '/').'.php', $dir);
     }
 
     /**
@@ -65,7 +65,7 @@ class Template extends Classes\AppBase
      *
      * @since 160118 Router templates.
      *
-     * @param string $route A URI route.
+     * @param string $route A URL path/route.
      * @param string $dir   From a specific directory?
      * @param array  $args  Any additional behavioral args.
      *
