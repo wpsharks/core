@@ -57,7 +57,7 @@ class Template extends Classes\AppBase
      */
     public function locateRoute(string $route = '', string $dir = ''): array
     {
-        return $this->locate('routes/'.c\mb_trim($route ?: c\current_path(), '/').'.php', $dir);
+        return $this->locate('http/html/routes/'.c\mb_trim($route ?: c\current_path(), '/').'.php', $dir);
     }
 
     /**
