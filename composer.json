@@ -3,8 +3,10 @@
   "homepage": "https://github.com/websharks/core",
   "description": "Core PHP library used by WebSharks, Inc.",
   "keywords": ["websharks"],
+
   "type": "library",
   "license": "GPL-3.0+",
+
   "authors": [{
     "name": "websharks",
     "homepage": "http://websharks-inc.com/",
@@ -18,13 +20,14 @@
     "homepage": "http://raam.org/",
     "role": "developer"
   }],
+
   "support": {
     "source": "https://github.com/websharks/core",
     "issues": "https://github.com/websharks/core/issues"
   },
 
   "require": {
-    "php-64bit": ">=7.0.0",
+    "php-64bit": ">=7.0.1",
 
     "ext-SPL": "*",
     "ext-Phar": "*",
@@ -91,7 +94,9 @@
     "corneltek/getoptionkit": "2.*",
     "hashids/hashids": "1.*",
     "phpmailer/phpmailer": "5.*",
-    "embedly/embedly-php": "0.*"
+    "embedly/embedly-php": "0.*",
+
+    "package/bourbon": "4.2.3"
   },
   "suggest": {
     "ext-Zend-OPcache": "* :: Highly recommended for faster processing.",
@@ -127,6 +132,19 @@
   },
 
   "config": {
-    "vendor-dir": "src/vendor"
-  }
+    "vendor-dir": "src/vendor",
+    "preferred-install": "dist"
+  },
+
+  "repositories": [{
+    "type": "package",
+    "package": {
+      "name": "package/bourbon",
+      "version": "4.2.3",
+      "dist": {
+        "url": "https://github.com/thoughtbot/bourbon/releases/download/v4.2.3/bourbon-v4.2.3.zip",
+        "type": "zip"
+      }
+    }
+  }]
 }

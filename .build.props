@@ -8,5 +8,5 @@ project_sub_namespace           = WebSharksCore
 
 project_version                 = %y%m%d
 
-project_php_required_version    = 7.0
+project_php_required_version    = 7.0.1
 project_php_tested_up_to_version = ${php.version}
