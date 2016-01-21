@@ -4,7 +4,7 @@ project_owner                   = websharks
 project_slug                    = core
 
 project_namespace               = WebSharks\\Core
-project_sub_namespace           = WebSharksCore
+project_sub_namespace           = Core
 
 project_version                 = %y%m%d
 
