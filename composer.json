@@ -74,7 +74,18 @@
     "ext-xmlwriter": "*",
     "ext-SimpleXML": "*",
 
-    "websharks/dicer": "151124"
+    "websharks/dicer": "151124",
+
+    "lusitanian/oauth": "0.*",
+    "aws/aws-sdk-php": "2.*",
+    "embedly/embedly-php": "0.*",
+    "erusev/parsedown": "1.*",
+    "erusev/parsedown-extra": "0.*",
+    "hashids/hashids": "1.*",
+    "michelf/php-markdown": "1.*",
+    "phpmailer/phpmailer": "5.*",
+    "ramsey/uuid": "3.*",
+    "symfony/yaml": "2.*"
   },
   "require-dev": {
     "ext-Zend-OPcache": "*",
@@ -83,18 +94,8 @@
     "ext-bcmath": "*",
     "ext-pspell": "*",
 
-    "ramsey/uuid": "3.*",
     "ryakad/pandoc-php": "1.*",
-    "aws/aws-sdk-php": "2.*",
-    "erusev/parsedown": "1.*",
-    "erusev/parsedown-extra": "0.*",
-    "michelf/php-markdown": "1.*",
-    "symfony/yaml": "2.*",
-    "lusitanian/oauth": "0.*",
     "corneltek/getoptionkit": "2.*",
-    "hashids/hashids": "1.*",
-    "phpmailer/phpmailer": "5.*",
-    "embedly/embedly-php": "0.*",
 
     "package/bourbon": "4.2.3"
   },
@@ -105,18 +106,8 @@
     "ext-bcmath": "* :: Required by routines that deal with large numbers.",
     "ext-pspell": "* :: Required by routines that deal with spellcheck.",
 
-    "ramsey/uuid": "3.* :: Required by routines that generate UUIDs.",
     "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc.",
-    "aws/aws-sdk-php": "2.* :: Required by routines that make calls to the AWS API.",
-    "erusev/parsedown": "1.* :: Required by routines that convert Markdown.",
-    "erusev/parsedown-extra": "0.* :: Required by routines that convert Markdown.",
-    "michelf/php-markdown": "1.* :: Required by routines that convert Markdown.",
-    "symfony/yaml": "2.* :: Required by routines that convert YAML.",
-    "lusitanian/oauth": "0.* :: Required by routines that deal w/ oAuth.",
-    "corneltek/getoptionkit": "2.* :: Required for routines that parse CLI opts.",
-    "hashids/hashids": "1.* :: Required for routines that deal with hash IDs.",
-    "phpmailer/phpmailer": "5.* :: Required for routine that deal with mail.",
-    "embedly/embedly-php": "0.* :: Required for routines that deal with oEmbed."
+    "corneltek/getoptionkit": "2.* :: Required for routines that parse CLI opts."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
