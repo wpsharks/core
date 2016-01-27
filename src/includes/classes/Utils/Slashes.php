@@ -50,7 +50,7 @@ class Slashes extends Classes\AppBase
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->strip($_value);
+                $_value = $this->remove($_value);
             } // unset($_key, $_value);
             return $value;
         }
