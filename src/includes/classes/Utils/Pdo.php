@@ -113,7 +113,7 @@ class Pdo extends Classes\AppBase
                 $shard_db_host['options'][\PDO::MYSQL_ATTR_INIT_COMMAND] .= ' COLLATE \''.$shard_db_host['collate'].'\'';
             }
         }
-        if ($shard_db_host['ssl_enable']) {
+        if ($shard_db_host['ssl_enable'] && $shard_db_host['ssl_key'] && $shard_db_host['ssl_crt'] && $shard_db_host['ssl_ca'] && $shard_db_host['ssl_cipher']) {
             $shard_db_host['options'][\PDO::MYSQL_ATTR_SSL_KEY]    = $shard_db_host['ssl_key'];
             $shard_db_host['options'][\PDO::MYSQL_ATTR_SSL_CERT]   = $shard_db_host['ssl_crt'];
             $shard_db_host['options'][\PDO::MYSQL_ATTR_SSL_CA]     = $shard_db_host['ssl_ca'];
