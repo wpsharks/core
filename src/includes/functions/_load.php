@@ -3,6 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Functions;
 
 require_once __DIR__.'/app.php';
+require_once __DIR__.'/arrays.php';
 require_once __DIR__.'/base64.php';
 require_once __DIR__.'/benchmark.php';
 require_once __DIR__.'/bitly.php';
