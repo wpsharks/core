@@ -53,6 +53,7 @@ class AppConfig extends AbsCore
                     'public_email' => (string) ($_SERVER['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
                 ],
             ],
+
             'di' => [
                 'default_rule' => [
                     'new_instances' => [
@@ -63,6 +64,7 @@ class AppConfig extends AbsCore
                     ],
                 ],
             ],
+
             'mysql_db' => [
                 'hosts' => [
                     (string) ($_SERVER['CFG_MYSQL_DB_HOST'] ?? '127.0.0.1') => [
@@ -93,6 +95,7 @@ class AppConfig extends AbsCore
                     ],
                 ],
             ],
+
             'brand' => [
                 'acronym' => (string) ($_SERVER['CFG_BRAND_ACRONYM'] ?? 'APP'),
                 'slug'    => (string) ($_SERVER['CFG_BRAND_SLUG'] ?? $_SERVER['CFG_SLUG'] ?? 'app'),
@@ -106,6 +109,7 @@ class AppConfig extends AbsCore
                 'logo'       => (string) ($_SERVER['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
                 'screenshot' => (string) ($_SERVER['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
             ],
+
             'urls' => [
                 'hosts' => [
                     'roots' => [
@@ -119,6 +123,7 @@ class AppConfig extends AbsCore
                 'default_scheme'    => (string) ($_SERVER['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),
                 'sig_key'           => (string) ($_SERVER['CFG_URL_SIG_KEY'] ?? ''),
             ],
+
             'fs_paths' => [
                 'logs_dir'      => (string) ($_SERVER['CFG_LOGS_DIR'] ?? '/var/log/app'),
                 'cache_dir'     => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '/tmp/app/cache'),
@@ -130,6 +135,7 @@ class AppConfig extends AbsCore
                 'transient_dirs' => (int) ($_SERVER['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 02775),
                 // `octdec(02775)` = 1533 as an integer.
             ],
+
             'memcache' => [
                 'enabled'   => (bool) ($_SERVER['CFG_MEMCACHE_ENABLED'] ?? true),
                 'namespace' => (string) ($_SERVER['CFG_MEMCACHE_NAMESPACE'] ?? 'app'),
@@ -141,10 +147,12 @@ class AppConfig extends AbsCore
                     ],
                 ],
             ],
+
             'i18n' => [
                 'locales'     => (array) ($_SERVER['CFG_LOCALES'] ?? ['en_US.UTF-8', 'C']),
                 'text_domain' => (string) ($_SERVER['CFG_I18N_TEXT_DOMAIN'] ?? $_SERVER['CFG_SLUG'] ?? 'app'),
             ],
+
             'email' => [
                 'from_name'  => (string) ($_SERVER['CFG_EMAIL_FROM_NAME'] ?? $_SERVER['CFG_BRAND_NAME'] ?? $_SERVER['CFG_HOST'] ?? 'App'),
                 'from_email' => (string) ($_SERVER['CFG_EMAIL_FROM_EMAIL'] ?? $_SERVER['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'app@'.$root_host),
@@ -159,6 +167,7 @@ class AppConfig extends AbsCore
                 'smtp_username' => (string) ($_SERVER['CFG_EMAIL_SMTP_USERNAME'] ?? ''),
                 'smtp_password' => (string) ($_SERVER['CFG_EMAIL_SMTP_PASSWORD'] ?? ''),
             ],
+
             'cookies' => [
                 'encryption_key' => (string) ($_SERVER['CFG_COOKIES_KEY'] ?? ''),
             ],
@@ -168,6 +177,7 @@ class AppConfig extends AbsCore
             'passwords' => [
                 'hash_key' => (string) ($_SERVER['CFG_PASSWORDS_KEY'] ?? ''),
             ],
+
             'aws' => [
                 'access_key' => (string) ($_SERVER['CFG_AWS_ACCESS_KEY'] ?? ''),
                 'secret_key' => (string) ($_SERVER['CFG_AWS_SECRET_KEY'] ?? ''),
