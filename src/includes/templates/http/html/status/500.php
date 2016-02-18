@@ -16,7 +16,7 @@ $¤defaults = [
 
     'http/html/header.php' => [
         'head' => [
-            'title' => c\__('500 Internal Server Error'),
+            'title' => __('500 Internal Server Error'),
         ],
     ],
 ];
@@ -26,8 +26,8 @@ extract($this->setVars($¤defaults, $¤vars));
  */ ?>
 <?= $this->get('http/html/header.php') ?>
 
-<h1><?= c\__('500 Internal Server Error'); ?></h1>
-<p><?= c\__('This error has been reported to system administrators. Very sorry! :-)'); ?></p>
+<h1><?= __('500 Internal Server Error'); ?></h1>
+<p><?= __('This error has been reported to system administrators. Very sorry! :-)'); ?></p>
 
 <?php if ($this->App->Config->debug && $Exception) : ?>
     <pre>

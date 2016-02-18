@@ -53,7 +53,7 @@ class Email extends Classes\AppBase implements Interfaces\EmailConstants
             $message_html = c\text_to_html($message);
         }
         if (!$message_text) { // Set a default plain text alternative in this case.
-            $message_text = c\__('To view this email message, open it in a program that understands HTML.');
+            $message_text = __('To view this email message, open it in a program that understands HTML.');
         }
         $headers = $this->parseHeaders($headers, [
             'from_name'     => &$from_name, 'from_email' => &$from_email,
