@@ -54,6 +54,7 @@ require_once __DIR__.'/uuid64.php';
 require_once __DIR__.'/uuids.php';
 require_once __DIR__.'/versions.php';
 require_once __DIR__.'/webpurify.php';
+require_once __DIR__.'/wordpress.php';
 require_once __DIR__.'/yaml.php';
 
 /* Use this snippet to recompile this file after a lot of changes.

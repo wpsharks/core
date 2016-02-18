@@ -4,6 +4,7 @@ namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
 use WebSharks\Core\Functions as c;
+use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -128,7 +129,7 @@ class Tokenizer extends AppBase
         if (!in_array('shortcodes', $this->tokenize, true)) {
             return; // Not tokenizing these.
         }
-        if (!defined('WPINC') || empty($GLOBALS['shortcode_tags']) || !c\can_call_func('get_shortcode_regex')) {
+        if (!c\is_wordpress() || empty($GLOBALS['shortcode_tags']) || !c\can_call_func('get_shortcode_regex')) {
             return; // Not WordPress; i.e., no known shortcodes.
         }
         if (mb_strpos($this->string, '[') === false) {

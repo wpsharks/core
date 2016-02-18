@@ -6,6 +6,7 @@ use WebSharks\Dicer\Di;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Functions as c;
+use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 

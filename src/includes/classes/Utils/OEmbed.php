@@ -5,6 +5,7 @@ namespace WebSharks\Core\Classes\Utils;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Functions as c;
+use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 //
@@ -95,7 +96,7 @@ class OEmbed extends Classes\AppBase implements Interfaces\UrlConstants
                 break; // All done here.
 
             default: // Defaults.
-                if (defined('WPINC')) {
+                if (c\is_wordpress()) {
                     $string = $this->viaWordPress($string);
                 } else { // Default outside WP.
                     $string = $this->viaEmbedly($string);
@@ -303,7 +304,7 @@ class OEmbed extends Classes\AppBase implements Interfaces\UrlConstants
      */
     protected function viaWordPress(string $string): string
     {
-        if (!defined('WPINC')
+        if (!c\is_wordpress()
             || !c\can_call_func('wp_oembed_get')
             || !c\can_call_func('wp_embed_defaults')) {
             throw new Exception('Unable to oEmbed via WordPress.');
