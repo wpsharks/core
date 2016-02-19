@@ -126,6 +126,7 @@ class AppConfig extends AbsCore
             ],
 
             'fs_paths' => [
+                'tmp_dir'       => (string) ($_SERVER['CFG_TMP_DIR'] ?? '/tmp/app/tmp'),
                 'logs_dir'      => (string) ($_SERVER['CFG_LOGS_DIR'] ?? '/var/log/app'),
                 'cache_dir'     => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '/tmp/app/cache'),
                 'templates_dir' => (string) ($_SERVER['CFG_TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates'),
