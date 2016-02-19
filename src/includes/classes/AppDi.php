@@ -28,6 +28,8 @@ class AppDi extends \WebSharks\Dicer\Di
      * Class constructor.
      *
      * @since 15xxxx Initial release.
+     *
+     * @param array $global_default_rule Default rule.
      */
     public function __construct(array $global_default_rule = [])
     {
