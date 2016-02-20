@@ -43,6 +43,15 @@ class App extends AbsCore
     public $dir;
 
     /**
+     * Dir basename.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $dir_basename;
+
+    /**
      * Core dir.
      *
      * @since 15xxxx
@@ -50,6 +59,15 @@ class App extends AbsCore
      * @type string
      */
     public $core_dir;
+
+    /**
+     * Core dir basename.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $core_dir_basename;
 
     /**
      * Core dir is vendor?
@@ -116,10 +134,12 @@ class App extends AbsCore
         $this->namespace      = $Class->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
 
-        $this->dir = dirname($Class->getFileName(), 4);
+        $this->dir          = dirname($Class->getFileName(), 4);
+        $this->dir_basename = basename($this->dir);
 
-        $this->core_dir       = dirname(__FILE__, 4);
-        $this->core_is_vendor = mb_stripos($this->core_dir, '/vendor/') !== false;
+        $this->core_dir          = dirname(__FILE__, 4);
+        $this->core_dir_basename = basename($this->core_dir);
+        $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
 
         $this->Config = new AppConfig($instance_base, $instance);
         $this->Di     = new AppDi($this->Config->di['default_rule']);
@@ -176,7 +196,6 @@ class App extends AbsCore
     protected function maybeSetLocales()
     {
         if ($this->Config->i18n['locales']) {
-
             // Try locale codes in a specific order.
             // See: <http://php.net/manual/en/function.setlocale.php>
             setlocale(LC_ALL, $this->Config->i18n['locales']);

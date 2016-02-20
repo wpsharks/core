@@ -27,3 +27,19 @@ function slug_to_name(...$args)
 {
     return $GLOBALS[App::class]->Utils->Slug->toName(...$args);
 }
+
+/**
+ * @since 160220 Acronym utils.
+ */
+function slug_to_acronym(...$args)
+{
+    return $GLOBALS[App::class]->Utils->Slug->toAcronym(...$args);
+}
+
+/**
+ * @since 160220 Var utils.
+ */
+function slug_to_var(...$args)
+{
+    return $GLOBALS[App::class]->Utils->Slug->toVar(...$args);
+}

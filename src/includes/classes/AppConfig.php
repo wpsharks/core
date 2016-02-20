@@ -98,9 +98,11 @@ class AppConfig extends AbsCore
             ],
 
             'brand' => [
-                'acronym' => (string) ($_SERVER['CFG_BRAND_ACRONYM'] ?? 'APP'),
                 'slug'    => (string) ($_SERVER['CFG_BRAND_SLUG'] ?? $_SERVER['CFG_SLUG'] ?? 'app'),
+                'var'     => (string) ($_SERVER['CFG_BRAND_VAR'] ?? $_SERVER['CFG_VAR'] ?? 'app'),
                 'name'    => (string) ($_SERVER['CFG_BRAND_NAME'] ?? $_SERVER['CFG_HOST'] ?? $host),
+                'acronym' => (string) ($_SERVER['CFG_BRAND_ACRONYM'] ?? 'APP'),
+                'prefix'  => (string) ($_SERVER['CFG_BRAND_PREFIX'] ?? 'app'),
 
                 'keywords'    => (string) ($_SERVER['CFG_BRAND_KEYWORDS'] ?? $_SERVER['CFG_HOST'] ?? [$host]),
                 'description' => (string) ($_SERVER['CFG_BRAND_DESCRIPTION'] ?? 'Just another site powered by the websharks/core.'),

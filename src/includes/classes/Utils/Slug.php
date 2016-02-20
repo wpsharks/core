@@ -80,4 +80,40 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
 
         return $name;
     }
+
+    /**
+     * Convert slug to acronym.
+     *
+     * @since 160220 Initial release.
+     *
+     * @param string $slug Slug to convert to acronym.
+     *
+     * @return string Acronym; based on slug.
+     */
+    public function toAcronym(string $slug): string
+    {
+        return c\name_to_acronym($this->toName($slug));
+    }
+
+    /**
+     * Convert slug to var.
+     *
+     * @since 160220 Initial release.
+     *
+     * @param string $slug Slug to convert to var.
+     *
+     * @return string Var; based on slug.
+     */
+    public function toVar(string $slug): string
+    {
+        $var = $slug; // Working copy.
+        $var = mb_strtolower(c\force_ascii($var));
+        $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
+        $var = c\mb_trim($var, '', '_');
+
+        if ($var && !preg_match('/^[a-z]/u', $var)) {
+            $var = 'x'.$var; // Force `^[a-z]`.
+        }
+        return $var;
+    }
 }

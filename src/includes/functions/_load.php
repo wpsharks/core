@@ -52,6 +52,7 @@ require_once __DIR__.'/url-querys.php';
 require_once __DIR__.'/url-utils.php';
 require_once __DIR__.'/uuid64.php';
 require_once __DIR__.'/uuids.php';
+require_once __DIR__.'/vars.php';
 require_once __DIR__.'/versions.php';
 require_once __DIR__.'/webpurify.php';
 require_once __DIR__.'/wordpress.php';

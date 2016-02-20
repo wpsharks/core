@@ -58,6 +58,6 @@ class I18n extends Classes\AppBase
         if ($this->is__wp) {
             return \__(...$args);
         }
-        return $string;
+        return $args[0] ?? '';
     }
 }
