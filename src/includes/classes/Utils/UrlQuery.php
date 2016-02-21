@@ -82,7 +82,10 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
         if (!isset($arg_separator[0])) {
             $arg_separator = ini_get('arg_separator.output');
         }
-        return http_build_query($args, $numeric_prefix, $arg_separator, $enc_type);
+        $query = http_build_query($args, $numeric_prefix, $arg_separator, $enc_type);
+        $query = c\mb_trim(str_replace('=&', '&', $query), '=&');
+
+        return $query;
     }
 
     /**
