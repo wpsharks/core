@@ -307,7 +307,11 @@ class AppConfig extends AbsCore
                     '%%app_namespace_sha1%%',
 
                     '%%app_dir%%',
+                    '%%app_dir_basename%%',
+
                     '%%core_dir%%',
+                    '%%core_dir_basename%%',
+
                     '%%home_dir%%',
                 ],
                 [
@@ -315,7 +319,11 @@ class AppConfig extends AbsCore
                     $this->App->namespace_sha1,
 
                     $this->App->dir,
+                    $this->App->dir_basename,
+
                     $this->App->core_dir,
+                    $this->App->core_dir_basename,
+
                     (string) ($_SERVER['HOME'] ?? ''),
                 ],
                 $value
