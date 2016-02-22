@@ -25,12 +25,16 @@ class DirTmp extends Classes\AppBase
      */
     public function __invoke(): string
     {
+        $App    = $this->App;
+        $Config = $this->App->Config;
+
         if (!is_null($dir = &$this->cacheKey(__FUNCTION__))) {
             return $dir; // Already cached this.
         }
         $possible_dirs = []; // Initialize.
+        $is_wordpress  = c\is_wordpress();
 
-        if (defined('WP_TEMP_DIR')) {
+        if ($is_wordpress && defined('WP_TEMP_DIR')) {
             $possible_dirs[] = (string) WP_TEMP_DIR;
         }
         $possible_dirs[] = (string) sys_get_temp_dir();
@@ -45,21 +49,18 @@ class DirTmp extends Classes\AppBase
         if (!empty($_SERVER['TMP'])) {
             $possible_dirs[] = (string) $_SERVER['TMP'];
         }
-        if (mb_stripos(PHP_OS, 'win') === 0) {
+        if (c\is_windows()) {
             $possible_dirs[] = 'C:/Temp';
-        }
-        if (mb_stripos(PHP_OS, 'win') !== 0) {
+        } else {
             $possible_dirs[] = '/tmp';
         }
-        if (defined('WP_CONTENT_DIR')) {
+        if ($is_wordpress && defined('WP_CONTENT_DIR')) {
             $possible_dirs[] = (string) WP_CONTENT_DIR;
         }
-        $permissions = $this->App->Config->fs_permissions['transient_dirs'];
-
         foreach ($possible_dirs as $_key => $_dir) {
-            if (($_dir = c\mb_trim((string) $_dir)) && @is_dir($_dir) && @is_writable($_dir)) {
-                $_dir = $_dir.'/'.$this->App->namespace_sha1; // For this application.
-                if (is_dir($_dir) || mkdir($_dir, $permissions, true)) {
+            if ($_dir && @is_dir($_dir) && @is_writable($_dir)) {
+                $_dir .= '/'.$App->namespace_sha1.'/'.$App->dir_sha1;
+                if (is_dir($_dir) || mkdir($_dir, $Config->fs_permissions['transient_dirs'], true)) {
                     return $dir = $_dir;
                 }
             }

@@ -18,6 +18,8 @@ use PHPMailer;
  */
 class Email extends Classes\AppBase implements Interfaces\EmailConstants
 {
+    // @TODO Constructor.
+
     /**
      * Send an email.
      *

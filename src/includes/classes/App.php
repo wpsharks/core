@@ -52,6 +52,15 @@ class App extends AbsCore
     public $dir_basename;
 
     /**
+     * Dir SHA-1.
+     *
+     * @since 15xxxx
+     *
+     * @type string
+     */
+    public $dir_sha1;
+
+    /**
      * Core dir.
      *
      * @since 15xxxx
@@ -68,6 +77,15 @@ class App extends AbsCore
      * @type string
      */
     public $core_dir_basename;
+
+    /**
+     * Core dir SHA-1.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $core_dir_sha1;
 
     /**
      * Core dir is vendor?
@@ -136,9 +154,11 @@ class App extends AbsCore
 
         $this->dir          = dirname($Class->getFileName(), 4);
         $this->dir_basename = basename($this->dir);
+        $this->dir_sha1     = sha1($this->dir);
 
         $this->core_dir          = dirname(__FILE__, 4);
         $this->core_dir_basename = basename($this->core_dir);
+        $this->core_dir_sha1     = sha1($this->core_dir);
         $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
 
         $this->Config = new AppConfig($instance_base, $instance);

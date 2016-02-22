@@ -34,12 +34,14 @@ class WebPurify extends Classes\AppBase
     {
         parent::__construct();
 
-        if (!$this->App->Config->fs_paths['cache_dir']) {
-            throw new Exception('Missing cache directory.');
-        } elseif (!$this->App->Config->webpurify['api_key']) {
+        $Config = $this->App->Config;
+
+        if (!$Config->webpurify['api_key']) {
             throw new Exception('Missing WebPurify API key.');
+        } elseif (!$Config->fs_paths['cache_dir']) {
+            throw new Exception('Missing cache directory.');
         }
-        $this->cache_dir = $this->App->Config->fs_paths['cache_dir'].'/webpurify';
+        $this->cache_dir = $Config->fs_paths['cache_dir'].'/webpurify';
     }
 
     /**
@@ -71,6 +73,8 @@ class WebPurify extends Classes\AppBase
      */
     public function check(string $text): bool
     {
+        $Config = $this->App->Config;
+
         # The text is empty?
 
         if (!($text = c\mb_trim($text))) {
@@ -85,7 +89,7 @@ class WebPurify extends Classes\AppBase
 
         $endpoint_args = [
             'method'  => 'webpurify.live.check',
-            'api_key' => $this->App->Config->webpurify['api_key'],
+            'api_key' => $Config->webpurify['api_key'],
             'text'    => $text,
             'format'  => 'json',
             'lang'    => 'en',
@@ -103,7 +107,7 @@ class WebPurify extends Classes\AppBase
 
         $endpoint_sha1         = sha1($endpoint);
         $cache_dir             = $this->cache_dir.'/'.c\sha1_mod_shard_id($endpoint_sha1, true);
-        $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
+        $cache_dir_permissions = $Config->fs_permissions['transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
         # Use cached response if at all possible.

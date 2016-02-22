@@ -14,8 +14,8 @@ $string = 'Lörem ipßüm dölör ßit ämet, cönßectetüer ädipißcing elit.
 
 c\benchmark_start();
 
-for ($i = 0; $i < 500000; ++$i) {
-    stripos($string);
+for ($i = 0; $i < 5000; ++$i) {
+    stripos($string, 'a');
 }
 c\benchmark_print();
 
@@ -23,7 +23,7 @@ c\benchmark_print();
 
 c\benchmark_start();
 
-for ($i = 0; $i < 500000; ++$i) {
-    mb_stripos($string);
+for ($i = 0; $i < 5000; ++$i) {
+    mb_stripos($string, 'a');
 }
 c\benchmark_print();

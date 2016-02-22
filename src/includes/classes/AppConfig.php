@@ -128,7 +128,6 @@ class AppConfig extends AbsCore
             ],
 
             'fs_paths' => [
-                'tmp_dir'       => (string) ($_SERVER['CFG_TMP_DIR'] ?? '/tmp/app/tmp'),
                 'logs_dir'      => (string) ($_SERVER['CFG_LOGS_DIR'] ?? '/var/log/app'),
                 'cache_dir'     => (string) ($_SERVER['CFG_CACHE_DIR'] ?? '/tmp/app/cache'),
                 'templates_dir' => (string) ($_SERVER['CFG_TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates'),
@@ -189,7 +188,7 @@ class AppConfig extends AbsCore
             'embedly' => [
                 'api_key' => (string) ($_SERVER['CFG_EMBEDLY_KEY'] ?? ''),
             ],
-            'web_purify' => [
+            'webpurify' => [
                 'api_key' => (string) ($_SERVER['CFG_WEBPURIFY_KEY'] ?? ''),
             ],
             'bitly' => [
@@ -294,6 +293,8 @@ class AppConfig extends AbsCore
      */
     protected function fillReplacementCodes($value)
     {
+        $App = $this->App;
+
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->fillReplacementCodes($_value);
@@ -308,21 +309,25 @@ class AppConfig extends AbsCore
 
                     '%%app_dir%%',
                     '%%app_dir_basename%%',
+                    '%%app_dir_sha1%%',
 
                     '%%core_dir%%',
                     '%%core_dir_basename%%',
+                    '%%core_dir_sha1%%',
 
                     '%%home_dir%%',
                 ],
                 [
-                    $this->App->namespace,
-                    $this->App->namespace_sha1,
+                    $App->namespace,
+                    $App->namespace_sha1,
 
-                    $this->App->dir,
-                    $this->App->dir_basename,
+                    $App->dir,
+                    $App->dir_basename,
+                    $App->dir_sha1,
 
-                    $this->App->core_dir,
-                    $this->App->core_dir_basename,
+                    $App->core_dir,
+                    $App->core_dir_basename,
+                    $App->core_dir_sha1,
 
                     (string) ($_SERVER['HOME'] ?? ''),
                 ],
