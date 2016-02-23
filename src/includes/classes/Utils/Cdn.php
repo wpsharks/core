@@ -29,10 +29,12 @@ class Cdn extends Classes\AppBase implements Interfaces\MimeConstants
      * Class constructor.
      *
      * @since 150424 Initial release.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         $this->static_exts = array_keys($this::MIME_TYPES);
         $this->static_exts = array_diff($this->static_exts, ['php']);

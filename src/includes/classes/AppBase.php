@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-abstract class AppBase extends AbsCore
+abstract class AppBase extends Abs
 {
     /**
      * App.
@@ -28,11 +28,13 @@ abstract class AppBase extends AbsCore
      * Class constructor.
      *
      * @since 15xxxx Initial release.
+     *
+     * @param App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(App $App)
     {
         parent::__construct();
 
-        $this->App = $GLOBALS[App::class];
+        $this->App = $App;
     }
 }

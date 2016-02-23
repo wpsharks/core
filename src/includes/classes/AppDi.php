@@ -7,13 +7,15 @@ use WebSharks\Core\Functions as c;
 use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use WebSharks\Dicer\Di;
 
 /**
  * App DI.
  *
  * @since 15xxxx Initial release.
  */
-class AppDi extends \WebSharks\Dicer\Di
+class AppDi extends Di
 {
     /**
      * App.
@@ -29,12 +31,13 @@ class AppDi extends \WebSharks\Dicer\Di
      *
      * @since 15xxxx Initial release.
      *
+     * @param App   $App                 Instance of App.
      * @param array $global_default_rule Default rule.
      */
-    public function __construct(array $global_default_rule = [])
+    public function __construct(App $App, array $global_default_rule = [])
     {
         parent::__construct($global_default_rule);
 
-        $this->App = $GLOBALS[App::class];
+        $this->App = $App;
     }
 }

@@ -29,10 +29,12 @@ class I18n extends Classes\AppBase
      * Class constructor.
      *
      * @since 151216 Memcached utilities.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         $this->is__wp = c\is_wordpress() && c\can_call_func('__');
     }

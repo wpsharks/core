@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Initial release.
  */
-class App extends AbsCore
+class App extends Abs
 {
     /**
      * Namespace.
@@ -161,9 +161,9 @@ class App extends AbsCore
         $this->core_dir_sha1     = sha1($this->core_dir);
         $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
 
-        $this->Config = new AppConfig($instance_base, $instance);
-        $this->Di     = new AppDi($this->Config->di['default_rule']);
-        $this->Utils  = new AppUtils(); // Utility class access.
+        $this->Config = new AppConfig($this, $instance_base, $instance);
+        $this->Di     = new AppDi($this, $this->Config->di['default_rule']);
+        $this->Utils  = new AppUtils($this); // Utility class access.
 
         $this->Di->addInstances([
             self::class => $this,

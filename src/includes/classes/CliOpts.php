@@ -34,10 +34,12 @@ class CliOpts extends AppBase
      * Class constructor.
      *
      * @since 15xxxx Initial release.
+     *
+     * @param App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         if (!c\is_cli()) {
             throw new Exception('Requires CLI mode.');

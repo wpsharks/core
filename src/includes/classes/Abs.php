@@ -9,11 +9,11 @@ use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
- * Core abstraction.
+ * Base abstraction.
  *
  * @since 150424 Initial release.
  */
-abstract class AbsCore implements \Serializable, \JsonSerializable
+abstract class Abs implements \Serializable, \JsonSerializable
 {
     use Traits\CacheMembers;
     use Traits\OverloadMembers;

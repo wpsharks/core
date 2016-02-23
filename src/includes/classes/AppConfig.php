@@ -13,30 +13,20 @@ use WebSharks\Core\Traits;
  *
  * @since 15xxxx Initial release.
  */
-class AppConfig extends AbsCore
+class AppConfig extends AppBase
 {
-    /**
-     * App.
-     *
-     * @since 15xxxx
-     *
-     * @type App
-     */
-    protected $App;
-
     /**
      * Class constructor.
      *
      * @since 15xxxx Initial release.
      *
+     * @param App   $App           Instance of App.
      * @param array $instance_base Instance base.
      * @param array $instance      Instance args (highest precedence).
      */
-    public function __construct(array $instance_base = [], array $instance = [])
+    public function __construct(App $App, array $instance_base = [], array $instance = [])
     {
-        parent::__construct();
-
-        $this->App = $GLOBALS[App::class];
+        parent::__construct($App);
 
         # Instance base (i.e., default config).
 

@@ -38,10 +38,12 @@ class Rijndael256 extends Classes\AppBase
      * Class constructor.
      *
      * @since 150424 Initial release.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         $this->iv_size  = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
         $this->key_size = mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);

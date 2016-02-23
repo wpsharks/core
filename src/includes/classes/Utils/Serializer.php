@@ -32,7 +32,7 @@ class Serializer extends Classes\AppBase
      *
      * @param mixed $value Value to serialize (maybe).
      *
-     * @return string A string value or a serialized value as a string.
+     * @return string A string or a serialized value.
      */
     public function maybeSerialize($value): string
     {

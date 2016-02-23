@@ -29,10 +29,12 @@ class WebPurify extends Classes\AppBase
      * Class constructor.
      *
      * @since 15xxxx Badwords checker.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         $Config = $this->App->Config;
 

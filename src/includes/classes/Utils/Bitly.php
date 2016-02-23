@@ -29,10 +29,12 @@ class Bitly extends Classes\AppBase
      * Class constructor.
      *
      * @since 160102 Adding bitly.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         if (!$this->App->Config->fs_paths['cache_dir']) {
             throw new Exception('Missing cache directory.');

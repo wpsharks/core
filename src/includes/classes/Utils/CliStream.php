@@ -20,10 +20,12 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
      * Class constructor.
      *
      * @since 150424 Initial release.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         if (!c\is_cli()) {
             throw new Exception('Requires CLI mode.');

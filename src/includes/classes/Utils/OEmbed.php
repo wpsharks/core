@@ -31,10 +31,12 @@ class OEmbed extends Classes\AppBase implements Interfaces\UrlConstants
      * Class constructor.
      *
      * @since 151125 OEmbed utilities.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         if (!$this->App->Config->fs_paths['cache_dir']) {
             throw new Exception('Missing cache directory.');

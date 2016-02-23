@@ -32,16 +32,14 @@ class HashIds extends Classes\AppBase
      *
      * @since 15xxxx Adding hash IDs.
      *
-     * @param string $salt      Secret key.
-     * @param int    $min_chars Minumum chars.
-     * @param string $alphabet  Chars to use in ID.
+     * @param Classes\App $App       Instance of App.
+     * @param string      $salt      Secret key.
+     * @param int         $min_chars Minumum chars.
+     * @param string      $alphabet  Chars to use in ID.
      */
-    public function __construct(
-        string $key = '',
-        int $min_chars = 0,
-        string $alphabet = ''
-    ) {
-        parent::__construct();
+    public function __construct(Classes\App $App, string $key = '', int $min_chars = 0, string $alphabet = '')
+    {
+        parent::__construct($App);
 
         if (!$key && !($key = $this->App->Config->hash_ids['hash_key'])) {
             throw new Exception('Missing HashIds hash key.');

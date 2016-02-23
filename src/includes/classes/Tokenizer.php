@@ -56,16 +56,15 @@ class Tokenizer extends AppBase
      *
      * @since 150424 Initial release.
      *
+     * @param App    $App      Instance of App.
      * @param string $string   Input string.
      * @param array  $tokenize Specific elements.
      *
      * @return string The tokenized string.
      */
-    public function __construct(
-        string $string,
-        array $tokenize
-    ) {
-        parent::__construct();
+    public function __construct(App $App, string $string, array $tokenize)
+    {
+        parent::__construct($App);
 
         $this->string   = $string;
         $this->tokenize = $tokenize;

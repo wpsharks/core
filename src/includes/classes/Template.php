@@ -74,14 +74,15 @@ class Template extends AppBase
      *
      * @since 15xxxx Initial release.
      *
+     * @param App    $App         Instance of App.
      * @param string $dir         Template dir.
      * @param string $file        Template file.
      * @param array  $parents     Parent template files.
      * @param array  $parent_vars Parent template vars.
      */
-    public function __construct(string $dir, string $file, array $parents = [], array $parent_vars = [])
+    public function __construct(App $App, string $dir, string $file, array $parents = [], array $parent_vars = [])
     {
-        parent::__construct();
+        parent::__construct($App);
 
         if (!($template = c\locate_template($file, $dir))) {
             throw new Exception(sprintf('Missing template: `%1$s`.', $dir.'/'.$file));

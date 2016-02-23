@@ -47,10 +47,12 @@ class Pdo extends Classes\AppBase
      * Constructor.
      *
      * @since 15xxxx Initial release.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         $this->hosts  = &$this->App->Config->mysql_db['hosts'];
         $this->shards = &$this->App->Config->mysql_db['shards'];
