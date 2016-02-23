@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 //
@@ -16,7 +14,7 @@ use PHPMailer;
  *
  * @since 151121 Email utilities.
  */
-class Email extends Classes\AppBase implements Interfaces\EmailConstants
+class Email extends Classes\Core implements Interfaces\EmailConstants
 {
     // @TODO Constructor.
 

@@ -3,8 +3,6 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -13,7 +11,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Template extends AppBase
+class Template extends Core
 {
     /**
      * Directory.

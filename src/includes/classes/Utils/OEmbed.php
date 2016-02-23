@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 //
@@ -16,7 +14,7 @@ use Embedly\Embedly;
  *
  * @since 151125 OEmbed utilities.
  */
-class OEmbed extends Classes\AppBase implements Interfaces\UrlConstants
+class OEmbed extends Classes\Core implements Interfaces\UrlConstants
 {
     /**
      * Cache directory.

@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlAnchorize extends Classes\AppBase implements Interfaces\EmailConstants, Interfaces\UrlConstants
+class HtmlAnchorize extends Classes\Core implements Interfaces\EmailConstants, Interfaces\UrlConstants
 {
     /**
      * Links in text to HTML anchors.

@@ -2,7 +2,7 @@
 declare (strict_types = 1);
 namespace WebSharks\Core;
 
-use WebSharks\Core\Functions as c;
+use WebSharks\Core\Classes\AppFacades as a;
 
 require_once dirname(__FILE__).'/includes/bootstrap.php';
 
@@ -16,4 +16,4 @@ $string .= 'http://www.amazon.com/gp/product/B017NL5EHW/ref=s9_hps_bw_g405_i1?pf
 $string .= 'https://www.flickr.com/photos/shutterjack/22665160864/in/explore-2015-11-25/'."\n\n";
 $string .= 'https://www.dailymotion.com/video/x2o4wou_cortoons-tv-big-buck-bunny_fun';
 
-echo c\oembed($string);
+echo a::oEmbed($string);

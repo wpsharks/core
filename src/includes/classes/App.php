@@ -3,8 +3,6 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -13,8 +11,26 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class App extends Abs
+class App extends Core
 {
+    /**
+     * Class.
+     *
+     * @since 160223
+     *
+     * @type string
+     */
+    public $class;
+
+    /**
+     * Class SHA-1.
+     *
+     * @since 160223
+     *
+     * @type string
+     */
+    public $class_sha1;
+
     /**
      * Namespace.
      *
@@ -124,6 +140,15 @@ class App extends Abs
     public $Utils;
 
     /**
+     * Facades.
+     *
+     * @since 160223
+     *
+     * @type string {AppFacades}
+     */
+    public $Facades;
+
+    /**
      * Version.
      *
      * @since 150424
@@ -146,8 +171,8 @@ class App extends Abs
 
         $Class = new \ReflectionClass($this);
 
-        $GLOBALS[self::class]       = $this;
-        $GLOBALS[$Class->getName()] = $this;
+        $this->class      = $Class->getName();
+        $this->class_sha1 = sha1($this->class);
 
         $this->namespace      = $Class->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
@@ -165,12 +190,16 @@ class App extends Abs
         $this->Di     = new AppDi($this, $this->Config->di['default_rule']);
         $this->Utils  = new AppUtils($this); // Utility class access.
 
-        $this->Di->addInstances([
-            self::class => $this,
-            $this, // Extender.
-            $this->Config,
-            $this->Utils,
-        ]);
+        $this->Di->addInstances([$this, $this->Config, $this->Utils]);
+
+        if (!class_exists($this->namespace.'\\AppFacades')) {
+            // Only if it doesn't already exist; i.e., if app has not already extended core.
+            eval('namespace '.$this->namespace.' { class AppFacades extends \\'.__NAMESPACE__.'\\AppFacades {} }');
+        }
+        $GLOBALS[$this->class]                    = $this;
+        $GLOBALS[$this->namespace.'\\AppFacades'] = $this;
+        $this->Facades                            = $this->namespace.'\\AppFacades';
+
         $this->maybeDebug();
         $this->maybeSetLocales();
         $this->maybeHandleExceptions();

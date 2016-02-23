@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151121 URL utilities.
  */
-class Url extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces\HtmlConstants
+class Url extends Classes\Core implements Interfaces\UrlConstants, Interfaces\HtmlConstants
 {
     /**
      * Build app URL.

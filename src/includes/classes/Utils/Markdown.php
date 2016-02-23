@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -17,7 +15,7 @@ use Michelf\MarkdownExtra;
  *
  * @since 150424 Initial release.
  */
-class Markdown extends Classes\AppBase
+class Markdown extends Classes\Core
 {
     /**
      * A very simple markdown parser.

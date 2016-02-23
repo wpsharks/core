@@ -3,8 +3,6 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -19,7 +17,7 @@ use GetOptionKit\OptionPrinter\ConsoleOptionPrinter;
  *
  * @since 150424 Initial release.
  */
-class CliOpts extends AppBase
+class CliOpts extends Core
 {
     /**
      * Options.
