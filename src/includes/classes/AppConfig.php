@@ -51,6 +51,9 @@ class AppConfig extends Core
                         Template::class,
                         Tokenizer::class,
                     ],
+                    'constructor_args' => [
+                        'App' => $this->App,
+                    ],
                 ],
             ],
 
