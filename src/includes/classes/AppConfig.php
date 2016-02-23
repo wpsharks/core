@@ -292,6 +292,9 @@ class AppConfig extends Core
         if ($value && is_string($value) && mb_strpos($value, '%%') !== false) {
             $value = str_replace(
                 [
+                    '%%app_class%%',
+                    '%%app_class_sha1%%',
+
                     '%%app_namespace%%',
                     '%%app_namespace_sha1%%',
 
@@ -306,6 +309,9 @@ class AppConfig extends Core
                     '%%home_dir%%',
                 ],
                 [
+                    $App->class,
+                    $App->class_sha1,
+
                     $App->namespace,
                     $App->namespace_sha1,
 
