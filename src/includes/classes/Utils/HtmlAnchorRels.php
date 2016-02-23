@@ -34,7 +34,7 @@ class HtmlAnchorRels extends Classes\Core
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        $Tokenizer = c\tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'md_fences', 'md_links']);
+        $Tokenizer = $this->a::tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'md_fences', 'md_links']);
         $string    = &$Tokenizer->getString(); // Now get string by reference.
 
         $string = preg_replace_callback('/\<a\s[^>]*\>/ui', function ($m) use ($rels) {
@@ -46,7 +46,7 @@ class HtmlAnchorRels extends Classes\Core
                 $anchor = $m[0]; // As-is in this case.
             }
             $new_rels = $existing_rels ? array_unique(array_merge($existing_rels, $rels)) : $rels;
-            return $anchor = str_replace('>', ' rel="'.c\esc_attr(implode(' ', $new_rels)).'">', $anchor);
+            return $anchor = str_replace('>', ' rel="'.$this->a::escAttr(implode(' ', $new_rels)).'">', $anchor);
         }, $string); // Adds new `rel=""` attributes.
 
         $string = $Tokenizer->restoreGetString();

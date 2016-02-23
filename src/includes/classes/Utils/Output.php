@@ -25,7 +25,7 @@ class Output extends Classes\Core
             throw new Exception('Heading already sent!');
         }
         @ini_set('zlib.output_compression', 'off');
-        if (c\can_call_func('apache_setenv')) {
+        if ($this->a::canCallFunc('apache_setenv')) {
             @apache_setenv('no-gzip', '1');
         }
     }

@@ -110,7 +110,7 @@ trait CacheMembers
             return; // Nothing to do here.
         }
         $sub_key_regex = // Allow `**` to indicate everything quickly.
-            $sub_key_pattern === '**' ? '' : c\wd_regex($sub_key_pattern);
+            $sub_key_pattern === '**' ? '' : $this->a::wdRegex($sub_key_pattern);
 
         if (!$sub_key_regex && $sub_key_pattern !== '**') {
             return; // Nothing to do; i.e., no regex.
@@ -173,7 +173,7 @@ trait CacheMembers
             return; // Nothing to do here.
         }
         $ref_key_regex = // Allow `**` to indicate everything quickly.
-            $ref_key_pattern === '**' ? '' : c\wd_regex($ref_key_pattern);
+            $ref_key_pattern === '**' ? '' : $this->a::wdRegex($ref_key_pattern);
 
         if (!$ref_key_regex && $ref_key_pattern !== '**') {
             return; // Nothing to do; i.e., no regex.

@@ -24,7 +24,7 @@ class HtmlStrip extends Classes\Core
      *
      * @return string|array|object String w/ HTML attributes stripped.
      */
-    public function attributes($value, array $args = array())
+    public function attributes($value, array $args = [])
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -35,9 +35,9 @@ class HtmlStrip extends Classes\Core
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        $default_args = array(
+        $default_args = [
             'allowed_attributes' => [],
-        );
+        ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 

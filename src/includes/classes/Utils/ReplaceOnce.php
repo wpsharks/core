@@ -49,7 +49,7 @@ class ReplaceOnce extends Classes\Core
                     if (($_mb_strpos = $mb_strpos($value, $_needle)) !== false) {
                         $_mb_strlen = mb_strlen($_needle);
                         $_replace   = isset($replace[$_key]) ? (string) $replace[$_key] : '';
-                        $value      = c\mb_substr_replace($value, $_replace, $_mb_strpos, $_mb_strlen);
+                        $value      = $this->a::mbSubstrReplace($value, $_replace, $_mb_strpos, $_mb_strlen);
                     }
                 } // unset($_key, $_needle, $_mb_strpos, $_mb_strlen, $_replace);
 
@@ -61,7 +61,7 @@ class ReplaceOnce extends Classes\Core
                     $_needle = (string) $_needle;
                     if (($_mb_strpos = $mb_strpos($value, $_needle)) !== false) {
                         $_mb_strlen = mb_strlen($_needle);
-                        $value      = c\mb_substr_replace($value, $replace, $_mb_strpos, $_mb_strlen);
+                        $value      = $this->a::mbSubstrReplace($value, $replace, $_mb_strpos, $_mb_strlen);
                     }
                 } // unset($_key, $_needle, $_mb_strpos, $_mb_strlen);
 
@@ -79,7 +79,7 @@ class ReplaceOnce extends Classes\Core
                 } else {
                     $_replace = (string) $replace; // Force string.
                 }
-                $value = c\mb_substr_replace($value, $_replace, $_mb_strpos, $_mb_strlen);
+                $value = $this->a::mbSubstrReplace($value, $_replace, $_mb_strpos, $_mb_strlen);
                 // unset($_mb_strpos, $_mb_strlen, $_replace);
             }
             return $value;

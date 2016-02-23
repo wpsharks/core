@@ -45,12 +45,12 @@ class Email extends Classes\Core implements Interfaces\EmailConstants
 
         $recipients = $this->parseAddresses($to);
 
-        if (c\is_html($message)) {
+        if ($this->a::isHtml($message)) {
             $message_html = $message; // HTML!
-            $message_text = c\html_to_text($message);
+            $message_text = $this->a::htmlToText($message);
         } else {
             $message_text = $message; // Text!
-            $message_html = c\text_to_html($message);
+            $message_html = $this->a::textToHtml($message);
         }
         if (!$message_text) { // Set a default plain text alternative in this case.
             $message_text = __('To view this email message, open it in a program that understands HTML.');
@@ -180,10 +180,10 @@ class Email extends Classes\Core implements Interfaces\EmailConstants
         }
         $string                      = (string) $value;
         $delimiter                   = mb_strpos($string, ';') !== false ? ';' : ',';
-        $regex_delimitation_splitter = '/'.$delimiter.'+/u'; // `c\esc_regex()` unnecessary.
+        $regex_delimitation_splitter = '/'.$delimiter.'+/u'; // `$this->a::escRegex()` unnecessary.
 
         $possible_addresses = preg_split($regex_delimitation_splitter, $string, -1, PREG_SPLIT_NO_EMPTY);
-        $possible_addresses = c\mb_trim($possible_addresses);
+        $possible_addresses = $this->a::mbTrim($possible_addresses);
 
         foreach ($possible_addresses as $_address) {
             if (!$_address || mb_strpos($_address, '@', 1) === false) {
@@ -193,8 +193,8 @@ class Email extends Classes\Core implements Interfaces\EmailConstants
                 if ($_m['email'] && mb_strpos($_m['email'], '@', 1) !== false && (!$strict || $this->isValid($_m['email']))) {
                     $_email             = mb_strtolower($_m['email']);
                     $_name              = !empty($_m['name']) ? $_m['name'] : '';
-                    $_fname             = $_name ? c\fname_in($_name) : '';
-                    $_lname             = $_name ? c\lname_in($_name) : '';
+                    $_fname             = $_name ? $this->a::fnameIn($_name) : '';
+                    $_lname             = $_name ? $this->a::lnameIn($_name) : '';
                     $addresses[$_email] = (object) ['name' => $_name, 'fname' => $_fname, 'lname' => $_lname, 'email' => $_email];
                 }
             } elseif (!$strict || $this->isValid($_address)) {
@@ -222,14 +222,14 @@ class Email extends Classes\Core implements Interfaces\EmailConstants
     {
         $headers = []; // Initialize parsed headers.
 
-        foreach (c\parse_headers($value) as $_header => $_value) {
+        foreach ($this->a::parseHeaders($value) as $_header => $_value) {
             switch ($_header) { // Maybe populate refs.
 
                 case 'from':
                     if (array_key_exists('from_name', $refs) && array_key_exists('from_email', $refs)) {
                         if (($_from_addresses = $this->parseAddresses($_value, $strict))) {
                             $_from              = array_shift($_from_addresses);
-                            $refs['from_name']  = c\mb_trim($_from->fname.' '.$_from->lname);
+                            $refs['from_name']  = $this->a::mbTrim($_from->fname.' '.$_from->lname);
                             $refs['from_email'] = $_from->email; // By reference.
                         } // unset($_from_addresses, $_from);
                     } else {
@@ -241,7 +241,7 @@ class Email extends Classes\Core implements Interfaces\EmailConstants
                     if (array_key_exists('reply_to_name', $refs) && array_key_exists('reply_to_email', $refs)) {
                         if (($_reply_to_addresses = $this->parseAddresses($_value, $strict))) {
                             $_reply_to              = array_shift($_reply_to_addresses);
-                            $refs['reply_to_name']  = c\mb_trim($_reply_to->fname.' '.$_reply_to->lname);
+                            $refs['reply_to_name']  = $this->a::mbTrim($_reply_to->fname.' '.$_reply_to->lname);
                             $refs['reply_to_email'] = $_reply_to->email; // By reference.
                         } // unset($_reply_to_addresses, $_reply_to);
                     } else {

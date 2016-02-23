@@ -72,7 +72,7 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
 
         $via = (string) $args['via']; // Force string.
 
-        $Tokenizer = c\tokenize(
+        $Tokenizer = $this->a::tokenize(
             $string,
             [
                 'shortcodes',
@@ -96,7 +96,7 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
                 break; // All done here.
 
             default: // Defaults.
-                if (c\is_wordpress()) {
+                if ($this->a::isWordpress()) {
                     $string = $this->viaWordPress($string);
                 } else { // Default outside WP.
                     $string = $this->viaEmbedly($string);
@@ -214,14 +214,14 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
         if (!$url || empty($embed->type) || empty($embed->provider_name)) {
             return $markup; // Not possible; i.e., empty string.
         }
-        $provider_slug = c\name_to_slug($embed->provider_name);
+        $provider_slug = $this->a::nameToSlug($embed->provider_name);
         $classes       = '-_embedly -_'.$embed->type.' -_'.$provider_slug;
 
         switch ($embed->type) { // See: <http://jas.xyz/1O7ymwT>
             case 'rich':
             case 'video':
                 if (!empty($embed->html)) {
-                    $markup = '<div class="'.c\esc_attr($classes).'">'.
+                    $markup = '<div class="'.$this->a::escAttr($classes).'">'.
                         $embed->html.
                     '</div>';
                 }
@@ -229,9 +229,9 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
 
             case 'photo':
                 if (!empty($embed->url) && isset($embed->width, $embed->height)) {
-                    $markup = '<div class="'.c\esc_attr($classes).'">'.
-                        '<a href="'.c\esc_url($url).'" title="'.c\esc_attr($embed->title ?? '').'">'.
-                            '<img src="'.c\esc_url($embed->url).'" width="'.c\esc_attr((string) $embed->width).'" height="'.c\esc_attr((string) $embed->height).'" alt="" />'.
+                    $markup = '<div class="'.$this->a::escAttr($classes).'">'.
+                        '<a href="'.$this->a::escUrl($url).'" title="'.$this->a::escAttr($embed->title ?? '').'">'.
+                            '<img src="'.$this->a::escUrl($embed->url).'" width="'.$this->a::escAttr((string) $embed->width).'" height="'.$this->a::escAttr((string) $embed->height).'" alt="" />'.
                         '</a>'.
                     '</div>';
                 }
@@ -239,9 +239,9 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
 
             case 'link':
                 if (!empty($embed->thumbnail_url) && isset($embed->thumbnail_width, $embed->thumbnail_height)) {
-                    $markup = '<div class="'.c\esc_attr($classes).'">'.
-                        '<a href="'.c\esc_url($url).'" title="'.c\esc_attr($embed->title ?? '').'">'.
-                            '<img src="'.c\esc_url($embed->thumbnail_url).'" width="'.c\esc_attr((string) $embed->thumbnail_width).'" height="'.c\esc_attr((string) $embed->thumbnail_height).'" alt="" />'.
+                    $markup = '<div class="'.$this->a::escAttr($classes).'">'.
+                        '<a href="'.$this->a::escUrl($url).'" title="'.$this->a::escAttr($embed->title ?? '').'">'.
+                            '<img src="'.$this->a::escUrl($embed->thumbnail_url).'" width="'.$this->a::escAttr((string) $embed->thumbnail_width).'" height="'.$this->a::escAttr((string) $embed->thumbnail_height).'" alt="" />'.
                         '</a>'.
                     '</div>';
                 }
@@ -262,7 +262,7 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
     protected function getEmbedlyCache(string $url)
     {
         $cache_dir = $this->cache_dir.'/embedly';
-        $cache_dir .= '/'.c\sha1_mod_shard_id($url);
+        $cache_dir .= '/'.$this->a::sha1ModShardId($url);
         $cache_file = $cache_dir.'/'.sha1($url);
 
         if (is_file($cache_file)) {
@@ -285,7 +285,7 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
     protected function setEmbedlyCache(string $url, \stdClass $embed)
     {
         $url_sha1              = sha1($url);
-        $cache_dir             = $this->cache_dir.'/embedly/'.c\sha1_mod_shard_id($url_sha1, true);
+        $cache_dir             = $this->cache_dir.'/embedly/'.$this->a::sha1ModShardId($url_sha1, true);
         $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
         $cache_file            = $cache_dir.'/'.$url_sha1;
 
@@ -304,9 +304,9 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
      */
     protected function viaWordPress(string $string): string
     {
-        if (!c\is_wordpress()
-            || !c\can_call_func('wp_oembed_get')
-            || !c\can_call_func('wp_embed_defaults')) {
+        if (!$this->a::isWordpress()
+            || !$this->a::canCallFunc('wp_oembed_get')
+            || !$this->a::canCallFunc('wp_embed_defaults')) {
             throw new Exception('Unable to oEmbed via WordPress.');
         }
         $oembed_args = array_merge(wp_embed_defaults(), ['discover' => false]);

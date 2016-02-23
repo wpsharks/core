@@ -210,7 +210,7 @@ class Dump extends Classes\Core
 
                     $var_dump = $var_dump.$dump_indents.$closing_encap;
                 } else {
-                    $var_dump = c\mb_rtrim($var_dump, "\n".$indent_char.$opening_encap).$opening_encap.$closing_encap;
+                    $var_dump = $this->a::mbRTrim($var_dump, "\n".$indent_char.$opening_encap).$opening_encap.$closing_encap;
                 }
                 break; // Break switch.
 

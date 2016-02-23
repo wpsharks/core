@@ -26,7 +26,7 @@ class DotKeys extends Classes\Core
     public function __invoke(array $array): array
     {
         $dot_keys = []; // Initialize.
-        $Iterator = c\array_recursive_iterator($array);
+        $Iterator = $this->a::arrayRecursiveIterator($array);
 
         foreach ($Iterator as $_key => $_value) {
             $_keys = []; // Initialize keys.

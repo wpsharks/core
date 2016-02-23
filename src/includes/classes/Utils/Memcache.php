@@ -255,7 +255,7 @@ class Memcache extends Classes\Core
                 break; // All good; stop here.
             }
             if (!isset($new_namespaced_primary_key_uuid)) {
-                $new_namespaced_primary_key_uuid = c\uuid_v4();
+                $new_namespaced_primary_key_uuid = $this->a::uuidV4();
             }
             if ($this->Pool->add($namespaced_primary_key, $new_namespaced_primary_key_uuid)) {
                 $namespaced_primary_key_uuid = $new_namespaced_primary_key_uuid;

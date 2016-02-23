@@ -39,7 +39,7 @@ class RegexPattern extends Classes\Core
                 if (is_array($_value) || is_object($_value)) {
                     if (($_matching_key_props = $this->in($regex, $_value, $collect_key_props))) {
                         if ($collect_key_props) {
-                            $matching_key_props[] = array($_key_prop => $_matching_key_props);
+                            $matching_key_props[] = [$_key_prop => $_matching_key_props];
                         } else {
                             return true;
                         }

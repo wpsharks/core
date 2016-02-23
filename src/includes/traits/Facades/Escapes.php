@@ -54,7 +54,7 @@ trait Escapes
      */
     public static function escShellArg(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Escape->shell_arg(...$args);
+        return $GLOBALS[static::class]->Utils->Escape->shellArg(...$args);
     }
 
     /**

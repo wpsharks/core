@@ -39,7 +39,7 @@ class DirDelete extends Classes\Core
             return false; // Not possible.
         }
         while (($_dir_file = readdir($opendir)) !== false) {
-            if (in_array($_dir_file, array('.', '..'), true)) {
+            if (in_array($_dir_file, ['.', '..'], true)) {
                 continue; // Skip dots.
             }
             if (is_dir($_dir_file = $dir.'/'.$_dir_file)) {

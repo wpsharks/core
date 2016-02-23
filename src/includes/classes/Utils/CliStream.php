@@ -25,7 +25,7 @@ class CliStream extends Classes\Core implements Interfaces\UrlConstants, Interfa
     {
         parent::__construct($App);
 
-        if (!c\is_cli()) {
+        if (!$this->a::isCli()) {
             throw new Exception('Requires CLI mode.');
         }
     }
@@ -55,7 +55,7 @@ class CliStream extends Classes\Core implements Interfaces\UrlConstants, Interfa
                 break; // Got what we wanted :-)
             }
         }
-        return c\mb_trim($stdin);
+        return $this->a::mbTrim($stdin);
     }
 
     /**

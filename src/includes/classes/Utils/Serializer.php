@@ -64,7 +64,7 @@ class Serializer extends Classes\Core
         $value = $string; // Initialize.
 
         if ($value && mb_strpos($value, $this::MARKER) === 0) {
-            $value = @unserialize(c\str_replace_once($this::MARKER, '', $value));
+            $value = @unserialize($this->a::strReplaceOnce($this::MARKER, '', $value));
         }
         return $value;
     }

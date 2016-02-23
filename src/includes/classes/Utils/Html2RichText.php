@@ -68,33 +68,33 @@ class Html2RichText extends Classes\Core implements Interfaces\HtmlConstants
         $strip_content_in_tags            = (array) $args['strip_content_in_tags'];
         $strip_content_in_tags            = array_map('mb_strtolower', $strip_content_in_tags);
         $strip_content_in_tags            = array_diff($strip_content_in_tags, $allowed_tags);
-        $strip_content_in_tags_regex_frag = implode('|', c\esc_regex($strip_content_in_tags));
+        $strip_content_in_tags_regex_frag = implode('|', $this->a::escRegex($strip_content_in_tags));
 
         $inject_eol_after_tags            = (array) $args['inject_eol_after_tags'];
         $inject_eol_after_tags            = array_map('mb_strtolower', $inject_eol_after_tags);
-        $inject_eol_after_tags_regex_frag = implode('|', c\esc_regex($inject_eol_after_tags));
+        $inject_eol_after_tags_regex_frag = implode('|', $this->a::escRegex($inject_eol_after_tags));
 
         $string = preg_replace('/\<('.$strip_content_in_tags_regex_frag.')(?:\>|\s[^>]*\>).*?\<\/\\1\>/uis', '', $string);
         $string = preg_replace('/\<\/(?:'.$inject_eol_after_tags_regex_frag.')\>/ui', '${0}'."\n", $string);
         $string = preg_replace('/\<(?:'.$inject_eol_after_tags_regex_frag.')(?:\/\s*\>|\s[^\/>]*\/\s*\>)/ui', '${0}'."\n", $string);
 
         $string = strip_tags($string, $allowed_tags ? '<'.implode('><', $allowed_tags).'>' : '');
-        $string = c\strip_html_attrs($string, compact('allowed_attributes'));
-        $string = c\balance_html_tags($string); // Force balanced tags.
+        $string = $this->a::stripHtmlAttrs($string, compact('allowed_attributes'));
+        $string = $this->a::balanceHtmlTags($string); // Force balanced tags.
 
-        $Tokenizer = c\tokenize($string, ['pre', 'code', 'samp']);
+        $Tokenizer = $this->a::tokenize($string, ['pre', 'code', 'samp']);
         $string    = &$Tokenizer->getString(); // By reference.
 
         if ($br2nl) {
             $string = preg_replace('/\<br(?:\>|\/\s*\>|\s[^\/>]*\/\s*\>)/u', "\n", $string);
-            $string = c\normalize_eols($string); // Normalize line breaks.
+            $string = $this->a::normalizeEols($string); // Normalize line breaks.
             $string = preg_replace('/[ '."\t\x0B".']+/u', ' ', $string);
         } else {
             $string = preg_replace('/\s+/u', ' ', $string);
         }
-        $string = c\normalize_html_whitespace($string);
+        $string = $this->a::normalizeHtmlWhitespace($string);
         $string = $Tokenizer->restoreGetString();
-        $string = c\html_trim($string);
+        $string = $this->a::htmlTrim($string);
 
         return $string;
     }

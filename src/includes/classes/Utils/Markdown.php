@@ -27,7 +27,7 @@ class Markdown extends Classes\Core
      *
      * @return string|array|object Html markup value(s).
      */
-    public function __invoke($value, array $args = array())
+    public function __invoke($value, array $args = [])
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -71,10 +71,10 @@ class Markdown extends Classes\Core
             $string = $MarkdownExtra->transform($string);
         }
         if ($anchorize) {
-            $string = c\html_anchorize($string);
+            $string = $this->a::htmlAnchorize($string);
         }
         if ($anchor_rels) {
-            $string = c\html_anchor_rels($string, $anchor_rels);
+            $string = $this->a::htmlAnchorRels($string, $anchor_rels);
         }
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);
@@ -92,7 +92,7 @@ class Markdown extends Classes\Core
      *
      * @return string|array|object Stripped markdown value(s).
      */
-    public function strip($value, array $args = array())
+    public function strip($value, array $args = [])
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

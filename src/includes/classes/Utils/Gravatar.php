@@ -27,7 +27,7 @@ class Gravatar extends Classes\Core
      */
     public function url(string $email, int $size = 64, string $scheme = ''): string
     {
-        $md5 = md5(mb_strtolower(c\mb_trim($email)));
-        return c\set_scheme('https://www.gravatar.com/avatar/'.$md5.'?s='.$size);
+        $md5 = md5(mb_strtolower($this->a::mbTrim($email)));
+        return $this->a::setScheme('https://www.gravatar.com/avatar/'.$md5.'?s='.$size);
     }
 }

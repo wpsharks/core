@@ -39,14 +39,14 @@ class Html2Pandoc extends Classes\Core
             return $string; // Nothing to do.
         }
         try { // Fail gracefully.
-            $options = array(
+            $options = [
                 'from'          => 'html',
                 'to'            => $to,
                 'parse-raw'     => null,
                 'atx-headers'   => null,
                 'no-wrap'       => null,
                 'preserve-tabs' => null,
-            );
+            ];
             $Pandoc = new Pandoc();
             return $Pandoc->runWith($string, $options);
         } catch (\Throwable $Exception) {

@@ -30,7 +30,7 @@ class DirTmp extends Classes\Core
             return $dir; // Already cached this.
         }
         $possible_dirs = []; // Initialize.
-        $is_wordpress  = c\is_wordpress();
+        $is_wordpress  = $this->a::isWordpress();
 
         if ($is_wordpress && defined('WP_TEMP_DIR')) {
             $possible_dirs[] = (string) WP_TEMP_DIR;
@@ -47,7 +47,7 @@ class DirTmp extends Classes\Core
         if (!empty($_SERVER['TMP'])) {
             $possible_dirs[] = (string) $_SERVER['TMP'];
         }
-        if (c\is_windows()) {
+        if ($this->a::isWindows()) {
             $possible_dirs[] = 'C:/Temp';
         } else {
             $possible_dirs[] = '/tmp';

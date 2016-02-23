@@ -30,7 +30,7 @@ class WdRegex extends Classes\Core
         $regex = ''; // Initialize.
 
         $patterns            = preg_split('/['."\r\n".']+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
-        $patterns            = c\remove_emptys(c\mb_trim($patterns));
+        $patterns            = $this->a::removeEmptys($this->a::mbTrim($patterns));
         $regex_pattern_frags = $this->frag($patterns, $star_not);
 
         if ($regex_pattern_frags) { // Have an array of regex patterns frags?
@@ -67,20 +67,20 @@ class WdRegex extends Classes\Core
             return $string;
         }
         return preg_replace(
-            array(
+            [
                 '/\\\\\^/u',
                 '/\\\\\*\\\\\*/u',
                 '/\\\\\*/u',
                 '/\\\\\$/u',
-            ),
-            array(
+            ],
+            [
                 '^', // Beginning of line.
                 '.*?', // Zero or more chars.
-                '[^'.c\esc_regex($star_not).']*?',
+                '[^'.$this->a::escRegex($star_not).']*?',
                 // Zero or more chars != `$star_not`.
                 '$', // End of line.
-            ),
-            c\esc_regex($string)
+            ],
+            $this->a::escRegex($string)
         );
     }
 }

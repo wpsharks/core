@@ -25,7 +25,7 @@ class Cookie extends Classes\Core
     {
         parent::__construct($App);
 
-        if (c\is_cli()) {
+        if ($this->a::isCli()) {
             throw new Exception('Not possible in CLI mode.');
         }
     }
@@ -49,13 +49,13 @@ class Cookie extends Classes\Core
             throw new Exception('Missing cookie encryption key.');
         }
         if (isset($value[0])) { // If not empty.
-            $value = c\encrypt($value, $key);
+            $value = $this->a::encrypt($value, $key);
         }
         $expires_after = max(0, $expires_after ?? 31556926);
         $expires       = $expires_after ? time() + $expires_after : 0;
 
-        $domain = $domain ?? c\current_host(true);
-        $domain = $domain === 'root' ? '.'.c\current_root_host(true) : $domain;
+        $domain = $domain ?? $this->a::currentHost(true);
+        $domain = $domain === 'root' ? '.'.$this->a::currentRootHost(true) : $domain;
         $path   = $path ?? '/'; // Default path covers the entire site.
 
         if (headers_sent()) {
@@ -85,7 +85,7 @@ class Cookie extends Classes\Core
             throw new Exception('Missing cookie encryption key.');
         }
         if (isset($_COOKIE[$name]) && is_string($_COOKIE[$name])) {
-            return c\decrypt($_COOKIE[$name], $key);
+            return $this->a::decrypt($_COOKIE[$name], $key);
         }
         return ''; // Missing cookie.
     }

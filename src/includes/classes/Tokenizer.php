@@ -126,7 +126,7 @@ class Tokenizer extends Core
         if (!in_array('shortcodes', $this->tokenize, true)) {
             return; // Not tokenizing these.
         }
-        if (!c\is_wordpress() || empty($GLOBALS['shortcode_tags']) || !c\can_call_func('get_shortcode_regex')) {
+        if (!$this->a::isWordpress() || empty($GLOBALS['shortcode_tags']) || !$this->a::canCallFunc('get_shortcode_regex')) {
             return; // Not WordPress; i.e., no known shortcodes.
         }
         if (mb_strpos($this->string, '[') === false) {

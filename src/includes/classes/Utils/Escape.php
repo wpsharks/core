@@ -79,7 +79,7 @@ class Escape extends Classes\Core
      *
      * @return string|array|object Output value.
      */
-    public function shell_arg($value)
+    public function shellArg($value)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

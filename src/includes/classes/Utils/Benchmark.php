@@ -71,7 +71,7 @@ class Benchmark extends Classes\Core
     {
         parent::__construct($App);
 
-        if (!c\is_cli()) {
+        if (!$this->a::isCli()) {
             throw new Exception('Requires CLI mode.');
         }
     }
@@ -107,7 +107,7 @@ class Benchmark extends Classes\Core
         $this->this_time = $this->stopped - $this->started;
 
         if ($this->last_time) {
-            $_percent_diff = c\percent_diff($this->last_time, $this->this_time, 2);
+            $_percent_diff = $this->a::percentDiff($this->last_time, $this->this_time, 2);
             $_percent_diff = $_percent_diff > 0 ? abs($_percent_diff).'% slower' : abs($_percent_diff).'% faster';
 
             $this->addStatistic('Processing Time', number_format($this->this_time, 8, '.', ''));
@@ -117,8 +117,8 @@ class Benchmark extends Classes\Core
             $this->addStatistic('Processing Time', number_format($this->this_time, 8, '.', '')."\n");
         }
         if ($full_report) {
-            $this->addStatistic('Memory', c\bytes_to_abbr(memory_get_usage()));
-            $this->addStatistic('Peak Memory', c\bytes_to_abbr(memory_get_peak_usage())."\n");
+            $this->addStatistic('Memory', $this->a::bytesToAbbr(memory_get_usage()));
+            $this->addStatistic('Peak Memory', $this->a::bytesToAbbr(memory_get_peak_usage())."\n");
 
             $this->addStatistic('PHP Version', PHP_VERSION);
             $this->addStatistic('PCRE Version', PCRE_VERSION."\n");
@@ -158,7 +158,7 @@ class Benchmark extends Classes\Core
             $statistics .= $_label.':    '.str_repeat(' ', $_alignment_chars).$_value."\n";
         } // unset($_label_chars, $_alignment_chars);
 
-        echo c\mb_trim($statistics)."\n";
+        echo $this->a::mbTrim($statistics)."\n";
 
         echo '----------------------------------------------------'."\n\n";
     }

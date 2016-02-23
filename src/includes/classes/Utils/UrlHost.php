@@ -44,7 +44,7 @@ class UrlHost extends Classes\Core
 
         $root          = implode('.', array_slice($parts, -2)); // `example.com`
         $root_basename = implode('.', array_slice($parts, -2, 1)); // `example`
-        $root_as_name  = c\slug_to_name($root_basename); // `Example`
+        $root_as_name  = $this->a::slugToName($root_basename); // `Example`
 
         $tld = implode('.', array_slice($parts, -1)); // `com`
 

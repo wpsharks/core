@@ -37,7 +37,7 @@ class FileExt extends Classes\Core
         if (!($ext = mb_strrchr($basename, '.'))) {
             return ''; // Nothing.
         }
-        $ext = c\mb_ltrim($ext, '.');
+        $ext = $this->a::mbLTrim($ext, '.');
         $ext = mb_strtolower($ext);
 
         return $ext;

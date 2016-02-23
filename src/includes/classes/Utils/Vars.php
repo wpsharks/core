@@ -41,8 +41,8 @@ class Vars extends Classes\Core implements Interfaces\VarConstants
     {
         $name = $var; // Working copy.
         $name = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $name);
-        $name = c\mb_ucwords($name);
-        $name = c\mb_trim($name);
+        $name = $this->a::mbUcWords($name);
+        $name = $this->a::mbTrim($name);
 
         return $name;
     }
@@ -58,7 +58,7 @@ class Vars extends Classes\Core implements Interfaces\VarConstants
      */
     public function toAcronym(string $var): string
     {
-        return c\name_to_acronym($this->toName($var));
+        return $this->a::nameToAcronym($this->toName($var));
     }
 
     /**
@@ -73,9 +73,9 @@ class Vars extends Classes\Core implements Interfaces\VarConstants
     public function toSlug(string $var): string
     {
         $slug = $var; // Working copy.
-        $slug = mb_strtolower(c\force_ascii($slug));
+        $slug = mb_strtolower($this->a::forceAscii($slug));
         $slug = preg_replace('/[^a-z0-9]+/u', '-', $slug);
-        $slug = c\mb_trim($slug, '', '-');
+        $slug = $this->a::mbTrim($slug, '', '-');
 
         if ($slug && !preg_match('/^[a-z]/u', $slug)) {
             $slug = 'x'.$slug; // Force `^[a-z]`.

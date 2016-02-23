@@ -25,7 +25,7 @@ class UrlCurrent extends Classes\Core
     {
         parent::__construct($App);
 
-        if (c\is_cli()) {
+        if ($this->a::isCli()) {
             throw new Exception('Not possible in CLI mode.');
         }
     }
@@ -134,7 +134,7 @@ class UrlCurrent extends Classes\Core
             return $uri; // Cached this already.
         }
         $uri = $_SERVER['REQUEST_URI'];
-        $uri = '/'.c\mb_ltrim($uri, '/');
+        $uri = '/'.$this->a::mbLTrim($uri, '/');
 
         if ($canonical) { // Strip query/frag.
             $uri = preg_split('/[?#]/u', $uri, 2)[0];
@@ -155,7 +155,7 @@ class UrlCurrent extends Classes\Core
             return $path; // Cached this already.
         }
         $path = (string) parse_url($this->uri(), PHP_URL_PATH);
-        $path = '/'.c\mb_ltrim($path, '/');
+        $path = '/'.$this->a::mbLTrim($path, '/');
 
         return $path;
     }
@@ -179,7 +179,7 @@ class UrlCurrent extends Classes\Core
         if (mb_strpos($path_info, '?') !== false) {
             list($path_info) = explode('?', $path_info, 2);
         }
-        $path_info = c\mb_trim($path_info, '/');
+        $path_info = $this->a::mbTrim($path_info, '/');
         $path_info = str_replace('%', '%25', $path_info);
 
         return $path_info;
@@ -208,7 +208,7 @@ class UrlCurrent extends Classes\Core
             }
         }
         if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
-            if (c\mb_strcasecmp($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0) {
+            if ($this->a::mbStrCaseCmp($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0) {
                 return $is = true;
             }
         }

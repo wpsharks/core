@@ -40,7 +40,7 @@ class Trim extends Classes\Core
             return $string; // Nothing to do.
         }
         $chars = isset($chars[0]) ? $chars : " \r\n\t\0\x0B";
-        $chars = c\esc_regex($chars.$extra_chars);
+        $chars = $this->a::escRegex($chars.$extra_chars);
 
         switch ($side) {
             case 'l': // Left trim.

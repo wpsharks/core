@@ -28,6 +28,6 @@ class Memory extends Classes\Core
         if (isset($limit) && $limit) {
             @ini_set('memory_limit', $limit);
         }
-        return c\abbr_to_bytes(ini_get('memory_limit'));
+        return $this->a::abbrToBytes(ini_get('memory_limit'));
     }
 }

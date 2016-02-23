@@ -233,7 +233,7 @@ class App extends Core
     protected function maybeHandleExceptions()
     {
         if (!$this->Config->debug && $this->Config->handle_exceptions) {
-            c\setup_exception_handler();
+            $this->a::setupExceptionHandler();
         }
     }
 

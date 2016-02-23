@@ -29,7 +29,7 @@ extract($this->setVars($¤defaults, $¤vars));
 
 <?php if ($this->App->Config->debug && $Exception) : ?>
     <pre>
-        <?= c\esc_html($Exception->getMessage()) ?>
+        <?= $this->a::escHtml($Exception->getMessage()) ?>
     </pre>
 <?php endif; ?>
 

@@ -49,7 +49,7 @@ function esc_url(...$args)
  */
 function esc_shell_arg(...$args)
 {
-    return $GLOBALS[App::class]->Utils->Escape->shell_arg(...$args);
+    return $GLOBALS[App::class]->Utils->Escape->shellArg(...$args);
 }
 
 /**

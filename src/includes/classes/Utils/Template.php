@@ -26,8 +26,8 @@ class Template extends Classes\Core
      */
     public function locate(string $file, string $dir = ''): array
     {
-        $dir  = c\mb_rtrim($dir, '/');
-        $file = c\mb_trim($file, '/');
+        $dir  = $this->a::mbRTrim($dir, '/');
+        $file = $this->a::mbTrim($file, '/');
 
         if (!$dir) { // Use default templates directory?
             $dir = $this->App->Config->fs_paths['templates_dir'];
@@ -36,10 +36,10 @@ class Template extends Classes\Core
             $dir = $this->App->core_dir.'/src/includes/templates';
         }
         if ($dir && $file && is_file($dir.'/'.$file)) {
-            if (preg_match('/\/\.|\.\/|\.\./u', c\normalize_dir_path($dir.'/'.$file))) {
+            if (preg_match('/\/\.|\.\/|\.\./u', $this->a::normalizeDirPath($dir.'/'.$file))) {
                 throw new Exception(sprintf('Insecure template path: `%1$s`.', $dir.'/'.$file));
             }
-            return ['dir' => $dir, 'file' => $file, 'ext' => c\file_ext($file)];
+            return ['dir' => $dir, 'file' => $file, 'ext' => $this->a::fileExt($file)];
         }
         return []; // Unable to locate.
     }
@@ -70,16 +70,16 @@ class Template extends Classes\Core
         $redirect_trailing_slash = (bool) $args['redirect_trailing_slash'];
 
         if (!isset($route[0])) {
-            $route = c\current_path(); // Use current URL path.
+            $route = $this->a::currentPath(); // Use current URL path.
             if ($redirect_trailing_slash && $route !== '/' && mb_substr($route, -1) === '/') {
-                $current_url         = c\parse_url(c\current_url());
-                $current_url['path'] = c\mb_rtrim($current_url['path'], '/');
-                $current_url         = c\unparse_url($current_url);
+                $current_url         = $this->a::parseUrl($this->a::currentUrl());
+                $current_url['path'] = $this->a::mbRTrim($current_url['path'], '/');
+                $current_url         = $this->a::unparseUrl($current_url);
                 header('location: '.$current_url, true, 301);
                 exit; // Stop here on redirection.
             }
         }
-        $route = c\mb_trim($route, '/');
+        $route = $this->a::mbTrim($route, '/');
         if (!isset($route[0])) {
             $route = 'index';
         }
@@ -122,7 +122,7 @@ class Template extends Classes\Core
             return true; // Loaded successfully.
         } else {
             if ($display_error) {
-                c\status_header(404, $args['status_header']);
+                $this->a::statusHeader(404, $args['status_header']);
             }
             return false; // Failure.
         }
@@ -142,6 +142,6 @@ class Template extends Classes\Core
      */
     public function get(string $file, string $dir = '', array $parents = [], array $parent_vars = []): Classes\Template
     {
-        return c\di_get(Classes\Template::class, compact('dir', 'file', 'parents', 'parent_vars'));
+        return $this->a::diGet(Classes\Template::class, compact('dir', 'file', 'parents', 'parent_vars'));
     }
 }

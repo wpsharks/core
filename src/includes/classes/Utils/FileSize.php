@@ -48,7 +48,7 @@ class FileSize extends Classes\Core
     {
         $precision  = max(0, $precision);
         $bytes      = max(0.0, (float) $bytes);
-        $units      = array('bytes', 'kbs', 'MB', 'GB', 'TB');
+        $units      = ['bytes', 'kbs', 'MB', 'GB', 'TB'];
         $power      = floor(($bytes ? log($bytes) : 0) / log(1024));
         $abbr_bytes = round($bytes / pow(1024, $power), $precision);
         $abbr       = $units[min($power, count($units) - 1)];

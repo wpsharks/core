@@ -44,9 +44,9 @@ class DirPath extends Classes\Core implements Interfaces\FsConstants
         if (mb_strpos($string, ':') !== false && preg_match($drive_prefix_regex, $stringm, $drive_prefix)) {
             $string = preg_replace($stream_wrapper_regex, '', $string);
         }
-        $string = str_replace(array(DIRECTORY_SEPARATOR, '\\', '/'), '/', $string);
+        $string = str_replace([DIRECTORY_SEPARATOR, '\\', '/'], '/', $string);
         $string = preg_replace('/\/+/u', '/', $string); // Remove extra slashes.
-        $string = $allow_trailing_slash ? $string : c\mb_rtrim($string, '/');
+        $string = $allow_trailing_slash ? $string : $this->a::mbRTrim($string, '/');
 
         if (!empty($drive_prefix[0])) {
             $string = mb_strtoupper($drive_prefix[0]).$string;

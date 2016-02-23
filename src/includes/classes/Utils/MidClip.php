@@ -37,7 +37,7 @@ class MidClip extends Classes\Core
         }
         $max_length      = max(6, $max_length);
         $half_max_length = floor($max_length / 2);
-        $string          = c\html_to_text($string, ['br2nl' => false]);
+        $string          = $this->a::htmlToText($string, ['br2nl' => false]);
         $full_string     = $string; // Remember full string.
 
         if (mb_strlen($string) <= $max_length) {

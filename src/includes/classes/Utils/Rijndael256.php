@@ -68,7 +68,7 @@ class Rijndael256 extends Classes\Core
         if (strlen($key = (string) substr($key, 0, $this->key_size)) < $this->key_size) {
             throw new Exception(sprintf('Key too short. Minimum length: `%1$s`.', $this->key_size));
         }
-        if (strlen($iv = c\random_key($this->iv_size, false)) < $this->iv_size) {
+        if (strlen($iv = $this->a::randomKey($this->iv_size, false)) < $this->iv_size) {
             throw new Exception(sprintf('IV too short. Minimum length: `%1$s`.', $this->iv_size));
         }
         if (!is_string($e = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $string, MCRYPT_MODE_CBC, $iv)) || !isset($e[0])) {
@@ -76,7 +76,7 @@ class Rijndael256 extends Classes\Core
         }
         $e = '~r2:'.$iv.($sha1 ? ':'.sha1($e) : '').'|'.$e; // Pack components.
 
-        return $base64 = c\base64_url_safe_encode($e);
+        return $base64 = $this->a::base64UrlSafeEncode($e);
     }
 
     /**
@@ -103,7 +103,7 @@ class Rijndael256 extends Classes\Core
             '\|(?<e>.+)'.// Encrypted string (not empty).
           '$/s'; // End of string.
 
-        if (!($e = c\base64_url_safe_decode($base64))) {
+        if (!($e = $this->a::base64UrlSafeDecode($base64))) {
             return $string = ''; // Not possible.
         }
         if (!preg_match($regex, $e, $iv_sha1_e)) {
@@ -121,6 +121,6 @@ class Rijndael256 extends Classes\Core
         if (!strlen($string = preg_replace('/^~r2\|/', '', $string, 1, $r2)) || !$r2) {
             return $string = ''; // Missing packed component identifier.
         }
-        return $string = c\mb_rtrim($string, "\0\4"); // See: <http://www.asciitable.com/>.
+        return $string = $this->a::mbRTrim($string, "\0\4"); // See: <http://www.asciitable.com/>.
     }
 }

@@ -15,7 +15,6 @@ foreach (dir_recursive_regex(dirname(__FILE__, 4), '/\.php$/ui') as $_file) {
     if (mb_strpos(basename($_file->getSubPathname()), '_') !== 0) {
         $_contents = file_get_contents($_file->getPathname());
         $_contents = preg_replace_callback('/\bc\\\\([a-z][a-z0-9_]*)\(/u', function ($m) use (&$counter) {
-            ++$counter;
             $name = preg_replace_callback('/_(.)/u', function ($m) {
                 return mb_strtoupper($m[1]);
             }, $m[1]);
@@ -29,13 +28,17 @@ foreach (dir_recursive_regex(dirname(__FILE__, 4), '/\.php$/ui') as $_file) {
             $name = preg_replace('/oembed$/', 'oEmbed', $name);
             $name = preg_replace('/oembed$/', 'oEmbed', $name);
             $name = preg_replace('/IreplaceOnce$/', 'IReplaceOnce', $name);
+
+            ++$counter; // Bump counter.
+            // Print for debugging purposes.
             echo $m[0].' = $this->a::'.$name.'('."\n";
+
             return '$this->a::'.$name.'(';
         }, $_contents);
-        //file_put_contents($_file->getPathname(), $_contents);
+        file_put_contents($_file->getPathname(), $_contents);
     }
-} // unset($_file); // Housekeeping.
-echo $counter."\n";
+} // unset($_file, $_contents);
+echo 'Total replacements: '.$counter."\n";
 
 function dir_recursive_regex(string $dir, string $regex): \RegexIterator
 {

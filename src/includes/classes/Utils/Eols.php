@@ -34,7 +34,7 @@ class Eols extends Classes\Core
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        $string = str_replace(array("\r\n", "\r"), "\n", $string);
+        $string = str_replace(["\r\n", "\r"], "\n", $string);
         $string = preg_replace('/'."\n".'{3,}/u', "\n\n", $string);
 
         return $string;
