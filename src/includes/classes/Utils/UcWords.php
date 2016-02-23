@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Multibyte `ucwords()`.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
-class UcWords extends Classes\AppBase
+class UcWords extends Classes\Core
 {
     /**
      * Multibyte `ucwords()`.
      *
-     * @since 15xxxx Enhancing multibyte support.
+     * @since 150424 Enhancing multibyte support.
      *
      * @param mixed $value Any input value.
      *

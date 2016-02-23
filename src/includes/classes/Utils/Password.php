@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Password extends Classes\AppBase
+class Password extends Classes\Core
 {
     /**
      * Generates a password hash.
@@ -31,6 +29,6 @@ class Password extends Classes\AppBase
         if (!$key && !($key = $this->App->Config->passwords['hash_key'])) {
             throw new Exception('Missing password hash key.');
         }
-        return c\sha256_keyed_hash($string, $key);
+        return $this->a::sha256KeyedHash($string, $key);
     }
 }

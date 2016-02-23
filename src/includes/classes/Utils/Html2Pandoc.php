@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 //
@@ -16,7 +14,7 @@ use Pandoc\Pandoc;
  *
  * @since 150424 Initial release.
  */
-class Html2Pandoc extends Classes\AppBase
+class Html2Pandoc extends Classes\Core
 {
     /**
      * Converts HTML into structured text.
@@ -41,14 +39,14 @@ class Html2Pandoc extends Classes\AppBase
             return $string; // Nothing to do.
         }
         try { // Fail gracefully.
-            $options = array(
+            $options = [
                 'from'          => 'html',
                 'to'            => $to,
                 'parse-raw'     => null,
                 'atx-headers'   => null,
                 'no-wrap'       => null,
                 'preserve-tabs' => null,
-            );
+            ];
             $Pandoc = new Pandoc();
             return $Pandoc->runWith($string, $options);
         } catch (\Throwable $Exception) {

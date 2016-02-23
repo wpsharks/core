@@ -17,7 +17,7 @@ trait OverloadMembers
     /**
      * Overload properties.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @type array Overload properties.
      */
@@ -26,7 +26,7 @@ trait OverloadMembers
     /**
      * Writable overload properties.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @type array Writable overload properties.
      */
@@ -35,7 +35,7 @@ trait OverloadMembers
     /**
      * Serialized properties.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @return string Serialized data.
      */
@@ -47,7 +47,7 @@ trait OverloadMembers
     /**
      * Unserialize handler.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $serialized Serialized data.
      *
@@ -61,7 +61,7 @@ trait OverloadMembers
     /**
      * JSON-encode properties.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @return mixed Properties to JSON-encode.
      */
@@ -73,7 +73,7 @@ trait OverloadMembers
     /**
      * Properties to dump.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @return array Properties to dump.
      */
@@ -92,7 +92,7 @@ trait OverloadMembers
     /**
      * Magic/overload `isset()` checker.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $property Property to check.
      *
@@ -108,7 +108,7 @@ trait OverloadMembers
     /**
      * Magic/overload property getter.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $property Property to get.
      *
@@ -129,7 +129,7 @@ trait OverloadMembers
     /**
      * Magic/overload property setter.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $property Property to set.
      * @param mixed  $value    The value for this property.
@@ -154,7 +154,7 @@ trait OverloadMembers
     /**
      * Magic `unset()` handler.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $property Property to unset.
      *
@@ -175,7 +175,7 @@ trait OverloadMembers
     /**
      * Magic call handler.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $method Method to call upon.
      * @param array  $args   Arguments to pass to the method.
@@ -195,7 +195,7 @@ trait OverloadMembers
     /**
      * Setup overloads.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array|object $properties Property(s).
      *

@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Multibyte `substr_replace()`.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
-class SubstrReplace extends Classes\AppBase
+class SubstrReplace extends Classes\Core
 {
     /**
      * Multibyte `substr_replace()`.
      *
-     * @since 15xxxx Enhancing multibyte.
+     * @since 150424 Enhancing multibyte.
      *
      * @param mixed    $value   Input value.
      * @param string   $replace Replacement string.

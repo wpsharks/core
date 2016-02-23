@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class UrlScheme extends Classes\AppBase implements Interfaces\UrlConstants
+class UrlScheme extends Classes\Core implements Interfaces\UrlConstants
 {
     /**
      * Set the scheme for a URL.
@@ -31,7 +29,7 @@ class UrlScheme extends Classes\AppBase implements Interfaces\UrlConstants
         if (!$scheme || $scheme === '//') {
             $scheme = '//'; # Inherits.
         } elseif ($scheme === 'current') {
-            $scheme = c\current_scheme();
+            $scheme = $this->a::currentScheme();
         } elseif ($scheme === 'default') {
             $scheme = $this->App->Config->urls['default_scheme'];
         }

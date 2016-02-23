@@ -3,8 +3,6 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -19,12 +17,12 @@ use GetOptionKit\OptionPrinter\ConsoleOptionPrinter;
  *
  * @since 150424 Initial release.
  */
-class CliOpts extends AppBase
+class CliOpts extends Core
 {
     /**
      * Options.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type OptionCollection
      */
@@ -33,13 +31,15 @@ class CliOpts extends AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
+     *
+     * @param App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
-        if (!c\is_cli()) {
+        if (!$this->a::isCli()) {
             throw new Exception('Requires CLI mode.');
         }
         $this->OptionCollection = new OptionCollection();
@@ -48,7 +48,7 @@ class CliOpts extends AppBase
     /**
      * Get options.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $specs An array of option specs.
      *
@@ -76,7 +76,7 @@ class CliOpts extends AppBase
     /**
      * Get options.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param bool       $extract Extract into an array after parsing?
      * @param array|null $args    Args to parse; default is `$GLOBALS['argv']`.
@@ -107,7 +107,7 @@ class CliOpts extends AppBase
     /**
      * Print option specs.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @return string Specs as a string.
      */

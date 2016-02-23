@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Transliteration utilities.
  *
- * @since 15xxxx Multibyte support.
+ * @since 150424 Multibyte support.
  */
-class Transliterate extends Classes\AppBase
+class Transliterate extends Classes\Core
 {
     /**
      * Convert to ASCII.
      *
-     * @since 15xxxx Multibyte support.
+     * @since 150424 Multibyte support.
      *
      * @param mixed $value Any input value.
      *

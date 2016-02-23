@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * WebPurify.
  *
- * @since 15xxxx Badwords checker.
+ * @since 150424 Badwords checker.
  */
-class WebPurify extends Classes\AppBase
+class WebPurify extends Classes\Core
 {
     /**
      * Cache directory.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -28,11 +26,13 @@ class WebPurify extends Classes\AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx Badwords checker.
+     * @since 150424 Badwords checker.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         $Config = $this->App->Config;
 
@@ -47,7 +47,7 @@ class WebPurify extends Classes\AppBase
     /**
      * Check a slug for bad words.
      *
-     * @since 15xxxx Badwords checker.
+     * @since 150424 Badwords checker.
      *
      * @return bool True if slug contains bad words.
      */
@@ -63,7 +63,7 @@ class WebPurify extends Classes\AppBase
     /**
      * Check a string for bad words.
      *
-     * @since 15xxxx Badwords checker.
+     * @since 150424 Badwords checker.
      *
      * @param string $text Input text to check.
      *
@@ -77,7 +77,7 @@ class WebPurify extends Classes\AppBase
 
         # The text is empty?
 
-        if (!($text = c\mb_trim($text))) {
+        if (!($text = $this->a::mbTrim($text))) {
             return false; // Nothing to do.
         }
         # Already cached this in memory?
@@ -101,12 +101,12 @@ class WebPurify extends Classes\AppBase
             'return_array'    => true,
         ];
         $endpoint = 'http://api1.webpurify.com/services/rest/';
-        $endpoint = c\add_url_query_args($endpoint_args, $endpoint);
+        $endpoint = $this->a::addUrlQueryArgs($endpoint_args, $endpoint);
 
         # Determine sharded cache directory and file.
 
         $endpoint_sha1         = sha1($endpoint);
-        $cache_dir             = $this->cache_dir.'/'.c\sha1_mod_shard_id($endpoint_sha1, true);
+        $cache_dir             = $this->cache_dir.'/'.$this->a::sha1ModShardId($endpoint_sha1, true);
         $cache_dir_permissions = $Config->fs_permissions['transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
@@ -117,7 +117,7 @@ class WebPurify extends Classes\AppBase
         }
         # Query for remote response via WebPurify API endpoint.
 
-        $response = c\remote_request($endpoint, $request_args);
+        $response = $this->a::remoteRequest($endpoint, $request_args);
 
         # Validate response; false (and no cache) on any error.
 

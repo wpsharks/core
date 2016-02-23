@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Multibyte `str_split()`.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
-class StrSplit extends Classes\AppBase
+class StrSplit extends Classes\Core
 {
     /**
      * Multibyte `str_split()`.
      *
-     * @since 15xxxx Enhancing multibyte support.
+     * @since 150424 Enhancing multibyte support.
      *
      * @param string $string       Input string to split.
      * @param int    $split_length Split length; i.e., chunk size.

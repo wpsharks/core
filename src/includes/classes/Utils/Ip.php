@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Ip extends Classes\AppBase
+class Ip extends Classes\Core
 {
     /**
      * Current visitor's IP address.
@@ -30,10 +28,10 @@ class Ip extends Classes\AppBase
         if (!is_null($ip = &$this->cacheKey(__FUNCTION__))) {
             return $ip; // Already cached this.
         }
-        if (c\is_cli()) {
+        if ($this->a::isCli()) {
             throw new Exception('Not possible in CLI mode.');
         }
-        $sources = array(
+        $sources = [
             'HTTP_CF_CONNECTING_IP',
             'HTTP_CLIENT_IP',
             'HTTP_X_FORWARDED_FOR',
@@ -43,7 +41,7 @@ class Ip extends Classes\AppBase
             'HTTP_FORWARDED',
             'HTTP_VIA',
             'REMOTE_ADDR',
-        );
+        ];
         foreach ($sources as $_source) {
             if (!empty($_SERVER[$_source]) && is_string($_SERVER[$_source])) {
                 if (($_valid_public_ip = $this->getValidPublicFrom($_SERVER[$_source]))) {
@@ -110,7 +108,7 @@ class Ip extends Classes\AppBase
     {
         # Valid  IP. Do we have one?
 
-        if (!($ip = c\mb_trim(mb_strtolower($ip)))) {
+        if (!($ip = $this->a::mbTrim(mb_strtolower($ip)))) {
             return false; // Not possible.
         }
         # Check object cache. Did we already do this?
@@ -124,7 +122,7 @@ class Ip extends Classes\AppBase
             throw new Exception('Missing cache directory.');
         }
         $ip_sha1               = sha1($ip); // Needed below.
-        $cache_dir             = $this->App->Config->fs_paths['cache_dir'].'/ip-geo-data/'.c\sha1_mod_shard_id($ip_sha1, true);
+        $cache_dir             = $this->App->Config->fs_paths['cache_dir'].'/ip-geo-data/'.$this->a::sha1ModShardId($ip_sha1, true);
         $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
         $cache_file            = $cache_dir.'/'.$ip_sha1.'.json';
 
@@ -138,7 +136,7 @@ class Ip extends Classes\AppBase
 
         # Query geoPlugin service.
 
-        $response = c\remote_request(
+        $response = $this->a::remoteRequest(
             'GET::http://www.geoplugin.net/json.gp?ip='.urlencode($ip),
             ['max_con_secs' => 5, 'max_stream_secs' => 5]
         );
@@ -150,7 +148,7 @@ class Ip extends Classes\AppBase
 
         if (!empty($json->geoplugin_regionCode)) {
             $region = (string) $json->geoplugin_regionCode;
-            $region = c\mb_str_pad($region, 2, '0', STR_PAD_LEFT);
+            $region = $this->a::mbStrPad($region, 2, '0', STR_PAD_LEFT);
             $region = mb_strtoupper($region);
         }
         if (!empty($json->geoplugin_countryCode)) {
@@ -186,7 +184,7 @@ class Ip extends Classes\AppBase
      */
     protected function getValidPublicFrom(string $list_of_possible_ips): string
     {
-        if (!($list_of_possible_ips = c\mb_trim($list_of_possible_ips))) {
+        if (!($list_of_possible_ips = $this->a::mbTrim($list_of_possible_ips))) {
             return ''; // Not possible; i.e., empty string.
         }
         foreach (preg_split('/[\s;,]+/u', $list_of_possible_ips, -1, PREG_SPLIT_NO_EMPTY) as $_possible_ip) {

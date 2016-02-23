@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Clip extends Classes\AppBase
+class Clip extends Classes\Core
 {
     /**
      * Clips string(s) to X chars deeply.
@@ -39,7 +37,7 @@ class Clip extends Classes\AppBase
             return $string; // Empty.
         }
         $max_length = max(6, $max_length);
-        $string     = c\html_to_text($string, ['br2nl' => false]);
+        $string     = $this->a::htmlToText($string, ['br2nl' => false]);
 
         if (mb_strlen($string) > $max_length) {
             $string = (string) mb_substr($string, 0, $max_length - 5).'[...]';

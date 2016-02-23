@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class ReplaceOnce extends Classes\AppBase
+class ReplaceOnce extends Classes\Core
 {
     /**
      * String replace (ONE time) deeply.
@@ -51,7 +49,7 @@ class ReplaceOnce extends Classes\AppBase
                     if (($_mb_strpos = $mb_strpos($value, $_needle)) !== false) {
                         $_mb_strlen = mb_strlen($_needle);
                         $_replace   = isset($replace[$_key]) ? (string) $replace[$_key] : '';
-                        $value      = c\mb_substr_replace($value, $_replace, $_mb_strpos, $_mb_strlen);
+                        $value      = $this->a::mbSubstrReplace($value, $_replace, $_mb_strpos, $_mb_strlen);
                     }
                 } // unset($_key, $_needle, $_mb_strpos, $_mb_strlen, $_replace);
 
@@ -63,7 +61,7 @@ class ReplaceOnce extends Classes\AppBase
                     $_needle = (string) $_needle;
                     if (($_mb_strpos = $mb_strpos($value, $_needle)) !== false) {
                         $_mb_strlen = mb_strlen($_needle);
-                        $value      = c\mb_substr_replace($value, $replace, $_mb_strpos, $_mb_strlen);
+                        $value      = $this->a::mbSubstrReplace($value, $replace, $_mb_strpos, $_mb_strlen);
                     }
                 } // unset($_key, $_needle, $_mb_strpos, $_mb_strlen);
 
@@ -81,7 +79,7 @@ class ReplaceOnce extends Classes\AppBase
                 } else {
                     $_replace = (string) $replace; // Force string.
                 }
-                $value = c\mb_substr_replace($value, $_replace, $_mb_strpos, $_mb_strlen);
+                $value = $this->a::mbSubstrReplace($value, $_replace, $_mb_strpos, $_mb_strlen);
                 // unset($_mb_strpos, $_mb_strlen, $_replace);
             }
             return $value;

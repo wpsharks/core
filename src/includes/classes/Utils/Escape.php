@@ -4,17 +4,15 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Escape utils.
  *
- * @since 15xxxx Escape utils.
+ * @since 150424 Escape utils.
  */
-class Escape extends Classes\AppBase
+class Escape extends Classes\Core
 {
     /**
      * Escape HTML markup (other).
@@ -81,7 +79,7 @@ class Escape extends Classes\AppBase
      *
      * @return string|array|object Output value.
      */
-    public function shell_arg($value)
+    public function shellArg($value)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

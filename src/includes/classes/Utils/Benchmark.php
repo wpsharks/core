@@ -5,22 +5,20 @@ namespace WebSharks\Core\Classes\Utils;
 use WebSharks\Dicer\Di;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Benchmark utilities.
  *
- * @since 15xxxx Benchmarking.
+ * @since 150424 Benchmarking.
  */
-class Benchmark extends Classes\AppBase
+class Benchmark extends Classes\Core
 {
     /**
      * Start time.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type float
      */
@@ -29,7 +27,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Stop time.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type float
      */
@@ -38,7 +36,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Elapsed time.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type float
      */
@@ -47,7 +45,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Last elapsed time.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type float
      */
@@ -56,7 +54,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Stats.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string[]
      */
@@ -66,12 +64,14 @@ class Benchmark extends Classes\AppBase
      * Class constructor.
      *
      * @since 150424 Initial release.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
-        if (!c\is_cli()) {
+        if (!$this->a::isCli()) {
             throw new Exception('Requires CLI mode.');
         }
     }
@@ -79,7 +79,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Start (initialize).
      *
-     * @since 15xxxx Benchmarking.
+     * @since 150424 Benchmarking.
      *
      * @param bool $save_last Save last time?
      */
@@ -97,7 +97,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Stop (and print).
      *
-     * @since 15xxxx Benchmarking.
+     * @since 150424 Benchmarking.
      *
      * @param bool $full_report Full report?
      */
@@ -107,7 +107,7 @@ class Benchmark extends Classes\AppBase
         $this->this_time = $this->stopped - $this->started;
 
         if ($this->last_time) {
-            $_percent_diff = c\percent_diff($this->last_time, $this->this_time, 2);
+            $_percent_diff = $this->a::percentDiff($this->last_time, $this->this_time, 2);
             $_percent_diff = $_percent_diff > 0 ? abs($_percent_diff).'% slower' : abs($_percent_diff).'% faster';
 
             $this->addStatistic('Processing Time', number_format($this->this_time, 8, '.', ''));
@@ -117,8 +117,8 @@ class Benchmark extends Classes\AppBase
             $this->addStatistic('Processing Time', number_format($this->this_time, 8, '.', '')."\n");
         }
         if ($full_report) {
-            $this->addStatistic('Memory', c\bytes_to_abbr(memory_get_usage()));
-            $this->addStatistic('Peak Memory', c\bytes_to_abbr(memory_get_peak_usage())."\n");
+            $this->addStatistic('Memory', $this->a::bytesToAbbr(memory_get_usage()));
+            $this->addStatistic('Peak Memory', $this->a::bytesToAbbr(memory_get_peak_usage())."\n");
 
             $this->addStatistic('PHP Version', PHP_VERSION);
             $this->addStatistic('PCRE Version', PCRE_VERSION."\n");
@@ -138,7 +138,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Print statistics.
      *
-     * @since 15xxxx Benchmarking.
+     * @since 150424 Benchmarking.
      */
     protected function printAllStatistics()
     {
@@ -158,7 +158,7 @@ class Benchmark extends Classes\AppBase
             $statistics .= $_label.':    '.str_repeat(' ', $_alignment_chars).$_value."\n";
         } // unset($_label_chars, $_alignment_chars);
 
-        echo c\mb_trim($statistics)."\n";
+        echo $this->a::mbTrim($statistics)."\n";
 
         echo '----------------------------------------------------'."\n\n";
     }
@@ -166,7 +166,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Add statistic.
      *
-     * @since 15xxxx Benchmarking.
+     * @since 150424 Benchmarking.
      *
      * @param string $label Label for this statistic.
      * @param string $value Value for this statistic.

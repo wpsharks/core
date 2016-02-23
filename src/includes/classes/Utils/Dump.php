@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Dump extends Classes\AppBase
+class Dump extends Classes\Core
 {
     /**
      * A better `var_dump()`.
@@ -212,7 +210,7 @@ class Dump extends Classes\AppBase
 
                     $var_dump = $var_dump.$dump_indents.$closing_encap;
                 } else {
-                    $var_dump = c\mb_rtrim($var_dump, "\n".$indent_char.$opening_encap).$opening_encap.$closing_encap;
+                    $var_dump = $this->a::mbRTrim($var_dump, "\n".$indent_char.$opening_encap).$opening_encap.$closing_encap;
                 }
                 break; // Break switch.
 

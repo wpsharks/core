@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151121 URL utilities.
  */
-class Url extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces\HtmlConstants
+class Url extends Classes\Core implements Interfaces\UrlConstants, Interfaces\HtmlConstants
 {
     /**
      * Build app URL.
@@ -32,11 +30,11 @@ class Url extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces
         if (!($host = $this->App->Config->urls['hosts']['app'])) {
             throw new Exception('App host is empty.');
         }
-        $uri = $uri ? c\mb_ltrim($uri, '/') : '';
-        $url = c\set_scheme('//'.$host.'/'.$uri, $scheme);
+        $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';
+        $url = $this->a::setScheme('//'.$host.'/'.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
-            $url = c\cdn_filter($url);
+            $url = $this->a::cdnFilter($url);
         }
         return $url;
     }
@@ -55,7 +53,7 @@ class Url extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces
     public function toAppCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
         if ($this->App->core_is_vendor) {
-            $uri = $uri ? c\mb_ltrim($uri, '/') : '';
+            $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';
             $uri = '/vendor/websharks/core/src/'.$uri;
         }
         return $this->toApp($uri, $scheme, $cdn_filter);
@@ -74,12 +72,12 @@ class Url extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces
      */
     public function toCurrent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        $host = c\current_host();
-        $uri  = $uri ? c\mb_ltrim($uri, '/') : '';
-        $url  = c\set_scheme('//'.$host.'/'.$uri, $scheme);
+        $host = $this->a::currentHost();
+        $uri  = $uri ? $this->a::mbLTrim($uri, '/') : '';
+        $url  = $this->a::setScheme('//'.$host.'/'.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
-            $url = c\cdn_filter($url);
+            $url = $this->a::cdnFilter($url);
         }
         return $url;
     }
@@ -98,7 +96,7 @@ class Url extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces
     public function toCurrentCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
         if ($this->App->core_is_vendor) {
-            $uri = $uri ? c\mb_ltrim($uri, '/') : '';
+            $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';
             $uri = '/vendor/websharks/core/src/'.$uri;
         }
         return $this->toCurrent($uri, $scheme, $cdn_filter);

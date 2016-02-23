@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -16,12 +14,12 @@ use Hashids\Hashids as Parser;
  *
  * @since 150424 Initial release.
  */
-class HashIds extends Classes\AppBase
+class HashIds extends Classes\Core
 {
     /**
      * Parser.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type Parser
      */
@@ -30,18 +28,16 @@ class HashIds extends Classes\AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx Adding hash IDs.
+     * @since 150424 Adding hash IDs.
      *
-     * @param string $salt      Secret key.
-     * @param int    $min_chars Minumum chars.
-     * @param string $alphabet  Chars to use in ID.
+     * @param Classes\App $App       Instance of App.
+     * @param string      $salt      Secret key.
+     * @param int         $min_chars Minumum chars.
+     * @param string      $alphabet  Chars to use in ID.
      */
-    public function __construct(
-        string $key = '',
-        int $min_chars = 0,
-        string $alphabet = ''
-    ) {
-        parent::__construct();
+    public function __construct(Classes\App $App, string $key = '', int $min_chars = 0, string $alphabet = '')
+    {
+        parent::__construct($App);
 
         if (!$key && !($key = $this->App->Config->hash_ids['hash_key'])) {
             throw new Exception('Missing HashIds hash key.');
@@ -52,7 +48,7 @@ class HashIds extends Classes\AppBase
     /**
      * Encodes integers.
      *
-     * @since 15xxxx Adding hash IDs.
+     * @since 150424 Adding hash IDs.
      *
      * @param int ...$integers Integers to encode.
      *
@@ -66,7 +62,7 @@ class HashIds extends Classes\AppBase
     /**
      * Decodes a hash ID.
      *
-     * @since 15xxxx Adding hash IDs.
+     * @since 150424 Adding hash IDs.
      *
      * @param string $hash_id Hash ID.
      *

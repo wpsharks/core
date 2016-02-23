@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Spellcheck Utils.
  *
- * @since 15xxxx Adding password strength.
+ * @since 150424 Adding password strength.
  */
-class SpellCheck extends Classes\AppBase
+class SpellCheck extends Classes\Core
 {
     /**
      * Checks spelling.
      *
-     * @since 15xxxx Adding password strength.
+     * @since 150424 Adding password strength.
      *
      * @param string $word  Input word to check.
      * @param int    $flags Dictionary flags.

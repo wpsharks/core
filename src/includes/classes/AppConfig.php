@@ -3,40 +3,28 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * App config.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
-class AppConfig extends AbsCore
+class AppConfig extends Core
 {
-    /**
-     * App.
-     *
-     * @since 15xxxx
-     *
-     * @type App
-     */
-    protected $App;
-
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
+     * @param App   $App           Instance of App.
      * @param array $instance_base Instance base.
      * @param array $instance      Instance args (highest precedence).
      */
-    public function __construct(array $instance_base = [], array $instance = [])
+    public function __construct(App $App, array $instance_base = [], array $instance = [])
     {
-        parent::__construct();
-
-        $this->App = $GLOBALS[App::class];
+        parent::__construct($App);
 
         # Instance base (i.e., default config).
 
@@ -226,7 +214,7 @@ class AppConfig extends AbsCore
     /**
      * Merge config arrays.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $base      Base array.
      * @param array $merge     Array to merge.
@@ -258,7 +246,7 @@ class AppConfig extends AbsCore
     /**
      * Empty numeric arrays.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $base  Base array.
      * @param array $merge Array to merge.
@@ -285,7 +273,7 @@ class AppConfig extends AbsCore
     /**
      * Fill replacement codes.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed $value Input value.
      *

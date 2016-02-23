@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * SHA-1 Modulus.
  *
- * @since 15xxxx SHA-1 modulus.
+ * @since 150424 SHA-1 modulus.
  */
-class Sha1Mod extends Classes\AppBase
+class Sha1Mod extends Classes\Core
 {
     /**
      * Total shards.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type int
      */
@@ -28,11 +26,13 @@ class Sha1Mod extends Classes\AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx SHA-1 modulus.
+     * @since 150424 SHA-1 modulus.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         $this->total_shards = count($this->App->Config->mysql_db['shards']);
     }
@@ -40,7 +40,7 @@ class Sha1Mod extends Classes\AppBase
     /**
      * SHA-1 modulus.
      *
-     * @since 15xxxx SHA-1 modulus.
+     * @since 150424 SHA-1 modulus.
      *
      * @param string $string  String or a SHA-1 hash.
      * @param int    $divisor Maximum allowable value.
@@ -67,7 +67,7 @@ class Sha1Mod extends Classes\AppBase
     /**
      * SHA-1 modulus shard ID.
      *
-     * @since 15xxxx SHA-1 modulus.
+     * @since 150424 SHA-1 modulus.
      *
      * @param string $string       String or a SHA-1 hash.
      * @param bool   $is_sha1      String is already a SHA-1 hash?
@@ -86,7 +86,7 @@ class Sha1Mod extends Classes\AppBase
     /**
      * Assign shard ID.
      *
-     * @since 15xxxx SHA-1 modulus.
+     * @since 150424 SHA-1 modulus.
      *
      * @param string $string  String or a SHA-1 hash.
      * @param bool   $is_sha1 String is already a SHA-1 hash?

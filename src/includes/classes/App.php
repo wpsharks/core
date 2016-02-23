@@ -3,22 +3,38 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Application.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
-class App extends AbsCore
+class App extends Core
 {
+    /**
+     * Class.
+     *
+     * @since 160223
+     *
+     * @type string
+     */
+    public $class;
+
+    /**
+     * Class SHA-1.
+     *
+     * @since 160223
+     *
+     * @type string
+     */
+    public $class_sha1;
+
     /**
      * Namespace.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -27,7 +43,7 @@ class App extends AbsCore
     /**
      * Namespace SHA-1.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -36,7 +52,7 @@ class App extends AbsCore
     /**
      * Dir.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -45,7 +61,7 @@ class App extends AbsCore
     /**
      * Dir basename.
      *
-     * @since 16xxxx
+     * @since 160223
      *
      * @type string
      */
@@ -54,7 +70,7 @@ class App extends AbsCore
     /**
      * Dir SHA-1.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -63,7 +79,7 @@ class App extends AbsCore
     /**
      * Core dir.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -72,7 +88,7 @@ class App extends AbsCore
     /**
      * Core dir basename.
      *
-     * @since 16xxxx
+     * @since 160223
      *
      * @type string
      */
@@ -81,7 +97,7 @@ class App extends AbsCore
     /**
      * Core dir SHA-1.
      *
-     * @since 16xxxx
+     * @since 160223
      *
      * @type string
      */
@@ -90,7 +106,7 @@ class App extends AbsCore
     /**
      * Core dir is vendor?
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type bool
      */
@@ -99,7 +115,7 @@ class App extends AbsCore
     /**
      * Config.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type AppConfig
      */
@@ -108,7 +124,7 @@ class App extends AbsCore
     /**
      * Dicer.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type AppDi
      */
@@ -117,25 +133,34 @@ class App extends AbsCore
     /**
      * Utilities.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type AppUtils
      */
     public $Utils;
 
     /**
+     * Facades.
+     *
+     * @since 160223
+     *
+     * @type string {AppFacades}
+     */
+    public $Facades;
+
+    /**
      * Version.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string Version.
      */
-    const VERSION = '160124'; //v//
+    const VERSION = '160223'; //v//
 
     /**
      * Constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $instance_base Instance base.
      * @param array $instance      Instance args (highest precedence).
@@ -146,8 +171,8 @@ class App extends AbsCore
 
         $Class = new \ReflectionClass($this);
 
-        $GLOBALS[self::class]       = $this;
-        $GLOBALS[$Class->getName()] = $this;
+        $this->class      = $Class->getName();
+        $this->class_sha1 = sha1($this->class);
 
         $this->namespace      = $Class->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
@@ -161,16 +186,20 @@ class App extends AbsCore
         $this->core_dir_sha1     = sha1($this->core_dir);
         $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
 
-        $this->Config = new AppConfig($instance_base, $instance);
-        $this->Di     = new AppDi($this->Config->di['default_rule']);
-        $this->Utils  = new AppUtils(); // Utility class access.
+        $this->Config = new AppConfig($this, $instance_base, $instance);
+        $this->Di     = new AppDi($this, $this->Config->di['default_rule']);
+        $this->Utils  = new AppUtils($this); // Utility class access.
 
-        $this->Di->addInstances([
-            self::class => $this,
-            $this, // Extender.
-            $this->Config,
-            $this->Utils,
-        ]);
+        $this->Di->addInstances([$this, $this->Config, $this->Utils]);
+
+        if (!class_exists($this->namespace.'\\AppFacades')) {
+            // Only if it doesn't already exist; i.e., if app has not already extended core.
+            eval('namespace '.$this->namespace.' { class AppFacades extends \\'.__NAMESPACE__.'\\AppFacades {} }');
+        }
+        $GLOBALS[$this->class]                    = $this;
+        $GLOBALS[$this->namespace.'\\AppFacades'] = $this;
+        $this->Facades                            = $this->namespace.'\\AppFacades';
+
         $this->maybeDebug();
         $this->maybeSetLocales();
         $this->maybeHandleExceptions();
@@ -179,7 +208,7 @@ class App extends AbsCore
     /**
      * Maybe setup debugging.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      */
     protected function maybeDebug()
     {
@@ -199,19 +228,19 @@ class App extends AbsCore
     /**
      * Maybe handle exceptions.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      */
     protected function maybeHandleExceptions()
     {
         if (!$this->Config->debug && $this->Config->handle_exceptions) {
-            c\setup_exception_handler();
+            $this->a::setupExceptionHandler();
         }
     }
 
     /**
      * Maybe setup locales.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      */
     protected function maybeSetLocales()
     {

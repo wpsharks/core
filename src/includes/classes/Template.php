@@ -3,8 +3,6 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -13,12 +11,12 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Template extends AppBase
+class Template extends Core
 {
     /**
      * Directory.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -27,7 +25,7 @@ class Template extends AppBase
     /**
      * File path.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -36,7 +34,7 @@ class Template extends AppBase
     /**
      * File ext.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -45,7 +43,7 @@ class Template extends AppBase
     /**
      * Parent files.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -54,7 +52,7 @@ class Template extends AppBase
     /**
      * Parent vars.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -63,7 +61,7 @@ class Template extends AppBase
     /**
      * Current vars.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -72,18 +70,19 @@ class Template extends AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
+     * @param App    $App         Instance of App.
      * @param string $dir         Template dir.
      * @param string $file        Template file.
      * @param array  $parents     Parent template files.
      * @param array  $parent_vars Parent template vars.
      */
-    public function __construct(string $dir, string $file, array $parents = [], array $parent_vars = [])
+    public function __construct(App $App, string $dir, string $file, array $parents = [], array $parent_vars = [])
     {
-        parent::__construct();
+        parent::__construct($App);
 
-        if (!($template = c\locate_template($file, $dir))) {
+        if (!($template = $this->a::locateTemplate($file, $dir))) {
             throw new Exception(sprintf('Missing template: `%1$s`.', $dir.'/'.$file));
         }
         $this->dir  = $template['dir'];
@@ -98,7 +97,7 @@ class Template extends AppBase
     /**
      * Parse template.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $¤vars Template vars.
      *
@@ -128,7 +127,7 @@ class Template extends AppBase
     /**
      * Set current vars.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $defaults Default vars.
      * @param array ...$vars Template vars.
@@ -143,7 +142,7 @@ class Template extends AppBase
     /**
      * Get a child template.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $file Relative to templates dir.
      * @param array  $vars Template vars for the include.
@@ -155,7 +154,7 @@ class Template extends AppBase
     {
         $parents     = array_merge($this->parents, [$this->file]);
         $parent_vars = array_merge($this->parent_vars, [$this->file => &$this->current_vars]);
-        $Template    = c\get_template($file, $dir, $parents, $parent_vars);
+        $Template    = $this->a::getTemplate($file, $dir, $parents, $parent_vars);
 
         foreach (array_reverse($this->parent_vars, true) as $_parent_file => $_parent_vars) {
             if (isset($_parent_vars[$file]) && is_array($_parent_vars[$file])) {
@@ -172,7 +171,7 @@ class Template extends AppBase
     /**
      * Has a parent template?
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $file Relative to templates dir.
      *
@@ -186,7 +185,7 @@ class Template extends AppBase
     /**
      * Parent template vars.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $file Relative to templates dir.
      *

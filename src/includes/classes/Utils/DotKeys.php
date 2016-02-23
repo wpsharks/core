@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,12 +12,12 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class DotKeys extends Classes\AppBase
+class DotKeys extends Classes\Core
 {
     /**
      * `.` keys (e.g., `key.ID`).
      *
-     * @since 15xxxx Array utils.
+     * @since 150424 Array utils.
      *
      * @param array $array Input array.
      *
@@ -28,7 +26,7 @@ class DotKeys extends Classes\AppBase
     public function __invoke(array $array): array
     {
         $dot_keys = []; // Initialize.
-        $Iterator = c\array_recursive_iterator($array);
+        $Iterator = $this->a::arrayRecursiveIterator($array);
 
         foreach ($Iterator as $_key => $_value) {
             $_keys = []; // Initialize keys.

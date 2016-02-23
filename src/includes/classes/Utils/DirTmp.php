@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class DirTmp extends Classes\AppBase
+class DirTmp extends Classes\Core
 {
     /**
      * Readable/writable tmp dir.
@@ -32,7 +30,7 @@ class DirTmp extends Classes\AppBase
             return $dir; // Already cached this.
         }
         $possible_dirs = []; // Initialize.
-        $is_wordpress  = c\is_wordpress();
+        $is_wordpress  = $this->a::isWordpress();
 
         if ($is_wordpress && defined('WP_TEMP_DIR')) {
             $possible_dirs[] = (string) WP_TEMP_DIR;
@@ -49,7 +47,7 @@ class DirTmp extends Classes\AppBase
         if (!empty($_SERVER['TMP'])) {
             $possible_dirs[] = (string) $_SERVER['TMP'];
         }
-        if (c\is_windows()) {
+        if ($this->a::isWindows()) {
             $possible_dirs[] = 'C:/Temp';
         } else {
             $possible_dirs[] = '/tmp';

@@ -3,8 +3,6 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -13,12 +11,12 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Tokenizer extends AppBase
+class Tokenizer extends Core
 {
     /**
      * String.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -27,7 +25,7 @@ class Tokenizer extends AppBase
     /**
      * Tokenize what?
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -36,7 +34,7 @@ class Tokenizer extends AppBase
     /**
      * Tokens.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -45,7 +43,7 @@ class Tokenizer extends AppBase
     /**
      * Marker.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -56,16 +54,15 @@ class Tokenizer extends AppBase
      *
      * @since 150424 Initial release.
      *
+     * @param App    $App      Instance of App.
      * @param string $string   Input string.
      * @param array  $tokenize Specific elements.
      *
      * @return string The tokenized string.
      */
-    public function __construct(
-        string $string,
-        array $tokenize
-    ) {
-        parent::__construct();
+    public function __construct(App $App, string $string, array $tokenize)
+    {
+        parent::__construct($App);
 
         $this->string   = $string;
         $this->tokenize = $tokenize;
@@ -129,7 +126,7 @@ class Tokenizer extends AppBase
         if (!in_array('shortcodes', $this->tokenize, true)) {
             return; // Not tokenizing these.
         }
-        if (!c\is_wordpress() || empty($GLOBALS['shortcode_tags']) || !c\can_call_func('get_shortcode_regex')) {
+        if (!$this->a::isWordpress() || empty($GLOBALS['shortcode_tags']) || !$this->a::canCallFunc('get_shortcode_regex')) {
             return; // Not WordPress; i.e., no known shortcodes.
         }
         if (mb_strpos($this->string, '[') === false) {

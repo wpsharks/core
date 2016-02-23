@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Trim extends Classes\AppBase
+class Trim extends Classes\Core
 {
     /**
      * Trim (multibyte-safe).
@@ -42,7 +40,7 @@ class Trim extends Classes\AppBase
             return $string; // Nothing to do.
         }
         $chars = isset($chars[0]) ? $chars : " \r\n\t\0\x0B";
-        $chars = c\esc_regex($chars.$extra_chars);
+        $chars = $this->a::escRegex($chars.$extra_chars);
 
         switch ($side) {
             case 'l': // Left trim.

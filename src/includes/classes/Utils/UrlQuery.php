@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,12 +12,12 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
+class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
 {
     /**
      * Default.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -83,7 +81,7 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
             $arg_separator = ini_get('arg_separator.output');
         }
         $query = http_build_query($args, $numeric_prefix, $arg_separator, $enc_type);
-        $query = c\mb_trim(str_replace('=&', '&', $query), '=&');
+        $query = $this->a::mbTrim(str_replace('=&', '&', $query), '=&');
 
         return $query;
     }
@@ -100,7 +98,7 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
      */
     public function addArgs(array $new_args, string $url_uri_qsl): string
     {
-        $url_uri_qsl = c\parse_url($url_uri_qsl);
+        $url_uri_qsl = $this->a::parseUrl($url_uri_qsl);
         $args        = []; // Initialize.
 
         if (isset($url_uri_qsl['query'][0])) {
@@ -108,7 +106,7 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
         }
         $args                 = array_merge($args, $new_args);
         $url_uri_qsl['query'] = $this->build($args);
-        $url_uri_qsl          = c\unparse_url($url_uri_qsl);
+        $url_uri_qsl          = $this->a::unparseUrl($url_uri_qsl);
 
         return $url_uri_qsl;
     }
@@ -125,7 +123,7 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
      */
     public function removeArgs(array $arg_keys, string $url_uri_qsl): string
     {
-        $url_uri_qsl = c\parse_url($url_uri_qsl);
+        $url_uri_qsl = $this->a::parseUrl($url_uri_qsl);
         $args        = []; // Initialize.
 
         if (isset($url_uri_qsl['query'][0])) {
@@ -133,7 +131,7 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
         }
         $args                 = array_diff_key($args, $arg_keys);
         $url_uri_qsl['query'] = $this->build($args);
-        $url_uri_qsl          = c\unparse_url($url_uri_qsl);
+        $url_uri_qsl          = $this->a::unparseUrl($url_uri_qsl);
 
         return $url_uri_qsl;
     }
@@ -216,10 +214,10 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
         $args    = $this->parse($qs_url_uri);
         unset($args[$sig_var]); // Exclude.
 
-        $args            = c\mb_trim($args);
-        $args            = c\sort_by_key($args);
+        $args            = $this->a::mbTrim($args);
+        $args            = $this->a::sortByKey($args);
         $serialized_args = serialize($args); // After sorting by key.
-        $sig             = c\sha256_keyed_hash($serialized_args, $key);
+        $sig             = $this->a::sha256KeyedHash($serialized_args, $key);
 
         return $sig; // Signature.
     }
@@ -238,7 +236,7 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
         if (!$qs_url_uri) {
             return $qs_url_uri; // Possible `0`.
         }
-        $qs_url_uri = c\normalize_url_amps($qs_url_uri);
+        $qs_url_uri = $this->a::normalizeUrlAmps($qs_url_uri);
 
         if (mb_strpos($qs_url_uri, '?') !== false) {
             list(, $qs) = explode('?', $qs_url_uri, 2);
@@ -247,6 +245,6 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
         } else {
             $qs = $qs_url_uri; // Assume it's a query string.
         }
-        return $qs = c\mb_trim($qs, '', '?=&');
+        return $qs = $this->a::mbTrim($qs, '', '?=&');
     }
 }

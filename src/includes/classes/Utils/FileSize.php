@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class FileSize extends Classes\AppBase
+class FileSize extends Classes\Core
 {
     /**
      * Abbreviated byte notation for a particular file.
@@ -50,7 +48,7 @@ class FileSize extends Classes\AppBase
     {
         $precision  = max(0, $precision);
         $bytes      = max(0.0, (float) $bytes);
-        $units      = array('bytes', 'kbs', 'MB', 'GB', 'TB');
+        $units      = ['bytes', 'kbs', 'MB', 'GB', 'TB'];
         $power      = floor(($bytes ? log($bytes) : 0) / log(1024));
         $abbr_bytes = round($bytes / pow(1024, $power), $precision);
         $abbr       = $units[min($power, count($units) - 1)];

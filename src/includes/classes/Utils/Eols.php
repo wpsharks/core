@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Eols extends Classes\AppBase
+class Eols extends Classes\Core
 {
     /**
      * Normalizes end of line chars deeply.
@@ -36,7 +34,7 @@ class Eols extends Classes\AppBase
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        $string = str_replace(array("\r\n", "\r"), "\n", $string);
+        $string = str_replace(["\r\n", "\r"], "\n", $string);
         $string = preg_replace('/'."\n".'{3,}/u', "\n\n", $string);
 
         return $string;

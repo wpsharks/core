@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -17,7 +15,7 @@ use Michelf\MarkdownExtra;
  *
  * @since 150424 Initial release.
  */
-class Markdown extends Classes\AppBase
+class Markdown extends Classes\Core
 {
     /**
      * A very simple markdown parser.
@@ -29,7 +27,7 @@ class Markdown extends Classes\AppBase
      *
      * @return string|array|object Html markup value(s).
      */
-    public function __invoke($value, array $args = array())
+    public function __invoke($value, array $args = [])
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -73,10 +71,10 @@ class Markdown extends Classes\AppBase
             $string = $MarkdownExtra->transform($string);
         }
         if ($anchorize) {
-            $string = c\html_anchorize($string);
+            $string = $this->a::htmlAnchorize($string);
         }
         if ($anchor_rels) {
-            $string = c\html_anchor_rels($string, $anchor_rels);
+            $string = $this->a::htmlAnchorRels($string, $anchor_rels);
         }
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);
@@ -94,7 +92,7 @@ class Markdown extends Classes\AppBase
      *
      * @return string|array|object Stripped markdown value(s).
      */
-    public function strip($value, array $args = array())
+    public function strip($value, array $args = [])
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

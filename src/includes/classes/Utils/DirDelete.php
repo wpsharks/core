@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class DirDelete extends Classes\AppBase
+class DirDelete extends Classes\Core
 {
     /**
      * Deletes a directory.
@@ -41,7 +39,7 @@ class DirDelete extends Classes\AppBase
             return false; // Not possible.
         }
         while (($_dir_file = readdir($opendir)) !== false) {
-            if (in_array($_dir_file, array('.', '..'), true)) {
+            if (in_array($_dir_file, ['.', '..'], true)) {
                 continue; // Skip dots.
             }
             if (is_dir($_dir_file = $dir.'/'.$_dir_file)) {

@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,12 +12,12 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Slug extends Classes\AppBase implements Interfaces\SlugConstants
+class Slug extends Classes\Core implements Interfaces\SlugConstants
 {
     /**
      * Validate slug.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $slug Slug to validate.
      *
@@ -33,7 +31,7 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
     /**
      * Is slug reserved?
      *
-     * @since 15xxxx Reserved slugs.
+     * @since 150424 Reserved slugs.
      *
      * @param string $slug Slug to check.
      *
@@ -65,7 +63,7 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
     /**
      * Convert slug to name.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $slug Slug to convert to name.
      *
@@ -75,8 +73,8 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
     {
         $name = $slug; // Working copy.
         $name = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $name);
-        $name = c\mb_ucwords($name);
-        $name = c\mb_trim($name);
+        $name = $this->a::mbUcWords($name);
+        $name = $this->a::mbTrim($name);
 
         return $name;
     }
@@ -92,7 +90,7 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
      */
     public function toAcronym(string $slug): string
     {
-        return c\name_to_acronym($this->toName($slug));
+        return $this->a::nameToAcronym($this->toName($slug));
     }
 
     /**
@@ -107,9 +105,9 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
     public function toVar(string $slug): string
     {
         $var = $slug; // Working copy.
-        $var = mb_strtolower(c\force_ascii($var));
+        $var = mb_strtolower($this->a::forceAscii($var));
         $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
-        $var = c\mb_trim($var, '', '_');
+        $var = $this->a::mbTrim($var, '', '_');
 
         if ($var && !preg_match('/^[a-z]/u', $var)) {
             $var = 'x'.$var; // Force `^[a-z]`.

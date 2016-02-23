@@ -24,7 +24,7 @@ interface SlugConstants
     /**
      * Reserved regex patterns.
      *
-     * @since 15xxxx Reserved slug class.
+     * @since 150424 Reserved slug class.
      *
      * @type array Reserved regex patterns.
      */
@@ -518,7 +518,7 @@ interface SlugConstants
     /**
      * Reserved slug strings.
      *
-     * @since 15xxxx Reserved slug strings.
+     * @since 150424 Reserved slug strings.
      *
      * @type array Reserved slug strings.
      */

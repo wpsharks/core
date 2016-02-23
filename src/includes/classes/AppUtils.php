@@ -3,43 +3,20 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * App utilities.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
-class AppUtils extends AbsCore
+class AppUtils extends Core
 {
-    /**
-     * App.
-     *
-     * @since 15xxxx
-     *
-     * @type App
-     */
-    protected $App;
-
-    /**
-     * Class constructor.
-     *
-     * @since 15xxxx Initial release.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->App = $GLOBALS[App::class];
-    }
-
     /**
      * Magic utility factory.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $property Property.
      *
@@ -62,7 +39,7 @@ class AppUtils extends AbsCore
     /**
      * Magic utility factory.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $method Method to call upon.
      * @param array  $args   Arguments to pass to the method.

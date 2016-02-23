@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Html extends Classes\AppBase
+class Html extends Classes\Core
 {
     /**
      * Is a string in HTML format?
@@ -34,7 +32,7 @@ class Html extends Classes\AppBase
     /**
      * Checked?
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed $a Input variable a.
      * @param mixed $b Input variable b.
@@ -49,7 +47,7 @@ class Html extends Classes\AppBase
     /**
      * Selected?
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed $a Input variable a.
      * @param mixed $b Input variable b.

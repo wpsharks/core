@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Output extends Classes\AppBase
+class Output extends Classes\Core
 {
     /**
      * Disables GZIP compression.
@@ -27,7 +25,7 @@ class Output extends Classes\AppBase
             throw new Exception('Heading already sent!');
         }
         @ini_set('zlib.output_compression', 'off');
-        if (c\can_call_func('apache_setenv')) {
+        if ($this->a::canCallFunc('apache_setenv')) {
             @apache_setenv('no-gzip', '1');
         }
     }

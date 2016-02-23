@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Serializer.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
-class Serializer extends Classes\AppBase
+class Serializer extends Classes\Core
 {
     /**
      * Marker.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -28,11 +26,11 @@ class Serializer extends Classes\AppBase
     /**
      * Maybe serialize value.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed $value Value to serialize (maybe).
      *
-     * @return string A string value or a serialized value as a string.
+     * @return string A string or a serialized value.
      */
     public function maybeSerialize($value): string
     {
@@ -55,7 +53,7 @@ class Serializer extends Classes\AppBase
     /**
      * Maybe unserialize value.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $string String to unserialize (maybe).
      *
@@ -66,7 +64,7 @@ class Serializer extends Classes\AppBase
         $value = $string; // Initialize.
 
         if ($value && mb_strpos($value, $this::MARKER) === 0) {
-            $value = @unserialize(c\str_replace_once($this::MARKER, '', $value));
+            $value = @unserialize($this->a::strReplaceOnce($this::MARKER, '', $value));
         }
         return $value;
     }
@@ -74,7 +72,7 @@ class Serializer extends Classes\AppBase
     /**
      * Check/set expected type.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed  $value         Value.
      * @param string $expected_type Data type.

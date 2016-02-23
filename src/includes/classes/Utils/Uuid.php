@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -16,12 +14,12 @@ use Ramsey\Uuid\Uuid as UuidGen;
  *
  * @since 150424 Initial release.
  */
-class Uuid extends Classes\AppBase
+class Uuid extends Classes\Core
 {
     /**
      * UUID v1 generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param bool $optimize Optimize?
      *
@@ -46,7 +44,7 @@ class Uuid extends Classes\AppBase
     /**
      * UUID v3 generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $namespace  Namespace.
      * @param string $identifier Identifier.
@@ -87,7 +85,7 @@ class Uuid extends Classes\AppBase
     /**
      * UUID v4 generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param bool $optimize Optimize?
      *
@@ -104,7 +102,7 @@ class Uuid extends Classes\AppBase
     /**
      * UUID v5 generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $namespace  Namespace.
      * @param string $identifier Identifier.

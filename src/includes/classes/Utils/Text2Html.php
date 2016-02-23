@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151121 Text conversions.
  */
-class Text2Html extends Classes\AppBase
+class Text2Html extends Classes\Core
 {
     /**
      * Text to HTML markup.
@@ -41,11 +39,11 @@ class Text2Html extends Classes\AppBase
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
 
-        $string = c\esc_html($string);
-        $string = nl2br(c\normalize_eols($string));
-        $string = c\html_anchorize($string);
-        $string = c\normalize_html_whitespace($string);
-        $string = c\html_trim($string);
+        $string = $this->a::escHtml($string);
+        $string = nl2br($this->a::normalizeEols($string));
+        $string = $this->a::htmlAnchorize($string);
+        $string = $this->a::normalizeHtmlWhitespace($string);
+        $string = $this->a::htmlTrim($string);
 
         return $string;
     }

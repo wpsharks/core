@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,12 +12,12 @@ use WebSharks\Core\Traits;
  *
  * @since 160102 Adding bitly.
  */
-class Bitly extends Classes\AppBase
+class Bitly extends Classes\Core
 {
     /**
      * Cache directory.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -29,10 +27,12 @@ class Bitly extends Classes\AppBase
      * Class constructor.
      *
      * @since 160102 Adding bitly.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         if (!$this->App->Config->fs_paths['cache_dir']) {
             throw new Exception('Missing cache directory.');
@@ -79,12 +79,12 @@ class Bitly extends Classes\AppBase
             'return_array'    => true,
         ];
         $endpoint = 'https://api-ssl.bitly.com/v3/shorten';
-        $endpoint = c\add_url_query_args($endpoint_args, $endpoint);
+        $endpoint = $this->a::addUrlQueryArgs($endpoint_args, $endpoint);
 
         # Determine sharded cache directory and file.
 
         $endpoint_sha1         = sha1($endpoint);
-        $cache_dir             = $this->cache_dir.'/'.c\sha1_mod_shard_id($endpoint_sha1, true);
+        $cache_dir             = $this->cache_dir.'/'.$this->a::sha1ModShardId($endpoint_sha1, true);
         $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
@@ -95,7 +95,7 @@ class Bitly extends Classes\AppBase
         }
         # Query for remote response via Bitly API endpoint.
 
-        $response = c\remote_request('GET::'.$endpoint, $request_args);
+        $response = $this->a::remoteRequest('GET::'.$endpoint, $request_args);
 
         # Validate response; no cache on any error.
 
@@ -163,12 +163,12 @@ class Bitly extends Classes\AppBase
             'return_array'    => true,
         ];
         $endpoint = 'https://api-ssl.bitly.com/v3/user/link_history';
-        $endpoint = c\add_url_query_args($endpoint_args, $endpoint);
+        $endpoint = $this->a::addUrlQueryArgs($endpoint_args, $endpoint);
 
         # Determine sharded cache directory and file.
 
         $endpoint_sha1         = sha1($endpoint);
-        $cache_dir             = $this->cache_dir.'/'.c\sha1_mod_shard_id($endpoint_sha1, true);
+        $cache_dir             = $this->cache_dir.'/'.$this->a::sha1ModShardId($endpoint_sha1, true);
         $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
@@ -179,7 +179,7 @@ class Bitly extends Classes\AppBase
         }
         # Query for remote response via Bitly API endpoint.
 
-        $response = c\remote_request('GET::'.$endpoint, $request_args);
+        $response = $this->a::remoteRequest('GET::'.$endpoint, $request_args);
 
         # Validate response; no cache on any error.
 

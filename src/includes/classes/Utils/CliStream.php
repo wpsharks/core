@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,18 +12,20 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Interfaces\CliConstants
+class CliStream extends Classes\Core implements Interfaces\UrlConstants, Interfaces\CliConstants
 {
     /**
      * Class constructor.
      *
      * @since 150424 Initial release.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
-        if (!c\is_cli()) {
+        if (!$this->a::isCli()) {
             throw new Exception('Requires CLI mode.');
         }
     }
@@ -33,7 +33,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
     /**
      * Read STDIN.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int  $max_lines Defaults to `0` (no limit).
      * @param bool $blocking  Blocking (`true`) or non-blocking?
@@ -55,7 +55,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
                 break; // Got what we wanted :-)
             }
         }
-        return c\mb_trim($stdin);
+        return $this->a::mbTrim($stdin);
     }
 
     /**

@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class PhpHas extends Classes\AppBase
+class PhpHas extends Classes\Core
 {
     /**
      * PHP's language constructs.
@@ -63,10 +61,10 @@ class PhpHas extends Classes\AppBase
         if (is_null($disabled_functions = &$this->cacheKey(__FUNCTION__.'_disabled_functions'))) {
             $disabled_functions = []; // Initialize disabled/blacklisted functions.
 
-            if (($disable_functions = c\mb_trim(ini_get('disable_functions')))) {
+            if (($disable_functions = $this->a::mbTrim(ini_get('disable_functions')))) {
                 $disabled_functions = array_merge($disabled_functions, preg_split('/[\s;,]+/u', mb_strtolower($disable_functions), -1, PREG_SPLIT_NO_EMPTY));
             }
-            if (($blacklist_functions = c\mb_trim(ini_get('suhosin.executor.func.blacklist')))) {
+            if (($blacklist_functions = $this->a::mbTrim(ini_get('suhosin.executor.func.blacklist')))) {
                 $disabled_functions = array_merge($disabled_functions, preg_split('/[\s;,]+/u', mb_strtolower($blacklist_functions), -1, PREG_SPLIT_NO_EMPTY));
             }
         } // We now have a full list of all disabled functions.

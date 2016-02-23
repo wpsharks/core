@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlBalance extends Classes\AppBase
+class HtmlBalance extends Classes\Core
 {
     /**
      * Balance HTML markup/tags.
@@ -60,7 +58,7 @@ class HtmlBalance extends Classes\AppBase
 
         $string = $Dom->saveHTML($Dom->getElementsByTagName('body')->item(0));
         $string = preg_replace(['/\<body\>/ui', '/\<\/body\>/ui'], '', $string);
-        $string = c\html_trim($string);
+        $string = $this->a::htmlTrim($string);
 
         return $string;
     }

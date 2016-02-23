@@ -4,22 +4,20 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
  * Watered-down regex.
  *
- * @since 15xxxx Adding watered-down regex.
+ * @since 150424 Adding watered-down regex.
  */
-class WdRegex extends Classes\AppBase
+class WdRegex extends Classes\Core
 {
     /**
      * Convert watered-down regex to real regex.
      *
-     * @since 15xxxx Adding watered-down regex parser.
+     * @since 150424 Adding watered-down regex parser.
      *
      * @param string $patterns Watered-down regex patterns; line-delimited.
      * @param string $star_not The behavior of the `*` star. Defaults to excluding `/`.
@@ -32,7 +30,7 @@ class WdRegex extends Classes\AppBase
         $regex = ''; // Initialize.
 
         $patterns            = preg_split('/['."\r\n".']+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
-        $patterns            = c\remove_emptys(c\mb_trim($patterns));
+        $patterns            = $this->a::removeEmptys($this->a::mbTrim($patterns));
         $regex_pattern_frags = $this->frag($patterns, $star_not);
 
         if ($regex_pattern_frags) { // Have an array of regex patterns frags?
@@ -44,7 +42,7 @@ class WdRegex extends Classes\AppBase
     /**
      * To true regex fragment.
      *
-     * @since 15xxxx Adding watered-down regex.
+     * @since 150424 Adding watered-down regex.
      *
      * @param mixed  $value    Input value(s) w/ watered-down regex.
      * @param string $star_not The behavior of the `*` star. Defaults to excluding `/`.
@@ -69,20 +67,20 @@ class WdRegex extends Classes\AppBase
             return $string;
         }
         return preg_replace(
-            array(
+            [
                 '/\\\\\^/u',
                 '/\\\\\*\\\\\*/u',
                 '/\\\\\*/u',
                 '/\\\\\$/u',
-            ),
-            array(
+            ],
+            [
                 '^', // Beginning of line.
                 '.*?', // Zero or more chars.
-                '[^'.c\esc_regex($star_not).']*?',
+                '[^'.$this->a::escRegex($star_not).']*?',
                 // Zero or more chars != `$star_not`.
                 '$', // End of line.
-            ),
-            c\esc_regex($string)
+            ],
+            $this->a::escRegex($string)
         );
     }
 }

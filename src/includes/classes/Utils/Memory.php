@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class Memory extends Classes\AppBase
+class Memory extends Classes\Core
 {
     /**
      * Get/set available memory.
@@ -30,6 +28,6 @@ class Memory extends Classes\AppBase
         if (isset($limit) && $limit) {
             @ini_set('memory_limit', $limit);
         }
-        return c\abbr_to_bytes(ini_get('memory_limit'));
+        return $this->a::abbrToBytes(ini_get('memory_limit'));
     }
 }

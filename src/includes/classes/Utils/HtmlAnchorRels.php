@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 160115 Initial release.
  */
-class HtmlAnchorRels extends Classes\AppBase
+class HtmlAnchorRels extends Classes\Core
 {
     /**
      * Adds new `rel=""` attributes.
@@ -36,7 +34,7 @@ class HtmlAnchorRels extends Classes\AppBase
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        $Tokenizer = c\tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'md_fences', 'md_links']);
+        $Tokenizer = $this->a::tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'md_fences', 'md_links']);
         $string    = &$Tokenizer->getString(); // Now get string by reference.
 
         $string = preg_replace_callback('/\<a\s[^>]*\>/ui', function ($m) use ($rels) {
@@ -48,7 +46,7 @@ class HtmlAnchorRels extends Classes\AppBase
                 $anchor = $m[0]; // As-is in this case.
             }
             $new_rels = $existing_rels ? array_unique(array_merge($existing_rels, $rels)) : $rels;
-            return $anchor = str_replace('>', ' rel="'.c\esc_attr(implode(' ', $new_rels)).'">', $anchor);
+            return $anchor = str_replace('>', ' rel="'.$this->a::escAttr(implode(' ', $new_rels)).'">', $anchor);
         }, $string); // Adds new `rel=""` attributes.
 
         $string = $Tokenizer->restoreGetString();

@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151216 Memcached utilities.
  */
-class Memcache extends Classes\AppBase
+class Memcache extends Classes\Core
 {
     /**
      * Pool.
@@ -65,10 +63,12 @@ class Memcache extends Classes\AppBase
      * Class constructor.
      *
      * @since 151216 Memcached utilities.
+     *
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct()
+    public function __construct(Classes\App $App)
     {
-        parent::__construct();
+        parent::__construct($App);
 
         $this->enabled   = $this->App->Config->memcache['enabled'];
         $this->namespace = $this->App->Config->memcache['namespace'];
@@ -255,7 +255,7 @@ class Memcache extends Classes\AppBase
                 break; // All good; stop here.
             }
             if (!isset($new_namespaced_primary_key_uuid)) {
-                $new_namespaced_primary_key_uuid = c\uuid_v4();
+                $new_namespaced_primary_key_uuid = $this->a::uuidV4();
             }
             if ($this->Pool->add($namespaced_primary_key, $new_namespaced_primary_key_uuid)) {
                 $namespaced_primary_key_uuid = $new_namespaced_primary_key_uuid;

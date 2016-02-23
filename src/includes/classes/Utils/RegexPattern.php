@@ -4,8 +4,6 @@ namespace WebSharks\Core\Classes\Utils;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Functions as c;
-use WebSharks\Core\Functions\__;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class RegexPattern extends Classes\AppBase
+class RegexPattern extends Classes\Core
 {
     /**
      * Match a regex pattern against other values.
@@ -41,7 +39,7 @@ class RegexPattern extends Classes\AppBase
                 if (is_array($_value) || is_object($_value)) {
                     if (($_matching_key_props = $this->in($regex, $_value, $collect_key_props))) {
                         if ($collect_key_props) {
-                            $matching_key_props[] = array($_key_prop => $_matching_key_props);
+                            $matching_key_props[] = [$_key_prop => $_matching_key_props];
                         } else {
                             return true;
                         }
