@@ -13,7 +13,7 @@ use WebSharks\Core\Traits;
 /**
  * Percent utilities.
  *
- * @since 15xxxx Percentage utils.
+ * @since 150424 Percentage utils.
  */
 class Percent extends Classes\AppBase
 {

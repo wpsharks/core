@@ -18,7 +18,7 @@ class Exception extends \Exception
     /**
      * Error code.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -27,7 +27,7 @@ class Exception extends \Exception
     /**
      * Error reason.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -36,7 +36,7 @@ class Exception extends \Exception
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string          $message  Message.
      * @param string          $code     Exception code.
@@ -59,7 +59,7 @@ class Exception extends \Exception
     /**
      * Get exception code.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @return string Exception code.
      */
@@ -71,7 +71,7 @@ class Exception extends \Exception
     /**
      * Get exception reason.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @return string Exception reason.
      */

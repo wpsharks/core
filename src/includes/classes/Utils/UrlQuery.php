@@ -19,7 +19,7 @@ class UrlQuery extends Classes\AppBase implements Interfaces\UrlConstants
     /**
      * Default.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */

@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * SHA-1 Modulus.
  *
- * @since 15xxxx SHA-1 modulus.
+ * @since 150424 SHA-1 modulus.
  */
 class Sha1Mod extends Classes\AppBase
 {
     /**
      * Total shards.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type int
      */
@@ -28,7 +28,7 @@ class Sha1Mod extends Classes\AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx SHA-1 modulus.
+     * @since 150424 SHA-1 modulus.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -42,7 +42,7 @@ class Sha1Mod extends Classes\AppBase
     /**
      * SHA-1 modulus.
      *
-     * @since 15xxxx SHA-1 modulus.
+     * @since 150424 SHA-1 modulus.
      *
      * @param string $string  String or a SHA-1 hash.
      * @param int    $divisor Maximum allowable value.
@@ -69,7 +69,7 @@ class Sha1Mod extends Classes\AppBase
     /**
      * SHA-1 modulus shard ID.
      *
-     * @since 15xxxx SHA-1 modulus.
+     * @since 150424 SHA-1 modulus.
      *
      * @param string $string       String or a SHA-1 hash.
      * @param bool   $is_sha1      String is already a SHA-1 hash?
@@ -88,7 +88,7 @@ class Sha1Mod extends Classes\AppBase
     /**
      * Assign shard ID.
      *
-     * @since 15xxxx SHA-1 modulus.
+     * @since 150424 SHA-1 modulus.
      *
      * @param string $string  String or a SHA-1 hash.
      * @param bool   $is_sha1 String is already a SHA-1 hash?

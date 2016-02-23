@@ -17,7 +17,7 @@ trait CacheMembers
     /**
      * Instance cache.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @type array Instance cache.
      */
@@ -26,7 +26,7 @@ trait CacheMembers
     /**
      * Set a cache sub-key.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string     $primary_key Primary key.
      * @param string|int $sub_key     Sub-key to set.
@@ -50,7 +50,7 @@ trait CacheMembers
     /**
      * Get a cache sub-key.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string     $primary_key Primary key.
      * @param string|int $sub_key     Sub-key to get.
@@ -78,7 +78,7 @@ trait CacheMembers
     /**
      * Unset a cache sub-key.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string     $primary_key Primary key.
      * @param string|int $sub_key     Sub-key to unset.
@@ -96,7 +96,7 @@ trait CacheMembers
     /**
      * Unset a cache sub-key pattern.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $primary_key     Primary key.
      * @param string $sub_key_pattern Sub-key pattern (watered-down regex).
@@ -126,7 +126,7 @@ trait CacheMembers
     /**
      * Add a new cache ref-key.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string     $primary_key Primary key.
      * @param string|int $ref_key     Ref-key to set.
@@ -141,7 +141,7 @@ trait CacheMembers
     /**
      * Unset a cache ref-key.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string     $primary_key Primary key.
      * @param string|int $ref_key     Ref-key to unset.
@@ -162,7 +162,7 @@ trait CacheMembers
     /**
      * Unset a cache ref-key pattern.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $primary_key     Primary key.
      * @param string $ref_key_pattern Ref-key pattern (watered-down regex).
@@ -191,7 +191,7 @@ trait CacheMembers
     /**
      * Cache key (or sub-key) based on args.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string      $primary_key Primary key.
      * @param mixed|array $args        Args to base key on.
@@ -266,7 +266,7 @@ trait CacheMembers
     /**
      * Clear cache (everything).
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      */
     protected function cacheClear()
     {

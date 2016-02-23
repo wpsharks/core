@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Multibyte `str_split()`.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
 class StrSplit extends Classes\AppBase
 {
     /**
      * Multibyte `str_split()`.
      *
-     * @since 15xxxx Enhancing multibyte support.
+     * @since 150424 Enhancing multibyte support.
      *
      * @param string $string       Input string to split.
      * @param int    $split_length Split length; i.e., chunk size.

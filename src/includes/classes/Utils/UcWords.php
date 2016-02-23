@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Multibyte `ucwords()`.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
 class UcWords extends Classes\AppBase
 {
     /**
      * Multibyte `ucwords()`.
      *
-     * @since 15xxxx Enhancing multibyte support.
+     * @since 150424 Enhancing multibyte support.
      *
      * @param mixed $value Any input value.
      *

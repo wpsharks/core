@@ -35,7 +35,7 @@ class CliStream extends Classes\AppBase implements Interfaces\UrlConstants, Inte
     /**
      * Read STDIN.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int  $max_lines Defaults to `0` (no limit).
      * @param bool $blocking  Blocking (`true`) or non-blocking?

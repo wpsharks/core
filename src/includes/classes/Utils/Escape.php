@@ -12,7 +12,7 @@ use WebSharks\Core\Traits;
 /**
  * Escape utils.
  *
- * @since 15xxxx Escape utils.
+ * @since 150424 Escape utils.
  */
 class Escape extends Classes\AppBase
 {

@@ -11,14 +11,14 @@ use WebSharks\Core\Traits;
 /**
  * App config.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
 class AppConfig extends AppBase
 {
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param App   $App           Instance of App.
      * @param array $instance_base Instance base.
@@ -216,7 +216,7 @@ class AppConfig extends AppBase
     /**
      * Merge config arrays.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $base      Base array.
      * @param array $merge     Array to merge.
@@ -248,7 +248,7 @@ class AppConfig extends AppBase
     /**
      * Empty numeric arrays.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $base  Base array.
      * @param array $merge Array to merge.
@@ -275,7 +275,7 @@ class AppConfig extends AppBase
     /**
      * Fill replacement codes.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed $value Input value.
      *

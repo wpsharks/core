@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Spellcheck Utils.
  *
- * @since 15xxxx Adding password strength.
+ * @since 150424 Adding password strength.
  */
 class SpellCheck extends Classes\AppBase
 {
     /**
      * Checks spelling.
      *
-     * @since 15xxxx Adding password strength.
+     * @since 150424 Adding password strength.
      *
      * @param string $word  Input word to check.
      * @param int    $flags Dictionary flags.

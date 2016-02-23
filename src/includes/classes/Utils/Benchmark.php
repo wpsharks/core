@@ -13,14 +13,14 @@ use WebSharks\Core\Traits;
 /**
  * Benchmark utilities.
  *
- * @since 15xxxx Benchmarking.
+ * @since 150424 Benchmarking.
  */
 class Benchmark extends Classes\AppBase
 {
     /**
      * Start time.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type float
      */
@@ -29,7 +29,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Stop time.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type float
      */
@@ -38,7 +38,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Elapsed time.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type float
      */
@@ -47,7 +47,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Last elapsed time.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type float
      */
@@ -56,7 +56,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Stats.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string[]
      */
@@ -81,7 +81,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Start (initialize).
      *
-     * @since 15xxxx Benchmarking.
+     * @since 150424 Benchmarking.
      *
      * @param bool $save_last Save last time?
      */
@@ -99,7 +99,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Stop (and print).
      *
-     * @since 15xxxx Benchmarking.
+     * @since 150424 Benchmarking.
      *
      * @param bool $full_report Full report?
      */
@@ -140,7 +140,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Print statistics.
      *
-     * @since 15xxxx Benchmarking.
+     * @since 150424 Benchmarking.
      */
     protected function printAllStatistics()
     {
@@ -168,7 +168,7 @@ class Benchmark extends Classes\AppBase
     /**
      * Add statistic.
      *
-     * @since 15xxxx Benchmarking.
+     * @since 150424 Benchmarking.
      *
      * @param string $label Label for this statistic.
      * @param string $value Value for this statistic.

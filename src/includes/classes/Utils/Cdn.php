@@ -19,7 +19,7 @@ class Cdn extends Classes\AppBase implements Interfaces\MimeConstants
     /**
      * Extensions.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string[]
      */
@@ -43,7 +43,7 @@ class Cdn extends Classes\AppBase implements Interfaces\MimeConstants
     /**
      * CDN URL generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $uri    URI to serve via CDN.
      * @param string $scheme Specific scheme?
@@ -65,7 +65,7 @@ class Cdn extends Classes\AppBase implements Interfaces\MimeConstants
     /**
      * CDN URL generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $uri    URI to serve via CDN.
      * @param string $scheme Specific scheme?
@@ -87,7 +87,7 @@ class Cdn extends Classes\AppBase implements Interfaces\MimeConstants
     /**
      * CDN URL filter.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $url_uri_qsl Input URL, URI, or query string w/ a leading `?`.
      *

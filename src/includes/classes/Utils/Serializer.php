@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Serializer.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
 class Serializer extends Classes\AppBase
 {
     /**
      * Marker.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -28,7 +28,7 @@ class Serializer extends Classes\AppBase
     /**
      * Maybe serialize value.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed $value Value to serialize (maybe).
      *
@@ -55,7 +55,7 @@ class Serializer extends Classes\AppBase
     /**
      * Maybe unserialize value.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $string String to unserialize (maybe).
      *
@@ -74,7 +74,7 @@ class Serializer extends Classes\AppBase
     /**
      * Check/set expected type.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed  $value         Value.
      * @param string $expected_type Data type.

@@ -34,7 +34,7 @@ class Html extends Classes\AppBase
     /**
      * Checked?
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed $a Input variable a.
      * @param mixed $b Input variable b.
@@ -49,7 +49,7 @@ class Html extends Classes\AppBase
     /**
      * Selected?
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param mixed $a Input variable a.
      * @param mixed $b Input variable b.

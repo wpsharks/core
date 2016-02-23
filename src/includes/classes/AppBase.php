@@ -18,7 +18,7 @@ abstract class AppBase extends Abs
     /**
      * App.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type App
      */
@@ -27,7 +27,7 @@ abstract class AppBase extends Abs
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param App $App Instance of App.
      */

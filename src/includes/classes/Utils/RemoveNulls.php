@@ -19,7 +19,7 @@ class RemoveNulls extends Classes\AppBase
     /**
      * Remove null values.
      *
-     * @since 15xxxx Enhance utils.
+     * @since 150424 Enhance utils.
      *
      * @param array|object $value Input value.
      *

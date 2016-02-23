@@ -19,7 +19,7 @@ class OneDimension extends Classes\AppBase
     /**
      * One dimension only.
      *
-     * @since 15xxxx Enhance utils.
+     * @since 150424 Enhance utils.
      *
      * @param array|object $value Input value.
      *

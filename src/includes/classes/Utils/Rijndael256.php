@@ -19,7 +19,7 @@ class Rijndael256 extends Classes\AppBase
     /**
      * IV size.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type int
      */
@@ -28,7 +28,7 @@ class Rijndael256 extends Classes\AppBase
     /**
      * Key size.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type int
      */

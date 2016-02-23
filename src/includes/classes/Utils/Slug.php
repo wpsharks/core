@@ -19,7 +19,7 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
     /**
      * Validate slug.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $slug Slug to validate.
      *
@@ -33,7 +33,7 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
     /**
      * Is slug reserved?
      *
-     * @since 15xxxx Reserved slugs.
+     * @since 150424 Reserved slugs.
      *
      * @param string $slug Slug to check.
      *
@@ -65,7 +65,7 @@ class Slug extends Classes\AppBase implements Interfaces\SlugConstants
     /**
      * Convert slug to name.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $slug Slug to convert to name.
      *

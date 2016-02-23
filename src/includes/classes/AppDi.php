@@ -13,14 +13,14 @@ use WebSharks\Dicer\Di;
 /**
  * App DI.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
 class AppDi extends Di
 {
     /**
      * App.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type App
      */
@@ -29,7 +29,7 @@ class AppDi extends Di
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param App   $App                 Instance of App.
      * @param array $global_default_rule Default rule.

@@ -11,14 +11,14 @@ use WebSharks\Core\Traits;
 /**
  * Application.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
 class App extends Abs
 {
     /**
      * Namespace.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -27,7 +27,7 @@ class App extends Abs
     /**
      * Namespace SHA-1.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -36,7 +36,7 @@ class App extends Abs
     /**
      * Dir.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -45,7 +45,7 @@ class App extends Abs
     /**
      * Dir basename.
      *
-     * @since 16xxxx
+     * @since 160223
      *
      * @type string
      */
@@ -54,7 +54,7 @@ class App extends Abs
     /**
      * Dir SHA-1.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -63,7 +63,7 @@ class App extends Abs
     /**
      * Core dir.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -72,7 +72,7 @@ class App extends Abs
     /**
      * Core dir basename.
      *
-     * @since 16xxxx
+     * @since 160223
      *
      * @type string
      */
@@ -81,7 +81,7 @@ class App extends Abs
     /**
      * Core dir SHA-1.
      *
-     * @since 16xxxx
+     * @since 160223
      *
      * @type string
      */
@@ -90,7 +90,7 @@ class App extends Abs
     /**
      * Core dir is vendor?
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type bool
      */
@@ -99,7 +99,7 @@ class App extends Abs
     /**
      * Config.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type AppConfig
      */
@@ -108,7 +108,7 @@ class App extends Abs
     /**
      * Dicer.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type AppDi
      */
@@ -117,7 +117,7 @@ class App extends Abs
     /**
      * Utilities.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type AppUtils
      */
@@ -126,7 +126,7 @@ class App extends Abs
     /**
      * Version.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string Version.
      */
@@ -135,7 +135,7 @@ class App extends Abs
     /**
      * Constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $instance_base Instance base.
      * @param array $instance      Instance args (highest precedence).
@@ -179,7 +179,7 @@ class App extends Abs
     /**
      * Maybe setup debugging.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      */
     protected function maybeDebug()
     {
@@ -199,7 +199,7 @@ class App extends Abs
     /**
      * Maybe handle exceptions.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      */
     protected function maybeHandleExceptions()
     {
@@ -211,7 +211,7 @@ class App extends Abs
     /**
      * Maybe setup locales.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      */
     protected function maybeSetLocales()
     {

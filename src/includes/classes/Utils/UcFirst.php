@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Multibyte `ucfirst()`.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
 class UcFirst extends Classes\AppBase
 {
     /**
      * Multibyte `ucfirst()`.
      *
-     * @since 15xxxx Enhancing multibyte support.
+     * @since 150424 Enhancing multibyte support.
      *
      * @param mixed $value Any input value.
      *

@@ -21,7 +21,7 @@ abstract class Abs implements \Serializable, \JsonSerializable
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      */
     public function __construct()
     {

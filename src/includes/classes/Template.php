@@ -18,7 +18,7 @@ class Template extends AppBase
     /**
      * Directory.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -27,7 +27,7 @@ class Template extends AppBase
     /**
      * File path.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -36,7 +36,7 @@ class Template extends AppBase
     /**
      * File ext.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -45,7 +45,7 @@ class Template extends AppBase
     /**
      * Parent files.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -54,7 +54,7 @@ class Template extends AppBase
     /**
      * Parent vars.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -63,7 +63,7 @@ class Template extends AppBase
     /**
      * Current vars.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -72,7 +72,7 @@ class Template extends AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param App    $App         Instance of App.
      * @param string $dir         Template dir.
@@ -99,7 +99,7 @@ class Template extends AppBase
     /**
      * Parse template.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $¤vars Template vars.
      *
@@ -129,7 +129,7 @@ class Template extends AppBase
     /**
      * Set current vars.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array $defaults Default vars.
      * @param array ...$vars Template vars.
@@ -144,7 +144,7 @@ class Template extends AppBase
     /**
      * Get a child template.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $file Relative to templates dir.
      * @param array  $vars Template vars for the include.
@@ -173,7 +173,7 @@ class Template extends AppBase
     /**
      * Has a parent template?
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $file Relative to templates dir.
      *
@@ -187,7 +187,7 @@ class Template extends AppBase
     /**
      * Parent template vars.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $file Relative to templates dir.
      *

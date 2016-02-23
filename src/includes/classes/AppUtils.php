@@ -11,14 +11,14 @@ use WebSharks\Core\Traits;
 /**
  * App utilities.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
 class AppUtils extends AppBase
 {
     /**
      * Magic utility factory.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $property Property.
      *
@@ -41,7 +41,7 @@ class AppUtils extends AppBase
     /**
      * Magic utility factory.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $method Method to call upon.
      * @param array  $args   Arguments to pass to the method.

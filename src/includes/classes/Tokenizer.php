@@ -18,7 +18,7 @@ class Tokenizer extends AppBase
     /**
      * String.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -27,7 +27,7 @@ class Tokenizer extends AppBase
     /**
      * Tokenize what?
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -36,7 +36,7 @@ class Tokenizer extends AppBase
     /**
      * Tokens.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -45,7 +45,7 @@ class Tokenizer extends AppBase
     /**
      * Marker.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */

@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Transliteration utilities.
  *
- * @since 15xxxx Multibyte support.
+ * @since 150424 Multibyte support.
  */
 class Transliterate extends Classes\AppBase
 {
     /**
      * Convert to ASCII.
      *
-     * @since 15xxxx Multibyte support.
+     * @since 150424 Multibyte support.
      *
      * @param mixed $value Any input value.
      *

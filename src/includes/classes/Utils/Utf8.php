@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * UTF-8 Utils.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
 class Utf8 extends Classes\AppBase
 {
     /**
      * Marker.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -28,7 +28,7 @@ class Utf8 extends Classes\AppBase
     /**
      * Is valid UTF-8?
      *
-     * @since 15xxxx Enhancing multibyte support.
+     * @since 150424 Enhancing multibyte support.
      *
      * @param string $string Input string to test.
      *

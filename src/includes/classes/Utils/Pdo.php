@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * PDO utilities.
  *
- * @since 15xxxx Initial release.
+ * @since 150424 Initial release.
  */
 class Pdo extends Classes\AppBase
 {
     /**
      * DB hosts.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -28,7 +28,7 @@ class Pdo extends Classes\AppBase
     /**
      * DB shards.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type array
      */
@@ -37,7 +37,7 @@ class Pdo extends Classes\AppBase
     /**
      * Current PDO instance.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type \PDO|null
      */
@@ -46,7 +46,7 @@ class Pdo extends Classes\AppBase
     /**
      * Constructor.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -61,7 +61,7 @@ class Pdo extends Classes\AppBase
     /**
      * PDO instance for a DB.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int|null $shard_id Shard ID explicitly.
      * @param int|null $uuid     Or, a UUID containing the shard ID.
@@ -136,7 +136,7 @@ class Pdo extends Classes\AppBase
     /**
      * Shard DB config properties.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int $shard_id Shard ID.
      *
@@ -158,7 +158,7 @@ class Pdo extends Classes\AppBase
     /**
      * Escapes table/column names.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $string Table/column name.
      *
@@ -172,7 +172,7 @@ class Pdo extends Classes\AppBase
     /**
      * Escapes/formats table columns.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array  $columns    Table columns.
      * @param string $table_name Optional table name.
@@ -199,7 +199,7 @@ class Pdo extends Classes\AppBase
     /**
      * Escapes order direction.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $string Order direction.
      *
@@ -215,7 +215,7 @@ class Pdo extends Classes\AppBase
     /**
      * Escapes/formats order bys.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array  $order_bys  Order bys.
      * @param string $table_name Optional table name.
@@ -240,7 +240,7 @@ class Pdo extends Classes\AppBase
     /**
      * Escapes/formats IN clause.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param array  $array Input array to escape.
      * @param string $type  One of: `ints`, `floats`, `strings`.

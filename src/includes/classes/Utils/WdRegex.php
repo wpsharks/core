@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Watered-down regex.
  *
- * @since 15xxxx Adding watered-down regex.
+ * @since 150424 Adding watered-down regex.
  */
 class WdRegex extends Classes\AppBase
 {
     /**
      * Convert watered-down regex to real regex.
      *
-     * @since 15xxxx Adding watered-down regex parser.
+     * @since 150424 Adding watered-down regex parser.
      *
      * @param string $patterns Watered-down regex patterns; line-delimited.
      * @param string $star_not The behavior of the `*` star. Defaults to excluding `/`.
@@ -44,7 +44,7 @@ class WdRegex extends Classes\AppBase
     /**
      * To true regex fragment.
      *
-     * @since 15xxxx Adding watered-down regex.
+     * @since 150424 Adding watered-down regex.
      *
      * @param mixed  $value    Input value(s) w/ watered-down regex.
      * @param string $star_not The behavior of the `*` star. Defaults to excluding `/`.

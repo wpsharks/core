@@ -19,7 +19,7 @@ class DotKeys extends Classes\AppBase
     /**
      * `.` keys (e.g., `key.ID`).
      *
-     * @since 15xxxx Array utils.
+     * @since 150424 Array utils.
      *
      * @param array $array Input array.
      *

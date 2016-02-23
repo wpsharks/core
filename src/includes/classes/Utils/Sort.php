@@ -19,7 +19,7 @@ class Sort extends Classes\AppBase
     /**
      * Sorts by key.
      *
-     * @since 15xxxx Array utils.
+     * @since 150424 Array utils.
      *
      * @param array $array Input array.
      * @param int   $flags Defaults to `SORT_REGULAR`.

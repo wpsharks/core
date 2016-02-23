@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Multibyte `strcasecmp()`.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
 class StrCaseCmp extends Classes\AppBase
 {
     /**
      * Multibyte `strcasecmp()`.
      *
-     * @since 15xxxx Enhancing multibyte support.
+     * @since 150424 Enhancing multibyte support.
      *
      * @param string $string1 Input string.
      * @param string $string2 Input string.

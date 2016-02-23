@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * WebPurify.
  *
- * @since 15xxxx Badwords checker.
+ * @since 150424 Badwords checker.
  */
 class WebPurify extends Classes\AppBase
 {
     /**
      * Cache directory.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */
@@ -28,7 +28,7 @@ class WebPurify extends Classes\AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx Badwords checker.
+     * @since 150424 Badwords checker.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -49,7 +49,7 @@ class WebPurify extends Classes\AppBase
     /**
      * Check a slug for bad words.
      *
-     * @since 15xxxx Badwords checker.
+     * @since 150424 Badwords checker.
      *
      * @return bool True if slug contains bad words.
      */
@@ -65,7 +65,7 @@ class WebPurify extends Classes\AppBase
     /**
      * Check a string for bad words.
      *
-     * @since 15xxxx Badwords checker.
+     * @since 150424 Badwords checker.
      *
      * @param string $text Input text to check.
      *

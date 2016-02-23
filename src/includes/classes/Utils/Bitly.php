@@ -19,7 +19,7 @@ class Bitly extends Classes\AppBase
     /**
      * Cache directory.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type string
      */

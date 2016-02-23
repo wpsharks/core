@@ -19,7 +19,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * UUID64 validator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int      $uuid              Input UUID64 (64 bits signed max `9223372036854775807`).
      * @param int|null $expecting_type_id Expected type ID.
@@ -40,7 +40,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * Shard ID from UUID64.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int  $uuid     Input UUID64 (64 bits signed max `9223372036854775807`).
      * @param bool $validate Validate the shard ID after extraction? Defaults to `true`.
@@ -60,7 +60,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * Validate shard ID.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int $shard_id Input shard ID (16 bits unsigned max `65535`).
      *
@@ -77,7 +77,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * Type ID from UUID64.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int      $uuid              Input UUID64 (64 bits signed max `9223372036854775807`).
      * @param int|null $expecting_type_id Expected type ID; i.e., validate for this type ID?
@@ -100,7 +100,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * Validate type ID.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int      $type_id           Input type ID (8 bits unsigned max `255`).
      * @param int|null $expecting_type_id Expected type ID.
@@ -120,7 +120,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * Local ID from UUID64.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int  $uuid     Input UUID64 (64 bits signed max `9223372036854775807`).
      * @param bool $validate Validate the local ID after extraction? Defaults to `true`.
@@ -140,7 +140,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * Validate local ID.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int $local_id Input local ID (38 bits unsigned max `274877906943`).
      *
@@ -157,7 +157,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * UUID64 parser.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int      $uuid              Input UUID64 (64 bits signed max `9223372036854775807`).
      * @param int|null $expecting_type_id Expected type ID; i.e., validate this type ID?
@@ -184,7 +184,7 @@ class Uuid64 extends Classes\AppBase
     /**
      * UUID64 builder.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param int  $shard_id Shard ID (16 bits unsigned max `65535`).
      * @param int  $type_id  Type ID (8 bits unsigned max `255`).

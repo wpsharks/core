@@ -21,7 +21,7 @@ class Uuid extends Classes\AppBase
     /**
      * UUID v1 generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param bool $optimize Optimize?
      *
@@ -46,7 +46,7 @@ class Uuid extends Classes\AppBase
     /**
      * UUID v3 generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $namespace  Namespace.
      * @param string $identifier Identifier.
@@ -87,7 +87,7 @@ class Uuid extends Classes\AppBase
     /**
      * UUID v4 generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param bool $optimize Optimize?
      *
@@ -104,7 +104,7 @@ class Uuid extends Classes\AppBase
     /**
      * UUID v5 generator.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $namespace  Namespace.
      * @param string $identifier Identifier.

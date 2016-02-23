@@ -19,7 +19,7 @@ class Iterators extends Classes\AppBase
     /**
      * Recursive array iterator.
      *
-     * @since 15xxxx Array utils.
+     * @since 150424 Array utils.
      *
      * @param array $array Input array.
      *

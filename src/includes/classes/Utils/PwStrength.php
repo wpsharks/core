@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Password Strength Utils.
  *
- * @since 15xxxx Adding password strength.
+ * @since 150424 Adding password strength.
  */
 class PwStrength extends Classes\AppBase
 {
     /**
      * Password strength.
      *
-     * @since 15xxxx Adding password strength.
+     * @since 150424 Adding password strength.
      *
      * @param string $password Password to test.
      *

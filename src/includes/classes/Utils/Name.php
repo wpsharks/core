@@ -122,7 +122,7 @@ class Name extends Classes\AppBase
     /**
      * Convert name to slug.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $name Full name.
      *

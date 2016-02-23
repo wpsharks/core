@@ -21,7 +21,7 @@ class HashIds extends Classes\AppBase
     /**
      * Parser.
      *
-     * @since 15xxxx
+     * @since 150424
      *
      * @type Parser
      */
@@ -30,7 +30,7 @@ class HashIds extends Classes\AppBase
     /**
      * Class constructor.
      *
-     * @since 15xxxx Adding hash IDs.
+     * @since 150424 Adding hash IDs.
      *
      * @param Classes\App $App       Instance of App.
      * @param string      $salt      Secret key.
@@ -50,7 +50,7 @@ class HashIds extends Classes\AppBase
     /**
      * Encodes integers.
      *
-     * @since 15xxxx Adding hash IDs.
+     * @since 150424 Adding hash IDs.
      *
      * @param int ...$integers Integers to encode.
      *
@@ -64,7 +64,7 @@ class HashIds extends Classes\AppBase
     /**
      * Decodes a hash ID.
      *
-     * @since 15xxxx Adding hash IDs.
+     * @since 150424 Adding hash IDs.
      *
      * @param string $hash_id Hash ID.
      *

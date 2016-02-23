@@ -43,7 +43,7 @@ class I18n extends Classes\AppBase
     /**
      * Translate a string.
      *
-     * @since 15xxxx Initial release.
+     * @since 150424 Initial release.
      *
      * @param string $string String to translate.
      *

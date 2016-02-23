@@ -19,7 +19,7 @@ class RemoveEmptys extends Classes\AppBase
     /**
      * Remove empty values.
      *
-     * @since 15xxxx Enhance utils.
+     * @since 150424 Enhance utils.
      *
      * @param array|object $value Input value.
      *

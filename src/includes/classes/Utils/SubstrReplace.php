@@ -12,14 +12,14 @@ use WebSharks\Core\Traits;
 /**
  * Multibyte `substr_replace()`.
  *
- * @since 15xxxx Enhancing multibyte support.
+ * @since 150424 Enhancing multibyte support.
  */
 class SubstrReplace extends Classes\AppBase
 {
     /**
      * Multibyte `substr_replace()`.
      *
-     * @since 15xxxx Enhancing multibyte.
+     * @since 150424 Enhancing multibyte.
      *
      * @param mixed    $value   Input value.
      * @param string   $replace Replacement string.
