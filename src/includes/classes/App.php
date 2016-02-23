@@ -190,7 +190,7 @@ class App extends Core
         $this->Di     = new AppDi($this, $this->Config->di['default_rule']);
         $this->Utils  = new AppUtils($this); // Utility class access.
 
-        $this->Di->addInstances([$this, $this->Config, $this->Utils]);
+        $this->Di->addInstances([self::class => $this, $this, $this->Config, $this->Utils]);
 
         if (!class_exists($this->namespace.'\\AppFacades')) {
             // Only if it doesn't already exist; i.e., if app has not already extended core.
