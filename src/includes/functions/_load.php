@@ -1,63 +1,8 @@
 <?php
 // This file was auto-generated:
-// February 23rd, 2016, 10:42 am UTC
+// February 23rd, 2016, 12:44 pm UTC
 
 declare (strict_types = 1);
 namespace WebSharks\Core\Functions;
 
-require_once __DIR__.'/back-compat/app.php';
-require_once __DIR__.'/back-compat/arrays.php';
-require_once __DIR__.'/back-compat/base64.php';
-require_once __DIR__.'/back-compat/benchmark.php';
-require_once __DIR__.'/back-compat/bitly.php';
-require_once __DIR__.'/back-compat/cli.php';
-require_once __DIR__.'/back-compat/clippers.php';
-require_once __DIR__.'/back-compat/cookies.php';
-require_once __DIR__.'/back-compat/dimensions.php';
-require_once __DIR__.'/back-compat/dirs.php';
-require_once __DIR__.'/back-compat/dump.php';
-require_once __DIR__.'/back-compat/email.php';
-require_once __DIR__.'/back-compat/encryption.php';
-require_once __DIR__.'/back-compat/eols.php';
-require_once __DIR__.'/back-compat/escapes.php';
-require_once __DIR__.'/back-compat/exceptions.php';
-require_once __DIR__.'/back-compat/files.php';
-require_once __DIR__.'/back-compat/gravatar.php';
-require_once __DIR__.'/back-compat/headers.php';
-require_once __DIR__.'/back-compat/html.php';
-require_once __DIR__.'/back-compat/i18n.php';
-require_once __DIR__.'/back-compat/ips.php';
-require_once __DIR__.'/back-compat/iterators.php';
-require_once __DIR__.'/back-compat/markdown.php';
-require_once __DIR__.'/back-compat/memcache.php';
-require_once __DIR__.'/back-compat/multibyte.php';
-require_once __DIR__.'/back-compat/names.php';
-require_once __DIR__.'/back-compat/oembed.php';
-require_once __DIR__.'/back-compat/os.php';
-require_once __DIR__.'/back-compat/output.php';
-require_once __DIR__.'/back-compat/patterns.php';
-require_once __DIR__.'/back-compat/pdo.php';
-require_once __DIR__.'/back-compat/percentages.php';
-require_once __DIR__.'/back-compat/php.php';
-require_once __DIR__.'/back-compat/replacements.php';
-require_once __DIR__.'/back-compat/serializer.php';
-require_once __DIR__.'/back-compat/sha1-mods.php';
-require_once __DIR__.'/back-compat/slashes.php';
-require_once __DIR__.'/back-compat/slugs.php';
-require_once __DIR__.'/back-compat/spellcheck.php';
-require_once __DIR__.'/back-compat/templates.php';
-require_once __DIR__.'/back-compat/tokenizer.php';
-require_once __DIR__.'/back-compat/translits.php';
-require_once __DIR__.'/back-compat/url-builders.php';
-require_once __DIR__.'/back-compat/url-current.php';
-require_once __DIR__.'/back-compat/url-parsers.php';
-require_once __DIR__.'/back-compat/url-querys.php';
-require_once __DIR__.'/back-compat/url-utils.php';
-require_once __DIR__.'/back-compat/uuid64.php';
-require_once __DIR__.'/back-compat/uuids.php';
-require_once __DIR__.'/back-compat/vars.php';
-require_once __DIR__.'/back-compat/versions.php';
-require_once __DIR__.'/back-compat/webpurify.php';
-require_once __DIR__.'/back-compat/wordpress.php';
-require_once __DIR__.'/back-compat/yaml.php';
 require_once __DIR__.'/i18n.php';
