@@ -1,7 +1,7 @@
 <?php
 declare (strict_types = 1);
 
-if (!function_exists('__')) {
+if (!defined('ABSPATH') && !defined('WPINC') && !function_exists('__')) {
     /**
      * @since 160223 Polyfill.
      */

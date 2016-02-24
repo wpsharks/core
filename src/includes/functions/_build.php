@@ -16,7 +16,7 @@ $_load = '<?php
 // '.date('F jS, Y, g:i a T').'
 
 declare (strict_types = 1);
-namespace WebSharks\Core\Functions;
+namespace '.__NAMESPACE__.';
 
 ';
 foreach (dir_recursive_regex(__DIR__, '/\.php$/ui') as $_file) {

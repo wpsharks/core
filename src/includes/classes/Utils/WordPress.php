@@ -23,6 +23,6 @@ class WordPress extends Classes\Core
      */
     public function is(): bool
     {
-        return defined('WPINC');
+        return defined('ABSPATH') || defined('WPINC');
     }
 }
