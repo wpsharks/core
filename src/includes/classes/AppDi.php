@@ -38,4 +38,20 @@ class AppDi extends Di
 
         $this->App = $App;
     }
+
+    /**
+     * Get a class instance.
+     *
+     * @since 160224 Initial release.
+     *
+     * @param string $class_name Class path.
+     * @param array  $args       Constructor args.
+     * @param bool   $as_is      Class name as-is?
+     *
+     * @return object An object class instance.
+     */
+    public function get(string $class_name, array $args = [], bool $as_is = false)
+    {
+        return parent::get($as_is ? $class_name : $this->App->getClass($class_name), $args);
+    }
 }

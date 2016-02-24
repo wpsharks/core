@@ -14,6 +14,15 @@ use WebSharks\Core\Traits;
 class App extends Core
 {
     /**
+     * Parent app.
+     *
+     * @since 160224
+     *
+     * @type App|null
+     */
+    public $parent;
+
+    /**
      * Class.
      *
      * @since 160223
@@ -162,12 +171,16 @@ class App extends Core
      *
      * @since 150424 Initial release.
      *
-     * @param array $instance_base Instance base.
-     * @param array $instance      Instance args (highest precedence).
+     * @param array    $instance_base Instance base.
+     * @param array    $instance      Instance args (highest precedence).
+     * @param App|null $parent        Parent app (optional).
+     * @param array    $args          Any additional behavioral args.
      */
-    public function __construct(array $instance_base = [], array $instance = [])
+    public function __construct(array $instance_base = [], array $instance = [], App $parent = null, array $args = [])
     {
         parent::__construct();
+
+        $this->parent = $parent;
 
         $Class = new \ReflectionClass($this);
 
@@ -186,23 +199,60 @@ class App extends Core
         $this->core_dir_sha1     = sha1($this->core_dir);
         $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
 
-        $this->Config = new AppConfig($this, $instance_base, $instance);
-        $this->Di     = new AppDi($this, $this->Config->di['default_rule']);
-        $this->Utils  = new AppUtils($this); // Utility class access.
+        $AppConfig_class       = $this->getClass(AppConfig::class);
+        $AppDi_class           = $this->getClass(AppDi::class);
+        $AppUtils_class        = $this->getClass(AppUtils::class);
+        $AppFacades_base_class = $this->getClass(AppFacades::class);
+        $AppFacades_class      = $this->namespace.'\\AppFacades';
 
-        $this->Di->addInstances([self::class => $this, $this, $this->Config, $this->Utils]);
+        $this->Config = new $AppConfig_class($this, $instance_base, $instance, $args);
+        $this->Di     = new $AppDi_class($this, $this->Config->di['default_rule']);
+        $this->Utils  = new $AppUtils_class($this);
 
-        if (!class_exists($this->namespace.'\\AppFacades')) {
-            // Only if it doesn't already exist; i.e., if app has not already extended core.
-            eval('namespace '.$this->namespace.' { class AppFacades extends \\'.__NAMESPACE__.'\\AppFacades {} }');
+        if (!class_exists($AppFacades_class)) {
+            eval('namespace '.$this->namespace.' { class AppFacades extends \\'.$AppFacades_base_class.' {} }');
         }
-        $GLOBALS[$this->class]                    = $this;
-        $GLOBALS[$this->namespace.'\\AppFacades'] = $this;
-        $this->Facades                            = $this->namespace.'\\AppFacades';
+        $this->Di->addInstances([$this, $this->Config, $this->Utils]);
+
+        if (isset($GLOBALS[$this->class])) {
+            throw new Exception('One instance only please.');
+        }
+        $GLOBALS[$this->class]      = $this;
+        $GLOBALS[$AppFacades_class] = $this;
+        $this->Facades              = $AppFacades_class;
 
         $this->maybeDebug();
         $this->maybeSetLocales();
         $this->maybeHandleExceptions();
+    }
+
+    /**
+     * Get class (in order of precedence).
+     *
+     * @since 160224 Support ancestors.
+     *
+     * @param string $class The class path.
+     *
+     * @return string Class w/ highest precedence.
+     */
+    public function getClass(string $class): string
+    {
+        if (!($classes_pos = strripos($class, '\\Classes\\'))) {
+            return $class; // Return as-is.
+        }
+        if (!($sub_class = substr($class, $classes_pos + 9))) {
+            return $class; // Return as-is.
+        }
+        if (class_exists($this->namespace.'\\'.$sub_class)) {
+            return $class = $this->namespace.'\\'.$sub_class;
+        } elseif (($_parent = $this->parent)) {
+            do {
+                if (class_exists($_parent->namespace.'\\'.$sub_class)) {
+                    return $class = $_parent->namespace.'\\'.$sub_class;
+                }
+            } while ($_parent->parent); // unset($_parent);
+        }
+        return $class; // Return as-is.
     }
 
     /**

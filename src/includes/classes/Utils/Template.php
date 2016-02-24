@@ -32,8 +32,12 @@ class Template extends Classes\Core
         if (!$dir) { // Use default templates directory?
             $dir = $this->App->Config->fs_paths['templates_dir'];
         }
-        if (!$dir || $dir === 'core' || ($file && !is_file($dir.'/'.$file))) {
-            $dir = $this->App->core_dir.'/src/includes/templates';
+        if (!$dir || $dir === 'parent' || $dir === 'core' || ($file && !is_file($dir.'/'.$file))) {
+            if ($this->App->parent) {
+                return $this->App->parent->Utils->Template->locate($file, $dir);
+            } else {
+                $dir = $this->App->core_dir.'/src/includes/templates';
+            }
         }
         if ($dir && $file && is_file($dir.'/'.$file)) {
             if (preg_match('/\/\.|\.\/|\.\./u', $this->a::normalizeDirPath($dir.'/'.$file))) {
@@ -80,6 +84,7 @@ class Template extends Classes\Core
             }
         }
         $route = $this->a::mbTrim($route, '/');
+
         if (!isset($route[0])) {
             $route = 'index';
         }

@@ -180,7 +180,7 @@ trait OverloadMembers
      * @param string $method Method to call upon.
      * @param array  $args   Arguments to pass to the method.
      *
-     * @return mixed Value produced by the overloaded method call.
+     * @return mixed Overloaded method return value.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */

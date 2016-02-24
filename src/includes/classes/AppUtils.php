@@ -24,14 +24,10 @@ class AppUtils extends Core
      */
     public function __get(string $property)
     {
-        if (class_exists($this->App->namespace.'\\Utils\\'.$property)) {
-            $utility = $this->App->Di->get($this->App->namespace.'\\Utils\\'.$property);
-            $this->overload((object) [$property => $utility], true);
-            return $utility;
-        } elseif (class_exists(__NAMESPACE__.'\\Utils\\'.$property)) {
-            $utility = $this->App->Di->get(__NAMESPACE__.'\\Utils\\'.$property);
-            $this->overload((object) [$property => $utility], true);
-            return $utility;
+        if (class_exists($class = $this->App->getClass(__NAMESPACE__.'\\Utils\\'.$property))) {
+            $Utility = $this->App->Di->get($class, [], true);
+            $this->overload((object) [$property => $Utility], true);
+            return $Utility;
         }
         return parent::__get($property);
     }
@@ -44,20 +40,18 @@ class AppUtils extends Core
      * @param string $method Method to call upon.
      * @param array  $args   Arguments to pass to the method.
      *
+     * @return mixed Overloaded method return value.
+     *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __call(string $method, array $args = [])
     {
         if (isset($this->¤¤overload[$method])) {
             return $this->¤¤overload[$method](...$args);
-        } elseif (class_exists($this->App->namespace.'\\Utils\\'.$method)) {
-            $utility = $this->App->Di->get($this->App->namespace.'\\Utils\\'.$method);
-            $this->overload((object) [$method => $utility], true);
-            return $utility(...$args);
-        } elseif (class_exists(__NAMESPACE__.'\\Utils\\'.$method)) {
-            $utility = $this->App->Di->get(__NAMESPACE__.'\\Utils\\'.$method);
-            $this->overload((object) [$method => $utility], true);
-            return $utility(...$args);
+        } elseif (class_exists($class = $this->App->getClass(__NAMESPACE__.'\\Utils\\'.$method))) {
+            $Utility = $this->App->Di->get($class, [], true);
+            $this->overload((object) [$method => $Utility], true);
+            return $Utility(...$args);
         }
         return parent::__call($property);
     }

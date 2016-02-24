@@ -12,10 +12,12 @@ $string = 'Lörem ipßüm dölör ßit ämet, cönßectetüer ädipißcing elit.
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
+$app = a::app();
+
 a::benchStart();
 
-for ($i = 0; $i < 5000; ++$i) {
-    stripos($string, 'a');
+for ($i = 0; $i < 50000; ++$i) {
+    (new \ReflectionClass($app))->getFileName();
 }
 a::benchPrint();
 
@@ -23,7 +25,7 @@ a::benchPrint();
 
 a::benchStart();
 
-for ($i = 0; $i < 5000; ++$i) {
-    mb_stripos($string, 'a');
+for ($i = 0; $i < 50000; ++$i) {
+    new \ReflectionClass($app);
 }
 a::benchPrint();
