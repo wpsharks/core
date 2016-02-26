@@ -40,7 +40,7 @@ class CliOpts extends Classes\Core
     {
         parent::__construct($App);
 
-        if (!$this->a::isCli()) {
+        if (!$this->c::isCli()) {
             throw new Exception('Requires CLI mode.');
         }
         $this->OptionCollection = new OptionCollection();

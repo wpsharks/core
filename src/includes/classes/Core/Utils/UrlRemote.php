@@ -86,7 +86,7 @@ class UrlRemote extends Classes\Core
         # Convert body to a string.
 
         if (is_array($body) || is_object($body)) {
-            $body = $this->a::buildUrlQuery((array) $body);
+            $body = $this->c::buildUrlQuery((array) $body);
         } else {
             $body = (string) $body;
         }
@@ -151,7 +151,7 @@ class UrlRemote extends Classes\Core
 
         $curl = curl_init(); // Initialize.
         curl_setopt_array($curl, $curl_opts);
-        $curl_body = $this->a::mbTrim((string) curl_exec($curl));
+        $curl_body = $this->c::mbTrim((string) curl_exec($curl));
 
         # Collect cURL info after request is complete.
 
@@ -161,7 +161,7 @@ class UrlRemote extends Classes\Core
 
         # Parse the headers that we collected, if any.
 
-        $curl_headers = explode("\r\n\r\n", $this->a::mbTrim($curl_headers));
+        $curl_headers = explode("\r\n\r\n", $this->c::mbTrim($curl_headers));
         $curl_headers = $curl_headers[count($curl_headers) - 1];
         // ↑ Last set of headers; in case of location redirects.
 
@@ -171,7 +171,7 @@ class UrlRemote extends Classes\Core
         foreach (preg_split('/['."\r\n".']+/u', $_curl_headers, -1, PREG_SPLIT_NO_EMPTY) as $_line) {
             if (isset($_line[0]) && mb_strpos($_line, ':', 1) !== false) {
                 list($_header, $_value)                                  = explode(':', $_line, 2);
-                $curl_headers[mb_strtolower($this->a::mbTrim($_header))] = $this->a::mbTrim($_value);
+                $curl_headers[mb_strtolower($this->c::mbTrim($_header))] = $this->c::mbTrim($_value);
             }
         } // unset($_curl_headers, $_line, $_header, $_value); // Housekeeping.
 

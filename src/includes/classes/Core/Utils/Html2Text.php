@@ -46,27 +46,27 @@ class Html2Text extends Classes\Core implements Interfaces\HtmlConstants
         $br2nl = (bool) $args['br2nl']; // Allow line breaks?
 
         $strip_content_in_tags            = (array) $args['strip_content_in_tags'];
-        $strip_content_in_tags_regex_frag = implode('|', $this->a::escRegex($strip_content_in_tags));
+        $strip_content_in_tags_regex_frag = implode('|', $this->c::escRegex($strip_content_in_tags));
 
         $inject_eol_after_tags            = (array) $args['inject_eol_after_tags'];
-        $inject_eol_after_tags_regex_frag = implode('|', $this->a::escRegex($inject_eol_after_tags));
+        $inject_eol_after_tags_regex_frag = implode('|', $this->c::escRegex($inject_eol_after_tags));
 
         $string = preg_replace('/\<('.$strip_content_in_tags_regex_frag.')(?:\>|\s[^>]*\>).*?\<\/\\1\>/uis', '', $string);
         $string = preg_replace('/\<\/(?:'.$inject_eol_after_tags_regex_frag.')\>/ui', '${0}'."\n", $string);
         $string = preg_replace('/\<(?:'.$inject_eol_after_tags_regex_frag.')(?:\/\s*\>|\s[^\/>]*\/\s*\>)/ui', '${0}'."\n", $string);
 
         $string = strip_tags($string, $br2nl ? '<br>' : '');
-        $string = $this->a::unescHtml($string);
+        $string = $this->c::unescHtml($string);
         $string = str_replace("\xC2\xA0", ' ', $string);
 
         if ($br2nl) {
             $string = preg_replace('/\<br(?:\>|\/\s*\>|\s[^\/>]*\/\s*\>)/u', "\n", $string);
-            $string = $this->a::normalizeEols($string); // Normalize line breaks.
+            $string = $this->c::normalizeEols($string); // Normalize line breaks.
             $string = preg_replace('/[ '."\t\x0B".']+/u', ' ', $string);
         } else {
             $string = preg_replace('/\s+/u', ' ', $string);
         }
-        $string = $this->a::mbTrim($string);
+        $string = $this->c::mbTrim($string);
 
         return $string;
     }

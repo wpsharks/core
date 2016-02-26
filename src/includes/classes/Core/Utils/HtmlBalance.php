@@ -58,7 +58,7 @@ class HtmlBalance extends Classes\Core
 
         $string = $Dom->saveHTML($Dom->getElementsByTagName('body')->item(0));
         $string = preg_replace(['/\<body\>/ui', '/\<\/body\>/ui'], '', $string);
-        $string = $this->a::htmlTrim($string);
+        $string = $this->c::htmlTrim($string);
 
         return $string;
     }

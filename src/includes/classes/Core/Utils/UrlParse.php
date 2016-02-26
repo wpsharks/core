@@ -89,7 +89,7 @@ class UrlParse extends Classes\Core
             $pass .= '@';
         }
         if (!empty($parts['path'])) {
-            $path = '/'.$this->a::mbLTrim($parts['path'], '/');
+            $path = '/'.$this->c::mbLTrim($parts['path'], '/');
         }
         if (!empty($parts['query'])) {
             $query = '?'.$parts['query'];

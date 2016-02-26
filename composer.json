@@ -119,7 +119,7 @@
       "WebSharks\\Core\\Interfaces\\": "src/includes/interfaces",
       "WebSharks\\Core\\Traits\\": "src/includes/traits"
     },
-    "files": ["src/includes/functions/_load.php"]
+    "files": ["src/includes/functions/.load.php"]
   },
 
   "config": {

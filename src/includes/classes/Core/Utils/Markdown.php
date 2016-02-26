@@ -71,10 +71,10 @@ class Markdown extends Classes\Core
             $string = $MarkdownExtra->transform($string);
         }
         if ($anchorize) {
-            $string = $this->a::htmlAnchorize($string);
+            $string = $this->c::htmlAnchorize($string);
         }
         if ($anchor_rels) {
-            $string = $this->a::htmlAnchorRels($string, $anchor_rels);
+            $string = $this->c::htmlAnchorRels($string, $anchor_rels);
         }
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);

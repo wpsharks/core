@@ -33,7 +33,7 @@ class Exceptions extends Classes\Core
      */
     public function handler(\Throwable $Exception)
     {
-        if ($this->a::isCli()) {
+        if ($this->c::isCli()) {
             // Set `STDERR` so that it can be used in CLI feedback.
             // If debugging, `STDERR` should include a full stack trace.
             // If it's not an interactive terminal session, try to log the error.
@@ -41,14 +41,14 @@ class Exceptions extends Classes\Core
 
             try { // Catch any inner exceptions.
 
-                $this->a::obEndCleanAll();
+                $this->c::obEndCleanAll();
 
                 if ($this->App->Config->©debug) {
-                    $this->a::writeStderr($Exception->__toString());
+                    $this->c::writeStderr($Exception->__toString());
                 } else {
-                    $this->a::writeStderr($Exception->getMessage());
+                    $this->c::writeStderr($Exception->getMessage());
                 }
-                if (!$this->a::isCliInteractive()) {
+                if (!$this->c::isCliInteractive()) {
                     error_log(str_replace("\0", '', $Exception->__toString()));
                 }
                 exit(1); // Exit status code (generic error code is `1`).
@@ -62,10 +62,10 @@ class Exceptions extends Classes\Core
 
             try { // Catch any inner exceptions.
 
-                $this->a::obEndCleanAll();
-                $this->a::statusHeader(500);
+                $this->c::obEndCleanAll();
+                $this->c::statusHeader(500);
 
-                echo $this->a::getTemplate('http/html/status/500.php')
+                echo $this->c::getTemplate('http/html/status/500.php')
                     ->parse(['Exception' => $Exception]);
                 //
             } catch (\Throwable $InnerException) {

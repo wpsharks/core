@@ -39,11 +39,11 @@ class Text2Html extends Classes\Core
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
 
-        $string = $this->a::escHtml($string);
-        $string = nl2br($this->a::normalizeEols($string));
-        $string = $this->a::htmlAnchorize($string);
-        $string = $this->a::normalizeHtmlWhitespace($string);
-        $string = $this->a::htmlTrim($string);
+        $string = $this->c::escHtml($string);
+        $string = nl2br($this->c::normalizeEols($string));
+        $string = $this->c::htmlAnchorize($string);
+        $string = $this->c::normalizeHtmlWhitespace($string);
+        $string = $this->c::htmlTrim($string);
 
         return $string;
     }

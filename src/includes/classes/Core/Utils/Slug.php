@@ -73,8 +73,8 @@ class Slug extends Classes\Core implements Interfaces\SlugConstants
     {
         $name = $slug; // Working copy.
         $name = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $name);
-        $name = $this->a::mbUcWords($name);
-        $name = $this->a::mbTrim($name);
+        $name = $this->c::mbUcWords($name);
+        $name = $this->c::mbTrim($name);
 
         return $name;
     }
@@ -90,7 +90,7 @@ class Slug extends Classes\Core implements Interfaces\SlugConstants
      */
     public function toAcronym(string $slug): string
     {
-        return $this->a::nameToAcronym($this->toName($slug));
+        return $this->c::nameToAcronym($this->toName($slug));
     }
 
     /**
@@ -105,9 +105,9 @@ class Slug extends Classes\Core implements Interfaces\SlugConstants
     public function toVar(string $slug): string
     {
         $var = $slug; // Working copy.
-        $var = mb_strtolower($this->a::forceAscii($var));
+        $var = mb_strtolower($this->c::forceAscii($var));
         $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
-        $var = $this->a::mbTrim($var, '', '_');
+        $var = $this->c::mbTrim($var, '', '_');
 
         if ($var && !preg_match('/^[a-z]/u', $var)) {
             $var = 'x'.$var; // Force `^[a-z]`.

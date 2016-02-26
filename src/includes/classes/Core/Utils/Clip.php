@@ -37,7 +37,7 @@ class Clip extends Classes\Core
             return $string; // Empty.
         }
         $max_length = max(6, $max_length);
-        $string     = $this->a::htmlToText($string, ['br2nl' => false]);
+        $string     = $this->c::htmlToText($string, ['br2nl' => false]);
 
         if (mb_strlen($string) > $max_length) {
             $string = (string) mb_substr($string, 0, $max_length - 5).'[...]';

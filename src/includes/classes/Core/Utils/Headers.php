@@ -61,7 +61,7 @@ class Headers extends Classes\Core implements Interfaces\HttpStatusConstants
             throw new Exception('Headers already sent.');
         } elseif (empty($this::HTTP_STATUSES[$status])) {
             throw new Exception('Unknown status.');
-        } elseif ($this->a::isCli()) {
+        } elseif ($this->c::isCli()) {
             throw new Exception('Not possible in CLI mode.');
         }
         if (!($protocol = $_SERVER['SERVER_PROTOCOL'] ?? '')) {
@@ -83,7 +83,7 @@ class Headers extends Classes\Core implements Interfaces\HttpStatusConstants
             if ($error_page && is_file($error_page)) {
                 readfile($error_page);
             } else {
-                echo '<h1>'.$this->a::escHtml($this::HTTP_STATUSES[$status]).'</h1>';
+                echo '<h1>'.$this->c::escHtml($this::HTTP_STATUSES[$status]).'</h1>';
             }
         }
     }
@@ -117,7 +117,7 @@ class Headers extends Classes\Core implements Interfaces\HttpStatusConstants
             if (mb_strpos($_rn_delimited_header, ':') === false) {
                 continue; // Invalid header.
             }
-            list($_header, $_value) = $this->a::mbTrim(explode(':', $_rn_delimited_header, 2));
+            list($_header, $_value) = $this->c::mbTrim(explode(':', $_rn_delimited_header, 2));
 
             if (!$_header || !isset($_value[0])) {
                 continue; // Invalid header.

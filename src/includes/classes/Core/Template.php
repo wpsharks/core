@@ -83,7 +83,7 @@ class Template extends Classes\Core
     {
         parent::__construct($App);
 
-        if (!($template = $this->a::locateTemplate($file, $dir))) {
+        if (!($template = $this->c::locateTemplate($file, $dir))) {
             throw new Exception(sprintf('Missing template: `%1$s`.', $dir.'/'.$file));
         }
         $this->dir  = $template['dir'];
@@ -155,7 +155,7 @@ class Template extends Classes\Core
     {
         $parents     = array_merge($this->parents, [$this->file]);
         $parent_vars = array_merge($this->parent_vars, [$this->file => &$this->current_vars]);
-        $Template    = $this->a::getTemplate($file, $dir, $parents, $parent_vars);
+        $Template    = $this->c::getTemplate($file, $dir, $parents, $parent_vars);
 
         foreach (array_reverse($this->parent_vars, true) as $_parent_file => $_parent_vars) {
             if (isset($_parent_vars[$file]) && is_array($_parent_vars[$file])) {

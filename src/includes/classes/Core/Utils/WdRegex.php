@@ -30,7 +30,7 @@ class WdRegex extends Classes\Core
         $regex = ''; // Initialize.
 
         $patterns            = preg_split('/['."\r\n".']+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
-        $patterns            = $this->a::removeEmptys($this->a::mbTrim($patterns));
+        $patterns            = $this->c::removeEmptys($this->c::mbTrim($patterns));
         $regex_pattern_frags = $this->frag($patterns, $star_not);
 
         if ($regex_pattern_frags) { // Have an array of regex patterns frags?
@@ -76,11 +76,11 @@ class WdRegex extends Classes\Core
             [
                 '^', // Beginning of line.
                 '.*?', // Zero or more chars.
-                '[^'.$this->a::escRegex($star_not).']*?',
+                '[^'.$this->c::escRegex($star_not).']*?',
                 // Zero or more chars != `$star_not`.
                 '$', // End of line.
             ],
-            $this->a::escRegex($string)
+            $this->c::escRegex($string)
         );
     }
 }

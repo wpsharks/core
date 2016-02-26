@@ -81,7 +81,7 @@ class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
             $arg_separator = ini_get('arg_separator.output');
         }
         $query = http_build_query($args, $numeric_prefix, $arg_separator, $enc_type);
-        $query = $this->a::mbTrim(str_replace('=&', '&', $query), '=&');
+        $query = $this->c::mbTrim(str_replace('=&', '&', $query), '=&');
 
         return $query;
     }
@@ -98,7 +98,7 @@ class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
      */
     public function addArgs(array $new_args, string $url_uri_qsl): string
     {
-        $url_uri_qsl = $this->a::parseUrl($url_uri_qsl);
+        $url_uri_qsl = $this->c::parseUrl($url_uri_qsl);
         $args        = []; // Initialize.
 
         if (isset($url_uri_qsl['query'][0])) {
@@ -106,7 +106,7 @@ class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
         }
         $args                 = array_merge($args, $new_args);
         $url_uri_qsl['query'] = $this->build($args);
-        $url_uri_qsl          = $this->a::unparseUrl($url_uri_qsl);
+        $url_uri_qsl          = $this->c::unparseUrl($url_uri_qsl);
 
         return $url_uri_qsl;
     }
@@ -123,7 +123,7 @@ class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
      */
     public function removeArgs(array $arg_keys, string $url_uri_qsl): string
     {
-        $url_uri_qsl = $this->a::parseUrl($url_uri_qsl);
+        $url_uri_qsl = $this->c::parseUrl($url_uri_qsl);
         $args        = []; // Initialize.
 
         if (isset($url_uri_qsl['query'][0])) {
@@ -131,7 +131,7 @@ class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
         }
         $args                 = array_diff_key($args, $arg_keys);
         $url_uri_qsl['query'] = $this->build($args);
-        $url_uri_qsl          = $this->a::unparseUrl($url_uri_qsl);
+        $url_uri_qsl          = $this->c::unparseUrl($url_uri_qsl);
 
         return $url_uri_qsl;
     }
@@ -214,10 +214,10 @@ class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
         $args    = $this->parse($qs_url_uri);
         unset($args[$sig_var]); // Exclude.
 
-        $args            = $this->a::mbTrim($args);
-        $args            = $this->a::sortByKey($args);
+        $args            = $this->c::mbTrim($args);
+        $args            = $this->c::sortByKey($args);
         $serialized_args = serialize($args); // After sorting by key.
-        $sig             = $this->a::sha256KeyedHash($serialized_args, $key);
+        $sig             = $this->c::sha256KeyedHash($serialized_args, $key);
 
         return $sig; // Signature.
     }
@@ -236,7 +236,7 @@ class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
         if (!$qs_url_uri) {
             return $qs_url_uri; // Possible `0`.
         }
-        $qs_url_uri = $this->a::normalizeUrlAmps($qs_url_uri);
+        $qs_url_uri = $this->c::normalizeUrlAmps($qs_url_uri);
 
         if (mb_strpos($qs_url_uri, '?') !== false) {
             list(, $qs) = explode('?', $qs_url_uri, 2);
@@ -245,6 +245,6 @@ class UrlQuery extends Classes\Core implements Interfaces\UrlConstants
         } else {
             $qs = $qs_url_uri; // Assume it's a query string.
         }
-        return $qs = $this->a::mbTrim($qs, '', '?=&');
+        return $qs = $this->c::mbTrim($qs, '', '?=&');
     }
 }

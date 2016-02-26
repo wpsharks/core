@@ -28,7 +28,7 @@ class Ip extends Classes\Core
         if (!is_null($ip = &$this->cacheKey(__FUNCTION__))) {
             return $ip; // Already cached this.
         }
-        if ($this->a::isCli()) {
+        if ($this->c::isCli()) {
             throw new Exception('Not possible in CLI mode.');
         }
         $sources = [
@@ -108,7 +108,7 @@ class Ip extends Classes\Core
     {
         # Valid  IP. Do we have one?
 
-        if (!($ip = $this->a::mbTrim(mb_strtolower($ip)))) {
+        if (!($ip = $this->c::mbTrim(mb_strtolower($ip)))) {
             return false; // Not possible.
         }
         # Check object cache. Did we already do this?
@@ -122,7 +122,7 @@ class Ip extends Classes\Core
             throw new Exception('Missing cache directory.');
         }
         $ip_sha1               = sha1($ip); // Needed below.
-        $cache_dir             = $this->App->Config->©fs_paths['©cache_dir'].'/ip-geo-data/'.$this->a::sha1ModShardId($ip_sha1, true);
+        $cache_dir             = $this->App->Config->©fs_paths['©cache_dir'].'/ip-geo-data/'.$this->c::sha1ModShardId($ip_sha1, true);
         $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
         $cache_file            = $cache_dir.'/'.$ip_sha1.'.json';
 
@@ -136,7 +136,7 @@ class Ip extends Classes\Core
 
         # Query geoPlugin service.
 
-        $response = $this->a::remoteRequest(
+        $response = $this->c::remoteRequest(
             'GET::http://www.geoplugin.net/json.gp?ip='.urlencode($ip),
             ['max_con_secs' => 5, 'max_stream_secs' => 5]
         );
@@ -148,7 +148,7 @@ class Ip extends Classes\Core
 
         if (!empty($json->geoplugin_regionCode)) {
             $region = (string) $json->geoplugin_regionCode;
-            $region = $this->a::mbStrPad($region, 2, '0', STR_PAD_LEFT);
+            $region = $this->c::mbStrPad($region, 2, '0', STR_PAD_LEFT);
             $region = mb_strtoupper($region);
         }
         if (!empty($json->geoplugin_countryCode)) {
@@ -184,7 +184,7 @@ class Ip extends Classes\Core
      */
     protected function getValidPublicFrom(string $list_of_possible_ips): string
     {
-        if (!($list_of_possible_ips = $this->a::mbTrim($list_of_possible_ips))) {
+        if (!($list_of_possible_ips = $this->c::mbTrim($list_of_possible_ips))) {
             return ''; // Not possible; i.e., empty string.
         }
         foreach (preg_split('/[\s;,]+/u', $list_of_possible_ips, -1, PREG_SPLIT_NO_EMPTY) as $_possible_ip) {

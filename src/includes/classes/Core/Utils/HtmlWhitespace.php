@@ -29,7 +29,7 @@ class HtmlWhitespace extends Classes\Core implements Interfaces\HtmlConstants
             foreach ($value as $_key => &$_value) {
                 $_value = $this->normalize($_value);
             } // unset($_key, $_value);
-            return $this->a::normalizeEols($value);
+            return $this->c::normalizeEols($value);
         }
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
@@ -39,6 +39,6 @@ class HtmlWhitespace extends Classes\Core implements Interfaces\HtmlConstants
         }
         $string = preg_replace('/('.$whitespace.')('.$whitespace.')('.$whitespace.')+/u', '${1}${2}', $string);
 
-        return $this->a::normalizeEols($string);
+        return $this->c::normalizeEols($string);
     }
 }

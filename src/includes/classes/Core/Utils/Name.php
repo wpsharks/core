@@ -39,7 +39,7 @@ class Name extends Classes\Core
         $name = preg_replace('/^(?:Mr\.?|Mrs\.?|Ms\.?|Dr\.?)\s+/ui', '', $name);
         $name = preg_replace('/\s+(?:Sr\.?|Jr\.?|IV|I+)$/ui', '', $name);
         $name = preg_replace('/\s+/u', ' ', $name);
-        $name = $this->a::mbTrim($name);
+        $name = $this->c::mbTrim($name);
 
         return $last_out = $name;
     }
@@ -61,7 +61,7 @@ class Name extends Classes\Core
         if ($name && mb_strpos($name, ' ', 1) !== false) {
             return explode(' ', $name, 2)[0];
         } elseif (!$name && $email && mb_strpos($email, '@', 1) !== false) {
-            return $this->a::mbUcFirst(explode('@', $email, 2)[0]);
+            return $this->c::mbUcFirst(explode('@', $email, 2)[0]);
         } else {
             return $name;
         }
@@ -101,7 +101,7 @@ class Name extends Classes\Core
         $acronym = ''; // Initialize.
 
         $name = $this->stripClean($name);
-        $name = $this->a::forceAscii($name); // ASCII only.
+        $name = $this->c::forceAscii($name); // ASCII only.
         $name = preg_replace('/([a-z])([A-Z0-9])/u', '${1} ${2}', $name);
         // This breaks `s2` into `s 2` and `xCache` into `x Cache`.
 
@@ -112,7 +112,7 @@ class Name extends Classes\Core
         } // unset($_word);
 
         if (mb_strlen($acronym) < 2) {
-            $acronym = $this->a::mbStrPad(mb_substr($acronym, 0, 2), 2, 'x');
+            $acronym = $this->c::mbStrPad(mb_substr($acronym, 0, 2), 2, 'x');
         }
         return mb_strtoupper($acronym);
     }
@@ -131,9 +131,9 @@ class Name extends Classes\Core
         $name = $this->stripClean($name);
 
         $slug = $name; // Working copy.
-        $slug = mb_strtolower($this->a::forceAscii($slug));
+        $slug = mb_strtolower($this->c::forceAscii($slug));
         $slug = preg_replace('/[^a-z0-9]+/u', '-', $slug);
-        $slug = $this->a::mbTrim($slug, '', '-');
+        $slug = $this->c::mbTrim($slug, '', '-');
 
         if ($slug && !preg_match('/^[a-z]/u', $slug)) {
             $slug = 'x'.$slug; // Force `^[a-z]`.
@@ -155,9 +155,9 @@ class Name extends Classes\Core
         $name = $this->stripClean($name);
 
         $var = $name; // Working copy.
-        $var = mb_strtolower($this->a::forceAscii($var));
+        $var = mb_strtolower($this->c::forceAscii($var));
         $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
-        $var = $this->a::mbTrim($var, '', '_');
+        $var = $this->c::mbTrim($var, '', '_');
 
         if ($var && !preg_match('/^[a-z]/u', $var)) {
             $var = 'x'.$var; // Force `^[a-z]`.

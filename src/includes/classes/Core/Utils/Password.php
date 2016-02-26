@@ -29,6 +29,6 @@ class Password extends Classes\Core
         if (!$key && !($key = $this->App->Config->©passwords['©hash_key'])) {
             throw new Exception('Missing password hash key.');
         }
-        return $this->a::sha256KeyedHash($string, $key);
+        return $this->c::sha256KeyedHash($string, $key);
     }
 }

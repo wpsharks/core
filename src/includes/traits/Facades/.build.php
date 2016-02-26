@@ -19,6 +19,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -31,7 +32,7 @@ class AppFacades
 {
 ';
 foreach (dir_recursive_regex(__DIR__, '/\.php$/ui') as $_file) {
-    if (mb_strpos(basename($_sub_path_name = $_file->getSubPathname()), '_') !== 0) {
+    if (mb_strpos(basename($_sub_path_name = $_file->getSubPathname()), '.') !== 0) {
         $AppFacades .= '    use Traits\\Facades\\'.str_replace(['/', '.php'], ['\\', ''], $_file->getSubPathname()).';'."\n";
     }
 } // unset($_file); // Housekeeping.

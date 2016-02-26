@@ -56,7 +56,7 @@ class HtmlTrim extends Classes\Core implements Interfaces\HtmlConstants
                 $string = preg_replace('/^(?:'.$whitespace.')+|(?:'.$whitespace.')+$/u', '', $string);
                 break; // Break switch handler.
         }
-        return $this->a::mbTrim($string, $chars, $extra_chars, $side);
+        return $this->c::mbTrim($string, $chars, $extra_chars, $side);
     }
 
     /**

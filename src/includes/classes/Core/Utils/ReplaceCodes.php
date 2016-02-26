@@ -43,7 +43,7 @@ class ReplaceCodes extends Classes\Core
         }
         $___raw_vars = $vars; // Copy.
         $___vars     = []; // Initialize.
-        $dot_keys    = $this->a::dotKeys($___raw_vars);
+        $dot_keys    = $this->c::dotKeys($___raw_vars);
 
         foreach ($dot_keys as $_key => $_value) {
             if (is_resource($_value)) {
@@ -52,7 +52,7 @@ class ReplaceCodes extends Classes\Core
             if (!is_scalar($_value)) {
                 if ($implode_non_scalars) {
                     $_value = (array) $_value;
-                    $_value = $this->a::oneDimension($_value);
+                    $_value = $this->c::oneDimension($_value);
                     $_value = array_map('strval', $_value);
                     $_value = implode($implode_non_scalars, $_value);
                 } else {
@@ -91,7 +91,7 @@ class ReplaceCodes extends Classes\Core
         };
         if (mb_stripos($string, '%%__dump__%%') !== false) {
             $string = preg_replace_callback('/%%__var_dump__%%/ui', function () use (&$maybe_urlencode, &$___vars) {
-                return $maybe_urlencode($this->a::dump($___vars, true));
+                return $maybe_urlencode($this->c::dump($___vars, true));
             }, $string);
         }
         if (mb_stripos($string, '%%__serialize__%%') !== false) {
@@ -106,13 +106,13 @@ class ReplaceCodes extends Classes\Core
         }
         if ($urlencode && mb_stripos($string, '%%__query_string__%%') !== false) {
             $string = preg_replace_callback('/%%__query_string__%%/ui', function () use (&$___vars) {
-                return $this->a::buildUrlQuery($___vars);
+                return $this->c::buildUrlQuery($___vars);
             }, $string);
         }
         $_iteration_counter = 0; // Check completion every 5th iteration to save time.
 
         foreach ($___vars as $_key => $_value) {
-            $string = preg_replace_callback('/%%'.$this->a::escRegex($_key).'%%/ui', function () use (&$maybe_urlencode, &$_value) {
+            $string = preg_replace_callback('/%%'.$this->c::escRegex($_key).'%%/ui', function () use (&$maybe_urlencode, &$_value) {
                 return $maybe_urlencode($_value); // Fill replacement codes.
             }, $string); // Note that these are all caSe-insensitive.
 
@@ -131,9 +131,9 @@ class ReplaceCodes extends Classes\Core
                 '/%%\/(?<pattern>[^%\/]+?)(?:\/(?<delimiter>[^%\/]*?))?(?:\/(?<key_delimiter>[^%\/]*?))?%%/u',
                 function ($m) use (&$maybe_urlencode, &$___vars, &$___var_keys) {
                     $values = []; // Initialize.
-                    $regex = $this->a::wdRegex($m['pattern'], '.');
+                    $regex = $this->c::wdRegex($m['pattern'], '.');
 
-                    if (!($keys = $this->a::regexPatternIn($regex, $___var_keys, true))) {
+                    if (!($keys = $this->c::regexPatternIn($regex, $___var_keys, true))) {
                         return; // No matching keys.
                     }
                     foreach ($keys as $_key) { // Matching keys.
@@ -157,7 +157,7 @@ class ReplaceCodes extends Classes\Core
                         $m['key_delimiter']
                     );
                     if ($m['delimiter'] === '&' && $m['key_delimiter'] === '=') {
-                        return $this->a::buildUrlQuery($values);
+                        return $this->c::buildUrlQuery($values);
                     }
                     if ($m['key_delimiter']) {
                         foreach ($values as $_key => &$_value) {

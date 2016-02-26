@@ -25,7 +25,7 @@ class CliOs extends Classes\Core
     {
         parent::__construct($App);
 
-        if (!$this->a::isCli()) {
+        if (!$this->c::isCli()) {
             throw new Exception('Requires CLI mode.');
         }
     }
@@ -39,16 +39,16 @@ class CliOs extends Classes\Core
      */
     public function openUrl(string $url)
     {
-        if (!($url = $this->a::mbTrim($url))) {
+        if (!($url = $this->c::mbTrim($url))) {
             return; // Not possible.
         }
         $url_arg = escapeshellarg($url);
 
-        if ($this->a::isMac()) {
+        if ($this->c::isMac()) {
             `open $url_arg`;
-        } elseif ($this->a::isLinux()) {
+        } elseif ($this->c::isLinux()) {
             `xdg-open $url_arg`;
-        } elseif ($this->a::isWindows()) {
+        } elseif ($this->c::isWindows()) {
             `start $url_arg`;
         } else {
             throw new Exception('Unable to open <'.$url.'>. Unsupported operating system.');

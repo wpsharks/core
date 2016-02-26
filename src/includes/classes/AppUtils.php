@@ -3,6 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -76,7 +77,7 @@ class AppUtils extends Classes\Core
      */
     protected function map(string $prop_meth): array
     {
-        if ($prop_meth && $prop_meth[0] === '©') {
+        if (mb_strpos($prop_meth, '©') === 0) {
             return [
                 'sub_namespace' => '\\Core',
                 'prop_meth'     => mb_substr($prop_meth, 1),

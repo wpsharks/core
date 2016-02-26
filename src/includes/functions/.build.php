@@ -11,7 +11,7 @@ if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
 
-$_load = '<?php
+$load = '<?php
 // This file was auto-generated:
 // '.date('F jS, Y, g:i a T').'
 
@@ -20,13 +20,13 @@ namespace '.__NAMESPACE__.';
 
 ';
 foreach (dir_recursive_regex(__DIR__, '/\.php$/ui') as $_file) {
-    if (mb_strpos(basename($_sub_path_name = $_file->getSubPathname()), '_') !== 0) {
-        $_load .= "require_once __DIR__.'/".$_file->getSubPathname()."';\n";
+    if (mb_strpos(basename($_sub_path_name = $_file->getSubPathname()), '.') !== 0) {
+        $load .= "require_once __DIR__.'/".$_file->getSubPathname()."';\n";
     }
 } // unset($_file); // Housekeeping.
 
-file_put_contents(__DIR__.'/_load.php', $_load);
-echo $_load; // Print for debugging purposes.
+file_put_contents(__DIR__.'/.load.php', $load);
+echo $load; // Print for debugging purposes.
 
 function dir_recursive_regex(string $dir, string $regex): \RegexIterator
 {

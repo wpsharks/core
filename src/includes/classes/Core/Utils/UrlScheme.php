@@ -29,7 +29,7 @@ class UrlScheme extends Classes\Core implements Interfaces\UrlConstants
         if (!$scheme || $scheme === '//') {
             $scheme = '//'; # Inherits.
         } elseif ($scheme === 'current') {
-            $scheme = $this->a::currentScheme();
+            $scheme = $this->c::currentScheme();
         } elseif ($scheme === 'default') {
             $scheme = $this->App->Config->©urls['©default_scheme'];
         }

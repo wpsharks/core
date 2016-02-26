@@ -73,7 +73,7 @@ class WebPurify extends Classes\Core
     {
         # The text is empty?
 
-        if (!($text = $this->a::mbTrim($text))) {
+        if (!($text = $this->c::mbTrim($text))) {
             return false; // Nothing to do.
         }
         # Already cached this in memory?
@@ -97,12 +97,12 @@ class WebPurify extends Classes\Core
             'return_array'    => true,
         ];
         $endpoint = 'http://api1.webpurify.com/services/rest/';
-        $endpoint = $this->a::addUrlQueryArgs($endpoint_args, $endpoint);
+        $endpoint = $this->c::addUrlQueryArgs($endpoint_args, $endpoint);
 
         # Determine sharded cache directory and file.
 
         $endpoint_sha1         = sha1($endpoint);
-        $cache_dir             = $this->cache_dir.'/'.$this->a::sha1ModShardId($endpoint_sha1, true);
+        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($endpoint_sha1, true);
         $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
@@ -113,7 +113,7 @@ class WebPurify extends Classes\Core
         }
         # Query for remote response via WebPurify API endpoint.
 
-        $response = $this->a::remoteRequest($endpoint, $request_args);
+        $response = $this->c::remoteRequest($endpoint, $request_args);
 
         # Validate response; false (and no cache) on any error.
 

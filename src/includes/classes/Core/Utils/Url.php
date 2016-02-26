@@ -30,11 +30,11 @@ class Url extends Classes\Core implements Interfaces\UrlConstants, Interfaces\Ht
         if (!($host = $this->App->Config->©urls['©hosts']['©app'])) {
             throw new Exception('App host is empty.');
         }
-        $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';
-        $url = $this->a::setScheme('//'.$host.'/'.$uri, $scheme);
+        $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
+        $url = $this->c::setScheme('//'.$host.'/'.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
-            $url = $this->a::cdnFilter($url);
+            $url = $this->c::cdnFilter($url);
         }
         return $url;
     }
@@ -53,7 +53,7 @@ class Url extends Classes\Core implements Interfaces\UrlConstants, Interfaces\Ht
     public function toAppCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
         if ($this->App->core_is_vendor) {
-            $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';
+            $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
             $uri = '/vendor/websharks/core/src/'.$uri;
         }
         return $this->toApp($uri, $scheme, $cdn_filter);
@@ -72,12 +72,12 @@ class Url extends Classes\Core implements Interfaces\UrlConstants, Interfaces\Ht
      */
     public function toCurrent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        $host = $this->a::currentHost();
-        $uri  = $uri ? $this->a::mbLTrim($uri, '/') : '';
-        $url  = $this->a::setScheme('//'.$host.'/'.$uri, $scheme);
+        $host = $this->c::currentHost();
+        $uri  = $uri ? $this->c::mbLTrim($uri, '/') : '';
+        $url  = $this->c::setScheme('//'.$host.'/'.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
-            $url = $this->a::cdnFilter($url);
+            $url = $this->c::cdnFilter($url);
         }
         return $url;
     }
@@ -96,7 +96,7 @@ class Url extends Classes\Core implements Interfaces\UrlConstants, Interfaces\Ht
     public function toCurrentCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
         if ($this->App->core_is_vendor) {
-            $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';
+            $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
             $uri = '/vendor/websharks/core/src/'.$uri;
         }
         return $this->toCurrent($uri, $scheme, $cdn_filter);

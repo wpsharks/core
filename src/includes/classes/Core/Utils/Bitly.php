@@ -79,12 +79,12 @@ class Bitly extends Classes\Core
             'return_array'    => true,
         ];
         $endpoint = 'https://api-ssl.bitly.com/v3/shorten';
-        $endpoint = $this->a::addUrlQueryArgs($endpoint_args, $endpoint);
+        $endpoint = $this->c::addUrlQueryArgs($endpoint_args, $endpoint);
 
         # Determine sharded cache directory and file.
 
         $endpoint_sha1         = sha1($endpoint);
-        $cache_dir             = $this->cache_dir.'/'.$this->a::sha1ModShardId($endpoint_sha1, true);
+        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($endpoint_sha1, true);
         $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
@@ -95,7 +95,7 @@ class Bitly extends Classes\Core
         }
         # Query for remote response via Bitly API endpoint.
 
-        $response = $this->a::remoteRequest('GET::'.$endpoint, $request_args);
+        $response = $this->c::remoteRequest('GET::'.$endpoint, $request_args);
 
         # Validate response; no cache on any error.
 
@@ -163,12 +163,12 @@ class Bitly extends Classes\Core
             'return_array'    => true,
         ];
         $endpoint = 'https://api-ssl.bitly.com/v3/user/link_history';
-        $endpoint = $this->a::addUrlQueryArgs($endpoint_args, $endpoint);
+        $endpoint = $this->c::addUrlQueryArgs($endpoint_args, $endpoint);
 
         # Determine sharded cache directory and file.
 
         $endpoint_sha1         = sha1($endpoint);
-        $cache_dir             = $this->cache_dir.'/'.$this->a::sha1ModShardId($endpoint_sha1, true);
+        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($endpoint_sha1, true);
         $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
@@ -179,7 +179,7 @@ class Bitly extends Classes\Core
         }
         # Query for remote response via Bitly API endpoint.
 
-        $response = $this->a::remoteRequest('GET::'.$endpoint, $request_args);
+        $response = $this->c::remoteRequest('GET::'.$endpoint, $request_args);
 
         # Validate response; no cache on any error.
 

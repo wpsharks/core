@@ -3,6 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -310,7 +311,7 @@ class App extends Classes\Core
     protected function maybeHandleExceptions()
     {
         if (!$this->Config->©debug && $this->Config->©handle_exceptions) {
-            $this->a::setupExceptionHandler();
+            $this->c::setupExceptionHandler();
         }
     }
 

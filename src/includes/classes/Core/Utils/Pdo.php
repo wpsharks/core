@@ -49,7 +49,7 @@ class Pdo extends Classes\Core
     {
         if (!isset($shard_id)) {
             if (isset($uuid)) {
-                $shard_id = $this->a::uuid64ShardIdIn($uuid);
+                $shard_id = $this->c::uuid64ShardIdIn($uuid);
             } else {
                 $shard_id = 0; // Default.
             }
@@ -169,7 +169,7 @@ class Pdo extends Classes\Core
                 $cols .= '`'.$this->escName($_column).'`';
             }
         } // unset($_key, $_column);
-        return $this->a::mbTrim($cols, ' ,'); // Trim it up now.
+        return $this->c::mbTrim($cols, ' ,'); // Trim it up now.
     }
 
     /**
@@ -210,7 +210,7 @@ class Pdo extends Classes\Core
                 $order .= '`'.$this->escName($_order_by).'` '.$this->escOrder($_order);
             }
         } // unset($_order_by, $_order);
-        return $this->a::mbTrim($order, ', ');
+        return $this->c::mbTrim($order, ', ');
     }
 
     /**
