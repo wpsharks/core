@@ -27,7 +27,7 @@ class Url extends Classes\Core implements Interfaces\UrlConstants, Interfaces\Ht
      */
     public function toApp(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        if (!($host = $this->App->Config->urls['hosts']['app'])) {
+        if (!($host = $this->App->Config->©urls['©hosts']['©app'])) {
             throw new Exception('App host is empty.');
         }
         $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';

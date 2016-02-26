@@ -15,24 +15,6 @@ use WebSharks\Core\Traits;
 class Pdo extends Classes\Core
 {
     /**
-     * DB hosts.
-     *
-     * @since 150424
-     *
-     * @type array
-     */
-    protected $hosts;
-
-    /**
-     * DB shards.
-     *
-     * @since 150424
-     *
-     * @type array
-     */
-    protected $shards;
-
-    /**
      * Current PDO instance.
      *
      * @since 150424
@@ -51,9 +33,6 @@ class Pdo extends Classes\Core
     public function __construct(Classes\App $App)
     {
         parent::__construct($App);
-
-        $this->hosts  = &$this->App->Config->mysql_db['hosts'];
-        $this->shards = &$this->App->Config->mysql_db['shards'];
     }
 
     /**
@@ -78,22 +57,21 @@ class Pdo extends Classes\Core
 
         $shard_db = $this->shardDbConfig($shard_id);
 
-        if (empty($this->hosts[$shard_db['host']])) {
+        if (empty($this->App->Config->©mysql_db['©hosts'][$shard_db['©host']])) {
             throw new Exception(sprintf('Missing host for shard ID: `%1$s`.', $shard_id));
         }
-        $shard_db_host         = &$this->hosts[$shard_db['host']]; // By reference (save memory).
-        $shard_db_host['name'] = &$shard_db['host']; // Copy this over for clarity.
+        $shard_db_host = $this->App->Config->©mysql_db['©hosts'][$shard_db['©host']];
 
         // Check the cache. Already connected to this DB host?
 
-        if (($Pdo = &$this->cacheKey(__FUNCTION__, $shard_db_host['name']))) {
-            $Pdo->exec('use `'.$shard_db['name'].'`');
+        if (($Pdo = &$this->cacheKey(__FUNCTION__, $shard_db['©host']))) {
+            $Pdo->exec('use `'.$shard_db['©name'].'`');
             $this->current_Pdo = $Pdo;
             return $Pdo;
         }
         // Otherwise, we need to establish a new connection.
 
-        $shard_db_host['options'] = [
+        $shard_db_host_options = [
             \PDO::ATTR_TIMEOUT => 5,
 
             \PDO::ATTR_AUTOCOMMIT       => true,
@@ -107,26 +85,26 @@ class Pdo extends Classes\Core
             \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
             \PDO::ATTR_ERRMODE                  => \PDO::ERRMODE_EXCEPTION,
         ];
-        if ($shard_db_host['charset']) { // Use a specific charset?
-            $shard_db_host['options'][\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \''.$shard_db_host['charset'].'\'';
+        if ($shard_db_host['©charset']) { // Use a specific charset?
+            $shard_db_host_options[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \''.$shard_db_host['©charset'].'\'';
 
-            if ($shard_db_host['collate']) { // Also a specific collation?
-                $shard_db_host['options'][\PDO::MYSQL_ATTR_INIT_COMMAND] .= ' COLLATE \''.$shard_db_host['collate'].'\'';
+            if ($shard_db_host['©collate']) { // Also a specific collation?
+                $shard_db_host_options[\PDO::MYSQL_ATTR_INIT_COMMAND] .= ' COLLATE \''.$shard_db_host['©collate'].'\'';
             }
         }
-        if ($shard_db_host['ssl_enable'] && $shard_db_host['ssl_key'] && $shard_db_host['ssl_crt'] && $shard_db_host['ssl_ca'] && $shard_db_host['ssl_cipher']) {
-            $shard_db_host['options'][\PDO::MYSQL_ATTR_SSL_KEY]    = $shard_db_host['ssl_key'];
-            $shard_db_host['options'][\PDO::MYSQL_ATTR_SSL_CERT]   = $shard_db_host['ssl_crt'];
-            $shard_db_host['options'][\PDO::MYSQL_ATTR_SSL_CA]     = $shard_db_host['ssl_ca'];
-            $shard_db_host['options'][\PDO::MYSQL_ATTR_SSL_CIPHER] = $shard_db_host['ssl_cipher'];
+        if ($shard_db_host['©ssl_enable'] && $shard_db_host['©ssl_key'] && $shard_db_host['©ssl_crt'] && $shard_db_host['©ssl_ca'] && $shard_db_host['©ssl_cipher']) {
+            $shard_db_host_options[\PDO::MYSQL_ATTR_SSL_KEY]    = $shard_db_host['©ssl_key'];
+            $shard_db_host_options[\PDO::MYSQL_ATTR_SSL_CERT]   = $shard_db_host['©ssl_crt'];
+            $shard_db_host_options[\PDO::MYSQL_ATTR_SSL_CA]     = $shard_db_host['©ssl_ca'];
+            $shard_db_host_options[\PDO::MYSQL_ATTR_SSL_CIPHER] = $shard_db_host['©ssl_cipher'];
         }
         $Pdo = new \PDO(// By reference. We are caching this connection.
-            'mysql:host='.$shard_db_host['name'].';port='.$shard_db_host['port'],
-            $shard_db_host['username'], // Connection username.
-            $shard_db_host['password'], // Connection password.
-            $shard_db_host['options'] // Connection options (from above).
+            'mysql:host='.$shard_db['©host'].';port='.$shard_db_host['©port'],
+            $shard_db_host['©username'], // Connection username.
+            $shard_db_host['©password'], // Connection password.
+            $shard_db_host_options // Connection options (from above).
         );
-        $Pdo->exec('use `'.$shard_db['name'].'`');
+        $Pdo->exec('use `'.$shard_db['©name'].'`');
         $this->current_Pdo = $Pdo;
         return $Pdo;
     }
@@ -145,9 +123,9 @@ class Pdo extends Classes\Core
         if (!is_null($properties = &$this->cacheKey(__FUNCTION__, $shard_id))) {
             return $properties; // Cached this already.
         }
-        foreach ($this->shards as $_key => $_shard_db) {
-            if ($shard_id >= $_shard_db['range']['from'] && $shard_id <= $_shard_db['range']['to']) {
-                return $properties = $_shard_db['properties'];
+        foreach ($this->App->Config->©mysql_db['©shards'] as $_key => $_shard_db) {
+            if ($shard_id >= $_shard_db['©range']['©from'] && $shard_id <= $_shard_db['©range']['©to']) {
+                return $properties = $_shard_db['©properties'];
             }
         } // unset($_key, $_shard_db); // Houskeeping.
         throw new Exception(sprintf('Missing DB info for shard ID: `%1$s`.', $shard_id));

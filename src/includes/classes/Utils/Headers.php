@@ -55,7 +55,7 @@ class Headers extends Classes\Core implements Interfaces\HttpStatusConstants
 
         $display_error      = (bool) $args['display_error'];
         $display_error_page = (string) $args['display_error_page'];
-        $errors_dir         = $this->App->Config->fs_paths['errors_dir'];
+        $errors_dir         = $this->App->Config->©fs_paths['©errors_dir'];
 
         if (headers_sent()) {
             throw new Exception('Headers already sent.');

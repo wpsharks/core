@@ -34,12 +34,12 @@ class Bitly extends Classes\Core
     {
         parent::__construct($App);
 
-        if (!$this->App->Config->fs_paths['cache_dir']) {
+        if (!$this->App->Config->©fs_paths['©cache_dir']) {
             throw new Exception('Missing cache directory.');
-        } elseif (!$this->App->Config->bitly['api_key']) {
+        } elseif (!$this->App->Config->©bitly['©api_key']) {
             throw new Exception('Missing API key.');
         }
-        $this->cache_dir = $this->App->Config->fs_paths['cache_dir'].'/bitly';
+        $this->cache_dir = $this->App->Config->©fs_paths['©cache_dir'].'/bitly';
     }
 
     /**
@@ -60,7 +60,7 @@ class Bitly extends Classes\Core
             return ''; // Nothing to do.
         }
         $default_args = [
-            'access_token' => $this->App->Config->bitly['api_key'],
+            'access_token' => $this->App->Config->©bitly['©api_key'],
             'longUrl'      => $long_url,
         ];
         $args = array_merge($default_args, $args);
@@ -85,7 +85,7 @@ class Bitly extends Classes\Core
 
         $endpoint_sha1         = sha1($endpoint);
         $cache_dir             = $this->cache_dir.'/'.$this->a::sha1ModShardId($endpoint_sha1, true);
-        $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
+        $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
         # Use cached response if at all possible.
@@ -142,7 +142,7 @@ class Bitly extends Classes\Core
         $offset   = ($page - 1) * $per_page;
 
         $default_args = [
-            'access_token' => $this->App->Config->bitly['api_key'],
+            'access_token' => $this->App->Config->©bitly['©api_key'],
             'offset'       => $offset,
             'limit'        => $per_page,
             'private'      => 'off',
@@ -169,7 +169,7 @@ class Bitly extends Classes\Core
 
         $endpoint_sha1         = sha1($endpoint);
         $cache_dir             = $this->cache_dir.'/'.$this->a::sha1ModShardId($endpoint_sha1, true);
-        $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
+        $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
         $cache_file            = $cache_dir.'/'.$endpoint_sha1;
 
         # Use cached response if at all possible.

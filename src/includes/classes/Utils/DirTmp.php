@@ -23,9 +23,6 @@ class DirTmp extends Classes\Core
      */
     public function __invoke(): string
     {
-        $App    = $this->App;
-        $Config = $this->App->Config;
-
         if (!is_null($dir = &$this->cacheKey(__FUNCTION__))) {
             return $dir; // Already cached this.
         }
@@ -57,8 +54,8 @@ class DirTmp extends Classes\Core
         }
         foreach ($possible_dirs as $_key => $_dir) {
             if ($_dir && @is_dir($_dir) && @is_writable($_dir)) {
-                $_dir .= '/'.$App->namespace_sha1.'/'.$App->dir_sha1;
-                if (is_dir($_dir) || mkdir($_dir, $Config->fs_permissions['transient_dirs'], true)) {
+                $_dir .= '/'.$this->App->namespace_sha1.'/'.$this->App->dir_sha1;
+                if (is_dir($_dir) || mkdir($_dir, $this->App->Config->©fs_permissions['©transient_dirs'], true)) {
                     return $dir = $_dir;
                 }
             }

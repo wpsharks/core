@@ -2,7 +2,6 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Classes\Utils;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -57,6 +56,24 @@ class App extends Core
      * @type string
      */
     public $namespace_sha1;
+
+    /**
+     * File.
+     *
+     * @since 160225
+     *
+     * @type string
+     */
+    public $file;
+
+    /**
+     * File SHA-1.
+     *
+     * @since 160225
+     *
+     * @type string
+     */
+    public $file_sha1;
 
     /**
      * Dir.
@@ -190,7 +207,10 @@ class App extends Core
         $this->namespace      = $Class->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
 
-        $this->dir          = dirname($Class->getFileName(), 4);
+        $this->file      = $Class->getFileName();
+        $this->file_sha1 = sha1($this->file);
+
+        $this->dir          = dirname($this->file, 4);
         $this->dir_basename = basename($this->dir);
         $this->dir_sha1     = sha1($this->dir);
 
@@ -205,8 +225,17 @@ class App extends Core
         $AppFacades_base_class = $this->getClass(AppFacades::class);
         $AppFacades_class      = $this->namespace.'\\AppFacades';
 
+        if (mb_strpos($this->namespace, '\\Classes') === false) {
+            throw new Exception(sprintf('Invalid namespace: `%1$s`. Expecting: `...\\Classes`.', $this->namespace));
+        }
+        if (mb_strpos($this->file, '/src/includes/classes/') === false) {
+            throw new Exception(sprintf('Invalid file path: `%1$s`. Expecting: `.../src/includes/classes/...`.', $this->file));
+        }
+        if (isset($GLOBALS[$this->class]) || isset($GLOBALS[$AppFacades_class])) {
+            throw new Exception(sprintf('One instance of `%1$s` only please.', $this->class));
+        }
         $this->Config = new $AppConfig_class($this, $instance_base, $instance, $args);
-        $this->Di     = new $AppDi_class($this, $this->Config->di['default_rule']);
+        $this->Di     = new $AppDi_class($this, $this->Config->©di['©default_rule']);
         $this->Utils  = new $AppUtils_class($this);
 
         if (!class_exists($AppFacades_class)) {
@@ -214,9 +243,6 @@ class App extends Core
         }
         $this->Di->addInstances([$this, $this->Config, $this->Utils]);
 
-        if (isset($GLOBALS[$this->class])) {
-            throw new Exception('One instance only please.');
-        }
         $GLOBALS[$this->class]      = $this;
         $GLOBALS[$AppFacades_class] = $this;
         $this->Facades              = $AppFacades_class;
@@ -262,7 +288,7 @@ class App extends Core
      */
     protected function maybeDebug()
     {
-        if ($this->Config->debug) {
+        if ($this->Config->©debug) {
             // All errors.
             error_reporting(E_ALL);
 
@@ -282,7 +308,7 @@ class App extends Core
      */
     protected function maybeHandleExceptions()
     {
-        if (!$this->Config->debug && $this->Config->handle_exceptions) {
+        if (!$this->Config->©debug && $this->Config->©handle_exceptions) {
             $this->a::setupExceptionHandler();
         }
     }
@@ -294,10 +320,10 @@ class App extends Core
      */
     protected function maybeSetLocales()
     {
-        if ($this->Config->i18n['locales']) {
+        if ($this->Config->©i18n['©locales']) {
             // Try locale codes in a specific order.
             // See: <http://php.net/manual/en/function.setlocale.php>
-            setlocale(LC_ALL, $this->Config->i18n['locales']);
+            setlocale(LC_ALL, $this->Config->©i18n['©locales']);
         }
     }
 }

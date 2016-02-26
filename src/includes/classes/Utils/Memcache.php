@@ -70,11 +70,11 @@ class Memcache extends Classes\Core
     {
         parent::__construct($App);
 
-        $this->enabled   = $this->App->Config->memcache['enabled'];
-        $this->namespace = $this->App->Config->memcache['namespace'];
+        $this->enabled   = $this->App->Config->©memcache['©enabled'];
+        $this->namespace = $this->App->Config->©memcache['©namespace'];
         $this->servers   = $active_servers   = []; // Initialize.
 
-        foreach ($this->App->Config->memcache['servers'] as $_server) {
+        foreach ($this->App->Config->©memcache['©servers'] as $_server) {
             $_host                            = $_server['host'];
             $_port                            = $_server['port'] ?? 11211;
             $_weight                          = $_server['weight'] ?? 0;

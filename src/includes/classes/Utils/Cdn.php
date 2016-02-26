@@ -50,11 +50,11 @@ class Cdn extends Classes\Core implements Interfaces\MimeConstants
      */
     public function url(string $uri, string $scheme = ''): string
     {
-        if (!$this->App->Config->urls['hosts']['cdn']) {
+        if (!$this->App->Config->©urls['©hosts']['©cdn']) {
             throw new Exception('Missing CDN host name.');
         }
         $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';
-        $url = '//'.$this->App->Config->urls['hosts']['cdn'].'/'.$uri;
+        $url = '//'.$this->App->Config->©urls['©hosts']['©cdn'].'/'.$uri;
         $url = $this->a::setScheme($url, $scheme);
 
         return $url;
@@ -72,11 +72,11 @@ class Cdn extends Classes\Core implements Interfaces\MimeConstants
      */
     public function s3Url(string $uri, string $scheme = ''): string
     {
-        if (!$this->App->Config->urls['hosts']['cdn_s3']) {
+        if (!$this->App->Config->©urls['©hosts']['©cdn_s3']) {
             throw new Exception('Missing CDN S3 host name.');
         }
         $uri = $uri ? $this->a::mbLTrim($uri, '/') : '';
-        $url = '//'.$this->App->Config->urls['hosts']['cdn_s3'].'/'.$uri;
+        $url = '//'.$this->App->Config->©urls['©hosts']['©cdn_s3'].'/'.$uri;
         $url = $this->a::setScheme($url, $scheme);
 
         return $url;
@@ -93,10 +93,10 @@ class Cdn extends Classes\Core implements Interfaces\MimeConstants
      */
     public function filter(string $url_uri_qsl): string
     {
-        if (!$this->App->Config->urls['cdn_filter_enable']) {
+        if (!$this->App->Config->©urls['©cdn_filter_enable']) {
             return $url_uri_qsl; // Nothing to do.
         }
-        if (!$this->App->Config->urls['hosts']['cdn']) {
+        if (!$this->App->Config->©urls['©hosts']['©cdn']) {
             return $url_uri_qsl; // Nothing to do.
         }
         if (!($parts = $this->a::parseUrl($url_uri_qsl))) {
@@ -116,7 +116,7 @@ class Cdn extends Classes\Core implements Interfaces\MimeConstants
         }
         if (!empty($parts['host'])) { // Has a host name?
             $host_root = $this->a::parseUrlHost($parts['host'])['root'];
-            $app_root  = $this->App->Config->urls['hosts']['roots']['app'];
+            $app_root  = $this->App->Config->©urls['©hosts']['©roots']['©app'];
             if (!$host_root || $this->a::mbStrCaseCmp($host_root, $app_root) !== 0) {
                 return $url_uri_qsl; // Not applicable.
             } // Also check for an empty/invalid root here.

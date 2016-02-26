@@ -118,12 +118,12 @@ class Ip extends Classes\Core
         }
         # Check filesystem cache. Did we already do this?
 
-        if (!$this->App->Config->fs_paths['cache_dir']) {
+        if (!$this->App->Config->©fs_paths['©cache_dir']) {
             throw new Exception('Missing cache directory.');
         }
         $ip_sha1               = sha1($ip); // Needed below.
-        $cache_dir             = $this->App->Config->fs_paths['cache_dir'].'/ip-geo-data/'.$this->a::sha1ModShardId($ip_sha1, true);
-        $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
+        $cache_dir             = $this->App->Config->©fs_paths['©cache_dir'].'/ip-geo-data/'.$this->a::sha1ModShardId($ip_sha1, true);
+        $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
         $cache_file            = $cache_dir.'/'.$ip_sha1.'.json';
 
         if (is_file($cache_file) && filemtime($cache_file) >= strtotime('-30 days')) {

@@ -2,10 +2,6 @@
 declare (strict_types = 1);
 namespace WebSharks\Core;
 
-use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Utils;
-use WebSharks\Core\Classes\Exception;
-
 /*
  * Merge w/ defaults.
  */
@@ -27,7 +23,7 @@ extract($this->setVars($¤defaults, $¤vars));
 <h1><?= __('500 Internal Server Error'); ?></h1>
 <p><?= __('This error has been reported to system administrators. Very sorry! :-)'); ?></p>
 
-<?php if ($this->App->Config->debug && $Exception) : ?>
+<?php if ($this->App->Config->©debug && $Exception) : ?>
     <pre>
         <?= $this->a::escHtml($Exception->getMessage()) ?>
     </pre>

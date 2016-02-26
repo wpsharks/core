@@ -3,9 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Utils;
 use WebSharks\Core\Classes\Exception;
-use WebSharks\Core\Interfaces;
 
 /**
  * Core constructor.
@@ -48,6 +46,6 @@ trait CoreConstructor
             throw new Exception('Missing App instance.');
         }
         $this->App = $App;
-        $this->a   = &$App->Facades;
+        $this->a   = &$this->App->Facades;
     }
 }

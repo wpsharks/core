@@ -15,13 +15,13 @@ use WebSharks\Core\Traits;
 class Sha1Mod extends Classes\Core
 {
     /**
-     * Total shards.
+     * Total MySQL DB shards.
      *
-     * @since 150424
+     * @since 160225
      *
      * @type int
      */
-    protected $total_shards;
+    protected $total_mysql_db_shards;
 
     /**
      * Class constructor.
@@ -34,7 +34,7 @@ class Sha1Mod extends Classes\Core
     {
         parent::__construct($App);
 
-        $this->total_shards = count($this->App->Config->mysql_db['shards']);
+        $this->total_mysql_db_shards = count($this->App->Config->©mysql_db['©shards']);
     }
 
     /**
@@ -98,9 +98,9 @@ class Sha1Mod extends Classes\Core
      */
     public function assignShardId(string $string, bool $is_sha1 = false)
     {
-        if ($this->total_shards < 1) {
-            throw new Exception('No DB shards available.');
+        if ($this->total_mysql_db_shards < 1) {
+            throw new Exception('No MySQL DB shards available.');
         }
-        return $this->shardId($string, $is_sha1, $this->total_shards);
+        return $this->shardId($string, $is_sha1, $this->total_mysql_db_shards);
     }
 }

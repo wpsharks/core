@@ -31,7 +31,7 @@ class UrlScheme extends Classes\Core implements Interfaces\UrlConstants
         } elseif ($scheme === 'current') {
             $scheme = $this->a::currentScheme();
         } elseif ($scheme === 'default') {
-            $scheme = $this->App->Config->urls['default_scheme'];
+            $scheme = $this->App->Config->©urls['©default_scheme'];
         }
         if (!$scheme) {
             throw new Exception('Empty scheme.');

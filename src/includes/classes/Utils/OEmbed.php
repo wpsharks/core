@@ -36,10 +36,10 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
     {
         parent::__construct($App);
 
-        if (!$this->App->Config->fs_paths['cache_dir']) {
+        if (!$this->App->Config->©fs_paths['©cache_dir']) {
             throw new Exception('Missing cache directory.');
         }
-        $this->cache_dir = $this->App->Config->fs_paths['cache_dir'].'/oembed';
+        $this->cache_dir = $this->App->Config->©fs_paths['©cache_dir'].'/oembed';
     }
 
     /**
@@ -116,14 +116,14 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
     {
         # Require a valid API key for Embedly.
 
-        if (!$this->App->Config->embedly['api_key']) {
+        if (!$this->App->Config->©embedly['©api_key']) {
             throw new Exception('Missing Embedly API key.');
         }
         # Initialize several variables.
 
         $tokens  = $uncached_urls  = $new_embeds  = [];
         $marker  = str_replace('.', '', uniqid('', true));
-        $Embedly = new Embedly(['key' => $this->App->Config->embedly['api_key']]);
+        $Embedly = new Embedly(['key' => $this->App->Config->©embedly['©api_key']]);
 
         # Tokenize all URLs on a line of their own.
 
@@ -286,7 +286,7 @@ class OEmbed extends Classes\Core implements Interfaces\UrlConstants
     {
         $url_sha1              = sha1($url);
         $cache_dir             = $this->cache_dir.'/embedly/'.$this->a::sha1ModShardId($url_sha1, true);
-        $cache_dir_permissions = $this->App->Config->fs_permissions['transient_dirs'];
+        $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
         $cache_file            = $cache_dir.'/'.$url_sha1;
 
         if (!is_dir($cache_dir)) {

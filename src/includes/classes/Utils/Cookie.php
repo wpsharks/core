@@ -45,7 +45,7 @@ class Cookie extends Classes\Core
         if (!$name) { // Must have a cookie name!
             throw new Exception('Missing cookie name.');
         }
-        if (!$key && !($key = $this->App->Config->cookies['encryption_key'])) {
+        if (!$key && !($key = $this->App->Config->©cookies['©encryption_key'])) {
             throw new Exception('Missing cookie encryption key.');
         }
         if (isset($value[0])) { // If not empty.
@@ -81,7 +81,7 @@ class Cookie extends Classes\Core
         if (!$name) { // Must have a cookie name!
             throw new Exception('Missing cookie name.');
         }
-        if (!$key && !($key = $this->App->Config->cookies['encryption_key'])) {
+        if (!$key && !($key = $this->App->Config->©cookies['©encryption_key'])) {
             throw new Exception('Missing cookie encryption key.');
         }
         if (isset($_COOKIE[$name]) && is_string($_COOKIE[$name])) {

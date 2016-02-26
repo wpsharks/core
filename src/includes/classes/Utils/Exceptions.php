@@ -43,7 +43,7 @@ class Exceptions extends Classes\Core
 
                 $this->a::obEndCleanAll();
 
-                if ($this->App->Config->debug) {
+                if ($this->App->Config->©debug) {
                     $this->a::writeStderr($Exception->__toString());
                 } else {
                     $this->a::writeStderr($Exception->getMessage());

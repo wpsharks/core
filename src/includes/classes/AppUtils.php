@@ -2,7 +2,6 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
-use WebSharks\Core\Classes\Utils;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -14,6 +13,15 @@ use WebSharks\Core\Traits;
 class AppUtils extends Core
 {
     /**
+     * Sub-namespace.
+     *
+     * @since 160225
+     *
+     * @type string
+     */
+    protected $sub_namespace = '';
+
+    /**
      * Magic utility factory.
      *
      * @since 150424 Initial release.
@@ -24,7 +32,7 @@ class AppUtils extends Core
      */
     public function __get(string $property)
     {
-        if (class_exists($class = $this->App->getClass(__NAMESPACE__.'\\Utils\\'.$property))) {
+        if (class_exists($class = $this->App->getClass(__NAMESPACE__.'\\Utils\\'.$this->sub_namespace.$property))) {
             $Utility = $this->App->Di->get($class, [], true);
             $this->overload((object) [$property => $Utility], true);
             return $Utility;
@@ -48,7 +56,7 @@ class AppUtils extends Core
     {
         if (isset($this->¤¤overload[$method])) {
             return $this->¤¤overload[$method](...$args);
-        } elseif (class_exists($class = $this->App->getClass(__NAMESPACE__.'\\Utils\\'.$method))) {
+        } elseif (class_exists($class = $this->App->getClass(__NAMESPACE__.'\\Utils\\'.$this->sub_namespace.$method))) {
             $Utility = $this->App->Di->get($class, [], true);
             $this->overload((object) [$method => $Utility], true);
             return $Utility(...$args);
