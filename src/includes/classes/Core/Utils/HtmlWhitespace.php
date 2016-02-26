@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -12,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class HtmlWhitespace extends Classes\Core implements Interfaces\HtmlConstants
+class HtmlWhitespace extends Classes\Core\Base\Core implements Interfaces\HtmlConstants
 {
     /**
      * Normalizes HTML whitespace deeply.

@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -12,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151002 Adding host parser.
  */
-class UrlHost extends Classes\Core
+class UrlHost extends Classes\Core\Base\Core
 {
     /**
      * Host parser.

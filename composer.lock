@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a4dde5acb9c7b2de8088e745bc64d00e",
+    "hash": "c14bc96d90e507101b8d2ef1ad0c06a9",
     "content-hash": "b5c8d5d7e8f49e326607f21dfe246f6d",
     "packages": [
         {
@@ -352,16 +352,16 @@
         },
         {
             "name": "lusitanian/oauth",
-            "version": "v0.8.8",
+            "version": "v0.8.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
-                "reference": "eeafc1937d7560825ff5c2f1b8e5f86f059b5a28"
+                "reference": "29bda6e176df6c292a9b1c43ae8a44d56a87c30b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/eeafc1937d7560825ff5c2f1b8e5f86f059b5a28",
-                "reference": "eeafc1937d7560825ff5c2f1b8e5f86f059b5a28",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/29bda6e176df6c292a9b1c43ae8a44d56a87c30b",
+                "reference": "29bda6e176df6c292a9b1c43ae8a44d56a87c30b",
                 "shasum": ""
             },
             "require": {
@@ -415,7 +415,7 @@
                 "oauth",
                 "security"
             ],
-            "time": "2016-02-14 22:50:50"
+            "time": "2016-02-24 00:20:18"
         },
         {
             "name": "michelf/php-markdown",

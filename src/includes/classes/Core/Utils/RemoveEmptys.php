@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -12,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 151312 Enhance utils.
  */
-class RemoveEmptys extends Classes\Core
+class RemoveEmptys extends Classes\Core\Base\Core
 {
     /**
      * Remove empty values.

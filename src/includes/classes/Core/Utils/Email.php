@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -14,7 +14,7 @@ use PHPMailer;
  *
  * @since 151121 Email utilities.
  */
-class Email extends Classes\Core implements Interfaces\EmailConstants
+class Email extends Classes\Core\Base\Core implements Interfaces\EmailConstants
 {
     // @TODO Constructor.
 

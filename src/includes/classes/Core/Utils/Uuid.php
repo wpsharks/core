@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -14,7 +14,7 @@ use Ramsey\Uuid\Uuid as UuidGen;
  *
  * @since 150424 Initial release.
  */
-class Uuid extends Classes\Core
+class Uuid extends Classes\Core\Base\Core
 {
     /**
      * UUID v1 generator.

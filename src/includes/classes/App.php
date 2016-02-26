@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -12,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class App extends Classes\Core
+class App extends Classes\Core\Base\Core
 {
     /**
      * Parent app.
@@ -183,7 +183,7 @@ class App extends Classes\Core
      *
      * @type string Version.
      */
-    const VERSION = '160223'; //v//
+    const VERSION = '160226'; //v//
 
     /**
      * Constructor.

@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -15,7 +15,7 @@ use Michelf\MarkdownExtra;
  *
  * @since 150424 Initial release.
  */
-class Markdown extends Classes\Core
+class Markdown extends Classes\Core\Base\Core
 {
     /**
      * A very simple markdown parser.

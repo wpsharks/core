@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -14,7 +14,7 @@ use Symfony\Component\Yaml\Yaml as Parser;
  *
  * @since 150424 Initial release.
  */
-class Yaml extends Classes\Core
+class Yaml extends Classes\Core\Base\Core
 {
     /**
      * YAML parser.

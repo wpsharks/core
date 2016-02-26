@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -12,7 +12,7 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class AppConfig extends Classes\Core
+class AppConfig extends Classes\Core\Base\Core
 {
     /**
      * Class constructor.
@@ -57,10 +57,10 @@ class AppConfig extends Classes\Core
             '©di' => [
                 '©default_rule' => [
                     'new_instances' => [
-                        Classes\Exception::class,
                         Classes\Core\CliOpts::class,
                         Classes\Core\Template::class,
                         Classes\Core\Tokenizer::class,
+                        Classes\Core\Base\Exception::class,
                     ],
                 ],
             ],

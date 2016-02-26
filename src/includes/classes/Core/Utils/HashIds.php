@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
@@ -14,7 +14,7 @@ use Hashids\Hashids as Parser;
  *
  * @since 150424 Initial release.
  */
-class HashIds extends Classes\Core
+class HashIds extends Classes\Core\Base\Core
 {
     /**
      * Parser.

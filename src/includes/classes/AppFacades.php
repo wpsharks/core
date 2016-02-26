@@ -1,12 +1,12 @@
 <?php
 // This file was auto-generated:
-// February 26th, 2016, 4:07 pm UTC
+// February 26th, 2016, 4:51 pm UTC
 
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Exception;
+use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
