@@ -12,7 +12,7 @@ trait Php
      */
     public static function canCallFunc(...$args)
     {
-        return $GLOBALS[static::class]->Utils->PhpHas->callableFunc(...$args);
+        return $GLOBALS[static::class]->Utils->©PhpHas->callableFunc(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Php
      */
     public static function memoryLimit(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Memory->limit(...$args);
+        return $GLOBALS[static::class]->Utils->©Memory->limit(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Php
      */
     public static function stripPhpTags(...$args)
     {
-        return $GLOBALS[static::class]->Utils->PhpStrip->tags(...$args);
+        return $GLOBALS[static::class]->Utils->©PhpStrip->tags(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Php
      */
     public static function uploadSizeLimit(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UploadSize->limit(...$args);
+        return $GLOBALS[static::class]->Utils->©UploadSize->limit(...$args);
     }
 
     /**
@@ -44,6 +44,6 @@ trait Php
      */
     public static function maxExecTime(...$args)
     {
-        return $GLOBALS[static::class]->Utils->ExecTime->max(...$args);
+        return $GLOBALS[static::class]->Utils->©ExecTime->max(...$args);
     }
 }

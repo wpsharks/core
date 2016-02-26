@@ -12,7 +12,7 @@ trait Multibyte
      */
     public static function isUtf8(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Utf8->isValid(...$args);
+        return $GLOBALS[static::class]->Utils->©Utf8->isValid(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Multibyte
      */
     public static function mbLcFirst(...$args)
     {
-        return $GLOBALS[static::class]->Utils->MbLcFirst->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©MbLcFirst->__invoke(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Multibyte
      */
     public static function mbStrCaseCmp(...$args)
     {
-        return $GLOBALS[static::class]->Utils->StrCaseCmp->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©StrCaseCmp->__invoke(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Multibyte
      */
     public static function mbStrPad(...$args)
     {
-        return $GLOBALS[static::class]->Utils->StrPad->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©StrPad->__invoke(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait Multibyte
      */
     public static function mbStrRev(...$args)
     {
-        return $GLOBALS[static::class]->Utils->StrRev->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©StrRev->__invoke(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait Multibyte
      */
     public static function mbStrSplit(...$args)
     {
-        return $GLOBALS[static::class]->Utils->StrSplit->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©StrSplit->__invoke(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait Multibyte
      */
     public static function mbSubstrReplace(...$args)
     {
-        return $GLOBALS[static::class]->Utils->SubstrReplace->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©SubstrReplace->__invoke(...$args);
     }
 
     /**
@@ -68,7 +68,7 @@ trait Multibyte
      */
     public static function mbTrim(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Trim->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Trim->__invoke(...$args);
     }
 
     /**
@@ -76,7 +76,7 @@ trait Multibyte
      */
     public static function mbLTrim(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Trim->l(...$args);
+        return $GLOBALS[static::class]->Utils->©Trim->l(...$args);
     }
 
     /**
@@ -84,7 +84,7 @@ trait Multibyte
      */
     public static function mbRTrim(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Trim->r(...$args);
+        return $GLOBALS[static::class]->Utils->©Trim->r(...$args);
     }
 
     /**
@@ -92,7 +92,7 @@ trait Multibyte
      */
     public static function mbUcFirst(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UcFirst->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©UcFirst->__invoke(...$args);
     }
 
     /**
@@ -100,6 +100,6 @@ trait Multibyte
      */
     public static function mbUcWords(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UcWords->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©UcWords->__invoke(...$args);
     }
 }

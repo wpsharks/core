@@ -12,7 +12,7 @@ trait Encryption
      */
     public static function randomKey(...$args)
     {
-        return $GLOBALS[static::class]->Utils->RandomKey->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©RandomKey->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Encryption
      */
     public static function passwordStrength(...$args)
     {
-        return $GLOBALS[static::class]->Utils->PwStrength->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©PwStrength->__invoke(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Encryption
      */
     public static function passwordSha256(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Password->sha256(...$args);
+        return $GLOBALS[static::class]->Utils->©Password->sha256(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Encryption
      */
     public static function encrypt(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Rijndael256->encrypt(...$args);
+        return $GLOBALS[static::class]->Utils->©Rijndael256->encrypt(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait Encryption
      */
     public static function decrypt(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Rijndael256->decrypt(...$args);
+        return $GLOBALS[static::class]->Utils->©Rijndael256->decrypt(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait Encryption
      */
     public static function sha256KeyedHash(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Sha256->keyedHash(...$args);
+        return $GLOBALS[static::class]->Utils->©Sha256->keyedHash(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait Encryption
      */
     public static function hashIds(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HashIds->encode(...$args);
+        return $GLOBALS[static::class]->Utils->©HashIds->encode(...$args);
     }
 
     /**
@@ -68,6 +68,6 @@ trait Encryption
      */
     public static function decodeHashId(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HashIds->decode(...$args);
+        return $GLOBALS[static::class]->Utils->©HashIds->decode(...$args);
     }
 }

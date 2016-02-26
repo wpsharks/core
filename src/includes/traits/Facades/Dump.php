@@ -12,6 +12,6 @@ trait Dump
      */
     public static function dump(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Dump->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Dump->__invoke(...$args);
     }
 }

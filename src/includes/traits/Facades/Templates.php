@@ -12,7 +12,7 @@ trait Templates
      */
     public static function locateTemplate(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Template->locate(...$args);
+        return $GLOBALS[static::class]->Utils->©Template->locate(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Templates
      */
     public static function locateRouteTemplate(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Template->locateRoute(...$args);
+        return $GLOBALS[static::class]->Utils->©Template->locateRoute(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Templates
      */
     public static function loadRouteTemplate(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Template->loadRoute(...$args);
+        return $GLOBALS[static::class]->Utils->©Template->loadRoute(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait Templates
      */
     public static function getTemplate(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Template->get(...$args);
+        return $GLOBALS[static::class]->Utils->©Template->get(...$args);
     }
 }

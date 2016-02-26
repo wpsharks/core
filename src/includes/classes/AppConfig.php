@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -10,19 +11,19 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class AppConfig extends Core
+class AppConfig extends Classes\Core
 {
     /**
      * Class constructor.
      *
      * @since 150424 Initial release.
      *
-     * @param App   $App           Instance of App.
-     * @param array $instance_base Instance base.
-     * @param array $instance      Instance args (highest precedence).
-     * @param array $args          Any additional behavioral args.
+     * @param Classes\App $App           Instance of App.
+     * @param array       $instance_base Instance base.
+     * @param array       $instance      Instance args (highest precedence).
+     * @param array       $args          Any additional behavioral args.
      */
-    public function __construct(App $App, array $instance_base = [], array $instance = [], array $args = [])
+    public function __construct(Classes\App $App, array $instance_base = [], array $instance = [], array $args = [])
     {
         parent::__construct($App);
 
@@ -55,13 +56,14 @@ class AppConfig extends Core
             '©di' => [
                 '©default_rule' => [
                     'new_instances' => [
-                        CliOpts::class,
-                        Exception::class,
-                        Template::class,
-                        Tokenizer::class,
+                        Classes\Exception::class,
+                        Classes\Core\CliOpts::class,
+                        Classes\Core\Template::class,
+                        Classes\Core\Tokenizer::class,
                     ],
                 ],
             ],
+            '©sub_namespace_map' => [],
 
             '©mysql_db' => [
                 '©hosts' => [

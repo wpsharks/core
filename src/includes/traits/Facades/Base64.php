@@ -12,7 +12,7 @@ trait Base64
      */
     public static function base64UrlSafeEncode(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Base64->urlSafeEncode(...$args);
+        return $GLOBALS[static::class]->Utils->©Base64->urlSafeEncode(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Base64
      */
     public static function base64UrlSafeDecode(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Base64->urlSafeDecode(...$args);
+        return $GLOBALS[static::class]->Utils->©Base64->urlSafeDecode(...$args);
     }
 }

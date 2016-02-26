@@ -12,7 +12,7 @@ trait Sha1Mods
      */
     public static function sha1Mod(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Sha1Mod->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Sha1Mod->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Sha1Mods
      */
     public static function sha1ModShardId(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Sha1Mod->shardId(...$args);
+        return $GLOBALS[static::class]->Utils->©Sha1Mod->shardId(...$args);
     }
 
     /**
@@ -28,6 +28,6 @@ trait Sha1Mods
      */
     public static function sha1ModAssignShardId(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Sha1Mod->assignShardId(...$args);
+        return $GLOBALS[static::class]->Utils->©Sha1Mod->assignShardId(...$args);
     }
 }

@@ -12,7 +12,7 @@ trait Html
      */
     public static function isHtml(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Html->is(...$args);
+        return $GLOBALS[static::class]->Utils->©Html->is(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Html
      */
     public static function balanceHtmlTags(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlBalance->tags(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlBalance->tags(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Html
      */
     public static function stripHtmlAttrs(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlStrip->attributes(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlStrip->attributes(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Html
      */
     public static function textToHtml(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Text2Html->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Text2Html->__invoke(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait Html
      */
     public static function htmlToText(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Html2Text->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Html2Text->__invoke(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait Html
      */
     public static function htmlToRichText(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Html2RichText->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Html2RichText->__invoke(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait Html
      */
     public static function htmlToPandoc(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Html2Pandoc->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Html2Pandoc->__invoke(...$args);
     }
 
     /**
@@ -68,7 +68,7 @@ trait Html
      */
     public static function htmlAnchorize(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlAnchorize->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlAnchorize->__invoke(...$args);
     }
 
     /**
@@ -76,7 +76,7 @@ trait Html
      */
     public static function htmlAnchorRels(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlAnchorRels->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlAnchorRels->__invoke(...$args);
     }
 
     /**
@@ -84,7 +84,7 @@ trait Html
      */
     public static function htmlTrim(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlTrim->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlTrim->__invoke(...$args);
     }
 
     /**
@@ -92,7 +92,7 @@ trait Html
      */
     public static function htmlLTrim(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlTrim->l(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlTrim->l(...$args);
     }
 
     /**
@@ -100,7 +100,7 @@ trait Html
      */
     public static function htmlRTrim(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlTrim->r(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlTrim->r(...$args);
     }
 
     /**
@@ -108,7 +108,7 @@ trait Html
      */
     public static function normalizeHtmlWhitespace(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlWhitespace->normalize(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlWhitespace->normalize(...$args);
     }
 
     /**
@@ -116,7 +116,7 @@ trait Html
      */
     public static function checked(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Html->checked(...$args);
+        return $GLOBALS[static::class]->Utils->©Html->checked(...$args);
     }
 
     /**
@@ -124,6 +124,6 @@ trait Html
      */
     public static function selected(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Html->selected(...$args);
+        return $GLOBALS[static::class]->Utils->©Html->selected(...$args);
     }
 }

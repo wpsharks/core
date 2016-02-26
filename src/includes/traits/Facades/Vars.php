@@ -12,7 +12,7 @@ trait Vars
      */
     public static function isVar(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Vars->isValid(...$args);
+        return $GLOBALS[static::class]->Utils->©Vars->isValid(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Vars
      */
     public static function varToName(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Vars->toName(...$args);
+        return $GLOBALS[static::class]->Utils->©Vars->toName(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Vars
      */
     public static function varToAcronym(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Vars->toAcronym(...$args);
+        return $GLOBALS[static::class]->Utils->©Vars->toAcronym(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait Vars
      */
     public static function varToSlug(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Vars->toSlug(...$args);
+        return $GLOBALS[static::class]->Utils->©Vars->toSlug(...$args);
     }
 }

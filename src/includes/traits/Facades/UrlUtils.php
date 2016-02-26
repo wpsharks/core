@@ -12,7 +12,7 @@ trait UrlUtils
      */
     public static function isUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Url->isValid(...$args);
+        return $GLOBALS[static::class]->Utils->©Url->isValid(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait UrlUtils
      */
     public static function stripUrlFragment(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlFragment->strip(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlFragment->strip(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait UrlUtils
      */
     public static function normalizeUrlAmps(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Url->normalizeAmps(...$args);
+        return $GLOBALS[static::class]->Utils->©Url->normalizeAmps(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait UrlUtils
      */
     public static function remoteRequest(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlRemote->request(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlRemote->request(...$args);
     }
 }

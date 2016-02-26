@@ -12,7 +12,7 @@ trait UrlQuerys
      */
     public static function stripUrlQuery(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlQuery->strip(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlQuery->strip(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait UrlQuerys
      */
     public static function parseUrlQuery(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlQuery->parse(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlQuery->parse(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait UrlQuerys
      */
     public static function buildUrlQuery(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlQuery->build(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlQuery->build(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait UrlQuerys
      */
     public static function addUrlQueryArgs(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlQuery->addArgs(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlQuery->addArgs(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait UrlQuerys
      */
     public static function removeUrlQueryArgs(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlQuery->removeArgs(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlQuery->removeArgs(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait UrlQuerys
      */
     public static function addUrlQuerySig(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlQuery->addSha256Sig(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlQuery->addSha256Sig(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait UrlQuerys
      */
     public static function removeUrlQuerySig(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlQuery->removeSha256Sig(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlQuery->removeSha256Sig(...$args);
     }
 
     /**
@@ -68,6 +68,6 @@ trait UrlQuerys
      */
     public static function urlQuerySigOk(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlQuery->sha256SigOk(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlQuery->sha256SigOk(...$args);
     }
 }

@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -10,14 +11,14 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class App extends Core
+class App extends Classes\Core
 {
     /**
      * Parent app.
      *
      * @since 160224
      *
-     * @type App|null
+     * @type Classes\App|null
      */
     public $parent;
 
@@ -143,7 +144,7 @@ class App extends Core
      *
      * @since 150424
      *
-     * @type AppConfig
+     * @type Classes\AppConfig
      */
     public $Config;
 
@@ -152,7 +153,7 @@ class App extends Core
      *
      * @since 150424
      *
-     * @type AppDi
+     * @type Classes\AppDi
      */
     public $Di;
 
@@ -161,7 +162,7 @@ class App extends Core
      *
      * @since 150424
      *
-     * @type AppUtils
+     * @type Classes\AppUtils
      */
     public $Utils;
 
@@ -170,7 +171,7 @@ class App extends Core
      *
      * @since 160223
      *
-     * @type string {AppFacades}
+     * @type string {Classes\AppFacades}
      */
     public $Facades;
 
@@ -188,12 +189,12 @@ class App extends Core
      *
      * @since 150424 Initial release.
      *
-     * @param array    $instance_base Instance base.
-     * @param array    $instance      Instance args (highest precedence).
-     * @param App|null $parent        Parent app (optional).
-     * @param array    $args          Any additional behavioral args.
+     * @param array            $instance_base Instance base.
+     * @param array            $instance      Instance args (highest precedence).
+     * @param Classes\App|null $parent        Parent app (optional).
+     * @param array            $args          Any additional behavioral args.
      */
-    public function __construct(array $instance_base = [], array $instance = [], App $parent = null, array $args = [])
+    public function __construct(array $instance_base = [], array $instance = [], Classes\App $parent = null, array $args = [])
     {
         parent::__construct();
 
@@ -219,13 +220,13 @@ class App extends Core
         $this->core_dir_sha1     = sha1($this->core_dir);
         $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
 
-        $AppConfig_class       = $this->getClass(AppConfig::class);
-        $AppDi_class           = $this->getClass(AppDi::class);
-        $AppUtils_class        = $this->getClass(AppUtils::class);
-        $AppFacades_base_class = $this->getClass(AppFacades::class);
+        $AppConfig_class       = $this->getClass(Classes\AppConfig::class);
+        $AppDi_class           = $this->getClass(Classes\AppDi::class);
+        $AppUtils_class        = $this->getClass(Classes\AppUtils::class);
+        $AppFacades_base_class = $this->getClass(Classes\AppFacades::class);
         $AppFacades_class      = $this->namespace.'\\AppFacades';
 
-        if (mb_strpos($this->namespace, '\\Classes') === false) {
+        if (mb_substr($this->namespace, -8) !== '\\Classes') {
             throw new Exception(sprintf('Invalid namespace: `%1$s`. Expecting: `...\\Classes`.', $this->namespace));
         }
         if (mb_strpos($this->file, '/src/includes/classes/') === false) {

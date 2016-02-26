@@ -12,7 +12,7 @@ trait Dirs
      */
     public static function tmpDir(...$args)
     {
-        return $GLOBALS[static::class]->Utils->DirTmp->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©DirTmp->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Dirs
      */
     public static function normalizeDirPath(...$args)
     {
-        return $GLOBALS[static::class]->Utils->DirPath->normalize(...$args);
+        return $GLOBALS[static::class]->Utils->©DirPath->normalize(...$args);
     }
 
     /**
@@ -28,6 +28,6 @@ trait Dirs
      */
     public static function deleteDir(...$args)
     {
-        return $GLOBALS[static::class]->Utils->DirDelete->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©DirDelete->__invoke(...$args);
     }
 }

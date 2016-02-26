@@ -12,7 +12,7 @@ trait Files
      */
     public static function fileExt(...$args)
     {
-        return $GLOBALS[static::class]->Utils->FileExt->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©FileExt->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Files
      */
     public static function fileSizeAbbr(...$args)
     {
-        return $GLOBALS[static::class]->Utils->FileSize->abbr(...$args);
+        return $GLOBALS[static::class]->Utils->©FileSize->abbr(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Files
      */
     public static function bytesToAbbr(...$args)
     {
-        return $GLOBALS[static::class]->Utils->FileSize->bytesAbbr(...$args);
+        return $GLOBALS[static::class]->Utils->©FileSize->bytesAbbr(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait Files
      */
     public static function abbrToBytes(...$args)
     {
-        return $GLOBALS[static::class]->Utils->FileSize->abbrBytes(...$args);
+        return $GLOBALS[static::class]->Utils->©FileSize->abbrBytes(...$args);
     }
 }

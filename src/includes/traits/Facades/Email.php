@@ -12,7 +12,7 @@ trait Email
      */
     public static function email(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Email->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Email->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Email
      */
     public static function isEmail(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Email->isValid(...$args);
+        return $GLOBALS[static::class]->Utils->©Email->isValid(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Email
      */
     public static function isRoleBasedEmail(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Email->isRoleBased(...$args);
+        return $GLOBALS[static::class]->Utils->©Email->isRoleBased(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait Email
      */
     public static function parseEmailAddresses(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Email->parseAddresses(...$args);
+        return $GLOBALS[static::class]->Utils->©Email->parseAddresses(...$args);
     }
 }

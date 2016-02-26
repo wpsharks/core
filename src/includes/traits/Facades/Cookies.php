@@ -12,7 +12,7 @@ trait Cookies
      */
     public static function getCookie(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Cookie->get(...$args);
+        return $GLOBALS[static::class]->Utils->©Cookie->get(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Cookies
      */
     public static function setCookie(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Cookie->set(...$args);
+        return $GLOBALS[static::class]->Utils->©Cookie->set(...$args);
     }
 }

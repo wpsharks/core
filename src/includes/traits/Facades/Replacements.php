@@ -12,7 +12,7 @@ trait Replacements
      */
     public static function fillReplacementCodes(...$args)
     {
-        return $GLOBALS[static::class]->Utils->ReplaceCodes->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©ReplaceCodes->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Replacements
      */
     public static function strReplaceOnce(...$args)
     {
-        return $GLOBALS[static::class]->Utils->ReplaceOnce->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©ReplaceOnce->__invoke(...$args);
     }
 
     /**
@@ -28,6 +28,6 @@ trait Replacements
      */
     public static function strIReplaceOnce(...$args)
     {
-        return $GLOBALS[static::class]->Utils->ReplaceOnce->i(...$args);
+        return $GLOBALS[static::class]->Utils->©ReplaceOnce->i(...$args);
     }
 }

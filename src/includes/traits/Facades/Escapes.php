@@ -12,7 +12,7 @@ trait Escapes
      */
     public static function escHtml(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Escape->html(...$args);
+        return $GLOBALS[static::class]->Utils->©Escape->html(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Escapes
      */
     public static function unescHtml(...$args)
     {
-        return $GLOBALS[static::class]->Utils->HtmlEntities->decode(...$args);
+        return $GLOBALS[static::class]->Utils->©HtmlEntities->decode(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Escapes
      */
     public static function escTextarea(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Escape->textarea(...$args);
+        return $GLOBALS[static::class]->Utils->©Escape->textarea(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Escapes
      */
     public static function escAttr(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Escape->attr(...$args);
+        return $GLOBALS[static::class]->Utils->©Escape->attr(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait Escapes
      */
     public static function escUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Escape->url(...$args);
+        return $GLOBALS[static::class]->Utils->©Escape->url(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait Escapes
      */
     public static function escShellArg(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Escape->shellArg(...$args);
+        return $GLOBALS[static::class]->Utils->©Escape->shellArg(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait Escapes
      */
     public static function escSqlName(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Pdo->escName(...$args);
+        return $GLOBALS[static::class]->Utils->©Pdo->escName(...$args);
     }
 
     /**
@@ -68,7 +68,7 @@ trait Escapes
      */
     public static function escSqlCols(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Pdo->escColumns(...$args);
+        return $GLOBALS[static::class]->Utils->©Pdo->escColumns(...$args);
     }
 
     /**
@@ -76,7 +76,7 @@ trait Escapes
      */
     public static function escSqlOrder(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Pdo->escOrder(...$args);
+        return $GLOBALS[static::class]->Utils->©Pdo->escOrder(...$args);
     }
 
     /**
@@ -84,7 +84,7 @@ trait Escapes
      */
     public static function escSqlOrderBys(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Pdo->escOrderBys(...$args);
+        return $GLOBALS[static::class]->Utils->©Pdo->escOrderBys(...$args);
     }
 
     /**
@@ -92,7 +92,7 @@ trait Escapes
      */
     public static function escSqlIn(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Pdo->escIn(...$args);
+        return $GLOBALS[static::class]->Utils->©Pdo->escIn(...$args);
     }
 
     /**
@@ -100,6 +100,6 @@ trait Escapes
      */
     public static function escRegex(...$args)
     {
-        return $GLOBALS[static::class]->Utils->RegexQuote->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©RegexQuote->__invoke(...$args);
     }
 }

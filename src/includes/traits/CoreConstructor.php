@@ -17,7 +17,7 @@ trait CoreConstructor
      *
      * @since 160223
      *
-     * @type App
+     * @type Classes\App
      */
     protected $App;
 
@@ -28,7 +28,7 @@ trait CoreConstructor
      *
      * @type string
      */
-    protected $a; #{AppFacades}
+    protected $c; #{AppFacades}
 
     /**
      * Class constructor.
@@ -46,6 +46,6 @@ trait CoreConstructor
             throw new Exception('Missing App instance.');
         }
         $this->App = $App;
-        $this->a   = &$this->App->Facades;
+        $this->c   = &$this->App->Facades;
     }
 }

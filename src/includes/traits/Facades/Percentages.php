@@ -12,6 +12,6 @@ trait Percentages
      */
     public static function percentDiff(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Percent->diff(...$args);
+        return $GLOBALS[static::class]->Utils->©Percent->diff(...$args);
     }
 }

@@ -12,7 +12,7 @@ trait Slugs
      */
     public static function isSlug(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Slug->isValid(...$args);
+        return $GLOBALS[static::class]->Utils->©Slug->isValid(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Slugs
      */
     public static function isSlugReserved(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Slug->isReserved(...$args);
+        return $GLOBALS[static::class]->Utils->©Slug->isReserved(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Slugs
      */
     public static function slugToName(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Slug->toName(...$args);
+        return $GLOBALS[static::class]->Utils->©Slug->toName(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Slugs
      */
     public static function slugToAcronym(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Slug->toAcronym(...$args);
+        return $GLOBALS[static::class]->Utils->©Slug->toAcronym(...$args);
     }
 
     /**
@@ -44,6 +44,6 @@ trait Slugs
      */
     public static function slugToVar(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Slug->toVar(...$args);
+        return $GLOBALS[static::class]->Utils->©Slug->toVar(...$args);
     }
 }

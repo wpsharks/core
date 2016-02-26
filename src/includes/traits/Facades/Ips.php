@@ -12,7 +12,7 @@ trait Ips
      */
     public static function currentIp(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Ip->current(...$args);
+        return $GLOBALS[static::class]->Utils->©Ip->current(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Ips
      */
     public static function ipRegion(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Ip->region(...$args);
+        return $GLOBALS[static::class]->Utils->©Ip->region(...$args);
     }
 
     /**
@@ -28,6 +28,6 @@ trait Ips
      */
     public static function ipCountry(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Ip->country(...$args);
+        return $GLOBALS[static::class]->Utils->©Ip->country(...$args);
     }
 }

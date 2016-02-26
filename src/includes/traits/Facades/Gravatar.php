@@ -12,6 +12,6 @@ trait Gravatar
      */
     public static function gravatarUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Gravatar->url(...$args);
+        return $GLOBALS[static::class]->Utils->©Gravatar->url(...$args);
     }
 }

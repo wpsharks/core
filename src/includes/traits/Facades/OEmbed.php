@@ -12,6 +12,6 @@ trait OEmbed
      */
     public static function oEmbed(...$args)
     {
-        return $GLOBALS[static::class]->Utils->OEmbed->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©OEmbed->__invoke(...$args);
     }
 }

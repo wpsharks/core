@@ -12,7 +12,7 @@ trait Markdown
      */
     public static function markdown(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Markdown->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Markdown->__invoke(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Markdown
      */
     public static function stripMarkdown(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Markdown->strip(...$args);
+        return $GLOBALS[static::class]->Utils->©Markdown->strip(...$args);
     }
 }

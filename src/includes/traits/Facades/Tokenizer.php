@@ -13,6 +13,6 @@ trait Tokenizer
     public static function tokenize(string $string, array $tokenize)
     {
         $args = ['string' => $string, 'tokenize' => $tokenize];
-        return $GLOBALS[static::class]->Di->get(Classes\Tokenizer::class, $args);
+        return $GLOBALS[static::class]->Di->get(Classes\Core\Tokenizer::class, $args);
     }
 }

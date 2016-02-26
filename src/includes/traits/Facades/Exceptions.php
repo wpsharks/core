@@ -12,6 +12,6 @@ trait Exceptions
      */
     public static function setupExceptionHandler(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Exceptions->handle(...$args);
+        return $GLOBALS[static::class]->Utils->©Exceptions->handle(...$args);
     }
 }

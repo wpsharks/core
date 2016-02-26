@@ -12,7 +12,7 @@ trait UrlCurrent
      */
     public static function isSsl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->isSsl(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->isSsl(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait UrlCurrent
      */
     public static function isLocalhost(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->isLocalhost(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->isLocalhost(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait UrlCurrent
      */
     public static function currentUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->__invoke(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait UrlCurrent
      */
     public static function currentScheme(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->scheme(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->scheme(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait UrlCurrent
      */
     public static function currentHost(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->host(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->host(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait UrlCurrent
      */
     public static function currentRootHost(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->rootHost(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->rootHost(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait UrlCurrent
      */
     public static function currentUri(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->uri(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->uri(...$args);
     }
 
     /**
@@ -68,7 +68,7 @@ trait UrlCurrent
      */
     public static function currentPath(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->path(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->path(...$args);
     }
 
     /**
@@ -76,6 +76,6 @@ trait UrlCurrent
      */
     public static function currentPathInfo(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlCurrent->pathInfo(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->pathInfo(...$args);
     }
 }

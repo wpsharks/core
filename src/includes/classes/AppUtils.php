@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
@@ -10,17 +11,8 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Initial release.
  */
-class AppUtils extends Core
+class AppUtils extends Classes\Core
 {
-    /**
-     * Sub-namespace.
-     *
-     * @since 160225
-     *
-     * @type string
-     */
-    protected $sub_namespace = '';
-
     /**
      * Magic utility factory.
      *
@@ -32,7 +24,11 @@ class AppUtils extends Core
      */
     public function __get(string $property)
     {
-        if (class_exists($class = $this->App->getClass(__NAMESPACE__.'\\Utils\\'.$this->sub_namespace.$property))) {
+        $map   = $this->map($property);
+        $class = __NAMESPACE__.$map['sub_namespace'].'\\Utils\\'.$map['prop_meth'];
+        $class = $this->App->getClass($class);
+
+        if (class_exists($class)) {
             $Utility = $this->App->Di->get($class, [], true);
             $this->overload((object) [$property => $Utility], true);
             return $Utility;
@@ -56,11 +52,45 @@ class AppUtils extends Core
     {
         if (isset($this->¤¤overload[$method])) {
             return $this->¤¤overload[$method](...$args);
-        } elseif (class_exists($class = $this->App->getClass(__NAMESPACE__.'\\Utils\\'.$this->sub_namespace.$method))) {
+        }
+        $map   = $this->map($method);
+        $class = __NAMESPACE__.$map['sub_namespace'].'\\Utils\\'.$map['prop_meth'];
+        $class = $this->App->getClass($class);
+
+        if (class_exists($class)) {
             $Utility = $this->App->Di->get($class, [], true);
             $this->overload((object) [$method => $Utility], true);
             return $Utility(...$args);
         }
-        return parent::__call($property);
+        return parent::__call($method);
+    }
+
+    /**
+     * Map the sub-namespace.
+     *
+     * @since 160225 Adding utilities map.
+     *
+     * @param string $prop_meth Property (or method) to check.
+     *
+     * @return array `['sub_namespace' => '', 'prop_meth' => '']`.
+     */
+    protected function map(string $prop_meth): array
+    {
+        if ($prop_meth && $prop_meth[0] === '©') {
+            return [
+                'sub_namespace' => '\\Core',
+                'prop_meth'     => mb_substr($prop_meth, 1),
+            ];
+        }
+        foreach ($this->App->Config->©sub_namespace_map as $_identifier => $_sub_namespace) {
+            if (mb_strpos($prop_meth, $_identifier) === 0) {
+                return [
+                    'sub_namespace' => '\\'.$_sub_namespace,
+                    'prop_meth'     => mb_substr($prop_meth, mb_strlen($prop_meth)),
+                ];
+            }
+        } // unset($_identifier, $_sub_namespace);
+
+        return ['sub_namespace' => '', 'prop_meth' => $prop_meth];
     }
 }

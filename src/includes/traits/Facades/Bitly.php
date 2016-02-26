@@ -12,7 +12,7 @@ trait Bitly
      */
     public static function bitlyShorten(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Bitly->shorten(...$args);
+        return $GLOBALS[static::class]->Utils->©Bitly->shorten(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Bitly
      */
     public static function bitlyLinkHistory(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Bitly->linkHistory(...$args);
+        return $GLOBALS[static::class]->Utils->©Bitly->linkHistory(...$args);
     }
 }

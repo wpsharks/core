@@ -12,7 +12,7 @@ trait Output
      */
     public static function gzipOff(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Output->gzipOff(...$args);
+        return $GLOBALS[static::class]->Utils->©Output->gzipOff(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Output
      */
     public static function obEndCleanAll(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Output->buffersEndClean(...$args);
+        return $GLOBALS[static::class]->Utils->©Output->buffersEndClean(...$args);
     }
 }

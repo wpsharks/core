@@ -12,7 +12,7 @@ trait Patterns
      */
     public static function regexFrag(...$args)
     {
-        return $GLOBALS[static::class]->Utils->RegexFrag->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©RegexFrag->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Patterns
      */
     public static function regexPatternIn(...$args)
     {
-        return $GLOBALS[static::class]->Utils->RegexPattern->in(...$args);
+        return $GLOBALS[static::class]->Utils->©RegexPattern->in(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Patterns
      */
     public static function regexPatternsMatch(...$args)
     {
-        return $GLOBALS[static::class]->Utils->RegexPatterns->match(...$args);
+        return $GLOBALS[static::class]->Utils->©RegexPatterns->match(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Patterns
      */
     public static function wdRegex(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WdRegex->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©WdRegex->__invoke(...$args);
     }
 
     /**
@@ -44,6 +44,6 @@ trait Patterns
      */
     public static function wdRegexFrag(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WdRegex->frag(...$args);
+        return $GLOBALS[static::class]->Utils->©WdRegex->frag(...$args);
     }
 }

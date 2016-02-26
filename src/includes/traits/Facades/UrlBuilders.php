@@ -12,7 +12,7 @@ trait UrlBuilders
      */
     public static function setScheme(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlScheme->set(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlScheme->set(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait UrlBuilders
      */
     public static function appUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Url->toApp(...$args);
+        return $GLOBALS[static::class]->Utils->©Url->toApp(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait UrlBuilders
      */
     public static function appCoreUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Url->toAppCore(...$args);
+        return $GLOBALS[static::class]->Utils->©Url->toAppCore(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait UrlBuilders
      */
     public static function curUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Url->toCurrent(...$args);
+        return $GLOBALS[static::class]->Utils->©Url->toCurrent(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait UrlBuilders
      */
     public static function curCoreUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Url->toCurrentCore(...$args);
+        return $GLOBALS[static::class]->Utils->©Url->toCurrentCore(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait UrlBuilders
      */
     public static function cdnUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Cdn->url(...$args);
+        return $GLOBALS[static::class]->Utils->©Cdn->url(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait UrlBuilders
      */
     public static function cdnS3Url(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Cdn->s3Url(...$args);
+        return $GLOBALS[static::class]->Utils->©Cdn->s3Url(...$args);
     }
 
     /**
@@ -68,6 +68,6 @@ trait UrlBuilders
      */
     public static function cdnFilter(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Cdn->filter(...$args);
+        return $GLOBALS[static::class]->Utils->©Cdn->filter(...$args);
     }
 }

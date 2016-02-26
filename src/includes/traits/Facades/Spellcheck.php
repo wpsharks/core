@@ -12,6 +12,6 @@ trait Spellcheck
      */
     public static function isSpelledRight(...$args)
     {
-        return $GLOBALS[static::class]->Utils->SpellCheck->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©SpellCheck->__invoke(...$args);
     }
 }

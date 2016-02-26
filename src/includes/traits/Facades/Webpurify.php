@@ -12,7 +12,7 @@ trait Webpurify
      */
     public static function containsBadWords(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WebPurify->check(...$args);
+        return $GLOBALS[static::class]->Utils->©WebPurify->check(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Webpurify
      */
     public static function slugContainsBadWords(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WebPurify->checkSlug(...$args);
+        return $GLOBALS[static::class]->Utils->©WebPurify->checkSlug(...$args);
     }
 }

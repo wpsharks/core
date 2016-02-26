@@ -12,6 +12,6 @@ trait Translits
      */
     public static function forceAscii(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Transliterate->toAscii(...$args);
+        return $GLOBALS[static::class]->Utils->©Transliterate->toAscii(...$args);
     }
 }

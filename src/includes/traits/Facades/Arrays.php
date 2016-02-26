@@ -12,6 +12,6 @@ trait Arrays
      */
     public static function arrayUnshiftAssoc(&$array, $key, $value)
     {
-        return $GLOBALS[static::class]->Utils->UnshiftAssoc->__invoke($array, $key, $value);
+        return $GLOBALS[static::class]->Utils->©UnshiftAssoc->__invoke($array, $key, $value);
     }
 }

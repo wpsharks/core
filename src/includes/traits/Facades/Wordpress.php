@@ -12,6 +12,6 @@ trait Wordpress
      */
     public static function isWordpress(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WordPress->is(...$args);
+        return $GLOBALS[static::class]->Utils->©WordPress->is(...$args);
     }
 }

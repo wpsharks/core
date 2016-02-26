@@ -12,6 +12,6 @@ trait Eols
      */
     public static function normalizeEols(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Eols->normalize(...$args);
+        return $GLOBALS[static::class]->Utils->©Eols->normalize(...$args);
     }
 }

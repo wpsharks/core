@@ -12,7 +12,7 @@ trait Versions
      */
     public static function isVersion(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Version->isValid(...$args);
+        return $GLOBALS[static::class]->Utils->©Version->isValid(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Versions
      */
     public static function isDevVersion(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Version->isValidDev(...$args);
+        return $GLOBALS[static::class]->Utils->©Version->isValidDev(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Versions
      */
     public static function isStableVersion(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Version->isValidStable(...$args);
+        return $GLOBALS[static::class]->Utils->©Version->isValidStable(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Versions
      */
     public static function isWsVersion(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WsVersion->isValid(...$args);
+        return $GLOBALS[static::class]->Utils->©WsVersion->isValid(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait Versions
      */
     public static function isWsDevVersion(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WsVersion->isValidDev(...$args);
+        return $GLOBALS[static::class]->Utils->©WsVersion->isValidDev(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait Versions
      */
     public static function isWsStableVersion(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WsVersion->isValidStable(...$args);
+        return $GLOBALS[static::class]->Utils->©WsVersion->isValidStable(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait Versions
      */
     public static function wsVersionDate(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WsVersion->date(...$args);
+        return $GLOBALS[static::class]->Utils->©WsVersion->date(...$args);
     }
 
     /**
@@ -68,6 +68,6 @@ trait Versions
      */
     public static function wsVersionTime(...$args)
     {
-        return $GLOBALS[static::class]->Utils->WsVersion->time(...$args);
+        return $GLOBALS[static::class]->Utils->©WsVersion->time(...$args);
     }
 }

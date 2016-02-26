@@ -12,7 +12,7 @@ trait Names
      */
     public static function fnameIn(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Name->firstIn(...$args);
+        return $GLOBALS[static::class]->Utils->©Name->firstIn(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Names
      */
     public static function lnameIn(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Name->lastIn(...$args);
+        return $GLOBALS[static::class]->Utils->©Name->lastIn(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Names
      */
     public static function nameToAcronym(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Name->toAcronym(...$args);
+        return $GLOBALS[static::class]->Utils->©Name->toAcronym(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Names
      */
     public static function nameToSlug(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Name->toSlug(...$args);
+        return $GLOBALS[static::class]->Utils->©Name->toSlug(...$args);
     }
 
     /**
@@ -44,6 +44,6 @@ trait Names
      */
     public static function nameToVar(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Name->toVar(...$args);
+        return $GLOBALS[static::class]->Utils->©Name->toVar(...$args);
     }
 }

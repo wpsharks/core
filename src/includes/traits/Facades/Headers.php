@@ -12,7 +12,7 @@ trait Headers
      */
     public static function statusHeader(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Headers->sendStatus(...$args);
+        return $GLOBALS[static::class]->Utils->©Headers->sendStatus(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Headers
      */
     public static function noCacheHeaders(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Headers->sendNoCache(...$args);
+        return $GLOBALS[static::class]->Utils->©Headers->sendNoCache(...$args);
     }
 
     /**
@@ -28,6 +28,6 @@ trait Headers
      */
     public static function parseHeaders(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Headers->parse(...$args);
+        return $GLOBALS[static::class]->Utils->©Headers->parse(...$args);
     }
 }

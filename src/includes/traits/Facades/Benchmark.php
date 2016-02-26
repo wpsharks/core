@@ -12,7 +12,7 @@ trait Benchmark
      */
     public static function benchStart(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Benchmark->start(...$args);
+        return $GLOBALS[static::class]->Utils->©Benchmark->start(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Benchmark
      */
     public static function benchPrint(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Benchmark->print(...$args);
+        return $GLOBALS[static::class]->Utils->©Benchmark->print(...$args);
     }
 }

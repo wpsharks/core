@@ -12,7 +12,7 @@ trait Memcache
      */
     public static function memcacheSet(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Memcache->set(...$args);
+        return $GLOBALS[static::class]->Utils->©Memcache->set(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Memcache
      */
     public static function memcacheGet(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Memcache->get(...$args);
+        return $GLOBALS[static::class]->Utils->©Memcache->get(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Memcache
      */
     public static function memcacheTouch(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Memcache->touch(...$args);
+        return $GLOBALS[static::class]->Utils->©Memcache->touch(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait Memcache
      */
     public static function memcacheClear(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Memcache->clear(...$args);
+        return $GLOBALS[static::class]->Utils->©Memcache->clear(...$args);
     }
 }

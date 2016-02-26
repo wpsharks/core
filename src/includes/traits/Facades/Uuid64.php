@@ -12,7 +12,7 @@ trait Uuid64
      */
     public static function uuid64Validate(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->validate(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->validate(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Uuid64
      */
     public static function uuid64ShardIdIn(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->shardIdIn(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->shardIdIn(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Uuid64
      */
     public static function uuid64ValidateShardId(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->validateShardId(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->validateShardId(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Uuid64
      */
     public static function uuid64TypeIdIn(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->typeIdIn(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->typeIdIn(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait Uuid64
      */
     public static function uuid64ValidateTypeId(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->validateTypeId(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->validateTypeId(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait Uuid64
      */
     public static function uuid64LocalIdIn(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->localIdIn(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->localIdIn(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait Uuid64
      */
     public static function uuid64ValidateLocalId(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->validateLocalId(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->validateLocalId(...$args);
     }
 
     /**
@@ -68,7 +68,7 @@ trait Uuid64
      */
     public static function uuid64Parse(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->parse(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->parse(...$args);
     }
 
     /**
@@ -76,6 +76,6 @@ trait Uuid64
      */
     public static function uuid64Build(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid64->build(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid64->build(...$args);
     }
 }

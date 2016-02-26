@@ -12,7 +12,7 @@ trait UrlParsers
      */
     public static function parseUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlParse->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlParse->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait UrlParsers
      */
     public static function unparseUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlParse->un(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlParse->un(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait UrlParsers
      */
     public static function parseUrlHost(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlHost->parse(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlHost->parse(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait UrlParsers
      */
     public static function unparseUrlHost(...$args)
     {
-        return $GLOBALS[static::class]->Utils->UrlHost->unParse(...$args);
+        return $GLOBALS[static::class]->Utils->©UrlHost->unParse(...$args);
     }
 }

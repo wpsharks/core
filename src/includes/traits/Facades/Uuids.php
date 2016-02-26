@@ -12,7 +12,7 @@ trait Uuids
      */
     public static function uuidV1(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid->v1(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid->v1(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Uuids
      */
     public static function uuidV3(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid->v3(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid->v3(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Uuids
      */
     public static function uuidV4(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid->v4(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid->v4(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait Uuids
      */
     public static function uuidV5(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Uuid->v5(...$args);
+        return $GLOBALS[static::class]->Utils->©Uuid->v5(...$args);
     }
 }

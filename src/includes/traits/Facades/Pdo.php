@@ -12,6 +12,6 @@ trait Pdo
      */
     public static function pdoGet(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Pdo->get(...$args);
+        return $GLOBALS[static::class]->Utils->©Pdo->get(...$args);
     }
 }

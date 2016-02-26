@@ -12,7 +12,7 @@ trait Serializer
      */
     public static function maybeSerialize(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Serializer->maybeSerialize(...$args);
+        return $GLOBALS[static::class]->Utils->©Serializer->maybeSerialize(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Serializer
      */
     public static function maybeUnserialize(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Serializer->maybeUnserialize(...$args);
+        return $GLOBALS[static::class]->Utils->©Serializer->maybeUnserialize(...$args);
     }
 
     /**
@@ -28,6 +28,6 @@ trait Serializer
      */
     public static function checkSetUnserializedType(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Serializer->checkSetType(...$args);
+        return $GLOBALS[static::class]->Utils->©Serializer->checkSetType(...$args);
     }
 }

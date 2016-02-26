@@ -12,7 +12,7 @@ trait Dimensions
      */
     public static function oneDimension(...$args)
     {
-        return $GLOBALS[static::class]->Utils->OneDimension->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©OneDimension->__invoke(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Dimensions
      */
     public static function removeEmptys(...$args)
     {
-        return $GLOBALS[static::class]->Utils->RemoveEmptys->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©RemoveEmptys->__invoke(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Dimensions
      */
     public static function removeNulls(...$args)
     {
-        return $GLOBALS[static::class]->Utils->RemoveNulls->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©RemoveNulls->__invoke(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Dimensions
      */
     public static function sortByKey(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Sort->byKey(...$args);
+        return $GLOBALS[static::class]->Utils->©Sort->byKey(...$args);
     }
 
     /**
@@ -44,6 +44,6 @@ trait Dimensions
      */
     public static function dotKeys(...$args)
     {
-        return $GLOBALS[static::class]->Utils->DotKeys->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©DotKeys->__invoke(...$args);
     }
 }

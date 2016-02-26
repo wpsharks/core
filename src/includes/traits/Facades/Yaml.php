@@ -12,6 +12,6 @@ trait Yaml
      */
     public static function parseYaml(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Yaml->parse(...$args);
+        return $GLOBALS[static::class]->Utils->©Yaml->parse(...$args);
     }
 }

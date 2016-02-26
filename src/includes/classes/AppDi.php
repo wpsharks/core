@@ -2,8 +2,10 @@
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
 use WebSharks\Dicer\Di;
 
 /**
@@ -18,7 +20,7 @@ class AppDi extends Di
      *
      * @since 150424
      *
-     * @type App
+     * @type Classes\App
      */
     protected $App;
 
@@ -27,10 +29,10 @@ class AppDi extends Di
      *
      * @since 150424 Initial release.
      *
-     * @param App   $App                 Instance of App.
-     * @param array $global_default_rule Default rule.
+     * @param Classes\App $App                 Instance of App.
+     * @param array       $global_default_rule Default rule.
      */
-    public function __construct(App $App, array $global_default_rule = [])
+    public function __construct(Classes\App $App, array $global_default_rule = [])
     {
         parent::__construct($global_default_rule);
 

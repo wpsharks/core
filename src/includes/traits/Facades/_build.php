@@ -18,6 +18,7 @@ $AppFacades = '<?php
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
+use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 

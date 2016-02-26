@@ -12,7 +12,7 @@ trait Cli
      */
     public static function isCli(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Cli->is(...$args);
+        return $GLOBALS[static::class]->Utils->©Cli->is(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Cli
      */
     public static function isCliInteractive(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Cli->isInteractive(...$args);
+        return $GLOBALS[static::class]->Utils->©Cli->isInteractive(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Cli
      */
     public static function readStdin(...$args)
     {
-        return $GLOBALS[static::class]->Utils->CliStream->in(...$args);
+        return $GLOBALS[static::class]->Utils->©CliStream->in(...$args);
     }
 
     /**
@@ -36,7 +36,7 @@ trait Cli
      */
     public static function writeStdout(...$args)
     {
-        return $GLOBALS[static::class]->Utils->CliStream->out(...$args);
+        return $GLOBALS[static::class]->Utils->©CliStream->out(...$args);
     }
 
     /**
@@ -44,7 +44,7 @@ trait Cli
      */
     public static function writeStdoutHr(...$args)
     {
-        return $GLOBALS[static::class]->Utils->CliStream->outHr(...$args);
+        return $GLOBALS[static::class]->Utils->©CliStream->outHr(...$args);
     }
 
     /**
@@ -52,7 +52,7 @@ trait Cli
      */
     public static function writeStderr(...$args)
     {
-        return $GLOBALS[static::class]->Utils->CliStream->err(...$args);
+        return $GLOBALS[static::class]->Utils->©CliStream->err(...$args);
     }
 
     /**
@@ -60,7 +60,7 @@ trait Cli
      */
     public static function writeStderrHr(...$args)
     {
-        return $GLOBALS[static::class]->Utils->CliStream->errHr(...$args);
+        return $GLOBALS[static::class]->Utils->©CliStream->errHr(...$args);
     }
 
     /**
@@ -68,6 +68,6 @@ trait Cli
      */
     public static function cliOpenUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->CliOs->openUrl(...$args);
+        return $GLOBALS[static::class]->Utils->©CliOs->openUrl(...$args);
     }
 }

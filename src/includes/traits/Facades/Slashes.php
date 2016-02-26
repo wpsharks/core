@@ -12,7 +12,7 @@ trait Slashes
      */
     public static function slash(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Slashes->add(...$args);
+        return $GLOBALS[static::class]->Utils->©Slashes->add(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Slashes
      */
     public static function unslash(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Slashes->remove(...$args);
+        return $GLOBALS[static::class]->Utils->©Slashes->remove(...$args);
     }
 }

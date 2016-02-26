@@ -12,7 +12,7 @@ trait Os
      */
     public static function isUnix(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Os->isUnix(...$args);
+        return $GLOBALS[static::class]->Utils->©Os->isUnix(...$args);
     }
 
     /**
@@ -20,7 +20,7 @@ trait Os
      */
     public static function isLinux(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Os->isLinux(...$args);
+        return $GLOBALS[static::class]->Utils->©Os->isLinux(...$args);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Os
      */
     public static function isMac(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Os->isMac(...$args);
+        return $GLOBALS[static::class]->Utils->©Os->isMac(...$args);
     }
 
     /**
@@ -36,6 +36,6 @@ trait Os
      */
     public static function isWindows(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Os->isWindows(...$args);
+        return $GLOBALS[static::class]->Utils->©Os->isWindows(...$args);
     }
 }

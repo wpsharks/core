@@ -12,7 +12,7 @@ trait Clippers
      */
     public static function clip(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Clip->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Clip->__invoke(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Clippers
      */
     public static function midClip(...$args)
     {
-        return $GLOBALS[static::class]->Utils->MidClip->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©MidClip->__invoke(...$args);
     }
 }

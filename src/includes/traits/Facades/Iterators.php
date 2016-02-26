@@ -12,7 +12,7 @@ trait Iterators
      */
     public static function arrayRecursiveIterator(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Iterators->arrayRecursive(...$args);
+        return $GLOBALS[static::class]->Utils->©Iterators->arrayRecursive(...$args);
     }
 
     /**
@@ -20,6 +20,6 @@ trait Iterators
      */
     public static function dirRegexRecursiveIterator(...$args)
     {
-        return $GLOBALS[static::class]->Utils->Iterators->dirRecursiveRegex(...$args);
+        return $GLOBALS[static::class]->Utils->©Iterators->dirRecursiveRegex(...$args);
     }
 }
