@@ -54,7 +54,7 @@ class DirTmp extends Classes\Core\Base\Core
         }
         foreach ($possible_dirs as $_key => $_dir) {
             if ($_dir && @is_dir($_dir) && @is_writable($_dir)) {
-                $_dir .= '/'.$this->App->namespace_sha1.'/'.$this->App->dir_sha1;
+                $_dir .= '/'.$this->App->namespace_sha1.'/tmp';
                 if (is_dir($_dir) || mkdir($_dir, $this->App->Config->©fs_permissions['©transient_dirs'], true)) {
                     return $dir = $_dir;
                 }

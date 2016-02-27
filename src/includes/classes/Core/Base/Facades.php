@@ -1,9 +1,9 @@
 <?php
 // This file was auto-generated:
-// February 26th, 2016, 4:51 pm UTC
+// February 27th, 2016, 3:57 pm UTC
 
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes;
+namespace WebSharks\Core\Classes\Core\Base;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Core\Base\Exception;
@@ -11,11 +11,11 @@ use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
- * App pseudo-static facades.
+ * Pseudo-static facades.
  *
  * @since 160223 Initial release.
  */
-class AppFacades
+abstract class Facades
 {
     use Traits\Facades\App;
     use Traits\Facades\Arrays;

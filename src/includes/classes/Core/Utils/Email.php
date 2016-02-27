@@ -166,7 +166,7 @@ class Email extends Classes\Core\Base\Core implements Interfaces\EmailConstants
      * @param bool  $strict Optional. Defaults to `false` (faster). Parses all strings w/ `@` signs.
      *                      If `true`, validate each address; and only return 100% valid email addresses.
      *
-     * @return \stdClass[] Each object in the array contains 3 properties: `name`, `fname`, `lname`, `email`.
+     * @return \StdClass[] Each object in the array contains 3 properties: `name`, `fname`, `lname`, `email`.
      */
     public function parseAddresses($value, bool $strict = false): array
     {

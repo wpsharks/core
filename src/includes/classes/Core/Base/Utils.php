@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes;
+namespace WebSharks\Core\Classes\Core\Base;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Core\Base\Exception;
@@ -8,11 +8,11 @@ use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
- * App utilities.
+ * Utilities.
  *
  * @since 150424 Initial release.
  */
-class AppUtils extends Classes\Core\Base\Core
+class Utils extends Classes\Core\Base\Core
 {
     /**
      * Magic utility factory.
@@ -26,7 +26,7 @@ class AppUtils extends Classes\Core\Base\Core
     public function __get(string $property)
     {
         $map   = $this->map($property);
-        $class = __NAMESPACE__.$map['sub_namespace'].'\\Utils\\'.$map['prop_meth'];
+        $class = Classes::class.$map['sub_namespace'].'\\Utils\\'.$map['prop_meth'];
         $class = $this->App->getClass($class);
 
         if (class_exists($class)) {
@@ -55,7 +55,7 @@ class AppUtils extends Classes\Core\Base\Core
             return $this->¤¤overload[$method](...$args);
         }
         $map   = $this->map($method);
-        $class = __NAMESPACE__.$map['sub_namespace'].'\\Utils\\'.$map['prop_meth'];
+        $class = Classes::class.$map['sub_namespace'].'\\Utils\\'.$map['prop_meth'];
         $class = $this->App->getClass($class);
 
         if (class_exists($class)) {
@@ -71,7 +71,7 @@ class AppUtils extends Classes\Core\Base\Core
      *
      * @since 160225 Adding utilities map.
      *
-     * @param string $prop_meth Property (or method) to check.
+     * @param string $prop_meth Property (or method).
      *
      * @return array `['sub_namespace' => '', 'prop_meth' => '']`.
      */
@@ -83,14 +83,14 @@ class AppUtils extends Classes\Core\Base\Core
                 'prop_meth'     => mb_substr($prop_meth, 1),
             ];
         }
-        foreach ($this->App->Config->©sub_namespace_map as $_identifier => $_sub_namespace) {
-            if (mb_strpos($prop_meth, $_identifier) === 0) {
+        foreach ($this->App->Config->©sub_namespace_map as $_sub_namespace => $_identifiers) {
+            if ($_sub_namespace && !empty($_identifiers['©utils']) && mb_strpos($prop_meth, $_identifiers['©utils']) === 0) {
                 return [
                     'sub_namespace' => '\\'.$_sub_namespace,
-                    'prop_meth'     => mb_substr($prop_meth, mb_strlen($prop_meth)),
+                    'prop_meth'     => mb_substr($prop_meth, mb_strlen($_identifiers['©utils'])),
                 ];
             }
-        } // unset($_identifier, $_sub_namespace);
+        } // unset($_sub_namespace, $_identifiers);
 
         return ['sub_namespace' => '', 'prop_meth' => $prop_meth];
     }

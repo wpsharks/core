@@ -203,11 +203,11 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
      * @since 151125 OEmbed utilities.
      *
      * @param string    $url   URL the embed is for.
-     * @param \stdClass $embed The embed response object.
+     * @param \StdClass $embed The embed response object.
      *
      * @return string The Embedly HTML markup.
      */
-    protected function embedlyMarkup(string $url, \stdClass $embed): string
+    protected function embedlyMarkup(string $url, \StdClass $embed): string
     {
         $markup = ''; // Initialize HTML markup.
 
@@ -257,7 +257,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
      *
      * @param string $url URL to check the cache for.
      *
-     * @return \stdClass|null Cached embed code, if possible.
+     * @return \StdClass|null Cached embed code, if possible.
      */
     protected function getEmbedlyCache(string $url)
     {
@@ -268,7 +268,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
         if (is_file($cache_file)) {
             $embed = file_get_contents($cache_file);
             $embed = unserialize($embed);
-            if ($embed instanceof \stdClass) {
+            if ($embed instanceof \StdClass) {
                 return $embed;
             }
         }
@@ -280,9 +280,9 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
      * @since 151125 OEmbed utilities.
      *
      * @param string    $url   URL the embed is for.
-     * @param \stdClass $embed The embed response object.
+     * @param \StdClass $embed The embed response object.
      */
-    protected function setEmbedlyCache(string $url, \stdClass $embed)
+    protected function setEmbedlyCache(string $url, \StdClass $embed)
     {
         $url_sha1              = sha1($url);
         $cache_dir             = $this->cache_dir.'/embedly/'.$this->c::sha1ModShardId($url_sha1, true);

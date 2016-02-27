@@ -22,13 +22,40 @@ trait CoreConstructor
     protected $App;
 
     /**
-     * Facades.
+     * All facades.
      *
-     * @since 160223
+     * @since 160227
+     *
+     * @type array
+     */
+    protected $f;
+
+    /**
+     * Core facades.
+     *
+     * @since 160227
      *
      * @type string
      */
-    protected $c; #{AppFacades}
+    protected $c;
+
+    /**
+     * App facades.
+     *
+     * @since 160227
+     *
+     * @type string
+     */
+    protected $a;
+
+    /**
+     * Secondary core facades.
+     *
+     * @since 160227
+     *
+     * @type string
+     */
+    protected $s;
 
     /**
      * Class constructor.
@@ -46,6 +73,9 @@ trait CoreConstructor
             throw new Exception('Missing App instance.');
         }
         $this->App = $App;
-        $this->c   = &$this->App->Facades;
+        $this->f   = &$this->App->facades;
+        $this->c   = &$this->App->facades['c'];
+        $this->a   = &$this->App->facades['a'];
+        $this->s   = &$this->App->facades['s'];
     }
 }

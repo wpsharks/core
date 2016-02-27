@@ -102,7 +102,7 @@ class Ip extends Classes\Core\Base\Core
      *
      * @param string $ip An IP address.
      *
-     * @return \stdClass|bool Geo data for IP address.
+     * @return \StdClass|bool Geo data for IP address.
      */
     protected function geoData(string $ip)
     {
@@ -155,13 +155,13 @@ class Ip extends Classes\Core\Base\Core
             $country = (string) $json->geoplugin_countryCode;
             $country = mb_strtoupper($country);
         }
-        # Fill object cache; i.e., `\stdClass` or `false`.
+        # Fill object cache; i.e., `\StdClass` or `false`.
 
         $geo = (object) compact('region', 'country');
         if (mb_strlen($geo->region) !== 2 || mb_strlen($geo->country) !== 2) {
             $geo = false; // Invalid (or insufficient) data.
         }
-        # Cache geo data; i.e., `\stdClass` or `false`.
+        # Cache geo data; i.e., `\StdClass` or `false`.
 
         if (!is_dir($cache_dir)) {
             mkdir($cache_dir, $cache_dir_permissions, true);
@@ -170,7 +170,7 @@ class Ip extends Classes\Core\Base\Core
 
         # Return object; or `false` on failure.
 
-        return $geo; // `\stdClass` or `false`.
+        return $geo; // `\StdClass` or `false`.
     }
 
     /**

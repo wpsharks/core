@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes;
+namespace WebSharks\Core\Classes\Core\Base;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Core\Base\Exception;
@@ -8,11 +8,11 @@ use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
- * App config.
+ * Config.
  *
  * @since 150424 Initial release.
  */
-class AppConfig extends Classes\Core\Base\Core
+class Config extends Classes\Core\Base\Core
 {
     /**
      * Class constructor.
@@ -64,7 +64,12 @@ class AppConfig extends Classes\Core\Base\Core
                     ],
                 ],
             ],
-            '©sub_namespace_map' => [],
+            '©sub_namespace_map' => [
+                // 'SCore' => [
+                //     '©utils'   => 'š',
+                //     '©facades' => 's',
+                // ],
+            ],
 
             '©mysql_db' => [
                 '©hosts' => [
@@ -128,11 +133,10 @@ class AppConfig extends Classes\Core\Base\Core
             ],
 
             '©fs_paths' => [
-                '©logs_dir'      => (string) ($_s_cfgs['CFG_LOGS_DIR'] ?? '/var/log/%%app_namespace_sha1%%'),
-                '©cache_dir'     => (string) ($_s_cfgs['CFG_CACHE_DIR'] ?? '/tmp/%%app_namespace_sha1%%/cache'),
-                '©templates_dir' => (string) ($_s_cfgs['CFG_TEMPLATES_DIR'] ?? '%%app_dir%%/src/includes/templates'),
-                '©errors_dir'    => (string) ($_s_cfgs['CFG_ERRORS_DIR'] ?? ($is_cfg_host ? '/bootstrap/src/html/errors' : '')),
-                '©config_file'   => (string) ($_s_cfgs['CFG_CONFIG_FILE'] ?? '%%app_dir%%/.config.json'),
+                '©logs_dir'    => (string) ($_s_cfgs['CFG_LOGS_DIR'] ?? '/var/log/%%app_namespace_sha1%%'),
+                '©cache_dir'   => (string) ($_s_cfgs['CFG_CACHE_DIR'] ?? '/tmp/%%app_namespace_sha1%%/cache'),
+                '©errors_dir'  => (string) ($_s_cfgs['CFG_ERRORS_DIR'] ?? ($is_cfg_host ? '/bootstrap/src/html/errors' : '')),
+                '©config_file' => (string) ($_s_cfgs['CFG_CONFIG_FILE'] ?? '%%app_base_dir%%/.config.json'),
             ],
             '©fs_permissions' => [
                 '©transient_dirs' => (int) ($_s_cfgs['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 02775),
@@ -200,7 +204,7 @@ class AppConfig extends Classes\Core\Base\Core
         $instance_base = $this->merge($default_instance_base, $instance_base);
 
         # Merge a possible JSON configuration file also.
-        // @TODO Store config in memory to avoid repeated disk reads.
+        # @TODO Convert this to a PHP include so OPcache picks it up.
 
         $config_file = $instance['©fs_paths']['©config_file'] ?? $instance_base['©fs_paths']['©config_file'];
 
@@ -308,9 +312,17 @@ class AppConfig extends Classes\Core\Base\Core
                     '%%app_namespace%%',
                     '%%app_namespace_sha1%%',
 
+                    '%%app_file%%',
+                    '%%app_file_basename%%',
+                    '%%app_file_sha1%%',
+
                     '%%app_dir%%',
                     '%%app_dir_basename%%',
                     '%%app_dir_sha1%%',
+
+                    '%%app_base_dir%%',
+                    '%%app_base_dir_basename%%',
+                    '%%app_base_dir_sha1%%',
 
                     '%%core_dir%%',
                     '%%core_dir_basename%%',
@@ -325,9 +337,17 @@ class AppConfig extends Classes\Core\Base\Core
                     $this->App->namespace,
                     $this->App->namespace_sha1,
 
+                    $this->App->file,
+                    $this->App->file_basename,
+                    $this->App->file_sha1,
+
                     $this->App->dir,
                     $this->App->dir_basename,
                     $this->App->dir_sha1,
+
+                    $this->App->base_dir,
+                    $this->App->base_dir_basename,
+                    $this->App->base_dir_sha1,
 
                     $this->App->core_dir,
                     $this->App->core_dir_basename,

@@ -1,20 +1,20 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes;
+namespace WebSharks\Core\Classes\Core\Base;
 
 use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
-use WebSharks\Dicer\Di;
+use WebSharks\Dicer\Di as Dicer;
 
 /**
- * App DI.
+ * Dependency injector.
  *
  * @since 150424 Initial release.
  */
-class AppDi extends Di
+class Di extends Dicer
 {
     /**
      * App.

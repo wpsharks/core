@@ -122,7 +122,7 @@ class Benchmark extends Classes\Core\Base\Core
             $this->addStatistic('PHP Version', PHP_VERSION);
             $this->addStatistic('PCRE Version', PCRE_VERSION."\n");
 
-            $this->addStatistic('Di Version', Classes\AppDi::VERSION);
+            $this->addStatistic('Di Version', Classes\Di::VERSION);
             $this->addStatistic('Core Version', Classes\App::VERSION);
             $this->addStatistic('App Version', $this->App::VERSION."\n");
 

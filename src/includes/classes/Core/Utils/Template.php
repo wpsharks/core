@@ -30,7 +30,7 @@ class Template extends Classes\Core\Base\Core
         $file = $this->c::mbTrim($file, '/');
 
         if (!$dir) { // Use default templates directory?
-            $dir = $this->App->Config->©fs_paths['©templates_dir'];
+            $dir = $this->App->base_dir.'/src/includes/templates';
         }
         if (!$dir || $dir === 'parent' || $dir === 'core' || ($file && !is_file($dir.'/'.$file))) {
             if ($this->App->parent) {
