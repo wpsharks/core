@@ -143,10 +143,10 @@ class Template extends Classes\Core\Base\Core
      * @param array  $parents     Parent template files.
      * @param array  $parent_vars Parent template vars.
      *
-     * @return Classes\Template Template instance.
+     * @return Classes\Core\Template Template instance.
      */
-    public function get(string $file, string $dir = '', array $parents = [], array $parent_vars = []): Classes\Template
+    public function get(string $file, string $dir = '', array $parents = [], array $parent_vars = []): Classes\Core\Template
     {
-        return $this->c::diGet(Classes\Template::class, compact('dir', 'file', 'parents', 'parent_vars'));
+        return $this->c::diGet(Classes\Core\Template::class, compact('dir', 'file', 'parents', 'parent_vars'));
     }
 }
