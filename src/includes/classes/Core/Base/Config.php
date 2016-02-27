@@ -114,8 +114,8 @@ class Config extends Classes\Core\Base\Core
                 '©tagline'     => (string) ($_s_cfgs['CFG_BRAND_TAGLINE'] ?? ''),
 
                 '©favicon'    => (string) ($_s_cfgs['CFG_BRAND_FAVICON'] ?? '/favicon.ico'),
-                '©logo'       => (string) ($_s_cfgs['CFG_BRAND_LOGO'] ?? ''),
-                '©screenshot' => (string) ($_s_cfgs['CFG_BRAND_SCREENSHOT'] ?? ''),
+                '©logo'       => (string) ($_s_cfgs['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
+                '©screenshot' => (string) ($_s_cfgs['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
             ],
 
             '©urls' => [
