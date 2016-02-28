@@ -31,13 +31,13 @@ class Config extends Classes\Core\Base\Core
         # Establish arguments.
 
         $default_args = [
-            'use_server_cfgs' => true,
+            '©use_server_cfgs' => true,
         ];
         $args = array_merge($default_args, $args);
 
         # Instance base (i.e., default config).
 
-        $_s_cfgs     = $args['use_server_cfgs'] ? $_SERVER : [];
+        $_s_cfgs     = $args['©use_server_cfgs'] ? $_SERVER : [];
         $host        = $_s_cfgs['CFG_HOST'] ?? mb_strtolower(php_uname('n'));
         $root_host   = $_s_cfgs['CFG_ROOT_HOST'] ?? implode('.', array_slice(explode('.', $host), -2));
         $is_cfg_host = !empty($_s_cfgs['CFG_HOST']); // Flag used below in some defaults.
@@ -66,7 +66,7 @@ class Config extends Classes\Core\Base\Core
             ],
             '©sub_namespace_map' => [
                 // 'SCore' => [
-                //     '©utils'   => 'š',
+                //     '©utils'   => '§',
                 //     '©facades' => 's',
                 // ],
             ],

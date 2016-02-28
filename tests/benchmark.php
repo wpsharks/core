@@ -13,11 +13,26 @@ $string = 'Lörem ipßüm dölör ßit ämet, cönßectetüer ädipißcing elit.
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 $app = c::app();
+$ref = new \ReflectionClass($app);
 
 c::benchStart();
 
 for ($i = 0; $i < 50000; ++$i) {
-    (new \ReflectionClass($app))->getFileName();
+    mb_strpos('hello', 'h');
+}
+c::benchPrint();
+
+c::benchStart();
+
+for ($i = 0; $i < 50000; ++$i) {
+    $ref->getFileName();
+}
+c::benchPrint();
+
+c::benchStart();
+
+for ($i = 0; $i < 50000; ++$i) {
+    $ref->getName();
 }
 c::benchPrint();
 

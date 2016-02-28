@@ -24,6 +24,15 @@ class App extends Classes\Core\Base\Core
     public $parent;
 
     /**
+     * Reflection.
+     *
+     * @since 160228
+     *
+     * @type \ReflectionClass
+     */
+    public $reflection;
+
+    /**
      * Class.
      *
      * @since 160223
@@ -239,17 +248,28 @@ class App extends Classes\Core\Base\Core
     {
         parent::__construct();
 
+        # Establish arguments.
+
+        $default_args = [
+            '©use_server_cfgs' => true,
+        ];
+        $args = array_merge($default_args, $args);
+
+        # Define most properties.
+
         $this->parent = $parent;
 
-        $Class = new \ReflectionClass($this);
-
-        $this->class      = $Class->getName();
+        if (!$this->reflection) {
+            // If not already obtained by an extender.
+            $this->reflection = new \ReflectionClass($this);
+        }
+        $this->class      = $this->reflection->getName();
         $this->class_sha1 = sha1($this->class);
 
-        $this->namespace      = $Class->getNamespaceName();
+        $this->namespace      = $this->reflection->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
 
-        $this->file          = $Class->getFileName();
+        $this->file          = $this->reflection->getFileName();
         $this->file_basename = basename($this->file, '.php');
         $this->file_sha1     = sha1($this->file);
 
@@ -266,6 +286,8 @@ class App extends Classes\Core\Base\Core
         $this->core_dir_sha1     = sha1($this->core_dir);
         $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
 
+        # Validate this instance of the app.
+
         if (isset($GLOBALS[$this->class])) {
             throw new Exception(sprintf('One instance of `%1$s` only please.', $this->class));
         }
@@ -275,11 +297,15 @@ class App extends Classes\Core\Base\Core
         if (mb_substr($this->dir, -21) !== '/src/includes/classes') {
             throw new Exception(sprintf('Invalid dir: `%1$s`. Expecting: `.../src/includes/classes`.', $this->dir));
         }
+        # Instantiate/configure child class instances; e.g., Config, Di, Utils.
+
         $this->Config = new Classes\Core\Base\Config($this, $instance_base, $instance, $args);
         $this->Di     = new Classes\Core\Base\Di($this, $this->Config->©di['©default_rule']);
         $this->Utils  = new Classes\Core\Base\Utils($this);
 
         $this->Di->addInstances([$this, $this->Config, $this->Utils]);
+
+        # Setup global references & facades.
 
         $GLOBALS[$this->class] = $this;
 
@@ -300,6 +326,8 @@ class App extends Classes\Core\Base\Core
                 eval('namespace '.$this->namespace.' { class '.$_sub_namespace.'Facades extends \\'.$_base_class.' {} }');
             }
         } // unset($_sub_namespace, $_identifiers, $_base_class);
+
+        # Post-construct setups.
 
         $this->maybeDebug();
         $this->maybeSetLocales();
