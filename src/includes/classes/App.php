@@ -255,9 +255,11 @@ class App extends Classes\Core\Base\Core
         ];
         $args = array_merge($default_args, $args);
 
-        # Define most properties.
+        # Define a possible parent app.
 
         $this->parent = $parent;
+
+        # Define reflection-based properties.
 
         if (!$this->reflection) {
             // If not already obtained by an extender.
@@ -408,5 +410,159 @@ class App extends Classes\Core\Base\Core
             } while ($_parent->parent); // unset($_parent);
         }
         return $class; // Return as-is.
+    }
+
+    /**
+     * Merge config arrays.
+     *
+     * @since 160227 Config utils in App.
+     *
+     * @param array $base           Base array.
+     * @param array $merge          Array to merge.
+     * @param bool  $is_config_file Is config file?
+     *
+     * @return array The resuling array after merging.
+     *
+     * @note This method must be capable of running w/o a constructed app.
+     */
+    public function mergeConfig(array $base, array $merge, bool $is_config_file = false): array
+    {
+        if ($is_config_file) { // Disallow these instance-only keys.
+            unset($merge['©di'], $merge['©fs_paths']['©config_file']);
+        }
+        if (isset($base['©di']['©default_rule']['new_instances'])) {
+            $base_di_default_rule_new_instances = $base['©di']['©default_rule']['new_instances'];
+        } // Save new instances before emptying numeric arrays.
+
+        if (isset($merge['©mysql_db']['©hosts'])) {
+            unset($base['©mysql_db']['©hosts']);
+        } // Override base array. Replace w/ new hosts only.
+
+        $base = $this->maybeEmptyNumericConfigArrays($base, $merge);
+
+        if (isset($base_di_default_rule_new_instances, $merge['©di']['©default_rule']['new_instances'])) {
+            $merge['©di']['©default_rule']['new_instances'] = array_merge($base_di_default_rule_new_instances, $merge['©di']['©default_rule']['new_instances']);
+        }
+        return $merged = array_replace_recursive($base, $merge);
+    }
+
+    /**
+     * Empty numeric config arrays.
+     *
+     * @since 160227 Config utils in App.
+     *
+     * @param array $base  Base array.
+     * @param array $merge Array to merge.
+     *
+     * @return array The `$base` w/ possibly-empty numeric arrays.
+     *
+     * @note This method must be capable of running w/o a constructed app.
+     */
+    public function maybeEmptyNumericConfigArrays(array $base, array $merge): array
+    {
+        if (!$merge) { // Save time. Merge is empty?
+            return $base; // Nothing to do here.
+        }
+        foreach ($base as $_key => &$_value) {
+            if (is_array($_value) && array_key_exists($_key, $merge)) {
+                if (!$_value || $_value === array_values($_value)) {
+                    $_value = []; // Empty numeric arrays.
+                } elseif ($merge[$_key] && is_array($merge[$_key])) {
+                    $_value = $this->maybeEmptyNumericConfigArrays($_value, $merge[$_key]);
+                }
+            }
+        } // unset($_key, $_value); // Housekeeping.
+        return $base; // Return possibly-modified base.
+    }
+
+    /**
+     * Fill replacement codes.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param mixed $value Input value.
+     *
+     * @return mixed string|array|object Output value.
+     *
+     * @note This method must be capable of running w/o a fully-constructed app.
+     *  Only dependency is the initial reflection-based properties.
+     */
+    public function fillConfigReplacementCodes($value)
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->fillConfigReplacementCodes($_value);
+            } // unset($_key, $_value);
+            return $value;
+        }
+        if ($value && is_string($value) && mb_strpos($value, '%%') !== false) {
+            $value = str_replace(
+                [
+                    '%%app_class%%',
+                    '%%app_class_sha1%%',
+
+                    '%%app_namespace%%',
+                    '%%app_namespace_sha1%%',
+
+                    '%%app_file%%',
+                    '%%app_file_basename%%',
+                    '%%app_file_sha1%%',
+
+                    '%%app_dir%%',
+                    '%%app_dir_basename%%',
+                    '%%app_dir_sha1%%',
+
+                    '%%app_base_dir%%',
+                    '%%app_base_dir_basename%%',
+                    '%%app_base_dir_sha1%%',
+
+                    '%%core_dir%%',
+                    '%%core_dir_basename%%',
+                    '%%core_dir_sha1%%',
+
+                    '%%home_dir%%',
+                ],
+                [
+                    $this->class,
+                    $this->class_sha1,
+
+                    $this->namespace,
+                    $this->namespace_sha1,
+
+                    $this->file,
+                    $this->file_basename,
+                    $this->file_sha1,
+
+                    $this->dir,
+                    $this->dir_basename,
+                    $this->dir_sha1,
+
+                    $this->base_dir,
+                    $this->base_dir_basename,
+                    $this->base_dir_sha1,
+
+                    $this->core_dir,
+                    $this->core_dir_basename,
+                    $this->core_dir_sha1,
+
+                    (string) ($_SERVER['HOME'] ?? ''),
+                ],
+                $value
+            );
+            if (mb_strpos($value, '%%env[') !== false) {
+                // e.g., `%%(int)env[CFG_MYSQL_DB_PORT]%%`, `%%(array)env[CFG_LOCALES]%%`.
+                $value = preg_replace_callback('/%%(\((?<type>[^()]+)\))?env\[(?<key>[^%[\]]+)\]%%/u', function ($m) {
+                    $env_key_value = $_SERVER[$m['key']] ?? '';
+
+                    if (!empty($m['type'])) {
+                        settype($env_key_value, $m['type']);
+                    } else {
+                        $env_key_value = (string) $env_key_value;
+                    }
+                    return $env_key_value;
+                });
+            }
+        }
+        return $value;
     }
 }

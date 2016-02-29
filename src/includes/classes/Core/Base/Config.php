@@ -199,12 +199,11 @@ class Config extends Classes\Core\Base\Core
                 '©api_key' => (string) ($_s_cfgs['CFG_BITLY_KEY'] ?? ''),
             ],
         ];
-        # Merge instance bases together now.
+        # Merge instance bases together now; forming a collective instance base.
 
-        $instance_base = $this->merge($default_instance_base, $instance_base);
+        $instance_base = $this->App->mergeConfig($default_instance_base, $instance_base);
 
-        # Merge a possible JSON configuration file also.
-        # @TODO Convert this to a PHP include so OPcache picks it up.
+        # Merge a possible JSON configuration file also. @TODO Convert this to a PHP include so OPcache picks it up.
 
         $config_file = $instance['©fs_paths']['©config_file'] ?? $instance_base['©fs_paths']['©config_file'];
 
@@ -217,160 +216,13 @@ class Config extends Classes\Core\Base\Core
             } elseif (!empty($config['©app'])) {
                 $config = (array) $config['©app'];
             }
-            $config = $this->merge($instance_base, $config, true);
-            $config = $this->merge($config, $instance);
+            $config = $this->App->mergeConfig($instance_base, $config, true);
+            $config = $this->App->mergeConfig($config, $instance);
         } else {
-            $config = $this->merge($instance_base, $instance);
+            $config = $this->App->mergeConfig($instance_base, $instance);
         }
         # Fill replacement codes and overload the config properties.
 
-        $this->overload((object) $this->fillReplacementCodes($config), true);
-    }
-
-    /**
-     * Merge config arrays.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param array $base      Base array.
-     * @param array $merge     Array to merge.
-     * @param bool  $is_config Is config file?
-     *
-     * @return array The resuling array after merging.
-     */
-    protected function merge(array $base, array $merge, bool $is_config = false): array
-    {
-        if ($is_config) { // Disallow these instance-only keys.
-            unset($merge['©di'], $merge['©fs_paths']['©config_file']);
-        }
-        if (isset($base['©di']['©default_rule']['new_instances'])) {
-            $base_di_default_rule_new_instances = $base['©di']['©default_rule']['new_instances'];
-        } // Save new instances before emptying numeric arrays.
-
-        if (isset($merge['©mysql_db']['©hosts'])) {
-            unset($base['©mysql_db']['©hosts']);
-        } // Override base array. Replace w/ new hosts only.
-
-        $base = $this->maybeEmptyNumericArrays($base, $merge);
-
-        if (isset($base_di_default_rule_new_instances, $merge['©di']['©default_rule']['new_instances'])) {
-            $merge['©di']['©default_rule']['new_instances'] = array_merge($base_di_default_rule_new_instances, $merge['©di']['©default_rule']['new_instances']);
-        }
-        return $merged = array_replace_recursive($base, $merge);
-    }
-
-    /**
-     * Empty numeric arrays.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param array $base  Base array.
-     * @param array $merge Array to merge.
-     *
-     * @return array The `$base` w/ possibly-empty numeric arrays.
-     */
-    protected function maybeEmptyNumericArrays(array $base, array $merge): array
-    {
-        if (!$merge) { // Save time. Merge is empty?
-            return $base; // Nothing to do here.
-        }
-        foreach ($base as $_key => &$_value) {
-            if (is_array($_value) && array_key_exists($_key, $merge)) {
-                if (!$_value || $_value === array_values($_value)) {
-                    $_value = []; // Empty numeric arrays.
-                } elseif ($merge[$_key] && is_array($merge[$_key])) {
-                    $_value = $this->maybeEmptyNumericArrays($_value, $merge[$_key]);
-                }
-            }
-        } // unset($_key, $_value); // Housekeeping.
-        return $base; // Return possibly-modified base.
-    }
-
-    /**
-     * Fill replacement codes.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param mixed $value Input value.
-     *
-     * @return mixed string|array|object Output value.
-     */
-    protected function fillReplacementCodes($value)
-    {
-        if (is_array($value) || is_object($value)) {
-            foreach ($value as $_key => &$_value) {
-                $_value = $this->fillReplacementCodes($_value);
-            } // unset($_key, $_value);
-            return $value;
-        }
-        if ($value && is_string($value) && mb_strpos($value, '%%') !== false) {
-            $value = str_replace(
-                [
-                    '%%app_class%%',
-                    '%%app_class_sha1%%',
-
-                    '%%app_namespace%%',
-                    '%%app_namespace_sha1%%',
-
-                    '%%app_file%%',
-                    '%%app_file_basename%%',
-                    '%%app_file_sha1%%',
-
-                    '%%app_dir%%',
-                    '%%app_dir_basename%%',
-                    '%%app_dir_sha1%%',
-
-                    '%%app_base_dir%%',
-                    '%%app_base_dir_basename%%',
-                    '%%app_base_dir_sha1%%',
-
-                    '%%core_dir%%',
-                    '%%core_dir_basename%%',
-                    '%%core_dir_sha1%%',
-
-                    '%%home_dir%%',
-                ],
-                [
-                    $this->App->class,
-                    $this->App->class_sha1,
-
-                    $this->App->namespace,
-                    $this->App->namespace_sha1,
-
-                    $this->App->file,
-                    $this->App->file_basename,
-                    $this->App->file_sha1,
-
-                    $this->App->dir,
-                    $this->App->dir_basename,
-                    $this->App->dir_sha1,
-
-                    $this->App->base_dir,
-                    $this->App->base_dir_basename,
-                    $this->App->base_dir_sha1,
-
-                    $this->App->core_dir,
-                    $this->App->core_dir_basename,
-                    $this->App->core_dir_sha1,
-
-                    (string) ($_SERVER['HOME'] ?? ''),
-                ],
-                $value
-            );
-            if (mb_strpos($value, '%%env[') !== false) {
-                // e.g., `%%(int)env[CFG_MYSQL_DB_PORT]%%`, `%%(array)env[CFG_LOCALES]%%`.
-                $value = preg_replace_callback('/%%(\((?<type>[^()]+)\))?env\[(?<key>[^%[\]]+)\]%%/u', function ($m) {
-                    $env_key_value = $_SERVER[$m['key']] ?? '';
-
-                    if (!empty($m['type'])) {
-                        settype($env_key_value, $m['type']);
-                    } else {
-                        $env_key_value = (string) $env_key_value;
-                    }
-                    return $env_key_value;
-                });
-            }
-        }
-        return $value;
+        $this->overload((object) $this->App->fillConfigReplacementCodes($config), true);
     }
 }
