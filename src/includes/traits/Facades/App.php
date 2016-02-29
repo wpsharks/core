@@ -10,9 +10,25 @@ trait App
     /**
      * @since 160102 App.
      */
-    public static function app()
+    public static function app(...$args)
     {
         return $GLOBALS[static::class];
+    }
+
+    /**
+     * @since 160227 App.
+     */
+    public static function config(...$args)
+    {
+        return $GLOBALS[static::class]->Config;
+    }
+
+    /**
+     * @since 160227 App.
+     */
+    public static function version(...$args)
+    {
+        return $GLOBALS[static::class]::VERSION;
     }
 
     /**

@@ -327,7 +327,7 @@ class App extends Classes\Core\Base\Core
             }
         } // unset($_sub_namespace, $_identifiers, $_base_class);
 
-        # Post-construct setups.
+        # Post-construct sub-routines.
 
         $this->maybeDebug();
         $this->maybeSetLocales();
