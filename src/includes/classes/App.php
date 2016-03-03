@@ -388,10 +388,10 @@ class App extends Classes\Core\Base\Core
      */
     protected function maybeSetLocales()
     {
-        if ($this->Config->©i18n['©locales']) {
+        if ($this->Config->©locales) {
             // Try locale codes in a specific order.
             // See: <http://php.net/manual/en/function.setlocale.php>
-            setlocale(LC_ALL, $this->Config->©i18n['©locales']);
+            setlocale(LC_ALL, $this->Config->©locales);
         }
     }
 

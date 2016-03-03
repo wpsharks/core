@@ -46,6 +46,8 @@ class Config extends Classes\Core\Base\Core
             '©debug'             => (bool) ($_s_cfgs['CFG_DEBUG'] ?? false),
             '©handle_exceptions' => (bool) ($_s_cfgs['CFG_HANDLE_EXCEPTIONS'] ?? false),
 
+            '©locales' => (array) ($_s_cfgs['CFG_LOCALES'] ?? ($is_cfg_host ? ['en_US.UTF-8', 'C'] : [])),
+
             '©contacts' => [
                 '©admin' => [
                     '©name'         => (string) ($_s_cfgs['CFG_ADMIN_NAME'] ?? $_s_cfgs['CFG_ADMIN_USERNAME'] ?? 'admin'),
@@ -103,11 +105,12 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©brand' => [
-                '©slug'    => (string) ($_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
-                '©var'     => (string) ($_s_cfgs['CFG_BRAND_VAR'] ?? $_s_cfgs['CFG_VAR'] ?? 'app'),
-                '©name'    => (string) ($_s_cfgs['CFG_BRAND_NAME'] ?? $_s_cfgs['CFG_HOST'] ?? $host),
-                '©acronym' => (string) ($_s_cfgs['CFG_BRAND_ACRONYM'] ?? 'APP'),
-                '©prefix'  => (string) ($_s_cfgs['CFG_BRAND_PREFIX'] ?? 'app'),
+                '©slug'        => (string) ($_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
+                '©var'         => (string) ($_s_cfgs['CFG_BRAND_VAR'] ?? $_s_cfgs['CFG_VAR'] ?? 'app'),
+                '©name'        => (string) ($_s_cfgs['CFG_BRAND_NAME'] ?? $_s_cfgs['CFG_HOST'] ?? $host),
+                '©acronym'     => (string) ($_s_cfgs['CFG_BRAND_ACRONYM'] ?? 'APP'),
+                '©prefix'      => (string) ($_s_cfgs['CFG_BRAND_PREFIX'] ?? 'app'),
+                '©text_domain' => (string) ($_s_cfgs['CFG_I18N_TEXT_DOMAIN'] ?? ''),
 
                 '©keywords'    => (string) ($_s_cfgs['CFG_BRAND_KEYWORDS'] ?? ''),
                 '©description' => (string) ($_s_cfgs['CFG_BRAND_DESCRIPTION'] ?? ''),
@@ -153,11 +156,6 @@ class Config extends Classes\Core\Base\Core
                         '©weight' => (int) ($_s_cfgs['CFG_MEMCACHE_WEIGHT'] ?? 0),
                     ],
                 ],
-            ],
-
-            '©i18n' => [
-                '©locales'     => (array) ($_s_cfgs['CFG_LOCALES'] ?? ($is_cfg_host ? ['en_US.UTF-8', 'C'] : [])),
-                '©text_domain' => (string) ($_s_cfgs['CFG_I18N_TEXT_DOMAIN'] ?? ''),
             ],
 
             '©email' => [
