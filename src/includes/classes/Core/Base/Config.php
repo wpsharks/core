@@ -106,11 +106,11 @@ class Config extends Classes\Core\Base\Core
 
             '©brand' => [
                 '©slug'        => (string) ($_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
+                '©text_domain' => (string) ($_s_cfgs['CFG_BRAND_TEXT_DOMAIN'] ?? $_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
                 '©var'         => (string) ($_s_cfgs['CFG_BRAND_VAR'] ?? $_s_cfgs['CFG_VAR'] ?? 'app'),
                 '©name'        => (string) ($_s_cfgs['CFG_BRAND_NAME'] ?? $_s_cfgs['CFG_HOST'] ?? $host),
                 '©acronym'     => (string) ($_s_cfgs['CFG_BRAND_ACRONYM'] ?? 'APP'),
                 '©prefix'      => (string) ($_s_cfgs['CFG_BRAND_PREFIX'] ?? 'app'),
-                '©text_domain' => (string) ($_s_cfgs['CFG_I18N_TEXT_DOMAIN'] ?? ''),
 
                 '©keywords'    => (string) ($_s_cfgs['CFG_BRAND_KEYWORDS'] ?? ''),
                 '©description' => (string) ($_s_cfgs['CFG_BRAND_DESCRIPTION'] ?? ''),
