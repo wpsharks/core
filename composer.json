@@ -27,7 +27,7 @@
   },
 
   "require": {
-    "php-64bit": ">=7.0.1",
+    "php-64bit": ">=7.0.4",
 
     "ext-SPL": "*",
     "ext-Phar": "*",
