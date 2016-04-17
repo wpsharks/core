@@ -1,11 +1,13 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core\Test;
+namespace WebSharks\Core;
 
 use WebSharks\Core\Classes\CoreFacades as c;
 
-require_once dirname(__FILE__).'/includes/bootstrap.php';
+error_reporting(-1);
+ini_set('display_errors', 'yes');
+require_once dirname(__FILE__, 2).'/includes/local.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-c::dump(c::email('jas+test@myinbox.ws', 'Testing™ •', '<p>Hello world!™ •</p><p>hi!</p>'));
+c::dump($App);

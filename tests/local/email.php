@@ -1,14 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Core;
+namespace WebSharks\Core\Test;
 
 use WebSharks\Core\Classes\CoreFacades as c;
 
-require_once dirname(__FILE__).'/includes/bootstrap.php';
+require_once dirname(__FILE__, 2).'/includes/local.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-echo c::fillReplacementCodes('%%hello%% %%/^w**$%%', [
-    'hello'     => 'hi!',
-    'world.abc' => 'earth :-)',
-]);
+c::dump(c::email('jas+test@myinbox.ws', 'Testing™ •', '<p>Hello world!™ •</p><p>hi!</p>'));

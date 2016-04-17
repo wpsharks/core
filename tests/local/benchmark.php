@@ -4,7 +4,7 @@ namespace WebSharks\Core;
 
 use WebSharks\Core\Classes\CoreFacades as c;
 
-require_once dirname(__FILE__).'/includes/bootstrap.php';
+require_once dirname(__FILE__, 2).'/includes/local.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
