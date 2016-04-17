@@ -1,0 +1,30 @@
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Container.
+
+dist: trusty
+sudo: required
+language: generic
+script: ./.travis.bash
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Notifications.
+
+notifications:
+  email: false # Disable.
+  slack: websharks:EpVKoMF6MQKjLKVw0CAX33Og
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# <custom> Build matrix.
+
+matrix: # Tests for websharks/core.
+
+  include: # PHP v7 only at this time.
+
+    - env: CI_RUN=PHP_VERSION=7.0
+
+  fast_finish: true # Before allowed failures.
+
+# </custom>
