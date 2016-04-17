@@ -2,7 +2,7 @@
 // @codingStandardsIgnoreFile
 
 declare (strict_types = 1);
-namespace WebSharks\Core\Traits\Facades;
+namespace WebSharks\Core\Functions;
 
 error_reporting(-1);
 ini_set('display_errors', 'yes');
@@ -10,36 +10,22 @@ ini_set('display_errors', 'yes');
 if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
-
-$Facades = '<?php
+$load = '<?php
 // This file was auto-generated:
 // '.date('F jS, Y, g:i a T').'
 
 declare (strict_types = 1);
-namespace WebSharks\Core\Classes\Core\Base;
+namespace '.__NAMESPACE__.';
 
-use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Core\Base\Exception;
-use WebSharks\Core\Interfaces;
-use WebSharks\Core\Traits;
-
-/**
- * Pseudo-static facades.
- *
- * @since 160223 Initial release.
- */
-abstract class Facades
-{
 ';
 foreach (dir_recursive_regex(__DIR__, '/\.php$/ui') as $_file) {
     if (mb_strpos(basename($_sub_path_name = $_file->getSubPathname()), '.') !== 0) {
-        $Facades .= '    use Traits\\Facades\\'.str_replace(['/', '.php'], ['\\', ''], $_file->getSubPathname()).';'."\n";
+        $load .= "require_once __DIR__.'/".$_file->getSubPathname()."';\n";
     }
 } // unset($_file); // Housekeeping.
 
-$Facades .= '}'."\n"; // Close the class.
-file_put_contents(dirname(__FILE__, 3).'/classes/Core/Base/Facades.php', $Facades);
-echo $Facades; // Print for debugging purposes.
+file_put_contents(__DIR__.'/.load.php', $load);
+echo $load; // Print for debugging purposes.
 
 function dir_recursive_regex(string $dir, string $regex): \RegexIterator
 {
