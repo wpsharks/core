@@ -1,4 +1,4 @@
-## WebSharks™ Core [![Build Status](https://travis-ci.org/websharks/core.svg?branch=master)](https://travis-ci.org/websharks/core)
+## WebSharks™ Core  [![Build Status](https://travis-ci.org/websharks/core.svg?branch=000000-dev)](https://travis-ci.org/websharks/core)
 
 <img src="https://cdn.websharks-inc.com/websharks/uploads/2013/11/sharks-logo.png" width="225" align="right" />
 
