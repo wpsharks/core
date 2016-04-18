@@ -249,7 +249,7 @@ class App extends Classes\Core\Base\Core
      * @since 150424 Initial release.
      *
      * @param array            $instance_base Instance base.
-     * @param array            $instance      Instance args (highest precedence).
+     * @param array            $instance      Instance args.
      * @param Classes\App|null $parent        Parent app (optional).
      * @param array            $args          Any additional behavioral args.
      */
@@ -557,7 +557,7 @@ class App extends Classes\Core\Base\Core
                     $this->core_dir_basename,
                     $this->core_dir_sha1,
 
-                    (string) ($_SERVER['HOME'] ?? ''),
+                    (string) ($_SERVER['HOME'] ?? $_SERVER['WEBSHARK_HOME'] ?? ''),
                 ],
                 $value
             );
