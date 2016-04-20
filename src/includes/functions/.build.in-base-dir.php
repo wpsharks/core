@@ -11,9 +11,6 @@ if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
 $load = '<?php
-// This file was auto-generated:
-// '.date('F jS, Y, g:i a T').'
-
 declare (strict_types = 1);
 namespace '.__NAMESPACE__.';
 
