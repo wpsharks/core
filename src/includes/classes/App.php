@@ -226,15 +226,6 @@ class App extends Classes\Core\Base\Core
     ];
 
     /**
-     * String.
-     *
-     * @since 160227
-     *
-     * @type string
-     */
-    public $version;
-
-    /**
      * Version.
      *
      * @since 150424
@@ -296,9 +287,6 @@ class App extends Classes\Core\Base\Core
         $this->core_dir_basename = basename($this->core_dir);
         $this->core_dir_sha1     = sha1($this->core_dir);
         $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
-
-        $this->version = $this::VERSION; // Allows PHP 5.2 scripts to check version.
-        // Note: the WP Sharks RV check uses this property. See: <https://github.com/websharks/wp-sharks-rv>
 
         # Validate this instance of the app.
 
