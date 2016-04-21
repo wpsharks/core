@@ -101,9 +101,12 @@ class Name extends Classes\Core\Base\Core
         $acronym = ''; // Initialize.
 
         $name = $this->stripClean($name);
-        $name = $this->c::forceAscii($name); // ASCII only.
+        $name = $this->c::forceAscii($name);
+
         $name = preg_replace('/([a-z])([A-Z0-9])/u', '${1} ${2}', $name);
-        // This breaks `s2` into `s 2` and `xCache` into `x Cache`.
+        $name = preg_replace('/([a-z])([0-9])/ui', '${1} ${2}', $name);
+        $name = preg_replace('/([0-9])([a-z])/ui', '${1} ${2}', $name);
+        // `s2` = `s 2`, `S3` = `S 3`, `3s` = `3 s`, `xCache` = `x Cache`.
 
         foreach (preg_split('/\s+/u', $name, -1, PREG_SPLIT_NO_EMPTY) as $_word) {
             if (isset($_word[0]) && ctype_alnum($_word[0])) {
