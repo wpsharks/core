@@ -96,7 +96,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
                 break; // All done here.
 
             default: // Defaults.
-                if ($this->c::isWordpress()) {
+                if ($this->c::isWordPress()) {
                     $string = $this->viaWordPress($string);
                 } else { // Default outside WP.
                     $string = $this->viaEmbedly($string);
@@ -304,7 +304,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
      */
     protected function viaWordPress(string $string): string
     {
-        if (!$this->c::isWordpress()
+        if (!$this->c::isWordPress()
             || !$this->c::canCallFunc('wp_oembed_get')
             || !$this->c::canCallFunc('wp_embed_defaults')) {
             throw new Exception('Unable to oEmbed via WordPress.');

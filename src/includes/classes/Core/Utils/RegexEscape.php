@@ -8,14 +8,14 @@ use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 
 /**
- * Regex quote utilities.
+ * Regex escape utilities.
  *
  * @since 150424 Initial release.
  */
-class RegexQuote extends Classes\Core\Base\Core
+class RegexEscape extends Classes\Core\Base\Core
 {
     /**
-     * Quote regex meta chars deeply.
+     * Escape regex meta chars deeply.
      *
      * @since 150424 Initial release.
      *

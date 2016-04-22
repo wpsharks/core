@@ -93,5 +93,6 @@ class Escape extends Classes\Core\Base\Core
         return escapeshellarg($string);
     }
 
-    // NOTE: SQL-related escapes are in the PDO class.
+    // NOTE: SQL-related escapes are in the `Sql` class.
+    // NOTE: Regex-related escapes are in the `RegexEscape` class.
 }

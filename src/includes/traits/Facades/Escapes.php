@@ -56,19 +56,35 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 160422 SQL utils.
      */
-    public static function escSqlName(...$args)
+    public static function quoteSql(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Pdo->escName(...$args);
+        return $GLOBALS[static::class]->Utils->©Sql->quote(...$args);
+    }
+
+    /**
+     * @since 160422 SQL utils.
+     */
+    public static function quoteSqlIn(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Sql->quoteIn(...$args);
     }
 
     /**
      * @since 151214 Adding functions.
      */
-    public static function escSqlCols(...$args)
+    public static function escSqlName(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Pdo->escColumns(...$args);
+        return $GLOBALS[static::class]->Utils->©Sql->escapeName(...$args);
+    }
+
+    /**
+     * @since 160422 SQL utils.
+     */
+    public static function quoteSqlCols(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Sql->quoteColumns(...$args);
     }
 
     /**
@@ -76,23 +92,15 @@ trait Escapes
      */
     public static function escSqlOrder(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Pdo->escOrder(...$args);
+        return $GLOBALS[static::class]->Utils->©Sql->escapeOrder(...$args);
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 160422 SQL utils.
      */
-    public static function escSqlOrderBys(...$args)
+    public static function quoteSqlOrderBys(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Pdo->escOrderBys(...$args);
-    }
-
-    /**
-     * @since 151214 Adding functions.
-     */
-    public static function escSqlIn(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Pdo->escIn(...$args);
+        return $GLOBALS[static::class]->Utils->©Sql->quoteOrderBys(...$args);
     }
 
     /**
@@ -100,6 +108,6 @@ trait Escapes
      */
     public static function escRegex(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©RegexQuote->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©RegexEscape->__invoke(...$args);
     }
 }

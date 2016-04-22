@@ -15,13 +15,13 @@ use WebSharks\Core\Traits;
 class Pdo extends Classes\Core\Base\Core
 {
     /**
-     * Current PDO instance.
+     * Current PDO.
      *
      * @since 150424
      *
      * @type \PDO|null
      */
-    protected $current_Pdo;
+    public $current;
 
     /**
      * Constructor.
@@ -33,6 +33,38 @@ class Pdo extends Classes\Core\Base\Core
     public function __construct(Classes\App $App)
     {
         parent::__construct($App);
+    }
+
+    /**
+     * Quotes/escapes SQL value.
+     *
+     * @since 160422 SQL utils.
+     *
+     * @param int|float|string $value Value.
+     *
+     * @return string Quoted/escaped value (as a string).
+     */
+    public function quote($value): string
+    {
+        if (!($Pdo = $this->current)) {
+            throw new Exception('No PDO yet; i.e., unable to quote.');
+        }
+        switch (gettype($value)) {
+            case 'int':
+            case 'integer':
+                return $Pdo->quote((string) $value, $Pdo::PARAM_INT);
+
+            case 'float':
+            case 'double':
+                return $Pdo->quote((string) $value, $Pdo::PARAM_STR);
+
+            case 'str':
+            case 'string':
+                return $Pdo->quote($value, $Pdo::PARAM_STR);
+
+            default: // Unexpected data type.
+                throw new Exception('Unexpected data type; unable to quote.');
+        }
     }
 
     /**
@@ -66,7 +98,7 @@ class Pdo extends Classes\Core\Base\Core
 
         if (($Pdo = &$this->cacheKey(__FUNCTION__, $shard_db['©host']))) {
             $Pdo->exec('use `'.$shard_db['©name'].'`');
-            $this->current_Pdo = $Pdo;
+            $this->current = $Pdo;
             return $Pdo;
         }
         // Otherwise, we need to establish a new connection.
@@ -105,7 +137,7 @@ class Pdo extends Classes\Core\Base\Core
             $shard_db_host_options // Connection options (from above).
         );
         $Pdo->exec('use `'.$shard_db['©name'].'`');
-        $this->current_Pdo = $Pdo;
+        $this->current = $Pdo;
         return $Pdo;
     }
 
@@ -129,127 +161,5 @@ class Pdo extends Classes\Core\Base\Core
             }
         } // unset($_key, $_shard_db); // Houskeeping.
         throw new Exception(sprintf('Missing DB info for shard ID: `%1$s`.', $shard_id));
-    }
-
-    /**
-     * Escapes table/column names.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param string $string Table/column name.
-     *
-     * @return string Escaped table/column name.
-     */
-    public function escName(string $string): string
-    {
-        return preg_replace('/[^a-z0-9_]+/ui', '', $string);
-    }
-
-    /**
-     * Escapes/formats table columns.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param array  $columns    Table columns.
-     * @param string $table_name Optional table name.
-     *
-     * @return string Escaped/formatted columns.
-     */
-    public function escColumns(array $columns, string $table_name = ''): string
-    {
-        $cols = ''; // Initialize.
-        foreach ($columns as $_key => $_column) {
-            if (is_string($_column) && $_column) {
-                $cols .= ','; // Always.
-
-                if ($table_name) { // Table prefix?
-                    $cols .= '`'.$this->escName($table_name).'`.';
-                } // If there is a table name, add a ``. prefix ↑
-
-                $cols .= '`'.$this->escName($_column).'`';
-            }
-        } // unset($_key, $_column);
-        return $this->c::mbTrim($cols, ' ,'); // Trim it up now.
-    }
-
-    /**
-     * Escapes order direction.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param string $string Order direction.
-     *
-     * @return string Escaped order direction.
-     */
-    public function escOrder(string $string): string
-    {
-        $string = mb_strtoupper($string);
-
-        return in_array($string, ['ASC', 'DESC'], true) ? $string : 'ASC';
-    }
-
-    /**
-     * Escapes/formats order bys.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param array  $order_bys  Order bys.
-     * @param string $table_name Optional table name.
-     *
-     * @return string Escaped/formatted order bys.
-     */
-    public function escOrderBys(array $order_bys, string $table_name = ''): string
-    {
-        $order = ''; // Initialize.
-        foreach ($order_bys as $_order_by => $_order) {
-            if (is_string($_order_by) && $_order_by) {
-                $order .= ',';
-                if ($table_name) {
-                    $order .= '`'.$this->escName($table_name).'`.';
-                } // If table name, add a ``. prefix ↑
-                $order .= '`'.$this->escName($_order_by).'` '.$this->escOrder($_order);
-            }
-        } // unset($_order_by, $_order);
-        return $this->c::mbTrim($order, ', ');
-    }
-
-    /**
-     * Escapes/formats IN clause.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param array  $array Input array to escape.
-     * @param string $type  One of: `ints`, `floats`, `strings`.
-     *
-     * @return string Escaped/formatted IN clause.
-     */
-    public function escIn(array $array, string $type = 'strings'): string
-    {
-        if (!$array) { // Array empty?
-            return ''; // Nothing to do.
-        }
-        switch (mb_strtolower($type)) {
-            case 'ints': // All integers; no quotes.
-                $array = array_map('intval', $array);
-                $array = array_unique($array);
-                return implode(',', $array);
-
-            case 'floats': // All floats; no quotes.
-                $array = array_map('floatval', $array);
-                $array = array_unique($array);
-                return implode(',', $array);
-
-            case 'strings': // String must always be quoted!
-                $array = array_map('strval', $array);
-                $array = array_unique($array);
-                if (!$this->current_Pdo) { // Must have a PDO instance.
-                    throw new Exception('No PDO yet; i.e., unable to quote.');
-                }
-                $array = array_map([$this->current_Pdo, 'quote'], $array);
-                return "'".implode("','", $array)."'";
-
-            default: // Throw exception on unexpected data type.
-                throw new Exception(sprintf('Unexpected type: `%1$s`.', $type));
-        }
     }
 }
