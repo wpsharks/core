@@ -66,6 +66,6 @@ abstract class Facades
     use Traits\Facades\Vars;
     use Traits\Facades\Versions;
     use Traits\Facades\Webpurify;
-    use Traits\Facades\Wordpress;
+    use Traits\Facades\WordPress;
     use Traits\Facades\Yaml;
 }
