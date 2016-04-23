@@ -30,13 +30,31 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
         if (!($host = $this->App->Config->©urls['©hosts']['©app'])) {
             throw new Exception('App host is empty.');
         }
+        $base_path = $this->App->Config->©urls['©base_paths']['©app'];
+
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
-        $url = $this->c::setScheme('//'.$host.'/'.$uri, $scheme);
+        $url = $this->c::setScheme('//'.$host.$base_path.'/'.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
             $url = $this->c::cdnFilter($url);
         }
         return $url;
+    }
+
+    /**
+     * Build app parent URL.
+     *
+     * @since 160423 Parent utilities.
+     *
+     * @param string $uri        URI to append.
+     * @param string $scheme     Specific scheme?
+     * @param bool   $cdn_filter CDN filter?
+     *
+     * @return string Output URL.
+     */
+    public function toAppParent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
+    {
+        return $this->App->parent ? $this->App->parent->Utils->©Url->toApp($uri, $scheme, $cdn_filter) : $this->toApp($uri, $scheme, $cdn_filter);
     }
 
     /**
@@ -52,6 +70,9 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
      */
     public function toAppCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
+        if ($this->App->parent) { // Looking for the root core.
+            return $this->App->parent->Utils->©Url->toAppCore($uri, $scheme, $cdn_filter);
+        }
         if ($this->App->core_is_vendor) {
             $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
             $uri = '/vendor/websharks/core/src/'.$uri;
@@ -72,14 +93,32 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
      */
     public function toCurrent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        $host = $this->c::currentHost();
-        $uri  = $uri ? $this->c::mbLTrim($uri, '/') : '';
-        $url  = $this->c::setScheme('//'.$host.'/'.$uri, $scheme);
+        $host      = $this->c::currentHost();
+        $base_path = $this->App->Config->©urls['©base_paths']['©app'];
+
+        $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
+        $url = $this->c::setScheme('//'.$host.$base_path.'/'.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
             $url = $this->c::cdnFilter($url);
         }
         return $url;
+    }
+
+    /**
+     * Build parent URL w/ current host.
+     *
+     * @since 160423 Parent utilities.
+     *
+     * @param string $uri        URI to append.
+     * @param string $scheme     Specific scheme?
+     * @param bool   $cdn_filter CDN filter?
+     *
+     * @return string Output URL w/ current host.
+     */
+    public function toCurrentParent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
+    {
+        return $this->App->parent ? $this->App->parent->Utils->©Url->toCurrent($uri, $scheme, $cdn_filter) : $this->toCurrent($uri, $scheme, $cdn_filter);
     }
 
     /**
@@ -95,6 +134,9 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
      */
     public function toCurrentCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
+        if ($this->App->parent) { // Looking for the root core.
+            return $this->App->parent->Utils->©Url->toCurrentCore($uri, $scheme, $cdn_filter);
+        }
         if ($this->App->core_is_vendor) {
             $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
             $uri = '/vendor/websharks/core/src/'.$uri;
@@ -130,7 +172,7 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
         if (!$qs_url_uri) {
             return $qs_url_uri; // Possible `0`.
         }
-        if (is_null($regex_amps = &$this->cacheKey(__FUNCTION__.'_regex_amps'))) {
+        if (($regex_amps = &$this->cacheKey(__FUNCTION__.'_regex_amps')) === null) {
             $regex_amps = implode('|', array_keys($this::HTML_AMPERSAND_ENTITIES));
         }
         return preg_replace('/(?:'.$regex_amps.')/uS', '&', $qs_url_uri);

@@ -24,6 +24,14 @@ trait UrlBuilders
     }
 
     /**
+     * @since 160423 Parent utilities.
+     */
+    public static function appParentUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Url->toAppParent(...$args);
+    }
+
+    /**
      * @since 151214 Adding functions.
      */
     public static function appCoreUrl(...$args)
@@ -37,6 +45,14 @@ trait UrlBuilders
     public static function curUrl(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Url->toCurrent(...$args);
+    }
+
+    /**
+     * @since 160423 Parent utilities.
+     */
+    public static function curParentUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Url->toCurrentParent(...$args);
     }
 
     /**
