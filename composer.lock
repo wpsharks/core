@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d1271affe6e28bca763a71f620d0fbc4",
-    "content-hash": "654d93b51dbe6f110c0e003e8f01f8e7",
+    "hash": "c643b184267ac07399590886894d07c7",
+    "content-hash": "f2066d34b6d5d6f1ebb8da529adaa244",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -766,16 +766,16 @@
         },
         {
             "name": "websharks/dicer",
-            "version": "151124",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
-                "reference": "b6bc024fbefa44f7003588c2a06f19ff9bf67d2b"
+                "reference": "044696b13f196f4f0ab0905de05346a0090655f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/dicer/zipball/b6bc024fbefa44f7003588c2a06f19ff9bf67d2b",
-                "reference": "b6bc024fbefa44f7003588c2a06f19ff9bf67d2b",
+                "url": "https://api.github.com/repos/websharks/dicer/zipball/044696b13f196f4f0ab0905de05346a0090655f5",
+                "reference": "044696b13f196f4f0ab0905de05346a0090655f5",
                 "shasum": ""
             },
             "require": {
@@ -813,7 +813,58 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2015-11-24 06:22:55"
+            "time": "2016-01-10 08:24:59"
+        },
+        {
+            "name": "websharks/sharkicons",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/websharks/sharkicons.git",
+                "reference": "2e6d6663c050f343fe944b424dea1759aa67cd05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/websharks/sharkicons/zipball/2e6d6663c050f343fe944b424dea1759aa67cd05",
+                "reference": "2e6d6663c050f343fe944b424dea1759aa67cd05",
+                "shasum": ""
+            },
+            "require-dev": {
+                "package/bourbon": "4.2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": []
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "websharks",
+                    "homepage": "http://websharks-inc.com/",
+                    "role": "company"
+                },
+                {
+                    "name": "jaswsinc",
+                    "homepage": "http://jaswsinc.com/",
+                    "role": "developer"
+                },
+                {
+                    "name": "raamdev",
+                    "homepage": "http://raam.org/",
+                    "role": "developer"
+                }
+            ],
+            "description": "Font containing WebSharks logos/icons.",
+            "homepage": "https://github.com/websharks/sharkicons",
+            "keywords": [
+                "php",
+                "websharks",
+                "wordpress"
+            ],
+            "time": "2016-02-21 15:16:12"
         }
     ],
     "packages-dev": [
@@ -899,7 +950,10 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "websharks/dicer": 20,
+        "websharks/sharkicons": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
