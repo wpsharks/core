@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c643b184267ac07399590886894d07c7",
-    "content-hash": "f2066d34b6d5d6f1ebb8da529adaa244",
+    "hash": "3d3cffc09e3b0d7fe6f816714cb188a2",
+    "content-hash": "8fb7690e9595e83d5b5e5e434d6b906b",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -579,16 +579,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.3.0",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "f44f53e5ceb7474a83b6e11e6623ff9d6f6da598"
+                "reference": "fb12163881a98588bcdc4ba820a96e0ff5ad97dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/f44f53e5ceb7474a83b6e11e6623ff9d6f6da598",
-                "reference": "f44f53e5ceb7474a83b6e11e6623ff9d6f6da598",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/fb12163881a98588bcdc4ba820a96e0ff5ad97dc",
+                "reference": "fb12163881a98588bcdc4ba820a96e0ff5ad97dc",
                 "shasum": ""
             },
             "require": {
@@ -600,6 +600,8 @@
             },
             "require-dev": {
                 "apigen/apigen": "^4.1",
+                "codeception/aspect-mock": "1.0.0",
+                "goaop/framework": "1.0.0-alpha.2",
                 "ircmaxell/random-lib": "^1.1",
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
                 "mockery/mockery": "^0.9.4",
@@ -653,7 +655,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-03-22 18:40:53"
+            "time": "2016-04-24 00:08:55"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -909,17 +911,6 @@
             "description": "Powerful command-line option toolkit",
             "homepage": "http://github.com/c9s/GetOptionKit",
             "time": "2016-02-16 10:41:32"
-        },
-        {
-            "name": "package/bourbon",
-            "version": "4.2.3",
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/thoughtbot/bourbon/releases/download/v4.2.3/bourbon-v4.2.3.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library"
         },
         {
             "name": "ryakad/pandoc-php",
