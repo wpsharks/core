@@ -34,16 +34,16 @@ trait Patterns
     /**
      * @since 151214 Adding functions.
      */
-    public static function wdRegex(...$args)
+    public static function wregx(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©WdRegex->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Wregx->__invoke(...$args);
     }
 
     /**
      * @since 151214 Adding functions.
      */
-    public static function wdRegexFrag(...$args)
+    public static function wregxFrag(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©WdRegex->frag(...$args);
+        return $GLOBALS[static::class]->Utils->©Wregx->frag(...$args);
     }
 }
