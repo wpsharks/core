@@ -42,6 +42,8 @@ class UrlParse extends Classes\Core\Base\Core
             }
             $parts['full']      = $url_uri_qsl;
             $parts['canonical'] = preg_split('/[?#]/u', $url_uri_qsl, 2)[0];
+            $uri_part_keys      = ['path' => 1, 'query' => 1, 'fragment' => 1];
+            $parts['uri']       = $this->un(array_intersect_key($parts, $uri_part_keys));
 
             return $parts;
         }

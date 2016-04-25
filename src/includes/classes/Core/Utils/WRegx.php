@@ -12,25 +12,31 @@ use WebSharks\Core\Traits;
  *
  * @since 150424 Adding watered-down regex.
  */
-class WRegx extends Classes\Core\Base\Core
+class Wregx extends Classes\Core\Base\Core
 {
     /**
      * Convert watered-down regex to real regex.
      *
      * @since 150424 Adding watered-down regex parser.
      *
-     * @param string $patterns        Watered-down regex patterns; line-delimited.
-     * @param string $exclusion_char  The behavior of `*` & `?`. Defaults to excluding `/`.
-     * @param bool   $force_match_all Force `^$` into play & don't treat `^$` as special chars.
-     * @param bool   $capture         Capture the matches, or use the default `(?:)` syntax?
+     * @param array|string $patterns        Watered-down regex patterns; array or line-delimited.
+     * @param string       $exclusion_char  The behavior of `*` & `?`. Defaults to excluding `/`.
+     * @param bool         $force_match_all Force `^$` into play & don't treat `^$` as special chars.
+     * @param bool         $capture         Capture the matches, or use the default `(?:)` syntax?
      *
      * @return string A real regex pattern; ready for {@link preg_match()}.
      */
-    public function __invoke(string $patterns, string $exclusion_char = '/', bool $force_match_all = false, bool $capture = false): string
+    public function __invoke($patterns, string $exclusion_char = '/', bool $force_match_all = false, bool $capture = false): string
     {
         $regex = ''; // Initialize.
 
-        $patterns            = preg_split('/['."\r\n".']+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
+        if (is_array($patterns)) {
+            $patterns = implode("\n", $patterns);
+        } elseif (is_string($patterns)) {
+            $patterns = preg_split('/['."\r\n".']+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
+        } else {
+            throw new Exception('Invalid data type for patterns.');
+        }
         $patterns            = $this->c::removeEmptys($this->c::mbTrim($patterns));
         $regex_pattern_frags = $this->frag($patterns, $exclusion_char, $force_match_all);
 
@@ -81,7 +87,7 @@ class WRegx extends Classes\Core\Base\Core
 
         $string = preg_replace_callback('/\\\\\{((?:(?:[^{}]+)|(?R))*)\\\\\}/u', function ($m) {
             return '(?:'.str_replace(['\\{', '\\}', ','], ['(?:', ')', '|'], $m[1]).')';
-        }, $string); // Converts to character class.
+        }, $string); // Converts to `(a|b|c)` alternation.
 
         if (!$force_match_all) { // Must come before `$exclusion_char` below.
             // If not forcing `^$`, we need to treat them as special chars here.
