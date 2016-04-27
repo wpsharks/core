@@ -10,14 +10,14 @@ use WebSharks\Core\Traits;
 /**
  * Watered-down regex.
  *
- * @since 150424 Adding watered-down regex.
+ * @since 150424 Watered-down regex.
  */
-class Wregx extends Classes\Core\Base\Core
+class WRegx extends Classes\Core\Base\Core
 {
     /**
      * Convert watered-down regex to real regex.
      *
-     * @since 150424 Adding watered-down regex parser.
+     * @since 150424 Watered-down regex.
      *
      * @param array|string $patterns        Watered-down regex patterns; array or line-delimited.
      * @param string       $exclusion_char  The behavior of `*` & `?`. Defaults to excluding `/`.
@@ -37,25 +37,24 @@ class Wregx extends Classes\Core\Base\Core
         } else {
             throw new Exception('Invalid data type for patterns.');
         }
-        $patterns            = $this->c::removeEmptys($this->c::mbTrim($patterns));
         $regex_pattern_frags = $this->frag($patterns, $exclusion_char, $force_match_all);
 
-        if ($regex_pattern_frags) { // Have an array of regex patterns frags?
+        if ($regex_pattern_frags) { // Have an array of regex pattern fragments?
             $regex = '/('.($capture ? '' : '?:').implode('|', $regex_pattern_frags).')/ui';
         }
         return $regex;
     }
 
     /**
-     * To true regex fragment.
+     * Convert watered-down regex to real regex fragment.
      *
-     * @since 150424 Adding watered-down regex.
+     * @since 150424 Watered-down regex.
      *
      * @param mixed  $value           Input value(s) w/ watered-down regex.
      * @param string $exclusion_char  The behavior of `*` & `?`. Defaults to excluding `/`.
      * @param bool   $force_match_all Force `^$` into play & don't treat `^$` as special chars.
      *
-     * @return string|array|object Value w/ true regex fragments.
+     * @return string|array|object Value(s) as true regex fragments.
      */
     public function frag($value, string $exclusion_char = '/', bool $force_match_all = false)
     {
@@ -64,7 +63,7 @@ class Wregx extends Classes\Core\Base\Core
         }
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->frag($_value, $exclusion_char);
+                $_value = $this->frag($_value, $exclusion_char, $force_match_all);
             } // unset($_key, $_value); // Housekeeping.
 
             return $value;
@@ -76,7 +75,7 @@ class Wregx extends Classes\Core\Base\Core
         }
         $tokens         = []; // Initialize.
         $string         = $this->c::escRegex($string);
-        $exclusion_char = $this->c::escRegex($exclusion_char, '/');
+        $exclusion_char = $this->c::escRegex($exclusion_char);
 
         $string = preg_replace_callback('/\\\\\[((?:(?:[^[\]]+)|(?R))*)\\\\\]/u', function ($m) use (&$tokens) {
             $m[1] = mb_strpos($m[1], '\\!') === 0 ? '^'.mb_substr($m[1], 2) : $m[1];
@@ -93,7 +92,14 @@ class Wregx extends Classes\Core\Base\Core
             // If not forcing `^$`, we need to treat them as special chars here.
             $string = preg_replace(['/\\\\\^/u', '/\\\\\$/u'], ['^', '$'], $string);
         }
-        $string = preg_replace(['/(?:\\\\\?){2,}/u', '/(?:\\\\\*){2,}/u'], ['[\s\S]', '[\s\S]*?'], $string);
+        $string = preg_replace_callback('/(?:\\\\\?){3,}/u', function ($m) use ($exclusion_char) {
+            return '[^'.$exclusion_char.']{'.strlen(str_replace('\\', '', $m[0])).'}';
+        }, $string); // Becaues ??? (or more) should be treated like `?` instead of as a partial `??` operator.
+
+        // Now convert `??` and `**` (or more) after having already converted `???`... above.
+        $string = preg_replace(['/(?:\\\\\?){2}/u', '/(?:\\\\\*){2,}/u'], ['[\s\S]', '[\s\S]*?'], $string);
+
+        // Now convert any remaining `?` and/or `*` operators after having dealt with `??` and `**` (or more) above.
         $string = preg_replace(['/\\\\\?/u', '/\\\\\*/u'], ['[^'.$exclusion_char.']', '[^'.$exclusion_char.']*?'], $string);
 
         foreach (array_reverse($tokens, true) as $_token => $_brackets) {

@@ -579,16 +579,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "fb12163881a98588bcdc4ba820a96e0ff5ad97dc"
+                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/fb12163881a98588bcdc4ba820a96e0ff5ad97dc",
-                "reference": "fb12163881a98588bcdc4ba820a96e0ff5ad97dc",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
+                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
                 "shasum": ""
             },
             "require": {
@@ -655,7 +655,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-04-24 00:08:55"
+            "time": "2016-04-24 00:30:41"
         },
         {
             "name": "symfony/event-dispatcher",

@@ -131,7 +131,7 @@ class ReplaceCodes extends Classes\Core\Base\Core
                 '/%%\/(?<pattern>[^%\/]+?)(?:\/(?<delimiter>[^%\/]*?))?(?:\/(?<key_delimiter>[^%\/]*?))?%%/u',
                 function ($m) use (&$maybe_urlencode, &$___vars, &$___var_keys) {
                     $values = []; // Initialize.
-                    $regex = $this->c::wregx($m['pattern'], '.');
+                    $regex = $this->c::wRegx($m['pattern'], '.');
 
                     if (!($keys = $this->c::regexPatternIn($regex, $___var_keys, true))) {
                         return; // No matching keys.
