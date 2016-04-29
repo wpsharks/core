@@ -133,7 +133,7 @@ class ReplaceCodes extends Classes\Core\Base\Core
                     $values = []; // Initialize.
                     $regex = $this->c::wRegx($m['pattern'], '.');
 
-                    if (!($keys = $this->c::regexPatternIn($regex, $___var_keys, true))) {
+                    if (!($keys = $this->c::regexPatternIn($regex.'i', $___var_keys, true))) {
                         return; // No matching keys.
                     }
                     foreach ($keys as $_key) { // Matching keys.

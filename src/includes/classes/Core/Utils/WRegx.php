@@ -40,7 +40,7 @@ class WRegx extends Classes\Core\Base\Core
         $regex_pattern_frags = $this->frag($patterns, $exclusion_char, $force_match_all);
 
         if ($regex_pattern_frags) { // Have an array of regex pattern fragments?
-            $regex = '/('.($capture ? '' : '?:').implode('|', $regex_pattern_frags).')/ui';
+            $regex = '/('.($capture ? '' : '?:').implode('|', $regex_pattern_frags).')/u';
         }
         return $regex;
     }

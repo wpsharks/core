@@ -8,4 +8,9 @@ require_once dirname(__FILE__, 2).'/includes/local.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-echo c::wRegxBracket('/hello/**/[?:*]/?/*');
+$pattern = '**{/**,}[?]{**&,}a=b{&**&,&,}e=f{&**,}';
+$regex   = c::wregx($pattern, '/', true);
+$matches = preg_match($regex.'i', '/hello/?this=that&a=b&c=d&e=f&g=h');
+
+c::dump($regex)."\n";
+echo $matches ? 'Match' : 'FAIL!';

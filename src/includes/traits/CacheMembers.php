@@ -114,7 +114,7 @@ trait CacheMembers
             return; // Nothing to do; i.e., no regex.
         }
         foreach (array_keys($this->¤¤cache[$primary_key]) as $_sub_key) {
-            if ($sub_key_pattern === '**' || preg_match($sub_key_regex, (string) $_sub_key)) {
+            if ($sub_key_pattern === '**' || preg_match($sub_key_regex.'i', (string) $_sub_key)) {
                 $this->¤¤cache[$primary_key][$_sub_key] = null;
                 unset($this->¤¤cache[$primary_key][$_sub_key]);
             }
@@ -177,7 +177,7 @@ trait CacheMembers
             return; // Nothing to do; i.e., no regex.
         }
         foreach (array_keys($this->¤¤cache['¤¤refs'][$primary_key]) as $_ref_key) {
-            if ($ref_key_pattern === '**' || preg_match($ref_key_regex, (string) $_ref_key)) {
+            if ($ref_key_pattern === '**' || preg_match($ref_key_regex.'i', (string) $_ref_key)) {
                 foreach (array_keys($this->¤¤cache['¤¤refs'][$primary_key][$_ref_key]) as $_key) {
                     $this->¤¤cache['¤¤refs'][$primary_key][$_ref_key][$_key] = null;
                 } // unset($_key); // Housekeeping.
