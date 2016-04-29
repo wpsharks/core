@@ -24,6 +24,14 @@ trait Dimensions
     }
 
     /**
+     * @since 160428 Remove 0 bytes.
+     */
+    public static function remove0Bytes(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Remove0Bytes->__invoke(...$args);
+    }
+
+    /**
      * @since 151214 Adding functions.
      */
     public static function removeNulls(...$args)

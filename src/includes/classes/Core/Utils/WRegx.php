@@ -30,13 +30,13 @@ class WRegx extends Classes\Core\Base\Core
     {
         $regex = ''; // Initialize.
 
-        if (is_array($patterns)) {
-            $patterns = implode("\n", $patterns);
-        } elseif (is_string($patterns)) {
+        if (is_string($patterns)) { // Convert to array.
             $patterns = preg_split('/['."\r\n".']+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
-        } else {
+        }
+        if (!is_array($patterns)) { // Require an array now.
             throw new Exception('Invalid data type for patterns.');
         }
+        $patterns            = $this->c::remove0Bytes($patterns);
         $regex_pattern_frags = $this->frag($patterns, $exclusion_char, $force_match_all);
 
         if ($regex_pattern_frags) { // Have an array of regex pattern fragments?
