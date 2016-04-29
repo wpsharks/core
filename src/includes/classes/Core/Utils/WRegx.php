@@ -113,7 +113,7 @@ class WRegx extends Classes\Core\Base\Core
     /**
      * Bracket special chars.
      *
-     * @since 150424 Watered-down regex.
+     * @since 160428 Watered-down regex.
      *
      * @param mixed $value Input value(s).
      *
@@ -148,5 +148,44 @@ class WRegx extends Classes\Core\Base\Core
         } // unset($_token, $_brackets); // Housekeeping.
 
         return $string;
+    }
+
+    /**
+     * URL to WRegx URI pattern.
+     *
+     * @since 160428 Watered-down regex.
+     *
+     * @param string $url_uri Input URL (or URI).
+     *
+     * @return string WRegx URI pattern.
+     */
+    public function urlToUriPattern(string $url_uri)
+    {
+        if (!($parts = $this->c::parseUrl($url_uri))) {
+            return ''; // Not possible.
+        }
+        $uri = $parts['uri'] ?? '';
+        $uri = preg_split('/#/u', $uri, 2)[0];
+        $uri = $this->c::mbTrim($uri, '/');
+
+        if (!$uri) { // URI is empty now?
+            return ''; // Nothing to do here.
+        }
+        // NOTE: This considers all possible `/endpoints` after the base.
+        // Including the possibility of there being `index.php/path/info/`.
+
+        // NOTE: If a URI contains multiple query string variables,
+        // the best we can do is `{&**&,&,}` (searching in the order given).
+
+        $uri_pattern = $this->bracket($uri); // i.e., `[?]`, etc.
+
+        if (mb_strpos($uri_pattern, '[?]') !== false) {
+            $uri_pattern = preg_replace_callback('/\[\?\]|&/u', function ($m) {
+                return $m[0] === '[?]' ? '[?]{**&,}' : '{&**&,&,}';
+            }, preg_replace('/([^\/])\[\?\]/u', '${1}{/**,}[?]', $uri_pattern));
+            return $uri_pattern = '/'.$uri_pattern.'{&**,}';
+        } else {
+            return $uri_pattern = '/'.$uri_pattern.'{/**,}';
+        }
     }
 }

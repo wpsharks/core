@@ -54,4 +54,12 @@ trait Patterns
     {
         return $GLOBALS[static::class]->Utils->©WRegx->bracket(...$args);
     }
+
+    /**
+     * @since 160428 Adding functions.
+     */
+    public static function urlToWRegxUriPattern(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©WRegx->urlToUriPattern(...$args);
+    }
 }
