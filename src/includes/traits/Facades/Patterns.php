@@ -46,4 +46,12 @@ trait Patterns
     {
         return $GLOBALS[static::class]->Utils->©WRegx->frag(...$args);
     }
+
+    /**
+     * @since 160428 Adding functions.
+     */
+    public static function wRegxBracket(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©WRegx->bracket(...$args);
+    }
 }

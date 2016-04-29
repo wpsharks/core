@@ -109,4 +109,44 @@ class WRegx extends Classes\Core\Base\Core
 
         return $force_match_all ? '^'.$string.'$' : $string;
     }
+
+    /**
+     * Bracket special chars.
+     *
+     * @since 150424 Watered-down regex.
+     *
+     * @param mixed $value Input value(s).
+     *
+     * @return string|array|object Bracketed value(s).
+     */
+    public function bracket($value)
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->bracket($_value);
+            } // unset($_key, $_value); // Housekeeping.
+
+            return $value;
+        }
+        $string = (string) $value;
+
+        if (!isset($string[0])) {
+            return $string;
+        }
+        $tokens = []; // Initialize.
+
+        $string = preg_replace_callback('/\[((?:(?:[^[\]]+)|(?R))*)\]/u', function ($m) use (&$tokens) {
+            $tokens[] = '['.$m[1].']'; // Save token.
+            return '|%#%|'.(count($tokens) - 1).'|%#%|';
+        }, $string); // Tokenizes character class.
+
+        $string = preg_replace('/[*?[\]!{},]/u', '[${0}]', $string);
+
+        foreach (array_reverse($tokens, true) as $_token => $_brackets) {
+            // Must go in reverse order so nested tokens unfold properly.
+            $string = str_replace('|%#%|'.$_token.'|%#%|', $_brackets, $string);
+        } // unset($_token, $_brackets); // Housekeeping.
+
+        return $string;
+    }
 }
