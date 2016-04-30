@@ -143,7 +143,7 @@ class Config extends Classes\Core\Base\Core
                 '©logs_dir'    => (string) ($_s_cfgs['CFG_LOGS_DIR'] ?? '/var/log/%%app_namespace_sha1%%'),
                 '©cache_dir'   => (string) ($_s_cfgs['CFG_CACHE_DIR'] ?? '/tmp/%%app_namespace_sha1%%/cache'),
                 '©errors_dir'  => (string) ($_s_cfgs['CFG_ERRORS_DIR'] ?? ($is_cfg_host ? '/bootstrap/src/html/errors' : '')),
-                '©config_file' => (string) ($_s_cfgs['CFG_CONFIG_FILE'] ?? '%%app_base_dir%%/.config.json'),
+                '©config_file' => (string) ($_s_cfgs['CFG_CONFIG_FILE'] ?? ''), // Empty by default, for improved performance.
             ],
             '©fs_permissions' => [
                 '©transient_dirs' => (int) ($_s_cfgs['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 02775),
@@ -205,12 +205,15 @@ class Config extends Classes\Core\Base\Core
 
         $instance_base = $this->App->mergeConfig($default_instance_base, $instance_base);
 
-        # Merge a possible JSON configuration file also. @TODO Convert this to a PHP include so OPcache picks it up.
+        # Merge a possible JSON configuration file also; via `include()` for improved performance.
 
-        $config_file = $instance['©fs_paths']['©config_file'] ?? $instance_base['©fs_paths']['©config_file'];
+        $config_file            = $instance['©fs_paths']['©config_file'] ?? $instance_base['©fs_paths']['©config_file'];
+        $is_default_config_file = $config_file && $config_file === $default_instance_base['©fs_paths']['©config_file'];
 
-        if ($config_file && is_file($config_file)) { // Has a config file?
-            if (!is_array($config = json_decode(file_get_contents($config_file), true))) {
+        if ($config_file && (!$is_default_config_file || is_file($config_file))) {
+            ob_start(); // Buffer contents of the JSON data.
+            include $config_file; // Improved performance via OPcache.
+            if (!is_array($config = json_decode(ob_get_clean(), true))) {
                 throw new Exception(sprintf('Invalid config file: `%1$s`.', $config_file));
             }
             if (!empty($config['©core_app'])) {
