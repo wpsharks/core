@@ -62,19 +62,22 @@ class WRegx extends Classes\Core\Base\Core
      */
     public function frag($value, string $exclusion_chars = '/', bool $force_match_all = false)
     {
-        if (!$exclusion_chars) { // Must have this.
-            throw new Exception('Missing `exclusion_chars`.');
-        }
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
                 $_value = $this->frag($_value, $exclusion_chars, $force_match_all);
             } // unset($_key, $_value); // Housekeeping.
             return $value;
         }
-        $string = (string) $value;
-
-        if (!isset($string[0])) {
-            return $string;
+        if (!($string = (string) $value)) {
+            return $string; // Empty.
+        }
+        if (!$exclusion_chars) { // Must have this.
+            throw new Exception('Missing `exclusion_chars`.');
+        } elseif ($exclusion_chars !== '/') {
+            $_exclusion_chars_array = $this->c::mbStrSplit($exclusion_chars);
+            if (array_diff($_exclusion_chars_array, ['⁅', '⒯', '⁆', '?', '*']) !== $_exclusion_chars_array) {
+                throw new Exception('Invalid `exclusion_chars`. May not exclude: `⁅`, `⒯`, `⁆`, `?` or `*`.');
+            } // unset($_exclusion_chars_array); // Housekeeping.
         }
         $tokens          = []; // Initialize.
         $string          = $this->c::escRegex($string);
@@ -130,10 +133,8 @@ class WRegx extends Classes\Core\Base\Core
             } // unset($_key, $_value); // Housekeeping.
             return $value;
         }
-        $string = (string) $value;
-
-        if (!isset($string[0])) {
-            return $string;
+        if (!($string = (string) $value)) {
+            return $string; // Empty.
         }
         $tokens = []; // Initialize.
 
