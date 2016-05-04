@@ -44,20 +44,20 @@ class StrPad extends Classes\Core\Base\Core
 
         switch ($pad_type) {
             case STR_PAD_LEFT:
-                $repeat = ceil(max(0, $mb_strlen - $pad_string_mb_strlen) + $pad_length);
+                $repeat = (int) ceil(max(0, $mb_strlen - $pad_string_mb_strlen) + $pad_length);
                 $string = str_repeat($pad_string, $repeat).$string;
                 return mb_substr($string, -$pad_length);
 
             case STR_PAD_RIGHT:
-                $repeat = ceil(max(0, $mb_strlen - $pad_string_mb_strlen) + $pad_length);
+                $repeat = (int) ceil(max(0, $mb_strlen - $pad_string_mb_strlen) + $pad_length);
                 $string = $string.str_repeat($pad_string, $repeat);
                 return mb_substr($string, 0, $pad_length);
 
             case STR_PAD_BOTH:
                 $half_pad_length = ($pad_length - $mb_strlen) / 2;
-                $split_repeat    = ceil($pad_length / $pad_string_mb_strlen);
-                return mb_substr(str_repeat($pad_string, $split_repeat), 0, floor($half_pad_length))
-                        .$string.mb_substr(str_repeat($pad_string, $split_repeat), 0, ceil($half_pad_length));
+                $split_repeat    = (int) ceil($pad_length / $pad_string_mb_strlen);
+                return mb_substr(str_repeat($pad_string, $split_repeat), 0, (int) floor($half_pad_length))
+                        .$string.mb_substr(str_repeat($pad_string, $split_repeat), 0, (int) ceil($half_pad_length));
 
             default: // Exception on unexpected pad type.
                 throw new Exception('Unexpected `pad_type`.');
