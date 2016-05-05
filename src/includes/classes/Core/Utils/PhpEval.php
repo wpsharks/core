@@ -28,6 +28,6 @@ class PhpEval extends Classes\Core\Base\Core
     {
         extract($¤vars, EXTR_PREFIX_SAME, '_xps');
 
-        return eval($¤¤string);
+        return eval($¤string);
     }
 }
