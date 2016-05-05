@@ -8,6 +8,14 @@ use WebSharks\Core\Classes\Core\Base\Exception;
 trait Php
 {
     /**
+     * @since 160505 PHP eval utils.
+     */
+    public static function phpEval(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©PhpEval->__invoke(...$args);
+    }
+
+    /**
      * @since 151214 Adding functions.
      */
     public static function canCallFunc(...$args)

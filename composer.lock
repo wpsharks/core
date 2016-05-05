@@ -72,16 +72,16 @@
         },
         {
             "name": "embedly/embedly-php",
-            "version": "v0.5.4",
+            "version": "v0.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/embedly/embedly-php.git",
-                "reference": "461886c6ffa90aadcde4fb216ff275969d96a7f9"
+                "reference": "a2cbf6dc45c1a8d82063ef099216f74007c8ad1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/embedly/embedly-php/zipball/461886c6ffa90aadcde4fb216ff275969d96a7f9",
-                "reference": "461886c6ffa90aadcde4fb216ff275969d96a7f9",
+                "url": "https://api.github.com/repos/embedly/embedly-php/zipball/a2cbf6dc45c1a8d82063ef099216f74007c8ad1a",
+                "reference": "a2cbf6dc45c1a8d82063ef099216f74007c8ad1a",
                 "shasum": ""
             },
             "require": {
@@ -113,7 +113,7 @@
             "keywords": [
                 "embedly"
             ],
-            "time": "2014-03-17 17:30:47"
+            "time": "2015-02-05 15:06:38"
         },
         {
             "name": "erusev/parsedown",
