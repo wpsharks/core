@@ -73,10 +73,6 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
         if ($this->App->parent) { // Looking for the root core.
             return $this->App->parent->Utils->©Url->toAppCore($uri, $scheme, $cdn_filter);
         }
-        if ($this->App->core_is_vendor) {
-            $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
-            $uri = '/vendor/websharks/core/src/'.$uri;
-        }
         return $this->toApp($uri, $scheme, $cdn_filter);
     }
 
@@ -136,10 +132,6 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
     {
         if ($this->App->parent) { // Looking for the root core.
             return $this->App->parent->Utils->©Url->toCurrentCore($uri, $scheme, $cdn_filter);
-        }
-        if ($this->App->core_is_vendor) {
-            $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
-            $uri = '/vendor/websharks/core/src/'.$uri;
         }
         return $this->toCurrent($uri, $scheme, $cdn_filter);
     }

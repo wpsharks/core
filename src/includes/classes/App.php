@@ -177,15 +177,6 @@ class App extends Classes\Core\Base\Core
     public $core_dir_sha1;
 
     /**
-     * Core dir is vendor?
-     *
-     * @since 150424
-     *
-     * @type bool
-     */
-    public $core_is_vendor;
-
-    /**
      * Config.
      *
      * @since 150424
@@ -232,7 +223,7 @@ class App extends Classes\Core\Base\Core
      *
      * @type string Version.
      */
-    const VERSION = '160505'; //v//
+    const VERSION = '160507'; //v//
 
     /**
      * Constructor.
@@ -286,7 +277,6 @@ class App extends Classes\Core\Base\Core
         $this->core_dir          = dirname(__FILE__, 4);
         $this->core_dir_basename = basename($this->core_dir);
         $this->core_dir_sha1     = sha1($this->core_dir);
-        $this->core_is_vendor    = mb_stripos($this->core_dir, '/vendor/') !== false;
 
         # Validate this instance of the app.
 
