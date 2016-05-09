@@ -204,6 +204,7 @@ trait OverloadMembers
      *
      * @note Property names in an array can be overloaded; e.g., to provide public or JSON access.
      *   This only works if each property in the array already exists in this class.
+     *   Overloaded object property names can be set as writable or not writable.
      *
      * @param bool $writable Overloaded properties are writable?
      *
