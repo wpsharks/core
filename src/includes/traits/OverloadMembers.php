@@ -138,11 +138,12 @@ trait OverloadMembers
     {
         if (isset($this->¤¤writable_overload_properties[$property])) {
             if ($this->¤¤writable_overload_properties[$property] === 1) {
-                $this->{$property} = $value; // Direct access.
-                // See also: {@link overload()} below.
+                $this->{$property} = $value; // Direct public write access.
+                // See also: {@link overload()} below for details.
                 return; // Null return value.
             } else {
                 $this->¤¤overload[$property] = $value;
+                // This is indirect public write access.
                 return; // Null return value.
             }
         }
@@ -199,8 +200,9 @@ trait OverloadMembers
      *
      * @note Objects are passed by reference, so we can overload properties by reference.
      *   This only works if each property in the object does not yet exist in this class.
+     *   Object properties can be set as writable or not writable.
      *
-     * @note Property names in an array can be overloaded for public access.
+     * @note Property names in an array can be overloaded; e.g., to provide public or JSON access.
      *   This only works if each property in the array already exists in this class.
      *
      * @param bool $writable Overloaded properties are writable?
@@ -212,6 +214,7 @@ trait OverloadMembers
     {
         // Objects are passed by reference, so we can overload properties by reference.
         // This only works if each property in the object does not yet exist in this class.
+        // Object properties can be set as writable or not writable.
 
         if (is_object($properties)) {
             foreach ($properties as $_property => &$_value) {
@@ -231,8 +234,9 @@ trait OverloadMembers
 
             return; // All done here.
         }
-        // Property names in an array can be overloaded for public access.
+        // Property names in an array can be overloaded; e.g., to provide public or JSON access.
         // This only works if each property in the array already exists in this class.
+        // Overloaded object property names can be set as writable or not writable.
 
         if (is_array($properties)) {
             foreach ($properties as $_key => $_property) {
@@ -240,7 +244,7 @@ trait OverloadMembers
                     throw new Exception(sprintf('Property: `%1$s` does not exist.', $_property));
                 }
                 if ($writable) { // Is the property writable?
-                    $this->¤¤writable_overload_properties[$_property] = 2;
+                    $this->¤¤writable_overload_properties[$_property] = 0;
                     $this->¤¤overload[$_property]                     = &$this->{$_property};
                 } else { // Remove it otherwise; i.e., NOT writable.
                     unset($this->¤¤writable_overload_properties[$_property]);
