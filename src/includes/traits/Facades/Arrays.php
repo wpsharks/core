@@ -14,4 +14,12 @@ trait Arrays
     {
         return $GLOBALS[static::class]->Utils->©UnshiftAssoc->__invoke($array, $key, $value);
     }
+
+    /**
+     * @since 160511 Array cloning.
+     */
+    public static function cloneArray(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©CloneArray->__invoke(...$args);
+    }
 }
