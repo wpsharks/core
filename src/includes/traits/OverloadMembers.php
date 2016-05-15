@@ -192,6 +192,42 @@ trait OverloadMembers
     }
 
     /**
+     * Is class overloaded?
+     *
+     * @since 160515 Overload conditional.
+     *
+     * @return bool True if class is overloaded.
+     */
+    protected function isOverloaded(): bool
+    {
+        return !empty($this->¤¤overload);
+    }
+
+    /**
+     * Current overload array.
+     *
+     * @since 160515 Overload conditional.
+     *
+     * @return array Current overload array.
+     */
+    protected function overloadArray(): array
+    {
+        return $this->¤¤overload;
+    }
+
+    /**
+     * Writable overload properties.
+     *
+     * @since 160515 Overload conditional.
+     *
+     * @return array Writable overload properties.
+     */
+    protected function writableOverloadProperties(): array
+    {
+        return array_keys($this->¤¤writable_overload_properties);
+    }
+
+    /**
      * Setup overloads.
      *
      * @since 150424 Initial release.
