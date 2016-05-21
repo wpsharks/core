@@ -33,7 +33,13 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
         $base_path = $this->App->Config->©urls['©base_paths']['©app'];
 
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
-        $url = $this->c::setScheme('//'.$host.$base_path.'/'.$uri, $scheme);
+        $uri = $uri ? '/'.$uri : ''; // Force leading slash.
+
+        if ($uri && defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) {
+            $uri = preg_replace('/\.min\.js($|[?])/u', '.js${1}', $uri);
+        } // This allows developers to debug uncompressed JS files.
+
+        $url = $this->c::setScheme('//'.$host.$base_path.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
             $url = $this->c::cdnFilter($url);
@@ -93,7 +99,13 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
         $base_path = $this->App->Config->©urls['©base_paths']['©app'];
 
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
-        $url = $this->c::setScheme('//'.$host.$base_path.'/'.$uri, $scheme);
+        $uri = $uri ? '/'.$uri : ''; // Force leading slash.
+
+        if ($uri && defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) {
+            $uri = preg_replace('/\.min\.js($|[?])/u', '.js${1}', $uri);
+        } // This allows developers to debug uncompressed JS files.
+
+        $url = $this->c::setScheme('//'.$host.$base_path.$uri, $scheme);
 
         if ($uri && $cdn_filter) {
             $url = $this->c::cdnFilter($url);
