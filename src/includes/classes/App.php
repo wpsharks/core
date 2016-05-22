@@ -223,7 +223,7 @@ class App extends Classes\Core\Base\Core
      *
      * @type string Version.
      */
-    const VERSION = '160521'; //v//
+    const VERSION = '160522'; //v//
 
     /**
      * Constructor.
@@ -327,22 +327,29 @@ class App extends Classes\Core\Base\Core
     }
 
     /**
-     * Maybe setup debugging.
+     * Maybe setup debug error reporting.
      *
      * @since 150424 Initial release.
      */
-    protected function maybeDebug()
+    protected function maybeDebug() // Error reporting.
     {
-        if ($this->Config->©debug) {
-            // All errors.
-            error_reporting(E_ALL);
+        if (!$this->Config->©debug['©enable']) {
+            return; // Nothing to do here.
+        } elseif (!$this->Config->©debug['©er_enable']) {
+            return; // Nothing to do here.
+        }
+        error_reporting(E_ALL); // Enable error reporting.
 
-            // Display errors.
-            ini_set('display_errors', 'yes');
-
+        if ($this->Config->©debug['©er_display']) {
+            ini_set('display_errors', 'yes'); // Display.
+        }
+        if ($this->Config->©debug['©er_assertions'] && @ini_set('zend.assertions', '1') !== false) {
             // Fail softly, because it can only go from `0` to `1`.
             // If the current value is `-1` this will trigger a warning.
-            @ini_set('zend.assertions', '1');
+            assert_options(ASSERT_ACTIVE, true);
+            assert_options(ASSERT_BAIL, true);
+            assert_options(ASSERT_WARNING, false);
+            assert_options(ASSERT_QUIET_EVAL, false);
         }
     }
 
@@ -353,7 +360,7 @@ class App extends Classes\Core\Base\Core
      */
     protected function maybeHandleExceptions()
     {
-        if (!$this->Config->©debug && $this->Config->©handle_exceptions) {
+        if (!$this->Config->©debug['©enable'] && $this->Config->©handle_exceptions) {
             // Handle exceptions w/ a custom error page.
             $this->c::setupExceptionHandler();
         }

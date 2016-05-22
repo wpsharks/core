@@ -23,7 +23,7 @@ extract($this->setVars($¤defaults, $¤vars));
 <h1><?= __('500 Internal Server Error'); ?></h1>
 <p><?= __('This error has been reported to system administrators. Very sorry! :-)'); ?></p>
 
-<?php if ($this->App->Config->©debug && $Exception) : ?>
+<?php if ($this->App->Config->©debug['©er_display'] && $Exception) : ?>
     <pre>
         <?= $this->c::escHtml($Exception->getMessage()) ?>
     </pre>

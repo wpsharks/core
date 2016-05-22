@@ -43,7 +43,13 @@ class Config extends Classes\Core\Base\Core
         $is_cfg_host = !empty($_s_cfgs['CFG_HOST']); // Flag used below in some defaults.
 
         $default_instance_base = [
-            '©debug'             => (bool) ($_s_cfgs['CFG_DEBUG'] ?? false),
+            '©debug' => [
+                '©enable'        => (bool) ($_s_cfgs['CFG_DEBUG'] ?? false),
+                '©log'           => (bool) ($_s_cfgs['CFG_DEBUG_LOG'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
+                '©er_enable'     => (bool) ($_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
+                '©er_display'    => (bool) ($_s_cfgs['CFG_DEBUG_ER_DISPLAY'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
+                '©er_assertions' => (bool) ($_s_cfgs['CFG_DEBUG_ER_ASSERTIONS'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
+            ],
             '©handle_exceptions' => (bool) ($_s_cfgs['CFG_HANDLE_EXCEPTIONS'] ?? false),
 
             '©locales' => (array) ($_s_cfgs['CFG_LOCALES'] ?? ($is_cfg_host ? ['en_US.UTF-8', 'C'] : [])),
@@ -228,6 +234,15 @@ class Config extends Classes\Core\Base\Core
         }
         # Fill replacement codes and overload the config properties.
 
-        $this->overload((object) $this->App->fillConfigReplacementCodes($config), true);
+        $config = $this->App->fillConfigReplacementCodes($config);
+        $config = (object) $config; // Force object properties.
+
+        if (!$config->©debug['©enable']) { // Must be on for any of these to be true.
+            $config->©debug['©log'] = $config->©debug['©er_enable'] = $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;
+        } elseif (!$config->©debug['©er_enable']) { // Must be on for any of these to be true.
+            $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;
+        }
+        $this->overload($config, true); // Overload public/writable properties.
+        // Public for performance gains & accessibility, but do NOT alter them at runtime.
     }
 }
