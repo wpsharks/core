@@ -343,14 +343,11 @@ class App extends Classes\Core\Base\Core
         if ($this->Config->©debug['©er_display']) {
             ini_set('display_errors', 'yes'); // Display.
         }
-        if ($this->Config->©debug['©er_assertions'] && @ini_set('zend.assertions', '1') !== false) {
+        if ($this->Config->©debug['©er_assertions']) {
             // Fail softly, because it can only go from `0` to `1`.
             // If the current value is `-1` this will trigger a warning.
-            assert_options(ASSERT_ACTIVE, true);
-            assert_options(ASSERT_QUIET_EVAL, false);
-            assert_options(ASSERT_EXCEPTION, true);
-            assert_options(ASSERT_WARNING, false);
-            assert_options(ASSERT_BAIL, true);
+            @ini_set('zend.assertions', '1');
+            ini_set('assert.exception', 'yes');
         }
     }
 
