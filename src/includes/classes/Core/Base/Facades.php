@@ -14,6 +14,7 @@ use WebSharks\Core\Traits;
  */
 abstract class Facades
 {
+    use Traits\Facades\Apache;
     use Traits\Facades\App;
     use Traits\Facades\Arrays;
     use Traits\Facades\Base64;
