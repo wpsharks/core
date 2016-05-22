@@ -347,9 +347,10 @@ class App extends Classes\Core\Base\Core
             // Fail softly, because it can only go from `0` to `1`.
             // If the current value is `-1` this will trigger a warning.
             assert_options(ASSERT_ACTIVE, true);
-            assert_options(ASSERT_BAIL, true);
-            assert_options(ASSERT_WARNING, false);
             assert_options(ASSERT_QUIET_EVAL, false);
+            assert_options(ASSERT_EXCEPTION, true);
+            assert_options(ASSERT_WARNING, false);
+            assert_options(ASSERT_BAIL, true);
         }
     }
 
