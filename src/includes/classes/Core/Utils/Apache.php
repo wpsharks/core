@@ -21,8 +21,10 @@ class Apache extends Classes\Core\Base\Core
      *
      * @param string $dir                 Directory to deny access in.
      * @param bool   $allow_static_access Allow static file access?
+     *
+     * @return int Number of bytes written to file.
      */
-    public function htaccessDeny(string $dir, bool $allow_static_access = false)
+    public function htaccessDeny(string $dir, bool $allow_static_access = false): int
     {
         $deny = // `.htaccess` file.
             '<IfModule authz_core_module>'."\n".
@@ -43,6 +45,6 @@ class Apache extends Classes\Core\Base\Core
             '	</IfModule>'."\n".
             '</FilesMatch>';
         }
-        file_put_contents($dir.'/.htaccess', $deny);
+        return (int) file_put_contents($dir.'/.htaccess', $deny);
     }
 }
