@@ -40,7 +40,7 @@ class Iterators extends Classes\Core\Base\Core
      *
      * @return \RegexIterator Recursive dir/regex iterator.
      */
-    public function dirRecursiveRegex(string $dir, string $regex): \RegexIterator
+    public function dirRecursiveRegex(string $dir, string $regex = '/.+/u'): \RegexIterator
     {
         if (!$dir || !$regex) {
             throw new Exception('Missing required `$dir` and/or `$regex` parameters.');
