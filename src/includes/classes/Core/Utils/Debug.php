@@ -65,19 +65,21 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @since 160522 Debug utilities.
      *
-     * @param string $event Event name (e.g., {@link __METHOD__}).
      * @param mixed  $data  Data to log (e.g., {@link vars()}).
-     * @param string $note  Optional notes/description.
+     * @param string $note  A brief note or description of the issue.
+     * @param string $event Event name (e.g., {@link __METHOD__}).
      *
      * @return Exception An exception ready to be thrown.
      */
-    public function logIssue(string $event, $data = [], string $note = ''): Exception
+    public function logIssue($data = [], string $note = '', string $event = ''): Exception
     {
-        if (mb_strpos($event, '#') === false) {
-            $event .= '#issues';
-        } // Assume this is for review only.
+        $event = $event ?: $this->traceLogEventTrigger();
 
-        $this->log($event, $data, $note);
+        if (mb_strpos($event, '#') === false) {
+            $event .= '#issue';
+        } // Assume this is an issue.
+
+        $this->maybeLog($data, $note, $event);
 
         return new Exception($note ? $note : $event);
     }
@@ -87,36 +89,38 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @since 160522 Debug utilities.
      *
-     * @param string $event Event name (e.g., {@link __METHOD__}).
      * @param mixed  $data  Data to log (e.g., {@link vars()}).
-     * @param string $note  Optional notes/description.
+     * @param string $note  A brief note or description of the issue.
+     * @param string $event Event name (e.g., {@link __METHOD__}).
      *
      * @return int Total number of bytes written.
      */
-    public function logReview(string $event, $data = [], string $note = ''): int
+    public function logReview($data = [], string $note = '', string $event = ''): int
     {
+        $event = $event ?: $this->traceLogEventTrigger();
+
         if (mb_strpos($event, '#') === false) {
             $event .= '#review';
-        } // Assume this is for review only.
+        } // Assume this is for review.
 
-        return $this->log($event, $data, $note);
+        return $this->maybeLog($data, $note, $event);
     }
 
     /**
-     * Debug logging utility.
+     * Maybe log for debugging.
      *
      * @since 160522 Debug utilities.
      *
-     * @param string $event Event name (e.g., {@link __METHOD__}).
      * @param mixed  $data  Data to log (e.g., {@link vars()}).
-     * @param string $note  Optional notes/description.
+     * @param string $note  A brief note or description of the issue.
+     * @param string $event Event name (e.g., {@link __METHOD__}).
      *
      * @return int Total number of bytes written.
      */
-    protected function log(string $event, $data = [], string $note = ''): int
+    protected function maybeLog($data = [], string $note = '', string $event = ''): int
     {
         if (!$this->App->Config->©debug['©log']) {
-            return; // Not applicable.
+            return 0; // Not applicable.
         }
         $is_cli       = $this->c::isCli();
         $is_wordpress = $this->c::isWordPress();
@@ -246,6 +250,42 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
                 unlink($_Resource->getPathname());
             }
         } // unset($_Resource); // Housekeeping.
+    }
+
+    /**
+     * Trace log event trigger.
+     *
+     * @since 160522 Debug utilities.
+     *
+     * @return string Log event trigger.
+     */
+    protected function traceLogEventTrigger(): string
+    {
+        // `[0]` is the call to this function.
+        // `[1]` is the call to the utility function in this class.
+        // So we start searching from index `2` for a possible trigger.
+
+        if (!($callers = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))) {
+            return ''; // Not possible; unexpected trace.
+        }
+        for ($_i = 2; $_i < count($callers); ++$_i) {
+            $_caller   = $callers[$_i];
+            $_function = $_caller['function'] ?? '';
+            $_class    = $_caller['class'] ?? '';
+
+            if (!$_function) { // Should not be empty.
+                return ''; // Unexpected caller in this case.
+            } elseif ($_class && mb_strpos($_function, '__') === 0) {
+                continue; // Bypass magic (middle-man) methods in classes.
+            } elseif ($_class && mb_stripos($_class, '\\Facades\\') !== false) {
+                continue; // Bypass facades that sit in the middle also.
+            }
+            $trigger = $_class ? $_class.'::' : '';
+            $trigger .= $_function; // i.e., `[class::]function`.
+            return $trigger; // The original caller; i.e. `class::method`.
+        } // unset($_caller, $_function, $_class); // Housekeeping.
+
+        return ''; // Unable to locate the original trigger.
     }
 
     /**
