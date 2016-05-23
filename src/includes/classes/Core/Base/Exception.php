@@ -5,6 +5,8 @@ namespace WebSharks\Core\Classes\Core\Base;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use function get_defined_vars as vars;
 
 /**
  * Exception.

@@ -6,6 +6,10 @@ use WebSharks\Core\Classes;
 use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use function get_defined_vars as vars;
+
+// `Vars` and function `vars` CAN coexist here.
 
 /**
  * Var utilities.

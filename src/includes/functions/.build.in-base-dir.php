@@ -12,7 +12,14 @@ if (PHP_SAPI !== 'cli') {
 }
 $load = '<?php
 declare (strict_types = 1);
-namespace '.__NAMESPACE__.';
+namespace WebSharks\Core\Functions;
+
+use WebSharks\Core\Classes;
+use WebSharks\Core\Classes\Core\Base\Exception;
+use WebSharks\Core\Interfaces;
+use WebSharks\Core\Traits;
+#
+use function get_defined_vars as vars;
 
 ';
 foreach (dir_recursive_regex(__DIR__, '/\.php$/ui') as $_file) {

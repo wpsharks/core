@@ -7,6 +7,8 @@ use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
+use function get_defined_vars as vars;
+#
 use Hashids\Hashids as Parser;
 
 /**
