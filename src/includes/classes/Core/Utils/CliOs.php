@@ -29,7 +29,7 @@ class CliOs extends Classes\Core\Base\Core
         parent::__construct($App);
 
         if (!$this->c::isCli()) {
-            throw new Exception('Requires CLI mode.');
+            throw $this->c::issue('Requires CLI mode.');
         }
     }
 
@@ -54,7 +54,7 @@ class CliOs extends Classes\Core\Base\Core
         } elseif ($this->c::isWindows()) {
             `start $url_arg`;
         } else {
-            throw new Exception('Unable to open <'.$url.'>. Unsupported operating system.');
+            throw $this->c::issue('Unable to open <'.$url.'>. Unsupported operating system.');
         }
     }
 }

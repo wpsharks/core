@@ -59,7 +59,7 @@ class Sha1Mod extends Classes\Core\Base\Core
             $sha1 = sha1($string);
         }
         if (strlen($sha1) !== 40) {
-            throw new Exception('SHA-1 hash not 40 chars.');
+            throw $this->c::issue('SHA-1 hash not 40 chars.');
         }
         $sha1_first_15 = substr($sha1, 0, 15);
         $dividend      = hexdec($sha1_first_15);
@@ -102,7 +102,7 @@ class Sha1Mod extends Classes\Core\Base\Core
     public function assignShardId(string $string, bool $is_sha1 = false)
     {
         if ($this->total_mysql_db_shards < 1) {
-            throw new Exception('No MySQL DB shards available.');
+            throw $this->c::issue('No MySQL DB shards available.');
         }
         return $this->shardId($string, $is_sha1, $this->total_mysql_db_shards);
     }

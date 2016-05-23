@@ -29,7 +29,7 @@ class UrlCurrent extends Classes\Core\Base\Core
         parent::__construct($App);
 
         if ($this->c::isCli()) {
-            throw new Exception('Not possible in CLI mode.');
+            throw $this->c::issue('Not possible in CLI mode.');
         }
     }
 

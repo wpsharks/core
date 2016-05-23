@@ -38,9 +38,9 @@ class WebPurify extends Classes\Core\Base\Core
         parent::__construct($App);
 
         if (!$this->App->Config->©webpurify['©api_key']) {
-            throw new Exception('Missing WebPurify API key.');
+            throw $this->c::issue('Missing WebPurify API key.');
         } elseif (!$this->App->Config->©fs_paths['©cache_dir']) {
-            throw new Exception('Missing cache directory.');
+            throw $this->c::issue('Missing cache directory.');
         }
         $this->cache_dir = $this->App->Config->©fs_paths['©cache_dir'].'/webpurify';
     }

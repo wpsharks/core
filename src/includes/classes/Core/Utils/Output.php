@@ -25,7 +25,7 @@ class Output extends Classes\Core\Base\Core
     public function gzipOff()
     {
         if (headers_sent()) {
-            throw new Exception('Heading already sent!');
+            throw $this->c::issue('Heading already sent!');
         }
         @ini_set('zlib.output_compression', 'off');
         if ($this->c::canCallFunc('apache_setenv')) {
@@ -41,7 +41,7 @@ class Output extends Classes\Core\Base\Core
     public function buffersEndClean()
     {
         if (headers_sent()) {
-            throw new Exception('Heading already sent!');
+            throw $this->c::issue('Heading already sent!');
         }
         while (@ob_end_clean()) {
             // End & clean any open buffers.

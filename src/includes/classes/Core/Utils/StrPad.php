@@ -63,7 +63,7 @@ class StrPad extends Classes\Core\Base\Core
                         .$string.mb_substr(str_repeat($pad_string, $split_repeat), 0, (int) ceil($half_pad_length));
 
             default: // Exception on unexpected pad type.
-                throw new Exception('Unexpected `pad_type`.');
+                throw $this->c::issue('Unexpected `pad_type`.');
         }
     }
 }

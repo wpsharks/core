@@ -44,7 +44,7 @@ class Template extends Classes\Core\Base\Core
         }
         if ($dir && $file && is_file($dir.'/'.$file)) {
             if (preg_match('/\/\.|\.\/|\.\./u', $this->c::normalizeDirPath($dir.'/'.$file))) {
-                throw new Exception(sprintf('Insecure template path: `%1$s`.', $dir.'/'.$file));
+                throw $this->c::issue(sprintf('Insecure template path: `%1$s`.', $dir.'/'.$file));
             }
             return ['dir' => $dir, 'file' => $file, 'ext' => $this->c::fileExt($file)];
         }

@@ -40,7 +40,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
         parent::__construct($App);
 
         if (!$this->App->Config->©fs_paths['©cache_dir']) {
-            throw new Exception('Missing cache directory.');
+            throw $this->c::issue('Missing cache directory.');
         }
         $this->cache_dir = $this->App->Config->©fs_paths['©cache_dir'].'/oembed';
     }
@@ -120,7 +120,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
         # Require a valid API key for Embedly.
 
         if (!$this->App->Config->©embedly['©api_key']) {
-            throw new Exception('Missing Embedly API key.');
+            throw $this->c::issue('Missing Embedly API key.');
         }
         # Initialize several variables.
 
@@ -310,7 +310,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
         if (!$this->c::isWordPress()
             || !$this->c::canCallFunc('wp_oembed_get')
             || !$this->c::canCallFunc('wp_embed_defaults')) {
-            throw new Exception('Unable to oEmbed via WordPress.');
+            throw $this->c::issue('Unable to oEmbed via WordPress.');
         }
         $oembed_args = array_merge(wp_embed_defaults(), ['discover' => false]);
         $string      = preg_replace_callback('/^\s*(https?:\/\/[^\s"]+)\s*$/uim', function ($m) use ($oembed_args) {

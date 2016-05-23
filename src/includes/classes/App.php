@@ -180,6 +180,15 @@ class App extends Classes\Core\Base\Core
     public $core_dir_sha1;
 
     /**
+     * Is the core?
+     *
+     * @since 150424
+     *
+     * @type bool
+     */
+    public $is_core;
+
+    /**
      * Config.
      *
      * @since 150424
@@ -280,6 +289,8 @@ class App extends Classes\Core\Base\Core
         $this->core_dir          = dirname(__FILE__, 4);
         $this->core_dir_basename = basename($this->core_dir);
         $this->core_dir_sha1     = sha1($this->core_dir);
+
+        $this->is_core = $this->class === self::class;
 
         # Validate this instance of the app.
 

@@ -45,10 +45,10 @@ class Sql extends Classes\Core\Base\Core
                     return "'".esc_sql($value)."'";
 
                 default: // Unexpected data type.
-                    throw new Exception('Unexpected data type; unable to quote.');
+                    throw $this->c::issue('Unexpected data type; unable to quote.');
             }
         }
-        throw new Exception('No SQL escape handler.');
+        throw $this->c::issue('No SQL escape handler.');
     }
 
     /**

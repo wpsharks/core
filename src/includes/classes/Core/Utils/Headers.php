@@ -25,7 +25,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
     public function sendNoCache()
     {
         if (headers_sent()) {
-            throw new Exception('Headers already sent.');
+            throw $this->c::issue('Headers already sent.');
         }
         $headers = [
             'expires'       => 'wed, 11 jan 1984 05:00:00 gmt',
@@ -61,11 +61,11 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
         $errors_dir         = $this->App->Config->©fs_paths['©errors_dir'];
 
         if (headers_sent()) {
-            throw new Exception('Headers already sent.');
+            throw $this->c::issue('Headers already sent.');
         } elseif (empty($this::HTTP_STATUSES[$status])) {
-            throw new Exception('Unknown status.');
+            throw $this->c::issue('Unknown status.');
         } elseif ($this->c::isCli()) {
-            throw new Exception('Not possible in CLI mode.');
+            throw $this->c::issue('Not possible in CLI mode.');
         }
         if (!($protocol = $_SERVER['SERVER_PROTOCOL'] ?? '')) {
             $protocol = 'HTTP/1.1'; // Default fallback.

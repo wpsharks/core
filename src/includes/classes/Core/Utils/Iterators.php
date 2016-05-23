@@ -46,7 +46,7 @@ class Iterators extends Classes\Core\Base\Core
     public function dirRecursiveRegex(string $dir, string $regex = '/.+/u'): \RegexIterator
     {
         if (!$dir || !$regex) {
-            throw new Exception('Missing required `$dir` and/or `$regex` parameters.');
+            throw $this->c::issue('Missing required `$dir` and/or `$regex` parameters.');
         }
         $DirIterator      = new \RecursiveDirectoryIterator($dir, \FilesystemIterator::KEY_AS_PATHNAME | \FilesystemIterator::CURRENT_AS_SELF | \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::UNIX_PATHS);
         $IteratorIterator = new \RecursiveIteratorIterator($DirIterator, \RecursiveIteratorIterator::CHILD_FIRST);

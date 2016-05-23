@@ -29,7 +29,7 @@ class Cookie extends Classes\Core\Base\Core
         parent::__construct($App);
 
         if ($this->c::isCli()) {
-            throw new Exception('Not possible in CLI mode.');
+            throw $this->c::issue('Not possible in CLI mode.');
         }
     }
 
@@ -46,10 +46,10 @@ class Cookie extends Classes\Core\Base\Core
     public function set(string $name, string $value, int $expires_after = null, string $domain = null, string $path = null, string $key = '')
     {
         if (!$name) { // Must have a cookie name!
-            throw new Exception('Missing cookie name.');
+            throw $this->c::issue('Missing cookie name.');
         }
         if (!$key && !($key = $this->App->Config->©cookies['©encryption_key'])) {
-            throw new Exception('Missing cookie encryption key.');
+            throw $this->c::issue('Missing cookie encryption key.');
         }
         if (isset($value[0])) { // If not empty.
             $value = $this->c::encrypt($value, $key);
@@ -62,7 +62,7 @@ class Cookie extends Classes\Core\Base\Core
         $path   = $path ?? '/'; // Default path covers the entire site.
 
         if (headers_sent()) {
-            throw new Exception('Headers already sent.');
+            throw $this->c::issue('Headers already sent.');
         }
         setcookie($name, $value, $expires, $path, $domain);
 
@@ -82,10 +82,10 @@ class Cookie extends Classes\Core\Base\Core
     public function get(string $name, string $key = ''): string
     {
         if (!$name) { // Must have a cookie name!
-            throw new Exception('Missing cookie name.');
+            throw $this->c::issue('Missing cookie name.');
         }
         if (!$key && !($key = $this->App->Config->©cookies['©encryption_key'])) {
-            throw new Exception('Missing cookie encryption key.');
+            throw $this->c::issue('Missing cookie encryption key.');
         }
         if (isset($_COOKIE[$name]) && is_string($_COOKIE[$name])) {
             return $this->c::decrypt($_COOKIE[$name], $key);

@@ -78,7 +78,7 @@ class Uuid extends Classes\Core\Base\Core
                 break; // Stop here.
 
             default:
-                throw new Exception('Invalid namespace.');
+                $this->c::issue('Invalid namespace.');
         }
         $uuid = UuidGen::uuid3($namespace, $identifier)->toString();
 
@@ -134,7 +134,7 @@ class Uuid extends Classes\Core\Base\Core
                 break; // Stop here.
 
             default:
-                throw new Exception('Invalid namespace.');
+                throw $this->c::issue('Invalid namespace.');
         }
         $uuid = UuidGen::uuid5($namespace, $identifier)->toString();
 

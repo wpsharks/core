@@ -33,7 +33,7 @@ class StrSplit extends Classes\Core\Base\Core
             return []; // Nothing to do.
         }
         if ($split_length < 1) {
-            throw new Exception('Length < 1.');
+            throw $this->c::issue('Length < 1.');
         }
         if ($split_length > 1) {
             $chunks    = [];

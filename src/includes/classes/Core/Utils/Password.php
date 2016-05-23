@@ -30,7 +30,7 @@ class Password extends Classes\Core\Base\Core
     public function sha256(string $string, string $key = ''): string
     {
         if (!$key && !($key = $this->App->Config->©passwords['©hash_key'])) {
-            throw new Exception('Missing password hash key.');
+            throw $this->c::issue('Missing password hash key.');
         }
         return $this->c::sha256KeyedHash($string, $key);
     }

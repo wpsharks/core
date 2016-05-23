@@ -38,9 +38,9 @@ class Bitly extends Classes\Core\Base\Core
         parent::__construct($App);
 
         if (!$this->App->Config->©fs_paths['©cache_dir']) {
-            throw new Exception('Missing cache directory.');
+            throw $this->c::issue('Missing cache directory.');
         } elseif (!$this->App->Config->©bitly['©api_key']) {
-            throw new Exception('Missing API key.');
+            throw $this->c::issue('Missing API key.');
         }
         $this->cache_dir = $this->App->Config->©fs_paths['©cache_dir'].'/bitly';
     }

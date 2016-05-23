@@ -50,7 +50,7 @@ class Pdo extends Classes\Core\Base\Core
     public function quote($value): string
     {
         if (!($Pdo = $this->current)) {
-            throw new Exception('No PDO yet; i.e., unable to quote.');
+            throw $this->c::issue('No PDO yet; i.e., unable to quote.');
         }
         switch (gettype($value)) {
             case 'int':
@@ -66,7 +66,7 @@ class Pdo extends Classes\Core\Base\Core
                 return $Pdo->quote($value, $Pdo::PARAM_STR);
 
             default: // Unexpected data type.
-                throw new Exception('Unexpected data type; unable to quote.');
+                throw $this->c::issue('Unexpected data type; unable to quote.');
         }
     }
 
@@ -93,7 +93,7 @@ class Pdo extends Classes\Core\Base\Core
         $shard_db = $this->shardDbConfig($shard_id);
 
         if (empty($this->App->Config->©mysql_db['©hosts'][$shard_db['©host']])) {
-            throw new Exception(sprintf('Missing host for shard ID: `%1$s`.', $shard_id));
+            throw $this->c::issue(sprintf('Missing host for shard ID: `%1$s`.', $shard_id));
         }
         $shard_db_host = $this->App->Config->©mysql_db['©hosts'][$shard_db['©host']];
 
@@ -163,6 +163,6 @@ class Pdo extends Classes\Core\Base\Core
                 return $properties = $_shard_db['©properties'];
             }
         } // unset($_key, $_shard_db); // Houskeeping.
-        throw new Exception(sprintf('Missing DB info for shard ID: `%1$s`.', $shard_id));
+        throw $this->c::issue(sprintf('Missing DB info for shard ID: `%1$s`.', $shard_id));
     }
 }

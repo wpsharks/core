@@ -74,7 +74,7 @@ class Benchmark extends Classes\Core\Base\Core
         parent::__construct($App);
 
         if (!$this->c::isCli()) {
-            throw new Exception('Requires CLI mode.');
+            throw $this->c::issue('Requires CLI mode.');
         }
     }
 

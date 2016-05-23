@@ -69,13 +69,13 @@ class Rijndael256 extends Classes\Core\Base\Core
         $string = '~r2|'.$string; // `RIJNDAEL 256` identifier.
 
         if (strlen($key = (string) substr($key, 0, $this->key_size)) < $this->key_size) {
-            throw new Exception(sprintf('Key too short. Minimum length: `%1$s`.', $this->key_size));
+            throw $this->c::issue(sprintf('Key too short. Minimum length: `%1$s`.', $this->key_size));
         }
         if (strlen($iv = $this->c::randomKey($this->iv_size, false)) < $this->iv_size) {
-            throw new Exception(sprintf('IV too short. Minimum length: `%1$s`.', $this->iv_size));
+            throw $this->c::issue(sprintf('IV too short. Minimum length: `%1$s`.', $this->iv_size));
         }
         if (!is_string($e = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $string, MCRYPT_MODE_CBC, $iv)) || !isset($e[0])) {
-            throw new Exception('String encryption failed; `$e` is not a string; or it has no length.');
+            throw $this->c::issue('String encryption failed; `$e` is not a string; or it has no length.');
         }
         $e = '~r2:'.$iv.($sha1 ? ':'.sha1($e) : '').'|'.$e; // Pack components.
 
@@ -116,10 +116,10 @@ class Rijndael256 extends Classes\Core\Base\Core
             return $string = ''; // Invalid checksum; automatic failure.
         }
         if (strlen($key = (string) substr($key, 0, $this->key_size)) < $this->key_size) {
-            throw new Exception(sprintf('Key too short. Minimum length: `%1$s`.', $this->key_size));
+            throw $this->c::issue(sprintf('Key too short. Minimum length: `%1$s`.', $this->key_size));
         }
         if (!is_string($string = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $iv_sha1_e['e'], MCRYPT_MODE_CBC, $iv_sha1_e['iv'])) || !isset($string[0])) {
-            throw new Exception('String decryption failed; `$string` is NOT a string, or it has no length.');
+            throw $this->c::issue('String decryption failed; `$string` is NOT a string, or it has no length.');
         }
         if (!strlen($string = preg_replace('/^~r2\|/', '', $string, 1, $r2)) || !$r2) {
             return $string = ''; // Missing packed component identifier.

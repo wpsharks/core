@@ -39,7 +39,7 @@ class WRegx extends Classes\Core\Base\Core
             $patterns = preg_split('/['."\r\n".']+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
         }
         if (!is_array($patterns)) { // Require an array now.
-            throw new Exception('Invalid data type for patterns.');
+            throw $this->c::issue('Invalid data type for patterns.');
         }
         $patterns            = $this->c::remove0Bytes($patterns);
         $regex_pattern_frags = $this->frag($patterns, $exclusion_chars, $force_match_all);
@@ -75,11 +75,11 @@ class WRegx extends Classes\Core\Base\Core
             return $string; // Empty.
         }
         if (!$exclusion_chars) { // Must have this.
-            throw new Exception('Missing `exclusion_chars`.');
+            throw $this->c::issue('Missing `exclusion_chars`.');
         } elseif ($exclusion_chars !== '/') {
             $_exclusion_chars_array = $this->c::mbStrSplit($exclusion_chars);
             if (array_diff($_exclusion_chars_array, ['⁅', '⒯', '⁆', '?', '*']) !== $_exclusion_chars_array) {
-                throw new Exception('Invalid `exclusion_chars`. May not exclude: `⁅`, `⒯`, `⁆`, `?` or `*`.');
+                throw $this->c::issue('Invalid `exclusion_chars`. May not exclude: `⁅`, `⒯`, `⁆`, `?` or `*`.');
             } // unset($_exclusion_chars_array); // Housekeeping.
         }
         $tokens          = []; // Initialize.

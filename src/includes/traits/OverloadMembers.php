@@ -126,7 +126,7 @@ trait OverloadMembers
         } elseif (array_key_exists($property, $this->¤¤overload)) {
             return $this->¤¤overload[$property];
         }
-        throw new Exception(sprintf('Undefined overload property: `%1$s`.', $property));
+        throw $this->c::issue([], sprintf('Undefined overload property: `%1$s`.', $property), __METHOD__);
     }
 
     /**
@@ -152,7 +152,7 @@ trait OverloadMembers
                 return; // Null return value.
             }
         }
-        throw new Exception(sprintf('Refused to set overload property: `%1$s`.', $property));
+        throw $this->c::issue([], sprintf('Refused to set overload property: `%1$s`.', $property), __METHOD__);
     }
 
     /**
@@ -173,7 +173,7 @@ trait OverloadMembers
      */
     public function __unset(string $property)
     {
-        throw new Exception(sprintf('Refused to unset overload property: `%1$s`.', $property));
+        throw $this->c::issue([], sprintf('Refused to unset overload property: `%1$s`.', $property), __METHOD__);
     }
 
     /**
@@ -193,7 +193,7 @@ trait OverloadMembers
         if (isset($this->¤¤overload[$method])) {
             return $this->¤¤overload[$method](...$args);
         }
-        throw new Exception(sprintf('Undefined overload method: `%1$s`.', $method));
+        throw $this->c::issue([], sprintf('Undefined overload method: `%1$s`.', $method), __METHOD__);
     }
 
     /**
@@ -261,7 +261,7 @@ trait OverloadMembers
         if (is_object($properties)) {
             foreach ($properties as $_property => &$_value) {
                 if (property_exists($this, $_property)) {
-                    throw new Exception(sprintf('Property: `%1$s` exists already.', $_property));
+                    throw $this->c::issue(sprintf('Property: `%1$s` exists already.', $_property));
                 }
                 if ($writable) { // Is the property writable?
                     $this->¤¤writable_overload_properties[$_property] = 1;
@@ -283,7 +283,7 @@ trait OverloadMembers
         if (is_array($properties)) {
             foreach ($properties as $_key => $_property) {
                 if (!property_exists($this, $_property)) {
-                    throw new Exception(sprintf('Property: `%1$s` does not exist.', $_property));
+                    throw $this->c::issue(sprintf('Property: `%1$s` does not exist.', $_property));
                 }
                 if ($writable) { // Is the property writable?
                     $this->¤¤writable_overload_properties[$_property] = 0;
@@ -296,6 +296,6 @@ trait OverloadMembers
 
             return; // All done here.
         }
-        throw new Exception(sprintf('Invalid type: `%1$s`; expecting object/array.', gettype($properties)));
+        throw $this->c::issue(sprintf('Invalid type: `%1$s`; expecting object/array.', gettype($properties)));
     }
 }

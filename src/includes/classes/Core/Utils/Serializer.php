@@ -43,12 +43,12 @@ class Serializer extends Classes\Core\Base\Core
             } elseif (is_int($value) || is_float($value)) {
                 $value = (string) $value;
             } elseif (is_resource($value)) {
-                throw new Exception('Cannot serialize a resource.');
+                throw $this->c::issue('Cannot serialize a resource.');
             } else { // Serialize.
                 $value = $this::MARKER.serialize($value);
             }
         } elseif ($value && mb_strpos($value, $this::MARKER) === 0) {
-            throw new Exception('String may unserialize inadvertently.');
+            throw $this->c::issue('String may unserialize inadvertently.');
         }
         return $value; // Possibly serialized value.
     }
@@ -118,7 +118,7 @@ class Serializer extends Classes\Core\Base\Core
                 break; // Stop here.
 
             default: // Catch invalid type checks here.
-                throw new Exception(sprintf('Unexpected type: `%1$s`.', $expected_type));
+                throw $this->c::issue(sprintf('Unexpected type: `%1$s`.', $expected_type));
         }
         $is = 'is_'.$expected_type; // See: <http://php.net/manual/en/function.gettype.php>
 

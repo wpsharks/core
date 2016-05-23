@@ -87,7 +87,7 @@ class Template extends Classes\Core\Base\Core
         parent::__construct($App);
 
         if (!($template = $this->c::locateTemplate($file, $dir))) {
-            throw new Exception(sprintf('Missing template: `%1$s`.', $dir.'/'.$file));
+            throw $this->c::issue(sprintf('Missing template: `%1$s`.', $dir.'/'.$file));
         }
         $this->dir  = $template['dir'];
         $this->file = $template['file'];

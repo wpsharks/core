@@ -10,14 +10,12 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-// `Vars` and function `vars` CAN coexist here.
-
 /**
  * Var utilities.
  *
  * @since 160220 Initial release.
  */
-class Vars extends Classes\Core\Base\Core implements Interfaces\VarConstants
+class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
 {
     /**
      * Validate var.

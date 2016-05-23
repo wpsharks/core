@@ -73,7 +73,6 @@ class Dump extends Classes\Core\Base\Core
             $indent_size = max(1, $indent_size);
         }
         switch (($type = $display_type = gettype($var))) {
-
             case 'object': // Iterates each object property.
             case 'array': // Or, each array key (if this is an array).
                 $longest_nested_key_prop_length = 0;
@@ -194,12 +193,10 @@ class Dump extends Classes\Core\Base\Core
 
                         case 'unknown':
                         case 'unknown type':
+                        default: // Default case handler.
                             $_nested_display_type            = 'unknown';
                             $nested_dumps[$_nested_key_prop] = (string) $_nested_value;
                             break; // Break switch.
-
-                        default: // Default case handler.
-                            throw new Exception(sprintf('Unexpected data type: `%1$s`.', $_nested_type));
                     }
                 }
                 unset($_nested_key_prop, $_nested_value, $_nested_type, $_nested_key_prop_length);
@@ -254,12 +251,10 @@ class Dump extends Classes\Core\Base\Core
 
             case 'unknown':
             case 'unknown type':
+            default: // Default case handler.
                 $display_type = 'unknown';
                 $var_dump     = (string) $var;
                 break; // Break switch.
-
-            default: // Default case handler.
-                throw new Exception(sprintf('Unexpected data type: `%1$s`.', $type));
         }
         if (!$return_only) {
             echo $var_dump."\n";

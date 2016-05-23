@@ -43,7 +43,7 @@ trait CacheMembers
     protected function &cacheSet(string $primary_key, $sub_key, $value)
     {
         if ($primary_key === '¤¤keys' || $primary_key === '¤¤refs') {
-            throw new Exception('Attempting to set a reserved primary key.');
+            throw $this->c::issue('Attempting to set a reserved primary key.');
         }
         $sub_key                               = (string) $sub_key;
         $this->¤¤cache[$primary_key][$sub_key] = $value;
@@ -66,7 +66,7 @@ trait CacheMembers
     protected function &cacheGet(string $primary_key, $sub_key)
     {
         if ($primary_key === '¤¤keys' || $primary_key === '¤¤refs') {
-            throw new Exception('Attempting to get a reserved primary key.');
+            throw $this->c::issue('Attempting to get a reserved primary key.');
         }
         $sub_key = (string) $sub_key; // Force string.
 
@@ -89,7 +89,7 @@ trait CacheMembers
     protected function cacheUnset(string $primary_key, $sub_key)
     {
         if ($primary_key === '¤¤keys' || $primary_key === '¤¤refs') {
-            throw new Exception('Attempting to unset a reserved primary key.');
+            throw $this->c::issue('Attempting to unset a reserved primary key.');
         }
         $sub_key                               = (string) $sub_key;
         $this->¤¤cache[$primary_key][$sub_key] = null;
@@ -107,7 +107,7 @@ trait CacheMembers
     protected function cacheUnsetPattern(string $primary_key, string $sub_key_pattern)
     {
         if ($primary_key === '¤¤keys' || $primary_key === '¤¤refs') {
-            throw new Exception('Attempting to unset a reserved primary key.');
+            throw $this->c::issue('Attempting to unset a reserved primary key.');
         }
         if (empty($this->¤¤cache[$primary_key])) {
             return; // Nothing to do here.
@@ -255,7 +255,7 @@ trait CacheMembers
                     break; // Break switch handler.
 
                 default: // Default case handler.
-                    throw new Exception(sprintf('Unexpected arg type: `%1$s`.', $_arg_type));
+                    throw $this->c::issue(sprintf('Unexpected arg type: `%1$s`.', $_arg_type));
             }
             if (!isset($cache_key[$_key])) {
                 $cache_key[$_key] = null;

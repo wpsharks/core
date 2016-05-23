@@ -10,14 +10,14 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-trait Debug
+trait Debugging
 {
     /**
      * @since 160522 Debug utilities.
      */
     public static function issue(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Debug->logIssue(...$args);
+        return $GLOBALS[static::class]->Utils->©Debugging->logIssue(...$args);
     }
 
     /**
@@ -25,6 +25,6 @@ trait Debug
      */
     public static function review(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Debug->logReview(...$args);
+        return $GLOBALS[static::class]->Utils->©Debugging->logReview(...$args);
     }
 }

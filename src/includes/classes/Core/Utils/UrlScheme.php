@@ -37,7 +37,7 @@ class UrlScheme extends Classes\Core\Base\Core implements Interfaces\UrlConstant
             $scheme = $this->App->Config->©urls['©default_scheme'];
         }
         if (!$scheme) {
-            throw new Exception('Empty scheme.');
+            throw $this->c::issue('Empty scheme.');
         }
         if ($scheme === '//') {
             $url = preg_replace('/^'.$this::URL_REGEX_FRAG_SCHEME.'/u', '//', $url);

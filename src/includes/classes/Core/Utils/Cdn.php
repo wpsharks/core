@@ -54,7 +54,7 @@ class Cdn extends Classes\Core\Base\Core implements Interfaces\MimeConstants
     public function url(string $uri, string $scheme = ''): string
     {
         if (!$this->App->Config->©urls['©hosts']['©cdn']) {
-            throw new Exception('Missing CDN host name.');
+            throw $this->c::issue('Missing CDN host name.');
         }
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
         $url = '//'.$this->App->Config->©urls['©hosts']['©cdn'].'/'.$uri;
@@ -76,7 +76,7 @@ class Cdn extends Classes\Core\Base\Core implements Interfaces\MimeConstants
     public function s3Url(string $uri, string $scheme = ''): string
     {
         if (!$this->App->Config->©urls['©hosts']['©cdn_s3']) {
-            throw new Exception('Missing CDN S3 host name.');
+            throw $this->c::issue('Missing CDN S3 host name.');
         }
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
         $url = '//'.$this->App->Config->©urls['©hosts']['©cdn_s3'].'/'.$uri;

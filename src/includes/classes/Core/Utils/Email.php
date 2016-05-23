@@ -36,7 +36,7 @@ class Email extends Classes\Core\Base\Core implements Interfaces\EmailConstants
     public function __invoke($to, string $subject, string $message, array $attachments = [], array $headers = [], bool $throw = false)
     {
         if (!$this->App->Config->©email['©smtp_host'] || !$this->App->Config->©email['©smtp_port']) {
-            throw new Exception('Missing required email config values.');
+            throw $this->c::issue('Missing required email config values.');
         }
         $from_name  = $this->App->Config->©email['©from_name'];
         $from_email = $this->App->Config->©email['©from_email'];

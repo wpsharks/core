@@ -30,7 +30,7 @@ class Uuid64 extends Classes\Core\Base\Core
     public function validate(int $uuid, int $expecting_type_id = null): int
     {
         if ($uuid < 1 || $uuid > 9223372036854775807) {
-            throw new Exception('UUID64 out of range.');
+            throw $this->c::issue('UUID64 out of range.');
         }
         if (isset($expecting_type_id)) {
             $this->typeIdIn($uuid, $expecting_type_id);
@@ -70,7 +70,7 @@ class Uuid64 extends Classes\Core\Base\Core
     public function validateShardId(int $shard_id): int
     {
         if ($shard_id < 0 || $shard_id > 65535) {
-            throw new Exception('Shard ID out of range.');
+            throw $this->c::issue('Shard ID out of range.');
         }
         return $shard_id;
     }
@@ -111,9 +111,9 @@ class Uuid64 extends Classes\Core\Base\Core
     public function validateTypeId(int $type_id, int $expecting_type_id = null): int
     {
         if ($type_id < 0 || $type_id > 255) {
-            throw new Exception('Type ID out of range.');
+            throw $this->c::issue('Type ID out of range.');
         } elseif (isset($expecting_type_id) && $type_id !== $expecting_type_id) {
-            throw new Exception(sprintf('Type ID mismatch: `%1$s`/`%2$s`.', $type_id, $expecting_type_id));
+            throw $this->c::issue(sprintf('Type ID mismatch: `%1$s`/`%2$s`.', $type_id, $expecting_type_id));
         }
         return $type_id;
     }
@@ -150,7 +150,7 @@ class Uuid64 extends Classes\Core\Base\Core
     public function validateLocalId(int $local_id): int
     {
         if ($local_id < 1 || $local_id > 274877906943) {
-            throw new Exception('Local ID out of range.');
+            throw $this->c::issue('Local ID out of range.');
         }
         return $local_id;
     }

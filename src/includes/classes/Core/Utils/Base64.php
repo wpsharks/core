@@ -34,7 +34,7 @@ class Base64 extends Classes\Core\Base\Core
     public function urlSafeEncode(string $string, array $url_unsafe_chars = ['+', '/'], array $url_safe_chars = ['-', '_'], string $trim_padding_chars = '='): string
     {
         if (!is_string($base64_url_safe = base64_encode($string))) {
-            throw new Exception('Base64 encoding failure.');
+            throw $this->c::issue('Base64 encoding failure.');
         }
         $base64_url_safe = str_replace($url_unsafe_chars, $url_safe_chars, $base64_url_safe);
         $base64_url_safe = isset($trim_padding_chars[0]) ? rtrim($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
@@ -63,7 +63,7 @@ class Base64 extends Classes\Core\Base\Core
         $string = str_replace($url_safe_chars, $url_unsafe_chars, $string);
 
         if (!is_string($string = base64_decode($string, true))) {
-            throw new Exception('Base64 decoding failure.');
+            throw $this->c::issue('Base64 decoding failure.');
         }
         return $string;
     }

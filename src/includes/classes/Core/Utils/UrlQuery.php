@@ -211,7 +211,7 @@ class UrlQuery extends Classes\Core\Base\Core implements Interfaces\UrlConstants
     protected function sha256Sig(string $qs_url_uri, string $key = '', string $sig_var = ''): string
     {
         if (!$key && !($key = $this->App->Config->©urls['©sig_key'])) {
-            throw new Exception('Missing URL signature key.');
+            throw $this->c::issue('Missing URL signature key.');
         }
         $sig_var = $sig_var ?: $this::DEFAULT_SIG_VAR;
         $args    = $this->parse($qs_url_uri);

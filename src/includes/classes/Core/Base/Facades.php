@@ -26,7 +26,7 @@ abstract class Facades
     use Traits\Facades\Cli;
     use Traits\Facades\Clippers;
     use Traits\Facades\Cookies;
-    use Traits\Facades\Debug;
+    use Traits\Facades\Debugging;
     use Traits\Facades\Dimensions;
     use Traits\Facades\Dirs;
     use Traits\Facades\Dump;
@@ -68,7 +68,7 @@ abstract class Facades
     use Traits\Facades\UrlUtils;
     use Traits\Facades\Uuid64;
     use Traits\Facades\Uuids;
-    use Traits\Facades\Vars;
+    use Traits\Facades\Varz;
     use Traits\Facades\Versions;
     use Traits\Facades\Webpurify;
     use Traits\Facades\WordPress;

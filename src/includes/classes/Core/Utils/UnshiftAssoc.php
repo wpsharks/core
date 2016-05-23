@@ -31,7 +31,7 @@ class UnshiftAssoc extends Classes\Core\Base\Core
     public function __invoke(array &$array, $key, $value)
     {
         if (!is_int($key) && !is_string($key)) {
-            throw new Exception('Invalid `$key`.');
+            throw $this->c::issue('Invalid `$key`.');
         }
         unset($array[$key]); // Unset first.
 

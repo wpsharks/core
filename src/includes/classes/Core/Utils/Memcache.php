@@ -154,7 +154,7 @@ class Memcache extends Classes\Core\Base\Core
         if (!($key = $this->key($primary_key, $sub_key))) {
             return false; // Fail; e.g., race condition.
         } elseif ($value === null || is_resource($value)) {
-            throw new Exception('Incompatible data type.');
+            throw $this->c::issue('Incompatible data type.');
         }
         do { // Avoid race issues with a loop.
 
@@ -276,7 +276,7 @@ class Memcache extends Classes\Core\Base\Core
         $namespaced_key                     = $namespaced_primary_key_uuid_prefix.$sub_key;
 
         if (isset($namespaced_key[251])) {
-            throw new Exception(sprintf('Sub key too long; %1$s bytes max.', 250 - strlen($namespaced_primary_key_uuid_prefix)));
+            throw $this->c::issue(sprintf('Sub key too long; %1$s bytes max.', 250 - strlen($namespaced_primary_key_uuid_prefix)));
         }
         return $namespaced_key;
     }
@@ -302,7 +302,7 @@ class Memcache extends Classes\Core\Base\Core
         $namespaced_primary_key = $namespace_prefix.$primary_key;
 
         if (isset($namespaced_primary_key[251])) {
-            throw new Exception(sprintf('Primary key too long; %1$s bytes max.', 250 - strlen($namespace_prefix)));
+            throw $this->c::issue(sprintf('Primary key too long; %1$s bytes max.', 250 - strlen($namespace_prefix)));
         }
         return $namespaced_primary_key;
     }

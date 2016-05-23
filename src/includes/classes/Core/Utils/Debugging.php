@@ -11,16 +11,16 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Debug utilities.
+ * Debugging utilities.
  *
- * @since 160522 Debug utilities.
+ * @since 160522 Debugging utilities.
  */
-class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
+class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstants
 {
     /**
      * Logs directory.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @type string Logs directory.
      */
@@ -29,7 +29,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Max log file size.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @type int Max log file size.
      */
@@ -38,7 +38,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Max log file age.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @type string Max log file age.
      */
@@ -47,7 +47,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Class constructor.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @param Classes\App $App Instance.
      */
@@ -55,6 +55,9 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     {
         parent::__construct($App);
 
+        if (!$this->App->Config->©fs_paths['©logs_dir']) {
+            throw new Exception('Missing logs directory.');
+        }
         $this->logs_dir          = $this->App->Config->©fs_paths['©logs_dir'].'/debug';
         $this->max_log_file_size = $this::BYTES_IN_MB * 2;
         $this->max_log_file_age  = strtotime('-7 days');
@@ -63,16 +66,22 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Log issue & generate exception.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @param mixed  $data  Data to log (e.g., {@link vars()}).
      * @param string $note  A brief note or description of the issue.
      * @param string $event Event name (e.g., {@link __METHOD__}).
      *
      * @return Exception An exception ready to be thrown.
+     *
+     * @note If only one parameter is passed and it's a string, it's treated as the `$note`.
      */
     public function logIssue($data = [], string $note = '', string $event = ''): Exception
     {
+        if (func_num_args() === 1 && is_string($data)) {
+            $note = $data; // Use data as note.
+            $data = []; // Data empty in this case.
+        }
         $event = $event ?: $this->traceLogEventTrigger();
 
         if (mb_strpos($event, '#') === false) {
@@ -87,16 +96,22 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Log for review.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @param mixed  $data  Data to log (e.g., {@link vars()}).
      * @param string $note  A brief note or description of the issue.
      * @param string $event Event name (e.g., {@link __METHOD__}).
      *
      * @return int Total number of bytes written.
+     *
+     * @note If only one parameter is passed and it's a string, it's treated as the `$note`.
      */
     public function logReview($data = [], string $note = '', string $event = ''): int
     {
+        if (func_num_args() === 1 && is_string($data)) {
+            $note = $data; // Use data as note.
+            $data = []; // Data empty in this case.
+        }
         $event = $event ?: $this->traceLogEventTrigger();
 
         if (mb_strpos($event, '#') === false) {
@@ -109,7 +124,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Maybe log for debugging.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @param mixed  $data  Data to log (e.g., {@link vars()}).
      * @param string $note  A brief note or description of the issue.
@@ -126,6 +141,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
         $is_wordpress = $this->c::isWordPress();
         $event        = $this->cleanLogEvent($event); // Strip namespace, etc.
 
+        $lines[] = __('Time:').'         '.date('F jS, Y, g:i a T');
         $lines[] = __('Microtime:').'    '.number_format(microtime(true), 8, '.', '');
         $lines[] = __('Event:').'        '.($event ? $event : __('unknown event name'));
         $lines[] = __('Note:').'         '.($note ? $note : __('no note given by caller'))."\n";
@@ -137,14 +153,13 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
                                          ($is_wordpress && defined('WC_VERSION') ? '; WC v'.WC_VERSION : '').
 
                                          ($this->App->parent ? '; '.$this->App->parent->Config->©brand['©acronym'].' v'.$this->App->parent::VERSION : '').
-                                        '; '.$this->App->Config->©brand['©acronym'].' v'.$this->App::VERSION."\n";
+                                        (!$this->App->is_core ? '; '.$this->App->Config->©brand['©acronym'].' v'.$this->App::VERSION : '')."\n";
 
         if ($is_wordpress && ($user = wp_get_current_user()) && $user->exists()) {
             $lines[] = __('User:').'         #'.$user->ID.' @'.$user->user_login.' \''.$user->display_name.'\'';
         }
         $lines[] = __('User IP:').'      '.($is_cli ? __('n/a; CLI process') : $this->c::currentIp());
-        $lines[] = __('User Agent:').'   '.($is_cli ? __('n/a; CLI process') : ($_SERVER['HTTP_USER_AGENT'] ?? ''))."\n";
-
+        $lines[] = __('User Agent:').'   '.($is_cli ? __('n/a; CLI process') : ($_SERVER['HTTP_USER_AGENT'] ?? ''));
         $lines[] = __('URL:').'          '.($is_cli ? __('n/a; CLI process') : $this->c::currentUrl())."\n";
 
         $lines[] = $this->c::mbTrim($this->c::dump($data, true), "\r\n"); // A dump of the data (variables).
@@ -155,7 +170,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Write lines to log file.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @param string $event Event name.
      * @param array  $lines Log entry lines.
@@ -192,7 +207,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Cleans log event name.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @param string $event Log event name.
      *
@@ -211,7 +226,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Prepares the logs directory.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      */
     protected function prepareLogsDir()
     {
@@ -231,7 +246,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Maybe rotate log files.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @param string $file Absolute file path.
      */
@@ -255,7 +270,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Trace log event trigger.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @return string Log event trigger.
      */
@@ -272,16 +287,17 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
             $_caller   = $callers[$_i];
             $_function = $_caller['function'] ?? '';
             $_class    = $_caller['class'] ?? '';
+            $_type     = $_caller['type'] ?? '';
 
             if (!$_function) { // Should not be empty.
                 return ''; // Unexpected caller in this case.
             } elseif ($_class && mb_strpos($_function, '__') === 0) {
                 continue; // Bypass magic (middle-man) methods in classes.
-            } elseif ($_class && mb_stripos($_class, '\\Facades\\') !== false) {
+            } elseif ($_class && $_type === '::' && mb_stripos($_class, '\\Facades') !== false) {
                 continue; // Bypass facades that sit in the middle also.
             }
-            $trigger = $_class ? $_class.'::' : '';
-            $trigger .= $_function; // i.e., `[class::]function`.
+            $trigger = $_class && $_type ? $_class.$_type : '';
+            $trigger .= $_function; // i.e., `[class[->|::]]function`.
             return $trigger; // The original caller; i.e. `class::method`.
         } // unset($_caller, $_function, $_class); // Housekeeping.
 
@@ -291,7 +307,7 @@ class Debug extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Unique suffix log file.
      *
-     * @since 160522 Debug utilities.
+     * @since 160522 Debugging utilities.
      *
      * @param string $file Absolute file path.
      *
