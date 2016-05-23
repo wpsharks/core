@@ -45,6 +45,15 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
     protected $max_log_file_age;
 
     /**
+     * First-process writes by file.
+     *
+     * @since 160522 Debugging utilities.
+     *
+     * @type array First-process writes by file.
+     */
+    protected $first_process_writes;
+
+    /**
      * Class constructor.
      *
      * @since 160522 Debugging utilities.
@@ -58,9 +67,10 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
         if (!$this->App->Config->©fs_paths['©logs_dir']) {
             throw new Exception('Missing logs directory.');
         }
-        $this->logs_dir          = $this->App->Config->©fs_paths['©logs_dir'].'/debug';
-        $this->max_log_file_size = $this::BYTES_IN_MB * 2;
-        $this->max_log_file_age  = strtotime('-7 days');
+        $this->logs_dir             = $this->App->Config->©fs_paths['©logs_dir'].'/debug';
+        $this->max_log_file_size    = $this::BYTES_IN_MB * 2;
+        $this->max_log_file_age     = strtotime('-7 days');
+        $this->first_process_writes = []; // Initialize.
     }
 
     /**
@@ -197,10 +207,12 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
 
         $entry = implode("\n", $lines)."\n\n".str_repeat('-', 3)."\n\n";
 
-        file_put_contents($process_file, $entry, LOCK_EX); // Single process.
-        // Helpful when all a developer wants to see is what was logged by the last process.
-        // If a test is being run, we can review this file to see isolated process log entries.
+        if (!isset($this->first_process_writes[$process_file])) {
+            $this->first_process_writes[$process_file] = -1;
+            @unlink($process_file); // First-process write.
+        } // ↑ Empty file on the first write in each process.
 
+        file_put_contents($process_file, $entry, LOCK_EX | FILE_APPEND);
         return (int) file_put_contents($file, $entry, LOCK_EX | FILE_APPEND);
     }
 
