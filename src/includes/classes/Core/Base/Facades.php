@@ -7,6 +7,7 @@ use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
+use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
@@ -25,6 +26,7 @@ abstract class Facades
     use Traits\Facades\Cli;
     use Traits\Facades\Clippers;
     use Traits\Facades\Cookies;
+    use Traits\Facades\Debug;
     use Traits\Facades\Dimensions;
     use Traits\Facades\Dirs;
     use Traits\Facades\Dump;

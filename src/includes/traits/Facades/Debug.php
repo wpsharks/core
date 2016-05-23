@@ -10,21 +10,21 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-trait Cookies
+trait Debug
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 160522 Debug utilities.
      */
-    public static function getCookie(...$args)
+    public static function issue(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Cookie->get(...$args);
+        return $GLOBALS[static::class]->Utils->©Debug->logIssue(...$args);
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 160522 Debug utilities.
      */
-    public static function setCookie(...$args)
+    public static function review(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Cookie->set(...$args);
+        return $GLOBALS[static::class]->Utils->©Debug->logReview(...$args);
     }
 }

@@ -6,6 +6,7 @@ use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
 #
+use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
