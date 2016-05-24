@@ -18,23 +18,23 @@ use function get_defined_vars as vars;
 class Os extends Classes\Core\Base\Core
 {
     /**
-     * A Unix environment?
+     * A nix OS?
      *
      * @since 150424 Initial release.
      *
-     * @return bool `TRUE` if in a Unix environment.
+     * @return bool True or false.
      */
-    public function isUnix(): bool
+    public function isNix(): bool
     {
         return !$this->isWindows();
     }
 
     /**
-     * A Linux environment?
+     * A linux OS?
      *
      * @since 150424 Initial release.
      *
-     * @return bool `TRUE` if in a Linux environment.
+     * @return bool True or false.
      */
     public function isLinux(): bool
     {
@@ -42,11 +42,11 @@ class Os extends Classes\Core\Base\Core
     }
 
     /**
-     * A Mac environment?
+     * A mac OS?
      *
      * @since 150424 Initial release.
      *
-     * @return bool `TRUE` if in a Mac environment.
+     * @return bool True or false.
      */
     public function isMac(): bool
     {
@@ -54,11 +54,11 @@ class Os extends Classes\Core\Base\Core
     }
 
     /**
-     * A Windows environment?
+     * A windows OS?
      *
      * @since 150424 Initial release.
      *
-     * @return bool `TRUE` if in a Windows environment.
+     * @return bool True or false.
      */
     public function isWindows(): bool
     {

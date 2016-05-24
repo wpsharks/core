@@ -15,9 +15,9 @@ trait Os
     /**
      * @since 151214 Adding functions.
      */
-    public static function isUnix(...$args)
+    public static function isNix(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Os->isUnix(...$args);
+        return $GLOBALS[static::class]->Utils->©Os->isNix(...$args);
     }
 
     /**
