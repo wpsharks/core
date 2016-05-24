@@ -1,3 +1,7 @@
+## v160525
+
+- First public release.
+
 ## v160223
 
 - Adding Facades for pseudo-static access.

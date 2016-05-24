@@ -74,8 +74,8 @@
     "ext-xmlwriter": "*",
     "ext-SimpleXML": "*",
 
-    "websharks/dicer": "dev-master",
-    "websharks/sharkicons": "dev-master",
+    "websharks/dicer": "160110",
+    "websharks/sharkicons": "160221",
 
     "lusitanian/oauth": "0.*",
     "aws/aws-sdk-php": "2.*",

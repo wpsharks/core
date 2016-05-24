@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3d3cffc09e3b0d7fe6f816714cb188a2",
-    "content-hash": "8fb7690e9595e83d5b5e5e434d6b906b",
+    "hash": "a759883fa4fb950eabd5b078a6fb1fbc",
+    "content-hash": "3a948d80ceb92057acdaa716d3ac4450",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -767,7 +767,7 @@
         },
         {
             "name": "websharks/dicer",
-            "version": "dev-master",
+            "version": "160110",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
@@ -818,7 +818,7 @@
         },
         {
             "name": "websharks/sharkicons",
-            "version": "dev-master",
+            "version": "160221",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/sharkicons.git",
@@ -944,10 +944,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "websharks/dicer": 20,
-        "websharks/sharkicons": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
