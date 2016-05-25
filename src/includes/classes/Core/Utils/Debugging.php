@@ -212,6 +212,9 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
             @unlink($process_file); // First-process write.
         } // ↑ Empty file on the first write in each process.
 
+        if (is_callable($this->App->Config->©debug['©log_callback'])) {
+            $this->App->Config->©debug['©log_callback'](compact('event', 'lines'));
+        }
         file_put_contents($process_file, $entry, LOCK_EX | FILE_APPEND);
         return (int) file_put_contents($file, $entry, LOCK_EX | FILE_APPEND);
     }

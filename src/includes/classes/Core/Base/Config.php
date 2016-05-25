@@ -49,6 +49,7 @@ class Config extends Classes\Core\Base\Core
             '©debug' => [
                 '©enable'        => (bool) ($_s_cfgs['CFG_DEBUG'] ?? false),
                 '©log'           => (bool) ($_s_cfgs['CFG_DEBUG_LOG'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
+                '©log_callback'  => null, // In case log entries should be reviewed in additional ways.
                 '©er_enable'     => (bool) ($_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
                 '©er_display'    => (bool) ($_s_cfgs['CFG_DEBUG_ER_DISPLAY'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
                 '©er_assertions' => (bool) ($_s_cfgs['CFG_DEBUG_ER_ASSERTIONS'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
