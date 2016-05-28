@@ -6,7 +6,7 @@ project_slug                    = core
 project_namespace               = WebSharks\\Core
 project_sub_namespace           = Core
 
-project_version                 = %y%m%d
+project_version                 = %y%m%d.%now
 
 project_php_required_version    = 7.0.4
 project_php_tested_up_to_version = ${php.version}

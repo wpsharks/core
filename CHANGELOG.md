@@ -1,3 +1,8 @@
+## v160528.295
+
+- Updating phing build system.
+- Enhancing debug log callback system.
+
 ## v160524
 
 - First public release.

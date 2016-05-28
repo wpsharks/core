@@ -174,6 +174,9 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
 
         $lines[] = $this->c::mbTrim($this->c::dump($data, true), "\r\n"); // A dump of the data (variables).
 
+        if (is_callable($this->App->Config->©debug['©log_callback'])) {
+            $this->App->Config->©debug['©log_callback'](compact('event', 'data', 'note', 'lines'));
+        }
         return $this->writeLogFileLines($event, $lines); // Writes the log entry.
     }
 
@@ -212,9 +215,6 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
             @unlink($process_file); // First-process write.
         } // ↑ Empty file on the first write in each process.
 
-        if (is_callable($this->App->Config->©debug['©log_callback'])) {
-            $this->App->Config->©debug['©log_callback'](compact('event', 'lines'));
-        }
         file_put_contents($process_file, $entry, LOCK_EX | FILE_APPEND);
         return (int) file_put_contents($file, $entry, LOCK_EX | FILE_APPEND);
     }
