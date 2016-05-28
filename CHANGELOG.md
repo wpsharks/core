@@ -1,4 +1,4 @@
-## v${[project_version]}
+## v160528.388
 
 - Updating phing build system.
 - Enhancing debug log callback system.
