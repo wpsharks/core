@@ -47,9 +47,12 @@ class Config extends Classes\Core\Base\Core
 
         $default_instance_base = [
             '©debug' => [
-                '©enable'        => (bool) ($_s_cfgs['CFG_DEBUG'] ?? false),
-                '©log'           => (bool) ($_s_cfgs['CFG_DEBUG_LOG'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
-                '©log_callback'  => null, // In case log entries should be reviewed in additional ways.
+                '©enable' => (bool) ($_s_cfgs['CFG_DEBUG'] ?? false),
+                '©edge'   => (bool) ($_s_cfgs['CFG_DEBUG_EDGE'] ?? false),
+
+                '©log'          => (bool) ($_s_cfgs['CFG_DEBUG_LOG'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
+                '©log_callback' => null, // In case log entries should be reviewed in additional ways.
+
                 '©er_enable'     => (bool) ($_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
                 '©er_display'    => (bool) ($_s_cfgs['CFG_DEBUG_ER_DISPLAY'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
                 '©er_assertions' => (bool) ($_s_cfgs['CFG_DEBUG_ER_ASSERTIONS'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
@@ -241,9 +244,11 @@ class Config extends Classes\Core\Base\Core
         $config = $this->App->fillConfigReplacementCodes($config);
         $config = (object) $config; // Force object properties.
 
-        if (!$config->©debug['©enable']) { // Must be on for any of these to be true.
-            $config->©debug['©log'] = $config->©debug['©er_enable'] = $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;
-        } elseif (!$config->©debug['©er_enable']) { // Must be on for any of these to be true.
+        if (!$config->©debug['©enable']) { // Is a master switch off?
+            $config->©debug['©edge']      = false;
+            $config->©debug['©log']       = $config->©debug['©log_callback']       = false;
+            $config->©debug['©er_enable'] = $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;
+        } elseif (!$config->©debug['©er_enable']) {
             $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;
         }
         $this->overload($config, true); // Overload public/writable properties.
