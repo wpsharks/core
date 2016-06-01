@@ -1,3 +1,7 @@
+## v${[project_version]}
+
+- Updating property names representing class instances.
+
 ## v160601.56004
 
 - Enhancing template locater; adding `core` directive.
