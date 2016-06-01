@@ -1,3 +1,9 @@
+## v${[project_version]}
+
+- Enhancing template locater; adding `core` directive.
+- Adding support for request-type detection; e.g., `isAjax()`, `doingAction()`, etc.
+- Adding support for bleeding-edge debug mode.
+
 ## v160528.388
 
 - Updating phing build system.
