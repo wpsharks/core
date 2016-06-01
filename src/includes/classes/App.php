@@ -24,7 +24,7 @@ class App extends Classes\Core\Base\Core
      *
      * @type Classes\App|null
      */
-    public $parent;
+    public $Parent;
 
     /**
      * Reflection.
@@ -33,7 +33,7 @@ class App extends Classes\Core\Base\Core
      *
      * @type \ReflectionClass
      */
-    public $reflection;
+    public $Reflection;
 
     /**
      * Class.
@@ -244,10 +244,10 @@ class App extends Classes\Core\Base\Core
      *
      * @param array            $instance_base Instance base.
      * @param array            $instance      Instance args.
-     * @param Classes\App|null $parent        Parent app (optional).
+     * @param Classes\App|null $Parent        Parent app (optional).
      * @param array            $args          Any additional behavioral args.
      */
-    public function __construct(array $instance_base = [], array $instance = [], Classes\App $parent = null, array $args = [])
+    public function __construct(array $instance_base = [], array $instance = [], Classes\App $Parent = null, array $args = [])
     {
         parent::__construct();
 
@@ -260,21 +260,21 @@ class App extends Classes\Core\Base\Core
 
         # Define a possible parent app.
 
-        $this->parent = $parent;
+        $this->Parent = $Parent;
 
         # Define reflection-based properties.
 
-        if (!$this->reflection) {
+        if (!$this->Reflection) {
             // If not already obtained by an extender.
-            $this->reflection = new \ReflectionClass($this);
+            $this->Reflection = new \ReflectionClass($this);
         }
-        $this->class      = $this->reflection->getName();
+        $this->class      = $this->Reflection->getName();
         $this->class_sha1 = sha1($this->class);
 
-        $this->namespace      = $this->reflection->getNamespaceName();
+        $this->namespace      = $this->Reflection->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
 
-        $this->file          = $this->reflection->getFileName();
+        $this->file          = $this->Reflection->getFileName();
         $this->file_basename = basename($this->file, '.php');
         $this->file_sha1     = sha1($this->file);
 
@@ -411,12 +411,12 @@ class App extends Classes\Core\Base\Core
         }
         if (class_exists($this->namespace.'\\'.$sub_class)) {
             return $class = $this->namespace.'\\'.$sub_class;
-        } elseif (($_parent = $this->parent)) {
+        } elseif (($_Parent = $this->Parent)) {
             do {
-                if (class_exists($_parent->namespace.'\\'.$sub_class)) {
-                    return $class = $_parent->namespace.'\\'.$sub_class;
+                if (class_exists($_Parent->namespace.'\\'.$sub_class)) {
+                    return $class = $_Parent->namespace.'\\'.$sub_class;
                 }
-            } while ($_parent->parent); // unset($_parent);
+            } while ($_Parent->Parent); // unset($_Parent);
         }
         return $class; // Return as-is.
     }

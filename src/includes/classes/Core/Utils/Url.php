@@ -63,7 +63,7 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
      */
     public function toAppParent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        return $this->App->parent ? $this->App->parent->Utils->©Url->toApp($uri, $scheme, $cdn_filter) : $this->toApp($uri, $scheme, $cdn_filter);
+        return $this->App->Parent ? $this->App->Parent->Utils->©Url->toApp($uri, $scheme, $cdn_filter) : $this->toApp($uri, $scheme, $cdn_filter);
     }
 
     /**
@@ -79,8 +79,8 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
      */
     public function toAppCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        if ($this->App->parent) { // Looking for the root core.
-            return $this->App->parent->Utils->©Url->toAppCore($uri, $scheme, $cdn_filter);
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->©Url->toAppCore($uri, $scheme, $cdn_filter);
         }
         return $this->toApp($uri, $scheme, $cdn_filter);
     }
@@ -129,7 +129,7 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
      */
     public function toCurrentParent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        return $this->App->parent ? $this->App->parent->Utils->©Url->toCurrent($uri, $scheme, $cdn_filter) : $this->toCurrent($uri, $scheme, $cdn_filter);
+        return $this->App->Parent ? $this->App->Parent->Utils->©Url->toCurrent($uri, $scheme, $cdn_filter) : $this->toCurrent($uri, $scheme, $cdn_filter);
     }
 
     /**
@@ -145,8 +145,8 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
      */
     public function toCurrentCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        if ($this->App->parent) { // Looking for the root core.
-            return $this->App->parent->Utils->©Url->toCurrentCore($uri, $scheme, $cdn_filter);
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->©Url->toCurrentCore($uri, $scheme, $cdn_filter);
         }
         return $this->toCurrent($uri, $scheme, $cdn_filter);
     }

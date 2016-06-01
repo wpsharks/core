@@ -38,8 +38,8 @@ class Template extends Classes\Core\Base\Core
         if ($dir === 'core') {
             $dir = $this->App->core_dir.'/src/includes/templates';
         } elseif ($dir === 'parent' || ($file && !is_file($dir.'/'.$file))) {
-            if ($this->App->parent) {
-                return $this->App->parent->Utils->©Template->locate($file);
+            if ($this->App->Parent) {
+                return $this->App->Parent->Utils->©Template->locate($file);
             } else {
                 $dir = $this->App->core_dir.'/src/includes/templates';
             }

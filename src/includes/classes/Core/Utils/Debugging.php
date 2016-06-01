@@ -162,7 +162,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
                                          ($is_wordpress ? '; WP v'.WP_VERSION : '').// WordPress.
                                          ($is_wordpress && defined('WC_VERSION') ? '; WC v'.WC_VERSION : '').
 
-                                         ($this->App->parent ? '; '.$this->App->parent->Config->©brand['©acronym'].' v'.$this->App->parent::VERSION : '').
+                                         ($this->App->Parent ? '; '.$this->App->Parent->Config->©brand['©acronym'].' v'.$this->App->Parent::VERSION : '').
                                         (!$this->App->is_core ? '; '.$this->App->Config->©brand['©acronym'].' v'.$this->App::VERSION : '')."\n";
 
         if ($is_wordpress && ($user = wp_get_current_user()) && $user->exists()) {
