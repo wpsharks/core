@@ -30,25 +30,26 @@ class Sql extends Classes\Core\Base\Core
     {
         if (($Pdo = $this->c::currentPdo())) {
             return $this->c::pdoQuote($value);
-        } elseif ($this->c::isWordPress()) {
-            switch (gettype($value)) {
-                case 'int':
-                case 'integer':
-                    return (string) $value;
-
-                case 'float':
-                case 'double':
-                    return (string) $value;
-
-                case 'str':
-                case 'string':
-                    return "'".esc_sql($value)."'";
-
-                default: // Unexpected data type.
-                    throw $this->c::issue('Unexpected data type; unable to quote.');
-            }
         }
-        throw $this->c::issue('No SQL escape handler.');
+        switch (gettype($value)) {
+            case 'int':
+            case 'integer':
+                return (string) $value;
+
+            case 'float':
+            case 'double':
+                return (string) $value;
+
+            case 'str':
+            case 'string':
+                if ($this->c::isWordPress()) {
+                    return "'".esc_sql($value)."'";
+                }
+            // Else fall through to exception if not WP.
+
+            default: // Unexpected data type.
+                throw $this->c::issue('No SQL escape handler.');
+        }
     }
 
     /**

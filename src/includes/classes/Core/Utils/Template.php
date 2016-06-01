@@ -35,9 +35,11 @@ class Template extends Classes\Core\Base\Core
         if (!$dir) { // Use default templates directory?
             $dir = $this->App->base_dir.'/src/includes/templates';
         }
-        if (!$dir || $dir === 'parent' || $dir === 'core' || ($file && !is_file($dir.'/'.$file))) {
+        if ($dir === 'core') {
+            $dir = $this->App->core_dir.'/src/includes/templates';
+        } elseif ($dir === 'parent' || ($file && !is_file($dir.'/'.$file))) {
             if ($this->App->parent) {
-                return $this->App->parent->Utils->©Template->locate($file, $dir);
+                return $this->App->parent->Utils->©Template->locate($file);
             } else {
                 $dir = $this->App->core_dir.'/src/includes/templates';
             }
