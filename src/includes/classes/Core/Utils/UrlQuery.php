@@ -132,6 +132,7 @@ class UrlQuery extends Classes\Core\Base\Core implements Interfaces\UrlConstants
         if (isset($url_uri_qsl['query'][0])) {
             $args = $this->parse($url_uri_qsl['query']);
         }
+        $arg_keys             = array_fill_keys($arg_keys, null);
         $args                 = array_diff_key($args, $arg_keys);
         $url_uri_qsl['query'] = $this->build($args);
         $url_uri_qsl          = $this->c::unparseUrl($url_uri_qsl);
