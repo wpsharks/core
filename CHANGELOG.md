@@ -1,3 +1,7 @@
+## v${[project_version]}
+
+- Bug fix in URL arg removal.
+
 ## v160601.57796
 
 - Updating property names representing class instances.
