@@ -1,4 +1,4 @@
-## v${[project_version]}
+## v160601.56004
 
 - Enhancing template locater; adding `core` directive.
 - Adding support for request-type detection; e.g., `isAjax()`, `doingAction()`, etc.
