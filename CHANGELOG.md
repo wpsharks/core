@@ -1,3 +1,7 @@
+## v160604.78151
+
+- Updating dotfiles and enhancing build props.
+
 ## v160601.61090
 
 - Bug fix in URL arg removal.
