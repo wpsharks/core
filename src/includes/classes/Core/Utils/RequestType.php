@@ -22,27 +22,50 @@ class RequestType extends Classes\Core\Base\Core
      *
      * @since 160531 Request types.
      *
-     * @param bool Request type is AJAX?
+     * @param bool|null Request type is AJAX?
      */
-    protected $is_ajax = false;
+    protected $is_ajax;
 
     /**
      * Request type is API?
      *
      * @since 160531 Request types.
      *
-     * @param bool Request type is API?
+     * @param bool|null Request type is API?
      */
-    protected $is_api = false;
+    protected $is_api;
 
     /**
      * Request type action.
      *
      * @since 160531 Request types.
      *
-     * @param string Request type action.
+     * @param string|null Request type action.
      */
-    protected $doing_action = '';
+    protected $doing_action;
+
+    /**
+     * Is WordPress?
+     *
+     * @since 160606 Request types.
+     *
+     * @param bool Is WordPress?
+     */
+    protected $is_wordpress;
+
+    /**
+     * Class constructor.
+     *
+     * @since 160606 Request types.
+     *
+     * @param Classes\App $App Instance of App.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        $this->is_wordpress = $this->c::isWordPress();
+    }
 
     /**
      * Request type is AJAX?
@@ -58,10 +81,12 @@ class RequestType extends Classes\Core\Base\Core
         if (isset($value)) {
             $this->is_ajax = $value;
         }
-        if (defined('DOING_AJAX') && DOING_AJAX && $this->c::isWordPress()) {
-            $this->is_ajax = true;
+        if (!isset($this->is_ajax) && $this->is_wordpress) {
+            if (defined('DOING_AJAX') && DOING_AJAX) {
+                $this->is_ajax = true;
+            }
         }
-        return $this->is_ajax;
+        return (bool) $this->is_ajax;
     }
 
     /**
@@ -78,12 +103,14 @@ class RequestType extends Classes\Core\Base\Core
         if (isset($value)) {
             $this->is_api = $value;
         }
-        if (((defined('XMLRPC_REQUEST') && XMLRPC_REQUEST)
-                    || (defined('REST_REQUEST') && REST_REQUEST))
-                && $this->c::isWordPress()) {
-            $this->is_api = true;
+        if (!isset($this->is_api) && $this->is_wordpress) {
+            if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) {
+                $this->is_api = true;
+            } elseif (defined('REST_REQUEST') && REST_REQUEST) {
+                $this->is_api = true;
+            }
         }
-        return $this->is_api;
+        return (bool) $this->is_api;
     }
 
     /**
@@ -100,6 +127,6 @@ class RequestType extends Classes\Core\Base\Core
         if (isset($value)) {
             $this->doing_action = $value;
         }
-        return $this->doing_action;
+        return (string) $this->doing_action;
     }
 }
