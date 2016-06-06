@@ -1,3 +1,7 @@
+## $v
+
+- Adding Facade `c::isApi()`.
+
 ## v160604.78151
 
 - Updating dotfiles and enhancing build props.

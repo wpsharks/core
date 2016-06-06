@@ -27,6 +27,15 @@ class RequestType extends Classes\Core\Base\Core
     protected $is_ajax = false;
 
     /**
+     * Request type is API?
+     *
+     * @since 160531 Request types.
+     *
+     * @param bool Request type is API?
+     */
+    protected $is_api = false;
+
+    /**
      * Request type action.
      *
      * @since 160531 Request types.
@@ -53,6 +62,28 @@ class RequestType extends Classes\Core\Base\Core
             $this->is_ajax = true;
         }
         return $this->is_ajax;
+    }
+
+    /**
+     * Request type is API?
+     *
+     * @since 160605 Request types.
+     *
+     * @param bool|null $value If setting value.
+     *
+     * @return bool Is an API request?
+     */
+    public function isApi(bool $value = null): bool
+    {
+        if (isset($value)) {
+            $this->is_api = $value;
+        }
+        if (((defined('XMLRPC_REQUEST') && XMLRPC_REQUEST)
+                    || (defined('REST_REQUEST') && REST_REQUEST))
+                && $this->c::isWordPress()) {
+            $this->is_api = true;
+        }
+        return $this->is_api;
     }
 
     /**

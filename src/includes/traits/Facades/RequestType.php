@@ -23,6 +23,14 @@ trait RequestType
     /**
      * @since 160531 Request types.
      */
+    public static function isApi(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©RequestType->isApi(...$args);
+    }
+
+    /**
+     * @since 160531 Request types.
+     */
     public static function doingAction(...$args)
     {
         return $GLOBALS[static::class]->Utils->©RequestType->doingAction(...$args);
