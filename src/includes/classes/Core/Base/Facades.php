@@ -45,6 +45,7 @@ abstract class Facades
     use Traits\Facades\Memcache;
     use Traits\Facades\Multibyte;
     use Traits\Facades\Names;
+    use Traits\Facades\NoCache;
     use Traits\Facades\OEmbed;
     use Traits\Facades\Os;
     use Traits\Facades\Output;

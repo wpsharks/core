@@ -1,4 +1,4 @@
-## $v
+## v160606.65620
 
 - Adding `NoCache{}` class and enhancing `RequestType{}`
 
