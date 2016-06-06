@@ -1,3 +1,7 @@
+## $v
+
+- Adding `NoCache{}` class and enhancing `RequestType{}`
+
 ## v160606.45353
 
 - Adding Facade `c::isApi()`.
