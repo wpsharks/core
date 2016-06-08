@@ -29,10 +29,10 @@ trait RequestType
     }
 
     /**
-     * @since 160531 Request types.
+     * @since 160608 Request types.
      */
-    public static function doingAction(...$args)
+    public static function doingRestAction(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©RequestType->doingAction(...$args);
+        return $GLOBALS[static::class]->Utils->©RequestType->doingRestAction(...$args);
     }
 }

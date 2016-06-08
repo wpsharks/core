@@ -36,13 +36,13 @@ class RequestType extends Classes\Core\Base\Core
     protected $is_api;
 
     /**
-     * Request type action.
+     * Doing a REsT action?
      *
      * @since 160531 Request types.
      *
-     * @param string|null Request type action.
+     * @param string|null REsT action.
      */
-    protected $doing_action;
+    protected $doing_rest_action;
 
     /**
      * Is WordPress?
@@ -114,19 +114,19 @@ class RequestType extends Classes\Core\Base\Core
     }
 
     /**
-     * Doing an action? If so, which action?
+     * Doing a REsT action?
      *
      * @since 160531 Request types.
      *
      * @param string|null $value If setting value.
      *
-     * @return string The action being done.
+     * @return string The REsT action being done.
      */
-    public function doingAction(string $value = null): string
+    public function doingRestAction(string $value = null): string
     {
         if (isset($value)) {
-            $this->doing_action = $value;
+            $this->doing_rest_action = $value;
         }
-        return (string) $this->doing_action;
+        return (string) $this->doing_rest_action;
     }
 }

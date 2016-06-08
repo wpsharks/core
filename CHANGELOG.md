@@ -1,3 +1,7 @@
+## $v
+
+- Refactoring. `doingAction()` now `doingRestAction()` to avoid confusion w/ hooks.
+
 ## v160606.65620
 
 - Adding `NoCache{}` class and enhancing `RequestType{}`
