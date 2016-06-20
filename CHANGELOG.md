@@ -1,3 +1,7 @@
+## v160620.27266
+
+- Updating to Sharkicons v160620.
+
 ## v160608.37022
 
 - Refactoring. `doingAction()` now `doingRestAction()` to avoid confusion w/ hooks.
