@@ -75,7 +75,7 @@
     "ext-SimpleXML": "*",
 
     "websharks/dicer": "160110",
-    "websharks/sharkicons": "160221",
+    "websharks/sharkicons": "160620",
 
     "lusitanian/oauth": "0.*",
     "aws/aws-sdk-php": "2.*",
