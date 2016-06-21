@@ -1,3 +1,7 @@
+## v160621.41871
+
+- Enhancing MailChimp utilities.
+
 ## v160621.35596
 
 - Adding MailChimp utilities.
