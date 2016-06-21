@@ -1,3 +1,7 @@
+## $v
+
+- Adding MailChimp utilities.
+
 ## v160620.27266
 
 - Updating to Sharkicons v160620.
