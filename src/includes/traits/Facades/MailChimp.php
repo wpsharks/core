@@ -23,6 +23,22 @@ trait MailChimp
     /**
      * @since 160620 Adding MailChimp.
      */
+    public static function mailchimpSubscribeOrUpdate(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©MailChimp->subscribeOrUpdate(...$args);
+    }
+
+    /**
+     * @since 160620 Adding MailChimp.
+     */
+    public static function mailchimpUpdateSubscriber(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©MailChimp->updateSubscriber(...$args);
+    }
+
+    /**
+     * @since 160620 Adding MailChimp.
+     */
     public static function mailchimpSubscriber(...$args)
     {
         return $GLOBALS[static::class]->Utils->©MailChimp->subscriber(...$args);
