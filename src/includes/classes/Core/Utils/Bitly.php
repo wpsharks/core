@@ -39,8 +39,6 @@ class Bitly extends Classes\Core\Base\Core
 
         if (!$this->App->Config->©fs_paths['©cache_dir']) {
             throw $this->c::issue('Missing cache directory.');
-        } elseif (!$this->App->Config->©bitly['©api_key']) {
-            throw $this->c::issue('Missing API key.');
         }
         $this->cache_dir = $this->App->Config->©fs_paths['©cache_dir'].'/bitly';
     }
@@ -64,7 +62,7 @@ class Bitly extends Classes\Core\Base\Core
         }
         $default_args = [
             'access_token' => $this->App->Config->©bitly['©api_key'],
-            'longUrl'      => $long_url,
+            'longUrl'      => $long_url, // From above.
         ];
         $args = array_merge($default_args, $args);
 
@@ -75,8 +73,10 @@ class Bitly extends Classes\Core\Base\Core
         }
         # Prepare endpoint/request args.
 
-        $endpoint_args = $args;
-        $request_args  = [
+        $endpoint_args = array_merge($args, [
+            // Nothing more at this time.
+        ]);
+        $request_args = [
             'max_con_secs'    => 5,
             'max_stream_secs' => 5,
             'return_array'    => true,
@@ -96,7 +96,7 @@ class Bitly extends Classes\Core\Base\Core
         if (is_file($cache_file)) { // File exists?
             return $short_url = (string) file_get_contents($cache_file);
         }
-        # Query for remote response via Bitly API endpoint.
+        # Query for remote response via API endpoint URL.
 
         $response = $this->c::remoteRequest('GET::'.$endpoint, $request_args);
 
@@ -159,8 +159,10 @@ class Bitly extends Classes\Core\Base\Core
         }
         # Prepare endpoint/request args.
 
-        $endpoint_args = $args;
-        $request_args  = [
+        $endpoint_args = array_merge($args, [
+            // Nothing more at this time.
+        ]);
+        $request_args = [
             'max_con_secs'    => 5,
             'max_stream_secs' => 5,
             'return_array'    => true,
@@ -180,7 +182,7 @@ class Bitly extends Classes\Core\Base\Core
         if (is_file($cache_file)) { // File exists?
             return $history = (array) unserialize(file_get_contents($cache_file));
         }
-        # Query for remote response via Bitly API endpoint.
+        # Query for remote response via API endpoint URL.
 
         $response = $this->c::remoteRequest('GET::'.$endpoint, $request_args);
 

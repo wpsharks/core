@@ -41,6 +41,7 @@ abstract class Facades
     use Traits\Facades\Html;
     use Traits\Facades\Ips;
     use Traits\Facades\Iterators;
+    use Traits\Facades\MailChimp;
     use Traits\Facades\Markdown;
     use Traits\Facades\Memcache;
     use Traits\Facades\Multibyte;

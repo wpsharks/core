@@ -191,13 +191,13 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©cookies' => [
-                '©encryption_key' => (string) ($_s_cfgs['CFG_COOKIES_KEY'] ?? ''),
+                '©encryption_key' => (string) ($_s_cfgs['CFG_COOKIES_ENCRYPTION_KEY'] ?? ''),
             ],
             '©hash_ids' => [
-                '©hash_key' => (string) ($_s_cfgs['CFG_HASH_IDS_KEY'] ?? ''),
+                '©hash_key' => (string) ($_s_cfgs['CFG_HASH_IDS_HASH_KEY'] ?? ''),
             ],
             '©passwords' => [
-                '©hash_key' => (string) ($_s_cfgs['CFG_PASSWORDS_KEY'] ?? ''),
+                '©hash_key' => (string) ($_s_cfgs['CFG_PASSWORDS_HASH_KEY'] ?? ''),
             ],
 
             '©aws' => [
@@ -205,13 +205,17 @@ class Config extends Classes\Core\Base\Core
                 '©secret_key' => (string) ($_s_cfgs['CFG_AWS_SECRET_KEY'] ?? ''),
             ],
             '©embedly' => [
-                '©api_key' => (string) ($_s_cfgs['CFG_EMBEDLY_KEY'] ?? ''),
+                '©api_key' => (string) ($_s_cfgs['CFG_EMBEDLY_API_KEY'] ?? ''),
             ],
             '©webpurify' => [
-                '©api_key' => (string) ($_s_cfgs['CFG_WEBPURIFY_KEY'] ?? ''),
+                '©api_key' => (string) ($_s_cfgs['CFG_WEBPURIFY_API_KEY'] ?? ''),
             ],
             '©bitly' => [
-                '©api_key' => (string) ($_s_cfgs['CFG_BITLY_KEY'] ?? ''),
+                '©api_key' => (string) ($_s_cfgs['CFG_BITLY_API_KEY'] ?? ''),
+            ],
+            '©mailchimp' => [
+                '©list_id' => (string) ($_s_cfgs['CFG_MAILCHIMP_LIST_ID'] ?? ''),
+                '©api_key' => (string) ($_s_cfgs['CFG_MAILCHIMP_API_KEY'] ?? ''),
             ],
         ];
         # Merge instance bases together now; forming a collective instance base.

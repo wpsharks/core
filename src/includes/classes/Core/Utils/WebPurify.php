@@ -37,9 +37,7 @@ class WebPurify extends Classes\Core\Base\Core
     {
         parent::__construct($App);
 
-        if (!$this->App->Config->©webpurify['©api_key']) {
-            throw $this->c::issue('Missing WebPurify API key.');
-        } elseif (!$this->App->Config->©fs_paths['©cache_dir']) {
+        if (!$this->App->Config->©fs_paths['©cache_dir']) {
             throw $this->c::issue('Missing cache directory.');
         }
         $this->cache_dir = $this->App->Config->©fs_paths['©cache_dir'].'/webpurify';
@@ -50,15 +48,18 @@ class WebPurify extends Classes\Core\Base\Core
      *
      * @since 150424 Badwords checker.
      *
+     * @param string $slug Input slug to check.
+     * @param array  $args Any additional args.
+     *
      * @return bool True if slug contains bad words.
      */
-    public function checkSlug(string $slug): bool
+    public function checkSlug(string $slug, array $args = []): bool
     {
         $text = mb_strtolower($slug);
         $text = preg_replace('/[^\p{L}\p{N}]/ui', ' ', $text);
         $text = preg_replace('/\s+/u', ' ', $text);
 
-        return $this->check($text);
+        return $this->check($text, $args);
     }
 
     /**
@@ -67,36 +68,42 @@ class WebPurify extends Classes\Core\Base\Core
      * @since 150424 Badwords checker.
      *
      * @param string $text Input text to check.
+     * @param array  $args Any additional args.
      *
      * @return bool True if string contains bad words.
      *
      * @see https://www.webpurify.com/documentation/methods/check/
+     * @TODO Test this with a POST request instead of GET for longer `text`.
      */
-    public function check(string $text): bool
+    public function check(string $text, array $args = []): bool
     {
         # The text is empty?
 
         if (!($text = $this->c::mbTrim($text))) {
             return false; // Nothing to do.
         }
+        $default_args = [
+            'api_key' => $this->App->Config->©webpurify['©api_key'],
+            'text'    => $text, // From above.
+        ];
+        $args = array_merge($default_args, $args);
+
         # Already cached this in memory?
 
-        if (!is_null($check = &$this->cacheKey(__FUNCTION__, $text))) {
+        if (!is_null($check = &$this->cacheKey(__FUNCTION__, $args))) {
             return $check; // Cached this already.
         }
         # Prepare endpoint/request args.
 
-        $endpoint_args = [
-            'method'  => 'webpurify.live.check',
-            'api_key' => $this->App->Config->©webpurify['©api_key'],
-            'text'    => $text,
-            'format'  => 'json',
-            'lang'    => 'en',
-            'rsp'     => '0',
-        ];
+        $endpoint_args = array_merge($args, [
+            'method' => 'webpurify.live.check',
+            'format' => 'json',
+            'lang'   => 'en',
+            'rsp'    => '0',
+        ]);
         $request_args = [
-            'max_con_secs'    => 3,
-            'max_stream_secs' => 3,
+            'max_con_secs'    => 5,
+            'max_stream_secs' => 5,
             'return_array'    => true,
         ];
         $endpoint = 'http://api1.webpurify.com/services/rest/';
@@ -114,9 +121,9 @@ class WebPurify extends Classes\Core\Base\Core
         if (is_file($cache_file)) { // File exists?
             return $check = (bool) file_get_contents($cache_file);
         }
-        # Query for remote response via WebPurify API endpoint.
+        # Query for remote response via API endpoint URL.
 
-        $response = $this->c::remoteRequest($endpoint, $request_args);
+        $response = $this->c::remoteRequest('GET::'.$endpoint, $request_args);
 
         # Validate response; false (and no cache) on any error.
 
