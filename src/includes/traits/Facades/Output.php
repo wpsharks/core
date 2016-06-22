@@ -13,11 +13,27 @@ use function get_defined_vars as vars;
 trait Output
 {
     /**
+     * @since 160622 Adding file output prep.
+     */
+    public static function prepareForFileOutput(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Output->filePrep(...$args);
+    }
+
+    /**
      * @since 151214 Adding functions.
      */
     public static function gzipOff(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Output->gzipOff(...$args);
+    }
+
+    /**
+     * @since 160622 Adding session write/close.
+     */
+    public static function sessionWriteClose(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Output->sessionWriteClose(...$args);
     }
 
     /**
