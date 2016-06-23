@@ -217,6 +217,12 @@ class Config extends Classes\Core\Base\Core
                 '©list_id' => (string) ($_s_cfgs['CFG_MAILCHIMP_LIST_ID'] ?? ''),
                 '©api_key' => (string) ($_s_cfgs['CFG_MAILCHIMP_API_KEY'] ?? ''),
             ],
+            '©slack' => [ // @TODO Add Slack utils to core.
+                '©api_client_id'     => (string) ($_s_cfgs['CFG_SLACK_API_CLIENT_ID'] ?? ''),
+                '©api_client_secret' => (string) ($_s_cfgs['CFG_SLACK_API_CLIENT_SECRET'] ?? ''),
+                '©api_access_token'  => (string) ($_s_cfgs['CFG_SLACK_API_ACCESS_TOKEN'] ?? ''),
+                '©api_webhook_url'   => (string) ($_s_cfgs['CFG_SLACK_API_WEBHOOK_URL'] ?? ''),
+            ],
         ];
         # Merge instance bases together now; forming a collective instance base.
 
