@@ -1,3 +1,7 @@
+## $v
+
+- Adding `short_slug`, `short_var`, and removing `prefix`.
+
 ## v160621.41871
 
 - Enhancing MailChimp utilities.
