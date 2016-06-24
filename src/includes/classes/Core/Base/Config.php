@@ -51,7 +51,7 @@ class Config extends Classes\Core\Base\Core
                 '©edge'   => (bool) ($_s_cfgs['CFG_DEBUG_EDGE'] ?? false),
 
                 '©log'          => (bool) ($_s_cfgs['CFG_DEBUG_LOG'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
-                '©log_callback' => null, // In case log entries should be reviewed in additional ways.
+                '©log_callback' => false, // In case log entries should be reviewed in additional ways.
 
                 '©er_enable'     => (bool) ($_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
                 '©er_display'    => (bool) ($_s_cfgs['CFG_DEBUG_ER_DISPLAY'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
@@ -118,13 +118,18 @@ class Config extends Classes\Core\Base\Core
                 ],
             ],
 
-            '©brand' => [
-                '©slug'        => (string) ($_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
+            '©brand' => [ // NOTE: `short_` variations should not exceed 10 bytes each.
+
+                '©name'    => (string) ($_s_cfgs['CFG_BRAND_NAME'] ?? $_s_cfgs['CFG_HOST'] ?? $host),
+                '©acronym' => (string) ($_s_cfgs['CFG_BRAND_ACRONYM'] ?? 'APP'),
+
                 '©text_domain' => (string) ($_s_cfgs['CFG_BRAND_TEXT_DOMAIN'] ?? $_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
-                '©var'         => (string) ($_s_cfgs['CFG_BRAND_VAR'] ?? $_s_cfgs['CFG_VAR'] ?? 'app'),
-                '©name'        => (string) ($_s_cfgs['CFG_BRAND_NAME'] ?? $_s_cfgs['CFG_HOST'] ?? $host),
-                '©acronym'     => (string) ($_s_cfgs['CFG_BRAND_ACRONYM'] ?? 'APP'),
-                '©prefix'      => (string) ($_s_cfgs['CFG_BRAND_PREFIX'] ?? 'app'),
+
+                '©slug' => (string) ($_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
+                '©var'  => (string) ($_s_cfgs['CFG_BRAND_VAR'] ?? $_s_cfgs['CFG_VAR'] ?? 'app'),
+
+                '©short_slug' => (string) ($_s_cfgs['CFG_BRAND_SHORT_SLUG'] ?? $_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
+                '©short_var'  => (string) ($_s_cfgs['CFG_BRAND_SHORT_VAR'] ?? $_s_cfgs['CFG_BRAND_VAR'] ?? $_s_cfgs['CFG_VAR'] ?? 'app'),
 
                 '©keywords'    => (string) ($_s_cfgs['CFG_BRAND_KEYWORDS'] ?? ''),
                 '©description' => (string) ($_s_cfgs['CFG_BRAND_DESCRIPTION'] ?? ''),
@@ -254,7 +259,7 @@ class Config extends Classes\Core\Base\Core
         $config = $this->App->fillConfigReplacementCodes($config);
         $config = (object) $config; // Force object properties.
 
-        if (!$config->©debug['©enable']) { // Is a master switch off?
+        if (!$config->©debug['©enable']) { // Master switch off?
             $config->©debug['©edge']      = false;
             $config->©debug['©log']       = $config->©debug['©log_callback']       = false;
             $config->©debug['©er_enable'] = $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;

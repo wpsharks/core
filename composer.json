@@ -2,22 +2,22 @@
   "name": "websharks/core",
   "homepage": "https://github.com/websharks/core",
   "description": "Core PHP library used by WebSharks, Inc.",
-  "keywords": ["websharks"],
+  "keywords": ["websharks", "core"],
 
   "type": "library",
   "license": "GPL-3.0+",
 
   "authors": [{
     "name": "websharks",
-    "homepage": "http://websharks-inc.com/",
+    "homepage": "https://websharks.org",
     "role": "company"
   }, {
     "name": "jaswsinc",
-    "homepage": "http://jaswsinc.com/",
+    "homepage": "https://jaswsinc.com",
     "role": "developer"
   }, {
     "name": "raamdev",
-    "homepage": "http://raam.org/",
+    "homepage": "http://raam.org",
     "role": "developer"
   }],
 
