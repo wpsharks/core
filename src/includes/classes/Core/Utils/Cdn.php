@@ -53,36 +53,20 @@ class Cdn extends Classes\Core\Base\Core implements Interfaces\MimeConstants
      */
     public function url(string $uri, string $scheme = ''): string
     {
-        if (!$this->App->Config->©urls['©hosts']['©cdn']) {
+        if (!($host = $this->App->Config->©urls['©hosts']['©cdn'])) {
             throw $this->c::issue('Missing CDN host name.');
         }
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
-        $url = '//'.$this->App->Config->©urls['©hosts']['©cdn'].'/'.$uri;
-        $url = $this->c::setScheme($url, $scheme);
+        $uri = $uri ? '/'.$uri : ''; // Force leading slash.
 
-        return $url;
-    }
+        if ($uri && defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) {
+            $uri = preg_replace('/\.min\.js($|[?])/u', '.js${1}', $uri);
+        } // This allows developers to debug uncompressed JS files.
 
-    /**
-     * CDN URL generator.
-     *
-     * @since 150424 Initial release.
-     *
-     * @param string $uri    URI to serve via CDN.
-     * @param string $scheme Specific scheme?
-     *
-     * @return string Output URL.
-     */
-    public function s3Url(string $uri, string $scheme = ''): string
-    {
-        if (!$this->App->Config->©urls['©hosts']['©cdn_s3']) {
-            throw $this->c::issue('Missing CDN S3 host name.');
-        }
-        $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
-        $url = '//'.$this->App->Config->©urls['©hosts']['©cdn_s3'].'/'.$uri;
-        $url = $this->c::setScheme($url, $scheme);
+        $base_path = $this->App->Config->©urls['©base_paths']['©cdn'];
+        $base_path = $base_path && $uri ? $this->c::mbRTrim($base_path, '/') : $base_path;
 
-        return $url;
+        return $url = $this->c::setScheme('//'.$host.$base_path.$uri, $scheme);
     }
 
     /**
@@ -127,12 +111,8 @@ class Cdn extends Classes\Core\Base\Core implements Interfaces\MimeConstants
 
         $uri = $parts; // w/ URI parts only.
         unset($uri['scheme'], $uri['host'], $uri['port']);
-        $uri = $this->c::unparseUrl($uri);
+        $uri = $this->c::unparseUrl($uri); // The URI only.
 
-        if (mb_stripos($uri, '/s3/') === 0) {
-            $uri = mb_substr($uri, 3); // Remove `/s3`.
-            return $this->s3Url($uri, $parts['scheme'] ?? '');
-        }
         return $this->url($uri, $parts['scheme'] ?? '');
     }
 }

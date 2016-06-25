@@ -1,3 +1,7 @@
+## $v
+
+- Enhancing base paths in URL generation.
+
 ## v160624.33052
 
 - Adding `short_slug`, `short_var`, and removing `prefix`.

@@ -145,12 +145,12 @@ class Config extends Classes\Core\Base\Core
                     '©roots' => [
                         '©app' => (string) ($_s_cfgs['CFG_ROOT_HOST'] ?? $root_host),
                     ],
-                    '©app'    => (string) ($_s_cfgs['CFG_HOST'] ?? $host),
-                    '©cdn'    => (string) ($_s_cfgs['CFG_CDN_HOST'] ?? 'cdn.'.$root_host),
-                    '©cdn_s3' => (string) ($_s_cfgs['CFG_CDN_S3_HOST'] ?? 'cdn-s3.'.$root_host),
+                    '©app' => (string) ($_s_cfgs['CFG_HOST'] ?? $host),
+                    '©cdn' => (string) ($_s_cfgs['CFG_CDN_HOST'] ?? 'cdn.'.$root_host),
                 ],
                 '©base_paths' => [
-                    '©app' => (string) ($_s_cfgs['CFG_HOST_BASE_PATH'] ?? ($is_cfg_host ? '' : '/src')),
+                    '©app' => (string) ($_s_cfgs['CFG_HOST_BASE_PATH'] ?? ($is_cfg_host ? '/' : '/src/')),
+                    '©cdn' => (string) ($_s_cfgs['CFG_CDN_HOST_BASE_PATH'] ?? '/'),
                 ],
                 '©cdn_filter_enable' => (bool) ($_s_cfgs['CFG_CDN_FILTER_ENABLE'] ?? false),
                 '©default_scheme'    => (string) ($_s_cfgs['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),

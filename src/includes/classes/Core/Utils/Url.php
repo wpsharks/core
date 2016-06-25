@@ -33,14 +33,15 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
         if (!($host = $this->App->Config->©urls['©hosts']['©app'])) {
             throw $this->c::issue('App host is empty.');
         }
-        $base_path = $this->App->Config->©urls['©base_paths']['©app'];
-
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
         $uri = $uri ? '/'.$uri : ''; // Force leading slash.
 
         if ($uri && defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) {
             $uri = preg_replace('/\.min\.js($|[?])/u', '.js${1}', $uri);
         } // This allows developers to debug uncompressed JS files.
+
+        $base_path = $this->App->Config->©urls['©base_paths']['©app'];
+        $base_path = $base_path && $uri ? $this->c::mbRTrim($base_path, '/') : $base_path;
 
         $url = $this->c::setScheme('//'.$host.$base_path.$uri, $scheme);
 
@@ -98,15 +99,18 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
      */
     public function toCurrent(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
-        $host      = $this->c::currentHost();
-        $base_path = $this->App->Config->©urls['©base_paths']['©app'];
-
+        if (!($host = $this->c::currentHost())) {
+            throw $this->c::issue('Current host is empty.');
+        }
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
         $uri = $uri ? '/'.$uri : ''; // Force leading slash.
 
         if ($uri && defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) {
             $uri = preg_replace('/\.min\.js($|[?])/u', '.js${1}', $uri);
         } // This allows developers to debug uncompressed JS files.
+
+        $base_path = $this->App->Config->©urls['©base_paths']['©app'];
+        $base_path = $base_path && $uri ? $this->c::mbRTrim($base_path, '/') : $base_path;
 
         $url = $this->c::setScheme('//'.$host.$base_path.$uri, $scheme);
 
