@@ -1,3 +1,9 @@
+## $v
+
+- Updating to latest websharks/phings.
+- Branch rename; `000000-dev` is now just `dev`.
+- Exposing `f` and `facades` property as public; read-only.
+
 ## v160625.59856
 
 - Enhancing base paths in URL generation.
