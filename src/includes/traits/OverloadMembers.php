@@ -121,7 +121,9 @@ trait OverloadMembers
      */
     public function __get(string $property)
     {
-        if (isset($this->¤¤overload[$property])) {
+        if ($property === 'f' || $property === 'facades') {
+            return $this->facades; // Public; read-only.
+        } elseif (isset($this->¤¤overload[$property])) {
             return $this->¤¤overload[$property];
         } elseif (array_key_exists($property, $this->¤¤overload)) {
             return $this->¤¤overload[$property];

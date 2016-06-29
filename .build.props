@@ -2,6 +2,7 @@ project_title                    = WebSharks Core
 
 project_owner                    = websharks
 project_slug                     = core
+project_text_domain              = websharks-core
 
 project_namespace                = WebSharks\\Core
 project_sub_namespace            = Core
