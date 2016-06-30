@@ -69,9 +69,9 @@ trait Encryption
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 160630 Adding functions.
      */
-    public static function decodeHashId(...$args)
+    public static function decodeHashedIds(...$args)
     {
         return $GLOBALS[static::class]->Utils->©HashIds->decode(...$args);
     }
