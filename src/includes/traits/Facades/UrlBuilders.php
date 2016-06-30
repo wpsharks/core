@@ -79,14 +79,6 @@ trait UrlBuilders
     /**
      * @since 151214 Adding functions.
      */
-    public static function cdnS3Url(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Cdn->s3Url(...$args);
-    }
-
-    /**
-     * @since 151214 Adding functions.
-     */
     public static function cdnFilter(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Cdn->filter(...$args);
