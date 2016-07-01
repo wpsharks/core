@@ -1,4 +1,4 @@
-## $v
+## v160701.57492
 
 - Use `$GLOBALS['wp_version']` instead of `WP_VERSION` const.
 - MIME type updates. `application/x-javascript` now `application/javascript`. Also adding `x-php` extension.
