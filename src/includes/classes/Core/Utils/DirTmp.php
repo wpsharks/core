@@ -26,11 +26,12 @@ class DirTmp extends Classes\Core\Base\Core
      */
     public function __invoke(): string
     {
-        if (!is_null($dir = &$this->cacheKey(__FUNCTION__))) {
+        if (($dir = &$this->cacheKey(__FUNCTION__)) !== null) {
             return $dir; // Already cached this.
         }
-        $possible_dirs = []; // Initialize.
-        $is_wordpress  = $this->c::isWordPress();
+        $possible_dirs      = []; // Initialize.
+        $is_wordpress       = $this->c::isWordPress();
+        $fs_transient_perms = $this->App->Config->©fs_permissions['©transient_dirs'];
 
         if ($is_wordpress && defined('WP_TEMP_DIR')) {
             $possible_dirs[] = (string) WP_TEMP_DIR;
@@ -57,8 +58,9 @@ class DirTmp extends Classes\Core\Base\Core
         }
         foreach ($possible_dirs as $_key => $_dir) {
             if ($_dir && @is_dir($_dir) && @is_writable($_dir)) {
-                $_dir .= '/'.$this->App->namespace_sha1.'/tmp';
-                if (is_dir($_dir) || mkdir($_dir, $this->App->Config->©fs_permissions['©transient_dirs'], true)) {
+                $_dir .= '/'.$this->App->namespace_sha1.'/.tmp'; // App-specific.
+                // Also using a `.tmp` directory to help improve security and designate tmp.
+                if (is_dir($_dir) || (!file_exists($_dir) && mkdir($_dir, $fs_transient_perms, true))) {
                     return $dir = $_dir;
                 }
             }

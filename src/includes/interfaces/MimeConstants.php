@@ -65,12 +65,13 @@ interface MimeConstants
 
         // CSS/JavaScript files.
         'css'  => 'text/css'.self::MIME_CHARSET_UTF8,
-        'js'   => 'application/x-javascript'.self::MIME_CHARSET_UTF8,
+        'js'   => 'application/javascript'.self::MIME_CHARSET_UTF8,
         'json' => 'application/json'.self::MIME_CHARSET_UTF8,
 
         // PHP scripts/files.
-        'php'  => 'text/html'.self::MIME_CHARSET_UTF8,
-        'phps' => 'text/html'.self::MIME_CHARSET_UTF8,
+        'php'   => 'text/html'.self::MIME_CHARSET_UTF8,
+        'phps'  => 'application/x-php-source'.self::MIME_CHARSET_UTF8,
+        'x-php' => 'application/x-php-source'.self::MIME_CHARSET_UTF8,
 
         // ASP scripts/files.
         'asp'  => 'text/html'.self::MIME_CHARSET_UTF8,
@@ -104,10 +105,8 @@ interface MimeConstants
 
         // Image/animation files.
         'ai'       => 'image/vnd.adobe.illustrator',
-        'blend'    => 'application/x-blender',
         'bmp'      => 'image/bmp',
         'eps'      => 'image/eps',
-        'fla'      => 'application/vnd.adobe.flash',
         'gif'      => 'image/gif',
         'ico'      => 'image/x-icon',
         'jpe'      => 'image/jpeg',
@@ -117,7 +116,6 @@ interface MimeConstants
         'psd'      => 'image/vnd.adobe.photoshop',
         'pspimage' => 'image/vnd.corel.psp',
         'svg'      => 'image/svg+xml',
-        'swf'      => 'application/x-shockwave-flash',
         'tif'      => 'image/tiff',
         'tiff'     => 'image/tiff',
 
@@ -140,6 +138,9 @@ interface MimeConstants
         'qt'   => 'video/quicktime',
         'webm' => 'video/webm',
         'wmv'  => 'audio/x-ms-wmv',
+        'fla'      => 'application/vnd.adobe.flash',
+        'swf'      => 'application/x-shockwave-flash',
+        'blend'    => 'application/x-blender',
 
         // Font files.
         'eot'   => 'application/vnd.ms-fontobject',
@@ -149,17 +150,17 @@ interface MimeConstants
         'woff2' => 'application/x-font-woff',
 
         // Archive files.
-        '7z'   => 'application/x-7z-compressed',
-        'dmg'  => 'application/x-apple-diskimage',
-        'gtar' => 'application/x-gtar',
-        'gz'   => 'application/gzip',
-        'iso'  => 'application/iso-image',
-        'jar'  => 'application/java-archive',
-        'phar' => 'application/php-archive',
-        'rar'  => 'application/x-rar-compressed',
-        'tar'  => 'application/x-tar',
-        'tgz'  => 'application/x-gtar',
         'zip'  => 'application/zip',
+        'tar'  => 'application/x-tar',
+        'gz'   => 'application/gzip',
+        'tgz'  => 'application/gzip',
+        'gtar' => 'application/x-gtar',
+        'rar'  => 'application/x-rar-compressed',
+        'phar' => 'application/php-archive',
+        '7z'   => 'application/x-7z-compressed',
+        'jar'  => 'application/java-archive',
+        'dmg'  => 'application/x-apple-diskimage',
+        'iso'  => 'application/iso-image',
 
         // Other misc files.
         'bat'   => 'application/octet-stream',
