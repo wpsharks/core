@@ -1,3 +1,9 @@
+## $v
+
+- Use `$GLOBALS['wp_version']` instead of `WP_VERSION` const.
+- MIME type updates. `application/x-javascript` now `application/javascript`. Also adding `x-php` extension.
+- Security hardending in `/tmp` directory detection.
+
 ## v160630.68424
 
 - Refactor hash IDs.
