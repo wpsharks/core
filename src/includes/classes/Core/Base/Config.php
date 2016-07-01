@@ -142,11 +142,13 @@ class Config extends Classes\Core\Base\Core
 
             '©urls' => [
                 '©hosts' => [
-                    '©roots' => [
-                        '©app' => (string) ($_s_cfgs['CFG_ROOT_HOST'] ?? $root_host),
-                    ],
                     '©app' => (string) ($_s_cfgs['CFG_HOST'] ?? $host),
                     '©cdn' => (string) ($_s_cfgs['CFG_CDN_HOST'] ?? 'cdn.'.$root_host),
+
+                    '©roots' => [
+                        '©app' => (string) ($_s_cfgs['CFG_ROOT_HOST'] ?? $root_host),
+                        '©cdn' => (string) ($_s_cfgs['CFG_CDN_ROOT_HOST'] ?? $root_host),
+                    ],
                 ],
                 '©base_paths' => [
                     '©app' => (string) ($_s_cfgs['CFG_HOST_BASE_PATH'] ?? ($is_cfg_host ? '/' : '/src/')),
