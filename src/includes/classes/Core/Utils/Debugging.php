@@ -149,7 +149,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
         }
         $is_cli       = $this->c::isCli();
         $is_wordpress = $this->c::isWordPress();
-        $event        = $this->cleanLogEvent($event); // Strip namespace, etc.
+        $event        = $this->cleanLogEvent($event);
 
         $lines[] = __('Time:').'         '.date('F jS, Y, g:i a T');
         $lines[] = __('Microtime:').'    '.number_format(microtime(true), 8, '.', '');
@@ -159,7 +159,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
         $lines[] = __('System:').'       '.PHP_OS.'; PHP v'.PHP_VERSION.' ('.PHP_SAPI.')';
         $lines[] = __('Software:').'     WSC v'.Classes\App::VERSION.// Core app class version.
 
-                                         ($is_wordpress ? '; WP v'.WP_VERSION : '').// WordPress.
+                                         ($is_wordpress ? '; WP v'.$GLOBALS['wp_version'] : '').
                                          ($is_wordpress && defined('WC_VERSION') ? '; WC v'.WC_VERSION : '').
 
                                          ($this->App->Parent ? '; '.$this->App->Parent->Config->©brand['©acronym'].' v'.$this->App->Parent::VERSION : '').
