@@ -1,3 +1,8 @@
+## $v
+
+- Adding `UniqueId` class and `uniqueId()` Facade.
+- Adding local `StrPad{}` test file.
+
 ## v160701.57492
 
 - Use `$GLOBALS['wp_version']` instead of `WP_VERSION` const.

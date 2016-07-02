@@ -13,6 +13,14 @@ use function get_defined_vars as vars;
 trait Encryption
 {
     /**
+     * @since 160701 Unique ID.
+     */
+    public static function uniqueId(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©UniqueId->__invoke(...$args);
+    }
+
+    /**
      * @since 151214 Adding functions.
      */
     public static function randomKey(...$args)
