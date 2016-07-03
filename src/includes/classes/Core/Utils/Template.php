@@ -29,19 +29,21 @@ class Template extends Classes\Core\Base\Core
      */
     public function locate(string $file, string $dir = ''): array
     {
-        $dir  = $this->c::mbRTrim($dir, '/');
-        $file = $this->c::mbTrim($file, '/');
+        $dir  = $this->c::mbRTrim($dir, '/'); // Template directory.
+        $dir  = $dir ?: $this->App->Config->©fs_paths['©templates_dir'];
+        $file = $this->c::mbTrim($file, '/'); // Template file.
 
-        if (!$dir) { // Use default templates directory?
-            $dir = $this->App->base_dir.'/src/includes/templates';
-        }
         if ($dir === 'core') {
-            $dir = $this->App->core_dir.'/src/includes/templates';
-        } elseif ($dir === 'parent' || ($file && !is_file($dir.'/'.$file))) {
+            if ($this->App->Parent) {
+                return $this->App->Parent->Utils->©Template->locate($file, $dir);
+            } else { // Use core config option.
+                $dir = $this->App->Config->©fs_paths['©templates_dir'];
+            }
+        } elseif ($dir === 'parent' || ($dir && $file && !is_file($dir.'/'.$file))) {
             if ($this->App->Parent) {
                 return $this->App->Parent->Utils->©Template->locate($file);
-            } else {
-                $dir = $this->App->core_dir.'/src/includes/templates';
+            } else { // Else go with what we have.
+                $dir = $this->App->Config->©fs_paths['©templates_dir'];
             }
         }
         if ($dir && $file && is_file($dir.'/'.$file)) {

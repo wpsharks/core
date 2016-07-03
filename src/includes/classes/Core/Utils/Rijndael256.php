@@ -61,10 +61,12 @@ class Rijndael256 extends Classes\Core\Base\Core
      *
      * @return string Encrypted string (URL-safe base64).
      */
-    public function encrypt(string $string, string $key, bool $sha1 = true): string
+    public function encrypt(string $string, string $key = '', bool $sha1 = true): string
     {
         if (!isset($string[0])) {
             return $base64 = ''; // Nothing to do.
+        } elseif (!$key && !($key = $this->App->Config->©encryption['©key'])) {
+            throw $this->c::issue('Missing encryption key.');
         }
         $string = '~r2|'.$string; // `RIJNDAEL 256` identifier.
 
@@ -92,10 +94,12 @@ class Rijndael256 extends Classes\Core\Base\Core
      *
      * @return string Decrypted string; or empty string on failure.
      */
-    public function decrypt(string $base64, string $key): string
+    public function decrypt(string $base64, string $key = ''): string
     {
         if (!isset($base64[0])) {
             return $string = '';
+        } elseif (!$key && !($key = $this->App->Config->©encryption['©key'])) {
+            throw $this->c::issue('Missing encryption key.');
         }
         $regex = // Matches a valid encryption.
 

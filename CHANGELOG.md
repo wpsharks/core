@@ -1,3 +1,9 @@
+## $v
+
+- Introducing new config key: `©fs_paths.©templates_dir`.
+- Introducing new config key: `©encryption.©key` as a generic fallback.
+- Improving template locator. Now handling parent/core templates in a more dynamic way.
+
 ## v160702.65000
 
 - Adding `UniqueId` class and `uniqueId()` Facade.

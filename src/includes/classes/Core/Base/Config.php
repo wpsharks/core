@@ -156,14 +156,15 @@ class Config extends Classes\Core\Base\Core
                 ],
                 '©cdn_filter_enable' => (bool) ($_s_cfgs['CFG_CDN_FILTER_ENABLE'] ?? false),
                 '©default_scheme'    => (string) ($_s_cfgs['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),
-                '©sig_key'           => (string) ($_s_cfgs['CFG_URL_SIG_KEY'] ?? ''),
+                '©sig_key'           => (string) ($_s_cfgs['CFG_URL_SIG_KEY'] ?? $_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
 
             '©fs_paths' => [
-                '©logs_dir'    => (string) ($_s_cfgs['CFG_LOGS_DIR'] ?? '/var/log/%%app_namespace_sha1%%'),
-                '©cache_dir'   => (string) ($_s_cfgs['CFG_CACHE_DIR'] ?? '/tmp/%%app_namespace_sha1%%/cache'),
-                '©errors_dir'  => (string) ($_s_cfgs['CFG_ERRORS_DIR'] ?? ($is_cfg_host ? '/bootstrap/src/html/errors' : '')),
-                '©config_file' => (string) ($_s_cfgs['CFG_CONFIG_FILE'] ?? ''), // Empty by default, for improved performance.
+                '©logs_dir'      => (string) ($_s_cfgs['CFG_LOGS_DIR'] ?? '/var/log/%%app_namespace_sha1%%'),
+                '©cache_dir'     => (string) ($_s_cfgs['CFG_CACHE_DIR'] ?? '/tmp/%%app_namespace_sha1%%/cache'),
+                '©templates_dir' => (string) ($_s_cfgs['CFG_TEMPLATES_DIR'] ?? '%%app_base_dir%%/src/includes/templates'),
+                '©errors_dir'    => (string) ($_s_cfgs['CFG_ERRORS_DIR'] ?? ($is_cfg_host ? '/bootstrap/src/html/errors' : '')),
+                '©config_file'   => (string) ($_s_cfgs['CFG_CONFIG_FILE'] ?? ''), // Empty by default, for improved performance.
             ],
             '©fs_permissions' => [
                 '©transient_dirs' => (int) ($_s_cfgs['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 02775),
@@ -197,14 +198,17 @@ class Config extends Classes\Core\Base\Core
                 '©smtp_password' => (string) ($_s_cfgs['CFG_EMAIL_SMTP_PASSWORD'] ?? ''),
             ],
 
+            '©encryption' => [
+                '©key' => (string) ($_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
+            ],
             '©cookies' => [
-                '©encryption_key' => (string) ($_s_cfgs['CFG_COOKIES_ENCRYPTION_KEY'] ?? ''),
+                '©encryption_key' => (string) ($_s_cfgs['CFG_COOKIES_ENCRYPTION_KEY'] ?? $_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
             '©hash_ids' => [
-                '©hash_key' => (string) ($_s_cfgs['CFG_HASH_IDS_HASH_KEY'] ?? ''),
+                '©hash_key' => (string) ($_s_cfgs['CFG_HASH_IDS_HASH_KEY'] ?? $_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
             '©passwords' => [
-                '©hash_key' => (string) ($_s_cfgs['CFG_PASSWORDS_HASH_KEY'] ?? ''),
+                '©hash_key' => (string) ($_s_cfgs['CFG_PASSWORDS_HASH_KEY'] ?? $_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
 
             '©aws' => [
