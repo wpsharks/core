@@ -1,4 +1,4 @@
-## $v
+## v160703.71181
 
 - Introducing new config key: `©fs_paths.©templates_dir`.
 - Introducing new config key: `©encryption.©key` as a generic fallback.
