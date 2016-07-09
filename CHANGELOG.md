@@ -1,3 +1,8 @@
+## $v
+
+- Bug fix in `c::sQuote()`
+- Bug fix in `c::dQuote()`
+
 ## v160709.16106
 
 - Adding `c::sQuote()`

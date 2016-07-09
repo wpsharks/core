@@ -34,7 +34,7 @@ class Escape extends Classes\Core\Base\Core
             } // unset($_key, $_value);
             return $value;
         }
-        return "'".str_replace("'", "\\'", $string)."'";
+        return "'".str_replace("'", "\\'", (string) $value)."'";
     }
 
     /**
@@ -58,7 +58,7 @@ class Escape extends Classes\Core\Base\Core
             } // unset($_key, $_value);
             return $value;
         }
-        return '"'.str_replace('"', $for_csv ? '""' : '\\"', $string).'"';
+        return '"'.str_replace('"', $for_csv ? '""' : '\\"', (string) $value).'"';
     }
 
     /**
