@@ -35,7 +35,7 @@ interface RegexConstants
      *
      * @type string Regex fragment for use in `preg_match()`.
      */
-    const REGEX_FRAG_DQ_VALUE = // Tricky tricky!
+    const REGEX_FRAG_DQ_VALUE =
         '(?<open_dq>(?<!\\\\)")'.// A double quote that has not been escaped.
             '(?<dq_value>(?s:\\\\.|[^\\\\"])*?)'.// Any escaped character (allowing for `\"`).
             //          | Or, anything that is not a `\` or `"` character.
@@ -48,7 +48,7 @@ interface RegexConstants
      *
      * @type string Regex fragment for use in `preg_match()`.
      */
-    const REGEX_FRAG_SQ_VALUE = // Tricky tricky!
+    const REGEX_FRAG_SQ_VALUE =
         '(?<open_sq>(?<!\\\\)\')'.// A single quote that has not been escaped.
             '(?<sq_value>(?s:\\\\.|[^\\\\\'])*?)'.// Any escaped character (allowing for `\'`).
             //          | Or, anything that is not a `\` or `'` character.
@@ -61,7 +61,7 @@ interface RegexConstants
      *
      * @type string Regex fragment for use in `preg_match()`.
      */
-    const REGEX_FRAG_DSQ_VALUE = // Super duper tricky!
+    const REGEX_FRAG_DSQ_VALUE =
         '(?<open_dsq>(?<!\\\\)["\'])'.// A quote that has not been escaped.
             '(?<dsq_value>(?s:\\\\.|(?!\\\\|(?P=open_dsq)).)*?)'.// Any escaped character (allowing for `\"`, `\'`).
             //          | Or, anything that is not a `\` or `'"` character.

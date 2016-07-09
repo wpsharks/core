@@ -1,3 +1,14 @@
+## v160708.73311
+
+- Adding `Interfaces\SimpleExpressionConstants{}`.
+- Adding `Interfaces\SimpleExpressionConstants\SIMPLE_EXPRESSION_REGEX_FRAG`.
+- Adding `Interfaces\SimpleExpressionConstants\SIMPLE_EXPRESSION_REGEX_VALID`.
+- Adding `Interfaces\SimpleExpressionConstants\SIMPLE_EXPRESSION_BOOL_ONLY_REGEX_FRAG`.
+- Adding `Interfaces\SimpleExpressionConstants\SIMPLE_EXPRESSION_BOOL_ONLY_REGEX_VALID`.
+- Adding `Classes\Core\Utils\SimpleExpression::toPhp()`.
+- Adding `c::simplePhpExpr()`.
+- Adding local tests in `simple-expr.php` w/ benchmarks.
+
 ## v160703.71181
 
 - Introducing new config key: `©fs_paths.©templates_dir`.
