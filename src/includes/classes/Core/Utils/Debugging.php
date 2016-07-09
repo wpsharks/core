@@ -330,6 +330,6 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      */
     protected function uniqueSuffixLogFile(string $file): string
     {
-        return preg_replace('/\.log$/ui', '', $file).'-'.uniqid('', true).'.log';
+        return preg_replace('/\.log$/ui', '', $file).'-'.$this->c::uniqueId().'.log';
     }
 }
