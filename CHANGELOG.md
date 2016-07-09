@@ -1,3 +1,10 @@
+## $v
+
+- Adding `c::sQuote()`
+- Adding `c::dQuote()`
+- Bug fix in `c::escShellArg()` related to iteration of array/object values.
+- Bug fix in `c::escShellArg()` related to an empty string.
+
 ## v160709.2110
 
 - Adding `Interfaces\SimpleExpressionConstants{}`.

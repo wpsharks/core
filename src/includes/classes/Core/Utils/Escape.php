@@ -18,6 +18,50 @@ use function get_defined_vars as vars;
 class Escape extends Classes\Core\Base\Core
 {
     /**
+     * Single-quote.
+     *
+     * @since 160708 Quotes.
+     *
+     * @param mixed Input value.
+     *
+     * @return string|array|object Output value.
+     */
+    public function singleQuote($value)
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->singleQuote($_value);
+            } // unset($_key, $_value);
+            return $value;
+        }
+        return "'".str_replace("'", "\\'", $string)."'";
+    }
+
+    /**
+     * Double-quote.
+     *
+     * @since 160708 Quotes.
+     *
+     * @param mixed Input value.
+     * @param bool $for_csv Changes quote-style for CSV compat.
+     *                      CSV quoting requires the use of a double-quote as the escape char.
+     *
+     * @return string|array|object Output value.
+     *
+     * @WARNING Double-quotes, in most languages, result in evaluation.
+     */
+    public function doubleQuote($value, bool $for_csv = false)
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->doubleQuote($_value);
+            } // unset($_key, $_value);
+            return $value;
+        }
+        return '"'.str_replace('"', $for_csv ? '""' : '\\"', $string).'"';
+    }
+
+    /**
      * Escape HTML markup (other).
      *
      * @since 151122 Escapes.
@@ -86,14 +130,11 @@ class Escape extends Classes\Core\Base\Core
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->shell_arg($_value);
+                $_value = $this->shellArg($_value);
             } // unset($_key, $_value);
             return $value;
         }
-        if (!($string = (string) $value)) {
-            return $string; // Nothing to do.
-        }
-        return escapeshellarg($string);
+        return escapeshellarg((string) $value);
     }
 
     // NOTE: SQL-related escapes are in the `Sql` class.

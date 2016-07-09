@@ -13,6 +13,22 @@ use function get_defined_vars as vars;
 trait Escapes
 {
     /**
+     * @since 160708 Quote utils.
+     */
+    public static function sQuote(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Escape->singleQuote(...$args);
+    }
+
+    /**
+     * @since 160708 Quote utils.
+     */
+    public static function dQuote(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Escape->doubleQuote(...$args);
+    }
+
+    /**
      * @since 151214 Adding functions.
      */
     public static function escHtml(...$args)
