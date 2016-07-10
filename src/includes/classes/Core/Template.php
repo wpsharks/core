@@ -159,16 +159,26 @@ class Template extends Classes\Core\Base\Core
         $parents     = array_merge($this->parents, [$this->file]);
         $parent_vars = array_merge($this->parent_vars, [$this->file => &$this->current_vars]);
         $Template    = $this->c::getTemplate($file, $dir, $parents, $parent_vars);
-
-        foreach (array_reverse($this->parent_vars, true) as $_parent_file => $_parent_vars) {
+        /*
+         * NOTE: Here, we are walking through each of the parents in reverse order.
+         * Merging variables from the closest ancestor first, then it's parent, and so on.
+         *
+         * Only file-specific variables from parents are merged w/ the variables for 'this' template file.
+         * And, we always give variables for 'this' template precedence over those defined by ancestors.
+         *
+         * The most confusing part of this routine has to do with the order in which the merging takes place.
+         * Each time a merge occurs, it is merging the 'current' variables for 'this' template, with those from an ancestor.
+         *
+         * The trick is, each time a merge occurs, the 'current' variables will include those from the previous ancestor.
+         * The effect is that the 'current' template take precedence over all others, and then each closest parent takes
+         * precedence over the ones before it. By going in reverse, we're filling the vars needed for the next merge.
+         */
+        foreach (array_reverse($parent_vars, true) as $_parent_file => $_parent_vars) {
             if (isset($_parent_vars[$file]) && is_array($_parent_vars[$file])) {
                 $vars = array_replace_recursive($_parent_vars[$file], $vars);
             } // Merge those from parents who have file-specific vars.
         } // unset($_parent_file, $_parent_vars); // Housekeeping.
 
-        if (isset($this->current_vars[$file]) && is_array($this->current_vars[$file])) {
-            $vars = array_replace_recursive($this->current_vars[$file], $vars);
-        }
         return $Template->parse($vars);
     }
 

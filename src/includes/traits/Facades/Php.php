@@ -59,4 +59,12 @@ trait Php
     {
         return $GLOBALS[static::class]->Utils->©ExecTime->max(...$args);
     }
+
+    /**
+     * @since 160709 Userland constants.
+     */
+    public static function isValidFuncName(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©PhpUserland->isValidFunctionName(...$args);
+    }
 }
