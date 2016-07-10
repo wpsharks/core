@@ -1,3 +1,7 @@
+## $v
+
+- Distinguish WSC from another secondary core with respect to `->is_core` and `->core_dir_*` vars.
+
 ## v160709.27664
 
 - Bug fix in `c::sQuote()`

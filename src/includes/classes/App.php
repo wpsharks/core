@@ -153,34 +153,43 @@ class App extends Classes\Core\Base\Core
     public $base_dir_sha1;
 
     /**
-     * Core dir.
+     * WSC dir.
      *
      * @since 150424
      *
      * @type string
      */
-    public $core_dir;
+    public $ws_core_dir;
 
     /**
-     * Core dir basename.
+     * WSC dir basename.
      *
      * @since 160223
      *
      * @type string
      */
-    public $core_dir_basename;
+    public $ws_core_dir_basename;
 
     /**
-     * Core dir SHA-1.
+     * WSC dir SHA-1.
      *
      * @since 160223
      *
      * @type string
      */
-    public $core_dir_sha1;
+    public $ws_core_dir_sha1;
 
     /**
-     * Is the core?
+     * Is WSC?
+     *
+     * @since 150424
+     *
+     * @type bool
+     */
+    public $is_ws_core;
+
+    /**
+     * Is a core?
      *
      * @since 150424
      *
@@ -286,11 +295,12 @@ class App extends Classes\Core\Base\Core
         $this->base_dir_basename = basename($this->base_dir);
         $this->base_dir_sha1     = sha1($this->base_dir);
 
-        $this->core_dir          = dirname(__FILE__, 4);
-        $this->core_dir_basename = basename($this->core_dir);
-        $this->core_dir_sha1     = sha1($this->core_dir);
+        $this->ws_core_dir          = dirname(__FILE__, 4);
+        $this->ws_core_dir_basename = basename($this->ws_core_dir);
+        $this->ws_core_dir_sha1     = sha1($this->ws_core_dir);
 
-        $this->is_core = $this->class === self::class;
+        $this->is_ws_core = $this->class === self::class;
+        $this->is_core    = $this->is_ws_core || !$this->Parent;
 
         # Validate this instance of the app.
 
@@ -525,9 +535,9 @@ class App extends Classes\Core\Base\Core
                     '%%app_base_dir_basename%%',
                     '%%app_base_dir_sha1%%',
 
-                    '%%core_dir%%',
-                    '%%core_dir_basename%%',
-                    '%%core_dir_sha1%%',
+                    '%%ws_core_dir%%',
+                    '%%ws_core_dir_basename%%',
+                    '%%ws_core_dir_sha1%%',
 
                     '%%home_dir%%',
                 ],
@@ -550,9 +560,9 @@ class App extends Classes\Core\Base\Core
                     $this->base_dir_basename,
                     $this->base_dir_sha1,
 
-                    $this->core_dir,
-                    $this->core_dir_basename,
-                    $this->core_dir_sha1,
+                    $this->ws_core_dir,
+                    $this->ws_core_dir_basename,
+                    $this->ws_core_dir_sha1,
 
                     (string) ($_SERVER['HOME'] ?? $_SERVER['WEBSHARK_HOME'] ?? ''),
                 ],
