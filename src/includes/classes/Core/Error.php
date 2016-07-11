@@ -78,6 +78,18 @@ class Error extends Classes\Core\Base\Core
     }
 
     /**
+     * Errors exist?
+     *
+     * @since 160710 Error utils.
+     *
+     * @return bool Errors exist?
+     */
+    public function exist(): bool
+    {
+        return !empty($this->errors);
+    }
+
+    /**
      * Get error slug.
      *
      * @since 160710 Error utils.
