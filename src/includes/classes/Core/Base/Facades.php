@@ -33,6 +33,7 @@ abstract class Facades
     use Traits\Facades\Email;
     use Traits\Facades\Encryption;
     use Traits\Facades\Eols;
+    use Traits\Facades\Errors;
     use Traits\Facades\Escapes;
     use Traits\Facades\Exceptions;
     use Traits\Facades\Files;
