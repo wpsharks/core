@@ -1,3 +1,9 @@
+## $v
+
+- Adding `Classes\Core\Error{}`.
+- Adding `c::error()`.
+- Adding `c::isError()`.
+
 ## v160710.79300
 
 - Distinguish WSC from another secondary core with respect to `->is_core` and `->core_dir_*` vars.

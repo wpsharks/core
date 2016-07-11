@@ -72,6 +72,7 @@ class Config extends Classes\Core\Base\Core
             '©di' => [
                 '©default_rule' => [
                     'new_instances' => [
+                        Classes\Core\Error::class,
                         Classes\Core\CliOpts::class,
                         Classes\Core\Template::class,
                         Classes\Core\Tokenizer::class,
