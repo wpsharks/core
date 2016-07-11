@@ -1,3 +1,7 @@
+## $v
+
+- Refactor `Classes\Core\Error{}`.
+
 ## v160711.3260
 
 - Adding `Classes\Core\Error{}`.

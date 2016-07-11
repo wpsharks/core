@@ -17,7 +17,7 @@ trait Errors
      */
     public static function error(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Error->get(...$args);
+        return $GLOBALS[static::class]->Utils->©Error->__invoke(...$args);
     }
 
     /**

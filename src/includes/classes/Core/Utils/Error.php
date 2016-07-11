@@ -18,6 +18,22 @@ use function get_defined_vars as vars;
 class Error extends Classes\Core\Base\Core
 {
     /**
+     * New error instance.
+     *
+     * @since 160710 Error utilities.
+     *
+     * @param string $slug    Error slug.
+     * @param string $message Error message.
+     * @param mixed  $data    Error data.
+     *
+     * @return Classes\Core\Error Error instance.
+     */
+    public function __invoke(string $slug = '', string $message = '', $data = null): Classes\Core\Error
+    {
+        return $this->c::diGet(Classes\Core\Error::class, compact('slug', 'message', 'data'));
+    }
+
+    /**
      * An error?
      *
      * @since 160710 Error utilities.
@@ -29,21 +45,5 @@ class Error extends Classes\Core\Base\Core
     public function is($value): bool
     {
         return $value instanceof Classes\Core\Error;
-    }
-
-    /**
-     * Create error.
-     *
-     * @since 160710 Error utilities.
-     *
-     * @param string $slug    Error slug.
-     * @param string $message Error message.
-     * @param mixed  $data    Error data.
-     *
-     * @return Classes\Core\Error Error instance.
-     */
-    public function get(string $slug, string $message, $data = null): Classes\Core\Error
-    {
-        return $this->c::diGet(Classes\Core\Error::class, compact('slug', 'message', 'data'));
     }
 }

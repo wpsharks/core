@@ -36,6 +36,24 @@ class Error extends Classes\Core\Base\Core
     protected $error_data;
 
     /**
+     * Default slug.
+     *
+     * @since 160710
+     *
+     * @type array
+     */
+    protected $default_slug;
+
+    /**
+     * Default message.
+     *
+     * @since 160710
+     *
+     * @type array
+     */
+    protected $default_message;
+
+    /**
      * Class constructor.
      *
      * @since 160710 Error utils.
@@ -45,15 +63,18 @@ class Error extends Classes\Core\Base\Core
      * @param string      $message Error message.
      * @param mixed       $data    Error data.
      */
-    public function __construct(Classes\App $App, string $slug, string $message, $data = null)
+    public function __construct(Classes\App $App, string $slug = '', string $message = '', $data = null)
     {
         parent::__construct($App);
 
-        if (!isset($slug[0])) {
-            $slug = 'error'; // Must have.
+        $this->errors          = [];
+        $this->error_data      = [];
+        $this->default_slug    = 'error';
+        $this->default_message = __('Unknown error.');
+
+        if ($slug || $message || isset($data)) {
+            $this->add($slug, $message, $data);
         }
-        $this->errors[$slug][]   = $message;
-        $this->error_data[$slug] = $data;
     }
 
     /**
@@ -65,8 +86,8 @@ class Error extends Classes\Core\Base\Core
      */
     public function slug(): string
     {
-        $slugs       = $this->slugs();
-        return $slug = $slugs ? $slugs[0] : '';
+        $slugs = $this->slugs();
+        return $slugs[0] ?? $this->default_slug;
     }
 
     /**
@@ -80,11 +101,9 @@ class Error extends Classes\Core\Base\Core
      */
     public function message(string $slug = ''): string
     {
-        if (!isset($slug[0])) {
-            $slug = $this->slug();
-        }
-        $messages       = $this->messages($slug);
-        return $message = $messages ? $messages[0] : '';
+        $slug     = $slug ?: $this->slug();
+        $messages = $this->messages($slug);
+        return $messages[0] ?? $this->default_message;
     }
 
     /**
@@ -96,7 +115,8 @@ class Error extends Classes\Core\Base\Core
      */
     public function slugs(): array
     {
-        return array_keys($this->errors);
+        $slugs = array_keys($this->errors);
+        return $slugs ?: [$this->default_slug];
     }
 
     /**
@@ -104,22 +124,58 @@ class Error extends Classes\Core\Base\Core
      *
      * @since 160710 Error utils.
      *
-     * @param string $slug Error slug.
+     * @param string $slug    Error slug.
+     * @param bool   $by_slug All errors by slug?
      *
      * @return string[] An array of error messages.
      */
-    public function messages(string $slug = ''): array
+    public function messages(string $slug = '', bool $by_slug = false): array
     {
-        if (!isset($slug[0])) {
-            $messages = []; // Initialize.
+        if (!$slug) { // All messages (i.e., for all slugs)?
+            //
+            if ($by_slug) { // All messages keyed by slug?
+                return $this->errors ?: [$this->default_slug => $this->default_message];
+                //
+            } else { // Merge all messages into a single array.
+                $messages = []; // Initialize array.
 
-            foreach ($this->errors as $_slug => $_messages) {
-                $messages = array_merge($messages, $_messages);
-            } // unset($_slug, $_messages); // Housekeeping.
+                foreach ($this->errors as $_slug => $_messages) {
+                    $messages = array_merge($messages, $_messages);
+                } // unset($_slug, $_messages); // Housekeeping.
 
-            return $messages;
+                return $messages ?: [$this->default_message];
+            }
+        } else { // For a specific slug.
+            $messages = $this->errors[$slug] ?? [];
+            return $messages ?: [$this->default_message];
         }
-        return $this->errors[$slug] ?? [];
+    }
+
+    /**
+     * Get error data.
+     *
+     * @since 160710 Error utils.
+     *
+     * @param string $slug    Error slug.
+     * @param bool   $by_slug All data by slug?
+     *
+     * @return array|mixed|null Error data.
+     */
+    public function data(string $slug = '', bool $by_slug = false)
+    {
+        if (!$slug) { // All data (i.e., for all slugs)?
+            //
+            if ($by_slug) { // All data keyed by slug?
+                return $this->error_data ?: [$this->default_slug => null];
+                //
+            } else { // Data for the first slug.
+                // NOTE: Different than `messages()`.
+                $slug = $this->slug(); // First slug.
+                return $this->error_data[$slug] ?? null;
+            }
+        } else {
+            return $this->error_data[$slug] ?? null;
+        }
     }
 
     /**
@@ -131,44 +187,38 @@ class Error extends Classes\Core\Base\Core
      * @param string $message Error message.
      * @param mixed  $data    Error data.
      */
-    public function add(string $slug, string $message, $data = null)
+    public function add(string $slug, string $message = '', $data = null)
     {
-        if (!isset($slug[0])) {
-            $slug = 'error'; // Must have.
+        $slug = $slug ?: $this->default_slug;
+
+        if (!$message && $slug === $this->default_slug) {
+            $message = $this->default_message;
+        } elseif (!$message) { // If empty, base it on slug.
+            $message = mb_strtolower($this->c::slugToName($slug));
+            $message = $this->c::mbUcFirst($message).'.';
         }
-        $this->errors[$slug][]   = $message;
-        $this->error_data[$slug] = $data;
+        $this->errors[$slug][] = $message;
+
+        if (isset($data) || !array_key_exists($slug, $this->error_data)) {
+            $this->error_data[$slug] = $data;
+        }
     }
 
     /**
-     * Add data.
-     *
-     * @since 160710 Error utils.
-     *
-     * @param string $slug Error slug.
-     * @param mixed  $data Error data.
-     */
-    public function addData(string $slug, $data)
-    {
-        if (!isset($slug[0])) {
-            $slug = 'error'; // Must have.
-        }
-        $this->error_data[$slug] = $data;
-    }
-
-    /**
-     * Remove error.
+     * Remove error(s).
      *
      * @since 160710 Error utils.
      *
      * @param string $slug Error slug.
      */
-    public function remove(string $slug)
+    public function remove(string $slug = '')
     {
-        if (!isset($slug[0])) {
-            $slug = 'error'; // Must have.
+        if (!$slug) {
+            $this->errors     = [];
+            $this->error_data = [];
+        } else {
+            unset($this->errors[$slug]);
+            unset($this->error_data[$slug]);
         }
-        unset($this->errors[$slug]);
-        unset($this->error_data[$slug]);
     }
 }
