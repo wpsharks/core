@@ -1,3 +1,7 @@
+## $v
+
+- Enhancing `c::canCallFunc()`.
+
 ## v160712.38316
 
 - Optimizing base App class for speedier instantiation.
