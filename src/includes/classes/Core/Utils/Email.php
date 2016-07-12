@@ -107,9 +107,9 @@ class Email extends Classes\Core\Base\Core implements Interfaces\EmailConstants
             } // unset($_file_path, $_attachment);
 
             return $response = (bool) $mailer->Send();
-        } catch (\Throwable $Exception) {
+        } catch (\Throwable $Throwable) {
             if ($throw) {
-                throw $Exception;
+                throw $Throwable;
             }
             return false;
         }

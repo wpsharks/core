@@ -84,10 +84,7 @@ trait OverloadMembers
     {
         // This returns public properties only.
         $props = call_user_func('get_object_vars', $this);
-
-        unset($props['Di']);
-        unset($props['App']);
-        unset($props['Utils']);
+        unset($props['Di'], $props['App'], $props['Utils']);
 
         return $props;
     }
@@ -105,7 +102,12 @@ trait OverloadMembers
      */
     public function __isset(string $property): bool
     {
-        return isset($this->¤¤overload[$property]);
+        if (!isset($property[1]) && ($property === 'c' || $property === 's' || $property === 'a' || $property === 'f')) {
+            // NOTE: `f` comes last here, because it improves the speed at which a match occurs.
+            return true; // Public read-only access.
+        } else {
+            return isset($this->¤¤overload[$property]);
+        }
     }
 
     /**
@@ -121,8 +123,10 @@ trait OverloadMembers
      */
     public function __get(string $property)
     {
-        if ($property === 'f' || $property === 'facades') {
-            return $this->facades; // Public; read-only.
+        if (!isset($property[1]) && ($property === 'c' || $property === 's' || $property === 'a' || $property === 'f')) {
+            // NOTE: `f` comes last here, because it improves the speed at which a match occurs.
+            return $this->{$property}; // Public read-only access.
+            //
         } elseif (isset($this->¤¤overload[$property])) {
             return $this->¤¤overload[$property];
         } elseif (array_key_exists($property, $this->¤¤overload)) {

@@ -154,6 +154,6 @@ class Template extends Classes\Core\Base\Core
      */
     public function get(string $file, string $dir = '', array $parents = [], array $parent_vars = []): Classes\Core\Template
     {
-        return $this->c::diGet(Classes\Core\Template::class, compact('dir', 'file', 'parents', 'parent_vars'));
+        return $this->App->Di->get(Classes\Core\Template::class, compact('dir', 'file', 'parents', 'parent_vars'));
     }
 }

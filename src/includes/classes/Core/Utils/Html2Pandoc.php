@@ -52,7 +52,7 @@ class Html2Pandoc extends Classes\Core\Base\Core
             ];
             $Pandoc = new Pandoc();
             return $Pandoc->runWith($string, $options);
-        } catch (\Throwable $Exception) {
+        } catch (\Throwable $Throwable) {
             return ''; // Failure.
         }
     }

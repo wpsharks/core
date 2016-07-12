@@ -53,12 +53,12 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
             'display_error'      => false,
             'display_error_page' => 'default',
         ];
-        $args = array_merge($default_args, $args);
-        $args = array_intersect_key($args, $default_args);
+        $args       = array_merge($default_args, $args);
+        $args       = array_intersect_key($args, $default_args);
+        $errors_dir = $this->App->Config->©fs_paths['©errors_dir'];
 
         $display_error      = (bool) $args['display_error'];
         $display_error_page = (string) $args['display_error_page'];
-        $errors_dir         = $this->App->Config->©fs_paths['©errors_dir'];
 
         if (headers_sent()) {
             throw $this->c::issue('Headers already sent.');
@@ -80,7 +80,11 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
             } else {
                 $error_page = ''; // No errors directory.
             }
-            $this->sendNoCache(); // Don't cache errors.
+            $this->c::noCacheFlags();
+            $this->c::sessionWriteClose();
+            $this->c::obEndCleanAll();
+
+            $this->sendNoCache(); // No-cache headers.
             header('content-type: text/html; charset=utf-8');
 
             if ($error_page && is_file($error_page)) {

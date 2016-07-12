@@ -31,7 +31,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @type array
+     * @type \StdClass
      */
     protected $f;
 
@@ -45,15 +45,6 @@ trait CoreConstructor
     protected $c;
 
     /**
-     * App facades.
-     *
-     * @since 160227
-     *
-     * @type string
-     */
-    protected $a;
-
-    /**
      * Secondary core facades.
      *
      * @since 160227
@@ -61,6 +52,15 @@ trait CoreConstructor
      * @type string
      */
     protected $s;
+
+    /**
+     * App facades.
+     *
+     * @since 160227
+     *
+     * @type string
+     */
+    protected $a;
 
     /**
      * Class constructor.
@@ -74,13 +74,17 @@ trait CoreConstructor
         if (!$App && $this instanceof Classes\App) {
             $App = $this; // Self reference.
         }
-        if (!$App) { // Must have an App instance!
+        if (!($this->App = $App)) { // Must have!
             throw new Exception('Missing App instance.');
         }
-        $this->App = $App;
-        $this->f   = &$this->App->facades;
-        $this->c   = &$this->App->facades['c'];
-        $this->a   = &$this->App->facades['a'];
-        $this->s   = &$this->App->facades['s'];
+        if (!isset($this->App->Facades)) {
+            $this->App->Facades = (object) ['c' => null, 's' => null, 'a' => null];
+        } // In case of the app itself; simply create references for now.
+        // This also applies to other classes loaded early-on; e.g., Config, Di, Utils.
+
+        $this->f = &$this->App->Facades;
+        $this->c = &$this->App->Facades->c;
+        $this->s = &$this->App->Facades->s;
+        $this->a = &$this->App->Facades->a;
     }
 }

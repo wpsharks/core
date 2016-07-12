@@ -42,7 +42,7 @@ class Yaml extends Classes\Core\Base\Core
         }
         try {
             $array = Parser::parse($yaml);
-        } catch (\Throwable $Exception) {
+        } catch (\Throwable $Throwable) {
             $array = []; // Empty.
         }
         return is_array($array) ? $array : [];

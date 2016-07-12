@@ -6,7 +6,11 @@ use WebSharks\Core\Classes\App;
 
 require_once dirname(__FILE__, 3).'/src/includes/stub.php';
 
-$App = new App([], [
+ob_start(); // Use local config file as a base.
+include dirname(__FILE__, 3).'/assets/.~config.json';
+${__FILE__}['instance_base'] = json_decode(ob_get_clean(), true);
+
+$App = new App(${__FILE__}['instance_base'], [
     '©debug' => [
         '©enable'        => true,
         '©log'           => true,
@@ -15,8 +19,7 @@ $App = new App([], [
         '©er_assertions' => true,
     ],
     '©fs_paths' => [ // Use config. file.
-        '©logs_dir'    => dirname(__FILE__, 2).'/local/.~logs',
-        '©cache_dir'   => dirname(__FILE__, 2).'/local/.~cache',
-        '©config_file' => dirname(__FILE__, 3).'/assets/.~config.json',
+        '©logs_dir'  => dirname(__FILE__, 2).'/local/.~logs',
+        '©cache_dir' => dirname(__FILE__, 2).'/local/.~cache',
     ],
 ]);

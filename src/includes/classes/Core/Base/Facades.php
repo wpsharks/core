@@ -35,7 +35,6 @@ abstract class Facades
     use Traits\Facades\Eols;
     use Traits\Facades\Errors;
     use Traits\Facades\Escapes;
-    use Traits\Facades\Exceptions;
     use Traits\Facades\Files;
     use Traits\Facades\Gravatar;
     use Traits\Facades\Headers;
@@ -64,6 +63,7 @@ abstract class Facades
     use Traits\Facades\Slugs;
     use Traits\Facades\Spellcheck;
     use Traits\Facades\Templates;
+    use Traits\Facades\Throwables;
     use Traits\Facades\Tokenizer;
     use Traits\Facades\Translits;
     use Traits\Facades\UrlBuilders;

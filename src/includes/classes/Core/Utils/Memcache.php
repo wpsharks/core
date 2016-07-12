@@ -78,9 +78,9 @@ class Memcache extends Classes\Core\Base\Core
         $this->servers   = $active_servers   = []; // Initialize.
 
         foreach ($this->App->Config->©memcache['©servers'] as $_server) {
-            $_host                            = $_server['host'];
-            $_port                            = $_server['port'] ?? 11211;
-            $_weight                          = $_server['weight'] ?? 0;
+            $_host                            = $_server['©host'];
+            $_port                            = $_server['©port'] ?? 11211;
+            $_weight                          = $_server['©weight'] ?? 0;
             $this->servers[$_host.':'.$_port] = [$_host, $_port, $_weight];
         } // unset($_server, $_host, $_port, $_weight);
 

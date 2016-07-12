@@ -10,13 +10,13 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-trait Exceptions
+trait Throwables
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 160711 Adding functions.
      */
-    public static function setupExceptionHandler(...$args)
+    public static function setupThrowableHandler(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Exceptions->handle(...$args);
+        return $GLOBALS[static::class]->Utils->©Throwables->handle(...$args);
     }
 }

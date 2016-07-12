@@ -25,47 +25,47 @@ class Config extends Classes\Core\Base\Core
      * @param Classes\App $App           Instance of App.
      * @param array       $instance_base Instance base.
      * @param array       $instance      Instance args (highest precedence).
-     * @param array       $args          Any additional behavioral args.
      */
-    public function __construct(Classes\App $App, array $instance_base = [], array $instance = [], array $args = [])
+    public function __construct(Classes\App $App, array $instance_base = [], array $instance = [])
     {
         parent::__construct($App);
 
-        # Establish arguments.
+        # Server CFGs (if applicable).
 
-        $default_args = [
-            '©use_server_cfgs' => true,
-        ];
-        $args = array_merge($default_args, $args);
+        $use_server_cfgs = (bool) ($instance['©use_server_cfgs']
+            ?? $instance_base['©use_server_cfgs'] ?? !empty($_SERVER['CFG_HOST']));
+        $_ = $use_server_cfgs && !empty($_['CFG_HOST']) ? $_SERVER : [];
 
-        # Instance base (i.e., default config).
+        # Default host names; needed below as fallbacks.
 
-        $_s_cfgs     = $args['©use_server_cfgs'] ? $_SERVER : [];
-        $host        = $_s_cfgs['CFG_HOST'] ?? mb_strtolower(php_uname('n'));
-        $root_host   = $_s_cfgs['CFG_ROOT_HOST'] ?? implode('.', array_slice(explode('.', $host), -2));
-        $is_cfg_host = !empty($_s_cfgs['CFG_HOST']); // Flag used below in some defaults.
+        $host      = $_['CFG_HOST'] ?? $_SERVER['HTTP_HOST'] ?? mb_strtolower(php_uname('n'));
+        $root_host = $_['CFG_ROOT_HOST'] ?? implode('.', array_slice(explode('.', $host), -2));
+
+        # Default instance base (i.e., default config).
 
         $default_instance_base = [
+            '©use_server_cfgs' => false,
+
             '©debug' => [
-                '©enable' => (bool) ($_s_cfgs['CFG_DEBUG'] ?? false),
-                '©edge'   => (bool) ($_s_cfgs['CFG_DEBUG_EDGE'] ?? false),
+                '©enable' => (bool) ($_['CFG_DEBUG'] ?? false),
+                '©edge'   => (bool) ($_['CFG_DEBUG_EDGE'] ?? false),
 
-                '©log'          => (bool) ($_s_cfgs['CFG_DEBUG_LOG'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
-                '©log_callback' => false, // In case log entries should be reviewed in additional ways.
+                '©log'          => (bool) ($_['CFG_DEBUG_LOG'] ?? $_['CFG_DEBUG'] ?? false),
+                '©log_callback' => false, // In case log entries should be reviewed in other ways.
 
-                '©er_enable'     => (bool) ($_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
-                '©er_display'    => (bool) ($_s_cfgs['CFG_DEBUG_ER_DISPLAY'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
-                '©er_assertions' => (bool) ($_s_cfgs['CFG_DEBUG_ER_ASSERTIONS'] ?? $_s_cfgs['CFG_DEBUG_ER_ENABLE'] ?? $_s_cfgs['CFG_DEBUG'] ?? false),
+                '©er_enable'     => (bool) ($_['CFG_DEBUG_ER_ENABLE'] ?? $_['CFG_DEBUG'] ?? false),
+                '©er_display'    => (bool) ($_['CFG_DEBUG_ER_DISPLAY'] ?? $_['CFG_DEBUG_ER_ENABLE'] ?? $_['CFG_DEBUG'] ?? false),
+                '©er_assertions' => (bool) ($_['CFG_DEBUG_ER_ASSERTIONS'] ?? $_['CFG_DEBUG_ER_ENABLE'] ?? $_['CFG_DEBUG'] ?? false),
             ],
-            '©handle_exceptions' => (bool) ($_s_cfgs['CFG_HANDLE_EXCEPTIONS'] ?? false),
+            '©handle_throwables' => (bool) ($_['CFG_HANDLE_THROWABLES'] ?? false),
 
-            '©locales' => (array) ($_s_cfgs['CFG_LOCALES'] ?? ($is_cfg_host ? ['en_US.UTF-8', 'C'] : [])),
+            '©locales' => (array) ($_['CFG_LOCALES'] ?? ($_ ? ['en_US.UTF-8', 'C'] : [])),
 
             '©contacts' => [
                 '©admin' => [
-                    '©name'         => (string) ($_s_cfgs['CFG_ADMIN_NAME'] ?? $_s_cfgs['CFG_ADMIN_USERNAME'] ?? 'admin'),
-                    '©email'        => (string) ($_s_cfgs['CFG_ADMIN_EMAIL'] ?? $_s_cfgs['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
-                    '©public_email' => (string) ($_s_cfgs['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
+                    '©name'         => (string) ($_['CFG_ADMIN_NAME'] ?? $_['CFG_ADMIN_USERNAME'] ?? 'admin'),
+                    '©email'        => (string) ($_['CFG_ADMIN_EMAIL'] ?? $_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
+                    '©public_email' => (string) ($_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
                 ],
             ],
 
@@ -90,19 +90,19 @@ class Config extends Classes\Core\Base\Core
 
             '©mysql_db' => [
                 '©hosts' => [
-                    (string) ($_s_cfgs['CFG_MYSQL_DB_HOST'] ?? '127.0.0.1') => [
-                        '©port'    => (int) ($_s_cfgs['CFG_MYSQL_DB_PORT'] ?? 3306),
-                        '©charset' => (string) ($_s_cfgs['CFG_MYSQL_DB_CHARSET'] ?? 'utf8mb4'),
-                        '©collate' => (string) ($_s_cfgs['CFG_MYSQL_DB_COLLATE'] ?? 'utf8mb4_unicode_ci'),
+                    (string) ($_['CFG_MYSQL_DB_HOST'] ?? '127.0.0.1') => [
+                        '©port'    => (int) ($_['CFG_MYSQL_DB_PORT'] ?? 3306),
+                        '©charset' => (string) ($_['CFG_MYSQL_DB_CHARSET'] ?? 'utf8mb4'),
+                        '©collate' => (string) ($_['CFG_MYSQL_DB_COLLATE'] ?? 'utf8mb4_unicode_ci'),
 
-                        '©username' => (string) ($_s_cfgs['CFG_MYSQL_DB_USERNAME'] ?? 'client'),
-                        '©password' => (string) ($_s_cfgs['CFG_MYSQL_DB_PASSWORD'] ?? ''),
+                        '©username' => (string) ($_['CFG_MYSQL_DB_USERNAME'] ?? 'client'),
+                        '©password' => (string) ($_['CFG_MYSQL_DB_PASSWORD'] ?? ''),
 
-                        '©ssl_enable' => (bool) ($_s_cfgs['CFG_MYSQL_SSL_ENABLE'] ?? false),
-                        '©ssl_key'    => (string) ($_s_cfgs['CFG_MYSQL_SSL_KEY'] ?? ''),
-                        '©ssl_crt'    => (string) ($_s_cfgs['CFG_MYSQL_SSL_CRT'] ?? ''),
-                        '©ssl_ca'     => (string) ($_s_cfgs['CFG_MYSQL_SSL_CA'] ?? ''),
-                        '©ssl_cipher' => (string) ($_s_cfgs['CFG_MYSQL_SSL_CIPHER'] ?? ''),
+                        '©ssl_enable' => (bool) ($_['CFG_MYSQL_SSL_ENABLE'] ?? false),
+                        '©ssl_key'    => (string) ($_['CFG_MYSQL_SSL_KEY'] ?? ''),
+                        '©ssl_crt'    => (string) ($_['CFG_MYSQL_SSL_CRT'] ?? ''),
+                        '©ssl_ca'     => (string) ($_['CFG_MYSQL_SSL_CA'] ?? ''),
+                        '©ssl_cipher' => (string) ($_['CFG_MYSQL_SSL_CIPHER'] ?? ''),
                     ],
                 ],
                 '©shards' => [
@@ -112,168 +112,151 @@ class Config extends Classes\Core\Base\Core
                             '©to'   => 65535,
                         ],
                         '©properties' => [
-                            '©host' => (string) ($_s_cfgs['CFG_MYSQL_DB_HOST'] ?? '127.0.0.1'),
-                            '©name' => (string) ($_s_cfgs['CFG_MYSQL_DB_NAME'] ?? 'db0'),
+                            '©host' => (string) ($_['CFG_MYSQL_DB_HOST'] ?? '127.0.0.1'),
+                            '©name' => (string) ($_['CFG_MYSQL_DB_NAME'] ?? 'db0'),
                         ],
                     ],
                 ],
             ],
 
-            '©brand' => [ // NOTE: `short_` variations should not exceed 10 bytes each.
+            '©brand' => [ // NOTE: `short_` variations should not exceed 10 bytes.
 
-                '©name'    => (string) ($_s_cfgs['CFG_BRAND_NAME'] ?? $_s_cfgs['CFG_HOST'] ?? $host),
-                '©acronym' => (string) ($_s_cfgs['CFG_BRAND_ACRONYM'] ?? 'APP'),
+                '©name'    => (string) ($_['CFG_BRAND_NAME'] ?? $_['CFG_HOST'] ?? $host),
+                '©acronym' => (string) ($_['CFG_BRAND_ACRONYM'] ?? 'APP'),
 
-                '©text_domain' => (string) ($_s_cfgs['CFG_BRAND_TEXT_DOMAIN'] ?? $_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
+                '©text_domain' => (string) ($_['CFG_BRAND_TEXT_DOMAIN'] ?? $_['CFG_BRAND_SLUG'] ?? $_['CFG_SLUG'] ?? 'app'),
 
-                '©slug' => (string) ($_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
-                '©var'  => (string) ($_s_cfgs['CFG_BRAND_VAR'] ?? $_s_cfgs['CFG_VAR'] ?? 'app'),
+                '©slug' => (string) ($_['CFG_BRAND_SLUG'] ?? $_['CFG_SLUG'] ?? 'app'),
+                '©var'  => (string) ($_['CFG_BRAND_VAR'] ?? $_['CFG_VAR'] ?? 'app'),
 
-                '©short_slug' => (string) ($_s_cfgs['CFG_BRAND_SHORT_SLUG'] ?? $_s_cfgs['CFG_BRAND_SLUG'] ?? $_s_cfgs['CFG_SLUG'] ?? 'app'),
-                '©short_var'  => (string) ($_s_cfgs['CFG_BRAND_SHORT_VAR'] ?? $_s_cfgs['CFG_BRAND_VAR'] ?? $_s_cfgs['CFG_VAR'] ?? 'app'),
+                '©short_slug' => (string) ($_['CFG_BRAND_SHORT_SLUG'] ?? $_['CFG_BRAND_SLUG'] ?? $_['CFG_SLUG'] ?? 'app'),
+                '©short_var'  => (string) ($_['CFG_BRAND_SHORT_VAR'] ?? $_['CFG_BRAND_VAR'] ?? $_['CFG_VAR'] ?? 'app'),
 
-                '©keywords'    => (string) ($_s_cfgs['CFG_BRAND_KEYWORDS'] ?? ''),
-                '©description' => (string) ($_s_cfgs['CFG_BRAND_DESCRIPTION'] ?? ''),
-                '©tagline'     => (string) ($_s_cfgs['CFG_BRAND_TAGLINE'] ?? ''),
+                '©keywords'    => (string) ($_['CFG_BRAND_KEYWORDS'] ?? ''),
+                '©description' => (string) ($_['CFG_BRAND_DESCRIPTION'] ?? ''),
+                '©tagline'     => (string) ($_['CFG_BRAND_TAGLINE'] ?? ''),
 
-                '©favicon'    => (string) ($_s_cfgs['CFG_BRAND_FAVICON'] ?? '/favicon.ico'),
-                '©logo'       => (string) ($_s_cfgs['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
-                '©screenshot' => (string) ($_s_cfgs['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
+                '©favicon'    => (string) ($_['CFG_BRAND_FAVICON'] ?? '/favicon.ico'),
+                '©logo'       => (string) ($_['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
+                '©screenshot' => (string) ($_['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
             ],
 
             '©urls' => [
                 '©hosts' => [
-                    '©app' => (string) ($_s_cfgs['CFG_HOST'] ?? $host),
-                    '©cdn' => (string) ($_s_cfgs['CFG_CDN_HOST'] ?? 'cdn.'.$root_host),
+                    '©app' => (string) ($_['CFG_HOST'] ?? $host),
+                    '©cdn' => (string) ($_['CFG_CDN_HOST'] ?? 'cdn.'.$root_host),
 
                     '©roots' => [
-                        '©app' => (string) ($_s_cfgs['CFG_ROOT_HOST'] ?? $root_host),
-                        '©cdn' => (string) ($_s_cfgs['CFG_CDN_ROOT_HOST'] ?? $root_host),
+                        '©app' => (string) ($_['CFG_ROOT_HOST'] ?? $root_host),
+                        '©cdn' => (string) ($_['CFG_CDN_ROOT_HOST'] ?? $root_host),
                     ],
                 ],
                 '©base_paths' => [
-                    '©app' => (string) ($_s_cfgs['CFG_HOST_BASE_PATH'] ?? ($is_cfg_host ? '/' : '/src/')),
-                    '©cdn' => (string) ($_s_cfgs['CFG_CDN_HOST_BASE_PATH'] ?? '/'),
+                    '©app' => (string) ($_['CFG_HOST_BASE_PATH'] ?? ($_ ? '/' : '/src/')),
+                    '©cdn' => (string) ($_['CFG_CDN_HOST_BASE_PATH'] ?? '/'),
                 ],
-                '©cdn_filter_enable' => (bool) ($_s_cfgs['CFG_CDN_FILTER_ENABLE'] ?? false),
-                '©default_scheme'    => (string) ($_s_cfgs['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),
-                '©sig_key'           => (string) ($_s_cfgs['CFG_URL_SIG_KEY'] ?? $_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
+                '©cdn_filter_enable' => (bool) ($_['CFG_CDN_FILTER_ENABLE'] ?? false),
+                '©default_scheme'    => (string) ($_['CFG_DEFAULT_URL_SCHEME'] ?? 'https'),
+                '©sig_key'           => (string) ($_['CFG_URL_SIG_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
 
             '©fs_paths' => [
-                '©logs_dir'      => (string) ($_s_cfgs['CFG_LOGS_DIR'] ?? '/var/log/%%app_namespace_sha1%%'),
-                '©cache_dir'     => (string) ($_s_cfgs['CFG_CACHE_DIR'] ?? '/tmp/%%app_namespace_sha1%%/cache'),
-                '©templates_dir' => (string) ($_s_cfgs['CFG_TEMPLATES_DIR'] ?? '%%app_base_dir%%/src/includes/templates'),
-                '©errors_dir'    => (string) ($_s_cfgs['CFG_ERRORS_DIR'] ?? ($is_cfg_host ? '/bootstrap/src/html/errors' : '')),
-                '©config_file'   => (string) ($_s_cfgs['CFG_CONFIG_FILE'] ?? ''), // Empty by default, for improved performance.
+                '©logs_dir'      => (string) ($_['CFG_LOGS_DIR'] ?? '/var/log/%%app_namespace_sha1%%'),
+                '©cache_dir'     => (string) ($_['CFG_CACHE_DIR'] ?? '/tmp/%%app_namespace_sha1%%/cache'),
+                '©templates_dir' => (string) ($_['CFG_TEMPLATES_DIR'] ?? '%%app_base_dir%%/src/includes/templates'),
+                '©errors_dir'    => (string) ($_['CFG_ERRORS_DIR'] ?? ($_ ? '/bootstrap/src/html/errors' : '')),
             ],
             '©fs_permissions' => [
-                '©transient_dirs' => (int) ($_s_cfgs['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 02775),
+                '©transient_dirs' => (int) ($_['CFG_TRANSIENT_DIR_PERMISSIONS'] ?? 02775),
                 // `octdec(02775)` = 1533 as an integer.
             ],
 
             '©memcache' => [
-                '©enabled'   => (bool) ($_s_cfgs['CFG_MEMCACHE_ENABLED'] ?? $is_cfg_host),
-                '©namespace' => (string) ($_s_cfgs['CFG_MEMCACHE_NAMESPACE'] ?? 'app'),
+                '©enabled'   => (bool) ($_['CFG_MEMCACHE_ENABLED'] ?? $_ ? true : false),
+                '©namespace' => (string) ($_['CFG_MEMCACHE_NAMESPACE'] ?? 'app'),
                 '©servers'   => [
                     [
-                        '©host'   => (string) ($_s_cfgs['CFG_MEMCACHE_HOST'] ?? '127.0.0.1'),
-                        '©port'   => (int) ($_s_cfgs['CFG_MEMCACHE_PORT'] ?? 11211),
-                        '©weight' => (int) ($_s_cfgs['CFG_MEMCACHE_WEIGHT'] ?? 0),
+                        '©host'   => (string) ($_['CFG_MEMCACHE_HOST'] ?? '127.0.0.1'),
+                        '©port'   => (int) ($_['CFG_MEMCACHE_PORT'] ?? 11211),
+                        '©weight' => (int) ($_['CFG_MEMCACHE_WEIGHT'] ?? 0),
                     ],
                 ],
             ],
 
             '©email' => [
-                '©from_name'  => (string) ($_s_cfgs['CFG_EMAIL_FROM_NAME'] ?? $_s_cfgs['CFG_BRAND_NAME'] ?? $_s_cfgs['CFG_HOST'] ?? 'App'),
-                '©from_email' => (string) ($_s_cfgs['CFG_EMAIL_FROM_EMAIL'] ?? $_s_cfgs['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'app@'.$root_host),
+                '©from_name'  => (string) ($_['CFG_EMAIL_FROM_NAME'] ?? $_['CFG_BRAND_NAME'] ?? $_['CFG_HOST'] ?? 'App'),
+                '©from_email' => (string) ($_['CFG_EMAIL_FROM_EMAIL'] ?? $_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'app@'.$root_host),
 
-                '©reply_to_name'  => (string) ($_s_cfgs['CFG_EMAIL_REPLY_TO_NAME'] ?? ''),
-                '©reply_to_email' => (string) ($_s_cfgs['CFG_EMAIL_REPLY_TO_EMAIL'] ?? ''),
+                '©reply_to_name'  => (string) ($_['CFG_EMAIL_REPLY_TO_NAME'] ?? ''),
+                '©reply_to_email' => (string) ($_['CFG_EMAIL_REPLY_TO_EMAIL'] ?? ''),
 
-                '©smtp_host'   => (string) ($_s_cfgs['CFG_EMAIL_SMTP_HOST'] ?? '127.0.0.1'),
-                '©smtp_port'   => (int) ($_s_cfgs['CFG_EMAIL_SMTP_PORT'] ?? 25),
-                '©smtp_secure' => (string) ($_s_cfgs['CFG_EMAIL_SMTP_SECURE'] ?? ''),
+                '©smtp_host'   => (string) ($_['CFG_EMAIL_SMTP_HOST'] ?? '127.0.0.1'),
+                '©smtp_port'   => (int) ($_['CFG_EMAIL_SMTP_PORT'] ?? 25),
+                '©smtp_secure' => (string) ($_['CFG_EMAIL_SMTP_SECURE'] ?? ''),
 
-                '©smtp_username' => (string) ($_s_cfgs['CFG_EMAIL_SMTP_USERNAME'] ?? ''),
-                '©smtp_password' => (string) ($_s_cfgs['CFG_EMAIL_SMTP_PASSWORD'] ?? ''),
+                '©smtp_username' => (string) ($_['CFG_EMAIL_SMTP_USERNAME'] ?? ''),
+                '©smtp_password' => (string) ($_['CFG_EMAIL_SMTP_PASSWORD'] ?? ''),
             ],
 
             '©encryption' => [
-                '©key' => (string) ($_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
+                '©key' => (string) ($_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
             '©cookies' => [
-                '©encryption_key' => (string) ($_s_cfgs['CFG_COOKIES_ENCRYPTION_KEY'] ?? $_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
+                '©encryption_key' => (string) ($_['CFG_COOKIES_ENCRYPTION_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
             '©hash_ids' => [
-                '©hash_key' => (string) ($_s_cfgs['CFG_HASH_IDS_HASH_KEY'] ?? $_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
+                '©hash_key' => (string) ($_['CFG_HASH_IDS_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
             '©passwords' => [
-                '©hash_key' => (string) ($_s_cfgs['CFG_PASSWORDS_HASH_KEY'] ?? $_s_cfgs['CFG_ENCRYPTION_KEY'] ?? ''),
+                '©hash_key' => (string) ($_['CFG_PASSWORDS_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
 
             '©aws' => [
-                '©access_key' => (string) ($_s_cfgs['CFG_AWS_ACCESS_KEY'] ?? ''),
-                '©secret_key' => (string) ($_s_cfgs['CFG_AWS_SECRET_KEY'] ?? ''),
+                '©access_key' => (string) ($_['CFG_AWS_ACCESS_KEY'] ?? ''),
+                '©secret_key' => (string) ($_['CFG_AWS_SECRET_KEY'] ?? ''),
             ],
             '©embedly' => [
-                '©api_key' => (string) ($_s_cfgs['CFG_EMBEDLY_API_KEY'] ?? ''),
+                '©api_key' => (string) ($_['CFG_EMBEDLY_API_KEY'] ?? ''),
             ],
             '©webpurify' => [
-                '©api_key' => (string) ($_s_cfgs['CFG_WEBPURIFY_API_KEY'] ?? ''),
+                '©api_key' => (string) ($_['CFG_WEBPURIFY_API_KEY'] ?? ''),
             ],
             '©bitly' => [
-                '©api_key' => (string) ($_s_cfgs['CFG_BITLY_API_KEY'] ?? ''),
+                '©api_key' => (string) ($_['CFG_BITLY_API_KEY'] ?? ''),
             ],
             '©mailchimp' => [
-                '©list_id' => (string) ($_s_cfgs['CFG_MAILCHIMP_LIST_ID'] ?? ''),
-                '©api_key' => (string) ($_s_cfgs['CFG_MAILCHIMP_API_KEY'] ?? ''),
+                '©list_id' => (string) ($_['CFG_MAILCHIMP_LIST_ID'] ?? ''),
+                '©api_key' => (string) ($_['CFG_MAILCHIMP_API_KEY'] ?? ''),
             ],
             '©slack' => [ // @TODO Add Slack utils to core.
-                '©api_client_id'     => (string) ($_s_cfgs['CFG_SLACK_API_CLIENT_ID'] ?? ''),
-                '©api_client_secret' => (string) ($_s_cfgs['CFG_SLACK_API_CLIENT_SECRET'] ?? ''),
-                '©api_access_token'  => (string) ($_s_cfgs['CFG_SLACK_API_ACCESS_TOKEN'] ?? ''),
-                '©api_webhook_url'   => (string) ($_s_cfgs['CFG_SLACK_API_WEBHOOK_URL'] ?? ''),
+                '©api_client_id'     => (string) ($_['CFG_SLACK_API_CLIENT_ID'] ?? ''),
+                '©api_client_secret' => (string) ($_['CFG_SLACK_API_CLIENT_SECRET'] ?? ''),
+                '©api_access_token'  => (string) ($_['CFG_SLACK_API_ACCESS_TOKEN'] ?? ''),
+                '©api_webhook_url'   => (string) ($_['CFG_SLACK_API_WEBHOOK_URL'] ?? ''),
             ],
         ];
-        # Merge instance bases together now; forming a collective instance base.
+        # Merge `$instance_base` param into `$default_instance_base`.
 
         $instance_base = $this->App->mergeConfig($default_instance_base, $instance_base);
 
-        # Merge a possible JSON configuration file also; via `include()` for improved performance.
+        # Merge everything together & convert to object properties now.
 
-        $config_file            = $instance['©fs_paths']['©config_file'] ?? $instance_base['©fs_paths']['©config_file'];
-        $is_default_config_file = $config_file && $config_file === $default_instance_base['©fs_paths']['©config_file'];
-
-        if ($config_file && (!$is_default_config_file || is_file($config_file))) {
-            ob_start(); // Buffer contents of the JSON data.
-            include $config_file; // Improved performance via OPcache.
-            if (!is_array($config = json_decode(ob_get_clean(), true))) {
-                throw new Exception(sprintf('Invalid config file: `%1$s`.', $config_file));
-            }
-            if (!empty($config['©core_app'])) {
-                $config = (array) $config['©core_app'];
-            } elseif (!empty($config['©app'])) {
-                $config = (array) $config['©app'];
-            }
-            $config = $this->App->mergeConfig($instance_base, $config, true);
-            $config = $this->App->mergeConfig($config, $instance);
-        } else {
-            $config = $this->App->mergeConfig($instance_base, $instance);
-        }
-        # Fill replacement codes and overload the config properties.
-
+        $config = $this->App->mergeConfig($instance_base, $instance);
         $config = $this->App->fillConfigReplacementCodes($config);
-        $config = (object) $config; // Force object properties.
+        $config = (object) $config; // Config properties.
 
-        if (!$config->©debug['©enable']) { // Master switch off?
+        # Adjust a few values associated w/ master switches.
+
+        if (!$config->©debug['©enable']) {
             $config->©debug['©edge']      = false;
             $config->©debug['©log']       = $config->©debug['©log_callback']       = false;
             $config->©debug['©er_enable'] = $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;
         } elseif (!$config->©debug['©er_enable']) {
             $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;
         }
+        # Overload configuration properties.
+
         $this->overload($config, true); // Overload public/writable properties.
-        // Public for performance gains & accessibility, but do NOT alter them at runtime.
+        // Public for performance gains & accessibility only. Do NOT alter at runtime.
     }
 }

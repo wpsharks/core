@@ -22,6 +22,7 @@ trait App
 
     /**
      * @since 160227 App.
+     * @deprecated 160711 Do not use.
      */
     public static function config(...$args)
     {
@@ -30,6 +31,7 @@ trait App
 
     /**
      * @since 160227 App.
+     * @deprecated 160711 Do not use.
      */
     public static function version(...$args)
     {
@@ -38,6 +40,7 @@ trait App
 
     /**
      * @since 151214 Adding functions.
+     * @deprecated 160711 Do not use.
      */
     public static function diGet(...$args)
     {

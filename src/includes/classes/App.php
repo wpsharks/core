@@ -45,15 +45,6 @@ class App extends Classes\Core\Base\Core
     public $class;
 
     /**
-     * Class SHA-1.
-     *
-     * @since 160223
-     *
-     * @type string
-     */
-    public $class_sha1;
-
-    /**
      * Namespace.
      *
      * @since 150424
@@ -81,24 +72,6 @@ class App extends Classes\Core\Base\Core
     public $file;
 
     /**
-     * File basename.
-     *
-     * @since 160227
-     *
-     * @type string
-     */
-    public $file_basename;
-
-    /**
-     * File SHA-1.
-     *
-     * @since 160225
-     *
-     * @type string
-     */
-    public $file_sha1;
-
-    /**
      * Dir.
      *
      * @since 150424
@@ -115,15 +88,6 @@ class App extends Classes\Core\Base\Core
      * @type string
      */
     public $dir_basename;
-
-    /**
-     * Dir SHA-1.
-     *
-     * @since 150424
-     *
-     * @type string
-     */
-    public $dir_sha1;
 
     /**
      * Base dir.
@@ -144,15 +108,6 @@ class App extends Classes\Core\Base\Core
     public $base_dir_basename;
 
     /**
-     * Base dir SHA-1.
-     *
-     * @since 160227
-     *
-     * @type string
-     */
-    public $base_dir_sha1;
-
-    /**
      * WSC dir.
      *
      * @since 150424
@@ -160,24 +115,6 @@ class App extends Classes\Core\Base\Core
      * @type string
      */
     public $ws_core_dir;
-
-    /**
-     * WSC dir basename.
-     *
-     * @since 160223
-     *
-     * @type string
-     */
-    public $ws_core_dir_basename;
-
-    /**
-     * WSC dir SHA-1.
-     *
-     * @since 160223
-     *
-     * @type string
-     */
-    public $ws_core_dir_sha1;
 
     /**
      * Is WSC?
@@ -196,6 +133,15 @@ class App extends Classes\Core\Base\Core
      * @type bool
      */
     public $is_core;
+
+    /**
+     * Facades.
+     *
+     * @since 160227
+     *
+     * @type \StdClass
+     */
+    public $Facades;
 
     /**
      * Config.
@@ -225,26 +171,13 @@ class App extends Classes\Core\Base\Core
     public $Utils;
 
     /**
-     * Facades.
-     *
-     * @since 160227
-     *
-     * @type array
-     */
-    public $facades = [
-        'c' => '',
-        'a' => '',
-        's' => '',
-    ];
-
-    /**
      * Version.
      *
      * @since 150424
      *
      * @type string Version.
      */
-    const VERSION = '160711.18232'; //v//
+    const VERSION = '160712.37380'; //v//
 
     /**
      * Constructor.
@@ -254,100 +187,92 @@ class App extends Classes\Core\Base\Core
      * @param array            $instance_base Instance base.
      * @param array            $instance      Instance args.
      * @param Classes\App|null $Parent        Parent app (optional).
-     * @param array            $args          Any additional behavioral args.
      */
-    public function __construct(array $instance_base = [], array $instance = [], Classes\App $Parent = null, array $args = [])
+    public function __construct(array $instance_base = [], array $instance = [], Classes\App $Parent = null)
     {
         parent::__construct();
 
-        # Establish arguments.
+        # Establish debug mode early-on.
 
-        $default_args = [
-            '©use_server_cfgs' => true,
-        ];
-        $args = array_merge($default_args, $args);
-
+        if (isset($instance['©debug']['©enable'])) {
+            $debug = (bool) $instance['©debug']['©enable'];
+        } elseif (isset($instance_base['©debug']['©enable'])) {
+            $debug = (bool) $instance_base['©debug']['©enable'];
+        } else { // Based on server CFGs (if enabled).
+            $use_server_cfgs = (bool) ($instance['©use_server_cfgs']
+                ?? $instance_base['©use_server_cfgs'] ?? !empty($_SERVER['CFG_HOST']));
+            $debug = $use_server_cfgs && !empty($_SERVER['CFG_DEBUG']);
+        }
         # Define a possible parent app.
 
         $this->Parent = $Parent;
 
         # Define reflection-based properties.
+        // If not already obtained by an extender.
 
-        if (!$this->Reflection) {
-            // If not already obtained by an extender.
-            $this->Reflection = new \ReflectionClass($this);
-        }
-        $this->class      = $this->Reflection->getName();
-        $this->class_sha1 = sha1($this->class);
+        $this->Reflection = $this->Reflection ?: new \ReflectionClass($this);
 
-        $this->namespace      = $this->Reflection->getNamespaceName();
-        $this->namespace_sha1 = sha1($this->namespace);
+        $this->class          = $this->class ?: $this->Reflection->getName();
+        $this->namespace      = $this->namespace ?: $this->Reflection->getNamespaceName();
+        $this->namespace_sha1 = $this->namespace_sha1 ?: sha1($this->namespace);
 
-        $this->file          = $this->Reflection->getFileName();
-        $this->file_basename = basename($this->file, '.php');
-        $this->file_sha1     = sha1($this->file);
+        $this->file         = $this->file ?: $this->Reflection->getFileName();
+        $this->dir          = $this->dir ?: dirname($this->file);
+        $this->dir_basename = $this->dir_basename ?: basename($this->dir);
 
-        $this->dir          = dirname($this->file);
-        $this->dir_basename = basename($this->dir);
-        $this->dir_sha1     = sha1($this->dir);
+        $this->base_dir          = $this->base_dir ?: dirname($this->dir, 3);
+        $this->base_dir_basename = $this->base_dir_basename ?: basename($this->base_dir);
 
-        $this->base_dir          = dirname($this->dir, 3);
-        $this->base_dir_basename = basename($this->base_dir);
-        $this->base_dir_sha1     = sha1($this->base_dir);
-
-        $this->ws_core_dir          = dirname(__FILE__, 4);
-        $this->ws_core_dir_basename = basename($this->ws_core_dir);
-        $this->ws_core_dir_sha1     = sha1($this->ws_core_dir);
+        $this->ws_core_dir = $this->ws_core_dir ?: dirname(__FILE__, 4);
 
         $this->is_ws_core = $this->class === self::class;
         $this->is_core    = $this->is_ws_core || !$this->Parent;
 
-        # Validate this instance of the app.
+        # Validate app instance (if applicable).
 
-        if (isset($GLOBALS[$this->class])) {
-            throw new Exception(sprintf('One instance of `%1$s` only please.', $this->class));
-        }
-        if (mb_substr($this->namespace, -8) !== '\\Classes') {
-            throw new Exception(sprintf('Invalid namespace: `%1$s`. Expecting: `...\\Classes`.', $this->namespace));
-        }
-        if (mb_substr($this->dir, -21) !== '/src/includes/classes') {
-            throw new Exception(sprintf('Invalid dir: `%1$s`. Expecting: `.../src/includes/classes`.', $this->dir));
+        if ($debug) { // Only in debug mode.
+            if (isset($GLOBALS[$this->class])) {
+                throw new Exception(sprintf('One instance of `%1$s` only please.', $this->class));
+            } elseif (mb_substr($this->namespace, -8) !== '\\Classes') {
+                throw new Exception(sprintf('Invalid namespace: `%1$s`. Expecting: `...\\Classes`.', $this->namespace));
+            } elseif (mb_substr($this->dir, -21) !== '/src/includes/classes') {
+                throw new Exception(sprintf('Invalid dir: `%1$s`. Expecting: `.../src/includes/classes`.', $this->dir));
+            }
         }
         # Instantiate/configure child class instances; e.g., Config, Di, Utils.
 
-        $this->Config = new Classes\Core\Base\Config($this, $instance_base, $instance, $args);
+        $this->Config = new Classes\Core\Base\Config($this, $instance_base, $instance);
         $this->Di     = new Classes\Core\Base\Di($this, $this->Config->©di['©default_rule']);
         $this->Utils  = new Classes\Core\Base\Utils($this);
 
         $this->Di->addInstances([$this, $this->Config, $this->Utils]);
 
         # Setup global references & facades.
+        # http://docstore.mik.ua/orelly/webprog/pcook/ch07_13.htm
 
-        $GLOBALS[$this->class] = $this;
+        $GLOBALS[$this->class] = $this; // Global access variable.
 
-        $GLOBALS[$this->namespace.'\\CoreFacades'] = $this;
-        $this->facades['c']                        = $this->namespace.'\\CoreFacades';
-        $_base_class                               = Classes\Core\Base\Facades::class;
-        eval('namespace '.$this->namespace.' { class CoreFacades extends \\'.$_base_class.' {} }');
-
-        $GLOBALS[$this->namespace.'\\AppFacades'] = $this;
-        $this->facades['a']                       = $this->namespace.'\\AppFacades';
-        $_base_class                              = class_exists($this->namespace.'\\Base\\Facades') ? $this->namespace.'\\Base\\Facades' : 'StdClass';
-        eval('namespace '.$this->namespace.' { class AppFacades extends \\'.$_base_class.' {} }');
+        $GLOBALS[$this->Facades->c = $this->namespace.'\\CoreFacades'] = $this;
+        $_facades_base_class                                           = $this->getClass(Classes\Core\Base\Facades::class);
+        eval('namespace '.$this->namespace.' { class CoreFacades extends \\'.$_facades_base_class.' {} }');
 
         foreach ($this->Config->©sub_namespace_map as $_sub_namespace => $_identifiers) {
-            if ($_sub_namespace && !empty($_identifiers['©facades']) && class_exists($_base_class = $this->getClass($this->namespace.'\\'.$_sub_namespace.'\\Base\\Facades'))) {
-                $GLOBALS[$this->namespace.'\\'.$_sub_namespace.'Facades'] = $this;
-                $this->facades[$_identifiers['©facades']]                 = $this->namespace.'\\'.$_sub_namespace.'Facades';
-                eval('namespace '.$this->namespace.' { class '.$_sub_namespace.'Facades extends \\'.$_base_class.' {} }');
+            if (class_exists($_facades_base_class = $this->getClass($this->namespace.'\\'.$_sub_namespace.'\\Base\\Facades'))) {
+                $GLOBALS[$this->Facades->{$_identifiers['©facades']} = $this->namespace.'\\'.$_sub_namespace.'Facades'] = $this;
+                eval('namespace '.$this->namespace.' { class '.$_sub_namespace.'Facades extends \\'.$_facades_base_class.' {} }');
             }
-        } // unset($_sub_namespace, $_identifiers, $_base_class);
+        } // unset($_sub_namespace, $_identifiers, $_facades_base_class);
+
+        $GLOBALS[$this->Facades->a = $this->namespace.'\\AppFacades'] = $this;
+        $_facades_base_class                                          = $this->namespace.'\\Base\\Facades';
+        $_facades_base_class                                          = class_exists($_facades_base_class) ? $_facades_base_class : 'StdClass';
+        eval('namespace '.$this->namespace.' { class AppFacades extends \\'.$_facades_base_class.' {} }');
 
         # Post-construct sub-routines.
 
         $this->maybeDebug();
         $this->maybeSetLocales();
-        $this->maybeHandleExceptions();
+        $this->maybeHandleThrowables();
     }
 
     /**
@@ -355,7 +280,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424 Initial release.
      */
-    protected function maybeDebug() // Error reporting.
+    protected function maybeDebug()
     {
         if (!$this->Config->©debug['©enable']) {
             return; // Nothing to do here.
@@ -376,15 +301,15 @@ class App extends Classes\Core\Base\Core
     }
 
     /**
-     * Maybe handle exceptions.
+     * Maybe handle throwables.
      *
-     * @since 150424 Initial release.
+     * @since 160711 Initial release.
      */
-    protected function maybeHandleExceptions()
+    protected function maybeHandleThrowables()
     {
-        if (!$this->Config->©debug['©enable'] && $this->Config->©handle_exceptions) {
-            // Handle exceptions w/ a custom error page.
-            $this->c::setupExceptionHandler();
+        if (!$this->Config->©debug['©enable'] && $this->Config->©handle_throwables) {
+            // Handle throwables w/ a custom error page.
+            $this->c::setupThrowableHandler();
         }
     }
 
@@ -413,11 +338,10 @@ class App extends Classes\Core\Base\Core
      */
     public function getClass(string $class): string
     {
-        if (!($classes_pos = strripos($class, '\\Classes\\'))) {
-            return $class; // Return as-is.
-        }
-        if (!($sub_class = substr($class, $classes_pos + 9))) {
-            return $class; // Return as-is.
+        if (!($classes_position = mb_strripos($class, '\\Classes\\'))) {
+            return $class; // Not possible; return as-is.
+        } elseif (!($sub_class = mb_substr($class, $classes_position + 9))) {
+            return $class; // Not possible; return as-is.
         }
         if (class_exists($this->namespace.'\\'.$sub_class)) {
             return $class = $this->namespace.'\\'.$sub_class;
@@ -428,34 +352,30 @@ class App extends Classes\Core\Base\Core
                 }
             } while ($_Parent->Parent); // unset($_Parent);
         }
-        return $class; // Return as-is.
+        return $class; // Return as-is (nothing more we can do).
     }
 
     /**
      * Merge config arrays.
      *
-     * @since 160227 Config utils in App.
+     * @since 160227 Config utils.
      *
-     * @param array $base           Base array.
-     * @param array $merge          Array to merge.
-     * @param bool  $is_config_file Is config file?
+     * @param array $base  Base array.
+     * @param array $merge Array to merge.
      *
      * @return array The resuling array after merging.
      *
      * @note This method must be capable of running w/o a constructed app.
      */
-    public function mergeConfig(array $base, array $merge, bool $is_config_file = false): array
+    public function mergeConfig(array $base, array $merge): array
     {
-        if ($is_config_file) { // Disallow these instance-only keys.
-            unset($merge['©di'], $merge['©fs_paths']['©config_file']);
-        }
         if (isset($base['©di']['©default_rule']['new_instances'])) {
             $base_di_default_rule_new_instances = $base['©di']['©default_rule']['new_instances'];
         } // Save new instances before emptying numeric arrays.
 
         if (isset($merge['©mysql_db']['©hosts'])) {
             unset($base['©mysql_db']['©hosts']);
-        } // Override base array. Replace w/ new hosts only.
+        } // Override base array. Replace w/ new hosts.
 
         $base = $this->maybeEmptyNumericConfigArrays($base, $merge);
 
@@ -468,7 +388,7 @@ class App extends Classes\Core\Base\Core
     /**
      * Empty numeric config arrays.
      *
-     * @since 160227 Config utils in App.
+     * @since 160227 Config utils.
      *
      * @param array $base  Base array.
      * @param array $merge Array to merge.
@@ -497,7 +417,7 @@ class App extends Classes\Core\Base\Core
     /**
      * Fill replacement codes.
      *
-     * @since 150424 Initial release.
+     * @since 150424 Config utils.
      *
      * @param mixed $value Input value.
      *
@@ -518,51 +438,33 @@ class App extends Classes\Core\Base\Core
             $value = str_replace(
                 [
                     '%%app_class%%',
-                    '%%app_class_sha1%%',
-
                     '%%app_namespace%%',
                     '%%app_namespace_sha1%%',
 
                     '%%app_file%%',
-                    '%%app_file_basename%%',
-                    '%%app_file_sha1%%',
-
                     '%%app_dir%%',
                     '%%app_dir_basename%%',
-                    '%%app_dir_sha1%%',
 
                     '%%app_base_dir%%',
                     '%%app_base_dir_basename%%',
-                    '%%app_base_dir_sha1%%',
 
                     '%%ws_core_dir%%',
-                    '%%ws_core_dir_basename%%',
-                    '%%ws_core_dir_sha1%%',
 
                     '%%home_dir%%',
                 ],
                 [
                     $this->class,
-                    $this->class_sha1,
-
                     $this->namespace,
                     $this->namespace_sha1,
 
                     $this->file,
-                    $this->file_basename,
-                    $this->file_sha1,
-
                     $this->dir,
                     $this->dir_basename,
-                    $this->dir_sha1,
 
                     $this->base_dir,
                     $this->base_dir_basename,
-                    $this->base_dir_sha1,
 
                     $this->ws_core_dir,
-                    $this->ws_core_dir_basename,
-                    $this->ws_core_dir_sha1,
 
                     (string) ($_SERVER['HOME'] ?? $_SERVER['WEBSHARK_HOME'] ?? ''),
                 ],

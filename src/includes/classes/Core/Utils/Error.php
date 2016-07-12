@@ -30,7 +30,7 @@ class Error extends Classes\Core\Base\Core
      */
     public function __invoke(string $slug = '', string $message = '', $data = null): Classes\Core\Error
     {
-        return $this->c::diGet(Classes\Core\Error::class, compact('slug', 'message', 'data'));
+        return $this->App->Di->get(Classes\Core\Error::class, compact('slug', 'message', 'data'));
     }
 
     /**

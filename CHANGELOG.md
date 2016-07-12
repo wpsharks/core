@@ -1,3 +1,17 @@
+## $v
+
+- Optimizing base App class for speedier instantiation.
+- Deprecating `$args` param to App constructor.
+- Adding multibyte support in `Classes\App::getClass()`.
+- Deprecating `c::config()` in favor of `Classes\App::Config()`.
+- Deprecating `c::version()` in favor of `Classes\App::VERSION`.
+- Deprecating `c::diGet()` in favor of `Classes\App::$Di::get()`.
+- Exposing `->f` property in base abstraction as public/read-only.
+- Refactor `Classes\Core\Utils\Exceptions{}`; now `Classes\Core\Utils\Throwables{}`.
+- Exposing `->c`, `->s`, and `->a` properties in base abstraction as public/read-only.
+- Refactor: `Classes\App::$facaces` is now `Classes\App::$Facades` (`\StdClass` instead of an array).
+- Removing support for an external `config.json` file in favor of `$instance_base` and `$instance`.
+
 ## v160711.18232
 
 - Refactor `Classes\Core\Error{}`.
