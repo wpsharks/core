@@ -1,4 +1,4 @@
-## $v
+## v160712.38316
 
 - Optimizing base App class for speedier instantiation.
 - Deprecating `$args` param to App constructor.
