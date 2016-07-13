@@ -7,9 +7,9 @@ use WebSharks\Core\Classes\CoreFacades as c;
 require_once dirname(__FILE__, 2).'/includes/local.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-
-echo $closure = c::serializeClosure(function (string $string) {
-    return $string;
+$_brand_name  = $App->Config->©brand['©name'];
+echo $closure = c::serializeClosure(function (string $string) use ($_brand_name) {
+    return $_brand_name.' says: '.$string;
 })."\n\n";
 c::dump($closure = c::unserializeClosure($closure));
 echo $closure('Closure serialization works.')."\n\n";
