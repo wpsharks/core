@@ -25,6 +25,7 @@ abstract class Facades
     use Traits\Facades\Bitly;
     use Traits\Facades\Cli;
     use Traits\Facades\Clippers;
+    use Traits\Facades\Closures;
     use Traits\Facades\Cookies;
     use Traits\Facades\Debugging;
     use Traits\Facades\Dimensions;

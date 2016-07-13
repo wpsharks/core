@@ -1,5 +1,11 @@
 ## $v
 
+- Adding serializable Closures.
+- Adding `c::serializeClosure()`.
+- Adding `c::unserializeClosure()`.
+
+## v160712.82762
+
 - Enhancing `c::canCallFunc()`.
 
 ## v160712.38316

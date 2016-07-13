@@ -83,6 +83,7 @@
     "erusev/parsedown": "1.*",
     "erusev/parsedown-extra": "0.*",
     "hashids/hashids": "1.*",
+    "jeremeamia/superclosure": "2.*",
     "michelf/php-markdown": "1.*",
     "phpmailer/phpmailer": "5.*",
     "ramsey/uuid": "3.*",
