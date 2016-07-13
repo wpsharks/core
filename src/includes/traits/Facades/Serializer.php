@@ -13,7 +13,31 @@ use function get_defined_vars as vars;
 trait Serializer
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 160712 Serializer.
+     */
+    public static function serialize(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Serializer->__invoke(...$args);
+    }
+
+    /**
+     * @since 160712 Serializer.
+     */
+    public static function serializeClosure(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Serializer->serializeClosure(...$args);
+    }
+
+    /**
+     * @since 160712 Serializer.
+     */
+    public static function unserializeClosure(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Serializer->unserializeClosure(...$args);
+    }
+
+    /**
+     * @since 151214 Serializer.
      */
     public static function maybeSerialize(...$args)
     {
@@ -21,7 +45,7 @@ trait Serializer
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 Serializer.
      */
     public static function maybeUnserialize(...$args)
     {
@@ -29,7 +53,15 @@ trait Serializer
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 160712 Serializer.
+     */
+    public static function isSerialized(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Serializer->isSerialized(...$args);
+    }
+
+    /**
+     * @since 151214 Serializer.
      */
     public static function checkSetUnserializedType(...$args)
     {

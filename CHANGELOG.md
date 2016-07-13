@@ -1,3 +1,7 @@
+## $v
+
+- Enhancing `Classes\Utils\Serializer{}`.
+
 ## v160713.3972
 
 - Adding serializable Closures.
