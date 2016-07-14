@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. `$_SERVER` instead of `$_`.
+
 ## v160714.26155
 
 - Updating build & composer dependencies.

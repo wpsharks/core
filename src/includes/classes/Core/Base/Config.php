@@ -34,7 +34,7 @@ class Config extends Classes\Core\Base\Core
 
         $use_server_cfgs = (bool) ($instance['©use_server_cfgs']
             ?? $instance_base['©use_server_cfgs'] ?? !empty($_SERVER['CFG_HOST']));
-        $_ = $use_server_cfgs && !empty($_['CFG_HOST']) ? $_SERVER : [];
+        $_ = $use_server_cfgs && !empty($_SERVER['CFG_HOST']) ? $_SERVER : [];
 
         # Default host names; needed below as fallbacks.
 
