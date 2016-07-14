@@ -257,6 +257,5 @@ class Config extends Classes\Core\Base\Core
         # Overload configuration properties.
 
         $this->overload($config, true); // Overload public/writable properties.
-        // Public for performance gains & accessibility only. Do NOT alter at runtime.
     }
 }
