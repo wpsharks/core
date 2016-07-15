@@ -1,3 +1,8 @@
+## $v
+
+- Bug fix in Simple Expression syntax. Correctly detect `===` operator.
+- Bug fix in Simple Expression syntax. Allow a jump from `()` to a new test-fragment that is not in brackets; e.g., `(a) OR b`.
+
 ## v160714.32466
 
 - Bug fix. `$_SERVER` instead of `$_`.

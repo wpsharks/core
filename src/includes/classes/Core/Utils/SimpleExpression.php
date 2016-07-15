@@ -24,7 +24,6 @@ class SimpleExpression extends Classes\Core\Base\Core implements Interfaces\Simp
      *
      * @param string   $expr     A simple expression.
      * @param callable $callback A callback template handler.
-     * @param array    $args     Any additional behavior args.
      *
      * @note The `$callback` receives one argument, a raw test-fragment (string, not quoted).
      *  The callback should always return a single PHP function call (as a string), using the test-fragment.
@@ -50,15 +49,11 @@ class SimpleExpression extends Classes\Core\Base\Core implements Interfaces\Simp
      *  e.g., `function:arg`, `function:arg,arg`, etc. So long as it doesn't use reserved chars you're fine.
      *  Just be sure to document special chars. In this example, `[:,]` would be reserved in test-fragments.
      */
-    public function toPhp(string $expr, callable $callback, array $args = []): string
+    public function toPhp(string $expr, callable $callback): string
     {
-        $validation_regex = !empty($args['bool_only'])
-            ? $this::SIMPLE_EXPRESSION_BOOL_ONLY_REGEX_VALID
-            : $this::SIMPLE_EXPRESSION_REGEX_VALID;
-
-        if (!$expr) {
+        if (!$expr) { // Expression empty?
             return ''; // Nothing to do in this case.
-        } elseif (!preg_match($validation_regex, '('.$expr.')')) {
+        } elseif (!preg_match($this::SIMPLE_EXPRESSION_REGEX_VALID, '('.$expr.')')) {
             return ''; // Not possible; i.e., not a valid simple expression.
             // NOTE: This validation is important. If it fails, the sub-routines below could
             // produce a PHP expression that contains syntax errors. Or worse, a security exploit.
@@ -149,6 +144,8 @@ class SimpleExpression extends Classes\Core\Base\Core implements Interfaces\Simp
     protected function quoteStrLiteral(string $string): string
     {
         if (!isset($string[0])) {
+            return "''"; // Empty string.
+        } elseif ($string === "''" || $string === '""') {
             return "''"; // Empty string.
         } elseif (mb_strpos($string, "'") === 0 && mb_substr($string, -1) === "'") {
             return "'".str_replace("'", "\\'", mb_substr($string, 1, -1))."'";

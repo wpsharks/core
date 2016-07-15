@@ -18,46 +18,50 @@ use function get_defined_vars as vars;
 interface SimpleExpressionConstants
 {
     /**
-     * A simple expression fragment.
+     * A simple expression.
      *
      * @since 160708 Expression regex patterns.
      *
      * @type string Regex fragment for use in `preg_match()`.
      */
-    const SIMPLE_EXPRESSION_REGEX_FRAG =
-        '(?i:'.// Enable caSe-insensitive matching.
+    const SIMPLE_EXPRESSION_REGEX_FRAG = // Begin regex.
+
+        '(?i:'.// CaSe-insensitive matching (inline modifier).
             '(?<brackets>'.// Sub-routine for recursion.
 
                 '\s*\(\s*'.// An opening round bracket.
                 // Any amount of whitespace before/after bracket.
-
-                    // First thing inside a bracket can't be a logical-operator or comparison-operator.
-                    '(?!(?:AND|OR|&&|\|\|\=\=\=|\!\=\=|\=\=|\!\=|\<\=|\>\=|\<\>|\>|\<)[\s()])'.
-                    // i.e., Disallow `(AND`, `(OR`, `(!==`, `(===`, etc.
 
                     '(?:'.// Begin expression loop.
 
                         // A test-fragment; i.e., not a logical-operator or comparison-operator.
-                        '(?!(?:AND|OR|&&|\|\|\=\=\=|\!\=\=|\=\=|\!\=|\<\=|\>\=|\<\>|\>|\<)[\s()])[^\s()]+'.
+                        '(?!(?:AND|OR|&&|\|\||\=\=\=|\!\=\=|\=\=|\!\=|\<\=|\>\=|\<\>|\>|\<)[\s()])[^\s()]+'.
+
                             '(?:'.// Followed by a comparison-operator that is followed by a comparison-value.
-                                '\s+(?:\=\=\=|\!\=\=|\=\=|\!\=|\<\=|\>\=|\<\>|\>|\<)'.// e.g., ... ` === comparison-value`.
-                                '\s+(?!(?:AND|OR|&&|\|\|\=\=\=|\!\=\=|\=\=|\!\=|\<\=|\>\=|\<\>|\>|\<)[\s()])[^\s()]+'.
-                            ')?'.// This comparison is optional. If not found, treat it as a boolean conditional.
+                                '\s+(?:\=\=\=|\!\=\=|\=\=|\!\=|\<\=|\>\=|\<\>|\>|\<)'.// e.g., ` == comparison-value`.
+                                '\s+(?!(?:AND|OR|&&|\|\||\=\=\=|\!\=\=|\=\=|\!\=|\<\=|\>\=|\<\>|\>|\<)[\s()])[^\s()]+'.
+                            ')?'.// This comparison is optional. If not found, treat it as a boolean condition.
 
-                            '(?:'.// Followed by a logical-operator that's not before an upcoming closing bracket.
-                                '\s+(?:AND|OR|&&|\|\|)\s+(?![)])'.// e.g., ... ` AND `.
-
-                                // Or, any whitespace followed by an upcoming closing bracket.
-                                '|\s*(?=[)])'.// e.g., This allows for `(a)` all by itself, or `(a === b)` by itself.
-                                // Also allows the last test inside brackets to be valid; e.g., ... `test-fragment === comparison-value)`.
-                                // i.e., it allows for nothing (`\s*`) before an upcoming closing bracket.
+                            '(?:'. // Followed by an upcoming `)`. Or, followed by a logical-operator.
+                                '\s*(?=[)])'. // e.g., `(a)`, `(a AND b)`, `(a OR b)` ... upcoming `)`.
+                                // Or, a logical-operator; not before an upcoming `)`, or before an upcoming `(`.
+                                '|\s+(?:AND|OR|&&|\|\|)(?:\s+(?![)])|\s*(?=[(]))'.// e.g., ` AND `, ` AND(`.
                             ')'.
-                        // Or, `<brackets>` sub-routine recursion (nested brackets).
-                        '|(?&brackets)(?=(?:\s*(?:\)|$)|\s*(?:AND|OR|&&|\|\|)\s*(?=[(])))'.
-                        // Allow another nested set of brackets followed by a closing `)` bracket or end of string.
-                        // Also allow another nested set of brackets followed by a logical-operator; e.g., `) OR (`;
-                        //  which allows the loop to jump from one set of brackets to another when it is separated by a logical-operator.
-                            '(?:\s*(?:AND|OR|&&|\|\|)\s*(?=[(]))?'. // Picks up a logical-operator between two bracketed expressions; e.g., `) OR (`.
+
+                        '|(?&brackets)'. // Or `<brackets>` (nested recursion via sub-routine).
+                            '(?='. // Followed by one of these; allowing a jump to another set of brackets.
+                                '(?:'.
+                                    '\s*[)]'. // Followed by an upcoming `)` bracket that closes the expression.
+                                    '|\s*(?:AND|OR|&&|\|\|)'. // Or, followed by a logical-operator.
+                                        '(?='. // Where the logical-operator is followed by one of these.
+                                            '\s*[(]'. // Followed by another set of brackets; e.g., `)AND(`, `) OR (`.
+                                            // Or, followed by a test-fragment that gets picked up in the next iteration.
+                                            '|\s+(?!(?:AND|OR|&&|\|\||\=\=\=|\!\=\=|\=\=|\!\=|\<\=|\>\=|\<\>|\>|\<)[\s()])'.
+                                        ')'.
+                                ')'.
+                            ')'. // This, coupled with lookahead, allows a jump to another set of brackets.
+                            // Also allows a jump from brackets to a new token that's not in brackets; e.g., `(a) OR a`.
+                            '(?:\s*(?:AND|OR|&&|\|\|)\s*)?'. // Eat logical-operator before starting next iteration.
 
                     ')+'.// End expression loop.
 
@@ -65,51 +69,7 @@ interface SimpleExpressionConstants
                 // Any amount of whitespace before/after bracket.
 
             ')'.// End capture group used for recursion.
-        ')';// End caSe-insensitive matching.
-
-    /**
-     * A simple, bool-only expression fragment.
-     *
-     * @since 160708 Expression regex patterns.
-     *
-     * @type string Regex fragment for use in `preg_match()`.
-     */
-    const SIMPLE_EXPRESSION_BOOL_ONLY_REGEX_FRAG =
-        '(?i:'.// Enable caSe-insensitive matching.
-            '(?<brackets>'.// Sub-routine for recursion.
-
-                '\s*\(\s*'.// An opening round bracket.
-                // Any amount of whitespace before/after bracket.
-
-                    // The first thing inside a bracket cannot be a logical operator.
-                    '(?!(?:AND|OR|&&|\|\|)[\s()])'.// i.e., Disallow `(AND`, `(OR`, etc.
-
-                    '(?:'.// Begin expression loop.
-
-                        // A test-fragment; i.e., not a logical-operator.
-                        '(?!(?:AND|OR|&&|\|\|)[\s()])[^\s()]+'.// e.g., `something-to-test-for`.
-                            '(?:'.// Followed by a logical-operator that is not before an upcoming closing bracket.
-                                '\s+(?:AND|OR|&&|\|\|)\s+(?![)])'.// e.g., ... ` AND `.
-
-                                // Or, any whitespace followed by an upcoming closing bracket.
-                                '|\s*(?=[)])'.// e.g., This allows for `(a)` all by itself.
-                                // Also allows the last test inside brackets to be valid; e.g., ... `test-fragment)`.
-                                // i.e., it allows for nothing (`\s*`) before an upcoming closing bracket.
-                            ')'.
-                        // Or, `<brackets>` sub-routine recursion (nested brackets).
-                        '|(?&brackets)(?=(?:\s*(?:\)|$)|\s*(?:AND|OR|&&|\|\|)\s*(?=[(])))'.
-                        // Allow another nested set of brackets followed by a closing `)` bracket or end of string.
-                        // Also allow another nested set of brackets followed by a logical-operator; e.g., `) OR (`;
-                        //  which allows the loop to jump from one set of brackets to another when it is separated by a logical-operator.
-                            '(?:\s*(?:AND|OR|&&|\|\|)\s*(?=[(]))?'. // Picks up a logical-operator between two bracketed expressions; e.g., `) OR (`.
-
-                    ')+'.// End expression loop.
-
-                '\s*\)\s*'.// A closing round bracket.
-                // Any amount of whitespace before/after bracket.
-
-            ')'.// End capture group used for recursion.
-        ')';// End caSe-insensitive matching.
+        ')';// End caSe-insensitive matching (inline modifier).
 
     /**
      * A valid simple expression.
@@ -119,13 +79,4 @@ interface SimpleExpressionConstants
      * @type string Regex fragment for use in `preg_match()`.
      */
     const SIMPLE_EXPRESSION_REGEX_VALID = '/^'.self::SIMPLE_EXPRESSION_REGEX_FRAG.'$/u';
-
-    /**
-     * A valid simple, bool-only expression.
-     *
-     * @since 160708 Expression regex patterns.
-     *
-     * @type string Regex fragment for use in `preg_match()`.
-     */
-    const SIMPLE_EXPRESSION_BOOL_ONLY_REGEX_VALID = '/^'.self::SIMPLE_EXPRESSION_BOOL_ONLY_REGEX_FRAG.'$/u';
 }
