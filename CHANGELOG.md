@@ -1,3 +1,7 @@
+## $v
+
+- Adding `setAdditional()` props to `Classes\Core\Template{}` for extenders.
+
 ## v160715.30802
 
 - Bug fix in Simple Expression syntax. Correctly detect `===` operator.

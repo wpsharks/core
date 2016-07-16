@@ -96,6 +96,18 @@ class Template extends Classes\Core\Base\Core
         $this->parents      = $parents;
         $this->parent_vars  = $parent_vars;
         $this->current_vars = [];
+
+        $this->setAdditionalProps();
+    }
+
+    /**
+     * Additional props (for extenders).
+     *
+     * @since 160715 Initial release.
+     */
+    protected function setAdditionalProps()
+    {
+        // For extenders only.
     }
 
     /**
