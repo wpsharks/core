@@ -21,29 +21,36 @@ trait App
     }
 
     /**
-     * @since 160227 App.
-     * @deprecated 160711 Do not use.
+     * @since 160715 App parent.
+     *
+     * @param int $levels Up X levels.
      */
-    public static function config(...$args)
+    public static function appParent(int $levels = 1)
     {
-        return $GLOBALS[static::class]->Config;
+        $levels        = max(1, $levels);
+        $level_counter = 1; // Start from `1`.
+        $Parent        = $GLOBALS[static::class]->Parent;
+
+        while ($Parent && $level_counter < $levels) {
+            $Parent = $Parent->Parent ?? null;
+            ++$level_counter; // Counter.
+        }
+        return $Parent; // Possible `null`.
     }
 
     /**
-     * @since 160227 App.
-     * @deprecated 160711 Do not use.
+     * @since 160715 App core.
      */
-    public static function version(...$args)
+    public static function appCore()
     {
-        return $GLOBALS[static::class]::VERSION;
-    }
-
-    /**
-     * @since 151214 Adding functions.
-     * @deprecated 160711 Do not use.
-     */
-    public static function diGet(...$args)
-    {
-        return $GLOBALS[static::class]->Di->get(...$args);
+        if (!($Parent = $GLOBALS[static::class]->Parent)) {
+            return $GLOBALS[static::class];
+            //
+        } else { // Find root core.
+            while ($Parent->Parent) {
+                $Parent = $Parent->Parent;
+            }
+            return $Parent;
+        }
     }
 }

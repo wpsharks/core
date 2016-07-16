@@ -1,3 +1,8 @@
+## $v
+
+- Adding `c::appParent()`.
+- Adding `c::appCore()`.
+
 ## v160716.38505
 
 - Adding `setAdditional()` props to `Classes\Core\Template{}` for extenders.
