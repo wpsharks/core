@@ -1,4 +1,4 @@
-## $v
+## v160719.39064
 
 - Bumping AWS library integration to v3.
 - Adding `c::awsSdk()` and `c::awsS3Client()`.
