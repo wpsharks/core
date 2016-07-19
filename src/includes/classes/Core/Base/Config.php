@@ -212,8 +212,12 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©aws' => [
+                '©region'     => (string) ($_['CFG_AWS_REGION'] ?? 'us-east-1'),
                 '©access_key' => (string) ($_['CFG_AWS_ACCESS_KEY'] ?? ''),
                 '©secret_key' => (string) ($_['CFG_AWS_SECRET_KEY'] ?? ''),
+
+                '©s3_bucket'  => (string) ($_['CFG_AWS_S3_BUCKET'] ?? ''),
+                '©s3_version' => (string) ($_['CFG_AWS_S3_VERSION'] ?? '2006-03-01'),
             ],
             '©embedly' => [
                 '©api_key' => (string) ($_['CFG_EMBEDLY_API_KEY'] ?? ''),

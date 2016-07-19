@@ -36,6 +36,10 @@ class Pdo extends Classes\Core\Base\Core
     public function __construct(Classes\App $App)
     {
         parent::__construct($App);
+
+        if (!class_exists('PDO')) {
+            throw $this->c::issue('Missing PDO extension for PHP.');
+        }
     }
 
     /**

@@ -45,7 +45,7 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
         $slug = mb_strtolower($slug);
         $slug = str_replace(['-', '_', '.'], '', $slug);
 
-        if (!is_null($is = &$this->cacheKey(__FUNCTION__, $slug))) {
+        if (($is = &$this->cacheKey(__FUNCTION__, $slug)) !== null) {
             return $is; // Cached this already.
         }
         if (mb_strlen($slug) < 3) {

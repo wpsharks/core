@@ -42,7 +42,6 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-mcrypt": "*",
-    "ext-posix": "*",
     "ext-session": "*",
     "ext-tokenizer": "*",
     "ext-zlib": "*",
@@ -62,14 +61,10 @@
     "lib-iconv": "*",
     "ext-iconv": "*",
 
-    "ext-PDO": "*",
-    "ext-mysqlnd": "*",
-    "ext-pdo_mysql": "*",
-
-    "lib-libxml": "*",
     "ext-dom": "*",
     "ext-xml": "*",
     "ext-libxml": "*",
+    "lib-libxml": "*",
     "ext-xmlreader": "*",
     "ext-xmlwriter": "*",
     "ext-SimpleXML": "*",
@@ -77,37 +72,52 @@
     "websharks/dicer": "160110",
     "websharks/sharkicons": "160620",
 
-    "lusitanian/oauth": "0.*",
-    "aws/aws-sdk-php": "2.*",
-    "embedly/embedly-php": "0.*",
+    "michelf/php-markdown": "1.*",
     "erusev/parsedown": "1.*",
     "erusev/parsedown-extra": "0.*",
-    "hashids/hashids": "1.*",
-    "jeremeamia/superclosure": "2.*",
-    "michelf/php-markdown": "1.*",
-    "phpmailer/phpmailer": "5.*",
+
     "ramsey/uuid": "3.*",
+    "hashids/hashids": "1.*",
+    "embedly/embedly-php": "0.*",
+    "jeremeamia/superclosure": "2.*",
+    "phpmailer/phpmailer": "5.*",
     "symfony/yaml": "2.*"
   },
   "require-dev": {
     "ext-Zend-OPcache": "*",
+
+    "ext-PDO": "*",
+    "ext-mysqlnd": "*",
+    "ext-pdo_mysql": "*",
+
     "ext-zip": "*",
     "ext-gmp": "*",
     "ext-bcmath": "*",
     "ext-pspell": "*",
+    "ext-memcached": "*",
 
     "ryakad/pandoc-php": "1.*",
-    "corneltek/getoptionkit": "2.*"
+    "corneltek/getoptionkit": "2.*",
+    "lusitanian/oauth": "0.*",
+    "aws/aws-sdk-php": "3.*"
   },
   "suggest": {
     "ext-Zend-OPcache": "* :: Highly recommended for faster processing.",
+
+    "ext-PDO": "* :: Required when using PDO utilities.",
+    "ext-mysqlnd": "* :: Required when using PDO utilities.",
+    "ext-pdo_mysql": "* :: Required when using PDO utilities.",
+
     "ext-zip": "* :: Required by routines that deal with ZIP files.",
     "ext-gmp": "* :: Required by routines that deal with large numbers.",
     "ext-bcmath": "* :: Required by routines that deal with large numbers.",
     "ext-pspell": "* :: Required by routines that deal with spellcheck.",
+    "ext-memcached": "* :: Required by routines that deal Memcache.",
 
     "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc.",
-    "corneltek/getoptionkit": "2.* :: Required for routines that parse CLI opts."
+    "corneltek/getoptionkit": "2.* :: Required for routines that parse CLI opts.",
+    "lusitanian/oauth": "0.* :: Required when using SSO and other related utils.",
+    "aws/aws-sdk-php": "3.* :: Required for routines that interact with the AWS API."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

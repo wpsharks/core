@@ -1,3 +1,10 @@
+## $v
+
+- Bumping AWS library integration to v3.
+- Adding `c::awsSdk()` and `c::awsS3Client()`.
+- Dropping `PDO` extension requirement (now optional).
+- Dropping `posix` extension requirement (now optional).
+
 ## v160716.56490
 
 - Adding `c::appParent()`.

@@ -18,6 +18,29 @@ use function get_defined_vars as vars;
 class Sql extends Classes\Core\Base\Core
 {
     /**
+     * Exists?
+     *
+     * @since 160719
+     *
+     * @type bool
+     */
+    protected $PDO_exists;
+
+    /**
+     * Constructor.
+     *
+     * @since 160719 Initial release.
+     *
+     * @param Classes\App $App Instance of App.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        $this->PDO_exists = class_exists('PDO');
+    }
+
+    /**
      * Quotes/escapes SQL value.
      *
      * @since 160422 SQL utils.
@@ -28,7 +51,7 @@ class Sql extends Classes\Core\Base\Core
      */
     public function quote($value): string
     {
-        if (($Pdo = $this->c::currentPdo())) {
+        if ($this->PDO_exists && $this->c::currentPdo()) {
             return $this->c::pdoQuote($value);
         }
         switch (gettype($value)) {
