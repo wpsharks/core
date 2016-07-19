@@ -10,7 +10,7 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 #
-use Aws;
+use Aws as AwsLib;
 
 /**
  * AWS utilities.
@@ -24,7 +24,7 @@ class Aws extends Classes\Core\Base\Core
      *
      * @since 160719
      *
-     * @type \Aws\Sdk
+     * @type AwsLib\Sdk
      */
     public $Sdk;
 
@@ -33,7 +33,7 @@ class Aws extends Classes\Core\Base\Core
      *
      * @since 160719
      *
-     * @type \Aws\S3\S3Client
+     * @type AwsLib\S3\S3Client
      */
     public $S3Client;
 
@@ -48,7 +48,7 @@ class Aws extends Classes\Core\Base\Core
     {
         parent::__construct($App);
 
-        $this->Sdk = new Aws\Sdk([
+        $this->Sdk = new AwsLib\Sdk([
             'version' => 'latest', // Default.
             'region'  => $this->App->Config->©aws['©region'],
 

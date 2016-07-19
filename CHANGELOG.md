@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. `AwsLib` instead of `Aws`, because this name conflicts with the utility that calls it.
+
 ## v160719.39064
 
 - Bumping AWS library integration to v3.
