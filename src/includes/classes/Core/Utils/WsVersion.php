@@ -110,6 +110,12 @@ class WsVersion extends Classes\Core\Base\Core implements Interfaces\WsVersionCo
         $m = substr($version, 2, 2); // Month.
         $d = substr($version, 4, 2); // Day.
 
-        return strtotime($Y.'-'.$m.'-'.$d);
+        $time = strtotime($Y.'-'.$m.'-'.$d.' 12:00 am');
+
+        if (preg_match('/^[0-9]{6}\.([0-9]+)/u', $version, $_m)) {
+            $time += $_m[1]; // Seconds into current day.
+        } // unset($_m); // Housekeeping.
+
+        return $time;
     }
 }
