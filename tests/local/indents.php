@@ -10,17 +10,36 @@ require_once dirname(__FILE__, 2).'/includes/local.php';
 
 $markdown = <<<MARKDOWN
 
+    <br />
+<p>&nbsp;</p>
+&nbsp;
     ## Heading One
 
-    This is some test.
+    This is some text.
 
         <script>
             Block of code.
         </script>
 
+    ```
+        Testing.
+    ```
+
+    [if]
+        Testing.
+    [/if]
+
+    <pre>
+        hello
+    </pre>
+
     ## Another Heading
 
     Some more text.
+
+    <br />
+<p>&nbsp;</p>
+&nbsp;
 
 MARKDOWN;
 

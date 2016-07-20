@@ -37,8 +37,8 @@ class HtmlWhitespace extends Classes\Core\Base\Core implements Interfaces\HtmlCo
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        if (is_null($whitespace = &$this->cacheKey(__FUNCTION__.'_whitespace'))) {
-            $whitespace = implode('|', array_keys($this::HTML_WHITESPACE));
+        if (($whitespace = &$this->cacheKey(__FUNCTION__.'_whitespace')) === null) {
+            $whitespace = implode('|', $this::HTML_WHITESPACE);
         }
         $string = preg_replace('/('.$whitespace.')('.$whitespace.')('.$whitespace.')+/u', '${1}${2}', $string);
 

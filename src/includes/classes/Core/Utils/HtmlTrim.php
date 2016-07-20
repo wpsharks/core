@@ -22,19 +22,19 @@ class HtmlTrim extends Classes\Core\Base\Core implements Interfaces\HtmlConstant
      *
      * @since 150424 Initial release.
      *
-     * @param mixed  $value       Any input value.
-     * @param string $chars       Defaults to: " \r\n\t\0\x0B".
-     *                            HTML whitespace is always trimmed, no matter.
-     * @param string $extra_chars Additional specific chars to trim.
-     * @param string $side        Optional; one of `l` or `r`.
+     * @param mixed  $value     Any input value.
+     * @param string $directive Default is empty (all whitespace).
+     *                          `vertical` trims only vertical whitespace.
+     *                          `horizontal` trims only horizontal whitespace.
+     * @param string $side      Optional; one of `l` or `r`.
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    public function __invoke($value, string $chars = '', string $extra_chars = '', string $side = '')
+    public function __invoke($value, string $directive = '', string $side = '')
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->__invoke($_value, $chars, $extra_chars, $side);
+                $_value = $this->__invoke($_value, $directive, $side);
             } // unset($_key, $_value); // Housekeeping.
             return $value;
         }
@@ -43,23 +43,38 @@ class HtmlTrim extends Classes\Core\Base\Core implements Interfaces\HtmlConstant
         if (!isset($string[0])) {
             return $string; // Nothing to do.
         }
-        if (is_null($whitespace = &$this->cacheKey(__FUNCTION__.'_whitespace'))) {
-            $whitespace = implode('|', array_keys($this::HTML_WHITESPACE));
+        if ($directive === 'vertical') {
+            if (($_vertical_whitespace = &$this->cacheKey(__FUNCTION__.'_vertical_whitespace')) === null) {
+                $_vertical_whitespace = implode('|', $this::HTML_VERTICAL_WHITESPACE);
+            } // Only trim vertical whitespace in this case.
+            $whitespace = $_vertical_whitespace; // Needed below.
+            //
+        } elseif ($directive === 'horizontal') {
+            if (($_horizontal_whitespace = &$this->cacheKey(__FUNCTION__.'_horizontal_whitespace')) === null) {
+                $_horizontal_whitespace = implode('|', $this::HTML_HORIZONTAL_WHITESPACE);
+            } // Only trim vertical whitespace in this case.
+            $whitespace = $_horizontal_whitespace; // Needed below.
+            //
+        } else { // Trim all whitespace.
+            if (($_whitespace = &$this->cacheKey(__FUNCTION__.'_whitespace')) === null) {
+                $_whitespace = implode('|', $this::HTML_WHITESPACE);
+            } // Trims all whitespace in this case (default).
+            $whitespace = $_whitespace; // Needed below.
         }
         switch ($side) {
             case 'l': // Left trim.
                 $string = preg_replace('/^(?:'.$whitespace.')+/u', '', $string);
-                break; // Break switch handler.
+                break;
 
             case 'r': // Right trim.
                 $string = preg_replace('/(?:'.$whitespace.')+$/u', '', $string);
-                break; // Break switch handler.
+                break;
 
             default: // Both sides.
                 $string = preg_replace('/^(?:'.$whitespace.')+|(?:'.$whitespace.')+$/u', '', $string);
-                break; // Break switch handler.
+                break;
         }
-        return $this->c::mbTrim($string, $chars, $extra_chars, $side);
+        return $string; // Nothing more to do here.
     }
 
     /**
@@ -67,16 +82,16 @@ class HtmlTrim extends Classes\Core\Base\Core implements Interfaces\HtmlConstant
      *
      * @since 150424 Initial release.
      *
-     * @param mixed  $value       Any input value.
-     * @param string $chars       Defaults to: " \r\n\t\0\x0B".
-     *                            HTML whitespace is always trimmed, no matter.
-     * @param string $extra_chars Additional specific chars to trim.
+     * @param mixed  $value     Any input value.
+     * @param string $directive Default is empty (all whitespace).
+     *                          `vertical` trims only vertical whitespace.
+     *                          `horizontal` trims only horizontal whitespace.
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    public function l($value, string $chars = '', string $extra_chars = '')
+    public function l($value, string $directive = '')
     {
-        return $this->__invoke($value, $chars, $extra_chars, 'l');
+        return $this->__invoke($value, $directive, 'l');
     }
 
     /**
@@ -84,15 +99,15 @@ class HtmlTrim extends Classes\Core\Base\Core implements Interfaces\HtmlConstant
      *
      * @since 150424 Initial release.
      *
-     * @param mixed  $value       Any input value.
-     * @param string $chars       Defaults to: " \r\n\t\0\x0B".
-     *                            HTML whitespace is always trimmed, no matter.
-     * @param string $extra_chars Additional specific chars to trim.
+     * @param mixed  $value     Any input value.
+     * @param string $directive Default is empty (all whitespace).
+     *                          `vertical` trims only vertical whitespace.
+     *                          `horizontal` trims only horizontal whitespace.
      *
      * @return string|array|object Trimmed string, array, object.
      */
-    public function r($value, string $chars = '', string $extra_chars = '')
+    public function r($value, string $directive = '')
     {
-        return $this->__invoke($value, $chars, $extra_chars, 'r');
+        return $this->__invoke($value, $directive, 'r');
     }
 }

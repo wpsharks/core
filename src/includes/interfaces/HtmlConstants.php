@@ -22,7 +22,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array Ampersand entities; keys are regex for use in `preg_match()`.
+     * @type array Ampersand entities.
      */
     const HTML_AMPERSAND_ENTITIES = [
         '&amp;'       => '&amp;',
@@ -31,20 +31,50 @@ interface HtmlConstants
     ];
 
     /**
-     * HTML whitespace; keys are regex patterns.
+     * Whitespace regex patterns.
      *
      * @since 150424 Initial release.
      *
-     * @type array HTML whitespace; keys are regex for use in `preg_match()`.
+     * @type array HTML whitespace.
      */
     const HTML_WHITESPACE = [
-        '\0'                               => "\0",
-        '\x0B'                             => "\x0B",
-        '\s'                               => "\r\n\t ",
-        '\xC2\xA0'                         => "\xC2\xA0",
-        '&nbsp;'                           => '&nbsp;',
-        '\<[Bb][Rr]\s*(?:\/\s*)?\>'        => '<br/>',
-        '\<[Pp]\>(?:&nbsp;|\s)*\<\/[Pp]\>' => '<p></p>',
+        '\0',
+        '\x0B',
+        '\s',
+        '\xC2\xA0',
+        '&nbsp;',
+        '\<[Bb][Rr]\s*(?:\/\s*)?\>',
+        '\<[Pp]\>(?:&nbsp;|\s)*\<\/[Pp]\>',
+    ];
+
+    /**
+     * Horizontal whitespace regex patterns.
+     *
+     * @since 160720 Initial release.
+     *
+     * @type array Vertical HTML whitespace.
+     */
+    const HTML_HORIZONTAL_WHITESPACE = [
+        '\0',
+        '\x0B',
+        "\t",
+        ' ',
+        '\xC2\xA0',
+        '&nbsp;',
+    ];
+
+    /**
+     * Vertical whitespace regex patterns.
+     *
+     * @since 160720 Initial release.
+     *
+     * @type array Vertical HTML whitespace.
+     */
+    const HTML_VERTICAL_WHITESPACE = [
+        "\r",
+        "\n",
+        '\<[Bb][Rr]\s*(?:\/\s*)?\>',
+        '\<[Pp]\>(?:&nbsp;|\s)*\<\/[Pp]\>',
     ];
 
     /**
@@ -52,7 +82,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array Quote entities; keys are regex for use in `preg_match()`.
+     * @type array Quote entities.
      */
     const HTML_QUOTE_ENTITIES = [
         '&apos;'           => '&apos;',
