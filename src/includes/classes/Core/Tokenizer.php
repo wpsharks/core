@@ -129,12 +129,12 @@ class Tokenizer extends Classes\Core\Base\Core
     {
         if (!in_array('shortcodes', $this->tokenize, true)) {
             return; // Not tokenizing these.
-        }
-        if (!$this->c::isWordPress() || empty($GLOBALS['shortcode_tags']) || !$this->c::canCallFunc('get_shortcode_regex')) {
-            return; // Not WordPress; i.e., no known shortcodes.
-        }
-        if (mb_strpos($this->string, '[') === false) {
+        } elseif (mb_strpos($this->string, '[') === false) {
             return; // No `[` shortcodes.
+        } elseif (empty($GLOBALS['shortcode_tags']) || !$this->c::isWordPress()) {
+            return; // Not WordPress; i.e., no known shortcodes.
+        } elseif (!$this->c::canCallFunc('get_shortcode_regex')) {
+            return; // Not possible; function missing.
         }
         $this->string = preg_replace_callback('/'.get_shortcode_regex().'/us', function ($m) {
             $this->tokens[] = $m[0]; // Tokenize.
@@ -151,8 +151,7 @@ class Tokenizer extends Classes\Core\Base\Core
     {
         if (!in_array('pre', $this->tokenize, true)) {
             return; // Not tokenizing these.
-        }
-        if (mb_stripos($this->string, '<pre') === false) {
+        } elseif (mb_stripos($this->string, '<pre') === false) {
             return; // Nothing to tokenize here.
         }
         $pre = // HTML `<pre>` tags.
@@ -177,8 +176,7 @@ class Tokenizer extends Classes\Core\Base\Core
     {
         if (!in_array('code', $this->tokenize, true)) {
             return; // Not tokenizing these.
-        }
-        if (mb_stripos($this->string, '<code') === false) {
+        } elseif (mb_stripos($this->string, '<code') === false) {
             return; // Nothing to tokenize here.
         }
         $code = // HTML `<code>` tags.
@@ -203,8 +201,7 @@ class Tokenizer extends Classes\Core\Base\Core
     {
         if (!in_array('samp', $this->tokenize, true)) {
             return; // Not tokenizing these.
-        }
-        if (mb_stripos($this->string, '<samp') === false) {
+        } elseif (mb_stripos($this->string, '<samp') === false) {
             return; // Nothing to tokenize here.
         }
         $samp = // HTML `<samp>` tags.
@@ -229,8 +226,7 @@ class Tokenizer extends Classes\Core\Base\Core
     {
         if (!in_array('anchors', $this->tokenize, true)) {
             return; // Not tokenizing these.
-        }
-        if (mb_stripos($this->string, '<a') === false) {
+        } elseif (mb_stripos($this->string, '<a') === false) {
             return; // Nothing to tokenize here.
         }
         $a = // HTML `<samp>` tags.
@@ -255,8 +251,7 @@ class Tokenizer extends Classes\Core\Base\Core
     {
         if (!in_array('tags', $this->tokenize, true)) {
             return; // Not tokenizing these.
-        }
-        if (mb_stripos($this->string, '<') === false) {
+        } elseif (mb_stripos($this->string, '<') === false) {
             return; // Nothing to tokenize here.
         }
         $tags = // This matches HTML `<a-z0-9>` tags (i.e., tags only).
@@ -271,16 +266,15 @@ class Tokenizer extends Classes\Core\Base\Core
     }
 
     /**
-     * Maybe tokenize `md fences`.
+     * Maybe tokenize MD fences.
      *
      * @since 150424 Initial release.
      */
     protected function maybeTokenizeMdFences()
     {
-        if (!in_array('md_fences', $this->tokenize, true)) {
+        if (!in_array('md-fences', $this->tokenize, true)) {
             return; // Not tokenizing these.
-        }
-        if (mb_strpos($this->string, '~') === false && mb_strpos($this->string, '`') === false) {
+        } elseif (mb_strpos($this->string, '~') === false && mb_strpos($this->string, '`') === false) {
             return; // Nothing to tokenize here.
         }
         $md_fences = // Markdown pre/code fences.
@@ -308,7 +302,7 @@ class Tokenizer extends Classes\Core\Base\Core
         // So, while we DO tokenize <link> "definitions" themselves, the [actual][references] to
         // these definitions do not need to be tokenized; i.e., it is not necessary here.
 
-        if (!in_array('md_links', $this->tokenize, true)) {
+        if (!in_array('md-links', $this->tokenize, true)) {
             return; // Not tokenizing these.
         }
         $this->string = preg_replace_callback(

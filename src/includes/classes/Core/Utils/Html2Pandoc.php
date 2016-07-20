@@ -37,8 +37,7 @@ class Html2Pandoc extends Classes\Core\Base\Core
         }
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
-        }
-        if (!$to) { // Convert to nothing?
+        } elseif (!$to) { // Convert to nothing?
             return $string; // Nothing to do.
         }
         try { // Fail gracefully.

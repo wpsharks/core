@@ -28,8 +28,7 @@ class Html extends Classes\Core\Base\Core
      */
     public function is(string $string): bool
     {
-        return $string && mb_strpos($string, '<') !== false
-                && preg_match('/\<[^<>]+\>/u', $string);
+        return mb_strpos($string, '<') !== false && preg_match('/\<[^<>]+\>/u', $string);
     }
 
     /**

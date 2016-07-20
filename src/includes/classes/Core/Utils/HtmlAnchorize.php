@@ -37,7 +37,7 @@ class HtmlAnchorize extends Classes\Core\Base\Core implements Interfaces\EmailCo
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        $Tokenizer = $this->c::tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'anchors', 'tags', 'md_fences', 'md_links']);
+        $Tokenizer = $this->c::tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'anchors', 'tags', 'md-fences', 'md-links']);
         $string    = &$Tokenizer->getString(); // Now get string by reference.
 
         $string = preg_replace_callback('/(?<before>^|[\s<])(?<url>'.$this->c::regexFrag($this::URL_REGEX_VALID).')/u', function ($m) {

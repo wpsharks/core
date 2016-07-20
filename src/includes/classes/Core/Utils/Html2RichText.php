@@ -88,11 +88,11 @@ class Html2RichText extends Classes\Core\Base\Core implements Interfaces\HtmlCon
         $Tokenizer = $this->c::tokenize($string, ['pre', 'code', 'samp']);
         $string    = &$Tokenizer->getString(); // By reference.
 
-        if ($br2nl) {
+        if ($br2nl) { // Default behavior.
             $string = preg_replace('/\<br(?:\>|\/\s*\>|\s[^\/>]*\/\s*\>)/u', "\n", $string);
             $string = $this->c::normalizeEols($string); // Normalize line breaks.
             $string = preg_replace('/[ '."\t\x0B".']+/u', ' ', $string);
-        } else {
+        } else { // Force everything into a single line.
             $string = preg_replace('/\s+/u', ' ', $string);
         }
         $string = $this->c::normalizeHtmlWhitespace($string);

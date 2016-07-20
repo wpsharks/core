@@ -1,3 +1,8 @@
+## [coming soon]
+
+- Adding `c::stripLeadingIndents()`.
+- Refactoring `Classes\Tokenizer{}`.
+
 ## v160719.52827
 
 - Bug fix. `AwsLib` instead of `Aws`, because this name conflicts with the utility that calls it.

@@ -83,8 +83,8 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
                 'code',
                 'samp',
                 'anchors',
-                'md_fences',
-                'md_links',
+                'md-fences',
+                'md-links',
             ]
         ); // Now get string by reference.
         $string = &$Tokenizer->getString();

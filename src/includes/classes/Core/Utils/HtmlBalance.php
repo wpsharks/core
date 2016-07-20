@@ -40,13 +40,11 @@ class HtmlBalance extends Classes\Core\Base\Core
             return $value;
         }
         if (!($string = (string) $value)) {
-            return $string;
-        }
-        if (mb_stripos($string, '</html>') !== false) {
-            return $string;
-        }
-        if (mb_stripos($string, '</body>') !== false) {
-            return $string;
+            return $string; // Nothing to do.
+        } elseif (mb_stripos($string, '</html>') !== false) {
+            return $string; // Not a fragment; leave as-is.
+        } elseif (mb_stripos($string, '</body>') !== false) {
+            return $string; // Not a fragment; leave as-is.
         }
         $html = // UTF-8 encoding.
             '<html>'.

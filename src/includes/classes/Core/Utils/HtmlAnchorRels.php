@@ -37,7 +37,7 @@ class HtmlAnchorRels extends Classes\Core\Base\Core
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
         }
-        $Tokenizer = $this->c::tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'md_fences', 'md_links']);
+        $Tokenizer = $this->c::tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'md-fences', 'md-links']);
         $string    = &$Tokenizer->getString(); // Now get string by reference.
 
         $string = preg_replace_callback('/\<a\s[^>]*\>/ui', function ($m) use ($rels) {
