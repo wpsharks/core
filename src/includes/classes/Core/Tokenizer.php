@@ -92,15 +92,17 @@ class Tokenizer extends Classes\Core\Base\Core
         $this->tokenize = $tokenize; // What to tokenize.
 
         $default_args = [
-            'shortcode_tag_names'       => [],
-            'exclude_escaped_shortcode' => false,
-            'shortcode_unautop_compat'  => false,
+            'shortcode_tag_names'               => [],
+            'exclude_escaped_shortcode'         => false,
+            'shortcode_unautop_compat'          => false,
+            'shortcode_unautop_compat_tag_name' => '',
         ]; // Establishes argument defaults.
 
-        $this->args                              = $args + $default_args;
-        $this->args['shortcode_tag_names']       = (array) $this->args['shortcode_tag_names'];
-        $this->args['exclude_escaped_shortcode'] = (bool) $this->args['exclude_escaped_shortcode'];
-        $this->args['shortcode_unautop_compat']  = (bool) $this->args['shortcode_unautop_compat'];
+        $this->args                                      = $args + $default_args;
+        $this->args['shortcode_tag_names']               = (array) $this->args['shortcode_tag_names'];
+        $this->args['exclude_escaped_shortcode']         = (bool) $this->args['exclude_escaped_shortcode'];
+        $this->args['shortcode_unautop_compat']          = (bool) $this->args['shortcode_unautop_compat'];
+        $this->args['shortcode_unautop_compat_tag_name'] = (string) $this->args['shortcode_unautop_compat_tag_name'];
 
         $this->tokens = []; // Initialize tokens.
 
@@ -172,12 +174,15 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (!empty($GLOBALS['shortcode_tags']) && is_array($GLOBALS['shortcode_tags'])) {
             $shortcode_tag_names = array_keys($GLOBALS['shortcode_tags']);
         }
-        if (empty($shortcode_tag_names) || !$this->c::isWordPress() || !$this->c::canCallFunc('get_shortcode_regex')) {
-            return; // Not possible; not WordPress or function missing at this time.
+        if (empty($shortcode_tag_names) || !$this->c::isWordPress()
+                || !$this->c::canCallFunc('get_shortcode_regex')) {
+            return; // Not possible at this time.
         }
-        $this->shortcode_unautop_compat_tag_name = $shortcode_tag_names[0];
-        // Any registered shortcode tag name; for `shortcode_unautop_compat` mode.
-        // This prevents WordPress from wrapping a stand-alone token with a `<p></p>`.
+        if ($this->args['shortcode_unautop_compat_tag_name']) {
+            $this->shortcode_unautop_compat_tag_name = $this->args['shortcode_unautop_compat_tag_name'];
+        } else { // Any registered shortcode tag name; for `shortcode_unautop_compat` mode.
+            $this->shortcode_unautop_compat_tag_name = $shortcode_tag_names[0];
+        } // This prevents WordPress from wrapping a stand-alone token with `<p></p>`.
 
         $regex = '/'.get_shortcode_regex($shortcode_tag_names).'/us'; // Dot matches new line.
         // See: <https://developer.wordpress.org/reference/functions/get_shortcode_regex/>
