@@ -802,16 +802,16 @@
     "packages-dev": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.18.30",
+            "version": "3.18.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "fbce85229b913a9e1aded54e464a9bbff0787bf1"
+                "reference": "dad0b7db5fa8f3c7a3805efb2a1e86a50f11fe8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fbce85229b913a9e1aded54e464a9bbff0787bf1",
-                "reference": "fbce85229b913a9e1aded54e464a9bbff0787bf1",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dad0b7db5fa8f3c7a3805efb2a1e86a50f11fe8b",
+                "reference": "dad0b7db5fa8f3c7a3805efb2a1e86a50f11fe8b",
                 "shasum": ""
             },
             "require": {
@@ -878,7 +878,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-07-18 16:15:53"
+            "time": "2016-07-19 17:25:45"
         },
         {
             "name": "corneltek/getoptionkit",
