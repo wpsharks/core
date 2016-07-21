@@ -18,6 +18,15 @@ use function get_defined_vars as vars;
 class Tokenizer extends Classes\Core\Base\Core
 {
     /**
+     * ID.
+     *
+     * @since 150424
+     *
+     * @type string
+     */
+    protected $id;
+
+    /**
      * String.
      *
      * @since 150424
@@ -36,6 +45,15 @@ class Tokenizer extends Classes\Core\Base\Core
     protected $tokenize;
 
     /**
+     * Behavioral args.
+     *
+     * @since 160720
+     *
+     * @type array
+     */
+    protected $args;
+
+    /**
      * Tokens.
      *
      * @since 150424
@@ -45,13 +63,13 @@ class Tokenizer extends Classes\Core\Base\Core
     protected $tokens;
 
     /**
-     * Marker.
+     * A shortcode tag name.
      *
-     * @since 150424
+     * @since 160720
      *
-     * @type string
+     * @type string|null
      */
-    protected $marker;
+    protected $shortcode_unautop_compat_tag_name;
 
     /**
      * Tokenize specific elements.
@@ -61,17 +79,30 @@ class Tokenizer extends Classes\Core\Base\Core
      * @param Classes\App $App      Instance of App.
      * @param string      $string   Input string.
      * @param array       $tokenize Specific elements.
+     * @param array       $args     Any behavioral args.
      *
      * @return string The tokenized string.
      */
-    public function __construct(Classes\App $App, string $string, array $tokenize)
+    public function __construct(Classes\App $App, string $string, array $tokenize, array $args = [])
     {
         parent::__construct($App);
 
-        $this->string   = $string;
-        $this->tokenize = $tokenize;
-        $this->tokens   = []; // Initialize.
-        $this->marker   = str_replace('.', '', uniqid('', true));
+        $this->id       = $this->c::uniqueId();
+        $this->string   = $string; // String to tokenize.
+        $this->tokenize = $tokenize; // What to tokenize.
+
+        $default_args = [
+            'shortcode_tag_names'       => [],
+            'exclude_escaped_shortcode' => false,
+            'shortcode_unautop_compat'  => false,
+        ]; // Establishes argument defaults.
+
+        $this->args                              = $args + $default_args;
+        $this->args['shortcode_tag_names']       = (array) $this->args['shortcode_tag_names'];
+        $this->args['exclude_escaped_shortcode'] = (bool) $this->args['exclude_escaped_shortcode'];
+        $this->args['shortcode_unautop_compat']  = (bool) $this->args['shortcode_unautop_compat'];
+
+        $this->tokens = []; // Initialize tokens.
 
         if (!$this->string || !$this->tokenize) {
             return; // Nothing to do.
@@ -89,6 +120,18 @@ class Tokenizer extends Classes\Core\Base\Core
     }
 
     /**
+     * Get tokenizer ID.
+     *
+     * @since 160720 Initial release.
+     *
+     * @return string Tokenizer ID.
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
      * Get tokenized string.
      *
      * @since 150424 Initial release.
@@ -101,23 +144,15 @@ class Tokenizer extends Classes\Core\Base\Core
     }
 
     /**
-     * Restore tokens.
+     * Set tokenized string.
      *
      * @since 150424 Initial release.
      *
-     * @return string After restoring tokens.
+     * @param string Set the tokenized string.
      */
-    public function &restoreGetString(): string
+    public function setString(string $string)
     {
-        if (!$this->tokens || mb_strpos($this->string, '|%#%|') === false) {
-            return $this->string; // Nothing to restore in this case.
-        }
-        foreach (array_reverse($this->tokens, true) as $_token => $_value) {
-            // Must go in reverse order so nested tokens unfold properly.
-            $this->string = str_replace('|%#%|html-token-'.$this->marker.'-'.$_token.'|%#%|', $_value, $this->string);
-        } // unset($_token, $_value); // Housekeeping.
-
-        return $this->string;
+        $this->string = $string;
     }
 
     /**
@@ -131,14 +166,37 @@ class Tokenizer extends Classes\Core\Base\Core
             return; // Not tokenizing these.
         } elseif (mb_strpos($this->string, '[') === false) {
             return; // No `[` shortcodes.
-        } elseif (empty($GLOBALS['shortcode_tags']) || !$this->c::isWordPress()) {
-            return; // Not WordPress; i.e., no known shortcodes.
-        } elseif (!$this->c::canCallFunc('get_shortcode_regex')) {
-            return; // Not possible; function missing.
         }
-        $this->string = preg_replace_callback('/'.get_shortcode_regex().'/us', function ($m) {
-            $this->tokens[] = $m[0]; // Tokenize.
-            return '|%#%|html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'|%#%|';
+        if ($this->args['shortcode_tag_names']) {
+            $shortcode_tag_names = $this->args['shortcode_tag_names'];
+        } elseif (!empty($GLOBALS['shortcode_tags']) && is_array($GLOBALS['shortcode_tags'])) {
+            $shortcode_tag_names = array_keys($GLOBALS['shortcode_tags']);
+        }
+        if (empty($shortcode_tag_names) || !$this->c::isWordPress() || !$this->c::canCallFunc('get_shortcode_regex')) {
+            return; // Not possible; not WordPress or function missing at this time.
+        }
+        $this->shortcode_unautop_compat_tag_name = $shortcode_tag_names[0];
+        // Any registered shortcode tag name; for `shortcode_unautop_compat` mode.
+        // This prevents WordPress from wrapping a stand-alone token with a `<p></p>`.
+
+        $regex = '/'.get_shortcode_regex($shortcode_tag_names).'/us'; // Dot matches new line.
+        // See: <https://developer.wordpress.org/reference/functions/get_shortcode_regex/>
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            // If excluding escaped shortcodes, check here before we continue.
+            if ($this->args['exclude_escaped_shortcode'] && $m[1] === '[' && $m[6] === ']') {
+                return $m[0]; // Escaped; exclude from tokenization.
+            }
+            $this->tokens[] = $m[0]; // Original data for token.
+            // i.e., The entire shortcode (w/ possible escape brackets).
+
+            if ($this->args['shortcode_unautop_compat']) {
+                return $token = '['.$this->shortcode_unautop_compat_tag_name.' _is_token="|%#%|"]'.
+                                    '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|'.
+                                '[/'.$this->shortcode_unautop_compat_tag_name.']';
+            } else { // Default behavior.
+                return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+            }
         }, $this->string); // Shortcodes replaced by tokens.
     }
 
@@ -154,16 +212,19 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<pre') === false) {
             return; // Nothing to tokenize here.
         }
-        $pre = // HTML `<pre>` tags.
-            '/(?<tag_open_bracket>\<)'.// Opening `<` bracket.
+        $regex = '/'.// HTML `<pre>` tags.
+
+            '(?<tag_open_bracket>\<)'.// Opening `<` bracket.
             '(?<tag_open_name>pre)'.// Tag name; i.e., a `pre` tag.
             '(?<tag_open_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
             '(?<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?<tag_close>\<\/\\2\>)/uis'; // e.g. closing `</pre>` tag.
+            '(?<tag_close>\<\/\\2\>)'.// Closing `</pre>` tag.
 
-        $this->string = preg_replace_callback($pre, function ($m) {
-            $this->tokens[] = $m[0]; // Tokenize.
-            return '|%#%|html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'|%#%|';
+        '/uis'; // End of regex pattern; plus modifiers.
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0]; // Original data for token.
+            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -179,16 +240,19 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<code') === false) {
             return; // Nothing to tokenize here.
         }
-        $code = // HTML `<code>` tags.
-            '/(?<tag_open_bracket>\<)'.// Opening `<` bracket.
+        $regex = '/'.// HTML `<code>` tags.
+
+            '(?<tag_open_bracket>\<)'.// Opening `<` bracket.
             '(?<tag_open_name>code)'.// Tag name; i.e., a `code` tag.
             '(?<tag_open_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
             '(?<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?<tag_close>\<\/\\2\>)/uis'; // e.g. closing `</code>` tag.
+            '(?<tag_close>\<\/\\2\>)'.// Closing `</code>` tag.
 
-        $this->string = preg_replace_callback($code, function ($m) {
-            $this->tokens[] = $m[0]; // Tokenize.
-            return '|%#%|html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'|%#%|';
+        '/uis'; // End of regex pattern; plus modifiers.
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -204,16 +268,19 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<samp') === false) {
             return; // Nothing to tokenize here.
         }
-        $samp = // HTML `<samp>` tags.
-            '/(?<tag_open_bracket>\<)'.// Opening `<` bracket.
+        $regex = '/'.// HTML `<samp>` tags.
+
+            '(?<tag_open_bracket>\<)'.// Opening `<` bracket.
             '(?<tag_open_name>samp)'.// Tag name; i.e., a `samp` tag.
             '(?<tag_open_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
             '(?<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?<tag_close>\<\/\\2\>)/uis'; // e.g. closing `</samp>` tag.
+            '(?<tag_close>\<\/\\2\>)'.// Closing `</samp>` tag.
 
-        $this->string = preg_replace_callback($samp, function ($m) {
-            $this->tokens[] = $m[0]; // Tokenize.
-            return '|%#%|html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'|%#%|';
+        '/uis'; // End of regex pattern; plus modifiers.
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -229,16 +296,19 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<a') === false) {
             return; // Nothing to tokenize here.
         }
-        $a = // HTML `<samp>` tags.
-            '/(?<tag_open_bracket>\<)'.// Opening `<` bracket.
+        $regex = '/'.// HTML `<samp>` tags.
+
+            '(?<tag_open_bracket>\<)'.// Opening `<` bracket.
             '(?<tag_open_name>a)'.// Tag name; i.e., an `a` tag.
             '(?<tag_open_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
             '(?<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?<tag_close>\<\/\\2\>)/uis'; // e.g. closing `</a>` tag.
+            '(?<tag_close>\<\/\\2\>)'.// Closing `</a>` tag.
 
-        $this->string = preg_replace_callback($a, function ($m) {
-            $this->tokens[] = $m[0]; // Tokenize.
-            return '|%#%|html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'|%#%|';
+        '/uis'; // End of regex pattern; plus modifiers.
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -254,14 +324,17 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<') === false) {
             return; // Nothing to tokenize here.
         }
-        $tags = // This matches HTML `<a-z0-9>` tags (i.e., tags only).
-            '/(?<tag_open_close_bracket>\<\/?)'.// Open or close `<[/]` bracket.
-            '(?<tag_open_close_name>[a-z0-9]+)'.// See: <http://jas.xyz/1P1MQyh>
-            '(?<tag_open_close_attrs_bracket>\>|\s[^>]*\>)/ui'; // Attributes & `>`.
+        $regex = '/'.// HTML `<a-z0-9>` tags (i.e., tags only).
 
-        $this->string = preg_replace_callback($tags, function ($m) {
-            $this->tokens[] = $m[0]; // Tokenize.
-            return '|%#%|html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'|%#%|';
+            '(?<tag_open_close_bracket>\<\/?)'.// Open or close `<[/]` bracket.
+            '(?<tag_open_close_name>[a-z0-9]+)'.// See: <http://jas.xyz/1P1MQyh>
+            '(?<tag_open_close_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
+
+        '/ui'; // End of regex pattern; plus modifiers.
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -277,14 +350,17 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_strpos($this->string, '~') === false && mb_strpos($this->string, '`') === false) {
             return; // Nothing to tokenize here.
         }
-        $md_fences = // Markdown pre/code fences.
-            '/(?<fence_open>~{3,}|`{3,}|`)'.// Opening fence.
-            '(?<fence_contents>.*?)'.// Contents (multiline possible).
-            '(?<fence_close>\\1)/uis'; // Closing fence; ~~~, ```, `.
+        $regex = '/'.// Markdown pre/code fences.
 
-        $this->string = preg_replace_callback($md_fences, function ($m) {
-            $this->tokens[] = $m[0]; // Tokenize.
-            return '|%#%|html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'|%#%|';
+            '(?<fence_open>~{3,}|`{3,}|`)'.// Opening fence.
+            '(?<fence_contents>.*?)'.// Contents (multiline possible).
+            '(?<fence_close>\\1)'.// Closing fence; ~~~, ```, `.
+
+        '/uis'; // End of regex pattern; plus modifiers.
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
         }, $this->string); // Fences replaced by tokens.
     }
 
@@ -295,6 +371,9 @@ class Tokenizer extends Classes\Core\Base\Core
      */
     protected function maybeTokenizeMdLinks()
     {
+        if (!in_array('md-links', $this->tokenize, true)) {
+            return; // Not tokenizing these.
+        }
         // This also tokenizes [Markdown]: <link> "definitions".
         // This routine includes considerations for images also.
 
@@ -302,19 +381,48 @@ class Tokenizer extends Classes\Core\Base\Core
         // So, while we DO tokenize <link> "definitions" themselves, the [actual][references] to
         // these definitions do not need to be tokenized; i.e., it is not necessary here.
 
-        if (!in_array('md-links', $this->tokenize, true)) {
-            return; // Not tokenizing these.
-        }
         $this->string = preg_replace_callback(
             [
                 '/^[ ]*(?:\[[^\]]+\])+[ ]*\:[ ]*(?:\<[^>]+\>|\S+)(?:[ ]+.+)?$/um',
                 '/\!?\[(?:(?R)|[^\]]*)\]\([^)]+\)(?:\{[^}]*\})?/u',
             ],
             function ($m) {
-                $this->tokens[] = $m[0]; // Tokenize.
-                return '|%#%|html-token-'.$this->marker.'-'.(count($this->tokens) - 1).'|%#%|';
+                $this->tokens[] = $m[0];  // Original data for token.
+                return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
             },
             $this->string // Shortcodes replaced by tokens.
         );
+    }
+
+    /**
+     * Restore token originals.
+     *
+     * @since 150424 Initial release.
+     *
+     * @return string After restoring tokens.
+     */
+    public function &restoreGetString(): string
+    {
+        if (!$this->tokens || mb_strpos($this->string, '|%#%|') === false) {
+            return $this->string; // Nothing to restore in this case.
+        }
+        $restore_shortcode_tokens = $this->args['shortcode_unautop_compat']
+            && $this->shortcode_unautop_compat_tag_name && in_array('shortcodes', $this->tokenize, true);
+
+        foreach (array_reverse($this->tokens, true) as $_token_id => $_original) {
+            // Must go in reverse order so nested tokens unfold properly.
+            // If `$restore_shortcode_tokens`, first replace shortcode tokens.
+
+            $_token = '|%#%|'.$this->id.'-'.$_token_id.'|%#%|'; // Placeholder.
+
+            if ($restore_shortcode_tokens) { // Restoring shortcode tokens in this class instance?
+                $this->string = str_replace('['.$this->shortcode_unautop_compat_tag_name.' _is_token="|%#%|"]'.
+                                                $_token.// Token inside the shortcode token.
+                                            '[/'.$this->shortcode_unautop_compat_tag_name.']', $_original, $this->string);
+            }
+            $this->string = str_replace($_token, $_original, $this->string);
+        } // unset($_token_id, $_token, $_original); // Housekeeping.
+
+        return $this->string;
     }
 }

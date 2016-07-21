@@ -15,9 +15,8 @@ trait Tokenizer
     /**
      * @since 151214 Adding functions.
      */
-    public static function tokenize(string $string, array $tokenize)
+    public static function tokenize(string $string, array $tokenize, array $args = [])
     {
-        $args = ['string' => $string, 'tokenize' => $tokenize];
-        return $GLOBALS[static::class]->Di->get(Classes\Core\Tokenizer::class, $args);
+        return $GLOBALS[static::class]->Di->get(Classes\Core\Tokenizer::class, ['string' => $string, 'tokenize' => $tokenize, 'args' => $args]);
     }
 }

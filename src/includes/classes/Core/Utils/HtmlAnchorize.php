@@ -38,11 +38,11 @@ class HtmlAnchorize extends Classes\Core\Base\Core implements Interfaces\EmailCo
             return $string; // Nothing to do.
         }
         $Tokenizer = $this->c::tokenize($string, ['shortcodes', 'pre', 'code', 'samp', 'anchors', 'tags', 'md-fences', 'md-links']);
-        $string    = &$Tokenizer->getString(); // Now get string by reference.
+        $string    = &$Tokenizer->getString(); // String by reference.
 
         $string = preg_replace_callback('/(?<before>^|[\s<])(?<url>'.$this->c::regexFrag($this::URL_REGEX_VALID).')/u', function ($m) {
             return $m['before'].'<a href="'.$this->c::escUrl($m['url']).'">'.$this->c::escHtml($m['url']).'</a>';
-        }, $string); // Converts full URLs into clickable links using advanced regex.
+        }, $string); // Converts full URLs into clickable links using regex.
 
         $string = preg_replace_callback('/(?<before>^|[\s<])(?<host>(?:www|ftp)\.'.$this::URL_REGEX_FRAG_HOST_TLD_PORT.')/u', function ($m) {
             return $m['before'].'<a href="'.$this->c::escUrl('http://'.$m['host'].'/').'">'.$this->c::escHtml($m['host']).'</a>';
@@ -54,7 +54,7 @@ class HtmlAnchorize extends Classes\Core\Base\Core implements Interfaces\EmailCo
 
         $string = preg_replace_callback('/(?<before>^|[\s<])(?<email>'.$this->c::regexFrag($this::EMAIL_REGEX_VALID).')/u', function ($m) {
             return $m['before'].'<a href="'.$this->c::escUrl('mailto:'.$m['email']).'">'.$this->c::escHtml($m['email']).'</a>';
-        }, $string); // Converts email address into clickable `mailto:` links.
+        }, $string); // Converts email addresses into clickable `mailto:` links.
 
         $string = $Tokenizer->restoreGetString();
 
