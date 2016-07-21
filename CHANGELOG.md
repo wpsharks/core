@@ -1,8 +1,9 @@
-## [coming soon]
+## $v
 
 - Adding `c::stripLeadingIndents()`.
 - Refactoring `Classes\Tokenizer{}`.
 - Making it possible to tokenize specific shortcode tag names in `Classes\Core\Tokenizer{}`.
+- Adding `$compress` parameter to `c::normalizeEols()` to allow for compressino to be disabled there.
 
 ## v160719.52827
 

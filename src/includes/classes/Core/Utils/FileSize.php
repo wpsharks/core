@@ -49,8 +49,12 @@ class FileSize extends Classes\Core\Base\Core
      */
     public function bytesAbbr(float $bytes, int $precision = 2): string
     {
+        // NOTE: Still necessary to force `(float)`.
+        // PHP `(float)` type hints allow for an integer.
+        $bytes = (float) $bytes;
+
         $precision  = max(0, $precision);
-        $bytes      = max(0.0, (float) $bytes);
+        $bytes      = max(0.0, $bytes);
         $units      = ['bytes', 'kbs', 'MB', 'GB', 'TB'];
         $power      = floor(($bytes ? log($bytes) : 0) / log(1024));
         $abbr_bytes = round($bytes / pow(1024, $power), $precision);

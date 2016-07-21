@@ -22,15 +22,16 @@ class Eols extends Classes\Core\Base\Core
      *
      * @since 150424 Initial release.
      *
-     * @param mixed $value Any input value.
+     * @param mixed $value    Any input value.
+     * @param bool  $compress Compress `\n{3,}` into `\n\n`?
      *
      * @return string|array|object With normalized end of line chars deeply.
      */
-    public function normalize($value)
+    public function normalize($value, bool $compress = true)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->normalize($_value);
+                $_value = $this->normalize($_value, $compress);
             } // unset($_key, $_value);
             return $value;
         }
@@ -38,7 +39,7 @@ class Eols extends Classes\Core\Base\Core
             return $string; // Nothing to do.
         }
         $string = str_replace(["\r\n", "\r"], "\n", $string);
-        $string = preg_replace('/'."\n".'{3,}/u', "\n\n", $string);
+        $string = $compress ? preg_replace('/'."\n".'{3,}/u', "\n\n", $string) : $string;
 
         return $string;
     }

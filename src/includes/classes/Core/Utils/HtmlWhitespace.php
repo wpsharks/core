@@ -22,17 +22,18 @@ class HtmlWhitespace extends Classes\Core\Base\Core implements Interfaces\HtmlCo
      *
      * @since 150424 Initial release.
      *
-     * @param mixed $value Any input value.
+     * @param mixed $value    Any input value.
+     * @param bool  $compress Compress `\n{3,}` into 2?
      *
      * @return string|array|object With normalized HTML whitespace deeply.
      */
-    public function normalize($value)
+    public function normalize($value, bool $compress = true)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->normalize($_value);
+                $_value = $this->normalize($_value, $compress);
             } // unset($_key, $_value);
-            return $this->c::normalizeEols($value);
+            return $this->c::normalizeEols($value, $compress);
         }
         if (!($string = (string) $value)) {
             return $string; // Nothing to do.
@@ -40,8 +41,9 @@ class HtmlWhitespace extends Classes\Core\Base\Core implements Interfaces\HtmlCo
         if (($whitespace = &$this->cacheKey(__FUNCTION__.'_whitespace')) === null) {
             $whitespace = implode('|', $this::HTML_WHITESPACE);
         }
-        $string = preg_replace('/('.$whitespace.')('.$whitespace.')('.$whitespace.')+/u', '${1}${2}', $string);
-
-        return $this->c::normalizeEols($string);
+        if ($compress) { // NOTE: This is the only task at the moment. It could change in the future.
+            $string = preg_replace('/('.$whitespace.')('.$whitespace.')('.$whitespace.')+/u', '${1}${2}', $string);
+        }
+        return $this->c::normalizeEols($string, $compress);
     }
 }
