@@ -45,6 +45,22 @@ trait Dimensions
     }
 
     /**
+     * @since 160720 Remove key utils.
+     */
+    public static function removeKey(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©RemoveKeys->__invoke(...$args);
+    }
+
+    /**
+     * @since 160720 Remove key utils.
+     */
+    public static function removeKeys(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©RemoveKeys->__invoke(...$args);
+    }
+
+    /**
      * @since 151214 Adding functions.
      */
     public static function sortByKey(...$args)
