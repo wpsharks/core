@@ -27,7 +27,7 @@ class Eols extends Classes\Core\Base\Core
      *
      * @return string|array|object With normalized end of line chars deeply.
      */
-    public function normalize($value, bool $compress = true)
+    public function normalize($value, bool $compress = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

@@ -64,7 +64,7 @@ class Html2Text extends Classes\Core\Base\Core implements Interfaces\HtmlConstan
 
         if ($br2nl) { // Default behavior.
             $string = preg_replace('/\<br(?:\>|\/\s*\>|\s[^\/>]*\/\s*\>)/u', "\n", $string);
-            $string = $this->c::normalizeEols($string); // Normalize line breaks.
+            $string = $this->c::normalizeEols($string, true); // Normalize line breaks.
             $string = preg_replace('/[ '."\t\x0B".']+/u', ' ', $string);
         } else { // Force everything into a single line.
             $string = preg_replace('/\s+/u', ' ', $string);

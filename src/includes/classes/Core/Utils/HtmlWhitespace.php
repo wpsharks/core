@@ -27,7 +27,7 @@ class HtmlWhitespace extends Classes\Core\Base\Core implements Interfaces\HtmlCo
      *
      * @return string|array|object With normalized HTML whitespace deeply.
      */
-    public function normalize($value, bool $compress = true)
+    public function normalize($value, bool $compress = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {

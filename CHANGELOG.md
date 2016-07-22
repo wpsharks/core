@@ -1,9 +1,13 @@
+## [coming soon]
+
+- `$compress` parameter to `c::normalizeEols()` now defaults to `false`.
+
 ## v160721.58607
 
 - Adding `c::stripLeadingIndents()`.
 - Refactoring `Classes\Tokenizer{}`.
 - Making it possible to tokenize specific shortcode tag names in `Classes\Core\Tokenizer{}`.
-- Adding `$compress` parameter to `c::normalizeEols()` to allow for compressino to be disabled there.
+- Adding `$compress` parameter to `c::normalizeEols()` to allow for compression to be disabled there.
 - Adding `c::removeKey()` and `c::removeKeys()`.
 
 ## v160719.52827

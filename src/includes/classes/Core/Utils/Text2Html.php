@@ -43,9 +43,9 @@ class Text2Html extends Classes\Core\Base\Core
         $args         = array_intersect_key($args, $default_args);
 
         $string = $this->c::escHtml($string);
-        $string = nl2br($this->c::normalizeEols($string));
-        $string = $this->c::htmlAnchorize($string);
-        $string = $this->c::normalizeHtmlWhitespace($string);
+        $string = nl2br($this->c::normalizeEols($string, true));
+        $string = $this->c::htmlAnchorize($string); // Make clickable.
+        $string = $this->c::normalizeHtmlWhitespace($string, true);
         $string = $this->c::htmlTrim($string);
 
         return $string;
