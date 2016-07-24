@@ -1,4 +1,10 @@
 <?php
+/**
+ * Dependency injector.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Base;
 
@@ -24,7 +30,7 @@ class Di extends Dicer
      *
      * @since 150424
      *
-     * @type Classes\App
+     * @var Classes\App
      */
     protected $App;
 

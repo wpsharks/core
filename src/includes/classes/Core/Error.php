@@ -1,4 +1,10 @@
 <?php
+/**
+ * Error.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core;
 
@@ -22,7 +28,7 @@ class Error extends Classes\Core\Base\Core
      *
      * @since 160710
      *
-     * @type array[]
+     * @var array[]
      */
     protected $errors;
 
@@ -31,7 +37,7 @@ class Error extends Classes\Core\Base\Core
      *
      * @since 160710
      *
-     * @type array
+     * @var array
      */
     protected $error_data;
 
@@ -40,7 +46,7 @@ class Error extends Classes\Core\Base\Core
      *
      * @since 160710
      *
-     * @type array
+     * @var array
      */
     protected $default_slug;
 
@@ -49,7 +55,7 @@ class Error extends Classes\Core\Base\Core
      *
      * @since 160710
      *
-     * @type array
+     * @var array
      */
     protected $default_message;
 

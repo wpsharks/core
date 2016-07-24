@@ -1,4 +1,10 @@
 <?php
+/**
+ * Application.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
@@ -22,7 +28,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160224
      *
-     * @type Classes\App|null
+     * @var Classes\App|null
      */
     public $Parent;
 
@@ -31,7 +37,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160228
      *
-     * @type \ReflectionClass
+     * @var \ReflectionClass
      */
     public $Reflection;
 
@@ -40,7 +46,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160223
      *
-     * @type string
+     * @var string
      */
     public $class;
 
@@ -49,7 +55,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     public $namespace;
 
@@ -58,7 +64,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     public $namespace_sha1;
 
@@ -67,7 +73,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160225
      *
-     * @type string
+     * @var string
      */
     public $file;
 
@@ -76,7 +82,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     public $dir;
 
@@ -85,7 +91,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160223
      *
-     * @type string
+     * @var string
      */
     public $dir_basename;
 
@@ -94,7 +100,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160227
      *
-     * @type string
+     * @var string
      */
     public $base_dir;
 
@@ -103,7 +109,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160227
      *
-     * @type string
+     * @var string
      */
     public $base_dir_basename;
 
@@ -112,7 +118,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     public $ws_core_dir;
 
@@ -121,7 +127,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type bool
+     * @var bool
      */
     public $is_ws_core;
 
@@ -130,7 +136,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type bool
+     * @var bool
      */
     public $is_core;
 
@@ -139,7 +145,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160227
      *
-     * @type \StdClass
+     * @var \StdClass
      */
     public $Facades;
 
@@ -148,7 +154,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type Classes\Core\Base\Config
+     * @var Classes\Core\Base\Config
      */
     public $Config;
 
@@ -157,7 +163,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type Classes\Core\Base\Di
+     * @var Classes\Core\Base\Di
      */
     public $Di;
 
@@ -166,7 +172,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type Classes\Core\Base\Utils
+     * @var Classes\Core\Base\Utils
      */
     public $Utils;
 
@@ -175,9 +181,9 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string Version.
+     * @var string Version.
      */
-    const VERSION = '160721.58607'; //v//
+    const VERSION = '160724.74278'; //v//
 
     /**
      * Constructor.

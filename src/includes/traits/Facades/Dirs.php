@@ -1,4 +1,10 @@
 <?php
+/**
+ * Dirs.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Dirs.
+ *
+ * @since 151214
+ */
 trait Dirs
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function tmpDir(...$args)
     {
@@ -21,7 +32,7 @@ trait Dirs
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function normalizeDirPath(...$args)
     {
@@ -29,7 +40,7 @@ trait Dirs
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function deleteDir(...$args)
     {

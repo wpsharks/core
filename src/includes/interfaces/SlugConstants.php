@@ -1,4 +1,10 @@
 <?php
+/**
+ * Slug-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface SlugConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex pattern for use in `preg_match()`.
+     * @var string Regex pattern for use in `preg_match()`.
      *
      * @note This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/SlugConstants::SLUG_REGEX_VALID);`
@@ -34,7 +40,7 @@ interface SlugConstants
      *
      * @since 150424 Reserved slug class.
      *
-     * @type array Reserved regex patterns.
+     * @var array Reserved regex patterns.
      */
     const SLUG_RESERVED_REGEX_FRAGS = [
         '(my|postgre)?sql[0-9]*',
@@ -528,7 +534,7 @@ interface SlugConstants
      *
      * @since 150424 Reserved slug strings.
      *
-     * @type array Reserved slug strings.
+     * @var array Reserved slug strings.
      */
     const SLUG_RESERVED_STRINGS = [
         '106andpark',

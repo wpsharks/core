@@ -1,4 +1,10 @@
 <?php
+/**
+ * Random key utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -11,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * RandomKey utilities.
+ * Random key utilities.
  *
  * @since 150424 Initial release.
  */

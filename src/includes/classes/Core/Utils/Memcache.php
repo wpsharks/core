@@ -1,4 +1,10 @@
 <?php
+/**
+ * Memcache utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -22,7 +28,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @type \Memcached
+     * @var \Memcached
      */
     protected $Pool;
 
@@ -31,7 +37,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @type bool
+     * @var bool
      */
     protected $enabled;
 
@@ -40,7 +46,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @type string
+     * @var string
      */
     protected $namespace;
 
@@ -49,7 +55,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @type array
+     * @var array
      */
     protected $servers;
 
@@ -58,7 +64,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @type int
+     * @var int
      */
     const MAX_WRITE_ATTEMPTS = 5;
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * HTML.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * HTML.
+ *
+ * @since 151214
+ */
 trait Html
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isHtml(...$args)
     {
@@ -21,7 +32,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function balanceHtmlTags(...$args)
     {
@@ -29,7 +40,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function stripHtmlAttrs(...$args)
     {
@@ -37,7 +48,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function textToHtml(...$args)
     {
@@ -45,7 +56,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function htmlToText(...$args)
     {
@@ -53,7 +64,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function htmlToRichText(...$args)
     {
@@ -61,7 +72,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function htmlToPandoc(...$args)
     {
@@ -69,7 +80,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function htmlAnchorize(...$args)
     {
@@ -77,7 +88,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function htmlAnchorRels(...$args)
     {
@@ -85,7 +96,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function htmlTrim(...$args)
     {
@@ -93,7 +104,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function htmlLTrim(...$args)
     {
@@ -101,7 +112,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function htmlRTrim(...$args)
     {
@@ -109,7 +120,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function normalizeHtmlWhitespace(...$args)
     {
@@ -117,7 +128,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function checked(...$args)
     {
@@ -125,7 +136,7 @@ trait Html
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function selected(...$args)
     {

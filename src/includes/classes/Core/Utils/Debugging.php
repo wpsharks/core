@@ -1,4 +1,10 @@
 <?php
+/**
+ * Debugging utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -22,7 +28,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @since 160522 Debugging utilities.
      *
-     * @type string Logs directory.
+     * @var string Logs directory.
      */
     protected $logs_dir;
 
@@ -31,7 +37,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @since 160522 Debugging utilities.
      *
-     * @type int Max log file size.
+     * @var int Max log file size.
      */
     protected $max_log_file_size;
 
@@ -40,7 +46,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @since 160522 Debugging utilities.
      *
-     * @type string Max log file age.
+     * @var string Max log file age.
      */
     protected $max_log_file_age;
 
@@ -49,7 +55,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @since 160522 Debugging utilities.
      *
-     * @type array First-process writes by file.
+     * @var array First-process writes by file.
      */
     protected $first_process_writes;
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Cache members.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
@@ -22,7 +28,7 @@ trait CacheMembers
      *
      * @since 150424 Initial release.
      *
-     * @type array Instance cache.
+     * @var array Instance cache.
      */
     protected $¤¤cache = [];
 

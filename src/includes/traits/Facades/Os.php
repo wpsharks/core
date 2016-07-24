@@ -1,4 +1,10 @@
 <?php
+/**
+ * OS.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * OS.
+ *
+ * @since 151214
+ */
 trait Os
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isNix(...$args)
     {
@@ -21,7 +32,7 @@ trait Os
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isLinux(...$args)
     {
@@ -29,7 +40,7 @@ trait Os
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isMac(...$args)
     {
@@ -37,7 +48,7 @@ trait Os
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isWindows(...$args)
     {

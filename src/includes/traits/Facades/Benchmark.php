@@ -1,4 +1,10 @@
 <?php
+/**
+ * Benchmark.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Benchmark.
+ *
+ * @since 151214
+ */
 trait Benchmark
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function benchStart(...$args)
     {
@@ -21,7 +32,7 @@ trait Benchmark
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function benchPrint(...$args)
     {

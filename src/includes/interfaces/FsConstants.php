@@ -1,4 +1,10 @@
 <?php
+/**
+ * FS-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface FsConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const FS_REGEX_FRAG_STREAM_WRAPPER = '[a-zA-Z][a-zA-Z0-9+.\-]*\:\/\/';
 
@@ -31,7 +37,7 @@ interface FsConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const FS_REGEX_FRAG_DRIVE_PREFIX = '[a-zA-Z])\:[\/\\\\]';
 }

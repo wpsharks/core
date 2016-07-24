@@ -1,4 +1,10 @@
 <?php
+/**
+ * Escapes.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,6 +16,11 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Escapes.
+ *
+ * @since 160708
+ */
 trait Escapes
 {
     /**
@@ -29,7 +40,7 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function escHtml(...$args)
     {
@@ -37,7 +48,7 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function unescHtml(...$args)
     {
@@ -45,7 +56,7 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function escTextarea(...$args)
     {
@@ -53,7 +64,7 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function escAttr(...$args)
     {
@@ -61,7 +72,7 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function escUrl(...$args)
     {
@@ -93,7 +104,7 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function escSqlName(...$args)
     {
@@ -109,7 +120,7 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function escSqlOrder(...$args)
     {
@@ -125,7 +136,7 @@ trait Escapes
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function escRegex(...$args)
     {

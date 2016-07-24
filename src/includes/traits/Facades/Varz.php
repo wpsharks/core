@@ -1,4 +1,10 @@
 <?php
+/**
+ * Vars.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,6 +16,11 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Vars.
+ *
+ * @since 160220
+ */
 trait Varz
 {
     /**

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Second constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @type int Seconds in minute.
+     * @var int Seconds in minute.
      */
     const SECONDS_IN_MINUTE = 60;
 
@@ -31,7 +37,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @type int Seconds in hour.
+     * @var int Seconds in hour.
      */
     const SECONDS_IN_HOUR = 3600;
 
@@ -40,7 +46,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @type int Seconds in day.
+     * @var int Seconds in day.
      */
     const SECONDS_IN_DAY = 86400;
 
@@ -49,7 +55,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @type int Seconds in week.
+     * @var int Seconds in week.
      */
     const SECONDS_IN_WEEK = 604800;
 
@@ -58,7 +64,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @type int Seconds in year.
+     * @var int Seconds in year.
      */
     const SECONDS_IN_YEAR = 31536000;
 }

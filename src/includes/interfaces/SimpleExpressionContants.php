@@ -1,4 +1,10 @@
 <?php
+/**
+ * Simple expression-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface SimpleExpressionConstants
      *
      * @since 160708 Expression regex patterns.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const SIMPLE_EXPRESSION_REGEX_FRAG = // Begin regex.
 
@@ -76,7 +82,7 @@ interface SimpleExpressionConstants
      *
      * @since 160708 Expression regex patterns.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const SIMPLE_EXPRESSION_REGEX_VALID = '/^'.self::SIMPLE_EXPRESSION_REGEX_FRAG.'$/u';
 }

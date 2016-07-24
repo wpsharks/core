@@ -1,4 +1,10 @@
 <?php
+/**
+ * UUID-64.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * UUID-64.
+ *
+ * @since 151214
+ */
 trait Uuid64
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64Validate(...$args)
     {
@@ -21,7 +32,7 @@ trait Uuid64
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64ShardIdIn(...$args)
     {
@@ -29,7 +40,7 @@ trait Uuid64
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64ValidateShardId(...$args)
     {
@@ -37,7 +48,7 @@ trait Uuid64
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64TypeIdIn(...$args)
     {
@@ -45,7 +56,7 @@ trait Uuid64
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64ValidateTypeId(...$args)
     {
@@ -53,7 +64,7 @@ trait Uuid64
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64LocalIdIn(...$args)
     {
@@ -61,7 +72,7 @@ trait Uuid64
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64ValidateLocalId(...$args)
     {
@@ -69,7 +80,7 @@ trait Uuid64
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64Parse(...$args)
     {
@@ -77,7 +88,7 @@ trait Uuid64
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuid64Build(...$args)
     {

@@ -1,4 +1,10 @@
 <?php
+/**
+ * WS version-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface WsVersionConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Plugin version string validation pattern.
+     * @var string Plugin version string validation pattern.
      *             This has additional limitations (but still compatible w/ PHP version strings).
      *
      * @note Requirements are as follows:
@@ -42,7 +48,7 @@ interface WsVersionConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Plugin dev version string validation pattern.
+     * @var string Plugin dev version string validation pattern.
      *             This has additional limitations (but still compatible w/ PHP dev version strings).
      *
      * @note Requirements are as follows:
@@ -63,7 +69,7 @@ interface WsVersionConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Plugin stable version string validation pattern.
+     * @var string Plugin stable version string validation pattern.
      *             This has additional limitations (but still compatible w/ PHP stable version strings).
      *
      * @note Requirements are as follows:

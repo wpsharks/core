@@ -1,4 +1,10 @@
 <?php
+/**
+ * MIME-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface MimeConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string `; charset=utf-8`
+     * @var string `; charset=utf-8`
      */
     const MIME_CHARSET_UTF8 = '; charset=utf-8';
 
@@ -31,7 +37,7 @@ interface MimeConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array Keys are file extensions.
+     * @var array Keys are file extensions.
      */
     const MIME_TYPES = [
         // Text files.

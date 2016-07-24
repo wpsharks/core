@@ -1,4 +1,10 @@
 <?php
+/**
+ * Current URL.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Current URL.
+ *
+ * @since 151214
+ */
 trait UrlCurrent
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isSsl(...$args)
     {
@@ -21,7 +32,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isLocalhost(...$args)
     {
@@ -29,7 +40,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function currentUrl(...$args)
     {
@@ -37,7 +48,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function currentScheme(...$args)
     {
@@ -45,7 +56,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function currentHost(...$args)
     {
@@ -53,7 +64,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function currentRootHost(...$args)
     {
@@ -61,7 +72,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function currentUri(...$args)
     {
@@ -69,7 +80,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function currentPath(...$args)
     {
@@ -77,7 +88,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function currentPathInfo(...$args)
     {

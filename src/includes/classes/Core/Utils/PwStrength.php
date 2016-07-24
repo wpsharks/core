@@ -1,4 +1,10 @@
 <?php
+/**
+ * Password strength utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -11,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Password Strength Utils.
+ * Password strength utils.
  *
  * @since 150424 Adding password strength.
  */

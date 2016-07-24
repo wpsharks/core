@@ -1,4 +1,10 @@
 <?php
+/**
+ * Overload members.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
@@ -22,7 +28,7 @@ trait OverloadMembers
      *
      * @since 150424 Initial release.
      *
-     * @type array Overload properties.
+     * @var array Overload properties.
      */
     protected $¤¤overload = [];
 
@@ -31,7 +37,7 @@ trait OverloadMembers
      *
      * @since 150424 Initial release.
      *
-     * @type array Writable overload properties.
+     * @var array Writable overload properties.
      */
     protected $¤¤writable_overload_properties = [];
 

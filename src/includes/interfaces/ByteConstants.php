@@ -1,4 +1,10 @@
 <?php
+/**
+ * Byte-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -11,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Byte constants.
+ * Byte-related constants.
  *
  * @since 160522 Byte constants.
  */
@@ -22,7 +28,7 @@ interface ByteConstants
      *
      * @since 160522 Byte constants.
      *
-     * @type int Bytes in one kilobyte.
+     * @var int Bytes in one kilobyte.
      */
     const BYTES_IN_KB = 1024;
 
@@ -31,7 +37,7 @@ interface ByteConstants
      *
      * @since 160522 Byte constants.
      *
-     * @type int Bytes in one megabyte.
+     * @var int Bytes in one megabyte.
      */
     const BYTES_IN_MB = 1048576;
 
@@ -40,7 +46,7 @@ interface ByteConstants
      *
      * @since 160522 Byte constants.
      *
-     * @type int Bytes in one gigabyte.
+     * @var int Bytes in one gigabyte.
      */
     const BYTES_IN_GB = 1073741824;
 
@@ -49,7 +55,7 @@ interface ByteConstants
      *
      * @since 160522 Byte constants.
      *
-     * @type int Bytes in one terabyte.
+     * @var int Bytes in one terabyte.
      */
     const BYTES_IN_TB = 1099511627776;
 }

@@ -1,4 +1,10 @@
 <?php
+/**
+ * URL querys.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * URL querys.
+ *
+ * @since 151214
+ */
 trait UrlQuerys
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function stripUrlQuery(...$args)
     {
@@ -21,7 +32,7 @@ trait UrlQuerys
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function parseUrlQuery(...$args)
     {
@@ -29,7 +40,7 @@ trait UrlQuerys
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function buildUrlQuery(...$args)
     {
@@ -37,7 +48,7 @@ trait UrlQuerys
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function addUrlQueryArgs(...$args)
     {
@@ -45,7 +56,7 @@ trait UrlQuerys
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function removeUrlQueryArgs(...$args)
     {
@@ -53,7 +64,7 @@ trait UrlQuerys
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function addUrlQuerySig(...$args)
     {
@@ -61,7 +72,7 @@ trait UrlQuerys
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function removeUrlQuerySig(...$args)
     {
@@ -69,7 +80,7 @@ trait UrlQuerys
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function urlQuerySigOk(...$args)
     {

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Memcache.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Memcache.
+ *
+ * @since 151214
+ */
 trait Memcache
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function memcacheSet(...$args)
     {
@@ -21,7 +32,7 @@ trait Memcache
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function memcacheGet(...$args)
     {
@@ -29,7 +40,7 @@ trait Memcache
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function memcacheTouch(...$args)
     {
@@ -37,7 +48,7 @@ trait Memcache
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function memcacheClear(...$args)
     {

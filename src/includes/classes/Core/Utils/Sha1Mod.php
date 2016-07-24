@@ -1,4 +1,10 @@
 <?php
+/**
+ * SHA-1 modulus.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -11,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * SHA-1 Modulus.
+ * SHA-1 modulus.
  *
  * @since 150424 SHA-1 modulus.
  */
@@ -22,7 +28,7 @@ class Sha1Mod extends Classes\Core\Base\Core
      *
      * @since 160225
      *
-     * @type int
+     * @var int
      */
     protected $total_mysql_db_shards;
 

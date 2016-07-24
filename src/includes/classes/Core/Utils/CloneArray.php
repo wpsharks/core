@@ -1,4 +1,10 @@
 <?php
+/**
+ * Clone an array deeply.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -22,7 +28,7 @@ class CloneArray extends Classes\Core\Base\Core
      *
      * @since 160511 Array cloning.
      *
-     * @param array $value Input array.
+     * @param array $array Input array.
      *
      * @return array Output array.
      */

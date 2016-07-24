@@ -1,4 +1,10 @@
 <?php
+/**
+ * Var-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface VarConstants
      *
      * @since 160220 Initial release.
      *
-     * @type string Regex pattern for use in `preg_match()`.
+     * @var string Regex pattern for use in `preg_match()`.
      *
      * @note This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/VarConstants::VAR_REGEX_VALID);`

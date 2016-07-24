@@ -1,4 +1,10 @@
 <?php
+/**
+ * SQL utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -22,7 +28,7 @@ class Sql extends Classes\Core\Base\Core
      *
      * @since 160719
      *
-     * @type bool
+     * @var bool
      */
     protected $PDO_exists;
 

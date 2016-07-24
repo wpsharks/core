@@ -1,4 +1,10 @@
 <?php
+/**
+ * Directory-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -11,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Directory constants.
+ * Directory-related constants.
  *
  * @since 160528 Constants.
  */
@@ -22,7 +28,7 @@ interface DirConstants
      *
      * @since 160528 Constants.
      *
-     * @type string Directory separator.
+     * @var string Directory separator.
      */
     const DIR_SEP = DIRECTORY_SEPARATOR;
 }

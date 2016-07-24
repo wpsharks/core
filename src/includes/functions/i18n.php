@@ -1,9 +1,17 @@
 <?php
+/**
+ * i18n functions.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 
 if (!defined('ABSPATH') && !defined('WPINC')) {
     if (!function_exists('__')) {
         /**
+         * Polyfill.
+         *
          * @since 160223 Polyfill.
          */
         function __(string $string): string
@@ -13,6 +21,8 @@ if (!defined('ABSPATH') && !defined('WPINC')) {
     }
     if (!function_exists('_x')) {
         /**
+         * Polyfill.
+         *
          * @since 160223 Polyfill.
          */
         function _x(string $string, string $context): string
@@ -22,6 +32,8 @@ if (!defined('ABSPATH') && !defined('WPINC')) {
     }
     if (!function_exists('_n')) {
         /**
+         * Polyfill.
+         *
          * @since 160223 Polyfill.
          */
         function _n(string $singular, string $plural, float $count): string
@@ -31,6 +43,8 @@ if (!defined('ABSPATH') && !defined('WPINC')) {
     }
     if (!function_exists('_nx')) {
         /**
+         * Polyfill.
+         *
          * @since 160223 Polyfill.
          */
         function _nx(string $singular, string $plural, float $count, string $context): string

@@ -1,4 +1,10 @@
 <?php
+/**
+ * OEmbed utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -24,7 +30,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     protected $cache_dir;
 

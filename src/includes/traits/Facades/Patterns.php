@@ -1,4 +1,10 @@
 <?php
+/**
+ * Patterns.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Patterns.
+ *
+ * @since 151214
+ */
 trait Patterns
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function regexFrag(...$args)
     {
@@ -21,7 +32,7 @@ trait Patterns
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function regexPatternIn(...$args)
     {
@@ -29,7 +40,7 @@ trait Patterns
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function regexPatternsMatch(...$args)
     {
@@ -37,7 +48,7 @@ trait Patterns
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function wRegx(...$args)
     {
@@ -45,7 +56,7 @@ trait Patterns
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function wRegxFrag(...$args)
     {
@@ -53,7 +64,7 @@ trait Patterns
     }
 
     /**
-     * @since 160428 Adding functions.
+     * @since 160428 First facades.
      */
     public static function wRegxBracket(...$args)
     {
@@ -61,7 +72,7 @@ trait Patterns
     }
 
     /**
-     * @since 160428 Adding functions.
+     * @since 160428 First facades.
      */
     public static function urlToWRegxUriPattern(...$args)
     {

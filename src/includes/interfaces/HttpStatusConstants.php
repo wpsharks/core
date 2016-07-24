@@ -1,4 +1,10 @@
 <?php
+/**
+ * HTTP status constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface HttpStatusConstants
      *
      * @since 150424
      *
-     * @type string[]
+     * @var string[]
      */
     const HTTP_STATUSES = [
         100 => 'Continue',

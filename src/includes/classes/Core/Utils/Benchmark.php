@@ -1,4 +1,10 @@
 <?php
+/**
+ * Benchmark utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -22,7 +28,7 @@ class Benchmark extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type float
+     * @var float
      */
     protected $started = 0;
 
@@ -31,7 +37,7 @@ class Benchmark extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type float
+     * @var float
      */
     protected $stopped = 0;
 
@@ -40,7 +46,7 @@ class Benchmark extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type float
+     * @var float
      */
     protected $this_time = 0;
 
@@ -49,7 +55,7 @@ class Benchmark extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type float
+     * @var float
      */
     protected $last_time = 0;
 
@@ -58,7 +64,7 @@ class Benchmark extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string[]
+     * @var string[]
      */
     protected $stats = [];
 

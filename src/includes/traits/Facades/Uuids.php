@@ -1,4 +1,10 @@
 <?php
+/**
+ * UUIDs.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * UUIDs.
+ *
+ * @since 151214
+ */
 trait Uuids
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuidV1(...$args)
     {
@@ -21,7 +32,7 @@ trait Uuids
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuidV3(...$args)
     {
@@ -29,7 +40,7 @@ trait Uuids
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuidV4(...$args)
     {
@@ -37,7 +48,7 @@ trait Uuids
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uuidV5(...$args)
     {

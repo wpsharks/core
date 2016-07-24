@@ -1,4 +1,10 @@
 <?php
+/**
+ * UTF-8 utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -11,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * UTF-8 Utils.
+ * UTF-8 utils.
  *
  * @since 150424 Enhancing multibyte support.
  */
@@ -22,7 +28,7 @@ class Utf8 extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     const BOM = "\xEF\xBB\xBF";
 

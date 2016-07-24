@@ -1,4 +1,10 @@
 <?php
+/**
+ * CLI-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -11,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * CLI constants.
+ * CLI-related constants.
  *
  * @since 151213 Colors.
  */
@@ -22,7 +28,7 @@ interface CliConstants
      *
      * @since 151213 Colors.
      *
-     * @type array
+     * @var array
      */
     const CLI_BG_COLORS = [
         'black'      => '40',
@@ -41,7 +47,7 @@ interface CliConstants
      *
      * @since 151213 Colors.
      *
-     * @type array
+     * @var array
      */
     const CLI_FG_COLORS = [
         'black'             => '0;30',
@@ -87,7 +93,7 @@ interface CliConstants
      *
      * @since 160110 HR.
      *
-     * @type string
+     * @var string
      */
     const CLI_HR = '----------------------------------------------------------------------';
 }

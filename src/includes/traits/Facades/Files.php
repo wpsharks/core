@@ -1,4 +1,10 @@
 <?php
+/**
+ * Files.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Files.
+ *
+ * @since 151214
+ */
 trait Files
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function fileExt(...$args)
     {
@@ -21,7 +32,7 @@ trait Files
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function fileSizeAbbr(...$args)
     {
@@ -29,7 +40,7 @@ trait Files
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function bytesToAbbr(...$args)
     {
@@ -37,7 +48,7 @@ trait Files
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function abbrToBytes(...$args)
     {

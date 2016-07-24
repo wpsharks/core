@@ -1,4 +1,10 @@
 <?php
+/**
+ * Watered-down regex.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 

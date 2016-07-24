@@ -1,4 +1,10 @@
 <?php
+/**
+ * No-cache utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 

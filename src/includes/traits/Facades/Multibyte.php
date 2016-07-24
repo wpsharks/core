@@ -1,4 +1,10 @@
 <?php
+/**
+ * Multibyte.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Multibyte.
+ *
+ * @since 151214
+ */
 trait Multibyte
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isUtf8(...$args)
     {
@@ -21,7 +32,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbLcFirst(...$args)
     {
@@ -29,7 +40,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbStrCaseCmp(...$args)
     {
@@ -37,7 +48,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbStrPad(...$args)
     {
@@ -45,7 +56,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbStrRev(...$args)
     {
@@ -53,7 +64,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbStrSplit(...$args)
     {
@@ -61,7 +72,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbSubstrReplace(...$args)
     {
@@ -69,7 +80,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbTrim(...$args)
     {
@@ -77,7 +88,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbLTrim(...$args)
     {
@@ -85,7 +96,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbRTrim(...$args)
     {
@@ -93,7 +104,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbUcFirst(...$args)
     {
@@ -101,7 +112,7 @@ trait Multibyte
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function mbUcWords(...$args)
     {

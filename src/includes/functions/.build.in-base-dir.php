@@ -11,6 +11,12 @@ if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
 $load = '<?php
+/**
+ * Functions.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Functions;
 

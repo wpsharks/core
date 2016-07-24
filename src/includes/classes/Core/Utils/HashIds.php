@@ -1,4 +1,10 @@
 <?php
+/**
+ * Hash ID utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -13,7 +19,7 @@ use function get_defined_vars as vars;
 use Hashids\Hashids as Parser;
 
 /**
- * Hash IDs.
+ * Hash ID utilities.
  *
  * @since 150424 Initial release.
  */
@@ -24,7 +30,7 @@ class HashIds extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type Parser
+     * @var Parser
      */
     protected $Parser;
 

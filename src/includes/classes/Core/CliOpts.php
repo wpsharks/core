@@ -1,4 +1,10 @@
 <?php
+/**
+ * CLI options.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core;
 
@@ -17,7 +23,7 @@ use GetOptionKit\OptionCollection;
 use GetOptionKit\OptionPrinter\ConsoleOptionPrinter;
 
 /**
- * CLI option utilities.
+ * CLI options.
  *
  * @since 150424 Initial release.
  */
@@ -28,7 +34,7 @@ class CliOpts extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type OptionCollection
+     * @var OptionCollection
      */
     protected $OptionCollection;
 

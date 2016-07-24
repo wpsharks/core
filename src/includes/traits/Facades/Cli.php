@@ -1,4 +1,10 @@
 <?php
+/**
+ * CLI.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * CLI.
+ *
+ * @since 151214
+ */
 trait Cli
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isCli(...$args)
     {
@@ -21,7 +32,7 @@ trait Cli
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isCliInteractive(...$args)
     {
@@ -29,7 +40,7 @@ trait Cli
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function readStdin(...$args)
     {
@@ -37,7 +48,7 @@ trait Cli
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function writeStdout(...$args)
     {
@@ -45,7 +56,7 @@ trait Cli
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function writeStdoutHr(...$args)
     {
@@ -53,7 +64,7 @@ trait Cli
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function writeStderr(...$args)
     {
@@ -61,7 +72,7 @@ trait Cli
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function writeStderrHr(...$args)
     {
@@ -69,7 +80,7 @@ trait Cli
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function cliOpenUrl(...$args)
     {

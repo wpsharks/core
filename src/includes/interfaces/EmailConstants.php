@@ -1,4 +1,10 @@
 <?php
+/**
+ * Email-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface EmailConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      *
      * @see https://en.wikipedia.org/wiki/Email_address#Local_part
      */
@@ -35,7 +41,7 @@ interface EmailConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const EMAIL_REGEX_FRAG_HOST = UrlConstants::URL_REGEX_FRAG_HOST;
 
@@ -44,7 +50,7 @@ interface EmailConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex pattern for use in `preg_match()`.
+     * @var string Regex pattern for use in `preg_match()`.
      *
      * @note This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/EmailConstants::EMAIL_REGEX_VALID);`
@@ -56,7 +62,7 @@ interface EmailConstants
      *
      * @since 151121 Email utilities.
      *
-     * @type array Role-based regex patterns.
+     * @var array Role-based regex patterns.
      */
     const EMAIL_ROLE_BASED_REGEX_FRAGS = [
         '(list)?(un)?subscribes?',
@@ -127,7 +133,7 @@ interface EmailConstants
      *
      * @since 151121 Email utilities.
      *
-     * @type array Role-based strings.
+     * @var array Role-based strings.
      */
     const EMAIL_ROLE_BASED_STRINGS = [
         'abuse',

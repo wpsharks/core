@@ -1,4 +1,10 @@
 <?php
+/**
+ * WebPurify.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -22,7 +28,7 @@ class WebPurify extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     protected $cache_dir;
 

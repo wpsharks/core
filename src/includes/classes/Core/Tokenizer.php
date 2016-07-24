@@ -1,4 +1,10 @@
 <?php
+/**
+ * Tokenizer.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core;
 
@@ -22,7 +28,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     protected $id;
 
@@ -31,7 +37,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     protected $string;
 
@@ -40,7 +46,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type array
+     * @var array
      */
     protected $tokenize;
 
@@ -49,7 +55,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 160720
      *
-     * @type array
+     * @var array
      */
     protected $args;
 
@@ -58,7 +64,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type array
+     * @var array
      */
     protected $tokens;
 
@@ -67,7 +73,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 160720
      *
-     * @type string|null
+     * @var string|null
      */
     protected $shortcode_unautop_compat_tag_name;
 

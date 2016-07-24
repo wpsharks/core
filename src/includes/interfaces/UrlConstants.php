@@ -1,4 +1,10 @@
 <?php
+/**
+ * URL-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface UrlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      *
      * @see http://jas.xyz/1TjZ0kA for details about valid schemes.
      */
@@ -33,7 +39,7 @@ interface UrlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      *
      * @see RegexConstants::REGEX_FRAG_NOT_ASCII_OR_INVISIBLE
      */
@@ -48,7 +54,7 @@ interface UrlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const URL_REGEX_FRAG_HOST = // Punycode-compatible.
         '(?:xn\-\-)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*'.// `[xn--]a[-b][-c]`
@@ -59,7 +65,7 @@ interface UrlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const URL_REGEX_FRAG_HOST_TLD = // Punycode-compatible.
         self::URL_REGEX_FRAG_HOST.// `[xn--]a[-b][-c].[xn--]a[-b][-c]`
@@ -70,7 +76,7 @@ interface UrlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const URL_REGEX_FRAG_PORT = '(?:\:[0-9]+)?';
 
@@ -79,7 +85,7 @@ interface UrlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const URL_REGEX_FRAG_HOST_TLD_PORT = self::URL_REGEX_FRAG_HOST_TLD.self::URL_REGEX_FRAG_PORT;
 
@@ -88,7 +94,7 @@ interface UrlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      *
      * @see RegexConstants::REGEX_FRAG_NOT_ASCII_OR_INVISIBLE
      */
@@ -121,7 +127,7 @@ interface UrlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex pattern for use in `preg_match()`.
+     * @var string Regex pattern for use in `preg_match()`.
      *
      * @note This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/UrlConstants::URL_REGEX_VALID);`

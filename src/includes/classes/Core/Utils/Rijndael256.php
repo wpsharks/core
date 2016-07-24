@@ -1,4 +1,10 @@
 <?php
+/**
+ * RIJNDAEL 256 encryption utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -22,7 +28,7 @@ class Rijndael256 extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type int
+     * @var int
      */
     protected $iv_size;
 
@@ -31,7 +37,7 @@ class Rijndael256 extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type int
+     * @var int
      */
     protected $key_size;
 

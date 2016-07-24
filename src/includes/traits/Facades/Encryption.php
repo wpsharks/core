@@ -1,4 +1,10 @@
 <?php
+/**
+ * Encryption.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,6 +16,11 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Encryption.
+ *
+ * @since 160701
+ */
 trait Encryption
 {
     /**
@@ -21,7 +32,7 @@ trait Encryption
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function randomKey(...$args)
     {
@@ -29,7 +40,7 @@ trait Encryption
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function passwordStrength(...$args)
     {
@@ -37,7 +48,7 @@ trait Encryption
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function passwordSha256(...$args)
     {
@@ -45,7 +56,7 @@ trait Encryption
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function encrypt(...$args)
     {
@@ -53,7 +64,7 @@ trait Encryption
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function decrypt(...$args)
     {
@@ -61,7 +72,7 @@ trait Encryption
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function sha256KeyedHash(...$args)
     {
@@ -69,7 +80,7 @@ trait Encryption
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function hashIds(...$args)
     {
@@ -77,7 +88,7 @@ trait Encryption
     }
 
     /**
-     * @since 160630 Adding functions.
+     * @since 160630 First facades.
      */
     public static function decodeHashedIds(...$args)
     {

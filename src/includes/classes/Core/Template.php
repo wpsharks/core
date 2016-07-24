@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core;
 
@@ -22,7 +28,7 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     protected $dir;
 
@@ -31,7 +37,7 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     protected $file;
 
@@ -40,7 +46,7 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type string
+     * @var string
      */
     protected $ext;
 
@@ -49,7 +55,7 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type array
+     * @var array
      */
     protected $parents;
 
@@ -58,7 +64,7 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type array
+     * @var array
      */
     protected $parent_vars;
 
@@ -67,7 +73,7 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @type array
+     * @var array
      */
     protected $current_vars;
 

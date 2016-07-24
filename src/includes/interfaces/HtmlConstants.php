@@ -1,4 +1,10 @@
 <?php
+/**
+ * HTML-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array Ampersand entities.
+     * @var array Ampersand entities.
      */
     const HTML_AMPERSAND_ENTITIES = [
         '&amp;'       => '&amp;',
@@ -35,7 +41,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array HTML whitespace.
+     * @var array HTML whitespace.
      */
     const HTML_WHITESPACE = [
         '\0',
@@ -52,7 +58,7 @@ interface HtmlConstants
      *
      * @since 160720 Initial release.
      *
-     * @type array Vertical HTML whitespace.
+     * @var array Vertical HTML whitespace.
      */
     const HTML_HORIZONTAL_WHITESPACE = [
         '\0',
@@ -68,7 +74,7 @@ interface HtmlConstants
      *
      * @since 160720 Initial release.
      *
-     * @type array Vertical HTML whitespace.
+     * @var array Vertical HTML whitespace.
      */
     const HTML_VERTICAL_WHITESPACE = [
         "\r",
@@ -82,7 +88,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array Quote entities.
+     * @var array Quote entities.
      */
     const HTML_QUOTE_ENTITIES = [
         '&apos;'           => '&apos;',
@@ -110,7 +116,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array HTML5 invisible tags.
+     * @var array HTML5 invisible tags.
      */
     const HTML_INVISIBLE_TAGS = [
         'head',
@@ -124,7 +130,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @type array HTML5 block-level tags.
+     * @var array HTML5 block-level tags.
      */
     const HTML_BLOCK_TAGS = [
         'address',

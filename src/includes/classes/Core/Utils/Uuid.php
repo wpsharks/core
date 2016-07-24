@@ -1,4 +1,10 @@
 <?php
+/**
+ * UUID generator.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -13,7 +19,7 @@ use function get_defined_vars as vars;
 use Ramsey\Uuid\Uuid as UuidGen;
 
 /**
- * UUID Generator.
+ * UUID generator.
  *
  * @since 150424 Initial release.
  */

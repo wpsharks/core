@@ -1,4 +1,10 @@
 <?php
+/**
+ * Facades.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Base;
 
@@ -77,7 +83,7 @@ abstract class Facades
     use Traits\Facades\Uuids;
     use Traits\Facades\Varz;
     use Traits\Facades\Versions;
-    use Traits\Facades\Webpurify;
+    use Traits\Facades\WebPurify;
     use Traits\Facades\WordPress;
     use Traits\Facades\Yaml;
 }

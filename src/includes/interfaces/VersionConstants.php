@@ -1,4 +1,10 @@
 <?php
+/**
+ * Version-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface VersionConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string PHP version string validation pattern.
+     * @var string PHP version string validation pattern.
      *
      * @note Requirements are as follows:
      *
@@ -40,7 +46,7 @@ interface VersionConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string PHP dev version string validation pattern.
+     * @var string PHP dev version string validation pattern.
      *
      * @note Requirements are as follows:
      *
@@ -59,7 +65,7 @@ interface VersionConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string PHP stable version string validation pattern.
+     * @var string PHP stable version string validation pattern.
      *
      * @note Requirements are as follows:
      *

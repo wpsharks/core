@@ -1,4 +1,10 @@
 <?php
+/**
+ * WebPurify.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-trait Webpurify
+/**
+ * WebPurify.
+ *
+ * @since 151214
+ */
+trait WebPurify
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function containsBadWords(...$args)
     {
@@ -21,7 +32,7 @@ trait Webpurify
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function slugContainsBadWords(...$args)
     {

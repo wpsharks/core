@@ -1,4 +1,10 @@
 <?php
+/**
+ * Functions.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Functions;
 

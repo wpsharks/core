@@ -1,4 +1,10 @@
 <?php
+/**
+ * URL utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * URL utils.
+ *
+ * @since 151214
+ */
 trait UrlUtils
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isUrl(...$args)
     {
@@ -21,7 +32,7 @@ trait UrlUtils
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function stripUrlFragment(...$args)
     {
@@ -29,7 +40,7 @@ trait UrlUtils
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function normalizeUrlAmps(...$args)
     {
@@ -37,7 +48,7 @@ trait UrlUtils
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function remoteRequest(...$args)
     {

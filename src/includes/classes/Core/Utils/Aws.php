@@ -1,4 +1,10 @@
 <?php
+/**
+ * AWS utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -24,7 +30,7 @@ class Aws extends Classes\Core\Base\Core
      *
      * @since 160719
      *
-     * @type AwsLib\Sdk
+     * @var AwsLib\Sdk
      */
     public $Sdk;
 
@@ -33,7 +39,7 @@ class Aws extends Classes\Core\Base\Core
      *
      * @since 160719
      *
-     * @type AwsLib\S3\S3Client
+     * @var AwsLib\S3\S3Client
      */
     public $S3Client;
 

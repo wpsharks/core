@@ -1,4 +1,12 @@
-<?php // @codingStandardsIgnoreFile
+<?php
+/**
+ * Stub.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
+// @codingStandardsIgnoreFile
+
 declare (strict_types = 1);
 namespace WebSharks\Core;
 

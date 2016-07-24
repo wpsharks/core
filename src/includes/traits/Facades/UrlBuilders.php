@@ -1,4 +1,10 @@
 <?php
+/**
+ * URL builders.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * URL builders.
+ *
+ * @since 151214
+ */
 trait UrlBuilders
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function setScheme(...$args)
     {
@@ -21,7 +32,7 @@ trait UrlBuilders
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function appUrl(...$args)
     {
@@ -37,7 +48,7 @@ trait UrlBuilders
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function appCoreUrl(...$args)
     {
@@ -45,7 +56,7 @@ trait UrlBuilders
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function curUrl(...$args)
     {
@@ -61,7 +72,7 @@ trait UrlBuilders
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function curCoreUrl(...$args)
     {
@@ -69,7 +80,7 @@ trait UrlBuilders
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function cdnUrl(...$args)
     {
@@ -77,7 +88,7 @@ trait UrlBuilders
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function cdnFilter(...$args)
     {

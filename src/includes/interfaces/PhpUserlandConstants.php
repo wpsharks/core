@@ -1,4 +1,10 @@
 <?php
+/**
+ * PHP userland constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface PhpUserlandConstants
      *
      * @since 160709 Userland constants.
      *
-     * @type string Regex pattern for use in `preg_match()`.
+     * @var string Regex pattern for use in `preg_match()`.
      *
      * @see http://php.net/manual/en/functions.user-defined.php
      */

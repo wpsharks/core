@@ -1,4 +1,10 @@
 <?php
+/**
+ * CDN utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -22,7 +28,7 @@ class Cdn extends Classes\Core\Base\Core implements Interfaces\MimeConstants
      *
      * @since 150424
      *
-     * @type string[]
+     * @var string[]
      */
     protected $static_exts;
 

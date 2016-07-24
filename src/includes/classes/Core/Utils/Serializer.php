@@ -1,4 +1,10 @@
 <?php
+/**
+ * Serializer.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -26,7 +32,7 @@ class Serializer extends Classes\Core\Base\Core
      *
      * @since 160712
      *
-     * @type ClosureSerializer
+     * @var ClosureSerializer
      */
     protected $ClosureAstSerializer;
 
@@ -35,7 +41,7 @@ class Serializer extends Classes\Core\Base\Core
      *
      * @since 160712
      *
-     * @type ClosureSerializer
+     * @var ClosureSerializer
      */
     protected $ClosureTokenSerializer;
 
@@ -44,7 +50,7 @@ class Serializer extends Classes\Core\Base\Core
      *
      * @since 160712 Serializer.
      *
-     * @type string `⌗🆂🅲⫶` Four UTF-8 chars.
+     * @var string `⌗🆂🅲⫶` Four UTF-8 chars.
      */
     const CLOSURE = "\u{2317}\u{1F182}\u{1F172}\u{2AF6}";
 

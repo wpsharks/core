@@ -1,4 +1,10 @@
 <?php
+/**
+ * Core constructor.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits;
 
@@ -22,7 +28,7 @@ trait CoreConstructor
      *
      * @since 160223
      *
-     * @type Classes\App
+     * @var Classes\App
      */
     protected $App;
 
@@ -31,7 +37,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @type \StdClass
+     * @var \StdClass
      */
     protected $f;
 
@@ -40,7 +46,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @type string
+     * @var string
      */
     protected $c;
 
@@ -49,7 +55,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @type string
+     * @var string
      */
     protected $s;
 
@@ -58,7 +64,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @type string
+     * @var string
      */
     protected $a;
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Regex-related constants.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Interfaces;
 
@@ -22,7 +28,7 @@ interface RegexConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      *
      * @see <http://www.regular-expressions.info/unicode.html>
      */
@@ -33,7 +39,7 @@ interface RegexConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const REGEX_FRAG_DQ_VALUE =
         '(?<open_dq>(?<!\\\\)")'.// A double quote that has not been escaped.
@@ -46,7 +52,7 @@ interface RegexConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const REGEX_FRAG_SQ_VALUE =
         '(?<open_sq>(?<!\\\\)\')'.// A single quote that has not been escaped.
@@ -59,7 +65,7 @@ interface RegexConstants
      *
      * @since 150424 Initial release.
      *
-     * @type string Regex fragment for use in `preg_match()`.
+     * @var string Regex fragment for use in `preg_match()`.
      */
     const REGEX_FRAG_DSQ_VALUE =
         '(?<open_dsq>(?<!\\\\)["\'])'.// A quote that has not been escaped.

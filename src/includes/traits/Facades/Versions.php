@@ -1,4 +1,10 @@
 <?php
+/**
+ * Versions.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Versions.
+ *
+ * @since 151214
+ */
 trait Versions
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isVersion(...$args)
     {
@@ -21,7 +32,7 @@ trait Versions
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isDevVersion(...$args)
     {
@@ -29,7 +40,7 @@ trait Versions
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isStableVersion(...$args)
     {
@@ -37,7 +48,7 @@ trait Versions
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isWsVersion(...$args)
     {
@@ -45,7 +56,7 @@ trait Versions
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isWsDevVersion(...$args)
     {
@@ -53,7 +64,7 @@ trait Versions
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function isWsStableVersion(...$args)
     {
@@ -61,7 +72,7 @@ trait Versions
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function wsVersionDate(...$args)
     {
@@ -69,7 +80,7 @@ trait Versions
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function wsVersionTime(...$args)
     {

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Apache.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,18 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Apache.
+ *
+ * @since 160521
+ */
 trait Apache
 {
     /**
+     * Facade `example`.
+     *
      * @since 160522 Apache utilities.
+     * @see Classes\Core\Utils\Apache::htaccessDeny()
      */
     public static function apacheHtaccessDeny(...$args)
     {

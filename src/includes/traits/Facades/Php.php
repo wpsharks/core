@@ -1,4 +1,10 @@
 <?php
+/**
+ * PHP.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,6 +16,11 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * PHP.
+ *
+ * @since 160505
+ */
 trait Php
 {
     /**
@@ -21,7 +32,7 @@ trait Php
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function canCallFunc(...$args)
     {
@@ -29,7 +40,7 @@ trait Php
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function memoryLimit(...$args)
     {
@@ -37,7 +48,7 @@ trait Php
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function stripPhpTags(...$args)
     {
@@ -45,7 +56,7 @@ trait Php
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function uploadSizeLimit(...$args)
     {
@@ -53,7 +64,7 @@ trait Php
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function maxExecTime(...$args)
     {

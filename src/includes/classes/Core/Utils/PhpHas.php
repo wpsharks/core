@@ -1,4 +1,10 @@
 <?php
+/**
+ * Php has utilities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
@@ -11,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * PhpHas utilities.
+ * Php has utilities.
  *
  * @since 150424 Initial release.
  */
@@ -22,7 +28,7 @@ class PhpHas extends Classes\Core\Base\Core
      *
      * @since 160712 PhpHas utilities.
      *
-     * @type array Global static cache.
+     * @var array Global static cache.
      */
     protected static $cache;
 
@@ -31,7 +37,7 @@ class PhpHas extends Classes\Core\Base\Core
      *
      * @since 160219 Adding constructs.
      *
-     * @type array Constructs.
+     * @var array Constructs.
      */
     const CONSTRUCTS = [
         'die',

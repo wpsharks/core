@@ -1,4 +1,10 @@
 <?php
+/**
+ * Headers.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\Core\Traits\Facades;
 
@@ -10,10 +16,15 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Headers.
+ *
+ * @since 151214
+ */
 trait Headers
 {
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function statusHeader(...$args)
     {
@@ -29,7 +40,7 @@ trait Headers
     }
 
     /**
-     * @since 151214 Adding functions.
+     * @since 151214 First facades.
      */
     public static function parseHeaders(...$args)
     {
