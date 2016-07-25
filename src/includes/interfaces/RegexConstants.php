@@ -30,7 +30,7 @@ interface RegexConstants
      *
      * @var string Regex fragment for use in `preg_match()`.
      *
-     * @see <http://www.regular-expressions.info/unicode.html>
+     * @link http://www.regular-expressions.info/unicode.html
      */
     const REGEX_FRAG_NOT_ASCII_OR_INVISIBLE = '[^\x{00}-\x{7F}\p{Z}\p{C}]';
 

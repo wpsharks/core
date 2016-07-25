@@ -28,15 +28,15 @@ class PhpEval extends Classes\Core\Base\Core
      *
      * @since 160505 Initial release.
      *
-     * @param string $¤string Input string.
-     * @param array  $¤vars   Input variables.
+     * @param string $x___string Input string.
+     * @param array  $x___vars   Input variables.
      *
      * @return mixed Eval return value.
      */
-    public function __invoke(string $¤string, array $¤vars = [])
+    public function __invoke(string $x___string, array $x___vars = [])
     {
-        extract($¤vars, EXTR_PREFIX_SAME, '_xps');
+        extract($x___vars, EXTR_PREFIX_SAME, 'xps__'); // Becomes `xps___`.
 
-        return eval($¤string);
+        return eval($x___string);
     }
 }

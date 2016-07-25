@@ -30,7 +30,7 @@ interface UrlConstants
      *
      * @var string Regex fragment for use in `preg_match()`.
      *
-     * @see http://jas.xyz/1TjZ0kA for details about valid schemes.
+     * @link http://jas.xyz/1TjZ0kA for details about valid schemes.
      */
     const URL_REGEX_FRAG_SCHEME = '(?:[a-zA-Z][a-zA-Z0-9+.\-]*\:)?\/\/';
 

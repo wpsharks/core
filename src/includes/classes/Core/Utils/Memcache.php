@@ -304,7 +304,7 @@ class Memcache extends Classes\Core\Base\Core
         if (!isset($primary_key[0])) {
             return ''; // Not possible.
         }
-        $namespace_prefix       = '¤'.$this->namespace.'\\';
+        $namespace_prefix       = 'x___'.$this->namespace.'\\';
         $namespaced_primary_key = $namespace_prefix.$primary_key;
 
         if (isset($namespaced_primary_key[251])) {

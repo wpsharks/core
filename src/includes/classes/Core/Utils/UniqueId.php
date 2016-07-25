@@ -39,7 +39,7 @@ class UniqueId extends Classes\Core\Base\Core
      * @note Unique identifier is based on the current time in microseconds.
      *  This ID contains alphanumeric ASCII chars (lowercase alpha only).
      *
-     * @see http://php.net/manual/en/function.uniqid.php
+     * @link http://php.net/manual/en/function.uniqid.php
      */
     public function __invoke(string $prefix = '', bool $more_entropy = true): string
     {

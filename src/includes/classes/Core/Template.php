@@ -69,13 +69,13 @@ class Template extends Classes\Core\Base\Core
     protected $parent_vars;
 
     /**
-     * Current vars.
+     * Variables.
      *
      * @since 150424
      *
      * @var array
      */
-    protected $current_vars;
+    protected $vars;
 
     /**
      * Class constructor.
@@ -99,9 +99,9 @@ class Template extends Classes\Core\Base\Core
         $this->file = $template['file'];
         $this->ext  = $template['ext'];
 
-        $this->parents      = $parents;
-        $this->parent_vars  = $parent_vars;
-        $this->current_vars = [];
+        $this->parents     = $parents;
+        $this->parent_vars = $parent_vars;
+        $this->vars        = []; // Initialize.
 
         $this->setAdditionalProps();
     }
@@ -121,22 +121,21 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 150424 Initial release.
      *
-     * @param array $¤vars Template vars.
+     * @param array $vars Template vars.
      *
      * @return string Parsed template contents.
      */
-    public function parse(array $¤vars = []): string
+    public function parse(array $vars = []): string
     {
         if ($this->ext === 'php') {
-            $¤this = $this; // `$this` in symbol table.
+            $_this = $this; // `$this` in symbol table.
             // ↑ Strange magic makes it possible for `$this` to be used from
             // inside the template file also. We just need to reference it here.
             // See: <http://stackoverflow.com/a/4994799/1219741>
 
-            unset($¤this, $¤vars['¤this'], $¤vars['this']);
-            unset($¤vars['¤defaults'], $¤vars['¤vars']);
-
-            $this->current_vars = $¤vars;
+            unset($_this, $vars['this']); // Avoid conflicts.
+            $this->vars = $vars; // Set current variables.
+            unset($vars); // Force templates to use `$this->vars`.
 
             ob_start(); // Output buffer.
             require $this->dir.'/'.$this->file;
@@ -147,71 +146,35 @@ class Template extends Classes\Core\Base\Core
     }
 
     /**
-     * Set current vars.
+     * Set template vars.
      *
      * @since 150424 Initial release.
      *
      * @param array $defaults Default vars.
      * @param array ...$vars Template vars.
      *
-     * @return array Current vars.
+     * @return array New template vars.
      */
     protected function setVars(array $defaults, array ...$vars): array
     {
-        return $this->current_vars = array_replace_recursive($defaults, ...$vars);
+        return $this->vars = array_replace_recursive($defaults, ...$vars);
     }
 
     /**
-     * Get a child template.
+     * Has a parent?
      *
      * @since 150424 Initial release.
      *
-     * @param string $file Relative to templates dir.
-     * @param array  $vars Template vars for the include.
-     * @param string $dir  From a specific directory?
+     * @param string|null $file Template file.
      *
-     * @return string Parsed template contents.
+     * @return bool True if child has a parent.
      */
-    protected function get(string $file, array $vars = [], string $dir = ''): string
+    protected function hasParent(string $file = null): bool
     {
-        $parents     = array_merge($this->parents, [$this->file]);
-        $parent_vars = array_merge($this->parent_vars, [$this->file => &$this->current_vars]);
-        $Template    = $this->c::getTemplate($file, $dir, $parents, $parent_vars);
-        /*
-         * NOTE: Here, we are walking through each of the parents in reverse order.
-         * Merging variables from the closest ancestor first, then it's parent, and so on.
-         *
-         * Only file-specific variables from parents are merged w/ the variables for 'this' template file.
-         * And, we always give variables for 'this' template precedence over those defined by ancestors.
-         *
-         * The most confusing part of this routine has to do with the order in which the merging takes place.
-         * Each time a merge occurs, it is merging the 'current' variables for 'this' template, with those from an ancestor.
-         *
-         * The trick is, each time a merge occurs, the 'current' variables will include those from the previous ancestor.
-         * The effect is that the 'current' template take precedence over all others, and then each closest parent takes
-         * precedence over the ones before it. By going in reverse, we're filling the vars needed for the next merge.
-         */
-        foreach (array_reverse($parent_vars, true) as $_parent_file => $_parent_vars) {
-            if (isset($_parent_vars[$file]) && is_array($_parent_vars[$file])) {
-                $vars = array_replace_recursive($_parent_vars[$file], $vars);
-            } // Merge those from parents who have file-specific vars.
-        } // unset($_parent_file, $_parent_vars); // Housekeeping.
-
-        return $Template->parse($vars);
-    }
-
-    /**
-     * Has a parent template?
-     *
-     * @since 150424 Initial release.
-     *
-     * @param string $file Relative to templates dir.
-     *
-     * @return bool True if child has the parent template file.
-     */
-    protected function hasParent(string $file): bool
-    {
-        return in_array($file, $this->parents, true);
+        if (isset($file)) {
+            return in_array($file, $this->parents, true);
+        }
+        return !empty($this->parents);
     }
 
     /**
@@ -219,12 +182,47 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 150424 Initial release.
      *
-     * @param string $file Relative to templates dir.
+     * @param string|null $file Template file.
      *
      * @return array Parent template vars.
      */
-    protected function parentVars(string $file): array
+    protected function parentVars(string $file = null): array
     {
-        return $this->parent_vars[$file] ?? [];
+        if (isset($file)) {
+            return $this->parent_vars[$file] ?? [];
+        }
+        $closest_ancestor_vars = end($this->parent_vars);
+        return $parent_vars    = $closest_ancestor_vars ?: [];
+    }
+
+    /**
+     * Get a child template.
+     *
+     * @since 150424 Initial release.
+     *
+     * @param string $new_child_file Relative to templates dir.
+     * @param array  $new_child_vars Template vars for the include.
+     * @param string $new_child_dir  From a specific directory?
+     *
+     * @return string Parsed template contents for child template.
+     */
+    protected function get(string $new_child_file, array $new_child_vars = [], string $new_child_dir = ''): string
+    {
+        $new_child_parents     = array_merge($this->parents, [$this->file]);
+        $new_child_parent_vars = array_merge($this->parent_vars, [$this->file => &$this->vars]);
+        $new_child_Template    = $this->c::getTemplate($new_child_file, $new_child_dir, $new_child_parents, $new_child_parent_vars);
+
+        // Variables from the closest ancestors take precedence over further/older ancestors.
+        // File-specific variables in those ancestors take precedence over those that aren't file-specific.
+
+        foreach (array_reverse($new_child_parent_vars, true) as $_parent_file => $_parent_vars) {
+            if (isset($_parent_vars[$new_child_file]) && is_array($_parent_vars[$new_child_file])) {
+                $new_child_vars = array_replace_recursive($_parent_vars[$new_child_file], $new_child_vars);
+            }
+            $_parent_vars_not_file_specific = array_diff_key($_parent_vars, $new_child_parent_vars + [$new_child_file => 0]);
+            $new_child_vars                 = array_replace_recursive($_parent_vars_not_file_specific, $new_child_vars);
+        } // unset($_parent_file, $_parent_vars, $_parent_vars_not_file_specific); // Housekeeping.
+
+        return $new_child_Template->parse($new_child_vars);
     }
 }

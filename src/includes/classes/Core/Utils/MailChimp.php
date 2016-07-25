@@ -45,7 +45,7 @@ class MailChimp extends Classes\Core\Base\Core
      *
      * @return \StdClass Including a boolean `success` property.
      *
-     * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/
+     * @link http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/
      */
     public function subscribe(string $email, array $args = []): \StdClass
     {
@@ -113,7 +113,7 @@ class MailChimp extends Classes\Core\Base\Core
      *
      * @return \StdClass Including a boolean `success` property.
      *
-     * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/
+     * @link http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/
      */
     public function subscribeOrUpdate(string $email, array $args = []): \StdClass
     {
@@ -181,7 +181,7 @@ class MailChimp extends Classes\Core\Base\Core
      *
      * @return \StdClass Including a boolean `success` property.
      *
-     * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/
+     * @link http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/
      */
     public function updateSubscriber(string $email, array $args = []): \StdClass
     {
@@ -245,7 +245,7 @@ class MailChimp extends Classes\Core\Base\Core
      *
      * @return \StdClass Including a boolean `success` property.
      *
-     * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/
+     * @link http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/
      */
     public function subscriber(string $email, array $args = []): \StdClass
     {

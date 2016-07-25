@@ -30,7 +30,7 @@ trait OverloadMembers
      *
      * @var array Overload properties.
      */
-    protected $¤¤overload = [];
+    protected $x___overload = [];
 
     /**
      * Writable overload properties.
@@ -39,7 +39,7 @@ trait OverloadMembers
      *
      * @var array Writable overload properties.
      */
-    protected $¤¤writable_overload_properties = [];
+    protected $x___writable_overload_properties = [];
 
     /**
      * Serialized properties.
@@ -50,7 +50,7 @@ trait OverloadMembers
      */
     public function serialize(): string
     {
-        return serialize((object) $this->¤¤overload);
+        return serialize((object) $this->x___overload);
     }
 
     /**
@@ -64,7 +64,7 @@ trait OverloadMembers
      */
     public function unserialize(/* string */$serialized)
     {
-        $this->¤¤overload = (array) unserialize($serialized);
+        $this->x___overload = (array) unserialize($serialized);
     }
 
     /**
@@ -76,7 +76,7 @@ trait OverloadMembers
      */
     public function jsonSerialize()
     {
-        return (object) $this->¤¤overload;
+        return (object) $this->x___overload;
     }
 
     /**
@@ -102,9 +102,9 @@ trait OverloadMembers
      *
      * @param string $property Property to check.
      *
-     * @return bool TRUE if `isset($this->¤¤overload{$property})`.
+     * @return bool TRUE if `isset($this->x___overload{$property})`.
      *
-     * @see http://php.net/manual/en/language.oop5.overloading.php
+     * @link http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __isset(string $property): bool
     {
@@ -112,7 +112,7 @@ trait OverloadMembers
             // NOTE: `f` comes last here, because it improves the speed at which a match occurs.
             return true; // Public read-only access.
         } else {
-            return isset($this->¤¤overload[$property]);
+            return isset($this->x___overload[$property]);
         }
     }
 
@@ -123,9 +123,9 @@ trait OverloadMembers
      *
      * @param string $property Property to get.
      *
-     * @return mixed The value of `$this->¤¤overload{$property}`.
+     * @return mixed The value of `$this->x___overload{$property}`.
      *
-     * @see http://php.net/manual/en/language.oop5.overloading.php
+     * @link http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __get(string $property)
     {
@@ -133,10 +133,10 @@ trait OverloadMembers
             // NOTE: `f` comes last here, because it improves the speed at which a match occurs.
             return $this->{$property}; // Public read-only access.
             //
-        } elseif (isset($this->¤¤overload[$property])) {
-            return $this->¤¤overload[$property];
-        } elseif (array_key_exists($property, $this->¤¤overload)) {
-            return $this->¤¤overload[$property];
+        } elseif (isset($this->x___overload[$property])) {
+            return $this->x___overload[$property];
+        } elseif (array_key_exists($property, $this->x___overload)) {
+            return $this->x___overload[$property];
         }
         throw $this->c::issue([], sprintf('Undefined overload property: `%1$s`.', $property), __METHOD__);
     }
@@ -149,17 +149,17 @@ trait OverloadMembers
      * @param string $property Property to set.
      * @param mixed  $value    The value for this property.
      *
-     * @see http://php.net/manual/en/language.oop5.overloading.php
+     * @link http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __set(string $property, $value)
     {
-        if (isset($this->¤¤writable_overload_properties[$property])) {
-            if ($this->¤¤writable_overload_properties[$property] === 1) {
+        if (isset($this->x___writable_overload_properties[$property])) {
+            if ($this->x___writable_overload_properties[$property] === 1) {
                 $this->{$property} = $value; // Direct public write access.
                 // See also: {@link overload()} below for details.
                 return; // Null return value.
             } else {
-                $this->¤¤overload[$property] = $value;
+                $this->x___overload[$property] = $value;
                 // This is indirect public write access.
                 return; // Null return value.
             }
@@ -174,7 +174,7 @@ trait OverloadMembers
      *
      * @param string $property Property to unset.
      *
-     * @see http://php.net/manual/en/language.oop5.overloading.php
+     * @link http://php.net/manual/en/language.oop5.overloading.php
      *
      * @WARNING Do not attempt to `unset()` an overloaded property. It can lead to confusion.
      *  Since overloads are by-reference, we need to prevent `unset()` at all times.
@@ -198,12 +198,12 @@ trait OverloadMembers
      *
      * @return mixed Overloaded method return value.
      *
-     * @see http://php.net/manual/en/language.oop5.overloading.php
+     * @link http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __call(string $method, array $args = [])
     {
-        if (isset($this->¤¤overload[$method])) {
-            return $this->¤¤overload[$method](...$args);
+        if (isset($this->x___overload[$method])) {
+            return $this->x___overload[$method](...$args);
         }
         throw $this->c::issue([], sprintf('Undefined overload method: `%1$s`.', $method), __METHOD__);
     }
@@ -217,7 +217,7 @@ trait OverloadMembers
      */
     protected function isOverloaded(): bool
     {
-        return !empty($this->¤¤overload);
+        return !empty($this->x___overload);
     }
 
     /**
@@ -229,7 +229,7 @@ trait OverloadMembers
      */
     protected function overloadArray(): array
     {
-        return $this->¤¤overload;
+        return $this->x___overload;
     }
 
     /**
@@ -241,7 +241,7 @@ trait OverloadMembers
      */
     protected function writableOverloadProperties(): array
     {
-        return array_keys($this->¤¤writable_overload_properties);
+        return array_keys($this->x___writable_overload_properties);
     }
 
     /**
@@ -276,13 +276,13 @@ trait OverloadMembers
                     throw $this->c::issue(sprintf('Property: `%1$s` exists already.', $_property));
                 }
                 if ($writable) { // Is the property writable?
-                    $this->¤¤writable_overload_properties[$_property] = 1;
-                    $this->{$_property}                               = null;
-                    $this->{$_property}                               = &$_value;
-                    $this->¤¤overload[$_property]                     = &$this->{$_property};
+                    $this->x___writable_overload_properties[$_property] = 1;
+                    $this->{$_property}                                 = null;
+                    $this->{$_property}                                 = &$_value;
+                    $this->x___overload[$_property]                     = &$this->{$_property};
                 } else { // Remove it otherwise; i.e., NOT writable.
-                    unset($this->¤¤writable_overload_properties[$_property]);
-                    $this->¤¤overload[$_property] = &$_value;
+                    unset($this->x___writable_overload_properties[$_property]);
+                    $this->x___overload[$_property] = &$_value;
                 }
             } // unset($_property, $_value); // Housekeeping.
 
@@ -298,11 +298,11 @@ trait OverloadMembers
                     throw $this->c::issue(sprintf('Property: `%1$s` does not exist.', $_property));
                 }
                 if ($writable) { // Is the property writable?
-                    $this->¤¤writable_overload_properties[$_property] = 0;
-                    $this->¤¤overload[$_property]                     = &$this->{$_property};
+                    $this->x___writable_overload_properties[$_property] = 0;
+                    $this->x___overload[$_property]                     = &$this->{$_property};
                 } else { // Remove it otherwise; i.e., NOT writable.
-                    unset($this->¤¤writable_overload_properties[$_property]);
-                    $this->¤¤overload[$_property] = &$this->{$_property};
+                    unset($this->x___writable_overload_properties[$_property]);
+                    $this->x___overload[$_property] = &$this->{$_property};
                 }
             } // unset($_key, $_property); // Housekeeping.
 

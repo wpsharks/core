@@ -25,6 +25,10 @@ trait App
 {
     /**
      * @since 160102 App.
+     *
+     * @param mixed ...$args to underlying utility.
+     *
+     * @see Classes\App
      */
     public static function app(...$args)
     {
@@ -35,6 +39,8 @@ trait App
      * @since 160715 App parent.
      *
      * @param int $levels Up X levels.
+     *
+     * @return Classes\App|null Parent App; else `null`.
      */
     public static function appParent(int $levels = 1)
     {
@@ -51,8 +57,10 @@ trait App
 
     /**
      * @since 160715 App core.
+     *
+     * @return Classes\App Core.
      */
-    public static function appCore()
+    public static function appCore(): Classes\App
     {
         if (!($Parent = $GLOBALS[static::class]->Parent)) {
             return $GLOBALS[static::class];

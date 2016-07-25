@@ -30,7 +30,7 @@ interface PhpUserlandConstants
      *
      * @var string Regex pattern for use in `preg_match()`.
      *
-     * @see http://php.net/manual/en/functions.user-defined.php
+     * @link http://php.net/manual/en/functions.user-defined.php
      */
     const PHP_USERLAND_FUNCTION_REGEX_VALID = '/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/u';
 }

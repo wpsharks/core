@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f66b80d770ce3a3f19efb24953b8d352",
-    "content-hash": "2863560932565831282fbf5d2cbfd939",
+    "hash": "7f950781b68bd19591f03cf72981b73c",
+    "content-hash": "a46d475449a3b2007d84ad5182302f59",
     "packages": [
         {
             "name": "embedly/embedly-php",
@@ -802,16 +802,16 @@
     "packages-dev": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.18.31",
+            "version": "3.18.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "dad0b7db5fa8f3c7a3805efb2a1e86a50f11fe8b"
+                "reference": "84b9927ee116b30babf90a9fc723764672543e29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dad0b7db5fa8f3c7a3805efb2a1e86a50f11fe8b",
-                "reference": "dad0b7db5fa8f3c7a3805efb2a1e86a50f11fe8b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/84b9927ee116b30babf90a9fc723764672543e29",
+                "reference": "84b9927ee116b30babf90a9fc723764672543e29",
                 "shasum": ""
             },
             "require": {
@@ -878,7 +878,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-07-19 17:25:45"
+            "time": "2016-07-21 22:30:58"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -925,6 +925,46 @@
             "description": "Powerful command-line option toolkit",
             "homepage": "http://github.com/c9s/GetOptionKit",
             "time": "2016-07-18 07:44:29"
+        },
+        {
+            "name": "gossi/docblock",
+            "version": "v1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gossi/docblock.git",
+                "reference": "9360d6c57c4d8655c59e77a50abdc5b43c3ca521"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gossi/docblock/zipball/9360d6c57c4d8655c59e77a50abdc5b43c3ca521",
+                "reference": "9360d6c57c4d8655c59e77a50abdc5b43c3ca521",
+                "shasum": ""
+            },
+            "require": {
+                "phootwork/collection": "~1",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4",
+                "sami/sami": "~1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "gossi\\docblock\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP Docblock parser and generator. An API to read and write Docblocks.",
+            "keywords": [
+                "docblock",
+                "generator",
+                "parser"
+            ],
+            "time": "2015-09-18 14:16:44"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1218,6 +1258,83 @@
                 "jsonpath"
             ],
             "time": "2016-01-05 18:25:05"
+        },
+        {
+            "name": "phootwork/collection",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phootwork/collection.git",
+                "reference": "954f77efdb57a64b1b5cb10a6dccea0625de87d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phootwork/collection/zipball/954f77efdb57a64b1b5cb10a6dccea0625de87d7",
+                "reference": "954f77efdb57a64b1b5cb10a6dccea0625de87d7",
+                "shasum": ""
+            },
+            "require": {
+                "phootwork/lang": "~0",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4",
+                "sami/sami": "~3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phootwork\\collection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP Collections library (List, Set, Map, Queue & Stack)",
+            "keywords": [
+                "collection",
+                "collections",
+                "list",
+                "map",
+                "queue",
+                "set",
+                "stack"
+            ],
+            "time": "2016-07-01 11:39:45"
+        },
+        {
+            "name": "phootwork/lang",
+            "version": "v0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phootwork/lang.git",
+                "reference": "7410bbc56bb98cd47dcded81b7dfbfd3be311782"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phootwork/lang/zipball/7410bbc56bb98cd47dcded81b7dfbfd3be311782",
+                "reference": "7410bbc56bb98cd47dcded81b7dfbfd3be311782",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phootwork\\lang\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "(Missing) PHP features represented by objects",
+            "time": "2015-06-23 13:11:40"
         },
         {
             "name": "psr/http-message",

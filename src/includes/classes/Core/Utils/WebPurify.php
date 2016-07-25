@@ -78,7 +78,7 @@ class WebPurify extends Classes\Core\Base\Core
      *
      * @return bool True if string contains bad words.
      *
-     * @see https://www.webpurify.com/documentation/methods/check/
+     * @link https://www.webpurify.com/documentation/methods/check/
      * @TODO Test this with a POST request instead of GET for longer `text`.
      */
     public function check(string $text, array $args = []): bool

@@ -16,7 +16,7 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-$¤defaults = [
+$defaults = [
     'Throwable' => null,
 
     'http/html/header.php' => [
@@ -25,7 +25,7 @@ $¤defaults = [
         ],
     ],
 ];
-extract($this->setVars($¤defaults, $¤vars));
+extract($this->setVars($defaults, $this->vars));
 ?>
 <?= $this->get('http/html/header.php') ?>
 

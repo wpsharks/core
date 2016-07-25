@@ -56,12 +56,12 @@ class Utils extends Classes\Core\Base\Core
      *
      * @return mixed Overloaded method return value.
      *
-     * @see http://php.net/manual/en/language.oop5.overloading.php
+     * @link http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __call(string $method, array $args = [])
     {
-        if (isset($this->¤¤overload[$method])) {
-            return $this->¤¤overload[$method](...$args);
+        if (isset($this->x___overload[$method])) {
+            return $this->x___overload[$method](...$args);
         }
         $map   = $this->map($method);
         $class = Classes::class.$map['sub_namespace'].'\\Utils\\'.$map['prop_meth'];

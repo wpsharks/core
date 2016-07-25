@@ -62,7 +62,7 @@ class CliOpts extends Classes\Core\Base\Core
      *
      * @param array $specs An array of option specs.
      *
-     * @see https://github.com/c9s/GetOptionKit
+     * @link https://github.com/c9s/GetOptionKit
      */
     public function add(array $specs)
     {

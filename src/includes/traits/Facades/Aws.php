@@ -25,6 +25,7 @@ trait Aws
 {
     /**
      * @since 160719 AWS utilities.
+     * @see Classes\Core\Utils\Aws::$Sdk
      */
     public static function awsSdk()
     {
@@ -33,6 +34,7 @@ trait Aws
 
     /**
      * @since 160719 AWS utilities.
+     * @see Classes\Core\Utils\Aws::$S3Client
      */
     public static function awsS3Client()
     {

@@ -19,14 +19,15 @@ use function get_defined_vars as vars;
 /**
  * Apache.
  *
- * @since 160521
+ * @since 160522
  */
 trait Apache
 {
     /**
-     * Facade `example`.
-     *
      * @since 160522 Apache utilities.
+     *
+     * @param mixed ...$args to underlying utility.
+     *
      * @see Classes\Core\Utils\Apache::htaccessDeny()
      */
     public static function apacheHtaccessDeny(...$args)

@@ -35,7 +35,7 @@ class SubstrReplace extends Classes\Core\Base\Core
      *
      * @return string|array|object Output value.
      *
-     * @see http://php.net/manual/en/function.substr-replace.php
+     * @link http://php.net/manual/en/function.substr-replace.php
      *
      * @warning Does NOT support mixed `$replace`, `$start`, `$length` params like `substr_replace()` does.
      */

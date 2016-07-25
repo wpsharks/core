@@ -30,7 +30,7 @@ interface EmailConstants
      *
      * @var string Regex fragment for use in `preg_match()`.
      *
-     * @see https://en.wikipedia.org/wiki/Email_address#Local_part
+     * @link https://en.wikipedia.org/wiki/Email_address#Local_part
      */
     const EMAIL_REGEX_FRAG_USER = // Local part of email address.
         '(?:[^\x{00}-\x{7F}\p{Z}\p{C}]|[a-zA-Z0-9_!#$%&*+=?`{}~|\/\^\'\-])+'.// `user` (no dots).

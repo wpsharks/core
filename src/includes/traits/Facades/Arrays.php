@@ -25,6 +25,7 @@ trait Arrays
 {
     /**
      * @since 160102 App.
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function arrayUnshiftAssoc(&$array, $key, $value)
     {
@@ -33,6 +34,10 @@ trait Arrays
 
     /**
      * @since 160511 Array cloning.
+     *
+     * @param mixed ...$args to underlying utility.
+     *
+     * @see Classes\Core\Utils\CloneArray::__invoke()
      */
     public static function cloneArray(...$args)
     {

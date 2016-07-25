@@ -32,7 +32,7 @@ class UnshiftAssoc extends Classes\Core\Base\Core
      * @param string|int New array key; string or integer.
      * @param mixed $value New array value.
      *
-     * @return int Like {@link \array_unshift()}, returns the new number of elements.
+     * @return int Like `array_unshift()`, returns new number of elements.
      */
     public function __invoke(array &$array, $key, $value)
     {
