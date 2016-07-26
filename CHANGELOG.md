@@ -1,4 +1,4 @@
-## $v
+## v160726.73683
 
 - `$compress` parameter to `c::normalizeEols()` now defaults to `false`.
 - Enhancing docBlocks throughout for improved codex generation coming soon.
