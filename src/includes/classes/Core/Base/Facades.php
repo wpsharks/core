@@ -83,7 +83,7 @@ abstract class Facades
     use Traits\Facades\Uuids;
     use Traits\Facades\Varz;
     use Traits\Facades\Versions;
-    use Traits\Facades\WebPurify;
+    use Traits\Facades\Webpurify;
     use Traits\Facades\WordPress;
     use Traits\Facades\Yaml;
 }
