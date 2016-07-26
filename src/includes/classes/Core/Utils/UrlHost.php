@@ -31,14 +31,14 @@ class UrlHost extends Classes\Core\Base\Core
      * @param string $host    The input host to parse.
      * @param bool   $no_port No port number? Defaults to `FALSE`.
      *
-     * @note Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
+     * @internal Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
      *    That SHOULD be left intact for URL generation in almost every scenario.
      *    However, in a few other edge cases it may be desirable to exclude the port number.
      *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
      *
      * @return array Host parts; i.e., `name`, `subs`, `sub`, `root`, `root_basename`, `root_as_name`, `tld`.
      *
-     * @note This allows an empty `$host` so that a caller can get the array elements even if empty.
+     * @internal This allows an empty `$host` so that a caller can get the array elements even if empty.
      */
     public function parse(string $host, bool $no_port = false): array
     {

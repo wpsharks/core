@@ -60,7 +60,7 @@ trait OverloadMembers
      *
      * @param string $serialized Serialized data.
      *
-     * @note \Serializable interface is missing `string` hint.
+     * @internal \Serializable interface is missing `string` hint.
      */
     public function unserialize(/* string */$serialized)
     {
@@ -251,11 +251,11 @@ trait OverloadMembers
      *
      * @param array|object $properties Property(s).
      *
-     * @note Objects are passed by reference, so we can overload properties by reference.
+     * @internal Objects are passed by reference, so we can overload properties by reference.
      *   This only works if each property in the object does not yet exist in this class.
      *   Object properties can be set as writable or not writable.
      *
-     * @note Property names in an array can be overloaded; e.g., to provide public or JSON access.
+     * @internal Property names in an array can be overloaded; e.g., to provide public or JSON access.
      *   This only works if each property in the array already exists in this class.
      *   Overloaded object property names can be set as writable or not writable.
      *

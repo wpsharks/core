@@ -25,6 +25,10 @@ trait Dirs
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\DirTmp::__invoke()
      */
     public static function tmpDir(...$args)
     {
@@ -33,6 +37,10 @@ trait Dirs
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\DirPath::normalize()
      */
     public static function normalizeDirPath(...$args)
     {
@@ -41,6 +49,10 @@ trait Dirs
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\DirDelete::__invoke()
      */
     public static function deleteDir(...$args)
     {

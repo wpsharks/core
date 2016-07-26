@@ -25,6 +25,10 @@ trait Throwables
 {
     /**
      * @since 160711 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Throwables::handle()
      */
     public static function setupThrowableHandler(...$args)
     {

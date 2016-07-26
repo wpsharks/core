@@ -66,7 +66,7 @@ class PhpHas extends Classes\Core\Base\Core
      *
      * @return bool True if the function is callable.
      *
-     * @note This checks (among other things) if the function exists and that it's callable.
+     * @internal This checks (among other things) if the function exists and that it's callable.
      *    It also checks INI `disable_functions` & `suhosin.executor.func.blacklist`.
      *    In addition, it also checks `suhosin.executor.disable_eval`.
      */

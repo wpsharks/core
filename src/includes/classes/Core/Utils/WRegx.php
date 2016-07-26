@@ -33,7 +33,7 @@ class WRegx extends Classes\Core\Base\Core
      * @param bool         $force_match_all Force `^$` into play & don't treat `^$` as special chars.
      * @param bool         $capture         Capture the matches, or use the default `(?:)` syntax?
      *
-     * @note `$exclusion_chars` may not contain: `⁅`, `⒯`, `⁆`, `?` or `*`
+     * @internal `$exclusion_chars` may not contain: `⁅`, `⒯`, `⁆`, `?` or `*`
      *
      * @return string A real regex pattern; ready for {@link preg_match()}.
      */
@@ -65,7 +65,7 @@ class WRegx extends Classes\Core\Base\Core
      * @param string $exclusion_chars The behavior of `*` & `?`. Defaults to excluding `/`.
      * @param bool   $force_match_all Force `^$` into play & don't treat `^$` as special chars.
      *
-     * @note `$exclusion_chars` may not contain: `⁅`, `⒯`, `⁆`, `?` or `*`
+     * @internal `$exclusion_chars` may not contain: `⁅`, `⒯`, `⁆`, `?` or `*`
      *
      * @return string|array|object Value(s) as true regex fragments.
      */

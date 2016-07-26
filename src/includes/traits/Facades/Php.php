@@ -25,6 +25,10 @@ trait Php
 {
     /**
      * @since 160505 PHP eval utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\PhpEval::__invoke()
      */
     public static function phpEval(...$args)
     {
@@ -33,6 +37,10 @@ trait Php
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\PhpHas::callableFunc()
      */
     public static function canCallFunc(...$args)
     {
@@ -41,6 +49,10 @@ trait Php
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Memory::limit()
      */
     public static function memoryLimit(...$args)
     {
@@ -49,6 +61,10 @@ trait Php
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\PhpStrip::tags()
      */
     public static function stripPhpTags(...$args)
     {
@@ -57,6 +73,10 @@ trait Php
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UploadSize::limit()
      */
     public static function uploadSizeLimit(...$args)
     {
@@ -65,6 +85,10 @@ trait Php
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\ExecTime::max()
      */
     public static function maxExecTime(...$args)
     {
@@ -73,6 +97,10 @@ trait Php
 
     /**
      * @since 160709 Userland constants.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\PhpUserland::isValidFunctionName()
      */
     public static function isValidFuncName(...$args)
     {

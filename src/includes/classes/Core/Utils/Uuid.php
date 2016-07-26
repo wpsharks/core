@@ -62,7 +62,7 @@ class Uuid extends Classes\Core\Base\Core
      * @return string Version 3 UUID (32 bytes optimized).
      *                Or 36 bytes unoptimized; i.e., w/ dashes.
      *
-     * @note {@link v5()} is a suggested alternative, as this version uses MD5.
+     * @internal {@link v5()} is a suggested alternative, as this version uses MD5.
      */
     public function v3(string $namespace, string $identifier, bool $optimize = true): string
     {

@@ -25,6 +25,10 @@ trait MailChimp
 {
     /**
      * @since 160620 Adding MailChimp.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\MailChimp::subscribe()
      */
     public static function mailchimpSubscribe(...$args)
     {
@@ -33,6 +37,10 @@ trait MailChimp
 
     /**
      * @since 160620 Adding MailChimp.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\MailChimp::subscribeOrUpdate()
      */
     public static function mailchimpSubscribeOrUpdate(...$args)
     {
@@ -41,6 +49,10 @@ trait MailChimp
 
     /**
      * @since 160620 Adding MailChimp.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\MailChimp::updateSubscriber()
      */
     public static function mailchimpUpdateSubscriber(...$args)
     {
@@ -49,6 +61,10 @@ trait MailChimp
 
     /**
      * @since 160620 Adding MailChimp.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\MailChimp::subscriber()
      */
     public static function mailchimpSubscriber(...$args)
     {

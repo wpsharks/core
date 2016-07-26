@@ -25,6 +25,10 @@ trait Uuids
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuidV1(...$args)
     {
@@ -33,6 +37,10 @@ trait Uuids
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuidV3(...$args)
     {
@@ -41,6 +49,10 @@ trait Uuids
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuidV4(...$args)
     {
@@ -49,6 +61,10 @@ trait Uuids
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuidV5(...$args)
     {

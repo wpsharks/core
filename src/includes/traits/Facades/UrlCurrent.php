@@ -25,6 +25,10 @@ trait UrlCurrent
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::isSsl()
      */
     public static function isSsl(...$args)
     {
@@ -33,6 +37,10 @@ trait UrlCurrent
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::isLocalhost()
      */
     public static function isLocalhost(...$args)
     {
@@ -41,6 +49,10 @@ trait UrlCurrent
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::__invoke()
      */
     public static function currentUrl(...$args)
     {
@@ -49,6 +61,10 @@ trait UrlCurrent
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::scheme()
      */
     public static function currentScheme(...$args)
     {
@@ -57,6 +73,10 @@ trait UrlCurrent
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::host()
      */
     public static function currentHost(...$args)
     {
@@ -65,6 +85,10 @@ trait UrlCurrent
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::rootHost()
      */
     public static function currentRootHost(...$args)
     {
@@ -73,6 +97,10 @@ trait UrlCurrent
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::uri()
      */
     public static function currentUri(...$args)
     {
@@ -81,6 +109,10 @@ trait UrlCurrent
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::path()
      */
     public static function currentPath(...$args)
     {
@@ -89,6 +121,10 @@ trait UrlCurrent
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::pathInfo()
      */
     public static function currentPathInfo(...$args)
     {

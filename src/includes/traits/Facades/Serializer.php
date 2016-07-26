@@ -25,6 +25,10 @@ trait Serializer
 {
     /**
      * @since 160712 Serializer.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Serializer::__invoke()
      */
     public static function serialize(...$args)
     {
@@ -33,6 +37,10 @@ trait Serializer
 
     /**
      * @since 160712 Serializer.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Serializer::serializeClosure()
      */
     public static function serializeClosure(...$args)
     {
@@ -41,6 +49,10 @@ trait Serializer
 
     /**
      * @since 160712 Serializer.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Serializer::unserializeClosure()
      */
     public static function unserializeClosure(...$args)
     {
@@ -49,6 +61,10 @@ trait Serializer
 
     /**
      * @since 151214 Serializer.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Serializer::maybeSerialize()
      */
     public static function maybeSerialize(...$args)
     {
@@ -57,6 +73,10 @@ trait Serializer
 
     /**
      * @since 151214 Serializer.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Serializer::maybeUnserialize()
      */
     public static function maybeUnserialize(...$args)
     {
@@ -65,6 +85,10 @@ trait Serializer
 
     /**
      * @since 160712 Serializer.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Serializer::isSerialized()
      */
     public static function isSerialized(...$args)
     {
@@ -73,6 +97,10 @@ trait Serializer
 
     /**
      * @since 151214 Serializer.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Serializer::checkSetType()
      */
     public static function checkSetUnserializedType(...$args)
     {

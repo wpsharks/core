@@ -25,12 +25,9 @@ trait App
 {
     /**
      * @since 160102 App.
-     *
-     * @param mixed ...$args to underlying utility.
-     *
      * @see Classes\App
      */
-    public static function app(...$args)
+    public static function app()
     {
         return $GLOBALS[static::class];
     }

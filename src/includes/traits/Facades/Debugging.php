@@ -25,6 +25,10 @@ trait Debugging
 {
     /**
      * @since 160522 Debug utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Debugging::logIssue()
      */
     public static function issue(...$args)
     {
@@ -33,6 +37,10 @@ trait Debugging
 
     /**
      * @since 160522 Debug utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Debugging::logReview()
      */
     public static function review(...$args)
     {

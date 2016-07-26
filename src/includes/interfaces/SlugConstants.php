@@ -30,7 +30,7 @@ interface SlugConstants
      *
      * @var string Regex pattern for use in `preg_match()`.
      *
-     * @note This can be used in MySQL by outputting the following:
+     * @internal This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/SlugConstants::SLUG_REGEX_VALID);`
      */
     const SLUG_REGEX_VALID = '/^[a-z][a-z0-9\-]+[a-z0-9]$/u';

@@ -25,6 +25,10 @@ trait Replacements
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\ReplaceCodes::__invoke()
      */
     public static function fillReplacementCodes(...$args)
     {
@@ -33,6 +37,10 @@ trait Replacements
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\ReplaceOnce::__invoke()
      */
     public static function strReplaceOnce(...$args)
     {
@@ -41,6 +49,10 @@ trait Replacements
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\ReplaceOnce::i()
      */
     public static function strIReplaceOnce(...$args)
     {

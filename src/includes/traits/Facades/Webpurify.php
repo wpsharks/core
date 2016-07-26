@@ -25,6 +25,10 @@ trait WebPurify
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function containsBadWords(...$args)
     {
@@ -33,6 +37,10 @@ trait WebPurify
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function slugContainsBadWords(...$args)
     {

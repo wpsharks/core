@@ -25,6 +25,10 @@ trait Templates
 {
     /**
      * @since 160118 Template locater.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Template::locate()
      */
     public static function locateTemplate(...$args)
     {
@@ -33,6 +37,10 @@ trait Templates
 
     /**
      * @since 160118 Router templates.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Template::locateRoute()
      */
     public static function locateRouteTemplate(...$args)
     {
@@ -41,6 +49,10 @@ trait Templates
 
     /**
      * @since 160118 Router templates.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Template::loadRoute()
      */
     public static function loadRouteTemplate(...$args)
     {
@@ -49,6 +61,10 @@ trait Templates
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Template::get()
      */
     public static function getTemplate(...$args)
     {

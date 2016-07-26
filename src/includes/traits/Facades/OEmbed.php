@@ -25,6 +25,10 @@ trait OEmbed
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\OEmbed::__invoke()
      */
     public static function oEmbed(...$args)
     {

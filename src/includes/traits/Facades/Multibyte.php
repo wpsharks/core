@@ -25,6 +25,10 @@ trait Multibyte
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Utf8::isValid()
      */
     public static function isUtf8(...$args)
     {
@@ -33,6 +37,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\MbLcFirst::__invoke()
      */
     public static function mbLcFirst(...$args)
     {
@@ -41,6 +49,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\StrCaseCmp::__invoke()
      */
     public static function mbStrCaseCmp(...$args)
     {
@@ -49,6 +61,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\StrPad::__invoke()
      */
     public static function mbStrPad(...$args)
     {
@@ -57,6 +73,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\StrRev::__invoke()
      */
     public static function mbStrRev(...$args)
     {
@@ -65,6 +85,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\StrSplit::__invoke()
      */
     public static function mbStrSplit(...$args)
     {
@@ -73,6 +97,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\SubstrReplace::__invoke()
      */
     public static function mbSubstrReplace(...$args)
     {
@@ -81,6 +109,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Trim::__invoke()
      */
     public static function mbTrim(...$args)
     {
@@ -89,6 +121,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Trim::l()
      */
     public static function mbLTrim(...$args)
     {
@@ -97,6 +133,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Trim::r()
      */
     public static function mbRTrim(...$args)
     {
@@ -105,6 +145,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UcFirst::__invoke()
      */
     public static function mbUcFirst(...$args)
     {
@@ -113,6 +157,10 @@ trait Multibyte
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UcWords::__invoke()
      */
     public static function mbUcWords(...$args)
     {

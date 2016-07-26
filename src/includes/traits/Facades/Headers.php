@@ -25,6 +25,10 @@ trait Headers
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::sendStatus()
      */
     public static function statusHeader(...$args)
     {
@@ -33,6 +37,10 @@ trait Headers
 
     /**
      * @since 160118 Adding no-cache headers.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::sendNoCache()
      */
     public static function noCacheHeaders(...$args)
     {
@@ -41,6 +49,10 @@ trait Headers
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::parse()
      */
     public static function parseHeaders(...$args)
     {

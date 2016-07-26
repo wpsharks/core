@@ -25,6 +25,10 @@ trait Markdown
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Markdown::__invoke()
      */
     public static function markdown(...$args)
     {
@@ -33,6 +37,10 @@ trait Markdown
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Markdown::strip()
      */
     public static function stripMarkdown(...$args)
     {

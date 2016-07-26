@@ -43,7 +43,7 @@ trait CacheMembers
      *
      * @return mixed|null Value (by reference) for the cache sub-key.
      *
-     * @note Returns by reference. The use of `&` is highly recommended when calling this utility.
+     * @internal Returns by reference. The use of `&` is highly recommended when calling this utility.
      *    See also: <http://php.net/manual/en/language.references.return.php>
      */
     protected function &cacheSet(string $primary_key, $sub_key, $value)
@@ -66,7 +66,7 @@ trait CacheMembers
      *
      * @return mixed|null Value (by reference) for the cache sub-key.
      *
-     * @note Returns by reference. The use of `&` is suggested when calling this utility.
+     * @internal Returns by reference. The use of `&` is suggested when calling this utility.
      *    See also: <http://php.net/manual/en/language.references.return.php>
      */
     protected function &cacheGet(string $primary_key, $sub_key)
@@ -207,7 +207,7 @@ trait CacheMembers
      *
      * @return mixed|null Value (by reference) for the cache key. Default is `null`.
      *
-     * @note Returns by reference. The use of `&` is highly recommended when calling this utility.
+     * @internal Returns by reference. The use of `&` is highly recommended when calling this utility.
      *    See also: <http://php.net/manual/en/language.references.return.php>
      */
     protected function &cacheKey(string $primary_key, $args = [])

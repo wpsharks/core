@@ -129,7 +129,7 @@ interface UrlConstants
      *
      * @var string Regex pattern for use in `preg_match()`.
      *
-     * @note This can be used in MySQL by outputting the following:
+     * @internal This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/UrlConstants::URL_REGEX_VALID);`
      */
     const URL_REGEX_VALID = '/^'.self::URL_REGEX_FRAG_SCHEME.self::URL_REGEX_FRAG_USER_PASS.self::URL_REGEX_FRAG_HOST_TLD_PORT.self::URL_REGEX_FRAG_URI_HASH.'$/u';

@@ -25,6 +25,10 @@ trait Names
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Name::firstIn()
      */
     public static function fnameIn(...$args)
     {
@@ -33,6 +37,10 @@ trait Names
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Name::lastIn()
      */
     public static function lnameIn(...$args)
     {
@@ -41,6 +49,10 @@ trait Names
 
     /**
      * @since 160220 Acronym utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Name::toAcronym()
      */
     public static function nameToAcronym(...$args)
     {
@@ -49,6 +61,10 @@ trait Names
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Name::toSlug()
      */
     public static function nameToSlug(...$args)
     {
@@ -57,6 +73,10 @@ trait Names
 
     /**
      * @since 160220 Var utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Name::toVar()
      */
     public static function nameToVar(...$args)
     {

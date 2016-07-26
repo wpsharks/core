@@ -25,6 +25,10 @@ trait SimpleExpressions
 {
     /**
      * @since 160708 Simple expression utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\SimpleExpression::toPhp()
      */
     public static function simplePhpExpr(...$args)
     {

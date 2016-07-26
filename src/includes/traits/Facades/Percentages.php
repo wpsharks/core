@@ -25,6 +25,10 @@ trait Percentages
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Percent::diff()
      */
     public static function percentDiff(...$args)
     {

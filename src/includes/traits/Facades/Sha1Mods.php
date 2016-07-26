@@ -25,6 +25,10 @@ trait Sha1Mods
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sha1Mod::__invoke()
      */
     public static function sha1Mod(...$args)
     {
@@ -33,6 +37,10 @@ trait Sha1Mods
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sha1Mod::shardId()
      */
     public static function sha1ModShardId(...$args)
     {
@@ -41,6 +49,10 @@ trait Sha1Mods
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sha1Mod::assignShardId()
      */
     public static function sha1ModAssignShardId(...$args)
     {

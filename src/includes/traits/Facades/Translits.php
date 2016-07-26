@@ -25,6 +25,10 @@ trait Translits
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Transliterate::toAscii()
      */
     public static function forceAscii(...$args)
     {

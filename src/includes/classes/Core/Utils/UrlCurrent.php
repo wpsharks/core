@@ -82,7 +82,7 @@ class UrlCurrent extends Classes\Core\Base\Core
      *
      * @param bool $no_port No port number? Defaults to `FALSE`.
      *
-     * @note Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
+     * @internal Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
      *    That SHOULD be left intact for URL generation in almost every scenario.
      *    However, in a few other edge cases it may be desirable to exclude the port number.
      *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
@@ -109,7 +109,7 @@ class UrlCurrent extends Classes\Core\Base\Core
      *
      * @param bool $no_port No port number? Defaults to `FALSE`.
      *
-     * @note Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
+     * @internal Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
      *    That SHOULD be left intact for URL generation in almost every scenario.
      *    However, in a few other edge cases it may be desirable to exclude the port number.
      *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.

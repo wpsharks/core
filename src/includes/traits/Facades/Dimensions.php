@@ -25,6 +25,10 @@ trait Dimensions
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\OneDimension::__invoke()
      */
     public static function oneDimension(...$args)
     {
@@ -33,6 +37,10 @@ trait Dimensions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RemoveEmptys::__invoke()
      */
     public static function removeEmptys(...$args)
     {
@@ -41,6 +49,10 @@ trait Dimensions
 
     /**
      * @since 160428 Remove 0 bytes.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Remove0Bytes::__invoke()
      */
     public static function remove0Bytes(...$args)
     {
@@ -49,6 +61,10 @@ trait Dimensions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RemoveNulls::__invoke()
      */
     public static function removeNulls(...$args)
     {
@@ -57,6 +73,10 @@ trait Dimensions
 
     /**
      * @since 160720 Remove key utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RemoveKeys::__invoke()
      */
     public static function removeKey(...$args)
     {
@@ -65,6 +85,10 @@ trait Dimensions
 
     /**
      * @since 160720 Remove key utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RemoveKeys::__invoke()
      */
     public static function removeKeys(...$args)
     {
@@ -73,6 +97,10 @@ trait Dimensions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sort::byKey()
      */
     public static function sortByKey(...$args)
     {
@@ -81,6 +109,10 @@ trait Dimensions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\DotKeys::__invoke()
      */
     public static function dotKeys(...$args)
     {

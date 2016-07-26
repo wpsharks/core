@@ -25,6 +25,10 @@ trait UrlQuerys
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function stripUrlQuery(...$args)
     {
@@ -33,6 +37,10 @@ trait UrlQuerys
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function parseUrlQuery(...$args)
     {
@@ -41,6 +49,10 @@ trait UrlQuerys
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function buildUrlQuery(...$args)
     {
@@ -49,6 +61,10 @@ trait UrlQuerys
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function addUrlQueryArgs(...$args)
     {
@@ -57,6 +73,10 @@ trait UrlQuerys
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function removeUrlQueryArgs(...$args)
     {
@@ -65,6 +85,10 @@ trait UrlQuerys
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function addUrlQuerySig(...$args)
     {
@@ -73,6 +97,10 @@ trait UrlQuerys
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function removeUrlQuerySig(...$args)
     {
@@ -81,6 +109,10 @@ trait UrlQuerys
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function urlQuerySigOk(...$args)
     {

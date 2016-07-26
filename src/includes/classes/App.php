@@ -371,7 +371,7 @@ class App extends Classes\Core\Base\Core
      *
      * @return array The resuling array after merging.
      *
-     * @note This method must be capable of running w/o a constructed app.
+     * @internal This method must be capable of running w/o a constructed app.
      */
     public function mergeConfig(array $base, array $merge): array
     {
@@ -401,7 +401,7 @@ class App extends Classes\Core\Base\Core
      *
      * @return array The `$base` w/ possibly-empty numeric arrays.
      *
-     * @note This method must be capable of running w/o a constructed app.
+     * @internal This method must be capable of running w/o a constructed app.
      */
     public function maybeEmptyNumericConfigArrays(array $base, array $merge): array
     {
@@ -429,7 +429,7 @@ class App extends Classes\Core\Base\Core
      *
      * @return mixed string|array|object Output value.
      *
-     * @note This method must be capable of running w/o a fully-constructed app.
+     * @internal This method must be capable of running w/o a fully-constructed app.
      *  Only dependency is the initial reflection-based properties.
      */
     public function fillConfigReplacementCodes($value)

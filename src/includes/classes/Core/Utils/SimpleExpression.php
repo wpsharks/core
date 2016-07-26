@@ -31,26 +31,26 @@ class SimpleExpression extends Classes\Core\Base\Core implements Interfaces\Simp
      * @param string   $expr     A simple expression.
      * @param callable $callback A callback template handler.
      *
-     * @note The `$callback` receives one argument, a raw test-fragment (string, not quoted).
+     * @internal The `$callback` receives one argument, a raw test-fragment (string, not quoted).
      *  The callback should always return a single PHP function call (as a string), using the test-fragment.
      *  e.g., `'check_something("'".$test_fragment."'")'`, `'get_something("'".$test_fragment."'")'`, etc.
      *
      * @return string PHP expression from a simple expression string.
      *
-     * @note The following reserved characters should NOT be used as a part of any test-fragment or comparison-value.
+     * @internal The following reserved characters should NOT be used as a part of any test-fragment or comparison-value.
      *  Reserved chars are: `(`, `)`, and all whitespace. Brackets & whitespace are delimiters in the expression.
      *
-     * @note Another special char is `!`, which can appear before any test-fragment to negate the test.
+     * @internal Another special char is `!`, which can appear before any test-fragment to negate the test.
      *  This is not considered a reserved char though, because it is only valid as the first char in a test-fragment.
      *  Also, it is only valid when the test-fragment contains a total of 2+ chars (counting the `!` symbol itself).
      *  It's also worth noting that the `!` symbol is not passed to the `$callback` when it's a valid negation.
      *
-     * @note There are also reserved sequences that form logical-operators and/or comparison-operators that should NOT be
+     * @internal There are also reserved sequences that form logical-operators and/or comparison-operators that should NOT be
      *  used as any stand-alone test-fragment or comparison-value. They can be part of a test-fragment or comparison-value,
      *  but not stand-alone; i.e., any of these preceded by `^|[\s()]` and followed by `[\s()]|$` form an operator.
      *  Reserved sequences include: `AND`, `OR`, `&&`, `||`, `===`, `!==`, `==`, `!=`, `<=`, `>=`, `<>`, `>`, `<`.
      *
-     * @note Other special chars can be implemented by the caller as a part of the test-fragment.
+     * @internal Other special chars can be implemented by the caller as a part of the test-fragment.
      *  For instance, it might be desirable to allow for a test-fragment that starts with a function name.
      *  e.g., `function:arg`, `function:arg,arg`, etc. So long as it doesn't use reserved chars you're fine.
      *  Just be sure to document special chars. In this example, `[:,]` would be reserved in test-fragments.
@@ -140,11 +140,11 @@ class SimpleExpression extends Classes\Core\Base\Core implements Interfaces\Simp
      *
      * @return string Quoted string literal. If empty, returns `''`.
      *
-     * @note This trims existing 'single' and/or "double" quoted encapsulations before quoting again.
+     * @internal This trims existing 'single' and/or "double" quoted encapsulations before quoting again.
      * However, for that reason, escaped quotes inside an already-quoted string are always escaped again.
      * So if you're going to quote a string literal in a simple expression, you should not escape inner quotes.
      *
-     * @note The simple expression syntax does NOT allow for spaces (or brackets) in any individual token.
+     * @internal The simple expression syntax does NOT allow for spaces (or brackets) in any individual token.
      *  i.e., It is NOT possible to quote a string containing a space (or brackets) at this time.
      */
     protected function quoteStrLiteral(string $string): string

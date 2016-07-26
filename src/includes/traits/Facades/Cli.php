@@ -25,6 +25,10 @@ trait Cli
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Cli::is()
      */
     public static function isCli(...$args)
     {
@@ -33,6 +37,10 @@ trait Cli
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Cli::isInteractive()
      */
     public static function isCliInteractive(...$args)
     {
@@ -41,6 +49,10 @@ trait Cli
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\CliStream::in()
      */
     public static function readStdin(...$args)
     {
@@ -49,6 +61,10 @@ trait Cli
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\CliStream::out()
      */
     public static function writeStdout(...$args)
     {
@@ -57,6 +73,10 @@ trait Cli
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\CliStream::outHr()
      */
     public static function writeStdoutHr(...$args)
     {
@@ -65,6 +85,10 @@ trait Cli
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\CliStream::err()
      */
     public static function writeStderr(...$args)
     {
@@ -73,6 +97,10 @@ trait Cli
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\CliStream::errHr()
      */
     public static function writeStderrHr(...$args)
     {
@@ -81,6 +109,10 @@ trait Cli
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\CliOs::openUrl()
      */
     public static function cliOpenUrl(...$args)
     {

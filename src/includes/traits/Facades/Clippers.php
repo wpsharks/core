@@ -25,6 +25,10 @@ trait Clippers
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Clip::__invoke()
      */
     public static function clip(...$args)
     {
@@ -33,6 +37,10 @@ trait Clippers
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\MidClip::__invoke()
      */
     public static function midClip(...$args)
     {

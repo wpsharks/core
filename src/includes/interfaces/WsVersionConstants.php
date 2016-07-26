@@ -31,7 +31,7 @@ interface WsVersionConstants
      * @var string Plugin version string validation pattern.
      *             This has additional limitations (but still compatible w/ PHP version strings).
      *
-     * @note Requirements are as follows:
+     * @internal Requirements are as follows:
      *
      *       1. Must follow {@link http://semver.org semantic versioning guidelines}.
      *       2. Must start with six digits.
@@ -51,7 +51,7 @@ interface WsVersionConstants
      * @var string Plugin dev version string validation pattern.
      *             This has additional limitations (but still compatible w/ PHP dev version strings).
      *
-     * @note Requirements are as follows:
+     * @internal Requirements are as follows:
      *
      *       1. Must follow {@link http://semver.org semantic versioning guidelines}.
      *       2. Must start with six digits.
@@ -72,7 +72,7 @@ interface WsVersionConstants
      * @var string Plugin stable version string validation pattern.
      *             This has additional limitations (but still compatible w/ PHP stable version strings).
      *
-     * @note Requirements are as follows:
+     * @internal Requirements are as follows:
      *
      *       1. Must follow {@link http://semver.org semantic versioning guidelines}.
      *       2. Must start with six digits.

@@ -25,6 +25,10 @@ trait Cookies
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Cookie::get()
      */
     public static function getCookie(...$args)
     {
@@ -33,6 +37,10 @@ trait Cookies
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Cookie::set()
      */
     public static function setCookie(...$args)
     {

@@ -25,6 +25,10 @@ trait Versions
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isVersion(...$args)
     {
@@ -33,6 +37,10 @@ trait Versions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isDevVersion(...$args)
     {
@@ -41,6 +49,10 @@ trait Versions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isStableVersion(...$args)
     {
@@ -49,6 +61,10 @@ trait Versions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isWsVersion(...$args)
     {
@@ -57,6 +73,10 @@ trait Versions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isWsDevVersion(...$args)
     {
@@ -65,6 +85,10 @@ trait Versions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isWsStableVersion(...$args)
     {
@@ -73,6 +97,10 @@ trait Versions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function wsVersionDate(...$args)
     {
@@ -81,6 +109,10 @@ trait Versions
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function wsVersionTime(...$args)
     {

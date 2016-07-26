@@ -25,6 +25,10 @@ trait Files
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\FileExt::__invoke()
      */
     public static function fileExt(...$args)
     {
@@ -33,6 +37,10 @@ trait Files
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\FileSize::abbr()
      */
     public static function fileSizeAbbr(...$args)
     {
@@ -41,6 +49,10 @@ trait Files
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\FileSize::bytesAbbr()
      */
     public static function bytesToAbbr(...$args)
     {
@@ -49,6 +61,10 @@ trait Files
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\FileSize::abbrBytes()
      */
     public static function abbrToBytes(...$args)
     {

@@ -34,7 +34,7 @@ class HtmlBalance extends Classes\Core\Base\Core
      *
      * @return string|array|object Balanced value (i.e., HTML markup).
      *
-     * @note This works with HTML fragments only. No on a full document.
+     * @internal This works with HTML fragments only. No on a full document.
      * i.e., If the input contains `</html>` or `</body>` it is left as-is.
      */
     public function tags($value)

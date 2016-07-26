@@ -25,6 +25,10 @@ trait Slashes
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Slashes::add()
      */
     public static function slash(...$args)
     {
@@ -33,6 +37,10 @@ trait Slashes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Slashes::remove()
      */
     public static function unslash(...$args)
     {

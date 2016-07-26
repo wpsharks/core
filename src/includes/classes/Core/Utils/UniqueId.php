@@ -36,7 +36,7 @@ class UniqueId extends Classes\Core\Base\Core
      * @return string `$prefix` + 22 bytes (by default).
      *                If `$more_entropy` is false, `$prefix` + 13 bytes.
      *
-     * @note Unique identifier is based on the current time in microseconds.
+     * @internal Unique identifier is based on the current time in microseconds.
      *  This ID contains alphanumeric ASCII chars (lowercase alpha only).
      *
      * @link http://php.net/manual/en/function.uniqid.php

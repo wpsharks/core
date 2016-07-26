@@ -84,7 +84,7 @@ class Sha1Mod extends Classes\Core\Base\Core
      *
      * @return int SHA-1 modulus; i.e., a shard ID.
      *
-     * @note Shard IDs are always zero-based, because a modulus will never be >= to the divisor.
+     * @internal Shard IDs are always zero-based, because a modulus will never be >= to the divisor.
      *  If `$total_shards is `65536`, min shard ID is `0`, max shard ID is `65535`.
      */
     public function shardId(string $string, bool $is_sha1 = false, int $total_shards = 65536): int
@@ -102,7 +102,7 @@ class Sha1Mod extends Classes\Core\Base\Core
      *
      * @return int Assigned shard ID; based on `sha1($string)`.
      *
-     * @note This one is based on the actual number of configured shards;
+     * @internal This one is based on the actual number of configured shards;
      *  i.e., not on the upper limit of the shard ID itself. `65536` is not used here.
      */
     public function assignShardId(string $string, bool $is_sha1 = false)

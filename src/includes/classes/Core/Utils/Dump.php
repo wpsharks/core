@@ -57,12 +57,10 @@ class Dump extends Classes\Core\Base\Core
      *
      * @return string A dump of the input `$var` (always in string format).
      *
-     * @note This method has built-in protection against circular references.
-     *
-     * @note This was benchmarked a few times against PHP's own `var_dump()`, and also against `print_r()`.
+     * @internal This method has built-in protection against circular references.
+     * @internal This was benchmarked a few times against PHP's own `var_dump()`, and also against `print_r()`.
      *    This routine is NOT faster than `var_dump()`, but it is MUCH faster than `print_r()`.
-     *
-     * @note This routine MUST be very careful that it does NOT write to any variables.
+     * @internal This routine MUST be very careful that it does NOT write to any variables.
      *    Writing to a variable (or to a variable reference) could cause damage in other routines.
      */
     protected function dump(

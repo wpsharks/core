@@ -25,6 +25,10 @@ trait NoCache
 {
     /**
      * @since 160606 No-cache utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\NoCache::setFlags()
      */
     public static function noCacheFlags(...$args)
     {

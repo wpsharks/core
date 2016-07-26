@@ -25,6 +25,10 @@ trait Memcache
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Memcache::set()
      */
     public static function memcacheSet(...$args)
     {
@@ -33,6 +37,10 @@ trait Memcache
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Memcache::get()
      */
     public static function memcacheGet(...$args)
     {
@@ -41,6 +49,10 @@ trait Memcache
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Memcache::touch()
      */
     public static function memcacheTouch(...$args)
     {
@@ -49,6 +61,10 @@ trait Memcache
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Memcache::clear()
      */
     public static function memcacheClear(...$args)
     {

@@ -30,7 +30,7 @@ interface VersionConstants
      *
      * @var string PHP version string validation pattern.
      *
-     * @note Requirements are as follows:
+     * @internal Requirements are as follows:
      *
      *       1. Must follow {@link http://semver.org semantic versioning guidelines}.
      *          However, a development-state suffix does not have to start with a `-` if the first character is a letter; e.g., 1.1RC is fine.
@@ -48,7 +48,7 @@ interface VersionConstants
      *
      * @var string PHP dev version string validation pattern.
      *
-     * @note Requirements are as follows:
+     * @internal Requirements are as follows:
      *
      *       1. Must follow {@link http://semver.org semantic versioning guidelines}.
      *          However, a development-state suffix does not have to start with a `-` if the first character is a letter; e.g., 1.1RC is fine.
@@ -67,7 +67,7 @@ interface VersionConstants
      *
      * @var string PHP stable version string validation pattern.
      *
-     * @note Requirements are as follows:
+     * @internal Requirements are as follows:
      *
      *       1. Must follow {@link http://semver.org semantic versioning guidelines}.
      *          However, a development-state suffix does not have to start with a `-` if the first character is a letter; e.g., 1.1RC is fine.

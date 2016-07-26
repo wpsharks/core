@@ -59,7 +59,7 @@ class HashIds extends Classes\Core\Base\Core
      *
      * @since 150424 Adding hash IDs.
      *
-     * @param int ...$integers Integers to encode.
+     * @param int ...$integers Variadic integers to encode.
      *
      * @return string A hash ID; e.g., `xjFsdcl`
      */

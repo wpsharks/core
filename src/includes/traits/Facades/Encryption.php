@@ -25,6 +25,10 @@ trait Encryption
 {
     /**
      * @since 160701 Unique ID.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UniqueId::__invoke()
      */
     public static function uniqueId(...$args)
     {
@@ -33,6 +37,10 @@ trait Encryption
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RandomKey::__invoke()
      */
     public static function randomKey(...$args)
     {
@@ -41,6 +49,10 @@ trait Encryption
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\PwStrength::__invoke()
      */
     public static function passwordStrength(...$args)
     {
@@ -49,6 +61,10 @@ trait Encryption
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Password::sha256()
      */
     public static function passwordSha256(...$args)
     {
@@ -57,6 +73,10 @@ trait Encryption
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Rijndael256::encrypt()
      */
     public static function encrypt(...$args)
     {
@@ -65,6 +85,10 @@ trait Encryption
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Rijndael256::decrypt()
      */
     public static function decrypt(...$args)
     {
@@ -73,6 +97,10 @@ trait Encryption
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sha256::keyedHash()
      */
     public static function sha256KeyedHash(...$args)
     {
@@ -81,6 +109,10 @@ trait Encryption
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HashIds::encode()
      */
     public static function hashIds(...$args)
     {
@@ -89,6 +121,10 @@ trait Encryption
 
     /**
      * @since 160630 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HashIds::decode()
      */
     public static function decodeHashedIds(...$args)
     {

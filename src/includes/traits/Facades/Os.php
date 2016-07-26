@@ -25,6 +25,10 @@ trait Os
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Os::isNix()
      */
     public static function isNix(...$args)
     {
@@ -33,6 +37,10 @@ trait Os
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Os::isLinux()
      */
     public static function isLinux(...$args)
     {
@@ -41,6 +49,10 @@ trait Os
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Os::isMac()
      */
     public static function isMac(...$args)
     {
@@ -49,6 +61,10 @@ trait Os
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Os::isWindows()
      */
     public static function isWindows(...$args)
     {

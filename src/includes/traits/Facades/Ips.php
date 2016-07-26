@@ -25,6 +25,10 @@ trait Ips
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Ip::current()
      */
     public static function currentIp(...$args)
     {
@@ -33,6 +37,10 @@ trait Ips
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Ip::region()
      */
     public static function ipRegion(...$args)
     {
@@ -41,6 +49,10 @@ trait Ips
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Ip::country()
      */
     public static function ipCountry(...$args)
     {

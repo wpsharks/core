@@ -90,7 +90,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @return Exception An exception ready to be thrown.
      *
-     * @note If only one parameter is passed and it's a string, it's treated as the `$note`.
+     * @internal If only one parameter is passed and it's a string, it's treated as the `$note`.
      */
     public function logIssue($data = [], string $note = '', string $event = ''): Exception
     {
@@ -120,7 +120,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @return int Total number of bytes written.
      *
-     * @note If only one parameter is passed and it's a string, it's treated as the `$note`.
+     * @internal If only one parameter is passed and it's a string, it's treated as the `$note`.
      */
     public function logReview($data = [], string $note = '', string $event = ''): int
     {

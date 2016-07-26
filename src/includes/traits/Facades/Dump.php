@@ -25,6 +25,10 @@ trait Dump
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Dump::__invoke()
      */
     public static function dump(...$args)
     {

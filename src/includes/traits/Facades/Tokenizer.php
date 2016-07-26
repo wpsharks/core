@@ -25,8 +25,14 @@ trait Tokenizer
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param string $string   to underlying utility.
+     * @param array  $tokenize to underlying utility.
+     * @param array  $args     to underlying utility.
+     *
+     * @see Classes\Core\Tokenizer::__construct()
      */
-    public static function tokenize(string $string, array $tokenize, array $args = [])
+    public static function tokenize(string $string, array $tokenize, array $args = []): Classes\Core\Tokenizer
     {
         return $GLOBALS[static::class]->Di->get(Classes\Core\Tokenizer::class, ['string' => $string, 'tokenize' => $tokenize, 'args' => $args]);
     }

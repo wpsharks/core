@@ -25,6 +25,10 @@ trait Pdo
 {
     /**
      * @since 160422 SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Pdo::quote()
      */
     public static function pdoQuote(...$args)
     {
@@ -33,6 +37,10 @@ trait Pdo
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Pdo::get()
      */
     public static function pdoGet(...$args)
     {
@@ -41,6 +49,7 @@ trait Pdo
 
     /**
      * @since 160422 SQL utils.
+     * @see Classes\Core\Utils\Pdo::$current
      */
     public static function currentPdo()
     {

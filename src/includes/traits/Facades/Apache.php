@@ -26,9 +26,9 @@ trait Apache
     /**
      * @since 160522 Apache utilities.
      *
-     * @param mixed ...$args to underlying utility.
+     * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Apache::htaccessDeny()
+     * @see Classes/Core/Utils/Apache::htaccessDeny()
      */
     public static function apacheHtaccessDeny(...$args)
     {

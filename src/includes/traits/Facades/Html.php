@@ -25,6 +25,10 @@ trait Html
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Html::is()
      */
     public static function isHtml(...$args)
     {
@@ -33,6 +37,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlBalance::tags()
      */
     public static function balanceHtmlTags(...$args)
     {
@@ -41,6 +49,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlStrip::attributes()
      */
     public static function stripHtmlAttrs(...$args)
     {
@@ -49,6 +61,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Text2Html::__invoke()
      */
     public static function textToHtml(...$args)
     {
@@ -57,6 +73,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Html2Text::__invoke()
      */
     public static function htmlToText(...$args)
     {
@@ -65,6 +85,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Html2RichText::__invoke()
      */
     public static function htmlToRichText(...$args)
     {
@@ -73,6 +97,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Html2Pandoc::__invoke()
      */
     public static function htmlToPandoc(...$args)
     {
@@ -81,6 +109,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlAnchorize::__invoke()
      */
     public static function htmlAnchorize(...$args)
     {
@@ -89,6 +121,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlAnchorRels::__invoke()
      */
     public static function htmlAnchorRels(...$args)
     {
@@ -97,6 +133,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlTrim::__invoke()
      */
     public static function htmlTrim(...$args)
     {
@@ -105,6 +145,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlTrim::l()
      */
     public static function htmlLTrim(...$args)
     {
@@ -113,6 +157,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlTrim::r()
      */
     public static function htmlRTrim(...$args)
     {
@@ -121,6 +169,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlWhitespace::normalize()
      */
     public static function normalizeHtmlWhitespace(...$args)
     {
@@ -129,6 +181,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Html::checked()
      */
     public static function checked(...$args)
     {
@@ -137,6 +193,10 @@ trait Html
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Html::selected()
      */
     public static function selected(...$args)
     {

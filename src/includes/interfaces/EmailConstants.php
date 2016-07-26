@@ -52,7 +52,7 @@ interface EmailConstants
      *
      * @var string Regex pattern for use in `preg_match()`.
      *
-     * @note This can be used in MySQL by outputting the following:
+     * @internal This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/EmailConstants::EMAIL_REGEX_VALID);`
      */
     const EMAIL_REGEX_VALID = '/^'.self::EMAIL_REGEX_FRAG_USER.'@'.self::EMAIL_REGEX_FRAG_HOST.'$/u';

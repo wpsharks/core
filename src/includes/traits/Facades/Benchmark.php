@@ -25,6 +25,10 @@ trait Benchmark
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Benchmark::start()
      */
     public static function benchStart(...$args)
     {
@@ -33,6 +37,10 @@ trait Benchmark
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Benchmark::print()
      */
     public static function benchPrint(...$args)
     {

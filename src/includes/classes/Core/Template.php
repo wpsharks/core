@@ -151,7 +151,7 @@ class Template extends Classes\Core\Base\Core
      * @since 150424 Initial release.
      *
      * @param array $defaults Default vars.
-     * @param array ...$vars Template vars.
+     * @param array ...$vars Variadic template vars.
      *
      * @return array New template vars.
      */

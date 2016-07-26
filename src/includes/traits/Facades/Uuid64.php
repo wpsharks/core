@@ -25,6 +25,10 @@ trait Uuid64
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64Validate(...$args)
     {
@@ -33,6 +37,10 @@ trait Uuid64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64ShardIdIn(...$args)
     {
@@ -41,6 +49,10 @@ trait Uuid64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64ValidateShardId(...$args)
     {
@@ -49,6 +61,10 @@ trait Uuid64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64TypeIdIn(...$args)
     {
@@ -57,6 +73,10 @@ trait Uuid64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64ValidateTypeId(...$args)
     {
@@ -65,6 +85,10 @@ trait Uuid64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64LocalIdIn(...$args)
     {
@@ -73,6 +97,10 @@ trait Uuid64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64ValidateLocalId(...$args)
     {
@@ -81,6 +109,10 @@ trait Uuid64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64Parse(...$args)
     {
@@ -89,6 +121,10 @@ trait Uuid64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function uuid64Build(...$args)
     {

@@ -25,6 +25,10 @@ trait Base64
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Base64::urlSafeEncode()
      */
     public static function base64UrlSafeEncode(...$args)
     {
@@ -33,6 +37,10 @@ trait Base64
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Base64::urlSafeDecode()
      */
     public static function base64UrlSafeDecode(...$args)
     {

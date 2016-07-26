@@ -25,6 +25,10 @@ trait UrlUtils
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isUrl(...$args)
     {
@@ -33,6 +37,10 @@ trait UrlUtils
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function stripUrlFragment(...$args)
     {
@@ -41,6 +49,10 @@ trait UrlUtils
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function normalizeUrlAmps(...$args)
     {
@@ -49,6 +61,10 @@ trait UrlUtils
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function remoteRequest(...$args)
     {

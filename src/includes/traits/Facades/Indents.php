@@ -25,6 +25,10 @@ trait Indents
 {
     /**
      * @since 160720 Indent utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Indents::stripLeading()
      */
     public static function stripLeadingIndents(...$args)
     {

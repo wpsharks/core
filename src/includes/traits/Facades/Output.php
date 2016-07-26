@@ -25,6 +25,10 @@ trait Output
 {
     /**
      * @since 160622 Adding file output prep.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Output::filePrep()
      */
     public static function prepareForFileOutput(...$args)
     {
@@ -33,6 +37,10 @@ trait Output
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Output::gzipOff()
      */
     public static function gzipOff(...$args)
     {
@@ -41,6 +49,10 @@ trait Output
 
     /**
      * @since 160622 Adding session write/close.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Output::sessionWriteClose()
      */
     public static function sessionWriteClose(...$args)
     {
@@ -49,6 +61,10 @@ trait Output
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Output::buffersEndClean()
      */
     public static function obEndCleanAll(...$args)
     {

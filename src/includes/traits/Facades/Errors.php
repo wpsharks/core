@@ -25,6 +25,10 @@ trait Errors
 {
     /**
      * @since 160710 Error utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Error::__invoke()
      */
     public static function error(...$args)
     {
@@ -33,6 +37,10 @@ trait Errors
 
     /**
      * @since 160710 Error utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Error::is()
      */
     public static function isError(...$args)
     {

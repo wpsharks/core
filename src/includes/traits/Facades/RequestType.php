@@ -25,6 +25,10 @@ trait RequestType
 {
     /**
      * @since 160531 Request types.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RequestType::isAjax()
      */
     public static function isAjax(...$args)
     {
@@ -33,6 +37,10 @@ trait RequestType
 
     /**
      * @since 160531 Request types.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RequestType::isApi()
      */
     public static function isApi(...$args)
     {
@@ -41,6 +49,10 @@ trait RequestType
 
     /**
      * @since 160608 Request types.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RequestType::doingRestAction()
      */
     public static function doingRestAction(...$args)
     {

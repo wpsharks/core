@@ -25,6 +25,10 @@ trait Spellcheck
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\SpellCheck::__invoke()
      */
     public static function isSpelledRight(...$args)
     {

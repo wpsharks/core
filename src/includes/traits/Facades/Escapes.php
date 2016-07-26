@@ -25,6 +25,10 @@ trait Escapes
 {
     /**
      * @since 160708 Quote utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::singleQuote()
      */
     public static function sQuote(...$args)
     {
@@ -33,6 +37,10 @@ trait Escapes
 
     /**
      * @since 160708 Quote utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::doubleQuote()
      */
     public static function dQuote(...$args)
     {
@@ -41,6 +49,10 @@ trait Escapes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::html()
      */
     public static function escHtml(...$args)
     {
@@ -49,6 +61,10 @@ trait Escapes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlEntities::decode()
      */
     public static function unescHtml(...$args)
     {
@@ -57,6 +73,10 @@ trait Escapes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::textarea()
      */
     public static function escTextarea(...$args)
     {
@@ -65,6 +85,10 @@ trait Escapes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::attr()
      */
     public static function escAttr(...$args)
     {
@@ -73,6 +97,10 @@ trait Escapes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::url()
      */
     public static function escUrl(...$args)
     {
@@ -81,6 +109,10 @@ trait Escapes
 
     /**
      * @since 160110 Adding shell arg escape.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::shellArg()
      */
     public static function escShellArg(...$args)
     {
@@ -89,6 +121,10 @@ trait Escapes
 
     /**
      * @since 160422 SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quote()
      */
     public static function quoteSql(...$args)
     {
@@ -97,6 +133,10 @@ trait Escapes
 
     /**
      * @since 160422 SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteIn()
      */
     public static function quoteSqlIn(...$args)
     {
@@ -105,6 +145,10 @@ trait Escapes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::escapeName()
      */
     public static function escSqlName(...$args)
     {
@@ -113,6 +157,10 @@ trait Escapes
 
     /**
      * @since 160422 SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteColumns()
      */
     public static function quoteSqlCols(...$args)
     {
@@ -121,6 +169,10 @@ trait Escapes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::escapeOrder()
      */
     public static function escSqlOrder(...$args)
     {
@@ -129,6 +181,10 @@ trait Escapes
 
     /**
      * @since 160422 SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteOrderBys()
      */
     public static function quoteSqlOrderBys(...$args)
     {
@@ -137,6 +193,10 @@ trait Escapes
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RegexEscape::__invoke()
      */
     public static function escRegex(...$args)
     {

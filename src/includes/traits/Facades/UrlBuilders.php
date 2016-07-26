@@ -25,6 +25,10 @@ trait UrlBuilders
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlScheme::set()
      */
     public static function setScheme(...$args)
     {
@@ -33,6 +37,10 @@ trait UrlBuilders
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Url::toApp()
      */
     public static function appUrl(...$args)
     {
@@ -41,6 +49,10 @@ trait UrlBuilders
 
     /**
      * @since 160423 Parent utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Url::toAppParent()
      */
     public static function appParentUrl(...$args)
     {
@@ -49,6 +61,10 @@ trait UrlBuilders
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Url::toAppCore()
      */
     public static function appCoreUrl(...$args)
     {
@@ -57,6 +73,10 @@ trait UrlBuilders
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Url::toCurrent()
      */
     public static function curUrl(...$args)
     {
@@ -65,6 +85,10 @@ trait UrlBuilders
 
     /**
      * @since 160423 Parent utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Url::toCurrentParent()
      */
     public static function curParentUrl(...$args)
     {
@@ -73,6 +97,10 @@ trait UrlBuilders
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Url::toCurrentCore()
      */
     public static function curCoreUrl(...$args)
     {
@@ -81,6 +109,10 @@ trait UrlBuilders
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Cdn::url()
      */
     public static function cdnUrl(...$args)
     {
@@ -89,6 +121,10 @@ trait UrlBuilders
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Cdn::filter()
      */
     public static function cdnFilter(...$args)
     {

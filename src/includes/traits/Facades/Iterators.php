@@ -25,6 +25,10 @@ trait Iterators
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Iterators::arrayRecursive()
      */
     public static function arrayRecursiveIterator(...$args)
     {
@@ -33,6 +37,10 @@ trait Iterators
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Iterators::dirRecursiveRegex()
      */
     public static function dirRegexRecursiveIterator(...$args)
     {

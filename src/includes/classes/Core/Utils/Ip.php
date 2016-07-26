@@ -30,7 +30,7 @@ class Ip extends Classes\Core\Base\Core
      *
      * @return string Current visitor's IP address.
      *
-     * @note Supports both IPv4 & IPv6 addresses.
+     * @internal Supports both IPv4 & IPv6 addresses.
      */
     public function current(): string
     {

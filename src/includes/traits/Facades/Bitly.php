@@ -25,6 +25,10 @@ trait Bitly
 {
     /**
      * @since 160102 Adding bitly.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Bitly::shorten()
      */
     public static function bitlyShorten(...$args)
     {
@@ -33,6 +37,10 @@ trait Bitly
 
     /**
      * @since 160114 Bitly link history.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Bitly::linkHistory()
      */
     public static function bitlyLinkHistory(...$args)
     {

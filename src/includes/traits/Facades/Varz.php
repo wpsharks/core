@@ -25,6 +25,10 @@ trait Varz
 {
     /**
      * @since 160220 Var utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isVar(...$args)
     {
@@ -33,6 +37,10 @@ trait Varz
 
     /**
      * @since 160220 Var utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function varToName(...$args)
     {
@@ -41,6 +49,10 @@ trait Varz
 
     /**
      * @since 160220 Var utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function varToAcronym(...$args)
     {
@@ -49,6 +61,10 @@ trait Varz
 
     /**
      * @since 160220 Var utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function varToSlug(...$args)
     {

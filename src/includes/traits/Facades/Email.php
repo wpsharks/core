@@ -25,6 +25,10 @@ trait Email
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Email::__invoke()
      */
     public static function email(...$args)
     {
@@ -33,6 +37,10 @@ trait Email
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Email::isValid()
      */
     public static function isEmail(...$args)
     {
@@ -41,6 +49,10 @@ trait Email
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Email::isRoleBased()
      */
     public static function isRoleBasedEmail(...$args)
     {
@@ -49,6 +61,10 @@ trait Email
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Email::parseAddresses()
      */
     public static function parseEmailAddresses(...$args)
     {

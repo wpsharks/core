@@ -25,6 +25,10 @@ trait Patterns
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RegexFrag::__invoke()
      */
     public static function regexFrag(...$args)
     {
@@ -33,6 +37,10 @@ trait Patterns
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RegexPattern::in()
      */
     public static function regexPatternIn(...$args)
     {
@@ -41,6 +49,10 @@ trait Patterns
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RegexPatterns::match()
      */
     public static function regexPatternsMatch(...$args)
     {
@@ -49,6 +61,10 @@ trait Patterns
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\WRegx::__invoke()
      */
     public static function wRegx(...$args)
     {
@@ -57,6 +73,10 @@ trait Patterns
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\WRegx::frag()
      */
     public static function wRegxFrag(...$args)
     {
@@ -65,6 +85,10 @@ trait Patterns
 
     /**
      * @since 160428 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\WRegx::bracket()
      */
     public static function wRegxBracket(...$args)
     {
@@ -73,6 +97,10 @@ trait Patterns
 
     /**
      * @since 160428 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\WRegx::urlToUriPattern()
      */
     public static function urlToWRegxUriPattern(...$args)
     {

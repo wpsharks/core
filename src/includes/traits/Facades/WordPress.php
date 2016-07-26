@@ -25,6 +25,10 @@ trait WordPress
 {
     /**
      * @since 160219 WP utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
      */
     public static function isWordPress(...$args)
     {

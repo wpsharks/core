@@ -25,6 +25,10 @@ trait Gravatar
 {
     /**
      * @since 160114 Gravatars.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Gravatar::url()
      */
     public static function gravatarUrl(...$args)
     {

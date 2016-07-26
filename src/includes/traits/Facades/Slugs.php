@@ -25,6 +25,10 @@ trait Slugs
 {
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Slug::isValid()
      */
     public static function isSlug(...$args)
     {
@@ -33,6 +37,10 @@ trait Slugs
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Slug::isReserved()
      */
     public static function isSlugReserved(...$args)
     {
@@ -41,6 +49,10 @@ trait Slugs
 
     /**
      * @since 151214 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Slug::toName()
      */
     public static function slugToName(...$args)
     {
@@ -49,6 +61,10 @@ trait Slugs
 
     /**
      * @since 160220 Acronym utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Slug::toAcronym()
      */
     public static function slugToAcronym(...$args)
     {
@@ -57,6 +73,10 @@ trait Slugs
 
     /**
      * @since 160220 Var utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Slug::toVar()
      */
     public static function slugToVar(...$args)
     {
