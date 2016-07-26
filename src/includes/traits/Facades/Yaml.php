@@ -28,7 +28,7 @@ trait Yaml
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Yaml::parse()
      */
     public static function parseYaml(...$args)
     {

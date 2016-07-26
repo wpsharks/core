@@ -28,7 +28,7 @@ trait UrlUtils
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Url::isValid()
      */
     public static function isUrl(...$args)
     {
@@ -40,7 +40,7 @@ trait UrlUtils
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlFragment::strip()
      */
     public static function stripUrlFragment(...$args)
     {
@@ -52,7 +52,7 @@ trait UrlUtils
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Url::normalizeAmps()
      */
     public static function normalizeUrlAmps(...$args)
     {
@@ -64,7 +64,7 @@ trait UrlUtils
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlRemote::request()
      */
     public static function remoteRequest(...$args)
     {

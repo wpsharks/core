@@ -28,7 +28,7 @@ trait Uuids
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid::v1()
      */
     public static function uuidV1(...$args)
     {
@@ -40,7 +40,7 @@ trait Uuids
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid::v3()
      */
     public static function uuidV3(...$args)
     {
@@ -52,7 +52,7 @@ trait Uuids
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid::v4()
      */
     public static function uuidV4(...$args)
     {
@@ -64,7 +64,7 @@ trait Uuids
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid::v5()
      */
     public static function uuidV5(...$args)
     {

@@ -28,7 +28,7 @@ trait WebPurify
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\WebPurify::check()
      */
     public static function containsBadWords(...$args)
     {
@@ -40,7 +40,7 @@ trait WebPurify
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\WebPurify::checkSlug()
      */
     public static function slugContainsBadWords(...$args)
     {

@@ -28,7 +28,7 @@ trait Versions
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Version::isValid()
      */
     public static function isVersion(...$args)
     {
@@ -40,7 +40,7 @@ trait Versions
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Version::isValidDev()
      */
     public static function isDevVersion(...$args)
     {
@@ -52,7 +52,7 @@ trait Versions
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Version::isValidStable()
      */
     public static function isStableVersion(...$args)
     {
@@ -64,7 +64,7 @@ trait Versions
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\WsVersion::isValid()
      */
     public static function isWsVersion(...$args)
     {
@@ -76,7 +76,7 @@ trait Versions
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\WsVersion::isValidDev()
      */
     public static function isWsDevVersion(...$args)
     {
@@ -88,7 +88,7 @@ trait Versions
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\WsVersion::isValidStable()
      */
     public static function isWsStableVersion(...$args)
     {
@@ -100,7 +100,7 @@ trait Versions
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\WsVersion::date()
      */
     public static function wsVersionDate(...$args)
     {
@@ -112,7 +112,7 @@ trait Versions
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\WsVersion::->time()
      */
     public static function wsVersionTime(...$args)
     {

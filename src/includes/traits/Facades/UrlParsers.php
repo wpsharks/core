@@ -28,7 +28,7 @@ trait UrlParsers
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlParse::__invoke()
      */
     public static function parseUrl(...$args)
     {
@@ -40,7 +40,7 @@ trait UrlParsers
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlParse::un()
      */
     public static function unparseUrl(...$args)
     {
@@ -52,7 +52,7 @@ trait UrlParsers
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlHost::parse()
      */
     public static function parseUrlHost(...$args)
     {
@@ -64,7 +64,7 @@ trait UrlParsers
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlHost::unParse()
      */
     public static function unparseUrlHost(...$args)
     {

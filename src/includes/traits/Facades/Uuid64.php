@@ -28,7 +28,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::validate()
      */
     public static function uuid64Validate(...$args)
     {
@@ -40,7 +40,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::shardIdIn()
      */
     public static function uuid64ShardIdIn(...$args)
     {
@@ -52,7 +52,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::validateShardId()
      */
     public static function uuid64ValidateShardId(...$args)
     {
@@ -64,7 +64,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::typeIdIn()
      */
     public static function uuid64TypeIdIn(...$args)
     {
@@ -76,7 +76,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::validateTypeId()
      */
     public static function uuid64ValidateTypeId(...$args)
     {
@@ -88,7 +88,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::localIdIn()
      */
     public static function uuid64LocalIdIn(...$args)
     {
@@ -100,7 +100,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::validateLocalId()
      */
     public static function uuid64ValidateLocalId(...$args)
     {
@@ -112,7 +112,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::parse()
      */
     public static function uuid64Parse(...$args)
     {
@@ -124,7 +124,7 @@ trait Uuid64
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\Uuid64::build()
      */
     public static function uuid64Build(...$args)
     {

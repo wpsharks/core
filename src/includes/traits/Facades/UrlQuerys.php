@@ -28,7 +28,7 @@ trait UrlQuerys
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlQuery::strip()
      */
     public static function stripUrlQuery(...$args)
     {
@@ -40,7 +40,7 @@ trait UrlQuerys
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlQuery::parse()
      */
     public static function parseUrlQuery(...$args)
     {
@@ -52,7 +52,7 @@ trait UrlQuerys
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlQuery::build()
      */
     public static function buildUrlQuery(...$args)
     {
@@ -64,7 +64,7 @@ trait UrlQuerys
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlQuery::addArgs()
      */
     public static function addUrlQueryArgs(...$args)
     {
@@ -76,7 +76,7 @@ trait UrlQuerys
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlQuery::removeArgs()
      */
     public static function removeUrlQueryArgs(...$args)
     {
@@ -88,7 +88,7 @@ trait UrlQuerys
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlQuery::addSha256Sig()
      */
     public static function addUrlQuerySig(...$args)
     {
@@ -100,7 +100,7 @@ trait UrlQuerys
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlQuery::removeSha256Sig()
      */
     public static function removeUrlQuerySig(...$args)
     {
@@ -112,7 +112,7 @@ trait UrlQuerys
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\UrlQuery::sha256SigOk()
      */
     public static function urlQuerySigOk(...$args)
     {

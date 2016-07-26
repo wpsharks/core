@@ -28,7 +28,7 @@ trait WordPress
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UnshiftAssoc::__invoke()
+     * @see Classes\Core\Utils\WordPress::is()
      */
     public static function isWordPress(...$args)
     {
