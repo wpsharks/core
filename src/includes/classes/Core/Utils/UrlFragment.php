@@ -30,7 +30,7 @@ class UrlFragment extends Classes\Core\Base\Core
      *
      * @param string $url_uri_qsl Input URL, URI, or query string w/ a leading `?`.
      *
-     * @return string URL without a #hash/fragment.
+     * @return string URL without a #hash fragment.
      */
     public function strip(string $url_uri_qsl): string
     {

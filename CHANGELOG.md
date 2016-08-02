@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. `isSlug()` was requiring a minimum of three chars; based a prior implementation. Updated so that only `isSlugReserved()` makes this check.
+
 ## v160726.73683
 
 - `$compress` parameter to `c::normalizeEols()` now defaults to `false`.
