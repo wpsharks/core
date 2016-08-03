@@ -19,6 +19,9 @@ use function get_defined_vars as vars;
 /**
  * Tokenizer.
  *
+ * @TODO Add support for recursion in regex patterns.
+ * i.e., Do a better job of dealing with nested tags.
+ *
  * @since 150424 Initial release.
  */
 class Tokenizer extends Classes\Core\Base\Core
