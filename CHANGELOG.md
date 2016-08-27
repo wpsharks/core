@@ -1,4 +1,4 @@
-## $v
+## v160827.7391
 
 - Bug fix. `isSlug()` was requiring a minimum of three chars; based a prior implementation. Updated so that only `isSlugReserved()` makes this check.
 
