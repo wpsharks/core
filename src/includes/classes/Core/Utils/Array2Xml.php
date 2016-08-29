@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * XML conversion utils.
  *
- * @since $v XML conversion utils.
+ * @since 160829.74007 XML conversion utils.
  */
 class Array2Xml extends Classes\Core\Base\Core
 {
     /**
      * Array to XML markup.
      *
-     * @since $v XML conversion utils.
+     * @since 160829.74007 XML conversion utils.
      *
      * @param string $parent_element_name Parent element name.
      * @param array  $array               Input array to convert.
@@ -80,7 +80,7 @@ class Array2Xml extends Classes\Core\Base\Core
     /**
      * Array to HTML markup.
      *
-     * @since $v XML conversion utils.
+     * @since 160829.74007 XML conversion utils.
      *
      * @param string $parent_element_name Parent element name.
      * @param array  $array               Input array to convert.
@@ -96,7 +96,7 @@ class Array2Xml extends Classes\Core\Base\Core
     /**
      * Array to XML handler.
      *
-     * @since $v XML conversion utils.
+     * @since 160829.74007 XML conversion utils.
      *
      * @param \DOMDocument $DOMDocument      Class instance.
      * @param \DOMElement  $ParentDOMElement Class instance.

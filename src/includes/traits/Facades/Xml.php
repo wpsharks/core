@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * XML.
  *
- * @since $v
+ * @since 160829.74007
  */
 trait Xml
 {
     /**
-     * @since $v XML conversion utils.
+     * @since 160829.74007 XML conversion utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Xml
     }
 
     /**
-     * @since $v XML conversion utils.
+     * @since 160829.74007 XML conversion utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

@@ -183,7 +183,7 @@ class App extends Classes\Core\Base\Core
      *
      * @var string Version.
      */
-    const VERSION = '160827.7391'; //v//
+    const VERSION = '160829.74007'; //v//
 
     /**
      * Constructor.
