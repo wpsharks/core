@@ -105,8 +105,9 @@ class Array2Xml extends Classes\Core\Base\Core
     protected function convert(\DOMDocument $DOMDocument, \DOMElement $ParentDOMElement, array $array)
     {
         foreach ($array as $_child_key => $_child_value) {
-            $_child_key = preg_replace('/^[0-9]+_/ui', $_child_key);
-
+            if (is_string($_child_key)) { // Allows duplicate string keys.
+                $_child_key = preg_replace('/^[0-9]+_/u', '', $_child_key);
+            }
             if (is_array($_child_value)) { // Nested tag.
                 $_ChildDOMElement = $DOMDocument->createElement($_child_key);
                 $ParentDOMElement->appendChild($_ChildDOMElement);
@@ -124,7 +125,7 @@ class Array2Xml extends Classes\Core\Base\Core
                     $_ChildDOMText = $DOMDocument->createTextNode($_child_value);
                     $ParentDOMElement->appendChild($_ChildDOMText);
                 }
-            } else {
+            } else { // Fail on unexpected values.
                 throw $this->c::issue('Unexpected non-scalar child value.');
             }
         } // unset($_child_key, $_child_value, $_ChildDOMElement, $_ChildDOMAttr, $_ChildDOMText);
