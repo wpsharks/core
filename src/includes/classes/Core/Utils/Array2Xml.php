@@ -105,15 +105,16 @@ class Array2Xml extends Classes\Core\Base\Core
     protected function convert(\DOMDocument $DOMDocument, \DOMElement $ParentDOMElement, array $array)
     {
         foreach ($array as $_child_key => $_child_value) {
-            if (is_array($_child_value)) {
-                //
+            $_child_key = preg_replace('/^[0-9]+_/ui', $_child_key);
+
+            if (is_array($_child_value)) { // Nested tag.
                 $_ChildDOMElement = $DOMDocument->createElement($_child_key);
                 $ParentDOMElement->appendChild($_ChildDOMElement);
                 $this->convert($DOMDocument, $_ChildDOMElement, $_child_value);
                 //
             } elseif (is_scalar($_child_value)) { // Must be scalar.
-                // String keys become attributes. Numeric keys become text nodes.
-                $_child_value = (string) $_child_value; // Force string value.
+                // String keys become attributes; numeric keys text nodes.
+                $_child_value = (string) $_child_value; // Force string.
 
                 if (is_string($_child_key)) {
                     $_ChildDOMAttr = $DOMDocument->createAttribute($_child_key);
