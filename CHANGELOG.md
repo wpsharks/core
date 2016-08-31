@@ -1,4 +1,4 @@
-## $v
+## v160831.61689
 
 - Additional `c::arrayToXml()` bug fix. Allow for duplicate tags.
 
