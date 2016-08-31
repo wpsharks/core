@@ -1,3 +1,7 @@
+## $v
+
+- `c::arrayToXml()` bug fix. Allow for duplicate tags.
+
 ## v160829.74007
 
 - Adding `c::arrayToXml()`.
