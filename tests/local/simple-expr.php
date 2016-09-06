@@ -21,6 +21,7 @@ c::benchStart();
 
 echo '• '.c::simplePhpExpr('a AND b', $callback)."\n";
 echo '• '.c::simplePhpExpr('(a AND b) OR c', $callback)."\n";
+echo '• '.c::simplePhpExpr('!(a AND b) OR c', $callback)."\n";
 echo '• '.c::simplePhpExpr('c OR (a AND b)', $callback)."\n";
 echo '• '.c::simplePhpExpr('a AND(b) or !', $callback)."\n";
 echo '• '.c::simplePhpExpr('(a)AND(b) or !', $callback)."\n";
