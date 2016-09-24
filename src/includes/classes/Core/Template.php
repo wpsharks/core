@@ -134,8 +134,10 @@ class Template extends Classes\Core\Base\Core
             // See: <http://stackoverflow.com/a/4994799/1219741>
 
             unset($_this, $vars['this']); // Avoid conflicts.
-            $this->vars = $vars; // Set current variables.
-            unset($vars); // Force templates to use `$this->vars`.
+            $this->vars = $vars; // Set current template variables.
+            unset($vars); // Don't include as a part of template variables.
+
+            extract($this->vars); // Extract for template.
 
             ob_start(); // Output buffer.
             require $this->dir.'/'.$this->file;
