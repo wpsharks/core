@@ -35,9 +35,10 @@ class Template extends Classes\Core\Base\Core
      */
     public function locate(string $file, string $dir = ''): array
     {
-        $dir  = $this->c::mbRTrim($dir, '/'); // Template directory.
-        $dir  = $dir ?: $this->App->Config->©fs_paths['©templates_dir'];
-        $file = $this->c::mbTrim($file, '/'); // Template file.
+        $is_file = false; // Initialize.
+        $file    = $this->c::mbTrim($file, '/');
+        $dir     = $this->c::mbRTrim($dir, '/');
+        $dir     = $dir ?: $this->App->Config->©fs_paths['©templates_dir'];
 
         if ($dir === 'core') {
             if ($this->App->Parent) {
@@ -45,14 +46,17 @@ class Template extends Classes\Core\Base\Core
             } else { // Use core config option.
                 $dir = $this->App->Config->©fs_paths['©templates_dir'];
             }
-        } elseif ($dir === 'parent' || ($dir && $file && !is_file($dir.'/'.$file))) {
+        } elseif ($dir === 'parent' || ($dir && $file && !($is_file = is_file($dir.'/'.$file)))) {
             if ($this->App->Parent) {
                 return $this->App->Parent->Utils->©Template->locate($file);
             } else { // Else go with what we have.
                 $dir = $this->App->Config->©fs_paths['©templates_dir'];
             }
         }
-        if ($dir && $file && is_file($dir.'/'.$file)) {
+        if ($dir && $file && !$is_file && !($is_file = is_file($dir.'/'.$file))) {
+            $dir = dirname(__FILE__, 4).'/templates'; // WS core templates.
+        }
+        if ($dir && $file && ($is_file || ($is_file = is_file($dir.'/'.$file)))) {
             if (preg_match('/\/\.|\.\/|\.\./u', $this->c::normalizeDirPath($dir.'/'.$file))) {
                 throw $this->c::issue(sprintf('Insecure template path: `%1$s`.', $dir.'/'.$file));
             }
@@ -88,6 +92,7 @@ class Template extends Classes\Core\Base\Core
 
         if (!isset($route[0])) {
             $route = $this->c::currentPath(); // Use current URL path.
+
             if ($redirect_trailing_slash && $route !== '/' && mb_substr($route, -1) === '/') {
                 $current_url         = $this->c::parseUrl($this->c::currentUrl());
                 $current_url['path'] = $this->c::mbRTrim($current_url['path'], '/');
