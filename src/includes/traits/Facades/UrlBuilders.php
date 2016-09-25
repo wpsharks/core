@@ -72,6 +72,18 @@ trait UrlBuilders
     }
 
     /**
+     * @since 160925 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Url::toAppWsCore()
+     */
+    public static function appWsCoreUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Url->toAppWsCore(...$args);
+    }
+
+    /**
      * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -105,6 +117,18 @@ trait UrlBuilders
     public static function curCoreUrl(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Url->toCurrentCore(...$args);
+    }
+
+    /**
+     * @since 160925 First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Url::toCurrentWsCore()
+     */
+    public static function curWsCoreUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Url->toCurrentWsCore(...$args);
     }
 
     /**

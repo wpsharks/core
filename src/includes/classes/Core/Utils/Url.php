@@ -93,6 +93,30 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
     }
 
     /**
+     * Build app WS core URL.
+     *
+     * @since 160925 URL utilities.
+     *
+     * @param string $uri        URI to append.
+     * @param string $scheme     Specific scheme?
+     * @param bool   $cdn_filter CDN filter?
+     *
+     * @return string Output URL.
+     */
+    public function toAppWsCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
+    {
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->©Url->toAppWsCore($uri, $scheme, $cdn_filter);
+        }
+        if (!$this->App->is_ws_core) {
+            $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
+            $uri = $uri ? '/'.$uri : ''; // Force leading slash.
+            $uri = '/vendor/websharks/core/src'.$uri;
+        }
+        return $this->toApp($uri, $scheme, $cdn_filter);
+    }
+
+    /**
      * Build URL w/ current host.
      *
      * @since 151121 URL utilities.
@@ -157,6 +181,30 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
     {
         if ($this->App->Parent) { // Looking for the root core.
             return $this->App->Parent->Utils->©Url->toCurrentCore($uri, $scheme, $cdn_filter);
+        }
+        return $this->toCurrent($uri, $scheme, $cdn_filter);
+    }
+
+    /**
+     * Build current WS core URL.
+     *
+     * @since 160925 URL utilities.
+     *
+     * @param string $uri        URI to append.
+     * @param string $scheme     Specific scheme?
+     * @param bool   $cdn_filter CDN filter?
+     *
+     * @return string Output URL.
+     */
+    public function toCurrentWsCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
+    {
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->©Url->toCurrentWsCore($uri, $scheme, $cdn_filter);
+        }
+        if (!$this->App->is_ws_core) {
+            $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
+            $uri = $uri ? '/'.$uri : ''; // Force leading slash.
+            $uri = '/vendor/websharks/core/src'.$uri;
         }
         return $this->toCurrent($uri, $scheme, $cdn_filter);
     }

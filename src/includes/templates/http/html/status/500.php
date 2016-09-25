@@ -27,13 +27,12 @@ $defaults = [
 ];
 extract($this->setVars($defaults, $this->vars));
 ?>
-<?= $this->get('http/html/header.php') ?>
+<?= $this->get('http/html/header.php'); ?>
 
-<h1><?= __('500 Internal Server Error'); ?></h1>
-<p><?= __('This error has been reported to system administrators. Very sorry! :-)'); ?></p>
+    <p><?= __('This error has been reported to system administrators.'); ?></p>
 
-<?php if ($this->App->Config->©debug['©er_display'] && $Throwable) : ?>
-    <pre><?= $this->c::escHtml($Throwable->getMessage()) ?></pre>
-<?php endif; ?>
+    <?php if ($this->App->Config->©debug['©er_display'] && $Throwable) : ?>
+        <pre><?= $this->c::escHtml($Throwable->getMessage()); ?></pre>
+    <?php endif; ?>
 
-<?= $this->get('http/html/footer.php') ?>
+<?= $this->get('http/html/footer.php'); ?>

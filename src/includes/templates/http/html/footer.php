@@ -15,4 +15,23 @@ use WebSharks\Core\Traits;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
+
+$defaults = [
+    'body' => [
+        'app_main_enable' => true,
+
+        'brand' => [
+            'name' => $this->App->Config->©brand['©name'],
+        ],
+        'scripts' => [
+            'v' => $this->App::VERSION,
+        ],
+    ],
+];
+extract($this->setVars($defaults, $this->vars));
 ?>
+        <?= $this->get('http/html/includes/footer/app-main.php'); ?>
+        <?= $this->get('http/html/includes/footer/app-extras.php'); ?>
+        <?= $this->get('http/html/includes/footer/app-scripts.php'); ?>
+    </body>
+</html>
