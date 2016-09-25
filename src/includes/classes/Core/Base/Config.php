@@ -167,8 +167,8 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©fs_paths' => [
-                '©logs_dir'      => (string) ($_['CFG_LOGS_DIR'] ?? '/var/log/%%app_namespace_sha1%%'),
-                '©cache_dir'     => (string) ($_['CFG_CACHE_DIR'] ?? '/tmp/%%app_namespace_sha1%%/cache'),
+                '©logs_dir'      => (string) ($_['CFG_LOGS_DIR'] ?? '/var/log/app/%%app_slug%%'),
+                '©cache_dir'     => (string) ($_['CFG_CACHE_DIR'] ?? '/tmp/app/%%app_slug%%/cache'),
                 '©templates_dir' => (string) ($_['CFG_TEMPLATES_DIR'] ?? '%%app_base_dir%%/src/includes/templates'),
                 '©errors_dir'    => (string) ($_['CFG_ERRORS_DIR'] ?? ($_ ? '/bootstrap/src/html/errors' : '')),
             ],

@@ -64,8 +64,9 @@ class DirTmp extends Classes\Core\Base\Core
         }
         foreach ($possible_dirs as $_key => $_dir) {
             if ($_dir && @is_dir($_dir) && @is_writable($_dir)) {
-                $_dir .= '/'.$this->App->namespace_sha1.'/.tmp'; // App-specific.
-                // Also using a `.tmp` directory to help improve security and designate tmp.
+                $_dir = $this->c::mbRTrim($_dir, '/');
+                $_dir .= '/'.$this->App->Config->©brand['©slug'].'/.tmp';
+                // Also using a `.tmp` (dot) directory to help improve security.
                 if (is_dir($_dir) || (!file_exists($_dir) && mkdir($_dir, $fs_transient_perms, true))) {
                     return $dir = $_dir;
                 }

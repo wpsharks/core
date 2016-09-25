@@ -425,18 +425,22 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424 Config utils.
      *
-     * @param mixed $value Input value.
+     * @param mixed      $value     Input value.
+     * @param array|null $___config Internal use only.
      *
      * @return mixed string|array|object Output value.
      *
      * @internal This method must be capable of running w/o a fully-constructed app.
      *  Only dependency is the initial reflection-based properties.
      */
-    public function fillConfigReplacementCodes($value)
+    public function fillConfigReplacementCodes($value, array $___config = null)
     {
         if (is_array($value) || is_object($value)) {
+            if (!isset($___config)) {
+                $___config = &$value; // Reference.
+            }
             foreach ($value as $_key => &$_value) {
-                $_value = $this->fillConfigReplacementCodes($_value);
+                $_value = $this->fillConfigReplacementCodes($_value, $___config);
             } // unset($_key, $_value);
             return $value;
         }
@@ -457,6 +461,9 @@ class App extends Classes\Core\Base\Core
                     '%%ws_core_dir%%',
 
                     '%%home_dir%%',
+
+                    '%%app_slug%%',
+                    '%%app_var%%',
                 ],
                 [
                     $this->class,
@@ -473,22 +480,12 @@ class App extends Classes\Core\Base\Core
                     $this->ws_core_dir,
 
                     (string) ($_SERVER['HOME'] ?? $_SERVER['WEBSHARK_HOME'] ?? ''),
+
+                    !empty($___config['©brand']['©slug']) ? (string) $___config['©brand']['©slug'] : '',
+                    !empty($___config['©brand']['©var']) ? (string) $___config['©brand']['©var'] : '',
                 ],
                 $value
             );
-            if (mb_strpos($value, '%%env[') !== false) {
-                // e.g., `%%(int)env[CFG_MYSQL_DB_PORT]%%`, `%%(array)env[CFG_LOCALES]%%`.
-                $value = preg_replace_callback('/%%(\((?<type>[^()]+)\))?env\[(?<key>[^%[\]]+)\]%%/u', function ($m) {
-                    $env_key_value = $_SERVER[$m['key']] ?? '';
-
-                    if (!empty($m['type'])) {
-                        settype($env_key_value, $m['type']);
-                    } else {
-                        $env_key_value = (string) $env_key_value;
-                    }
-                    return $env_key_value;
-                });
-            }
         }
         return $value;
     }
