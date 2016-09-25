@@ -198,6 +198,21 @@ class Template extends Classes\Core\Base\Core
     }
 
     /**
+     * Main template file.
+     *
+     * @since 160926 Initial release.
+     *
+     * @return string Main template file.
+     */
+    protected function mainFile(): string
+    {
+        if ($this->parents) {
+            return $this->parents[0];
+        }
+        return $this->file;
+    }
+
+    /**
      * Get a child template.
      *
      * @since 150424 Initial release.

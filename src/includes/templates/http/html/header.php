@@ -16,14 +16,14 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-$_current_url        = $this->c::currentUrl();
-$_current_url        = $this->c::parseUrl($_current_url);
-$_template_file_slug = $this->c::nameToSlug($this->file);
+$_current_url    = $this->c::currentUrl();
+$_current_url    = $this->c::parseUrl($_current_url);
+$_main_file_slug = $this->c::nameToSlug($this->mainFile());
 
 $defaults = [
     'html' => [
         'lang'  => 'en-US',
-        'class' => $_template_file_slug,
+        'class' => $_main_file_slug,
     ],
     'head' => [
         'robots'    => 'index,follow',
@@ -56,7 +56,7 @@ $defaults = [
         ],
     ],
     'body' => [
-        'class' => $_template_file_slug,
+        'class' => $_main_file_slug,
 
         'app_main_enable' => true,
 
@@ -69,7 +69,7 @@ $defaults = [
             'title' => '',
         ],
     ],
-]; unset($_current_url, $_template_file_slug);
+]; unset($_current_url, $_main_file_slug);
 extract($this->setVars($defaults, $this->vars));
 
 $head['og']['site']        = $head['og']['site'] ?: $head['site'];
