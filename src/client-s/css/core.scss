@@ -1,5 +1,179 @@
-/*::auto-compile:: first-line comment flag. */
+@import 'bourbon/bourbon';
 
+/*
+ * Mixins.
+ */
+@mixin mobile-only {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet-plus {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media (min-width: 768px) and (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin mobile-and-tablet-only {
+  @media (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin small-screen-plus {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin small-screen-only {
+  @media (min-width: 992px) and (max-width: 1199px) {
+    @content;
+  }
+}
+
+@mixin small-and-large-screen-only {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin large-screen-only {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+/*
+ * Color vars.
+ */
+$main-menu-border-color: #eee;
+
+/*
+ * HTML/body.
+ */
+html,
+body {
+  font-size:                  16px;
+
+  @include mobile-and-tablet-only {
+    font-size:                14px;
+  }
+}
+
+body {
+  overflow-y:                 scroll !important;
+}
+
+/*
+ * Form fields.
+ */
 [placeholder]:focus::-webkit-input-placeholder {
-  opacity:                    0;
+  opacity:                    0.25;
+}
+
+/*
+ * Main menu.
+ */
+.app-main-menu {
+  padding:                    0 0 1em;
+  margin:                     1em 0 2em;
+  border-bottom:              1px solid $main-menu-border-color;
+
+  .-left-side {
+    .-logo {
+      margin:                 1.5em 0 0;
+    }
+  }
+
+  .-right-side {
+    //
+
+  }
+}
+
+/*
+ * Main header.
+ */
+.app-main-header {
+  margin:                     1em 0;
+
+  .-left-side {
+    //
+
+  }
+
+  .-right-side {
+    //
+
+  }
+}
+
+/*
+ * Main body.
+ */
+.app-main-body {
+  //
+}
+
+/*
+ * Main footer.
+ */
+.app-main-footer {
+  .-left-side {
+    //
+
+  }
+
+  .-right-side {
+    //
+
+  }
+}
+
+/*
+ * Muted utils.
+ */
+.--muted {
+  opacity:                    0.5;
+}
+
+[class*='--very --muted'] {
+  opacity:                    0.25;
+}
+
+[class*='--muted --when-not-hovering'] {
+  &:hover {
+    opacity:                  1;
+  }
+}
+
+/*
+ * Blurred utils.
+ */
+.--blurred {
+  @include filter(blur(2px));
+
+  opacity:                    0.5;
+}
+
+[class*='--very --blurred'] {
+  @include filter(blur(4px));
+
+  opacity:                    0.25;
+}
+
+[class*='--blurred --when-not-hovering'] {
+  &:hover {
+    @include filter(none);
+
+    opacity:                  1;
+  }
 }
