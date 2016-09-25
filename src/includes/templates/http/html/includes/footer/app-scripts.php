@@ -22,7 +22,7 @@ use function get_defined_vars as vars;
 <script src="<?= c::escUrl(c::appWsCoreUrl('/client-s/js/core.min.js?v='.urlencode($body['scripts']['v']))); ?>"></script>
 
 <? if (is_file($this->App->base_dir.'/src/client-s/js/app.min.js')) : ?>
-    <script src="<?= c::escUrl(c::appUrl('/client-s/js/app.min.js?v='.urlencode($body['scripts']['v']))); ?>"></script>
+    <script src="<?= $this->c::escUrl($this->c::appUrl('/client-s/js/app.min.js?v='.urlencode($body['scripts']['v']))); ?>"></script>
 <?php endif; ?>
 
 <?= $this->get('http/html/includes/footer/includes/app-scripts/append.php'); ?>
