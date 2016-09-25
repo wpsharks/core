@@ -70,12 +70,13 @@ $defaults = [
         ],
     ],
 ]; unset($_current_url, $_main_file_slug);
-extract($this->setVars($defaults, $this->vars));
 
-$head['og']['site']        = $head['og']['site'] ?: $head['site'];
-$head['og']['title']       = $head['og']['title'] ?: $head['title'];
-$head['og']['description'] = $head['og']['description'] ?: $head['description'];
-$body['header']['title']   = $body['header']['title'] ?: $this->c::escHtml($head['title']);
+$defaults['head']['og']['site']        = $defaults['head']['og']['site'] ?: $defaults['head']['site'];
+$defaults['head']['og']['title']       = $defaults['head']['og']['title'] ?: $defaults['head']['title'];
+$defaults['head']['og']['description'] = $defaults['head']['og']['description'] ?: $defaults['head']['description'];
+$defaults['body']['header']['title']   = $defaults['body']['header']['title'] ?: $this->c::escHtml($defaults['head']['title']);
+
+extract($this->setVars($defaults, $this->vars));
 ?>
 <?= $this->get('http/html/includes/header/html-open.php'); ?>
     <?= $this->get('http/html/includes/header/html-head.php'); ?>
