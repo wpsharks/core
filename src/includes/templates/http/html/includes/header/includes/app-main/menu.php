@@ -23,8 +23,8 @@ use function get_defined_vars as vars;
         <div class="eight wide column -left-side">
             <div class="ui stackable grid">
                 <div class="sixteen wide column">
-                    <a href="<?= c::escUrl($body['brand']['url']); ?>">
-                        <img class="-logo" src="<?= c::escUrl($body['brand']['logo']); ?>" alt="<?= c::escAttr($body['brand']['name']); ?>" data-pin-nopin="true" />
+                    <a href="<?= $this->c::escUrl($body['brand']['url']); ?>">
+                        <img class="-logo" src="<?= $this->c::escUrl($body['brand']['logo']); ?>" alt="<?= $this->c::escAttr($body['brand']['name']); ?>" data-pin-nopin="true" />
                     </a>
                 </div>
             </div>
