@@ -71,12 +71,13 @@ $defaults = [
     ],
 ]; unset($_current_url, $_main_file_slug);
 
-$defaults['head']['og']['site']        = $defaults['head']['og']['site'] ?: $defaults['head']['site'];
-$defaults['head']['og']['title']       = $defaults['head']['og']['title'] ?: $defaults['head']['title'];
-$defaults['head']['og']['description'] = $defaults['head']['og']['description'] ?: $defaults['head']['description'];
-$defaults['body']['header']['title']   = $defaults['body']['header']['title'] ?: $this->c::escHtml($defaults['head']['title']);
+$vars                              = array_replace_recursive($defaults, $this->vars);
+$vars['head']['og']['site']        = $vars['head']['og']['site'] ?: $vars['head']['site'];
+$vars['head']['og']['title']       = $vars['head']['og']['title'] ?: $vars['head']['title'];
+$vars['head']['og']['description'] = $vars['head']['og']['description'] ?: $vars['head']['description'];
+$vars['body']['header']['title']   = $vars['body']['header']['title'] ?: $this->c::escHtml($vars['head']['title']);
 
-extract($this->setVars($defaults, $this->vars));
+extract($this->setVars($vars, $this->vars));
 ?>
 <?= $this->get('http/html/includes/header/html-open.php'); ?>
     <?= $this->get('http/html/includes/header/html-head.php'); ?>
