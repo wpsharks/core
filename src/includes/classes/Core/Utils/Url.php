@@ -87,7 +87,7 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
     public function toAppCore(string $uri = '', string $scheme = '', bool $cdn_filter = true): string
     {
         if ($this->App->Parent) { // Looking for the root core.
-            return $this->App->Parent->Utils->©Url->toAppCore($uri, $scheme, $cdn_filter, ++$___depth);
+            return $this->App->Parent->Utils->©Url->toAppCore($uri, $scheme, $cdn_filter);
         }
         return $this->toApp($uri, $scheme, $cdn_filter);
     }
