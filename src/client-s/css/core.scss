@@ -141,15 +141,15 @@ body {
 /*
  * Muted utils.
  */
-.--muted {
+._muted {
   opacity:                    0.5;
 }
 
-[class*='--very --muted'] {
+[class*='_very _muted'] {
   opacity:                    0.25;
 }
 
-[class*='--muted --when-not-hovering'] {
+[class*='_muted _when-not-hovering'] {
   &:hover {
     opacity:                  1;
   }
@@ -158,30 +158,22 @@ body {
 /*
  * Blurred utils.
  */
-.--blurred {
+._blurred {
   @include filter(blur(2px));
 
   opacity:                    0.5;
 }
 
-[class*='--very --blurred'] {
+[class*='_very _blurred'] {
   @include filter(blur(4px));
 
   opacity:                    0.25;
 }
 
-[class*='--blurred --when-not-hovering'] {
+[class*='_blurred _when-not-hovering'] {
   &:hover {
     @include filter(none);
 
     opacity:                  1;
   }
-}
-
-/*
- * Display utilities.
- */
-
-.--hidden {
-  display:                    none;
 }
