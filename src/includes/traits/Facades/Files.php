@@ -70,4 +70,16 @@ trait Files
     {
         return $GLOBALS[static::class]->Utils->©FileSize->abbrBytes(...$args);
     }
+
+    /**
+     * @since 160926 Upload utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\FileUpload::errorReason()
+     */
+    public static function fileUploadErrorReason(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©FileUpload->errorReason(...$args);
+    }
 }
