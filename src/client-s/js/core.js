@@ -1,6 +1,6 @@
 (function ($) {
   /*
-   * Hash mixins.
+   * Mixins.
    */
   _.mixin({
     crc32: Hashes.CRC32,
