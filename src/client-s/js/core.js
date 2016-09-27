@@ -10,7 +10,17 @@
     sha1: new Hashes.SHA1(),
     sha256: new Hashes.SHA256(),
     sha512: new Hashes.SHA512(),
-    rmd160: new Hashes.RMD160()
+    rmd160: new Hashes.RMD160(),
+
+    trim: function (str, chars) {
+      return _.lTrim(_.rTrim(str, chars), chars);
+    },
+    lTrim: function (str, chars) {
+      return str.replace(new RegExp('^[' + (chars || '\\s') + ']+', 'g'), '');
+    },
+    rTrim: function (str, chars) {
+      return str.replace(new RegExp('[' + (chars || '\\s') + ']+$', 'g'), '');
+    }
   });
 
   /*
