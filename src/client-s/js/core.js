@@ -46,7 +46,7 @@
     },
 
     hexDec: function (hex) {
-      return parseInt(hex.replace(/[^a-f0-9]/i, ''), 16);
+      return parseInt(hex.replace(/[^a-f0-9]/gi, ''), 16);
     },
     sha1Mod: function (str, divisor, isSha) {
       return _.hexDec((isSha ? str : _.sha1(str)).substr(0, 15)) % Math.max(1, divisor);
