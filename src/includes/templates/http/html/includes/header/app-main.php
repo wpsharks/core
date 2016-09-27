@@ -18,7 +18,7 @@ use function get_defined_vars as vars;
 
 ?>
 <?php if ($body['app_main_enable']) : ?>
-    <?= $this->get('http/html/includes/header/includes/app-main/menu.php'); ?>
-    <?= $this->get('http/html/includes/header/includes/app-main/header.php'); ?>
-    <?= $this->get('http/html/includes/header/includes/app-main/body-open.php'); ?>
+    <?= $this->get('http/html/includes/header/app-main-menu.php'); ?>
+    <?= $this->get('http/html/includes/header/app-main-header.php'); ?>
+    <?= $this->get('http/html/includes/header/app-main-body-open.php'); ?>
 <?php endif; ?>

@@ -79,7 +79,7 @@ $vars['body']['header']['title']   = $vars['body']['header']['title'] ?: $this->
 
 extract($this->setVars($vars, $this->vars));
 ?>
-<?= $this->get('http/html/includes/header/html-open.php'); ?>
-    <?= $this->get('http/html/includes/header/html-head.php'); ?>
-    <?= $this->get('http/html/includes/header/body-open.php'); ?>
+<?= $this->get('http/html/includes/header/html.php'); ?>
+    <?= $this->get('http/html/includes/header/head.php'); ?>
+    <?= $this->get('http/html/includes/header/body.php'); ?>
         <?= $this->get('http/html/includes/header/app-main.php'); ?>

@@ -17,8 +17,3 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 ?>
-<?php if ($body['app_main_enable']) : ?>
-    <?= $this->get('http/html/includes/footer/app-main-body-close.php'); ?>
-    <?= $this->get('http/html/includes/footer/app-main-footer.php'); ?>
-    <?= $this->get('http/html/includes/footer/app-main-append.php'); ?>
-<?php endif; ?>

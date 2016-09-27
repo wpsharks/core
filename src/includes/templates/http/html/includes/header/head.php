@@ -40,13 +40,7 @@ use function get_defined_vars as vars;
     <link rel="shortcut icon" href="<?= $this->c::escUrl($head['favicon']); ?>" />
     <link rel="shortlink" href="<?= $this->c::escUrl($head['shortlink']); ?>" />
 
-    <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css" />
-    <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/github.min.css" />
-    <link type="text/css" rel="stylesheet" href="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/css/core.min.css?v='.urlencode($head['styles']['v']))); ?>" />
+    <?= $this->get('http/html/includes/header/styles.php'); ?>
 
-    <?php if (is_file($this->App->base_dir.'/src/client-s/css/app.min.css')) : ?>
-        <link type="text/css" rel="stylesheet" href="<?= $this->c::escUrl($this->c::appUrl('/client-s/css/app.min.css?v='.urlencode($head['styles']['v']))); ?>" />
-    <?php endif; ?>
-
-    <?= $this->get('http/html/includes/header/includes/html-head/append.php'); ?>
+    <?= $this->get('http/html/includes/header/head-append.php'); ?>
 </head>

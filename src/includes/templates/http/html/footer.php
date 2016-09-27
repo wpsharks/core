@@ -31,7 +31,6 @@ $defaults = [
 extract($this->setVars($defaults, $this->vars));
 ?>
         <?= $this->get('http/html/includes/footer/app-main.php'); ?>
-        <?= $this->get('http/html/includes/footer/app-extras.php'); ?>
-        <?= $this->get('http/html/includes/footer/app-scripts.php'); ?>
+        <?= $this->get('http/html/includes/footer/scripts.php'); ?>
     </body>
 </html>
