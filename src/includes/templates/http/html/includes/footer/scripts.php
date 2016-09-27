@@ -20,6 +20,7 @@ use function get_defined_vars as vars;
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jshashes/1.0.5/hashes.min.js"></script>
 
 <script src="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/js/core.min.js?v='.urlencode($body['scripts']['v']))); ?>"></script>
 <script src="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/js/hljs/langs/wp.min.js?v='.urlencode($body['scripts']['v']))); ?>"></script>
