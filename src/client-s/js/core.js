@@ -1,16 +1,18 @@
 (function ($) {
   $(document).ready(function () {
     /*
-     * Hash globals.
+     * Hash mixins.
      */
-    window.crc32 = crc32 || Hashes.CRC32;
-    window.md5 = md5 || new Hashes.MD5();
-    window.base64 = base64 || new Hashes.Base64();
+    _.mixin({
+      crc32: Hashes.CRC32,
+      md5: new Hashes.MD5(),
+      base64: new Hashes.Base64(),
 
-    window.sha1 = sha1 || new Hashes.SHA1();
-    window.sha256 = sha256 || new Hashes.SHA256();
-    window.sha512 = sha512 || new Hashes.SHA512();
-    window.rmd160 = rmd160 || new Hashes.RMD160();
+      sha1: new Hashes.SHA1(),
+      sha256: new Hashes.SHA256(),
+      sha512: new Hashes.SHA512(),
+      rmd160: new Hashes.RMD160()
+    });
 
     /*
      * Syntax highlighting via Highlight.js.
