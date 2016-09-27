@@ -2,15 +2,37 @@
   /*
    * Mixins.
    */
-  _.mixin({
-    crc32: Hashes.CRC32,
-    md5: new Hashes.MD5(),
-    base64: new Hashes.Base64(),
+  var md5 = new Hashes.MD5();
+  var base64 = new Hashes.Base64();
 
-    sha1: new Hashes.SHA1(),
-    sha256: new Hashes.SHA256(),
-    sha512: new Hashes.SHA512(),
-    rmd160: new Hashes.RMD160(),
+  var sha1 = new Hashes.SHA1();
+  var sha256 = new Hashes.SHA256();
+  var sha512 = new Hashes.SHA512();
+  var rmd160 = new Hashes.RMD160();
+
+  _.mixin({
+    crc32: function (str) {
+      return Hashes.CRC32(str);
+    },
+    md5: function (str) {
+      return md5.hex(str);
+    },
+    base64: function (str) {
+      return base64.hex(str);
+    },
+
+    sha1: function (str) {
+      return sha1.hex(str);
+    },
+    sha256: function (str) {
+      return sha256.hex(str);
+    },
+    sha512: function (str) {
+      return sha512.hex(str);
+    },
+    rmd160: function (str) {
+      return rmd160.hex(str);
+    },
 
     trim: function (str, chars) {
       return _.lTrim(_.rTrim(str, chars), chars);
