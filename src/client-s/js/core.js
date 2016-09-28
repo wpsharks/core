@@ -45,11 +45,10 @@
       return str.replace(new RegExp('[' + (chars || '\\s') + ']+$', 'g'), '');
     },
 
-    hexDec: function (hex) {
-      return parseInt(hex.replace(/[^a-f0-9]/gi, ''), 16);
-    },
     sha1Mod: function (str, divisor, isSha) {
-      return _.hexDec((isSha ? str : _.sha1(str)).substr(0, 15)) % Math.max(1, divisor);
+      var sha1 = isSha ? str : _.sha1(str);
+      var hex15 = '0x' + sha1.substr(0, 15);
+      return new BigNumber(hex15).mod(divisor).toString(10);
     }
   });
 
