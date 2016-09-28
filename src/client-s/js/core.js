@@ -48,7 +48,7 @@
     sha1Mod: function (str, divisor, isSha) {
       var sha1 = isSha ? str : _.sha1(str);
       var hex15 = '0x' + sha1.substr(0, 15);
-      return new BigNumber(hex15).mod(divisor).toString(10);
+      return new BigNumber(hex15).mod(Math.max(1, divisor)).toString(10);
     }
   });
 
