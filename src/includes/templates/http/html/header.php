@@ -16,6 +16,7 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+$_og_type        = 'website';
 $_current_url    = $this->c::currentUrl();
 $_current_url    = $this->c::parseUrl($_current_url);
 $_main_file_slug = $this->c::nameToSlug($this->mainFile());
@@ -35,21 +36,30 @@ $defaults = [
         'keywords'    => $this->App->Config->©brand['©keywords'],
         'description' => $this->App->Config->©brand['©description'],
 
-        'og' => [ // See below.
-            'site'        => '',
-            'title'       => '',
-            'description' => '',
-            'type'        => 'website',
-            'url'         => $_current_url['canonical'],
-            'image'       => $this->c::appUrl($this->App->Config->©brand['©screenshot'], 'current'),
+        'og' => [ // See: <http://ogp.me/>
+            'site_name' => '', // See below.
+            'locale'    => '', // See below.
+
+            'type' => $_og_type, // See above.
+            'url'  => $_current_url['canonical'],
+
+            'title'       => '', // See below.
+            'description' => '', // See below.
+
+            'image' => $this->c::appUrl($this->App->Config->©brand['©screenshot'], 'current'),
+
+            'profile:gender'     => $_og_type === 'profile' ? $this->App->Config->©contacts['©admin']['©gender'] : '',
+            'profile:username'   => $_og_type === 'profile' ? $this->App->Config->©contacts['©admin']['©username'] : '',
+            'profile:first_name' => $_og_type === 'profile' ? $this->c::firstNameIn($this->App->Config->©contacts['©admin']['©name']) : '',
+            'profile:last_name'  => $_og_type === 'profile' ? $this->c::lastNameIn($this->App->Config->©contacts['©admin']['©name']) : '',
         ],
+        'favicon' => $this->c::appUrl($this->App->Config->©brand['©favicon'], 'current'),
+
         'canonical' => $_current_url['canonical'],
-
-        'next' => '', // See: <http://jas.xyz/1IEKvqB>
-        'prev' => '', // See: <http://jas.xyz/1IEKvqB>
-
-        'favicon'   => $this->c::appUrl($this->App->Config->©brand['©favicon'], 'current'),
         'shortlink' => $_current_url['canonical'],
+
+        'next' => '', // @TODO: <http://jas.xyz/1IEKvqB>
+        'prev' => '', // @TODO: <http://jas.xyz/1IEKvqB>
 
         'styles' => [
             'v' => $this->App::VERSION,
@@ -71,11 +81,15 @@ $defaults = [
     ],
 ]; unset($_current_url, $_main_file_slug);
 
-$vars                              = array_replace_recursive($defaults, $this->vars);
-$vars['head']['og']['site']        = $vars['head']['og']['site'] ?: $vars['head']['site'];
+$vars = array_replace_recursive($defaults, $this->vars);
+
+$vars['head']['og']['site_name'] = $vars['head']['og']['site_name'] ?: $vars['head']['site'];
+$vars['head']['og']['locale']    = $vars['head']['og']['locale'] ?: str_replace('-', '_', $vars['html']['lang']);
+
 $vars['head']['og']['title']       = $vars['head']['og']['title'] ?: $vars['head']['title'];
 $vars['head']['og']['description'] = $vars['head']['og']['description'] ?: $vars['head']['description'];
-$vars['body']['header']['title']   = $vars['body']['header']['title'] ?: $this->c::escHtml($vars['head']['title']);
+
+$vars['body']['header']['title'] = $vars['body']['header']['title'] ?: $this->c::escHtml($vars['head']['title']);
 
 extract($this->setVars($vars, $this->vars));
 ?>

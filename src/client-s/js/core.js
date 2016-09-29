@@ -1,4 +1,5 @@
 (function () {
+
   /*
    * On DOM ready handler.
    */
@@ -16,4 +17,5 @@
       }
     });
   });
+
 })();

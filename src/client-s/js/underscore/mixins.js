@@ -1,4 +1,5 @@
 (function () {
+
   /*
    * Mixins.
    */
@@ -51,4 +52,5 @@
       return new BigNumber(hex15).mod(Math.max(1, divisor)).toString(10);
     }
   });
+
 })();

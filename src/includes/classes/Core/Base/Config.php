@@ -69,6 +69,8 @@ class Config extends Classes\Core\Base\Core
 
             '©contacts' => [
                 '©admin' => [
+                    '©gender'       => (string) ($_['CFG_ADMIN_GENDER'] ?? 'male'),
+                    '©username'     => (string) ($_['CFG_ADMIN_USERNAME'] ?? 'admin'),
                     '©name'         => (string) ($_['CFG_ADMIN_NAME'] ?? $_['CFG_ADMIN_USERNAME'] ?? 'admin'),
                     '©email'        => (string) ($_['CFG_ADMIN_EMAIL'] ?? $_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
                     '©public_email' => (string) ($_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
