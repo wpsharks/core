@@ -16,7 +16,11 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-$_og_type        = 'website';
+if (!empty($this->vars['head']['og']['type'])) {
+    $_og_type = $this->vars['head']['og']['type'];
+} else {
+    $_og_type = 'website'; // Default type.
+}
 $_current_url    = $this->c::currentUrl();
 $_current_url    = $this->c::parseUrl($_current_url);
 $_main_file_slug = $this->c::nameToSlug($this->mainFile());
