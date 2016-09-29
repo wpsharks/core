@@ -54,8 +54,8 @@ $defaults = [
 
             'profile:gender'     => $_og_type === 'profile' ? $this->App->Config->©contacts['©admin']['©gender'] : '',
             'profile:username'   => $_og_type === 'profile' ? $this->App->Config->©contacts['©admin']['©username'] : '',
-            'profile:first_name' => $_og_type === 'profile' ? $this->c::firstNameIn($this->App->Config->©contacts['©admin']['©name']) : '',
-            'profile:last_name'  => $_og_type === 'profile' ? $this->c::lastNameIn($this->App->Config->©contacts['©admin']['©name']) : '',
+            'profile:first_name' => $_og_type === 'profile' ? $this->c::fnameIn($this->App->Config->©contacts['©admin']['©name']) : '',
+            'profile:last_name'  => $_og_type === 'profile' ? $this->c::lnameIn($this->App->Config->©contacts['©admin']['©name']) : '',
         ],
         'favicon' => $this->c::appUrl($this->App->Config->©brand['©favicon'], 'current'),
 
