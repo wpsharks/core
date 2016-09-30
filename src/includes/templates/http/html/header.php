@@ -39,7 +39,7 @@ $defaults = [
         'title' => '', // Filled by application.
         'site'  => $this->App->Config->©brand['©name'],
 
-        'author'      => $this->App->Config->©brand['©author'],
+        'author'      => $this->App->Config->©brand['©author']['©name'],
         'keywords'    => $this->App->Config->©brand['©keywords'],
         'description' => $this->App->Config->©brand['©description'],
 
@@ -56,10 +56,10 @@ $defaults = [
             'description' => '', // See below.
             'image'       => $this->c::appUrl($this->App->Config->©brand['©image'], 'current'),
 
-            'profile:gender'     => $this->App->Config->©contacts['©admin']['©gender'],
-            'profile:username'   => $this->App->Config->©contacts['©admin']['©username'],
-            'profile:first_name' => $_og_type === 'profile' ? $this->c::fnameIn($this->App->Config->©contacts['©admin']['©name']) : '',
-            'profile:last_name'  => $_og_type === 'profile' ? $this->c::lnameIn($this->App->Config->©contacts['©admin']['©name']) : '',
+            'profile:gender'     => $this->App->Config->©brand['©author']['©gender'],
+            'profile:username'   => $this->App->Config->©brand['©author']['©username'],
+            'profile:first_name' => $_og_type === 'profile' ? $this->c::fnameIn($this->App->Config->©brand['©author']['©name']) : '',
+            'profile:last_name'  => $_og_type === 'profile' ? $this->c::lnameIn($this->App->Config->©brand['©author']['©name']) : '',
 
             'article:author'         => '', // See below.
             'article:tags'           => '', // See below.
