@@ -31,46 +31,45 @@ $defaults = [
         'class' => $_main_file_slug,
     ],
     'head' => [
-        'robots'    => 'index,follow',
-        'generator' => $this->App->Config->©brand['©name'],
-        'viewport'  => 'width=device-width, initial-scale=1.0',
+        'robots'          => 'index,follow',
+        'generator'       => 'websharks/core',
+        'viewport'        => 'width=device-width, initial-scale=1.0',
+        'x_ua_compatible' => 'IE=edge', // See: <http://bit.ly/1fJyGT3>
 
-        'title'       => __('Untitled'),
-        'site'        => $this->App->Config->©brand['©name'],
+        'title' => '', // Filled by application.
+        'site'  => $this->App->Config->©brand['©name'],
+
+        'author'      => $this->App->Config->©brand['©author'],
         'keywords'    => $this->App->Config->©brand['©keywords'],
         'description' => $this->App->Config->©brand['©description'],
 
+        'canonical' => $_current_url['canonical'],
+        'shortlink' => '', // Filled by application.
+
         'og' => [ // See: <http://ogp.me/>
-            'site_name' => '', // See below.
-            'locale'    => '', // See below.
+            'locale' => '', // See below.
+            'type'   => $_og_type, // See above.
+            'url'    => $_current_url['canonical'],
 
-            'type' => $_og_type, // See above.
-            'url'  => $_current_url['canonical'],
-
+            'site_name'   => '', // See below.
             'title'       => '', // See below.
             'description' => '', // See below.
+            'image'       => $this->c::appUrl($this->App->Config->©brand['©image'], 'current'),
 
-            'image' => $this->c::appUrl($this->App->Config->©brand['©screenshot'], 'current'),
-
-            'profile:gender'     => $_og_type === 'profile' ? $this->App->Config->©contacts['©admin']['©gender'] : '',
-            'profile:username'   => $_og_type === 'profile' ? $this->App->Config->©contacts['©admin']['©username'] : '',
+            'profile:gender'     => $this->App->Config->©contacts['©admin']['©gender'],
+            'profile:username'   => $this->App->Config->©contacts['©admin']['©username'],
             'profile:first_name' => $_og_type === 'profile' ? $this->c::fnameIn($this->App->Config->©contacts['©admin']['©name']) : '',
             'profile:last_name'  => $_og_type === 'profile' ? $this->c::lnameIn($this->App->Config->©contacts['©admin']['©name']) : '',
-        ],
-        'favicon' => $this->c::appUrl($this->App->Config->©brand['©favicon'], 'current'),
 
-        'canonical' => $_current_url['canonical'],
-        'shortlink' => $_current_url['canonical'],
-
-        'next' => '', // @TODO: <http://jas.xyz/1IEKvqB>
-        'prev' => '', // @TODO: <http://jas.xyz/1IEKvqB>
-
-        'styles' => [
-            'v' => $this->App::VERSION,
+            'article:author'         => '', // See below.
+            'article:tags'           => '', // See below.
+            'article:section'        => '', // Filled by application.
+            'article:published_time' => '', // Filled by application.
+            'article:modified_time'  => '', // Filled by application.
         ],
     ],
     'body' => [
-        'class' => $_main_file_slug,
+        'class' => '', // Filled by app.
 
         'app_main_enable' => true,
 
@@ -92,6 +91,9 @@ $vars['head']['og']['locale']    = $vars['head']['og']['locale'] ?: str_replace(
 
 $vars['head']['og']['title']       = $vars['head']['og']['title'] ?: $vars['head']['title'];
 $vars['head']['og']['description'] = $vars['head']['og']['description'] ?: $vars['head']['description'];
+
+$vars['head']['og']['article:author'] = $vars['head']['og']['article:author'] ?: $vars['head']['author'];
+$vars['head']['og']['article:tags']   = $vars['head']['og']['article:tags'] ?: $vars['head']['keywords'];
 
 $vars['body']['header']['title'] = $vars['body']['header']['title'] ?: $this->c::escHtml($vars['head']['title']);
 

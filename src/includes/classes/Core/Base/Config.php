@@ -71,7 +71,7 @@ class Config extends Classes\Core\Base\Core
                 '©admin' => [
                     '©gender'       => (string) ($_['CFG_ADMIN_GENDER'] ?? 'male'),
                     '©username'     => (string) ($_['CFG_ADMIN_USERNAME'] ?? 'admin'),
-                    '©name'         => (string) ($_['CFG_ADMIN_NAME'] ?? $_['CFG_ADMIN_USERNAME'] ?? 'admin'),
+                    '©name'         => (string) ($_['CFG_ADMIN_NAME'] ?? $_['CFG_ADMIN_USERNAME'] ?? 'Admin'),
                     '©email'        => (string) ($_['CFG_ADMIN_EMAIL'] ?? $_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
                     '©public_email' => (string) ($_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
                 ],
@@ -127,12 +127,17 @@ class Config extends Classes\Core\Base\Core
                 ],
             ],
 
-            '©brand' => [ // NOTE: `short_` variations should not exceed 10 bytes.
-
-                '©name'    => (string) ($_['CFG_BRAND_NAME'] ?? $_['CFG_HOST'] ?? $host),
+            '©brand' => [ // `short_` variations should not exceed 10 bytes.
                 '©acronym' => (string) ($_['CFG_BRAND_ACRONYM'] ?? 'APP'),
+                '©name'    => (string) ($_['CFG_BRAND_NAME'] ?? $_['CFG_HOST'] ?? $host),
 
-                '©text_domain' => (string) ($_['CFG_BRAND_TEXT_DOMAIN'] ?? $_['CFG_BRAND_SLUG'] ?? $_['CFG_SLUG'] ?? 'app'),
+                '©author' => [ // Used for `<meta name="author" />`, personal sites, etc.
+                    '©gender'       => (string) ($_['CFG_BRAND_AUTHOR_GENDER'] ?? $_['CFG_ADMIN_GENDER'] ?? 'male'),
+                    '©username'     => (string) ($_['CFG_BRAND_AUTHOR_USERNAME'] ?? $_['CFG_ADMIN_USERNAME'] ?? 'admin'),
+                    '©name'         => (string) ($_['CFG_BRAND_AUTHOR_NAME'] ?? $_['CFG_ADMIN_NAME'] ?? 'Admin'),
+                    '©email'        => (string) ($_['CFG_BRAND_AUTHOR_EMAIL'] ?? $_['CFG_ADMIN_EMAIL'] ?? $_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
+                    '©public_email' => (string) ($_['CFG_BRAND_AUTHOR_PUBLIC_EMAIL'] ?? $_['CFG_ADMIN_PUBLIC_EMAIL'] ?? 'admin@'.$root_host),
+                ],
 
                 '©slug' => (string) ($_['CFG_BRAND_SLUG'] ?? $_['CFG_SLUG'] ?? 'app'),
                 '©var'  => (string) ($_['CFG_BRAND_VAR'] ?? $_['CFG_VAR'] ?? 'app'),
@@ -140,13 +145,21 @@ class Config extends Classes\Core\Base\Core
                 '©short_slug' => (string) ($_['CFG_BRAND_SHORT_SLUG'] ?? $_['CFG_BRAND_SLUG'] ?? $_['CFG_SLUG'] ?? 'app'),
                 '©short_var'  => (string) ($_['CFG_BRAND_SHORT_VAR'] ?? $_['CFG_BRAND_VAR'] ?? $_['CFG_VAR'] ?? 'app'),
 
-                '©keywords'    => (string) ($_['CFG_BRAND_KEYWORDS'] ?? ''),
+                '©text_domain' => (string) ($_['CFG_BRAND_TEXT_DOMAIN'] ?? $_['CFG_BRAND_SLUG'] ?? $_['CFG_SLUG'] ?? 'app'),
+
+                '©keywords'    => (array) ($_['CFG_BRAND_KEYWORDS'] ?? []),
                 '©description' => (string) ($_['CFG_BRAND_DESCRIPTION'] ?? ''),
                 '©tagline'     => (string) ($_['CFG_BRAND_TAGLINE'] ?? ''),
 
-                '©favicon'    => (string) ($_['CFG_BRAND_FAVICON'] ?? '/favicon.ico'),
-                '©logo'       => (string) ($_['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
-                '©screenshot' => (string) ($_['CFG_BRAND_SCREENSHOT'] ?? '/client-s/images/screenshot.png'),
+                '©favicon' => (string) ($_['CFG_BRAND_FAVICON'] ?? '/favicon.ico'),
+                '©logo'    => (string) ($_['CFG_BRAND_LOGO'] ?? '/client-s/images/logo.png'),
+                '©image'   => (string) ($_['CFG_BRAND_IMAGE'] ?? '/client-s/images/image.png'),
+
+                '©favicons' => [
+                    '©dir'          => (string) ($_['CFG_BRAND_FAVICONS_DIR'] ?? '/client-s/images/favicons'),
+                    '©theme_color'  => (string) ($_['CFG_BRAND_FAVICONS_THEME_COLOR'] ?? '#ffffff'),
+                    '©pinned_color' => (string) ($_['CFG_BRAND_FAVICONS_PINNED_ACTIVE_COLOR'] ?? '#2b5797'),
+                ],
             ],
 
             '©urls' => [

@@ -23,9 +23,6 @@ $defaults = [
         'brand' => [
             'name' => $this->App->Config->©brand['©name'],
         ],
-        'scripts' => [
-            'v' => $this->App::VERSION,
-        ],
     ],
 ];
 extract($this->setVars($defaults, $this->vars));
