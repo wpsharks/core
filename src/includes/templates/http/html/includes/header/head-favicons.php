@@ -31,7 +31,7 @@ $_dir = $this->c::escAttr($this->App->Config->©brand['©favicons']['©dir']);
 
 <link rel="shortcut icon" href="<?= $this->c::escUrl($this->c::appUrl($_dir.'/favicon.ico', 'current')); ?>" />
 <link rel="apple-touch-icon" sizes="180x180" href="<?= $this->c::escUrl($this->c::appUrl($_dir.'/apple-touch-icon.png', 'current')); ?>" />
-<link rel="icon" type="image/png" href="<?= $this->c::escUrl($this->c::appUrl($_dir.'/favicon-32x32.png" sizes="32x32', 'current')); ?>" />
-<link rel="icon" type="image/png" href="<?= $this->c::escUrl($this->c::appUrl($_dir.'/favicon-16x16.png" sizes="16x16', 'current')); ?>" />
+<link rel="icon" type="image/png" href="<?= $this->c::escUrl($this->c::appUrl($_dir.'/favicon-32x32.png', 'current')); ?>" sizes="32x32" />
+<link rel="icon" type="image/png" href="<?= $this->c::escUrl($this->c::appUrl($_dir.'/favicon-16x16.png', 'current')); ?>" sizes="16x16" />
 <link rel="mask-icon" href="<?= $this->c::escUrl($this->c::appUrl($_dir.'/safari-pinned-tab.svg', 'current')); ?>"
       color="<?= $this->c::escAttr($this->App->Config->©brand['©favicons']['©pinned_color']); ?>" />
