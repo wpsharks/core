@@ -31,8 +31,8 @@ use function get_defined_vars as vars;
 
 <script src="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/js/core.min.js?v='.urlencode($this->App::VERSION))); ?>"></script>
 
+<?= $this->get('http/html/includes/footer/scripts-append.php'); ?>
+
 <?php if (is_file($this->App->base_dir.'/src/client-s/js/app.min.js')) : ?>
     <script src="<?= $this->c::escUrl($this->c::appUrl('/client-s/js/app.min.js?v='.urlencode($this->App::VERSION))); ?>"></script>
 <?php endif; ?>
-
-<?= $this->get('http/html/includes/footer/scripts-append.php'); ?>
