@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -80,14 +80,14 @@ class Template extends Classes\Core\Base\Core
     {
         $default_args = [
             'protocol'                => 'http',
-            'ext'                     => 'php',
+            'extension'               => 'php',
             'redirect_trailing_slash' => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
         $protocol                = (string) $args['protocol'];
-        $ext                     = (string) $args['ext'];
+        $extension               = (string) $args['extension'];
         $redirect_trailing_slash = (bool) $args['redirect_trailing_slash'];
 
         if (!isset($route[0])) {
@@ -106,10 +106,10 @@ class Template extends Classes\Core\Base\Core
         if (!isset($route[0])) {
             $route = 'index';
         }
-        if (!$protocol || !$ext) {
+        if (!$protocol || !$extension) {
             return []; // Fail on missing data.
         }
-        return $this->locate($protocol.'/routes/'.$route.'.'.$ext, $dir);
+        return $this->locate($protocol.'/routes/'.$route.'.'.$extension, $dir);
     }
 
     /**
