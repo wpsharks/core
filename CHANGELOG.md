@@ -4,6 +4,7 @@
 - Adding `.webp` extension support.
 - Adding a default set of templates for general purpose web applications.
 - Enhancing core SCSS and adding a new set of mixins.
+- Enhancing router by adding support for endpoint query vars.
 
 ## v160831.61689
 

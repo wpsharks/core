@@ -79,37 +79,57 @@ class Template extends Classes\Core\Base\Core
     public function locateRoute(string $route = '', string $dir = '', array $args = []): array
     {
         $default_args = [
-            'protocol'                => 'http',
-            'extension'               => 'php',
-            'redirect_trailing_slash' => false,
+            'protocol'                    => 'http',
+            'extension'                   => 'php',
+            'redirect_trailing_slash'     => true,
+            'endpoint_query_var_patterns' => [],
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $protocol                = (string) $args['protocol'];
-        $extension               = (string) $args['extension'];
-        $redirect_trailing_slash = (bool) $args['redirect_trailing_slash'];
+        $protocol                    = (string) $args['protocol'];
+        $extension                   = (string) $args['extension'];
+        $redirect_trailing_slash     = (bool) $args['redirect_trailing_slash'];
+        $endpoint_query_var_patterns = (array) $args['endpoint_query_var_patterns'];
 
-        if (!isset($route[0])) {
+        if (!$protocol || !$extension) {
+            return []; // Missing template path components.
+        }
+        if (!isset($route[0])) { // If no specific route; use current URL path.
             $route = $this->c::currentPath(); // Use current URL path.
 
-            if ($redirect_trailing_slash && $route !== '/' && mb_substr($route, -1) === '/') {
+            if ($redirect_trailing_slash && mb_substr($route, -1) === '/' && $route !== '/') {
                 $current_url         = $this->c::parseUrl($this->c::currentUrl());
                 $current_url['path'] = $this->c::mbRTrim($current_url['path'], '/');
                 $current_url         = $this->c::unparseUrl($current_url);
                 header('location: '.$current_url, true, 301);
                 exit; // Stop here on redirection.
             }
-        }
-        $route = $this->c::mbTrim($route, '/');
+        } // And now we trim leading/trailing slashes.
+        $route               = $this->c::mbTrim($route, '/');
+        $route               = isset($route[0]) ? $route : 'index';
+        $endpoint_query_vars = []; // Initialize.
 
-        if (!isset($route[0])) {
-            $route = 'index';
-        }
-        if (!$protocol || !$extension) {
-            return []; // Fail on missing data.
-        }
-        return $this->locate($protocol.'/routes/'.$route.'.'.$extension, $dir);
+        foreach ($endpoint_query_var_patterns as $_endpoint_query_var_pattern => $_endpoint_route) {
+            if (!preg_match($_endpoint_query_var_pattern, $route, $_m)) {
+                continue; // Only if pattern matches.
+            } elseif (!$_endpoint_route) {
+                continue; // Must have.
+            }
+            foreach ($_m as $_key => $_value) {
+                if (!is_string($_key) || !$_key || !isset($_value[0])) {
+                    continue; // Skip this one.
+                } // Only string keys that have a value.
+
+                $endpoint_query_vars[urldecode($_key)] = urldecode($_value);
+                $_endpoint_route                       = str_replace('%%'.$_key.'%%', $_value, $_endpoint_route);
+            } // unset($_key, $_value);
+            $route = $this->c::mbTrim(preg_replace($_endpoint_query_var_pattern, $_endpoint_route), '/');
+            break; // Stop; i.e., only one pattern can match.
+        } // unset($_endpoint_query_var_pattern, $_endpoint_route, $_m);
+
+        $template        = $this->locate($protocol.'/routes/'.$route.'.'.$extension, $dir);
+        return $template = $template ? array_merge($template, ['vars' => compact('endpoint_query_vars')]) : [];
     }
 
     /**
@@ -117,38 +137,36 @@ class Template extends Classes\Core\Base\Core
      *
      * @since 160118 Router templates.
      *
-     * @param string $route A URL path/route.
-     * @param string $dir   From a specific directory?
-     * @param array  $args  Any additional behavioral args.
+     * @param array $args Behavioral args.
      *
      * @return bool True if the route was successfully loaded.
      */
-    public function loadRoute(string $route = '', string $dir = '', array $args = []): bool
+    public function loadRoute(array $args = []): bool
     {
         $default_args = [
-            'display_error' => true,
-            'locate'        => [
-                'redirect_trailing_slash' => true,
-            ],
-            'status_header' => [
-                'display_error' => true,
-            ],
+            'route' => '', 'dir' => '',
+            // See: {@link locateRoute()}
+
+            'protocol'                    => 'http',
+            'extension'                   => 'php',
+            'redirect_trailing_slash'     => true,
+            'endpoint_query_var_patterns' => [],
+
+            'display_error'      => true,
+            'display_error_page' => 'default',
+            // See: {@link c::statusHeader()}
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $display_error                          = (bool) $args['display_error'];
-        $args['status_header']['display_error'] = $display_error;
-
-        if (($template = $this->locateRoute($route, $dir, $args['locate']))) {
-            echo $this->get($template['file'], $template['dir'])->parse();
+        if (($template = $this->locateRoute($args['route'], $args['dir'], $args))) {
+            echo $this->get($template['file'], $template['dir'])->parse($template['vars']);
             return true; // Loaded successfully.
-        } else {
-            if ($display_error) {
-                $this->c::statusHeader(404, $args['status_header']);
-            }
-            return false; // Failure.
         }
+        if ($args['display_error']) {
+            $this->c::statusHeader(404, $args);
+        }
+        return false; // Failure.
     }
 
     /**

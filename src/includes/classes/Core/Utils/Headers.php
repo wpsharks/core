@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -84,7 +84,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
             } elseif ($errors_dir) {
                 $error_page = $errors_dir.'/'.$status.'/index.html';
             } else {
-                $error_page = ''; // No errors directory.
+                $error_page = ''; // Not possible.
             }
             $this->c::noCacheFlags();
             $this->c::sessionWriteClose();
