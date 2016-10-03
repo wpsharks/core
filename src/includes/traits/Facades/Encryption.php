@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -105,6 +105,30 @@ trait Encryption
     public static function sha256KeyedHash(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Sha256->keyedHash(...$args);
+    }
+
+    /**
+     * @since 161003 Encode one ID.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HashIds::encode()
+     */
+    public static function hashId(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©HashIds->encode(...$args);
+    }
+
+    /**
+     * @since 161003 One decoded ID.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HashIds::decodeOne()
+     */
+    public static function decodeHashId(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©HashIds->decodeOne(...$args);
     }
 
     /**

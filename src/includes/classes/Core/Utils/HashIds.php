@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -75,10 +75,25 @@ class HashIds extends Classes\Core\Base\Core
      *
      * @param string $hash_id Hash ID.
      *
-     * @return array An array of integers.
+     * @return array Array of decoded IDs.
      */
     public function decode(string $hash_id): array
     {
         return $this->Parser->decode($hash_id);
+    }
+
+    /**
+     * Decodes a hash ID.
+     *
+     * @since 161003 Single hash ID.
+     *
+     * @param string $hash_id Hash ID.
+     *
+     * @return int One decoded ID.
+     */
+    public function decodeOne(string $hash_id): int
+    {
+        $ids       = $this->Parser->decode($hash_id);
+        return $id = (int) ($ids[0] ?? 0);
     }
 }

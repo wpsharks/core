@@ -5,6 +5,7 @@
 - Adding a default set of templates for general purpose web applications.
 - Enhancing core SCSS and adding a new set of mixins.
 - Enhancing router by adding support for endpoint query vars.
+- Adding new Facade that makes it easier to encode/decode a single ID.
 
 ## v160831.61689
 
