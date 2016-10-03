@@ -1,64 +1,6 @@
 @import 'bourbon/bourbon';
-
-/*
- * Mixins.
- */
-@mixin mobile-only {
-  @media (max-width: 767px) {
-    @content;
-  }
-}
-
-@mixin tablet-plus {
-  @media (min-width: 768px) {
-    @content;
-  }
-}
-
-@mixin tablet-only {
-  @media (min-width: 768px) and (max-width: 991px) {
-    @content;
-  }
-}
-
-@mixin mobile-and-tablet-only {
-  @media (max-width: 991px) {
-    @content;
-  }
-}
-
-@mixin small-screen-plus {
-  @media (min-width: 992px) {
-    @content;
-  }
-}
-
-@mixin small-screen-only {
-  @media (min-width: 992px) and (max-width: 1199px) {
-    @content;
-  }
-}
-
-@mixin small-and-large-screen-only {
-  @media (min-width: 992px) {
-    @content;
-  }
-}
-
-@mixin large-screen-only {
-  @media (min-width: 1200px) {
-    @content;
-  }
-}
-
-/*
- * Color vars.
- */
-$main-menu-border-color: #eee;
-
-$blockquote-bg-color: #f9f9f9;
-$blockquote-border-color: #ccc;
-$blockquote-quote-color: #ccc;
+@import 'mixins/responsive';
+@import 'colors/core';
 
 /*
  * HTML/body.

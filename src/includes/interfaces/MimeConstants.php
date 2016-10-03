@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Interfaces;
 
 use WebSharks\Core\Classes;
@@ -119,6 +119,7 @@ interface MimeConstants
         'jpeg'     => 'image/jpeg',
         'jpg'      => 'image/jpeg',
         'png'      => 'image/png',
+        'webp'     => 'image/webp',
         'psd'      => 'image/vnd.adobe.photoshop',
         'pspimage' => 'image/vnd.corel.psp',
         'svg'      => 'image/svg+xml',
@@ -133,20 +134,20 @@ interface MimeConstants
         'wma'  => 'audio/x-ms-wma',
 
         // Video files.
-        'avi'  => 'video/avi',
-        'flv'  => 'video/x-flv',
-        'ogg'  => 'video/ogg',
-        'ogv'  => 'video/ogg',
-        'mp4'  => 'video/mp4',
-        'mov'  => 'movie/quicktime',
-        'mpg'  => 'video/mpeg',
-        'mpeg' => 'video/mpeg',
-        'qt'   => 'video/quicktime',
-        'webm' => 'video/webm',
-        'wmv'  => 'audio/x-ms-wmv',
-        'fla'      => 'application/vnd.adobe.flash',
-        'swf'      => 'application/x-shockwave-flash',
-        'blend'    => 'application/x-blender',
+        'avi'   => 'video/avi',
+        'flv'   => 'video/x-flv',
+        'ogg'   => 'video/ogg',
+        'ogv'   => 'video/ogg',
+        'mp4'   => 'video/mp4',
+        'mov'   => 'movie/quicktime',
+        'mpg'   => 'video/mpeg',
+        'mpeg'  => 'video/mpeg',
+        'qt'    => 'video/quicktime',
+        'webm'  => 'video/webm',
+        'wmv'   => 'audio/x-ms-wmv',
+        'fla'   => 'application/vnd.adobe.flash',
+        'swf'   => 'application/x-shockwave-flash',
+        'blend' => 'application/x-blender',
 
         // Font files.
         'eot'   => 'application/vnd.ms-fontobject',

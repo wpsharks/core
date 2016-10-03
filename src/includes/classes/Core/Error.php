@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core;
 
 use WebSharks\Core\Classes;
@@ -84,11 +84,25 @@ class Error extends Classes\Core\Base\Core
     }
 
     /**
-     * Errors exist?
+     * Errors exists.
+     *
+     * @since 161002 Error utils.
+     *
+     * @return bool Errors exist?
+     */
+    public function exists(): bool
+    {
+        return !empty($this->errors);
+    }
+
+    /**
+     * Errors exist (alias).
      *
      * @since 160710 Error utils.
      *
      * @return bool Errors exist?
+     *
+     * @deprecated 161002 Use `exists()` please.
      */
     public function exist(): bool
     {

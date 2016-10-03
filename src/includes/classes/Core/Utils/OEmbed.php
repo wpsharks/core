@@ -224,7 +224,7 @@ class OEmbed extends Classes\Core\Base\Core implements Interfaces\UrlConstants
             return $markup; // Not possible; i.e., empty string.
         }
         $provider_slug = $this->c::nameToSlug($embed->provider_name);
-        $classes       = '-_embedly -_'.$embed->type.' -_'.$provider_slug;
+        $classes       = '_-embedly _-'.$embed->type.' _-'.$provider_slug;
 
         switch ($embed->type) { // See: <http://jas.xyz/1O7ymwT>
             case 'rich':

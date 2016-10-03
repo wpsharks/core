@@ -1,3 +1,10 @@
+## [coming soon]
+
+- Enhancing `Error{}` class.
+- Adding `.webp` extension support.
+- Adding a default set of templates for general purpose web applications.
+- Enhancing core SCSS and adding a new set of mixins.
+
 ## v160831.61689
 
 - Additional `c::arrayToXml()` bug fix. Allow for duplicate tags.
