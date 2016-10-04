@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
@@ -18,6 +18,7 @@ use function get_defined_vars as vars;
 
 ?>
 <?php if ($body['app_main_enable']) : ?>
+    <?= $this->get('http/html/includes/header/app-main-open.php'); ?>
     <?= $this->get('http/html/includes/header/app-main-menu.php'); ?>
     <?= $this->get('http/html/includes/header/app-main-header.php'); ?>
     <?= $this->get('http/html/includes/header/app-main-body-open.php'); ?>

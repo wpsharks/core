@@ -17,13 +17,11 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 ?>
-<div class="ui container app-main-header">
+<div class="ui container entry-header app-main-header">
     <div class="ui stackable grid">
 
         <div class="twelve wide column -left-side">
-            <h1 class="ui header -title">
-                <?= $body['header']['title']; ?>
-            </h1>
+            <h1 class="ui header entry-title -title"><?= $body['header']['title']; ?></h1>
         </div>
 
         <div class="four wide large screen only right aligned column -right-side">

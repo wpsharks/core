@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
@@ -21,4 +21,5 @@ use function get_defined_vars as vars;
     <?= $this->get('http/html/includes/footer/app-main-body-close.php'); ?>
     <?= $this->get('http/html/includes/footer/app-main-footer.php'); ?>
     <?= $this->get('http/html/includes/footer/app-main-append.php'); ?>
+    <?= $this->get('http/html/includes/footer/app-main-close.php'); ?>
 <?php endif; ?>
