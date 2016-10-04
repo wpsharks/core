@@ -124,7 +124,7 @@ class Template extends Classes\Core\Base\Core
                 $endpoint_query_vars[urldecode($_key)] = urldecode($_value);
                 $_endpoint_route                       = str_replace('%%'.$_key.'%%', $_value, $_endpoint_route);
             } // unset($_key, $_value);
-            $route = $this->c::mbTrim(preg_replace($_endpoint_query_var_pattern, $_endpoint_route), '/');
+            $route = $this->c::mbTrim(preg_replace($_endpoint_query_var_pattern, $_endpoint_route, $route), '/');
             break; // Stop; i.e., only one pattern can match.
         } // unset($_endpoint_query_var_pattern, $_endpoint_route, $_m);
 
