@@ -23,6 +23,7 @@ body {
  */
 blockquote {
   padding:                    1em;
+  border-radius:             .25em;
   quotes:                     '“' '”';
   background:                 $blockquote-bg-color;
   border-left:                0.1em solid $blockquote-border-color;
@@ -49,6 +50,22 @@ blockquote::after {
  */
 [placeholder]:focus::-webkit-input-placeholder {
   opacity:                    0.25;
+}
+
+/*
+ * Buttons.
+ */
+.ui.buttons {
+  .ui.button {
+    + .or {
+      &::before {
+        font-weight:          400;
+        font-size:           .75em;
+        line-height:          1.75em;
+        padding-left:        .075em;
+      }
+    }
+  }
 }
 
 /*
