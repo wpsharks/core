@@ -101,7 +101,7 @@ blockquote::after {
  * Main footer.
  */
 .app-main-footer {
-  @include mobile-and-tablet-only {
+  @include mobile-only {
     > .vertical.segment {
       > .section.divider {
         display:              none;
