@@ -77,10 +77,8 @@ blockquote::after {
   border-bottom:              1px solid $app-main-header-border-color;
 
   .-left-side {
-    .-logo {
-      display:                block;
-      margin:                 1.5em 0 0;
-    }
+    //
+
   }
 
   .-right-side {
