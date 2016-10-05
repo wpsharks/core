@@ -19,4 +19,4 @@ use function get_defined_vars as vars;
 ?>
 <div class="ui container app-main-body">
     <div class="ui stackable grid">
-        <div class="sixteen wide column">
+        <div class="sixteen wide column -only-side">

@@ -91,11 +91,9 @@ blockquote::after {
  * Main body.
  */
 .app-main-body {
-  .entry-content {
-    > p:first-of-type:not([class]) {
-      font-size:              1.25em;
-      font-family:            'Georgia', serif;
-    }
+  .-only-side {
+    //
+
   }
 }
 
@@ -111,6 +109,16 @@ blockquote::after {
   .-right-side {
     //
 
+  }
+}
+
+/*
+ * Article utils.
+ */
+._article {
+  > p:first-of-type:not([class]) {
+    font-size:                1.25em;
+    font-family:              'Georgia', serif;
   }
 }
 
