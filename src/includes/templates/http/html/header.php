@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
@@ -36,7 +36,7 @@ $defaults = [
         'viewport'        => 'width=device-width, initial-scale=1.0',
         'x_ua_compatible' => 'IE=edge', // See: <http://bit.ly/1fJyGT3>
 
-        'title' => '', // Filled by application.
+        'title' => '', // Filled by app.
         'site'  => $this->App->Config->©brand['©name'],
 
         'author'      => $this->App->Config->©brand['©author']['©name'],
@@ -44,7 +44,7 @@ $defaults = [
         'description' => $this->App->Config->©brand['©description'],
 
         'canonical' => $_current_url['canonical'],
-        'shortlink' => '', // Filled by application.
+        'shortlink' => '', // Filled by app.
 
         'og' => [ // See: <http://ogp.me/>
             'locale' => '', // See below.
@@ -63,24 +63,14 @@ $defaults = [
 
             'article:author'         => '', // See below.
             'article:tags'           => '', // See below.
-            'article:section'        => '', // Filled by application.
-            'article:published_time' => '', // Filled by application.
-            'article:modified_time'  => '', // Filled by application.
+            'article:section'        => '', // Filled by app.
+            'article:published_time' => '', // Filled by app.
+            'article:modified_time'  => '', // Filled by app.
         ],
     ],
     'body' => [
-        'class' => '', // Filled by app.
-
+        'class'           => '', // Filled by app.
         'app_main_enable' => true,
-
-        'brand' => [
-            'url'  => $this->c::appUrl('/'),
-            'name' => $this->App->Config->©brand['©name'],
-            'logo' => $this->c::appUrl($this->App->Config->©brand['©logo']),
-        ],
-        'header' => [
-            'title' => '',
-        ],
     ],
 ]; unset($_current_url, $_main_file_slug);
 
@@ -94,8 +84,6 @@ $vars['head']['og']['description'] = $vars['head']['og']['description'] ?: $vars
 
 $vars['head']['og']['article:author'] = $vars['head']['og']['article:author'] ?: $vars['head']['author'];
 $vars['head']['og']['article:tags']   = $vars['head']['og']['article:tags'] ?: $vars['head']['keywords'];
-
-$vars['body']['header']['title'] = $vars['body']['header']['title'] ?: $this->c::escHtml($vars['head']['title']);
 
 extract($this->setVars($vars, $this->vars));
 ?>

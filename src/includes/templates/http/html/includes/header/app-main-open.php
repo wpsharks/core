@@ -17,4 +17,4 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 ?>
-<div class="hentry app-main">
+<div class="app-main">

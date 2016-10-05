@@ -4,6 +4,7 @@
    * On DOM ready handler.
    */
   $(document).ready(function () {
+
     /*
      * Syntax highlighting via Highlight.js.
      */
@@ -16,6 +17,7 @@
         hljs.highlightBlock(this);
       }
     });
+
   });
 
 })();

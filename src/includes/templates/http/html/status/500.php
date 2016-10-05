@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
@@ -29,6 +29,7 @@ extract($this->setVars($defaults, $this->vars));
 ?>
 <?= $this->get('http/html/header.php'); ?>
 
+    <h1><?= __('500 Internal Server Error'); ?></h1>
     <p><?= __('This error has been reported to system administrators.'); ?></p>
 
     <?php if ($this->App->Config->©debug['©er_display'] && $Throwable) : ?>

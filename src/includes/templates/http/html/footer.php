@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
@@ -19,10 +19,6 @@ use function get_defined_vars as vars;
 $defaults = [
     'body' => [
         'app_main_enable' => true,
-
-        'brand' => [
-            'name' => $this->App->Config->©brand['©name'],
-        ],
     ],
 ];
 extract($this->setVars($defaults, $this->vars));

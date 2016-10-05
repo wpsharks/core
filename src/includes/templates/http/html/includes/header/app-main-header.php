@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
@@ -17,14 +17,21 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 ?>
-<div class="ui container entry-header app-main-header">
+<div class="ui container app-main-header">
     <div class="ui stackable grid">
 
-        <div class="twelve wide column -left-side">
-            <h1 class="ui header entry-title -title"><?= $body['header']['title']; ?></h1>
+        <div class="eight wide column -left-side">
+            <div class="ui stackable grid">
+                <div class="sixteen wide column">
+                    <a href="<?= $this->c::escUrl($this->c::appUrl('/')); ?>">
+                        <img class="-logo" src="<?= $this->c::escUrl($this->App->Config->©brand['©logo']); ?>"
+                             alt="<?= $this->c::escAttr($this->App->Config->©brand['©name']); ?>"
+                             data-pin-nopin="true" />
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <div class="four wide large screen only right aligned column -right-side">
+        <div class="eight wide right aligned large screen only column -right-side">
             &nbsp;
         </div>
 

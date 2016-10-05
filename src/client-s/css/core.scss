@@ -69,12 +69,12 @@ blockquote::after {
 }
 
 /*
- * Main menu.
+ * Main header.
  */
-.app-main-menu {
+.app-main-header {
   padding:                    0 0 1em;
   margin:                     1em 0 2em;
-  border-bottom:              1px solid $main-menu-border-color;
+  border-bottom:              1px solid $app-main-header-border-color;
 
   .-left-side {
     .-logo {
@@ -89,27 +89,15 @@ blockquote::after {
 }
 
 /*
- * Main header.
- */
-.app-main-header {
-  margin:                     1em 0;
-
-  .-left-side {
-    //
-
-  }
-
-  .-right-side {
-    //
-
-  }
-}
-
-/*
  * Main body.
  */
 .app-main-body {
-  //
+  .entry-content {
+    > p:first-of-type:not([class]) {
+      font-size:              1.25em;
+      font-family:            'Georgia', serif;
+    }
+  }
 }
 
 /*
