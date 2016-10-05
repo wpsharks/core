@@ -17,11 +17,10 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 ?>
-<div class="ui center aligned container app-main-footer">
-    <div class="ui vertical footer segment">
+<div class="ui container app-main-footer">
+    <div class="ui section divider"></div>
 
-        <div class="ui section divider"></div>
-
+    <div class="ui vertical segment">
         <div class="ui stackable divided grid">
 
             <div class="eight wide column -left-side">
@@ -31,12 +30,11 @@ use function get_defined_vars as vars;
                     <?= __('"All Rights Reserved"'); ?>
                 </p>
             </div>
-
-            <div class="eight wide large screen only column -right-side">
-                &nbsp;
+            <div class="eight wide right aligned large screen only column -right-side">
+                <a href="<?= $this->c::escUrl(appUrl('/')); ?>"><?= __('Home'); ?></a>
             </div>
 
         </div>
-
     </div>
+
 </div>

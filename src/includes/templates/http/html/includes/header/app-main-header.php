@@ -27,7 +27,6 @@ use function get_defined_vars as vars;
                      data-pin-nopin="true" />
             </a>
         </div>
-
         <div class="eight wide right aligned large screen only column -right-side">
             &nbsp;
         </div>
