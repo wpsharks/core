@@ -31,6 +31,7 @@ use function get_defined_vars as vars;
                 </div>
             </div>
         </div>
+
         <div class="eight wide right aligned large screen only column -right-side">
             &nbsp;
         </div>
