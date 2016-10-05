@@ -101,6 +101,13 @@ blockquote::after {
  * Main footer.
  */
 .app-main-footer {
+  @include mobile-and-tablet-only {
+    > .section.divider {
+      display:                none;
+    }
+  }
+
+
   .-left-side {
     //
 
