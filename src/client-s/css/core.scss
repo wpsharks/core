@@ -102,8 +102,10 @@ blockquote::after {
  */
 .app-main-footer {
   @include mobile-and-tablet-only {
-    > .section.divider {
-      display:                none;
+    > .vertical.segment {
+      > .section.divider {
+        display:              none;
+      }
     }
   }
 
