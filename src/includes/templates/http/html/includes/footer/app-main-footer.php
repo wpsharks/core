@@ -18,9 +18,9 @@ use function get_defined_vars as vars;
 
 ?>
 <div class="ui container app-main-footer">
-    <div class="ui section divider"></div>
-
     <div class="ui vertical segment">
+        <div class="ui section divider"></div>
+
         <div class="ui stackable divided grid">
 
             <div class="eight wide column -left-side">
@@ -36,5 +36,4 @@ use function get_defined_vars as vars;
 
         </div>
     </div>
-
 </div>
