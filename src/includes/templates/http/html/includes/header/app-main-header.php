@@ -21,8 +21,8 @@ use function get_defined_vars as vars;
     <div class="ui stackable grid">
 
         <div class="eight wide column -left-side">
-            <a class="-logo" href="<?= $this->c::escUrl($this->c::appUrl('/')); ?>">
-                <img src="<?= $this->c::escUrl($this->App->Config->©brand['©logo']); ?>"
+            <a href="<?= $this->c::escUrl($this->c::appUrl('/')); ?>">
+                <img class="-logo" src="<?= $this->c::escUrl($this->App->Config->©brand['©logo']); ?>"
                      alt="<?= $this->c::escAttr($this->App->Config->©brand['©name']); ?>"
                      data-pin-nopin="true" />
             </a>
