@@ -23,6 +23,7 @@ use function get_defined_vars as vars;
         <div class="ui section divider"></div>
 
         <div class="ui stackable divided grid">
+
             <div class="eight wide column -left-side">
                 <p class="-copyright">
                     © <?= date('Y'); ?>
@@ -30,9 +31,11 @@ use function get_defined_vars as vars;
                     <?= __('"All Rights Reserved"'); ?>
                 </p>
             </div>
+
             <div class="eight wide large screen only column -right-side">
                 &nbsp;
             </div>
+
         </div>
 
     </div>
