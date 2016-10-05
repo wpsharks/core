@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -37,6 +37,6 @@ class Gravatar extends Classes\Core\Base\Core
     public function url(string $email, int $size = 64, string $scheme = ''): string
     {
         $md5 = md5(mb_strtolower($this->c::mbTrim($email)));
-        return $this->c::setScheme('https://www.gravatar.com/avatar/'.$md5.'?s='.$size);
+        return $this->c::setScheme('https://www.gravatar.com/avatar/'.$md5.'?s='.$size, $scheme);
     }
 }
