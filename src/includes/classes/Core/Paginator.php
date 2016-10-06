@@ -15,12 +15,6 @@ use WebSharks\Core\Traits;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
-#
-use GetOptionKit\Option;
-use GetOptionKit\OptionParser;
-use GetOptionKit\OptionResult;
-use GetOptionKit\OptionCollection;
-use GetOptionKit\OptionPrinter\ConsoleOptionPrinter;
 
 /**
  * Paginator.
