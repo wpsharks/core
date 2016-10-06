@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Base;
 
 use WebSharks\Core\Classes;
@@ -84,6 +84,7 @@ class Config extends Classes\Core\Base\Core
                         Classes\Core\CliOpts::class,
                         Classes\Core\Template::class,
                         Classes\Core\Tokenizer::class,
+                        Classes\Core\Paginator::class,
                         Classes\Core\Base\Exception::class,
                     ],
                 ],

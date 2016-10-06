@@ -58,6 +58,7 @@ abstract class Facades
     use Traits\Facades\OEmbed;
     use Traits\Facades\Os;
     use Traits\Facades\Output;
+    use Traits\Facades\Paginator;
     use Traits\Facades\Patterns;
     use Traits\Facades\Pdo;
     use Traits\Facades\Percentages;
