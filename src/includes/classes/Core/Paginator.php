@@ -68,6 +68,18 @@ class Paginator extends Classes\Core\Base\Core
     }
 
     /**
+     * Set found rows.
+     *
+     * @since 161006 Paginator.
+     *
+     * @param int $found_rows Found rows.
+     */
+    public function setFoundRows(int $found_rows)
+    {
+        $this->found_rows = max(0, $found_rows);
+    }
+
+    /**
      * Build pagination links.
      *
      * @since 161006 Paginator.
