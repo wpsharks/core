@@ -54,7 +54,7 @@ $defaults = [
             'site_name'   => '', // See below.
             'title'       => '', // See below.
             'description' => '', // See below.
-            'image'       => $this->c::appUrl($this->App->Config->©brand['©image'], 'current'),
+            'image'       => $this->c::appUrl($this->App->Config->©brand['©image']),
 
             'profile:gender'     => $this->App->Config->©brand['©author']['©gender'],
             'profile:username'   => $this->App->Config->©brand['©author']['©username'],
