@@ -7,6 +7,7 @@
 - Enhancing router by adding support for endpoint query vars.
 - Adding new Facade that makes it easier to encode/decode a single ID.
 - Adding `Paginator{}` class and utilities.
+- Adding `StHighlighter{}` and utilities.
 
 ## v160831.61689
 

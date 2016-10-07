@@ -65,6 +65,7 @@ abstract class Facades
     use Traits\Facades\Php;
     use Traits\Facades\Replacements;
     use Traits\Facades\RequestType;
+    use Traits\Facades\SearchTerms;
     use Traits\Facades\Serializer;
     use Traits\Facades\Sha1Mods;
     use Traits\Facades\SimpleExpressions;
