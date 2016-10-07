@@ -79,7 +79,7 @@ class SearchTermHighlighter extends Classes\Core\Base\Core
         $args = array_intersect_key($args, $default_args);
         $args = array_map('strval', $args);
 
-        $this->q     = (string) $args['q'];
+        $this->q     = $q; // Copy of param.
         $this->terms = $this->parseTerms($this->q);
         $this->regex = $this->termsToRegex($this->terms);
         $this->class = $this->c::escAttr((string) $args['class']);
@@ -98,6 +98,9 @@ class SearchTermHighlighter extends Classes\Core\Base\Core
      */
     protected function parseTerms(string $q): array
     {
+        if (!$q) { // Query is empty?
+            return []; // No terms.
+        }
         $terms = []; // Initialize.
 
         if (preg_match_all('/"(?<phrase>[^"]+)"/u', $q, $_m)) {
@@ -128,7 +131,7 @@ class SearchTermHighlighter extends Classes\Core\Base\Core
      */
     protected function termsToRegex(array $terms): string
     {
-        return '/(?<term>'.implode('|', $this->c::escRegex($terms)).')/ui';
+        return $terms ? '/(?<term>'.implode('|', $this->c::escRegex($terms)).')/ui' : '';
     }
 
     /**
@@ -142,6 +145,9 @@ class SearchTermHighlighter extends Classes\Core\Base\Core
      */
     public function highlight(string $string): string
     {
+        if (!$this->q || !$this->terms || !$this->regex) {
+            return $string; // Nothing to do.
+        }
         return $string = preg_replace_callback($this->regex, function ($m) {
             return '<i class="'.$this->class.'">'.$this->c::escHtml($m['term']).'</i>';
         }, $string);
