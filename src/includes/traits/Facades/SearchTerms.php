@@ -30,7 +30,7 @@ trait SearchTerms
      *
      * @see Classes\Core\Utils\SearchTerms::getHighlighter()
      */
-    public static function getStHighlighter(...$args)
+    public static function getSearchTermHighlighter(...$args)
     {
         return $GLOBALS[static::class]->Utils->©SearchTerms->getHighlighter(...$args);
     }

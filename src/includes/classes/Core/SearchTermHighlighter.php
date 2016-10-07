@@ -21,7 +21,7 @@ use function get_defined_vars as vars;
  *
  * @since 161007 Highligher.
  */
-class StHighlighter extends Classes\Core\Base\Core
+class SearchTermHighlighter extends Classes\Core\Base\Core
 {
     /**
      * Search query.

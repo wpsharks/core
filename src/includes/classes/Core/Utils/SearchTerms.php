@@ -31,10 +31,10 @@ class SearchTerms extends Classes\Core\Base\Core
      * @param string $q    Input search query.
      * @param array  $args Additional arguments.
      *
-     * @return Classes\Core\StHighlighter Instance.
+     * @return Classes\Core\SearchTermHighlighter Instance.
      */
-    public function getHighlighter(string $q, array $args = []): Classes\Core\StHighlighter
+    public function getHighlighter(string $q, array $args = []): Classes\Core\SearchTermHighlighter
     {
-        return $this->App->Di->get(Classes\Core\StHighlighter::class, compact('q', 'args'));
+        return $this->App->Di->get(Classes\Core\SearchTermHighlighter::class, compact('q', 'args'));
     }
 }

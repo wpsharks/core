@@ -85,7 +85,7 @@ class Config extends Classes\Core\Base\Core
                         Classes\Core\Template::class,
                         Classes\Core\Tokenizer::class,
                         Classes\Core\Paginator::class,
-                        Classes\Core\StHighlighter::class,
+                        Classes\Core\SearchTermHighlighter::class,
                         Classes\Core\Base\Exception::class,
                     ],
                 ],
