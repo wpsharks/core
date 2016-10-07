@@ -45,7 +45,7 @@ class Paginator extends Classes\Core\Base\Core
             'pages_class' => 'ui basic buttons',
 
             'page_class'          => 'ui button',
-            'page_active_class'   => 'ui primary button',
+            'page_active_class'   => 'ui basic primary button',
             'page_disabled_class' => 'ui disabled button',
 
             'page_icon_class'          => 'ui icon button',
@@ -89,7 +89,7 @@ class Paginator extends Classes\Core\Base\Core
     public function links(): string
     {
         $first_page = 1; // Always `1` (first page).
-        $last_page  = ceil($this->found_rows / $this->per_page);
+        $last_page  = (int) ceil($this->found_rows / $this->per_page);
 
         $start_page = $this->page - $this->show_pages > 0 ? $this->page - $this->show_pages : 1;
         $end_page   = $this->page + $this->show_pages < $last_page ? $this->page + $this->show_pages : $last_page;
