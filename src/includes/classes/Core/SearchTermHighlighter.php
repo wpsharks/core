@@ -88,7 +88,7 @@ class SearchTermHighlighter extends Classes\Core\Base\Core
     /**
      * Highlight.
      *
-     * @since 161006 Paginator.
+     * @since 161007 Highligher.
      *
      * @param string $q Search query.
      *
@@ -123,7 +123,7 @@ class SearchTermHighlighter extends Classes\Core\Base\Core
     /**
      * Highlight.
      *
-     * @since 161006 Paginator.
+     * @since 161007 Highligher.
      *
      * @param array $terms Search terms.
      *
@@ -137,7 +137,7 @@ class SearchTermHighlighter extends Classes\Core\Base\Core
     /**
      * Highlight.
      *
-     * @since 161006 Paginator.
+     * @since 161007 Highligher.
      *
      * @param string $string String to highlight.
      *
