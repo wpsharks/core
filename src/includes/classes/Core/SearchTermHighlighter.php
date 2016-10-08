@@ -116,7 +116,7 @@ class SearchTermHighlighter extends Classes\Core\Base\Core
         $q = preg_replace('/[()*<>]+/u', '', $q);
 
         $terms        = array_merge($terms, preg_split('/\s+/', $q));
-        $terms        = $this->c::remoteEmptys($this->c::mbTrim($terms));
+        $terms        = $this->c::removeEmptys($this->c::mbTrim($terms));
         return $terms = array_unique($terms);
     }
 
