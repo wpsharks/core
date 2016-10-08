@@ -1,8 +1,19 @@
 /*
- * Colors.
+ * Header.
  */
 $app-main-header-border-color: #eee;
 
+/*
+ * Blockquote tags.
+ */
 $blockquote-bg-color: #f9f9f9;
 $blockquote-border-color: #ccc;
 $blockquote-quote-color: #ccc;
+
+/*
+ * Footer colors.
+ */
+$app-main-footer-heading-color: #505050;
+$app-main-footer-text-color: #828282;
+$app-main-footer-link-color: #a1a1a1;
+$app-main-footer-link-hover-color: #fff;

@@ -3,7 +3,7 @@
 @import 'colors/core';
 
 /*
- * HTML/body.
+ * HTML / body.
  */
 html,
 body {
@@ -19,7 +19,7 @@ body {
 }
 
 /*
- * Blockquotes.
+ * Blockquote tags.
  */
 blockquote {
   padding:                    1em;
@@ -71,7 +71,7 @@ blockquote::after {
 /*
  * Main header.
  */
-.app-main-header {
+.app-main-header:not(#x) {
   padding:                    0 0 1em;
   margin:                     1em 0 2em;
   border-bottom:              1px solid $app-main-header-border-color;
@@ -90,7 +90,7 @@ blockquote::after {
 /*
  * Main body.
  */
-.app-main-body {
+.app-main-body:not(#x) {
   .-only-side {
     //
 
@@ -100,15 +100,27 @@ blockquote::after {
 /*
  * Main footer.
  */
-.app-main-footer {
-  @include mobile-only {
-    > .vertical.segment {
-      > .section.divider {
-        display:              none;
+.app-main-footer:not(#x) {
+  margin-top:                 4em;
+
+  &.inverted {
+    h4 {
+      color:                  $app-main-footer-heading-color;
+    }
+
+    p {
+      color:                  $app-main-footer-text-color;
+    }
+
+    a,
+    .ui.link.list a {
+      color:                  $app-main-footer-link-color;
+
+      &:hover {
+        color:                $app-main-footer-link-hover-color;
       }
     }
   }
-
 
   .-left-side {
     //
