@@ -105,19 +105,19 @@ blockquote::after {
 
   &.inverted {
     h4 {
-      color:                  $app-main-footer-heading-color;
+      color:                  $app-main-footer-inverted-heading-color;
     }
 
     p {
-      color:                  $app-main-footer-text-color;
+      color:                  $app-main-footer-inverted-text-color;
     }
 
     a,
     .ui.link.list a {
-      color:                  $app-main-footer-link-color;
+      color:                  $app-main-footer-inverted-link-color;
 
       &:hover {
-        color:                $app-main-footer-link-hover-color;
+        color:                $app-main-footer-inverted-link-hover-color;
       }
     }
   }
