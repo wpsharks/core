@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -33,30 +33,6 @@ trait Templates
     public static function locateTemplate(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Template->locate(...$args);
-    }
-
-    /**
-     * @since 160118 Router templates.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\Core\Utils\Template::locateRoute()
-     */
-    public static function locateRouteTemplate(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Template->locateRoute(...$args);
-    }
-
-    /**
-     * @since 160118 Router templates.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\Core\Utils\Template::loadRoute()
-     */
-    public static function loadRouteTemplate(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Template->loadRoute(...$args);
     }
 
     /**

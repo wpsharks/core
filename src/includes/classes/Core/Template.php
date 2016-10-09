@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core;
 
 use WebSharks\Core\Classes;
@@ -78,42 +78,67 @@ class Template extends Classes\Core\Base\Core
     protected $vars;
 
     /**
+     * Route.
+     *
+     * @since 161008
+     *
+     * @var null|Classes\Core\Route
+     */
+    protected $Route;
+
+    /**
+     * Parse counter.
+     *
+     * @since 161008
+     *
+     * @var int
+     */
+    protected $parsed;
+
+    /**
      * Class constructor.
      *
      * @since 150424 Initial release.
      *
-     * @param Classes\App $App         Instance of App.
-     * @param string      $dir         Template dir.
-     * @param string      $file        Template file.
-     * @param array       $parents     Parent template files.
-     * @param array       $parent_vars Parent template vars.
+     * @param Classes\App $App  Instance of App.
+     * @param string      $dir  Template file directory.
+     * @param string      $file Relative to directory.
+     * @param array       $args Additional args.
      */
-    public function __construct(Classes\App $App, string $dir, string $file, array $parents = [], array $parent_vars = [])
+    public function __construct(Classes\App $App, string $dir, string $file, array $args = [])
     {
         parent::__construct($App);
 
         if (!($template = $this->c::locateTemplate($file, $dir))) {
             throw $this->c::issue(sprintf('Missing template: `%1$s`.', $dir.'/'.$file));
         }
-        $this->dir  = $template['dir'];
-        $this->file = $template['file'];
-        $this->ext  = $template['ext'];
+        $default_args = [
+            'parents'     => [],
+            'parent_vars' => [],
+            'Route'       => null,
+        ];
+        $args += $default_args;
 
-        $this->parents     = $parents;
-        $this->parent_vars = $parent_vars;
-        $this->vars        = []; // Initialize.
+        $this->dir         = $template['dir'];
+        $this->file        = $template['file'];
+        $this->ext         = $template['ext'];
+        $this->parents     = (array) $args['parents'];
+        $this->parent_vars = (array) $args['parent_vars'];
+        $this->vars        = []; // Initialize template vars.
+        $this->Route       = $args['Route'] instanceof Classes\Core\Route ? $args['Route'] : null;
+        $this->parsed      = 0; // Initialize.
 
         $this->setAdditionalProps();
     }
 
     /**
-     * Additional props (for extenders).
+     * Reserved for extenders.
      *
      * @since 160715 Initial release.
      */
     protected function setAdditionalProps()
     {
-        // For extenders only.
+        // Reserved for extenders.
     }
 
     /**
@@ -127,6 +152,8 @@ class Template extends Classes\Core\Base\Core
      */
     public function parse(array $vars = []): string
     {
+        ++$this->parsed; // Parsing now.
+
         if ($this->ext === 'php') {
             $_this = $this; // `$this` in symbol table.
             // ↑ Strange magic makes it possible for `$this` to be used from
@@ -213,6 +240,32 @@ class Template extends Classes\Core\Base\Core
     }
 
     /**
+     * Main template file slug.
+     *
+     * @since 160926 Initial release.
+     *
+     * @return string Main template file slug.
+     */
+    protected function mainFileSlug(): string
+    {
+        return $this->c::nameToSlug($this->mainFile());
+    }
+
+    /**
+     * Main template file matches?
+     *
+     * @since 160926 Initial release.
+     *
+     * @param string $file File to match.
+     *
+     * @return bool True if main template file matches.
+     */
+    protected function mainFileIs(string $file): bool
+    {
+        return $this->mainFile() === $file;
+    }
+
+    /**
      * Get a child template.
      *
      * @since 150424 Initial release.
@@ -227,8 +280,11 @@ class Template extends Classes\Core\Base\Core
     {
         $new_child_parents     = array_merge($this->parents, [$this->file]);
         $new_child_parent_vars = array_merge($this->parent_vars, [$this->file => &$this->vars]);
-        $new_child_Template    = $this->c::getTemplate($new_child_file, $new_child_dir, $new_child_parents, $new_child_parent_vars);
-
+        $new_child_Template    = $this->c::getTemplate($new_child_file, $new_child_dir, [
+            'parents'     => $new_child_parents,
+            'parent_vars' => $new_child_parent_vars,
+            'Route'       => $this->Route,
+        ]);
         // Variables from the closest ancestors take precedence over further/older ancestors.
         // File-specific variables in those ancestors take precedence over those that aren't file-specific.
 

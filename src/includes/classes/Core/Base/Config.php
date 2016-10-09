@@ -81,6 +81,7 @@ class Config extends Classes\Core\Base\Core
                 '©default_rule' => [
                     'new_instances' => [
                         Classes\Core\Error::class,
+                        Classes\Core\Route::class,
                         Classes\Core\CliOpts::class,
                         Classes\Core\Template::class,
                         Classes\Core\Tokenizer::class,
@@ -186,6 +187,7 @@ class Config extends Classes\Core\Base\Core
             '©fs_paths' => [
                 '©logs_dir'      => (string) ($_['CFG_LOGS_DIR'] ?? '/var/log/app/%%app_slug%%'),
                 '©cache_dir'     => (string) ($_['CFG_CACHE_DIR'] ?? '/tmp/app/%%app_slug%%/cache'),
+                '©routes_dir'    => (string) ($_['CFG_ROUTES_DIR'] ?? '%%app_base_dir%%/src/includes/routes'),
                 '©templates_dir' => (string) ($_['CFG_TEMPLATES_DIR'] ?? '%%app_base_dir%%/src/includes/templates'),
                 '©errors_dir'    => (string) ($_['CFG_ERRORS_DIR'] ?? ($_ ? '/bootstrap/src/html/errors' : '')),
             ],

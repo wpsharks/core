@@ -8,6 +8,7 @@
 - Adding new Facade that makes it easier to encode/decode a single ID.
 - Adding `Paginator{}` class and utilities.
 - Adding `StHighlighter{}` and utilities.
+- Adding `Route{}` and utilities.
 
 ## v160831.61689
 
