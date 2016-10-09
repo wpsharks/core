@@ -124,9 +124,9 @@ class Template extends Classes\Core\Base\Core
         $this->ext         = $template['ext'];
         $this->parents     = (array) $args['parents'];
         $this->parent_vars = (array) $args['parent_vars'];
-        $this->vars        = []; // Initialize template vars.
-        $this->Route       = $args['Route'] instanceof Classes\Core\Route ? $args['Route'] : null;
-        $this->parsed      = 0; // Initialize.
+        $this->vars        = []; // Initialize.
+        $this->Route       = $args['Route'];
+        $this->parsed      = 0;
 
         $this->setAdditionalProps();
     }

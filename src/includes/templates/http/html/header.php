@@ -21,14 +21,16 @@ if (!empty($this->vars['head']['og']['type'])) {
 } else {
     $_og_type = 'website'; // Default type.
 }
-$_current_url    = $this->c::currentUrl();
-$_current_url    = $this->c::parseUrl($_current_url);
-$_main_file_slug = $this->c::nameToSlug($this->mainFile());
+$_current_url = $this->c::currentUrl();
+$_current_url = $this->c::parseUrl($_current_url);
 
-$defaults = [
+$_html_class = $this->Route ? $this->Route->slug().' ' : '';
+$_html_class .= $this->mainFileSlug();
+
+$_defaults = [
     'html' => [
         'lang'  => 'en-US',
-        'class' => $_main_file_slug,
+        'class' => $_html_class,
     ],
     'head' => [
         'robots'          => 'index,follow',
@@ -72,9 +74,8 @@ $defaults = [
         'class'           => '', // Filled by app.
         'app_main_enable' => true,
     ],
-]; unset($_current_url, $_main_file_slug);
-
-$this->vars = array_replace_recursive($defaults, $this->vars);
+];
+$this->setVars($_defaults); // Extends the defaults above.
 
 $this->vars['head']['og']['site_name'] = $this->vars['head']['og']['site_name'] ?: $this->vars['head']['site'];
 $this->vars['head']['og']['locale']    = $this->vars['head']['og']['locale'] ?: str_replace('-', '_', $this->vars['html']['lang']);
@@ -85,7 +86,7 @@ $this->vars['head']['og']['description'] = $this->vars['head']['og']['descriptio
 $this->vars['head']['og']['article:author'] = $this->vars['head']['og']['article:author'] ?: $this->vars['head']['author'];
 $this->vars['head']['og']['article:tags']   = $this->vars['head']['og']['article:tags'] ?: $this->vars['head']['keywords'];
 
-extract($this->vars); // Extract all vars now.
+// extract($this->vars); // No need to extract, for now. Not using any vars in this file.
 ?>
 <?= $this->get('http/html/includes/header/html.php'); ?>
     <?= $this->get('http/html/includes/header/head.php'); ?>
