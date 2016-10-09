@@ -174,7 +174,7 @@ class Route extends Classes\Core\Base\Core
      */
     public function is(string $path): bool
     {
-        $this->path === $path;
+        return $this->path === $path;
     }
 
     /**
@@ -212,7 +212,7 @@ class Route extends Classes\Core\Base\Core
      */
     public function fileIs(string $file): bool
     {
-        $this->file === $file;
+        return $this->file === $file;
     }
 
     /**
