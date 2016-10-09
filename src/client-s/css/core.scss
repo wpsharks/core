@@ -3,19 +3,15 @@
 @import 'colors/core';
 
 /*
- * HTML / body.
+ * Body.
  */
-html,
 body {
   font-size:                  16px;
+  overflow-y:                 scroll !important;
 
   @include mobile-and-tablet-only {
     font-size:                14px;
   }
-}
-
-body {
-  overflow-y:                 scroll !important;
 }
 
 /*
