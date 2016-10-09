@@ -111,7 +111,7 @@ class Route extends Classes\Core\Base\Core
             'dir'                => '',
             'file'               => '',
             'ext'                => '',
-            'route'              => '',
+            'path'               => '',
             'rewrite_query_vars' => [],
         ];
         $args = array_merge($default_args, $args);
@@ -120,7 +120,7 @@ class Route extends Classes\Core\Base\Core
         $this->dir                = (string) $args['dir'];
         $this->file               = (string) $args['file'];
         $this->ext                = (string) $args['ext'];
-        $this->path               = (string) $args['route'];
+        $this->path               = (string) $args['path'];
         $this->rewrite_query_vars = (array) $args['rewrite_query_vars'];
         $this->query_vars         = [];
         $this->vars               = [];
@@ -152,11 +152,11 @@ class Route extends Classes\Core\Base\Core
     }
 
     /**
-     * Route as slug.
+     * Path as slug.
      *
      * @since 160926 Initial release.
      *
-     * @return string Route as slug.
+     * @return string Path as slug.
      */
     public function slug(): string
     {
@@ -168,13 +168,13 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008 Route.
      *
-     * @param string $route Route.
+     * @param string $path Route.
      *
-     * @return bool True if route matches.
+     * @return bool True if path matches.
      */
-    public function is(string $route): bool
+    public function is(string $path): bool
     {
-        $this->path === $route;
+        $this->path === $path;
     }
 
     /**
@@ -198,7 +198,7 @@ class Route extends Classes\Core\Base\Core
      */
     public function fileSlug(): string
     {
-        return $this->c::nameToSlug($this->file());
+        return $this->c::nameToSlug($this->file);
     }
 
     /**
