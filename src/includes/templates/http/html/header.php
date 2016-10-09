@@ -74,18 +74,18 @@ $defaults = [
     ],
 ]; unset($_current_url, $_main_file_slug);
 
-$vars = array_replace_recursive($defaults, $this->vars);
+$this->vars = array_replace_recursive($defaults, $this->vars);
 
-$vars['head']['og']['site_name'] = $vars['head']['og']['site_name'] ?: $vars['head']['site'];
-$vars['head']['og']['locale']    = $vars['head']['og']['locale'] ?: str_replace('-', '_', $vars['html']['lang']);
+$this->vars['head']['og']['site_name'] = $this->vars['head']['og']['site_name'] ?: $this->vars['head']['site'];
+$this->vars['head']['og']['locale']    = $this->vars['head']['og']['locale'] ?: str_replace('-', '_', $this->vars['html']['lang']);
 
-$vars['head']['og']['title']       = $vars['head']['og']['title'] ?: $vars['head']['title'];
-$vars['head']['og']['description'] = $vars['head']['og']['description'] ?: $vars['head']['description'];
+$this->vars['head']['og']['title']       = $this->vars['head']['og']['title'] ?: $this->vars['head']['title'];
+$this->vars['head']['og']['description'] = $this->vars['head']['og']['description'] ?: $this->vars['head']['description'];
 
-$vars['head']['og']['article:author'] = $vars['head']['og']['article:author'] ?: $vars['head']['author'];
-$vars['head']['og']['article:tags']   = $vars['head']['og']['article:tags'] ?: $vars['head']['keywords'];
+$this->vars['head']['og']['article:author'] = $this->vars['head']['og']['article:author'] ?: $this->vars['head']['author'];
+$this->vars['head']['og']['article:tags']   = $this->vars['head']['og']['article:tags'] ?: $this->vars['head']['keywords'];
 
-extract($this->setVars($vars, $this->vars));
+extract($this->vars); // Extract all vars now.
 ?>
 <?= $this->get('http/html/includes/header/html.php'); ?>
     <?= $this->get('http/html/includes/header/head.php'); ?>

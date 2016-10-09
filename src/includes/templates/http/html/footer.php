@@ -16,12 +16,11 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-$defaults = [
+extract($this->setVars([
     'body' => [
         'app_main_enable' => true,
     ],
-];
-extract($this->setVars($defaults, $this->vars));
+]));
 ?>
         <?= $this->get('http/html/includes/footer/app-main.php'); ?>
         <?= $this->get('http/html/includes/footer/scripts.php'); ?>

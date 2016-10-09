@@ -16,7 +16,7 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-$defaults = [
+extract($this->setVars([
     'Throwable' => null,
 
     'http/html/header.php' => [
@@ -24,8 +24,7 @@ $defaults = [
             'title' => __('500 Internal Server Error'),
         ],
     ],
-];
-extract($this->setVars($defaults, $this->vars));
+]));
 ?>
 <?= $this->get('http/html/header.php'); ?>
 
