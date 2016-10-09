@@ -160,7 +160,7 @@ class Slack extends Classes\Core\Base\Core
         }
         # Validate & finalize data elements.
 
-        if (!$data['channel'] || !$data['username'] || !$data['icon_url'] || !$data['api_webhook_url']
+        if (!$data['channel'] || !$data['username'] || !$data['icon_url'] || !$args['api_webhook_url']
             || (!$data['text'] && empty($data['attachments']))) {
             return false; // Not possible.
         }
