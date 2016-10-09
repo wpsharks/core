@@ -71,6 +71,7 @@ abstract class Facades
     use Traits\Facades\Serializer;
     use Traits\Facades\Sha1Mods;
     use Traits\Facades\SimpleExpressions;
+    use Traits\Facades\Slack;
     use Traits\Facades\Slashes;
     use Traits\Facades\Slugs;
     use Traits\Facades\Spellcheck;

@@ -10,6 +10,7 @@
 - Adding `StHighlighter{}` and utilities.
 - Adding `Route{}` and utilities.
 - Adding `c::contrastingFgColor()`.
+- Adding `c::slackNotify()` utility.
 
 ## v160831.61689
 

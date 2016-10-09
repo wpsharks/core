@@ -257,7 +257,7 @@ class Config extends Classes\Core\Base\Core
                 '©list_id' => (string) ($_['CFG_MAILCHIMP_LIST_ID'] ?? ''),
                 '©api_key' => (string) ($_['CFG_MAILCHIMP_API_KEY'] ?? ''),
             ],
-            '©slack' => [ // @TODO Add Slack utils to core.
+            '©slack' => [
                 '©api_client_id'     => (string) ($_['CFG_SLACK_API_CLIENT_ID'] ?? ''),
                 '©api_client_secret' => (string) ($_['CFG_SLACK_API_CLIENT_SECRET'] ?? ''),
                 '©api_access_token'  => (string) ($_['CFG_SLACK_API_ACCESS_TOKEN'] ?? ''),
