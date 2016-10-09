@@ -291,4 +291,21 @@ class Route extends Classes\Core\Base\Core
     {
         return $this->vars = array_replace_recursive($defaults, ...$vars);
     }
+
+    /**
+     * Get a template.
+     *
+     * @since 161008 Route.
+     *
+     * @param string $file Relative to templates dir.
+     * @param array  $vars Template vars for the include.
+     * @param string $dir  From a specific directory?
+     *
+     * @return string Parsed template contents.
+     */
+    protected function get(string $file, array $vars = [], string $dir = ''): string
+    {
+        $Template = $this->c::getTemplate($file, $dir, ['Route' => $this]);
+        return $Template->parse(array_merge($this->vars, $vars));
+    }
 }
