@@ -306,6 +306,6 @@ class Route extends Classes\Core\Base\Core
     protected function get(string $file, array $vars = [], string $dir = ''): string
     {
         $Template = $this->c::getTemplate($file, $dir, ['Route' => $this]);
-        return $Template->parse(array_merge($this->vars, $vars));
+        return $Template->parse(array_replace_recursive($this->vars, $vars));
     }
 }

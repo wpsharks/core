@@ -24,8 +24,8 @@ if (!empty($this->vars['head']['og']['type'])) {
 $_current_url = $this->c::currentUrl();
 $_current_url = $this->c::parseUrl($_current_url);
 
-$_html_class = $this->Route ? $this->Route->slug().' ' : '';
-$_html_class .= $this->mainFileSlug();
+$_html_class = $this->Route ? 'route-'.$this->Route->fileSlug() : '';
+$_html_class .= ($_html_class ? ' ' : '').'template-'.$this->mainFileSlug();
 
 $_defaults = [
     'html' => [
