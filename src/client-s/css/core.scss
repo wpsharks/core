@@ -1,17 +1,22 @@
 @import 'bourbon/bourbon';
 @import 'mixins/responsive';
+@import 'functions/units';
 @import 'colors/core';
 
 /*
- * Body.
+ * HTML/body.
  */
-body {
+
+html, body {
   font-size:                  16px;
-  overflow-y:                 scroll !important;
 
   @include mobile-and-tablet-only {
     font-size:                14px;
   }
+}
+
+body {
+  overflow-y:                 scroll !important;
 }
 
 /*
@@ -60,6 +65,47 @@ blockquote::after {
         line-height:          1.75em;
         padding-left:        .075em;
       }
+    }
+  }
+}
+
+/*
+ * Tag labels.
+ */
+.ui.tag.label {
+  @include small-screen-plus {
+    font-size:                rem(14);
+
+    &.mini {
+      font-size:              rem(11);
+    }
+
+    &.tiny {
+      font-size:              rem(12);
+    }
+
+    &.small {
+      font-size:              rem(13);
+    }
+
+    &.medium {
+      font-size:              rem(14);
+    }
+
+    &.large {
+      font-size:              rem(16);
+    }
+
+    &.big {
+      font-size:              rem(20);
+    }
+
+    &.huge {
+      font-size:              rem(22);
+    }
+
+    &.massive {
+      font-size:              rem(26);
     }
   }
 }

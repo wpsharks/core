@@ -31,9 +31,26 @@ class Colors extends Classes\Core\Base\Core
      * @param string $bg_hex Background color.
      *
      * @return string Suggested foreground color.
+     *
+     * @see https://24ways.org/2010/calculating-color-contrast/
      */
     public function contrastingFg(string $bg_hex): string
     {
-        return hexdec($bg_hex) > 0xffffff / 2 ? '#000' : '#fff';
+        $bg_hex = ltrim($bg_hex, '#');
+
+        if (!isset($bg_hex[5])) {
+            $bg_hex .= $bg_hex; // e.g., `fff` * 2.
+
+            if (!isset($bg_hex[5])) {
+                return '#000'; // Failure.
+            }
+        }
+        $r = hexdec(substr($bg_hex, 0, 2));
+        $g = hexdec(substr($bg_hex, 2, 2));
+        $b = hexdec(substr($bg_hex, 4, 2));
+
+        $yiq = (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+        return $yiq >= 128 ? '#000' : '#fff';
     }
 }
