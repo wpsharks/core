@@ -186,7 +186,7 @@ class Template extends Classes\Core\Base\Core
      */
     protected function setVars(array $defaults, array ...$vars): array
     {
-        return $this->vars = array_replace_recursive($defaults, ...$vars);
+        return $this->vars = array_replace_recursive($defaults, $this->vars, ...$vars);
     }
 
     /**
