@@ -9,6 +9,7 @@
 - Adding `Paginator{}` class and utilities.
 - Adding `StHighlighter{}` and utilities.
 - Adding `Route{}` and utilities.
+- Adding `c::contrastingFgColor()`.
 
 ## v160831.61689
 
