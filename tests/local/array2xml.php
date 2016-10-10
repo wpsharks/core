@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Test;
 
 use WebSharks\Core\Classes\CoreFacades as c;
@@ -8,33 +8,36 @@ require_once dirname(__FILE__, 2).'/includes/local.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-echo c::arrayToXml('root', [
-    'root_a'  => 'a',
-    'root_b'  => 'b',
-    'child_1' => [
-        'child_1_a' => 'a',
-        'child_1_b' => '/?a&b',
-        'child_2'   => [
-            'child_2_a' => 'a',
-            'child_2_b' => 'b',
-            0           => '<hello>',
-            1           => '& <> "\'hello',
-        ],
-    ],
-]);
+echo c::arrayToXml('rss', [
+    'version' => '2.0',
 
-echo "\n\n";
+    'channel' => [
+        'language'  => ['en-US'],
+        'generator' => [''],
 
-echo c::arrayToHtml('html', [
-    'head' => [
-        'title' => [
-            1 => '& <> "\'hello',
+        'title'       => [''],
+        'link'        => [''],
+        'description' => [''],
+
+        'image' => [
+            'url'   => [''],
+            'title' => [''],
+            'link'  => [''],
         ],
-        'base' => [
-            'href' => '/?a&b',
+
+        'item' => [
+            'title'       => [''],
+            'link'        => [''],
+            'description' => [''],
+
+            'image' => [
+                'url'   => [''],
+                'title' => [''],
+                'link'  => [''],
+            ],
+            'pubDate'  => [''],
+            'guid'     => [''],
+            'comments' => [''],
         ],
-    ],
-    'body' => [
-        0 => 'Hello world!',
     ],
 ]);
