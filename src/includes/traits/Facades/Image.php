@@ -24,6 +24,18 @@ use function get_defined_vars as vars;
 trait Image
 {
     /**
+     * @since 161010 Decode image data URL.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::decodeDataUrl()
+     */
+    public static function decodeImageDataUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->decodeDataUrl(...$args);
+    }
+
+    /**
      * @since 161010 PNG compression.
      *
      * @param mixed ...$args Variadic args to underlying utility.

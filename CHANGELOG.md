@@ -12,6 +12,7 @@
 - Adding `c::contrastingFgColor()`.
 - Adding `c::slackNotify()` utility.
 - Adding `c::compressPng()` utility.
+- Adding `c::decodeImageDataUrl()` utility.
 
 ## v160831.61689
 
