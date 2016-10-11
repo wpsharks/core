@@ -164,17 +164,31 @@ class Route extends Classes\Core\Base\Core
     }
 
     /**
-     * Route matches?
+     * Route is?
      *
      * @since 161008 Route.
      *
      * @param string $path Route.
      *
-     * @return bool True if path matches.
+     * @return bool True if path is.
      */
     public function is(string $path): bool
     {
         return $this->path === $path;
+    }
+
+    /**
+     * Route matches?
+     *
+     * @since 161008 Route.
+     *
+     * @param string $regex Regex.
+     *
+     * @return bool True if path matches.
+     */
+    public function matches(string $regex): bool
+    {
+        return (bool) preg_match($regex, $this->path);
     }
 
     /**

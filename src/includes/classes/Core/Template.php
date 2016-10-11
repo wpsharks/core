@@ -252,17 +252,31 @@ class Template extends Classes\Core\Base\Core
     }
 
     /**
-     * Main template file matches?
+     * Main template file is?
      *
      * @since 160926 Initial release.
      *
      * @param string $file File to match.
      *
-     * @return bool True if main template file matches.
+     * @return bool True if main template file is.
      */
     protected function mainFileIs(string $file): bool
     {
         return $this->mainFile() === $file;
+    }
+
+    /**
+     * Main template file matches?
+     *
+     * @since 160926 Initial release.
+     *
+     * @param string $regex Regex to match.
+     *
+     * @return bool True if main template file matches.
+     */
+    protected function mainFileMatches(string $regex): bool
+    {
+        return (bool) preg_match($regex, $this->mainFile());
     }
 
     /**
