@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -73,6 +73,7 @@ class DirTmp extends Classes\Core\Base\Core
             }
         } // unset($_key, $_dir); // Housekeeping.
 
-        return $dir = '';
+        $dir = ''; // Empty string and exception on failure.
+        throw $this->c::issue(vars(), 'Unable to locate a tmp directory.');
     }
 }
