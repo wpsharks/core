@@ -11,6 +11,7 @@
 - Adding `Route{}` and utilities.
 - Adding `c::contrastingFgColor()`.
 - Adding `c::slackNotify()` utility.
+- Adding `c::compressPng()` utility.
 
 ## v160831.61689
 

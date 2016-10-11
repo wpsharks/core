@@ -47,6 +47,7 @@ abstract class Facades
     use Traits\Facades\Gravatar;
     use Traits\Facades\Headers;
     use Traits\Facades\Html;
+    use Traits\Facades\Image;
     use Traits\Facades\Indents;
     use Traits\Facades\Ips;
     use Traits\Facades\Iterators;
