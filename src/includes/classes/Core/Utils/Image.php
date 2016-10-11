@@ -29,9 +29,8 @@ class Image extends Classes\Core\Base\Core
      * @since 161011 Initial release.
      *
      * @param string $data_url Data URL.
-     * @param array  $args     Any behavioral args.
      *
-     * @return array `[extension, raw_image_data]`.
+     * @return array `[raw_image_data, extension]`.
      */
     public function decodeDataUrl(string $data_url): array
     {
