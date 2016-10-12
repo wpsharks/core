@@ -60,7 +60,7 @@ class Color extends Classes\Core\Base\Core
             $adjusted_hex .= dechex(round(min(max(0, $_dec + ($_dec * $adjust)), 255)));
         } // unset($_dec, $_i); // Housekeeping.
 
-        return '#' + $adjusted_hex;
+        return '#'.$adjusted_hex;
     }
 
     /**
