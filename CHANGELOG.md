@@ -13,6 +13,7 @@
 - Adding `c::slackNotify()` utility.
 - Adding `c::compressPng()` utility.
 - Adding `c::decodeImageDataUrl()` utility.
+- Adding several color utilities.
 
 ## v160831.61689
 

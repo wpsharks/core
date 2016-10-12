@@ -13,6 +13,7 @@
   var rmd160 = new Hashes.RMD160();
 
   _.mixin({
+
     crc32: function (str) {
       return crc32(str);
     },
@@ -51,6 +52,7 @@
       var hex15 = '0x' + sha1.substr(0, 15);
       return new BigNumber(hex15).mod(Math.max(1, divisor)).toString(10);
     }
+
   });
 
 })();
