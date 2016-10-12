@@ -55,10 +55,11 @@ class Color extends Classes\Core\Base\Core
     {
         $hex = $this->cleanHex($hex);
 
-        for ($adjusted_hex = '', $_dec, $_i = 0; $_i < 3; ++$_i) {
+        for ($adjusted_hex = '', $_dec, $_hex, $_i = 0; $_i < 3; ++$_i) {
             $_dec = hexdec(mb_substr($hex, $_i * 2, 2));
-            $adjusted_hex .= dechex(round(min(max(0, $_dec + ($_dec * $adjust)), 255)));
-        } // unset($_dec, $_i); // Housekeeping.
+            $_hex = dechex(round(min(max(0, $_dec + ($_dec * $adjust)), 255)));
+            $adjusted_hex .= $this->c::mbStrPad($_hex, 2, '0');
+        } // unset($_dec, $_hex, $_i); // Housekeeping.
 
         return '#'.$adjusted_hex;
     }
