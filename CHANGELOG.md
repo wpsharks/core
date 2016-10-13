@@ -1,4 +1,4 @@
-## [coming soon]
+## v161013.18318
 
 - Enhancing `Error{}` class.
 - Adding `.webp` extension support.
