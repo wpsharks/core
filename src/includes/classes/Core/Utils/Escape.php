@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -68,7 +68,7 @@ class Escape extends Classes\Core\Base\Core
     }
 
     /**
-     * Escape HTML markup (other).
+     * Escape HTML markup.
      *
      * @since 151122 Escapes.
      *
@@ -79,6 +79,20 @@ class Escape extends Classes\Core\Base\Core
     public function html($value)
     {
         return $this->App->Utils->©HtmlEntities->encode($value);
+    }
+
+    /**
+     * Escape HTML chars.
+     *
+     * @since 16xxxx Escapes.
+     *
+     * @param mixed Input value.
+     *
+     * @return string|array|object Output value.
+     */
+    public function htmlChars($value)
+    {
+        return $this->App->Utils->©HtmlEntities->encode($value, false, ENT_HTML5 | ENT_NOQUOTES | ENT_SUBSTITUTE);
     }
 
     /**

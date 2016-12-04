@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -57,6 +57,18 @@ trait Escapes
     public static function escHtml(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Escape->html(...$args);
+    }
+
+    /**
+     * @since 16xxxx HTML chars.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::htmlChars()
+     */
+    public static function escHtmlChars(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Escape->htmlChars(...$args);
     }
 
     /**

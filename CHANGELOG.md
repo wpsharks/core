@@ -1,3 +1,7 @@
+## [coming soon]
+
+- Adding `c::escHtmlChars()` (escapes `<>&` only).
+
 ## v161013.18318
 
 - Enhancing `Error{}` class.
