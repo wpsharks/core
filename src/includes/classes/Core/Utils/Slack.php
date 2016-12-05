@@ -167,9 +167,7 @@ class Slack extends Classes\Core\Base\Core
         # POST, validate, and collect API response.
 
         $request_args = [
-            'max_con_secs'    => 5,
-            'max_stream_secs' => 5,
-            'headers'         => [
+            'headers' => [
                 'content-type: application/json',
             ],
             'body'         => json_encode($data),
@@ -180,10 +178,13 @@ class Slack extends Classes\Core\Base\Core
         # Validate response.
 
         if ($response['code'] !== 200) {
+            debug(0, $this->c::issue(vars(), 'Bad response code.'));
             return false;
         } elseif (!is_object($api_response = json_decode($response['body']))) {
+            debug(0, $this->c::issue(vars(), 'Bad response.'));
             return false;
         } elseif (empty($api_response->ok)) {
+            debug(0, $this->c::issue(vars(), 'Response not OK.'));
             return false;
         }
         # Return success.

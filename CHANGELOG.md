@@ -1,5 +1,6 @@
 ## [coming soon]
 
+- Enhanced debugging in Slack notifier utility.
 - Adding `c::escHtmlChars()` (escapes `<>&` only).
 
 ## v161013.18318
