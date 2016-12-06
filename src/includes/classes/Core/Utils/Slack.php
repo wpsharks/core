@@ -180,11 +180,8 @@ class Slack extends Classes\Core\Base\Core
         if ($response['code'] !== 200) {
             debug(0, $this->c::issue(vars(), 'Bad response code.'));
             return false;
-        } elseif (!is_object($api_response = json_decode($response['body']))) {
-            debug(0, $this->c::issue(vars(), 'Bad response.'));
-            return false;
-        } elseif (empty($api_response->ok)) {
-            debug(0, $this->c::issue(vars(), 'Response not OK.'));
+        } elseif ($response['body'] !== 'ok') {
+            debug(0, $this->c::issue(vars(), 'Response body not `ok`.'));
             return false;
         }
         # Return success.
