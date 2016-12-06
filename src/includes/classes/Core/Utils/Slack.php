@@ -72,7 +72,7 @@ class Slack extends Classes\Core\Base\Core
             'link_names' => true,
             'text'       => '',
 
-            'attachment_color' => '#625433',
+            'attachment_color' => '#e8e8e8',
 
             'attachment_pretext' => '',
 
