@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -92,7 +92,7 @@ class Markdown extends Classes\Core\Base\Core
     }
 
     /**
-     * Markdown stripper.
+     * Markdown stripper. @TODO
      *
      * @since 151029 Markdown stripper.
      *
@@ -134,7 +134,7 @@ class Markdown extends Classes\Core\Base\Core
         // Strip line-based decorative headings.
         $string = preg_replace('/^\s*[=\-]+\s*$/um', '', $string);
 
-        // Stripe images and links.
+        // Strip images and links.
         $string = preg_replace('/!?\[([^[\]]*)\]\([^()]*\)/u', '${1}', $string);
 
         return $string;

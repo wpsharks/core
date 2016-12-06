@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core;
 
 use WebSharks\Core\Classes;
@@ -397,8 +397,8 @@ class Tokenizer extends Classes\Core\Base\Core
 
         $this->string = preg_replace_callback(
             [
-                '/^[ ]*(?:\[[^\]]+\])+[ ]*\:[ ]*(?:\<[^>]+\>|\S+)(?:[ ]+.+)?$/um',
-                '/\!?\[(?:(?R)|[^\]]*)\]\([^)]+\)(?:\{[^}]*\})?/u',
+                '/^[ ]*(?:\[[^[\]]+\])+[ ]*\:[ ]*\<(?:[a-z][a-z0-9+.\-]*\:|#)[^\s<>]+\>(?:[ ]+.+)?$/uim',
+                '/\!?\[(?:(?R)|[^[\]]*)\]\((?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+\)(?:\{[^{}]*\})?/ui',
             ],
             function ($m) {
                 $this->tokens[] = $m[0];  // Original data for token.
