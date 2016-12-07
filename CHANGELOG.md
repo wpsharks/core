@@ -3,6 +3,7 @@
 - Enhancing `c::clip()` and `c::midClip()`. Now accepts a custom `$more` argument.
 - Enhanced debugging in Slack notifier utility.
 - Adding `c::escHtmlChars()` (escapes `<>&` only).
+- Bug fix. Incorrect return type in `SubstrReplace{}` class.
 
 ## v161013.18318
 

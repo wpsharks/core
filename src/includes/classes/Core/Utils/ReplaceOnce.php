@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -41,7 +41,6 @@ class ReplaceOnce extends Classes\Core\Base\Core
             foreach ($value as $_key => &$_value) {
                 $_value = $this->__invoke($needle, $replace, $_value, $caSe_insensitive);
             } // unset($_key, $_value); // Housekeeping.
-
             return $value;
         }
         $value     = (string) $value; // Force string (always).

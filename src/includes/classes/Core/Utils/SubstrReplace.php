@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -39,7 +39,7 @@ class SubstrReplace extends Classes\Core\Base\Core
      *
      * @warning Does NOT support mixed `$replace`, `$start`, `$length` params like `substr_replace()` does.
      */
-    public function __invoke($value, string $replace, int $start, int $length = null): string
+    public function __invoke($value, string $replace, int $start, int $length = null)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
