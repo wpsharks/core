@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -72,8 +72,10 @@ class PhpHas extends Classes\Core\Base\Core
      */
     public function callableFunc(string $function): bool
     {
-        if (isset(static::$cache[__FUNCTION__][$function = mb_strtolower($function)])) {
-            return static::$cache[__FUNCTION__][$function]; // Already cached this.
+        $function = mb_strtolower($function);
+
+        if (isset(static::$cache[__FUNCTION__][$function])) {
+            return static::$cache[__FUNCTION__][$function];
         }
         if (!isset(static::$cache[__FUNCTION__.'s_disabled'])) {
             static::$cache[__FUNCTION__.'s_disabled'] = []; // Initialize.
@@ -87,14 +89,17 @@ class PhpHas extends Classes\Core\Base\Core
                 $_ini_suhosin_blacklist_functions = mb_strtolower($_ini_suhosin_blacklist_functions);
                 $_functions_disabled              = array_merge($_functions_disabled, preg_split('/[\s;,]+/u', $_ini_suhosin_blacklist_functions, -1, PREG_SPLIT_NO_EMPTY));
             }
+            if (($_ini_opcache_restrict_api = (string) ini_get('opcache.restrict_api')) && mb_stripos(__FILE__, $_ini_opcache_restrict_api) !== 0) {
+                $_functions_disabled = array_merge($_functions_disabled, ['opcache_compile_file', 'opcache_get_configuration', 'opcache_get_status', 'opcache_invalidate', 'opcache_is_script_cached', 'opcache_reset']);
+            }
             if (filter_var(@ini_get('suhosin.executor.disable_eval'), FILTER_VALIDATE_BOOLEAN)) {
                 $_functions_disabled[] = 'eval'; // The `eval()` construct is disabled also.
             }
         } // We now have a full list of all disabled functions.
 
         static::$cache[__FUNCTION__][$function] = null; // Initialize.
-        $functions_disabled                     = &static::$cache[__FUNCTION__.'s_disabled'];
         $has                                    = &static::$cache[__FUNCTION__][$function];
+        $functions_disabled                     = &static::$cache[__FUNCTION__.'s_disabled'];
 
         if ($functions_disabled && in_array($function, $functions_disabled, true)) {
             return $has = false; // Not possible; e.g., `eval()`.
