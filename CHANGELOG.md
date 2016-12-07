@@ -1,5 +1,6 @@
 ## [coming soon]
 
+- Enhancing `c::clip()` and `c::midClip()`. Now accepts a custom `$more` argument.
 - Enhanced debugging in Slack notifier utility.
 - Adding `c::escHtmlChars()` (escapes `<>&` only).
 
