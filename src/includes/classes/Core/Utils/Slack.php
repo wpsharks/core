@@ -263,7 +263,7 @@ class Slack extends Classes\Core\Base\Core
                 return $m[0]; // Not an image.
             } else {
                 return preg_replace_callback('/\!\[(?<alt_text>[^[\]]*)\]\((?<url>(?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+)\)/ui', function ($m) {
-                    return '<'.$m['url'].'|'.$this->c::escHtmlChars($m['alt_text'] ? $m['alt_text'].' ('.basename($m['url']).')' : basename($m['url'])).'>';
+                    return '<'.$m['url'].'|'.$this->c::escHtmlChars($m['alt_text'] ? $m['alt_text'].' '.__('(image)') : $this->c::midClip(basename($m['url']), 15)).'>';
                 }, $m[0]); // Strip away images.
             }
         }, $mrkdwn); // Strip away images.

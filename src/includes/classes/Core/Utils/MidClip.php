@@ -34,7 +34,7 @@ class MidClip extends Classes\Core\Base\Core
      *
      * @return string|array|object Mid-clipped value.
      */
-    public function __invoke($value, int $max_length = 80, string $more = '[...]')
+    public function __invoke($value, int $max_length = 80, string $more = '...')
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
