@@ -263,6 +263,11 @@ class Config extends Classes\Core\Base\Core
                 '©api_access_token'  => (string) ($_['CFG_SLACK_API_ACCESS_TOKEN'] ?? ''),
                 '©api_webhook_url'   => (string) ($_['CFG_SLACK_API_WEBHOOK_URL'] ?? ''),
             ],
+            '©github' => [
+                '©api_client_id'     => (string) ($_['CFG_GITHUB_API_CLIENT_ID'] ?? ''),
+                '©api_client_secret' => (string) ($_['CFG_GITHUB_API_CLIENT_SECRET'] ?? ''),
+                '©api_access_token'  => (string) ($_['CFG_GITHUB_API_ACCESS_TOKEN'] ?? ''),
+            ],
         ];
         # Merge `$instance_base` param into `$default_instance_base`.
 

@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -90,7 +90,11 @@ class UrlRemote extends Classes\Core\Base\Core
         # Validate URL.
 
         if (!$url) { // Failure.
-            return $return_array ? [] : '';
+            return $return_array ? [
+                'code'    => 0,
+                'headers' => [],
+                'body'    => '',
+            ] : '';
         }
         # Convert body to a string.
 

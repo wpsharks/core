@@ -398,7 +398,7 @@ class Tokenizer extends Classes\Core\Base\Core
         $this->string = preg_replace_callback(
             [
                 '/^[ ]*(?:\[[^[\]]+\])+[ ]*\:[ ]*\<(?:[a-z][a-z0-9+.\-]*\:|#)[^\s<>]+\>(?:[ ]+.+)?$/uim',
-                '/\!?\[(?:(?R)|[^[\]]*)\]\((?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+\)(?:\{[^{}]*\})?/ui',
+                '/\!?\[(?:(?R)|[^[\]]*)\]\((?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+\)(?:\h+\{[^{}]*\})?/ui',
             ],
             function ($m) {
                 $this->tokens[] = $m[0];  // Original data for token.

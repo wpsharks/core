@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -33,6 +33,18 @@ trait Markdown
     public static function markdown(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Markdown->__invoke(...$args);
+    }
+
+    /**
+     * @since 16xxxx Markdown utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Markdown::firstImageUrl()
+     */
+    public static function firstImageUrlInMarkdown(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Markdown->firstImageUrl(...$args);
     }
 
     /**

@@ -66,14 +66,14 @@ class Markdown extends Classes\Core\Base\Core
         $anchor_rels = (array) $args['anchor_rels'];
 
         if ($flavor === 'parsedown-extra') {
-            if (is_null($ParsedownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
+            if (!($ParsedownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
                 $ParsedownExtra = new ParsedownExtra();
             }
             $ParsedownExtra->setBreaksEnabled($breaks);
             $string = $ParsedownExtra->text($string);
         } else {
             $flavor = 'markdown-extra'; // Default flavor.
-            if (is_null($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
+            if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
                 $MarkdownExtra                    = new MarkdownExtra();
                 $MarkdownExtra->code_class_prefix = 'language-';
             }
@@ -92,7 +92,22 @@ class Markdown extends Classes\Core\Base\Core
     }
 
     /**
-     * Markdown stripper. @TODO
+     * First image URL.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param string $markdown Markdown.
+     *
+     * @return string First image URL.
+     */
+    public function firstImageUrl(string $markdown): string
+    {
+        $regex      = '/(?<=^|[\s;,])\!\[[^[\]]*\]\((?<url>https?\:\/\/[^\s()]+?\.(?:png|jpeg|jpg|gif))\)(?=$|[\s.!?;,])/ui';
+        return $url = $markdown && preg_match($regex, $markdown, $_m) ? $_m['url'] : '';
+    }
+
+    /**
+     * Markdown stripper. @TODO.
      *
      * @since 151029 Markdown stripper.
      *

@@ -188,4 +188,98 @@ class Slack extends Classes\Core\Base\Core
 
         return true;
     }
+
+    /**
+     * Slack mrkdwn.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param mixed $value Input value.
+     * @param array $args  Additional args.
+     *
+     * @return string|array|object Mrkdwn'd.
+     */
+    public function mrkdwn($value, array $args = [])
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->mrkdwn($_value, $args);
+            } // unset($_key, $_value);
+            return $value;
+        }
+        $markdown = (string) $value;
+
+        if (!isset($markdown[0])) {
+            return $markdown;
+        }
+        $default_args = [
+            'current_gfm_owner' => '',
+            'current_gfm_repo'  => '',
+            'is_gfm'            => false,
+        ];
+        $args += $default_args; // Merge defaults.
+
+        $is_gfm            = (bool) $args['is_gfm'];
+        $current_gfm_owner = (string) $args['current_gfm_owner'];
+        $current_gfm_repo  = (string) $args['current_gfm_repo'];
+
+        if ($is_gfm) { // GitHub flavor?
+            $markdown = $this->c::mdGitHubIssueRefs($markdown, [
+                'current_owner' => $current_gfm_owner,
+                'current_repo'  => $current_gfm_repo,
+            ]); // Keeps MD formatting.
+        } // Converts MD issue references.
+
+        $mrkdwn = $markdown; // Converting now.
+
+        // Remove language specifier from MD fences.
+        $mrkdwn = preg_replace('/^(\h*)```[a-z0-9_\-]+(\v)/uim', '$1```$2', $mrkdwn);
+
+        // Tokenize; i.e., strip MD fences.
+        $Tokenizer = $this->c::tokenize($mrkdwn, ['md-fences']);
+        $mrkdwn    = &$Tokenizer->getString(); // By reference.
+
+        // Convert GFM headings into Slack `*bold*`.
+        $mrkdwn = preg_replace('/(^|\h+)#+\h+([^#\v]+?)(?:\h+#+)?(?:\h+\{[^{}]*\})?$/uim', '$1*$2*', $mrkdwn);
+
+        // Convert GFM `*italic*` into Slack `_italic_`.
+        $mrkdwn = preg_replace('/(?<=^|[\s;,(])\*{1}([^*\v]+)\*{1}(?=$|[\s.!?;,)])/ui', '_$1_', $mrkdwn);
+
+        // Convert GFM `**bold**` into Slack `*bold*`.
+        $mrkdwn = preg_replace('/(?<=^|[\s;,(])\*{2}([^*\v]+)\*{2}(?=$|[\s.!?;,)])/ui', '*$1*', $mrkdwn);
+
+        // Convert GFM `~~strike~~` into Slack `~strike~`.
+        $mrkdwn = preg_replace('/(?<=^|[\s;,(])~{2}([^~\v]+)~{2}(?=$|[\s.!?;,)])/ui', '~$1~', $mrkdwn);
+
+        // Convert `<>` links into just stand-alone links.
+        $mrkdwn = preg_replace('/(?<=^|[\s;,(])\<((?:[a-z][a-z0-9+.\-]*\:|#)[^\s<>]+)\>(?=$|[\s.!?;,)])/ui', '$1', $mrkdwn);
+
+        // Escape special HTML chars; i.e., convert to plain text now.
+        $mrkdwn = $this->c::escHtmlChars($mrkdwn); // After `<>` links & issue references.
+
+        // Replace images (not Slack compatible) with clickable links.
+        $mrkdwn = preg_replace_callback('/\!?\[(?:(?R)|[^[\]]*)\]\((?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+\)(?:\h+\{[^{}]*\})?/ui', function ($m) {
+            if (mb_stripos($m[0], '![') === false) {
+                return $m[0]; // Not an image.
+            } else {
+                return preg_replace_callback('/\!\[(?<alt_text>[^[\]]*)\]\((?<url>(?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+)\)/ui', function ($m) {
+                    return '<'.$m['url'].'|'.$this->c::escHtmlChars($m['alt_text'] ? $m['alt_text'].' ('.basename($m['url']).')' : basename($m['url'])).'>';
+                }, $m[0]); // Strip away images.
+            }
+        }, $mrkdwn); // Strip away images.
+
+        // Convert links for Slack compatibility.
+        $mrkdwn = preg_replace_callback('/(?<=^|[\s;,(])\[(?<text>[^|[\]]*)\]\((?<url>(?:[a-z][a-z0-9+.\-]*\:|#)[^|\s()]+)\)(?=$|[\s.!?;,)])/ui', function ($m) {
+            if (isset($m['text'][0])) {
+                return '<'.$m['url'].'|'.$this->c::escHtmlChars($m['text']).'>';
+            } else {
+                return '<'.$m['url'].'>';
+            }
+        }, $mrkdwn); // `<url|text>`
+
+        // No more than two consecutive breaks.
+        $mrkdwn = $this->c::mbTrim($this->c::normalizeEols($mrkdwn, true));
+
+        return $mrkdwn = &$Tokenizer->restoreGetString();
+    }
 }

@@ -34,4 +34,16 @@ trait Slack
     {
         return $GLOBALS[static::class]->Utils->©Slack->notify(...$args);
     }
+
+    /**
+     * @since 16xxxx Slack utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Slack::mrkdwn()
+     */
+    public static function slackMrkdwn(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Slack->mrkdwn(...$args);
+    }
 }

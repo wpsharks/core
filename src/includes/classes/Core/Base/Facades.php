@@ -44,6 +44,7 @@ abstract class Facades
     use Traits\Facades\Errors;
     use Traits\Facades\Escapes;
     use Traits\Facades\Files;
+    use Traits\Facades\GitHub;
     use Traits\Facades\Gravatar;
     use Traits\Facades\Headers;
     use Traits\Facades\Html;
