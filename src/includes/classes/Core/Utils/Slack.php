@@ -223,14 +223,19 @@ class Slack extends Classes\Core\Base\Core
         $current_gfm_owner = (string) $args['current_gfm_owner'];
         $current_gfm_repo  = (string) $args['current_gfm_repo'];
 
-        if ($is_gfm) { // GitHub flavor?
+        // GitHub flavored markdown?
+        if ($is_gfm) { // If so, convert issue references.
             $markdown = $this->c::mdGitHubIssueRefs($markdown, [
                 'current_owner' => $current_gfm_owner,
                 'current_repo'  => $current_gfm_repo,
             ]); // Keeps MD formatting.
         } // Converts MD issue references.
 
-        $mrkdwn = $markdown; // Converting now.
+        // Begin conversions.
+        $mrkdwn = $markdown; // Converting.
+
+        // Normalize breaks for `/m` mode below.
+        $mrkdwn = $this->c::normalizeEols($mrkdwn);
 
         // Remove language specifier from MD fences.
         $mrkdwn = preg_replace('/^(\h*)```[a-z0-9_\-]+(\v)/uim', '$1```$2', $mrkdwn);
@@ -238,9 +243,6 @@ class Slack extends Classes\Core\Base\Core
         // Tokenize; i.e., strip MD fences.
         $Tokenizer = $this->c::tokenize($mrkdwn, ['md-fences']);
         $mrkdwn    = &$Tokenizer->getString(); // By reference.
-
-        // Convert GFM headings into Slack `*bold*`.
-        $mrkdwn = preg_replace('/(^|\h+)#+\h+([^#\v]+?)(?:\h+#+)?(?:\h+\{[^{}]*\})?$/uim', '$1*$2*', $mrkdwn);
 
         // Convert GFM `*italic*` into Slack `_italic_`.
         $mrkdwn = preg_replace('/(?<=^|[\s;,(])\*{1}([^*\v]+)\*{1}(?=$|[\s.!?;,)])/ui', '_$1_', $mrkdwn);
@@ -253,6 +255,9 @@ class Slack extends Classes\Core\Base\Core
 
         // Convert `<>` links into just stand-alone links.
         $mrkdwn = preg_replace('/(?<=^|[\s;,(])\<((?:[a-z][a-z0-9+.\-]*\:|#)[^\s<>]+)\>(?=$|[\s.!?;,)])/ui', '$1', $mrkdwn);
+
+        // Convert GFM headings into Slack `*bold*`.
+        $mrkdwn = preg_replace('/(^|\h+)#+\h+([^#\v]+?)(?:\h+#+)?(?:\h+\{[^{}]*\})?$/uim', '$1*$2*', $mrkdwn);
 
         // Escape special HTML chars; i.e., convert to plain text now.
         $mrkdwn = $this->c::escHtmlChars($mrkdwn); // After `<>` links & issue references.

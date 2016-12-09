@@ -327,11 +327,11 @@ class GitHub extends Classes\Core\Base\Core
         $issue_regex         = '(?<issue>[0-9]+)';
         $comment_regex       = '(?<comment>#[^#\s]+)?';
 
-        $pull_url_regex            = '/(?<=^|[\s;,(<])https?\:\/\/github\.com\/'.$owner_regex.'\/'.$repo_regex.'\/(?<is_pull>pull)\/'.$issue_regex.$comment_regex.'(?=$|[\s.!?;,)>])/ui';
-        $issue_url_regex           = '/(?<=^|[\s;,(<])https?\:\/\/github\.com\/'.$owner_regex.'\/'.$repo_regex.'\/issues\/'.$issue_regex.$comment_regex.'(?=$|[\s.!?;,)>])/ui';
-        $owner_repo_issue_regex    = '/(?<=^|[\s;,(])'.$owner_regex.'\/'.$repo_regex.'#'.$issue_regex.'(?=$|[\s.!?;,)])/ui';
-        $current_owner_issue_regex = $have_currents ? '/(?<=^|[\s;,(])'.$current_owner_regex.'#'.$issue_regex.'(?=$|[\s.!?;,)])/ui' : '';
-        $issue_number_regex        = $have_currents ? '/(?<=^|[\s;,(])#'.$issue_regex.'(?=$|[\s.!?;,)])/ui' : '';
+        $pull_url_regex            = '/(?<=^|[\s;,<]|(?<!\])\()https?\:\/\/github\.com\/'.$owner_regex.'\/'.$repo_regex.'\/(?<is_pull>pull)\/'.$issue_regex.$comment_regex.'(?=$|[\s.!?;,)>])/ui';
+        $issue_url_regex           = '/(?<=^|[\s;,<]|(?<!\])\()https?\:\/\/github\.com\/'.$owner_regex.'\/'.$repo_regex.'\/issues\/'.$issue_regex.$comment_regex.'(?=$|[\s.!?;,)>])/ui';
+        $owner_repo_issue_regex    = '/(?<=^|[\s;,]|(?<!\])\()'.$owner_regex.'\/'.$repo_regex.'#'.$issue_regex.'(?=$|[\s.!?;,)])/ui';
+        $current_owner_issue_regex = $have_currents ? '/(?<=^|[\s;,]|(?<!\])\()'.$current_owner_regex.'#'.$issue_regex.'(?=$|[\s.!?;,)])/ui' : '';
+        $issue_number_regex        = $have_currents ? '/(?<=^|[\s;,]|(?<!\])\()#'.$issue_regex.'(?=$|[\s.!?;,)])/ui' : '';
 
         $Tokenizer = $this->c::tokenize($markdown, ['md-fences']);
         $markdown  = &$Tokenizer->getString(); // By reference.
