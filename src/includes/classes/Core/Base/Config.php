@@ -166,11 +166,11 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©urls' => [
-                '©hosts' => [
+                '©hosts' => [ // Contains `:port` when necessary.
                     '©app' => (string) ($_['CFG_HOST'] ?? $host),
                     '©cdn' => (string) ($_['CFG_CDN_HOST'] ?? 'cdn.'.$root_host),
 
-                    '©roots' => [
+                    '©roots' => [ // Expected to contain `:port` when necessary.
                         '©app' => (string) ($_['CFG_ROOT_HOST'] ?? $root_host),
                         '©cdn' => (string) ($_['CFG_CDN_ROOT_HOST'] ?? $root_host),
                     ],

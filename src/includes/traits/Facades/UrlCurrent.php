@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -84,6 +84,18 @@ trait UrlCurrent
     }
 
     /**
+     * @since 16xxxx Adding port utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::port()
+     */
+    public static function currentPort(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->port(...$args);
+    }
+
+    /**
      * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -93,6 +105,18 @@ trait UrlCurrent
     public static function currentRootHost(...$args)
     {
         return $GLOBALS[static::class]->Utils->©UrlCurrent->rootHost(...$args);
+    }
+
+    /**
+     * @since 16xxxx Adding port utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::rootPort()
+     */
+    public static function currentRootPort(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->rootPort(...$args);
     }
 
     /**

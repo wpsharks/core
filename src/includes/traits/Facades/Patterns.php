@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -92,7 +92,7 @@ trait Patterns
      */
     public static function wRegxBracket(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©WRegx->bracket(...$args);
+        return $GLOBALS[static::class]->Utils->©WRegx->bracketSpecialChars(...$args);
     }
 
     /**

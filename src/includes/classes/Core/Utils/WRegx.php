@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -28,6 +28,21 @@ class WRegx extends Classes\Core\Base\Core
      *
      * @since 150424 Watered-down regex.
      *
+     * - `*` Matches zero or more characters that are not a `/`
+     * - `**` Matches zero or more characters of any kind.
+     * - `?` Matches exactly one character that is not a `/`
+     * - `??` Matches exactly one character of any kind.
+     * - `[abc]` Matches exactly one character: `a`, `b`, or `c`.
+     * - `[a-z0-9]` Matches exactly one character: `a` thru `z` or `0` thru `9`.
+     * - `[!abc]` A leading `!` inside `[]` negates; i.e., anything that is not: `a`, `b`, or `c`.
+     * - `{abc,def}` Matches the fragment `abc` or `def` (one or the other).
+     * - `{abc,def,}` Matches `abc`, `def` or nothing; i.e., an optional match.
+     * - `{/**,}` Matches a `/` followed by zero or more characters. Or nothing.
+     * - `[*?[]!{},^$]` Matches a literal special character. One of: `*?[]!{},^$` explicitly.
+     *
+     * - `^` = beginning of the string (but can be turned off depending on the use case).
+     * - `$` = end of the string (but can be turned off depending on the use case).
+     *
      * @param array|string $patterns        Watered-down regex patterns; array or line-delimited.
      * @param string       $exclusion_chars The behavior of `*` & `?`. Defaults to excluding `/`.
      * @param bool         $force_match_all Force `^$` into play & don't treat `^$` as special chars.
@@ -42,7 +57,7 @@ class WRegx extends Classes\Core\Base\Core
         $regex = ''; // Initialize.
 
         if (is_string($patterns)) { // Convert to array.
-            $patterns = preg_split('/['."\r\n".']+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
+            $patterns = preg_split('/\v+/u', $patterns, -1, PREG_SPLIT_NO_EMPTY);
         }
         if (!is_array($patterns)) { // Require an array now.
             throw $this->c::issue('Invalid data type for patterns.');
@@ -92,24 +107,30 @@ class WRegx extends Classes\Core\Base\Core
         $string          = $this->c::escRegex($string);
         $exclusion_chars = $this->c::escRegex($exclusion_chars);
 
+        // Convert `[!a-z0-9]` into a real regex `[^character class]`.
+        // Special characters inside a character class have no further meaning.
+        // For this reason, we remove them from the equation by tokenizing them, for now.
         $string = preg_replace_callback('/\\\\\[((?:(?:[^[\]]+)|(?R))*)\\\\\]/u', function ($m) use (&$tokens) {
             $m[1] = mb_strpos($m[1], '\\!') === 0 ? '^'.mb_substr($m[1], 2) : $m[1];
             $m[1] = preg_replace('/([a-z0-9])\\\\\-([a-z0-9])/u', '${1}-${2}', $m[1]);
-            $tokens[] = '['.$m[1].']'; // Save token.
+            $tokens[] = '['.$m[1].']';
             return '⁅⒯'.(count($tokens) - 1).'⒯⁆';
-        }, $string); // Converts to character class.
+        }, $string); // See restoration below.
 
+        // Convert `{}` into `(?:this|that)`; i.e., a list of alternates.
         $string = preg_replace_callback('/\\\\\{((?:(?:[^{}]+)|(?R))*)\\\\\}/u', function ($m) {
             return '(?:'.str_replace(['\\{', '\\}', ','], ['(?:', ')', '|'], $m[1]).')';
-        }, $string); // Converts to `(a|b|c)` alternation.
+        }, $string); // `,` becomes `|` for regex alternation.
 
+        // Deal with `^` and `$`, depending on `$force_match_all`.
         if (!$force_match_all) { // Must come before `$exclusion_chars` below.
             // If not forcing `^$`, we need to treat them as special chars here.
             $string = preg_replace(['/\\\\\^/u', '/\\\\\$/u'], ['^', '$'], $string);
         }
+        // `???` (or more) should be treated like `?` instead of as a partial `??` operator.
         $string = preg_replace_callback('/(?:\\\\\?){3,}/u', function ($m) use ($exclusion_chars) {
             return '[^'.$exclusion_chars.']{'.strlen(str_replace('\\', '', $m[0])).'}';
-        }, $string); // Becaues ??? (or more) should be treated like `?` instead of as a partial `??` operator.
+        }, $string); // i.e., Treat as three or more instances of `?` by itself.
 
         // Now convert `??` and `**` (or more) after having already converted `???`... above.
         $string = preg_replace(['/(?:\\\\\?){2}/u', '/(?:\\\\\*){2,}/u'], ['[\s\S]', '[\s\S]*?'], $string);
@@ -117,48 +138,43 @@ class WRegx extends Classes\Core\Base\Core
         // Now convert any remaining `?` and/or `*` operators after having dealt with `??` and `**` (or more) above.
         $string = preg_replace(['/\\\\\?/u', '/\\\\\*/u'], ['[^'.$exclusion_chars.']', '[^'.$exclusion_chars.']*?'], $string);
 
+        // Restore special characters tokenized when we began above.
         foreach (array_reverse($tokens, true) as $_token => $_brackets) {
             // Must go in reverse order so nested tokens unfold properly.
             $string = str_replace('⁅⒯'.$_token.'⒯⁆', $_brackets, $string);
         } // unset($_token, $_brackets); // Housekeeping.
 
+        // Return value based on `$force_match_all`.
         return $force_match_all ? '^'.$string.'$' : $string;
     }
 
     /**
      * Bracket special chars.
      *
-     * @since 160428 Watered-down regex.
+     * @since 16xxxx New name. Old name `bracket()`.
+     * @since 16xxxx Adding `$will_force_match_all` param.
      *
-     * @param mixed $value Input value(s).
+     * @param mixed $value                Input value(s) to bracket here.
+     * @param bool  $will_force_match_all If true, don't treat `^$` as special chars.
      *
      * @return string|array|object Bracketed value(s).
      */
-    public function bracket($value)
+    public function bracketSpecialChars($value, bool $will_force_match_all = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
-                $_value = $this->bracket($_value);
+                $_value = $this->bracketSpecialChars($_value, $will_force_match_all);
             } // unset($_key, $_value); // Housekeeping.
             return $value;
         }
         if (!($string = (string) $value)) {
             return $string; // Empty.
         }
-        $tokens = []; // Initialize.
-
-        $string = preg_replace_callback('/\[((?:(?:[^[\]]+)|(?R))*)\]/u', function ($m) use (&$tokens) {
-            $tokens[] = '['.$m[1].']'; // Save token.
-            return '⁅⒯'.(count($tokens) - 1).'⒯⁆';
-        }, $string); // Tokenizes character class.
-
-        $string = preg_replace('/[*?[\]!{},]/u', '[${0}]', $string);
-
-        foreach (array_reverse($tokens, true) as $_token => $_brackets) {
-            // Must go in reverse order so nested tokens unfold properly.
-            $string = str_replace('⁅⒯'.$_token.'⒯⁆', $_brackets, $string);
-        } // unset($_token, $_brackets); // Housekeeping.
-
+        if (!$will_force_match_all) {
+            $string = preg_replace('/[*?[\]!{},\^$]/u', '[${0}]', $string);
+        } else { // `^` and `$` are not special characters.
+            $string = preg_replace('/[*?[\]!{},]/u', '[${0}]', $string);
+        }
         return $string;
     }
 
@@ -166,38 +182,62 @@ class WRegx extends Classes\Core\Base\Core
      * URL to WRegx URI pattern.
      *
      * @since 160428 Watered-down regex.
+     * @since 16xxxx Adding `$will_force_match_all` param.
+     * @since 16xxxx Fixing bug in query string wildcard pattern.
      *
-     * @param string $url_uri Input URL (or URI).
+     * @param mixed $value                Input value(s) containing:
+     *                                    URLs, URIs, or query strings w/ a leading `?`.
+     * @param bool  $will_force_match_all If true, don't treat `^$` as special chars.
      *
-     * @return string WRegx URI pattern.
+     * @return string WRegx URI pattern, else an empty string if unable to parse.
+     *
+     * - This considers all possible `/endpoints` after the base.
+     *   Including the possibility of there being `index.php/path/info/`.
+     *
+     * - If a URI contains multiple query string variables,
+     *   the best we can do is `{&**&,&}` (searching in the order given).
+     *
+     * - In the case of a root URI or empty path, this returns a pattern
+     *   matching any path [/endpoints] & query string; i.e., matches all URIs.
+     *   This will also be true if only a query string is given. Path is empty.
      */
-    public function urlToUriPattern(string $url_uri)
+    public function urlToUriPattern($value, bool $will_force_match_all = false)
     {
-        if (!($parts = $this->c::parseUrl($url_uri))) {
+        // Note: We must allow for `0` here.
+        // It will parse as `[path => '0']`, which is valid.
+
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->urlToUriPattern($_value, $will_force_match_all);
+            } // unset($_key, $_value); // Housekeeping.
+            return $value;
+        }
+        $url_uri_qsl = (string) $value; // Force string.
+
+        if (!isset($url_uri_qsl[0])) {
+            return ''; // Not possible.
+        } elseif (!($parts = $this->c::parseUrl($url_uri_qsl))) {
             return ''; // Not possible.
         }
-        $uri = $parts['uri'] ?? '';
-        $uri = preg_split('/#/u', $uri, 2)[0];
-        $uri = $this->c::mbTrim($uri, '/');
+        $uri_no_fragment     = $parts['uri_no_fragment'] ?? '';
+        $uri_no_fragment_lts = $uri_no_fragment ? $this->c::mbTrim($uri_no_fragment, '/') : $uri_no_fragment;
+        $uri_pattern         = $uri_no_fragment_lts ? $this->bracketSpecialChars($uri_no_fragment_lts, $will_force_match_all) : $uri_no_fragment_lts;
 
-        if (!$uri) { // URI is empty now?
-            return ''; // Nothing to do here.
-        }
-        // NOTE: This considers all possible `/endpoints` after the base.
-        // Including the possibility of there being `index.php/path/info/`.
+        if (!isset($uri_pattern[0])) { // Treat as root URI.
+            return '{/**,}'; // Any path [/endpoints] & query string.
+            //
+        } elseif (mb_strpos($uri_pattern, '[?]') !== false) {
+            $uri_pattern        = preg_replace('/(^|[^\/])\[\?\]/u', '${1}{/**,}[?]', $uri_pattern);
+            $uri_pattern        = preg_replace('/&/u', '{&**&,&}', $this->c::mbRTrim($uri_pattern, '&'));
+            $uri_pattern        = preg_replace('/\[\?\]/u', '[?]{**&,}', $uri_pattern); // After `&` replacements.
 
-        // NOTE: If a URI contains multiple query string variables,
-        // the best we can do is `{&**&,&,}` (searching in the order given).
-
-        $uri_pattern = $this->bracket($uri); // i.e., `[?]`, etc.
-
-        if (mb_strpos($uri_pattern, '[?]') !== false) {
-            $uri_pattern = preg_replace_callback('/\[\?\]|&/u', function ($m) {
-                return $m[0] === '[?]' ? '[?]{**&,}' : '{&**&,&,}';
-            }, preg_replace('/([^\/])\[\?\]/u', '${1}{/**,}[?]', $uri_pattern));
-            return $uri_pattern = '/'.$uri_pattern.'{&**,}';
+            if (mb_strpos($uri_pattern, '{/**,}') === 0) {
+                return $uri_pattern = $uri_pattern.'{&**,}'; // Any path [/endpoints] w/ the query string.
+            } else {
+                return $uri_pattern = '/'.$uri_pattern.'{&**,}'; // Specific path [/endpoints] w/ the query string.
+            }
         } else {
-            return $uri_pattern = '/'.$uri_pattern.'{/**,}';
+            return $uri_pattern = '/'.$uri_pattern.'{/**,}'; // Specific path [/endpoints] & query string.
         }
     }
 }

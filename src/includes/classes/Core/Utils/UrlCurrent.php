@@ -50,12 +50,10 @@ class UrlCurrent extends Classes\Core\Base\Core
      */
     public function __invoke(bool $canonical = false): string
     {
-        if (!is_null($url = &$this->cacheKey(__FUNCTION__, $canonical))) {
+        if (($url = &$this->cacheKey(__FUNCTION__, $canonical)) !== null) {
             return $url; // Cached this already.
         }
-        $url = $this->scheme().'://'.$this->host().$this->uri($canonical);
-
-        return $url;
+        return $url = $this->scheme().'://'.$this->host().$this->uri($canonical);
     }
 
     /**
@@ -67,12 +65,10 @@ class UrlCurrent extends Classes\Core\Base\Core
      */
     public function scheme(): string
     {
-        if (!is_null($scheme = &$this->cacheKey(__FUNCTION__))) {
+        if (($scheme = &$this->cacheKey(__FUNCTION__)) !== null) {
             return $scheme; // Cached this already.
         }
-        $scheme = $this->isSsl() ? 'https' : 'http';
-
-        return $scheme;
+        return $scheme = $this->isSsl() ? 'https' : 'http';
     }
 
     /**
@@ -80,26 +76,36 @@ class UrlCurrent extends Classes\Core\Base\Core
      *
      * @since 150424 Initial release.
      *
-     * @param bool $no_port No port number? Defaults to `FALSE`.
-     *
-     * @internal Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
-     *    That SHOULD be left intact for URL generation in almost every scenario.
-     *    However, in a few other edge cases it may be desirable to exclude the port number.
-     *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
+     * @param bool $with_port With port number?
      *
      * @return string Current host name; lowercase.
      */
-    public function host(bool $no_port = false): string
+    public function host(bool $with_port = true): string
     {
-        if (!is_null($host = &$this->cacheKey(__FUNCTION__, $no_port))) {
+        if (($host = &$this->cacheKey(__FUNCTION__, $with_port)) !== null) {
             return $host; // Cached this already.
         }
         $host = mb_strtolower($_SERVER['HTTP_HOST']);
 
-        if ($no_port) {
+        if (!$with_port) { // Strip port number?
             $host = preg_replace('/\:[0-9]+$/u', '', $host);
         }
-        return $host;
+        return $host; // With or without port number.
+    }
+
+    /**
+     * Current port number (as string).
+     *
+     * @since 16xxxx Enhancing support for ports.
+     *
+     * @return string Current port (as string).
+     */
+    public function port(): string
+    {
+        if (($port = &$this->cacheKey(__FUNCTION__)) !== null) {
+            return $port; // Cached this already.
+        }
+        return $port = (explode(':', $this->host(), 2) + ['', ''])[1];
     }
 
     /**
@@ -107,25 +113,34 @@ class UrlCurrent extends Classes\Core\Base\Core
      *
      * @since 151002 Adding root host support.
      *
-     * @param bool $no_port No port number? Defaults to `FALSE`.
-     *
-     * @internal Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
-     *    That SHOULD be left intact for URL generation in almost every scenario.
-     *    However, in a few other edge cases it may be desirable to exclude the port number.
-     *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
+     * @param bool $with_port With port number?
      *
      * @return string Current root host name; lowercase.
      */
-    public function rootHost(bool $no_port = false): string
+    public function rootHost(bool $with_port = true): string
     {
-        if (!is_null($root_host = &$this->cacheKey(__FUNCTION__, $no_port))) {
+        if (($root_host = &$this->cacheKey(__FUNCTION__, $with_port)) !== null) {
             return $root_host; // Cached this already.
         }
-        $host  = $this->host($no_port);
-        $parts = explode('.', $host);
-        $root  = implode('.', array_slice($parts, -2));
+        $name_parts       = explode('.', $this->host(false));
+        $root_name        = implode('.', array_slice($name_parts, -2));
+        $port             = $this->port(); // Might be needed in next line.
+        return $root_host = $root_name.(!$with_port ? '' : (isset($port[0]) ? ':'.$port : ''));
+    }
 
-        return $root;
+    /**
+     * Current root port number (as string).
+     *
+     * @since 16xxxx Enhancing support for ports.
+     *
+     * @return string Current root port (as string).
+     */
+    public function rootPort(): string
+    {
+        if (($port = &$this->cacheKey(__FUNCTION__)) !== null) {
+            return $port; // Cached this already.
+        }
+        return $port = (explode(':', $this->rootHost(), 2) + ['', ''])[1];
     }
 
     /**
@@ -139,16 +154,16 @@ class UrlCurrent extends Classes\Core\Base\Core
      */
     public function uri(bool $canonical = false): string
     {
-        if (!is_null($uri = &$this->cacheKey(__FUNCTION__, $canonical))) {
+        if (($uri = &$this->cacheKey(__FUNCTION__, $canonical)) !== null) {
             return $uri; // Cached this already.
         }
         $uri = $_SERVER['REQUEST_URI'];
         $uri = '/'.$this->c::mbLTrim($uri, '/');
 
-        if ($canonical) { // Strip query/frag.
+        if ($canonical) { // Strip query/fragment.
             $uri = preg_split('/[?#]/u', $uri, 2)[0];
         }
-        return $uri;
+        return $uri; // With or without query/fragment.
     }
 
     /**
@@ -160,13 +175,11 @@ class UrlCurrent extends Classes\Core\Base\Core
      */
     public function path(): string
     {
-        if (!is_null($path = &$this->cacheKey(__FUNCTION__))) {
+        if (($path = &$this->cacheKey(__FUNCTION__)) !== null) {
             return $path; // Cached this already.
         }
-        $path = (string) parse_url($this->uri(), PHP_URL_PATH);
-        $path = '/'.$this->c::mbLTrim($path, '/');
-
-        return $path;
+        $path        = (string) parse_url($this->uri(), PHP_URL_PATH);
+        return $path = '/'.$this->c::mbLTrim($path, '/');
     }
 
     /**
@@ -178,20 +191,19 @@ class UrlCurrent extends Classes\Core\Base\Core
      */
     public function pathInfo(): string
     {
-        if (!is_null($path_info = &$this->cacheKey(__FUNCTION__))) {
+        if (($path_info = &$this->cacheKey(__FUNCTION__)) !== null) {
             return $path_info; // Cached this already.
         }
         $path_info = ''; // Initialize.
+
         if (isset($_SERVER['PATH_INFO'])) {
             $path_info = $_SERVER['PATH_INFO'];
         }
         if (mb_strpos($path_info, '?') !== false) {
             list($path_info) = explode('?', $path_info, 2);
         }
-        $path_info = $this->c::mbTrim($path_info, '/');
-        $path_info = str_replace('%', '%25', $path_info);
-
-        return $path_info;
+        $path_info        = $this->c::mbTrim($path_info, '/');
+        return $path_info = str_replace('%', '%25', $path_info);
     }
 
     /**
@@ -203,7 +215,7 @@ class UrlCurrent extends Classes\Core\Base\Core
      */
     public function isSsl(): bool
     {
-        if (!is_null($is = &$this->cacheKey(__FUNCTION__))) {
+        if (($is = &$this->cacheKey(__FUNCTION__)) !== null) {
             return $is; // Cached this already.
         }
         if (!empty($_SERVER['SERVER_PORT'])) {
@@ -233,12 +245,12 @@ class UrlCurrent extends Classes\Core\Base\Core
      */
     public function isLocalhost(): bool
     {
-        if (!is_null($is = &$this->cacheKey(__FUNCTION__))) {
+        if (($is = &$this->cacheKey(__FUNCTION__)) !== null) {
             return $is; // Cached this already.
         }
         if (defined('LOCALHOST') && LOCALHOST) {
             return $is = true;
-        } elseif (preg_match('/(?:\b(?:localhost|127\.0\.0\.1)\b|\.vm)$/ui', $this->host())) {
+        } elseif (preg_match('/(?:\b(?:localhost|127\.0\.0\.1)\b|\.vm)$/ui', $this->host(false))) {
             return $is = true;
         }
         return $is = false;

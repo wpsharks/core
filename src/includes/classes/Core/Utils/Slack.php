@@ -28,7 +28,7 @@ class Slack extends Classes\Core\Base\Core
      *
      * @since 161009
      *
-     * @var string
+     * @type string
      */
     protected $cache_dir;
 
@@ -238,43 +238,50 @@ class Slack extends Classes\Core\Base\Core
         $mrkdwn = $this->c::normalizeEols($mrkdwn);
 
         // Remove language specifier from MD fences.
-        $mrkdwn = preg_replace('/^(\h*)```[a-z0-9_\-]+(\v)/uim', '$1```$2', $mrkdwn);
+        $mrkdwn = preg_replace('/^(\h*)(~{3,}|`{3,})[\w\-]+(\v)/uim', '$1$2$3', $mrkdwn);
 
         // Tokenize; i.e., strip MD fences.
         $Tokenizer = $this->c::tokenize($mrkdwn, ['md-fences']);
         $mrkdwn    = &$Tokenizer->getString(); // By reference.
 
-        // Convert GFM `*italic*` into Slack `_italic_`.
+        // Convert markdown `*italic*` into Slack `_italic_`.
         $mrkdwn = preg_replace('/(?<=^|[\s;,(])\*{1}([^*\v]+)\*{1}(?=$|[\s.!?;,)])/ui', '_$1_', $mrkdwn);
 
-        // Convert GFM `**bold**` into Slack `*bold*`.
+        // Convert markdown `**bold**` into Slack `*bold*`.
         $mrkdwn = preg_replace('/(?<=^|[\s;,(])\*{2}([^*\v]+)\*{2}(?=$|[\s.!?;,)])/ui', '*$1*', $mrkdwn);
 
-        // Convert GFM `~~strike~~` into Slack `~strike~`.
+        // Convert markdown `~~strike~~` into Slack `~strike~`.
         $mrkdwn = preg_replace('/(?<=^|[\s;,(])~{2}([^~\v]+)~{2}(?=$|[\s.!?;,)])/ui', '~$1~', $mrkdwn);
 
-        // Convert `<>` links into just stand-alone links.
-        $mrkdwn = preg_replace('/(?<=^|[\s;,(])\<((?:[a-z][a-z0-9+.\-]*\:|#)[^\s<>]+)\>(?=$|[\s.!?;,)])/ui', '$1', $mrkdwn);
+        // Convert markdown headings into Slack `*bold*`.
+        $mrkdwn = preg_replace('/^([ ]*)(#+)[ ]+([^#\v]+?)(?:[ ]+\\2)?(?:[ ]+\{[^{}]*\})?$/uim', '$1*$3*', $mrkdwn);
 
-        // Convert GFM headings into Slack `*bold*`.
-        $mrkdwn = preg_replace('/(^|\h+)#+\h+([^#\v]+?)(?:\h+#+)?(?:\h+\{[^{}]*\})?$/uim', '$1*$2*', $mrkdwn);
+        // Convert markdown list items into Slack `- :checked-box:` or `- :unchecked-box:`.
+        $mrkdwn = preg_replace('/^([ ]*[*\-][ ]+)\[x\](?=[ ]+)/uim', '$1:checked-box:', $mrkdwn);
+        $mrkdwn = preg_replace('/^([ ]*[*\-][ ]+)\[ \](?=[ ]+)/uim', '$1:unchecked-box:', $mrkdwn);
 
-        // Escape special HTML chars; i.e., convert to plain text now.
+        // Tokenize  markdown `<>` links because `<>` are escaped below. Note UTF-8 `⟨` and `⟩` in place of `<` and `>`.
+        $mrkdwn = preg_replace('/(?<=^|[\s;,(])\<([a-z][a-z0-9+.\-]*\:[^\s<>]+)\>(?=$|[\s.!?;,)])/ui', '⟨$1⟩', $mrkdwn);
+
+        // Escape special HTML chars. Converts `[<>&]` into plain text; i.e., disallows raw HTML code.
         $mrkdwn = $this->c::escHtmlChars($mrkdwn); // After `<>` links & issue references.
 
+        // Restore  markdown `<>` links. Note UTF-8 `⟨` and `⟩` in place of `<` and `>`.
+        $mrkdwn = preg_replace('/(?<=^|[\s;,(])[⟨]([a-z][a-z0-9+.\-]*\:[^\s<>]+)[⟩](?=$|[\s.!?;,)])/ui', '<$1>', $mrkdwn);
+
         // Replace images (not Slack compatible) with clickable links.
-        $mrkdwn = preg_replace_callback('/\!?\[(?:(?R)|[^[\]]*)\]\((?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+\)(?:\h+\{[^{}]*\})?/ui', function ($m) {
+        $mrkdwn = preg_replace_callback('/\!?\[(?:[^[\]]*|(?R))\]\([a-z][a-z0-9+.\-]*\:[^\s()]+\)(?:[ ]+\{[^{}]*\})?/ui', function ($m) {
             if (mb_stripos($m[0], '![') === false) {
                 return $m[0]; // Not an image.
             } else {
-                return preg_replace_callback('/\!\[(?<alt_text>[^[\]]*)\]\((?<url>(?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+)\)/ui', function ($m) {
+                return preg_replace_callback('/\!\[(?<alt_text>[^[\]]*)\]\((?<url>[a-z][a-z0-9+.\-]*\:[^\s()]+)\)/ui', function ($m) {
                     return '<'.$m['url'].'|'.$this->c::escHtmlChars($m['alt_text'] ? $m['alt_text'].' '.__('(image)') : $this->c::midClip(basename($m['url']), 15)).'>';
                 }, $m[0]); // Strip away images.
             }
         }, $mrkdwn); // Strip away images.
 
         // Convert links for Slack compatibility.
-        $mrkdwn = preg_replace_callback('/(?<=^|[\s;,(])\[(?<text>[^|[\]]*)\]\((?<url>(?:[a-z][a-z0-9+.\-]*\:|#)[^|\s()]+)\)(?=$|[\s.!?;,)])/ui', function ($m) {
+        $mrkdwn = preg_replace_callback('/(?<=^|[\s;,(])\[(?<text>[^|[\]]*)\]\((?<url>[a-z][a-z0-9+.\-]*\:[^|\s()]+)\)(?=$|[\s.!?;,)])/ui', function ($m) {
             if (isset($m['text'][0])) {
                 return '<'.$m['url'].'|'.$this->c::escHtmlChars($m['text']).'>';
             } else {

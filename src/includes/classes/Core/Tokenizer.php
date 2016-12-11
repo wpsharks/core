@@ -19,9 +19,6 @@ use function get_defined_vars as vars;
 /**
  * Tokenizer.
  *
- * @TODO Add support for recursion in regex patterns.
- * i.e., Do a better job of dealing with nested tags.
- *
  * @since 150424 Initial release.
  */
 class Tokenizer extends Classes\Core\Base\Core
@@ -31,7 +28,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var string
+     * @type string
      */
     protected $id;
 
@@ -40,7 +37,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var string
+     * @type string
      */
     protected $string;
 
@@ -49,7 +46,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var array
+     * @type array
      */
     protected $tokenize;
 
@@ -58,7 +55,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 160720
      *
-     * @var array
+     * @type array
      */
     protected $args;
 
@@ -67,7 +64,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var array
+     * @type array
      */
     protected $tokens;
 
@@ -76,7 +73,7 @@ class Tokenizer extends Classes\Core\Base\Core
      *
      * @since 160720
      *
-     * @var string|null
+     * @type string|null
      */
     protected $shortcode_unautop_compat_tag_name;
 
@@ -199,17 +196,17 @@ class Tokenizer extends Classes\Core\Base\Core
         $this->string = preg_replace_callback($regex, function ($m) {
             // If excluding escaped shortcodes, check here before we continue.
             if ($this->args['exclude_escaped_shortcode'] && $m[1] === '[' && $m[6] === ']') {
-                return $m[0]; // Escaped; exclude from tokenization.
+                return $m[0]; // Exclude from tokenization.
             }
             $this->tokens[] = $m[0]; // Original data for token.
             // i.e., The entire shortcode (w/ possible escape brackets).
 
             if ($this->args['shortcode_unautop_compat']) {
-                return $token = '['.$this->shortcode_unautop_compat_tag_name.' _is_token="|%#%|"]'.
-                                    '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|'.
+                return $token = '['.$this->shortcode_unautop_compat_tag_name.' _is_token="⁅⒯⁆"]'.
+                                    '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆'.
                                 '[/'.$this->shortcode_unautop_compat_tag_name.']';
             } else { // Default behavior.
-                return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+                return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
             }
         }, $this->string); // Shortcodes replaced by tokens.
     }
@@ -226,19 +223,11 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<pre') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/'.// HTML `<pre>` tags.
-
-            '(?<tag_open_bracket>\<)'.// Opening `<` bracket.
-            '(?<tag_open_name>pre)'.// Tag name; i.e., a `pre` tag.
-            '(?<tag_open_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
-            '(?<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?<tag_close>\<\/\\2\>)'.// Closing `</pre>` tag.
-
-        '/uis'; // End of regex pattern; plus modifiers.
+        $regex = '/\<(pre)(?:\>|\s[^>]*\>)(?:(?s:(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0]; // Original data for token.
-            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -254,19 +243,11 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<code') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/'.// HTML `<code>` tags.
-
-            '(?<tag_open_bracket>\<)'.// Opening `<` bracket.
-            '(?<tag_open_name>code)'.// Tag name; i.e., a `code` tag.
-            '(?<tag_open_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
-            '(?<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?<tag_close>\<\/\\2\>)'.// Closing `</code>` tag.
-
-        '/uis'; // End of regex pattern; plus modifiers.
+        $regex = '/\<(code)(?:\>|\s[^>]*\>)(?:(?s:(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
-            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -282,19 +263,11 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<samp') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/'.// HTML `<samp>` tags.
-
-            '(?<tag_open_bracket>\<)'.// Opening `<` bracket.
-            '(?<tag_open_name>samp)'.// Tag name; i.e., a `samp` tag.
-            '(?<tag_open_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
-            '(?<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?<tag_close>\<\/\\2\>)'.// Closing `</samp>` tag.
-
-        '/uis'; // End of regex pattern; plus modifiers.
+        $regex = '/\<(samp)(?:\>|\s[^>]*\>)(?:(?s:(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
-            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -310,19 +283,11 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<a') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/'.// HTML `<samp>` tags.
-
-            '(?<tag_open_bracket>\<)'.// Opening `<` bracket.
-            '(?<tag_open_name>a)'.// Tag name; i.e., an `a` tag.
-            '(?<tag_open_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
-            '(?<tag_contents>.*?)'.// Tag contents (multiline possible).
-            '(?<tag_close>\<\/\\2\>)'.// Closing `</a>` tag.
-
-        '/uis'; // End of regex pattern; plus modifiers.
+        $regex = '/\<(a)(?:\>|\s[^>]*\>)(?:(?s:(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
-            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -338,17 +303,11 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_stripos($this->string, '<') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/'.// HTML `<a-z0-9>` tags (i.e., tags only).
-
-            '(?<tag_open_close_bracket>\<\/?)'.// Open or close `<[/]` bracket.
-            '(?<tag_open_close_name>[a-z0-9]+)'.// See: <http://jas.xyz/1P1MQyh>
-            '(?<tag_open_close_attrs_bracket>\>|\s[^>]*\>)'.// Attributes & `>`.
-
-        '/ui'; // End of regex pattern; plus modifiers.
+        $regex = '/\<\/?[\w\-]+(?:\>|\s[^>]*\>)/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
-            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
         }, $this->string); // Tags replaced by tokens.
     }
 
@@ -364,17 +323,11 @@ class Tokenizer extends Classes\Core\Base\Core
         } elseif (mb_strpos($this->string, '~') === false && mb_strpos($this->string, '`') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/'.// Markdown pre/code fences.
-
-            '(?<fence_open>~{3,}|`{3,}|`)'.// Opening fence.
-            '(?<fence_contents>.*?)'.// Contents (multiline possible).
-            '(?<fence_close>\\1)'.// Closing fence; ~~~, ```, `.
-
-        '/uis'; // End of regex pattern; plus modifiers.
+        $regex = '/(~{3,}|`{3,}|`)(?s:.*?)\\1/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
-            return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
         }, $this->string); // Fences replaced by tokens.
     }
 
@@ -397,12 +350,12 @@ class Tokenizer extends Classes\Core\Base\Core
 
         $this->string = preg_replace_callback(
             [
-                '/^[ ]*(?:\[[^[\]]+\])+[ ]*\:[ ]*\<(?:[a-z][a-z0-9+.\-]*\:|#)[^\s<>]+\>(?:[ ]+.+)?$/uim',
-                '/\!?\[(?:(?R)|[^[\]]*)\]\((?:[a-z][a-z0-9+.\-]*\:|#)[^\s()]+\)(?:\h+\{[^{}]*\})?/ui',
+                '/^[ ]*(?:\[[^[\]]+\])+[ ]*\:[ ]*\<[^\s<>]+\>(?:[ ]+.+)?$/uim',
+                '/\!?\[(?:[^[\]]*|(?R))\]\([^\s()]+\)(?:[ ]+\{[^{}]*\})?/ui',
             ],
             function ($m) {
                 $this->tokens[] = $m[0];  // Original data for token.
-                return $token = '|%#%|'.$this->id.'-'.(count($this->tokens) - 1).'|%#%|';
+                return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
             },
             $this->string // Shortcodes replaced by tokens.
         );
@@ -417,7 +370,7 @@ class Tokenizer extends Classes\Core\Base\Core
      */
     public function &restoreGetString(): string
     {
-        if (!$this->tokens || mb_strpos($this->string, '|%#%|') === false) {
+        if (!$this->tokens || mb_strpos($this->string, '⒯') === false) {
             return $this->string; // Nothing to restore in this case.
         }
         $restore_shortcode_tokens = $this->args['shortcode_unautop_compat']
@@ -427,14 +380,14 @@ class Tokenizer extends Classes\Core\Base\Core
             // Must go in reverse order so nested tokens unfold properly.
             // If `$restore_shortcode_tokens`, first replace shortcode tokens.
 
-            $_token = '|%#%|'.$this->id.'-'.$_token_id.'|%#%|'; // Placeholder.
+            $_token = '⁅⒯'.$this->id.'⒯'.$_token_id.'⒯⁆'; // Placeholder.
 
             if ($restore_shortcode_tokens) { // Restoring shortcode tokens in this class instance?
-                $this->string = str_replace('['.$this->shortcode_unautop_compat_tag_name.' _is_token="|%#%|"]'.
+                $this->string = str_replace('['.$this->shortcode_unautop_compat_tag_name.' _is_token="⁅⒯⁆"]'.
                                                 $_token.// Token inside the shortcode token.
                                             '[/'.$this->shortcode_unautop_compat_tag_name.']', $_original, $this->string);
             }
-            $this->string = str_replace($_token, $_original, $this->string);
+            $this->string = str_replace($_token, $_original, $this->string); // Always.
         } // unset($_token_id, $_token, $_original); // Housekeeping.
 
         return $this->string;

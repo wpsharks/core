@@ -1,9 +1,14 @@
 ## [coming soon]
 
-- Enhancing `c::clip()` and `c::midClip()`. Now accepts a custom `$more` argument.
 - Enhanced debugging in Slack notifier utility.
 - Adding `c::escHtmlChars()` (escapes `<>&` only).
 - Bug fix. Incorrect return type in `SubstrReplace{}` class.
+- Enhanced string tokenizer by adding recursion to many regex patterns.
+- The `PhpHas{}` class is now smart enough to detect allowable paths via `opcache.restrict_api`.
+- Added `c::currentUrlPort()`, `c::currentRootPort()`, and enhanced several URL-related methods.
+- Enhancing `c::clip()` and `c::midClip()`. Now accepts a custom `$more` argument.
+- Corrected some minor bugs in WRegex parsing engine.
+- Adding new Slack utility: `c::slackMrkdwn()`.
 
 ## v161013.18318
 

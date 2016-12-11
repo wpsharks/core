@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ class UrlQuery extends Classes\Core\Base\Core implements Interfaces\UrlConstants
      *
      * @since 150424
      *
-     * @var string
+     * @type string
      */
     const DEFAULT_SIG_VAR = '_sig';
 

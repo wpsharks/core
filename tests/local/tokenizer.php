@@ -33,10 +33,17 @@ echo \'123\';
 
 ## BEHAVIOR THAT I OBSERVED
 
-The clickable [`code`](http://example.com) did not work properly.
+The clickable [`code` link](http://example.com) did not work properly.
 ';
-echo c::slackMrkdwn($markdown, [
-    'current_gfm_owner' => 'owner',
-    'current_gfm_repo'  => 'repo',
-    'is_gfm'            => true,
+$Tokenizer = c::tokenize($markdown, [
+    'pre',
+    'code',
+    'samp',
+    'anchors',
+    'tags',
+    'md-fences',
+    'md-links',
 ]);
+echo $Tokenizer->getString()."\n\n";
+echo '--------------------------------------'."\n\n";
+echo $Tokenizer->restoreGetString();

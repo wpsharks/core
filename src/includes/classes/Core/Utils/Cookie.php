@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -63,8 +63,8 @@ class Cookie extends Classes\Core\Base\Core
         $expires_after = max(0, $expires_after ?? 31556926);
         $expires       = $expires_after ? time() + $expires_after : 0;
 
-        $domain = $domain ?? $this->c::currentHost(true);
-        $domain = $domain === 'root' ? '.'.$this->c::currentRootHost(true) : $domain;
+        $domain = $domain ?? $this->c::currentHost(false);
+        $domain = $domain === 'root' ? '.'.$this->c::currentRootHost(false) : $domain;
         $path   = $path ?? '/'; // Default path covers the entire site.
 
         if (headers_sent()) {

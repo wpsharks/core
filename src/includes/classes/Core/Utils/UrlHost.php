@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -27,43 +27,47 @@ class UrlHost extends Classes\Core\Base\Core
      * Host parser.
      *
      * @since 151002 Adding host parser.
+     * @since 16xxxx Adding `port` key.
+     * @since 16xxxx Adding `root_name` key.
+     * @since 16xxxx Adding `root_port` key.
+     * @since 16xxxx Removing `root_as_name` key.
+     * @since 16xxxx The `name` key now contains only the name.
+     * @since 16xxxx The `root` key now contains a full root host (including port).
+     * @since 16xxxx Bug fix. Hosts with ports in their name are now exploded properly.
      *
-     * @param string $host    The input host to parse.
-     * @param bool   $no_port No port number? Defaults to `FALSE`.
+     * @param string $host The input host to parse.
      *
-     * @internal Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
-     *    That SHOULD be left intact for URL generation in almost every scenario.
-     *    However, in a few other edge cases it may be desirable to exclude the port number.
-     *    e.g., if the purpose of obtaining the host is to use it for email generation, or in a slug, etc.
-     *
-     * @return array Host parts; i.e., `name`, `subs`, `sub`, `root`, `root_basename`, `root_as_name`, `tld`.
+     * @return array `[name, port, sub, subs, root, root_name, root_port, root_basename, tld]`.
      *
      * @internal This allows an empty `$host` so that a caller can get the array elements even if empty.
      */
     public function parse(string $host, bool $no_port = false): array
     {
-        if ($no_port) {
-            $host = preg_replace('/\:[0-9]+$/u', '', $host);
-        }
-        $name  = mb_strtolower($host); // `abc.xyz.example.com`
-        $parts = explode('.', $name); // `[abc,xyz,example,com]`
+        $host = mb_strtolower($host); // `abc.xyz.example.com:80`.
 
-        $subs = array_slice($parts, 0, -2); // `[abc,xyz]`
-        $sub  = implode('.', $subs); // `abc.xyz`
+        $name = preg_replace('/\:[0-9]+$/u', '', $host); // `abc.xyz.example.com`.
+        $port = (explode(':', $host, 2) + ['', ''])[1]; // `80`; i.e., port number.
 
-        $root          = implode('.', array_slice($parts, -2)); // `example.com`
-        $root_basename = implode('.', array_slice($parts, -2, 1)); // `example`
-        $root_as_name  = $this->c::slugToName($root_basename); // `Example`
+        $name_parts = explode('.', $name); // `[abc,xyz,example,com]`.
 
-        $tld = implode('.', array_slice($parts, -1)); // `com`
+        $subs = array_slice($name_parts, 0, -2); // `[abc,xyz]`.
+        $sub  = implode('.', $subs); // `abc.xyz`.
 
-        return compact('name', 'subs', 'sub', 'root', 'root_basename', 'root_as_name', 'tld');
+        $root_name     = implode('.', array_slice($name_parts, -2)); // `example.com`.
+        $root_port     = $port; // This is nothing more than a copy of the `$port`; `80`.
+        $root          = $root_name.(isset($root_port[0]) ? ':'.$root_port : ''); // `example.com:80`.
+        $root_basename = implode('.', array_slice($name_parts, -2, 1)); // `example`.
+
+        $tld = implode('.', array_slice($name_parts, -1)); // `com`, `net`, `org`, etc.
+
+        return compact('name', 'port', 'sub', 'subs', 'root', 'root_name', 'root_port', 'root_basename', 'tld');
     }
 
     /**
      * Unparses a host.
      *
      * @since 151002 Adding host parser.
+     * @since 16xxxx Collecting both `name` and `port` now.
      *
      * @param array $parts Input host parts.
      *
@@ -71,6 +75,14 @@ class UrlHost extends Classes\Core\Base\Core
      */
     public function unParse(array $parts): string
     {
-        return !empty($parts['name']) ? (string) $parts['name'] : '';
+        $name = $port= '';
+
+        if (isset($parts['name'][0])) {
+            $name = $parts['name'];
+        }
+        if (isset($parts['port'][0])) {
+            $port = ':'.$parts['port'];
+        }
+        return $name.$port;
     }
 }
