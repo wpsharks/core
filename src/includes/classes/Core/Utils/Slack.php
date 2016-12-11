@@ -256,14 +256,20 @@ class Slack extends Classes\Core\Base\Core
         // Convert markdown headings into Slack `*bold*`.
         $mrkdwn = preg_replace('/^([ ]*)(#+)[ ]+([^#\v]+?)(?:[ ]+\\2)?(?:[ ]+\{[^{}]*\})?$/uim', '$1*$3*', $mrkdwn);
 
-        // Convert markdown list items into Slack `- :checked-box:` or `- :unchecked-box:`.
-        $mrkdwn = preg_replace('/^([ ]*[*\-][ ]+)\[x\](?=[ ]+)/uim', '$1:checked-box:', $mrkdwn);
-        $mrkdwn = preg_replace('/^([ ]*[*\-][ ]+)\[ \](?=[ ]+)/uim', '$1:unchecked-box:', $mrkdwn);
+        // Convert markdown list items into Slack `:li:`.
+        $mrkdwn = preg_replace_callback('/^([ ]*)[*\-][ ]+(?!\[)/uim', function ($m) {
+            return str_replace(' ', '   ', $m[1]).':li:'; // Via emoji code.
+        }, $mrkdwn); // This turns each space into 3 for nested list items.
+
+        // Convert markdown list items into Slack `- :cbc:` or `- :cb:`.
+        $mrkdwn = preg_replace_callback('/^([ ]*)[*\-][ ]+\[([x| ])\](?=[ ]+)/uim', function ($m) {
+            return str_replace(' ', '   ', $m[1]).($m['2'] === 'x' ? ':cbc:' : ':cb:');
+        }, $mrkdwn); // This turns each space into 3 for nested list items.
 
         // Tokenize  markdown `<>` links because `<>` are escaped below. Note UTF-8 `⟨` and `⟩` in place of `<` and `>`.
         $mrkdwn = preg_replace('/(?<=^|[\s;,(])\<([a-z][a-z0-9+.\-]*\:[^\s<>]+)\>(?=$|[\s.!?;,)])/ui', '⟨$1⟩', $mrkdwn);
 
-        // Escape special HTML chars. Converts `[<>&]` into plain text; i.e., disallows raw HTML code.
+        // Escape special HTML chars. Converts `<>&` into plain text; i.e., disallows raw HTML code.
         $mrkdwn = $this->c::escHtmlChars($mrkdwn); // After `<>` links & issue references.
 
         // Restore  markdown `<>` links. Note UTF-8 `⟨` and `⟩` in place of `<` and `>`.

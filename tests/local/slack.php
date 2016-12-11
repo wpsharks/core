@@ -21,6 +21,20 @@ Latest version as of today; see [hello](http://example.com)
 * [x] This is a list item with an <http://example.com> URL.
 * [ ] This is a list item with a [clickable](http://example.com) link.
 
+- [ ] An unchecked list item.
+- [x] A checked list `item`.
+  - [ ] A nested list item.
+    - [ ] A nested list item.
+
+  * [ ] Unchecked with bullet.
+  * [x] Checked with bullet.
+
+- Normal list item.
+  - Nested list item.
+
+* Normal list item with bullet.
+* Normal list item with bullet.
+
 ## BEHAVIOR THAT I EXPECTED
 
 That it should work like this...
