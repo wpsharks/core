@@ -195,8 +195,21 @@ class UrlRemote extends Classes\Core\Base\Core
         }
         # Close cURL resource handle.
 
-        curl_close($curl); // Close cURL resource now.
+        curl_close($curl); // Close cURL resource.
 
+        # Maybe review HTTP connection data.
+
+        if ($this->App->Config->©debug['©log']) {
+            $this->c::review([
+                'url'      => $url,
+                'args'     => $args,
+                'response' => [
+                    'code'    => $curl_code,
+                    'headers' => $curl_headers,
+                    'body'    => $curl_body,
+                ],
+            ], 'Remote URL connection details.', __METHOD__.'#http');
+        }
         # Return final response; array or just the body.
 
         return $return_array ? [
