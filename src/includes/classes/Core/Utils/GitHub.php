@@ -28,7 +28,7 @@ class GitHub extends Classes\Core\Base\Core
      *
      * @since 16xxxx
      *
-     * @var string
+     * @type string
      */
     protected $cache_dir;
 
@@ -86,7 +86,7 @@ class GitHub extends Classes\Core\Base\Core
                 'authorization: token '.$args['api_access_token'],
             ],
             'return_array' => true,
-        ]); // Expecting the API to return a `200` status.
+        ]); // Expecting the API to return file contents.
 
         $response_object = (object) [
             'success'  => $response['code'] === 200,
@@ -103,7 +103,7 @@ class GitHub extends Classes\Core\Base\Core
     }
 
     /**
-     * POST/GET JSON response.
+     * GET JSON response.
      *
      * @since 16xxxx Initial release.
      *
@@ -139,7 +139,7 @@ class GitHub extends Classes\Core\Base\Core
                 'authorization: token '.$args['api_access_token'],
             ],
             'return_array' => true,
-        ]); // Expecting the API to return a `200` status.
+        ]); // Expecting the API to return JSON.
 
         $response_object = (object) [
             'success'  => $response['code'] && $response['code'] < 400,
@@ -198,7 +198,7 @@ class GitHub extends Classes\Core\Base\Core
             ],
             'body'         => $data,
             'return_array' => true,
-        ]); // Expecting the API to return a `200` status.
+        ]); // Expecting the API to return JSON.
 
         $response_object = (object) [
             'success'  => $response['code'] && $response['code'] < 400,

@@ -268,6 +268,11 @@ class Config extends Classes\Core\Base\Core
                 '©api_client_secret' => (string) ($_['CFG_GITHUB_API_CLIENT_SECRET'] ?? ''),
                 '©api_access_token'  => (string) ($_['CFG_GITHUB_API_ACCESS_TOKEN'] ?? ''),
             ],
+            '©zenhub' => [
+                '©api_client_id'     => (string) ($_['CFG_ZENHUB_API_CLIENT_ID'] ?? ''),
+                '©api_client_secret' => (string) ($_['CFG_ZENHUB_API_CLIENT_SECRET'] ?? ''),
+                '©api_access_token'  => (string) ($_['CFG_ZENHUB_API_ACCESS_TOKEN'] ?? ''),
+            ],
         ];
         # Merge `$instance_base` param into `$default_instance_base`.
 

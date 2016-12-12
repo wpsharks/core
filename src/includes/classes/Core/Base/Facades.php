@@ -94,4 +94,5 @@ abstract class Facades
     use Traits\Facades\WordPress;
     use Traits\Facades\Xml;
     use Traits\Facades\Yaml;
+    use Traits\Facades\ZenHub;
 }

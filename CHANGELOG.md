@@ -9,6 +9,8 @@
 - Enhancing `c::clip()` and `c::midClip()`. Now accepts a custom `$more` argument.
 - Corrected some minor bugs in WRegex parsing engine.
 - Adding new Slack utility: `c::slackMrkdwn()`.
+- Adding GitHub API and parsing utilities.
+- Adding ZenHub API utilities.
 
 ## v161013.18318
 
