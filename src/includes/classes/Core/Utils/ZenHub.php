@@ -83,7 +83,7 @@ class ZenHub extends Classes\Core\Base\Core
         $response = $this->c::remoteRequest('GET::'.$url, [
             'headers' => [
                 'accept: application/json',
-                'x-authentication-token: token '.$args['api_access_token'],
+                'x-authentication-token: '.$args['api_access_token'],
             ],
             'return_array' => true,
         ]); // Expecting the API to return JSON.
