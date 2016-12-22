@@ -52,11 +52,35 @@ trait GitHub
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
+     * @see Classes\Core\Utils\GitHub::submitJson()
+     */
+    public static function gitHubSubmitJson(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©GitHub->submitJson(...$args);
+    }
+
+    /**
+     * @since 16xxxx GitHub utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
      * @see Classes\Core\Utils\GitHub::postJson()
      */
     public static function gitHubPostJson(...$args)
     {
         return $GLOBALS[static::class]->Utils->©GitHub->postJson(...$args);
+    }
+
+    /**
+     * @since 16xxxx GitHub utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\GitHub::patchJson()
+     */
+    public static function gitHubPatchJson(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©GitHub->patchJson(...$args);
     }
 
     /**

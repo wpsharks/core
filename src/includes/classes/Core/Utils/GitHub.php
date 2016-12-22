@@ -72,10 +72,10 @@ class GitHub extends Classes\Core\Base\Core
         $args['cache_max_age']    = (int) $args['cache_max_age'];
         $args['api_access_token'] = (string) $args['api_access_token'];
 
-        $url_sha1              = sha1($url); // A SHA-1 hash of the URL.
+        $cache_sha1            = sha1($url.$args['api_access_token']);
         $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
-        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($url_sha1, true);
-        $cache_file            = $cache_dir.'/'.$url_sha1; // Hash location.
+        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($cache_sha1, true);
+        $cache_file            = $cache_dir.'/'.$cache_sha1; // Hash location.
 
         if ($args['cache'] && is_file($cache_file) && filemtime($cache_file) >= $args['cache_max_age']) {
             return $response_object = json_decode(file_get_contents($cache_file));
@@ -125,10 +125,10 @@ class GitHub extends Classes\Core\Base\Core
         $args['cache_max_age']    = (int) $args['cache_max_age'];
         $args['api_access_token'] = (string) $args['api_access_token'];
 
-        $url_sha1              = sha1($url); // A SHA-1 hash of the URL.
+        $cache_sha1            = sha1($url.$args['api_access_token']);
         $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
-        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($url_sha1, true);
-        $cache_file            = $cache_dir.'/'.$url_sha1; // Hash location.
+        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($cache_sha1, true);
+        $cache_file            = $cache_dir.'/'.$cache_sha1; // Hash location.
 
         if ($args['cache'] && is_file($cache_file) && filemtime($cache_file) >= $args['cache_max_age']) {
             return $response_object = json_decode(file_get_contents($cache_file));
@@ -138,6 +138,67 @@ class GitHub extends Classes\Core\Base\Core
                 'accept: application/json',
                 'authorization: token '.$args['api_access_token'],
             ],
+            'return_array' => true,
+        ]); // Expecting the API to return JSON.
+
+        $response_object = (object) [
+            'success'  => $response['code'] && $response['code'] < 400,
+            'data'     => json_decode($response['body']),
+            'response' => $response,
+        ];
+        if ($args['cache']) {
+            if (!is_dir($cache_dir)) {
+                mkdir($cache_dir, $cache_dir_permissions, true);
+            }
+            file_put_contents($cache_file, json_encode($response_object));
+        }
+        return $response_object;
+    }
+
+    /**
+     * Submit JSON data.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param string $url  API URL.
+     * @param mixed  $data Data to submit.
+     * @param array  $args Additional args.
+     *
+     * @return \StdClass Including a boolean `success` property.
+     */
+    public function submitJson(string $url, $data, array $args = []): \StdClass
+    {
+        if (!is_string($data)) {
+            $data = json_encode($data);
+        }
+        $default_args = [
+            'method'           => 'POST',
+            'cache'            => false,
+            'cache_max_age'    => strtotime('-15 minutes'),
+            'api_access_token' => $this->App->Config->©github['©api_access_token'],
+        ];
+        $args += $default_args; // Merge defaults.
+
+        $args['method']           = (string) $args['method'];
+        $args['cache']            = (bool) $args['cache'];
+        $args['cache_max_age']    = (int) $args['cache_max_age'];
+        $args['api_access_token'] = (string) $args['api_access_token'];
+
+        $cache_sha1            = sha1($args['method'].$url.$args['api_access_token'].serialize($data));
+        $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
+        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($cache_sha1, true);
+        $cache_file            = $cache_dir.'/'.$cache_sha1; // Hash location.
+
+        if ($args['cache'] && is_file($cache_file) && filemtime($cache_file) >= $args['cache_max_age']) {
+            return $response_object = json_decode(file_get_contents($cache_file));
+        }
+        $response = $this->c::remoteRequest($args['method'].'::'.$url, [
+            'headers' => [
+                'accept: application/json',
+                'content-type: application/json',
+                'authorization: token '.$args['api_access_token'],
+            ],
+            'body'         => $data,
             'return_array' => true,
         ]); // Expecting the API to return JSON.
 
@@ -168,50 +229,23 @@ class GitHub extends Classes\Core\Base\Core
      */
     public function postJson(string $url, $data, array $args = []): \StdClass
     {
-        if (!is_string($data)) {
-            $data = json_encode($data);
-        }
-        $default_args = [
-            'cache'            => false,
-            'cache_max_age'    => strtotime('-15 minutes'),
-            'api_access_token' => $this->App->Config->©github['©api_access_token'],
-        ];
-        $args += $default_args; // Merge defaults.
+        return $this->submitJson($url, $data, array_merge($args, ['method' => 'POST']));
+    }
 
-        $args['cache']            = (bool) $args['cache'];
-        $args['cache_max_age']    = (int) $args['cache_max_age'];
-        $args['api_access_token'] = (string) $args['api_access_token'];
-
-        $url_sha1              = sha1($url); // A SHA-1 hash of the URL.
-        $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
-        $cache_dir             = $this->cache_dir.'/'.$this->c::sha1ModShardId($url_sha1, true);
-        $cache_file            = $cache_dir.'/'.$url_sha1; // Hash location.
-
-        if ($args['cache'] && is_file($cache_file) && filemtime($cache_file) >= $args['cache_max_age']) {
-            return $response_object = json_decode(file_get_contents($cache_file));
-        }
-        $response = $this->c::remoteRequest('POST::'.$url, [
-            'headers' => [
-                'accept: application/json',
-                'content-type: application/json',
-                'authorization: token '.$args['api_access_token'],
-            ],
-            'body'         => $data,
-            'return_array' => true,
-        ]); // Expecting the API to return JSON.
-
-        $response_object = (object) [
-            'success'  => $response['code'] && $response['code'] < 400,
-            'data'     => json_decode($response['body']),
-            'response' => $response,
-        ];
-        if ($args['cache']) {
-            if (!is_dir($cache_dir)) {
-                mkdir($cache_dir, $cache_dir_permissions, true);
-            }
-            file_put_contents($cache_file, json_encode($response_object));
-        }
-        return $response_object;
+    /**
+     * PATCH JSON data.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param string $url  API URL.
+     * @param mixed  $data Data to PATCH.
+     * @param array  $args Additional args.
+     *
+     * @return \StdClass Including a boolean `success` property.
+     */
+    public function patchJson(string $url, $data, array $args = []): \StdClass
+    {
+        return $this->submitJson($url, $data, array_merge($args, ['method' => 'PATCH']));
     }
 
     /**
