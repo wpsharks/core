@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @since 160522 Debugging utilities.
      *
-     * @var string Logs directory.
+     * @type string Logs directory.
      */
     protected $logs_dir;
 
@@ -37,7 +37,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @since 160522 Debugging utilities.
      *
-     * @var int Max log file size.
+     * @type int Max log file size.
      */
     protected $max_log_file_size;
 
@@ -46,7 +46,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @since 160522 Debugging utilities.
      *
-     * @var string Max log file age.
+     * @type string Max log file age.
      */
     protected $max_log_file_age;
 
@@ -55,7 +55,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
      *
      * @since 160522 Debugging utilities.
      *
-     * @var array First-process writes by file.
+     * @type array First-process writes by file.
      */
     protected $first_process_writes;
 
@@ -199,7 +199,7 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
     protected function writeLogFileLines(string $event, array $lines): int
     {
         if (!$lines) { // No lines?
-            return; // Stop; nothing to do here.
+            return 0; // Stop; nothing to do here.
         }
         $this->prepareLogsDir(); // Prepares (and secures).
 
