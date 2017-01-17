@@ -1,114 +1,14 @@
-@import 'bourbon/bourbon';
-@import 'mixins/responsive';
-@import 'functions/units';
-@import 'colors/core';
+@import 'base';
 
 /*
- * HTML/body.
+ * Colors.
  */
+$app-main-header-border-color: #eee;
 
-html, body {
-  font-size:                  16px;
-
-  @include mobile-and-tablet-only {
-    font-size:                14px;
-  }
-}
-
-body {
-  overflow-y:                 scroll !important;
-}
-
-/*
- * Blockquote tags.
- */
-blockquote {
-  padding:                    1em;
-  border-radius:             .25em;
-  quotes:                     '“' '”';
-  background:                 $blockquote-bg-color;
-  border-left:                0.1em solid $blockquote-border-color;
-}
-
-blockquote::before {
-  font-size:                  3em;
-  float:                      left;
-  content:                    open-quote;
-  margin:                    .25em .1em 0 0;
-  color:                      $blockquote-quote-color;
-}
-
-blockquote::after {
-  font-size:                  3em;
-  float:                      right;
-  content:                    close-quote;
-  margin:                     0 .1em .25em 0;
-  color:                      $blockquote-quote-color;
-}
-
-/*
- * Form fields.
- */
-[placeholder]:focus::-webkit-input-placeholder {
-  opacity:                    0.25;
-}
-
-/*
- * Buttons.
- */
-.ui.buttons {
-  .ui.button {
-    + .or {
-      &::before {
-        font-weight:          400;
-        font-size:           .75em;
-        line-height:          1.75em;
-        padding-left:        .075em;
-      }
-    }
-  }
-}
-
-/*
- * Tag labels.
- */
-.ui.tag.label {
-  @include small-screen-plus {
-    font-size:                rem(14);
-
-    &.mini {
-      font-size:              rem(11);
-    }
-
-    &.tiny {
-      font-size:              rem(12);
-    }
-
-    &.small {
-      font-size:              rem(13);
-    }
-
-    &.medium {
-      font-size:              rem(14);
-    }
-
-    &.large {
-      font-size:              rem(16);
-    }
-
-    &.big {
-      font-size:              rem(20);
-    }
-
-    &.huge {
-      font-size:              rem(22);
-    }
-
-    &.massive {
-      font-size:              rem(26);
-    }
-  }
-}
+$app-main-footer-inverted-heading-color: #505050;
+$app-main-footer-inverted-text-color: #828282;
+$app-main-footer-inverted-link-color: #a1a1a1;
+$app-main-footer-inverted-link-hover-color: #fff;
 
 /*
  * Main header.
@@ -172,55 +72,5 @@ blockquote::after {
   .-right-side {
     //
 
-  }
-}
-
-/*
- * Article utils.
- */
-._article {
-  > p:first-of-type:not([class]) {
-    font-size:                1.25em;
-    font-family:              'Georgia', serif;
-  }
-}
-
-/*
- * Muted utils.
- */
-._muted {
-  opacity:                    0.5;
-}
-
-[class*='_very _muted'] {
-  opacity:                    0.25;
-}
-
-[class*='_muted _when-not-hovering'] {
-  &:hover {
-    opacity:                  1;
-  }
-}
-
-/*
- * Blurred utils.
- */
-._blurred {
-  @include filter(blur(2px));
-
-  opacity:                    0.5;
-}
-
-[class*='_very _blurred'] {
-  @include filter(blur(4px));
-
-  opacity:                    0.25;
-}
-
-[class*='_blurred _when-not-hovering'] {
-  &:hover {
-    @include filter(none);
-
-    opacity:                  1;
   }
 }

@@ -1,25 +1,13 @@
 /*
- * `<pre>`, `<code>` and other monospace tags.
+ * Fancy monospace tags.
  */
-@mixin monospace-styles(
-  $pre-bg-color: #f8f8f8,
-
-  $code-color: #0f0f0f,
-  $code-bg-color: #f9f9f9,
-  $code-border-color: #ececec,
-  $code-text-shadow-color: #fff,
-
-  $kbd-color: #666,
-  $kbd-bg-color: #fff,
-  $kbd-box-shadow-color1: rgba(0, 0, 0, 0.75),
-  $kbd-box-shadow-color2: #fff
-) {
+@mixin fancy-monospace-tags {
   pre,
   code,
   samp,
   kbd,
   tt {
-    font-family:              'Hack', 'Menlo', 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', monospace;
+    font-family:              $monospace;
   }
 
   kbd,

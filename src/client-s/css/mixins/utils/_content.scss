@@ -1,0 +1,11 @@
+/*
+ * Content utils.
+ */
+@mixin content-utils {
+  ._content {
+    > p:first-of-type:not([class]) {
+      font-size:              1.25em;
+      font-family:            $georgia;
+    }
+  }
+}

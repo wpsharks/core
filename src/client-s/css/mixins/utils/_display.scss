@@ -1,0 +1,20 @@
+/*
+ * Display utils.
+ */
+@mixin display-utils {
+  ._hidden {
+    display:                  none !important;
+  }
+
+  ._inline {
+    display:                  inline !important;
+  }
+
+  ._inline-block {
+    display:                  inline-block !important;
+  }
+
+  ._block {
+    display:                  none !important;
+  }
+}

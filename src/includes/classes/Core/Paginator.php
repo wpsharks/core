@@ -38,31 +38,42 @@ class Paginator extends Classes\Core\Base\Core
         $default_args = [
             'page'       => 1,
             'per_page'   => 25,
+
             'found_rows' => 0,
-            'show_pages' => 15,
+            'range'      => 2,
 
-            'page_url'    => '#%%page%%',
-            'pages_class' => 'ui basic buttons',
+            'page_url_callback'     => null,
+            'page_replacement_code' => '%%page%%',
+            'page_url'              => '#%%page%%',
 
-            'page_class'          => 'ui button',
-            'page_active_class'   => 'ui basic primary button',
-            'page_disabled_class' => 'ui disabled button',
+            'page_class'               => 'item',
+            'page_icon_class'          => 'item',
+            'page_active_class'        => 'active item',
+            'page_disabled_class'      => 'disabled item',
+            'page_icon_disabled_class' => 'disabled item',
+            'pages_class'              => 'ui mini pagination menu',
 
-            'page_icon_class'          => 'ui icon button',
-            'page_icon_disabled_class' => 'ui disabled icon button',
+            'prev_page_icon'  => '<i class="chevron left icon"></i>',
+            'first_page_icon' => '<i class="angle double left icon"></i>',
 
-            'prev_page_icon' => '<i class="left arrow icon"></i>',
-            'next_page_icon' => '<i class="right arrow icon"></i>',
+            'last_page_icon' => '<i class="angle double right icon"></i>',
+            'next_page_icon' => '<i class="chevron right icon"></i>',
+
             'ellipsis_icon'  => '<i class="ellipsis horizontal icon"></i>',
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $args               = array_map('strval', $args);
+        foreach ($args as $_key => &$_value) {
+            if ($_key !== 'page_url_callback') {
+                $_value = (string) $_value;
+            }
+        } // unset($_key, $_value); // Housekeeping.
+
         $args['page']       = max(1, (int) $args['page']);
         $args['per_page']   = max(1, (int) $args['per_page']);
         $args['found_rows'] = max(0, (int) $args['found_rows']);
-        $args['show_pages'] = max(2, (int) $args['show_pages']);
+        $args['range']      = max(1, (int) $args['range']);
 
         $this->overload((object) $args, true);
     }
@@ -91,54 +102,81 @@ class Paginator extends Classes\Core\Base\Core
         $first_page = 1; // Always `1` (first page).
         $last_page  = (int) ceil($this->found_rows / $this->per_page);
 
-        $start_page = $this->page - $this->show_pages > 0 ? $this->page - $this->show_pages : 1;
-        $end_page   = $this->page + $this->show_pages < $last_page ? $this->page + $this->show_pages : $last_page;
+        // Note: `6` = Prev, [x], ..., ..., [x], Next.
+
+        if ($last_page < ($this->range * 2) + 6) {
+            $start_page = $first_page;
+            $end_page   = $last_page;
+        } elseif ($this->page < ($this->range * 2) + 1) {
+            $start_page = $first_page;
+            $end_page   = ($this->range * 2) + 3;
+        } elseif ($page > $last_page - ($this->range * 2)) {
+            $start_page = $last_page - ($this->range * 2) - 2;
+            $end_page   = $last_page;
+        } else {
+            $start_page = $this->page - $this->range;
+            $end_page   = $this->page + $this->range;
+        }
+        $start_page = max($first_page, $start_page);
+        $end_page   = min($last_page, $end_page);
 
         $links = '<div class="'.$this->pages_class.'">';
 
-        $links .= '<a class="'.$this->c::escAttr($this->page === $first_page ? $this->page_icon_disabled_class : $this->page_icon_class).'"'.
-                    ' href="'.$this->c::escUrl($this->page === $first_page ? '#' : str_replace('%%page%%', $this->page - 1, $this->page_url)).'"'.
-                    ' style="'.($this->page === $first_page ? 'pointer-events:none;' : '').'">';
+        $links .= '<a class="-prev-page '.$this->c::escAttr($this->page === $first_page ? $this->page_icon_disabled_class : $this->page_icon_class).'"'.
+                    ' href="'.$this->c::escUrl($this->page === $first_page ? '#' : $this->pageUrl($this->page - 1)).'">';
         $links .= $this->prev_page_icon;
         $links .= '</a>';
 
         if ($start_page > $first_page) {
-            $links .= '<a class="'.$this->c::escAttr($this->page_class).'"'.
-                        ' href="'.$this->c::escUrl(str_replace('%%page%%', $first_page, $this->page_url)).'">';
-            $links .= $first_page;
+            $links .= '<a class="-first-page '.$this->c::escAttr($this->page_class).'"'.
+                        ' href="'.$this->c::escUrl($this->pageUrl($first_page)).'">';
+            $links .= $this->first_page_icon.' '.$first_page;
             $links .= '</a>';
 
-            $links .= '<a class="'.$this->c::escAttr($this->page_icon_disabled_class).'"'.
-                      ' href="#" style="pointer-events:none;">';
+            $links .= '<span class="-ellipsis '.$this->c::escAttr($this->page_icon_disabled_class).'">';
             $links .= $this->ellipsis_icon;
-            $links .= '</a>';
+            $links .= '</span>';
         }
         for ($_page = $start_page; $_page <= $end_page; ++$_page) {
-            $links .= '<a class="'.$this->c::escAttr($_page === $this->page ? $this->page_active_class : $this->page_class).'"'.
-                        ' href="'.$this->c::escUrl($_page === $this->page ? '#' : str_replace('%%page%%', $_page, $this->page_url)).'"'.
-                        ' style="'.($_page === $this->page ? 'pointer-events:none;' : '').'">';
+            $links .= '<a class="-page '.$this->c::escAttr($_page === $this->page ? $this->page_active_class : $this->page_class).'"'.
+                        ' href="'.$this->c::escUrl($_page === $this->page ? '#' : $this->pageUrl($_page)).'">';
             $links .= $_page;
             $links .= '</a>';
         }
         if ($end_page < $last_page) {
-            $links .= '<a class="'.$this->c::escAttr($this->page_icon_disabled_class).'"'.
-                      ' href="#" style="pointer-events:none;">';
+            $links .= '<span class="-ellipsis '.$this->c::escAttr($this->page_icon_disabled_class).'">';
             $links .= $this->ellipsis_icon;
-            $links .= '</a>';
+            $links .= '</span>';
 
-            $links .= '<a class="'.$this->c::escAttr($this->page_class).'"'.
-                        ' href="'.$this->c::escUrl(str_replace('%%page%%', $last_page, $this->page_url)).'">';
-            $links .= $last_page;
+            $links .= '<a class="-last-page '.$this->c::escAttr($this->page_class).'"'.
+                        ' href="'.$this->c::escUrl($this->pageUrl($last_page)).'">';
+            $links .= $last_page.' '.$this->last_page_icon;
             $links .= '</a>';
         }
-        $links .= '<a class="'.$this->c::escAttr($this->page === $last_page ? $this->page_icon_disabled_class : $this->page_icon_class).'"'.
-                    ' href="'.$this->c::escUrl($this->page === $last_page ? '#' : str_replace('%%page%%', $this->page + 1, $this->page_url)).'"'.
-                    ' style="'.($this->page === $last_page ? 'pointer-events:none;' : '').'">';
+        $links .= '<a class="-next-page '.$this->c::escAttr($this->page === $last_page ? $this->page_icon_disabled_class : $this->page_icon_class).'"'.
+                    ' href="'.$this->c::escUrl($this->page === $last_page ? '#' : $this->pageUrl($this->page + 1)).'">';
         $links .= $this->next_page_icon;
         $links .= '</a>';
 
         $links .= '</div>';
 
         return $links;
+    }
+
+    /**
+     * Get page URL.
+     *
+     * @since 170117 Paginator.
+     *
+     * @param int $page Page number.
+     *
+     * @return string Page URL.
+     */
+    protected function pageUrl(int $page): string
+    {
+        if ($this->page_url_callback && is_callable($this->page_url_callback)) {
+            return str_replace($this->page_replacement_code, $page, (string) $this->page_url_callback($page));
+        }
+        return str_replace($this->page_replacement_code, $page, $this->page_url);
     }
 }

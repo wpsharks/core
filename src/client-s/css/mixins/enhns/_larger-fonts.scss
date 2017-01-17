@@ -1,0 +1,62 @@
+@import '../../functions/units';
+@import '../tools/responsive';
+
+/*
+ * Larger fonts.
+ */
+@mixin larger-fonts($small-screen: -2) {
+  $base: strip-units($em-base);
+
+  /*
+   * Base.
+   */
+  html,
+  body {
+    font-size:                #{$base}px;
+
+    @include mobile-and-tablet-only {
+      font-size:              #{$base + $small-screen}px;
+    }
+  }
+
+  /*
+   * Tag labels.
+   */
+  .ui.tag.label {
+    @include small-screen-plus {
+      font-size:              _rem(14);
+
+      &.mini {
+        font-size:            _rem(11);
+      }
+
+      &.tiny {
+        font-size:            _rem(12);
+      }
+
+      &.small {
+        font-size:            _rem(13);
+      }
+
+      &.medium {
+        font-size:            _rem(14);
+      }
+
+      &.large {
+        font-size:            _rem(16);
+      }
+
+      &.big {
+        font-size:            _rem(20);
+      }
+
+      &.huge {
+        font-size:            _rem(22);
+      }
+
+      &.massive {
+        font-size:            _rem(26);
+      }
+    }
+  }
+}

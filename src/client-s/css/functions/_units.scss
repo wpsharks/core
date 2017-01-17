@@ -1,6 +1,13 @@
 /*
- * Unit functions.
+ * Pixels to rem.
  */
-@function rem($pixels, $context: 16) {
-  @return #{$pixels / $context}rem;
+@function _rem($pixels, $base: $em-base) {
+  $pixels: strip-units($pixels);
+  $base: strip-units($base);
+
+  @return #{$pixels / $base}rem;
 }
+
+// Note: `rem($pixels)` exists in Bourbon.
+// However, it is deprecated and does not support `$base`.
+// On the up side, `em($pixels, $base)` already exists in Bourbon.

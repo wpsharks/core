@@ -1,0 +1,18 @@
+/*
+ * Muted utils.
+ */
+@mixin muted-utils {
+  ._muted {
+    opacity:                  0.5 !important;
+  }
+
+  [class*='_very _muted'] {
+    opacity:                  0.25 !important;
+  }
+
+  [class*='_muted _when-not-hovering'] {
+    &:hover {
+      opacity:                1 !important;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+/*
+ * Align utils.
+ */
+@mixin align-utils {
+  ._left {
+    text-align:               left !important;
+  }
+
+  ._float-left,
+  ._pull-left,
+  ._yank-left {
+    float:                    left !important;
+  }
+
+  ._pull-left {
+    margin-right:             1em !important;
+    margin-bottom:            1em !important;
+  }
+
+  ._yank-left {
+    margin-right:             2em !important;
+    margin-bottom:            2em !important;
+  }
+
+  ._center {
+    text-align:               center !important;
+  }
+
+  ._center-block {
+    margin-left:              auto !important;
+    margin-right:             auto !important;
+    display:                  block !important;
+  }
+
+  ._right {
+    text-align:               right !important;
+  }
+
+  ._float-right,
+  ._pull-right,
+  ._yank-right {
+    float:                    right !important;
+  }
+
+  ._pull-right {
+    margin-left:              1em !important;
+    margin-bottom:            1em !important;
+  }
+
+  ._yank-right {
+    margin-left:              2em !important;
+    margin-bottom:            2em !important;
+  }
+}
