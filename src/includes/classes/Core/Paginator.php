@@ -53,11 +53,13 @@ class Paginator extends Classes\Core\Base\Core
             'page_icon_disabled_class' => 'disabled item',
             'pages_class'              => 'ui mini pagination menu',
 
+            'prev_page_text'  => __('Prev'),
             'prev_page_icon'  => '<i class="chevron left icon"></i>',
             'first_page_icon' => '<i class="angle double left icon"></i>',
 
-            'last_page_icon' => '<i class="angle double right icon"></i>',
-            'next_page_icon' => '<i class="chevron right icon"></i>',
+            'last_page_icon'  => '<i class="angle double right icon"></i>',
+            'next_page_icon'  => '<i class="chevron right icon"></i>',
+            'next_page_text'  => __('Next'),
 
             'ellipsis_icon'  => '<i class="ellipsis horizontal icon"></i>',
         ];
@@ -103,6 +105,8 @@ class Paginator extends Classes\Core\Base\Core
         $last_page  = (int) ceil($this->found_rows / $this->per_page);
 
         // Note: `6` = Prev, [x], ..., ..., [x], Next.
+        // Calculations below force a consistent menu width.
+        // i.e., Always the same number of links in the menu.
 
         if ($last_page < ($this->range * 2) + 6) {
             $start_page = $first_page;
@@ -110,7 +114,7 @@ class Paginator extends Classes\Core\Base\Core
         } elseif ($this->page < ($this->range * 2) + 1) {
             $start_page = $first_page;
             $end_page   = ($this->range * 2) + 3;
-        } elseif ($page > $last_page - ($this->range * 2)) {
+        } elseif ($this->page > $last_page - ($this->range * 2)) {
             $start_page = $last_page - ($this->range * 2) - 2;
             $end_page   = $last_page;
         } else {
@@ -124,7 +128,7 @@ class Paginator extends Classes\Core\Base\Core
 
         $links .= '<a class="-prev-page '.$this->c::escAttr($this->page === $first_page ? $this->page_icon_disabled_class : $this->page_icon_class).'"'.
                     ' href="'.$this->c::escUrl($this->page === $first_page ? '#' : $this->pageUrl($this->page - 1)).'">';
-        $links .= $this->prev_page_icon;
+        $links .= $this->prev_page_icon.' '.$this->c::escHtml($this->prev_page_text);
         $links .= '</a>';
 
         if ($start_page > $first_page) {
@@ -155,7 +159,7 @@ class Paginator extends Classes\Core\Base\Core
         }
         $links .= '<a class="-next-page '.$this->c::escAttr($this->page === $last_page ? $this->page_icon_disabled_class : $this->page_icon_class).'"'.
                     ' href="'.$this->c::escUrl($this->page === $last_page ? '#' : $this->pageUrl($this->page + 1)).'">';
-        $links .= $this->next_page_icon;
+        $links .= $this->c::escHtml($this->next_page_text).' '.$this->next_page_icon;
         $links .= '</a>';
 
         $links .= '</div>';
