@@ -1,0 +1,11 @@
+/*
+ * Fancy navigation menus.
+ */
+@mixin fancy-navigation-menus {
+  nav > .menu {
+    .dropdown.item:not(a):not(.link),
+    .dropdown > .menu .item:not(a):not(.link) {
+      cursor:                 default;
+    }
+  }
+}

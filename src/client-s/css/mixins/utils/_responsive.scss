@@ -1,0 +1,106 @@
+/*
+ * Responsive utils.
+ */
+@mixin responsive-utils {
+  // `mobile only` hide.
+  @media only screen and (max-width: 767px) {
+    .tablet.only:not(.ui)[class*='tablet only'] {
+      display:                none !important;
+    }
+
+    .computer.only:not(.ui)[class*='computer only'] {
+      display:                none !important;
+    }
+
+    .large.screen.only:not(.ui)[class*='large screen only'] {
+      display:                none !important;
+    }
+
+    .widescreen.only:not(.ui)[class*='widescreen only'] {
+      display:                none !important;
+    }
+  }
+
+  // `tablet only` hide.
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .mobile.only:not(.ui)[class*='mobile only'] {
+      display:                none !important;
+    }
+
+    .computer.only:not(.ui)[class*='computer only'] {
+      display:                none !important;
+    }
+
+    .large.screen.only:not(.ui)[class*='large screen only'] {
+      display:                none !important;
+    }
+
+    .widescreen.only:not(.ui)[class*='widescreen only'] {
+      display:                none !important;
+    }
+  }
+
+  // -------------------------------------------------------------------------------------------------------------------
+  // Note: `handheld only` is already covered in other sequences ↑ ↓
+  // Note also, the additional `:not(.ui)` check is removed for `handheld only`.
+  // The reason is because Semantic UI doesn't support `handheld only` natively, so we add it in.
+  // In other words, there is no overlap in functionality when it comes to `handheld only`, so no need to exclude.
+  // -------------------------------------------------------------------------------------------------------------------
+
+  // `computer only` hide.
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .mobile.only:not(.ui)[class*='mobile only'] {
+      display:                none !important;
+    }
+
+    .tablet.only:not(.ui)[class*='tablet only'] {
+      display:                none !important;
+    }
+
+    .handheld.only[class*='handheld only'] {
+      display:                none !important;
+    }
+
+    .large.screen.only:not(.ui)[class*='large screen only'] {
+      display:                none !important;
+    }
+
+    .widescreen.only:not(.ui)[class*='widescreen only'] {
+      display:                none !important;
+    }
+  }
+
+  // `large screen only` hide.
+  @media only screen and (min-width: 1200px) and (max-width: 1919px) {
+    .mobile.only:not(.ui)[class*='mobile only'] {
+      display:                none !important;
+    }
+
+    .tablet.only:not(.ui)[class*='tablet only'] {
+      display:                none !important;
+    }
+
+    .handheld.only[class*='handheld only'] {
+      display:                none !important;
+    }
+
+    .widescreen.only:not(.ui)[class*='widescreen only'] {
+      display:                none !important;
+    }
+  }
+
+  // `widescreen only` hide.
+  @media only screen and (min-width: 1920px) {
+    .mobile.only:not(.ui)[class*='mobile only'] {
+      display:                none !important;
+    }
+
+    .tablet.only:not(.ui)[class*='tablet only'] {
+      display:                none !important;
+    }
+
+    .handheld.only[class*='handheld only'] {
+      display:                none !important;
+    }
+  }
+}

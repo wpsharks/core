@@ -1,0 +1,9 @@
+/*
+ * Responsive images.
+ */
+@mixin responsive-imgs {
+  img {
+    height:                   auto;
+    max-width:                100%;
+  }
+}

@@ -14,7 +14,7 @@
   body {
     font-size:                #{$base}px;
 
-    @include mobile-and-tablet-only {
+    @include handheld-only {
       font-size:              #{$base + $small-screen}px;
     }
   }
@@ -23,7 +23,7 @@
    * Tag labels.
    */
   .ui.tag.label {
-    @include small-screen-plus {
+    @include computer-only {
       font-size:              _rem(14);
 
       &.mini {

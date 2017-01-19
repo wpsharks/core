@@ -1,50 +1,41 @@
 /*
- * Mixins.
+ * Mixins for responsive tweaks.
+ * See: <http://semantic-ui.com/elements/container.html>
+ * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
+ * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
  */
 @mixin mobile-only {
-  @media (max-width: 767px) {
-    @content;
-  }
-}
-
-@mixin tablet-plus {
-  @media (min-width: 768px) {
+  @media only screen and (max-width: 767px) {
     @content;
   }
 }
 
 @mixin tablet-only {
-  @media (min-width: 768px) and (max-width: 991px) {
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
     @content;
   }
 }
 
-@mixin mobile-and-tablet-only {
-  @media (max-width: 991px) {
+@mixin handheld-only {
+  @media only screen and (max-width: 991px) {
     @content;
   }
 }
 
-@mixin small-screen-plus {
-  @media (min-width: 992px) {
-    @content;
-  }
-}
-
-@mixin small-screen-only {
-  @media (min-width: 992px) and (max-width: 1199px) {
-    @content;
-  }
-}
-
-@mixin small-and-large-screen-only {
-  @media (min-width: 992px) {
+@mixin computer-only {
+  @media only screen and (min-width: 992px) {
     @content;
   }
 }
 
 @mixin large-screen-only {
-  @media (min-width: 1200px) {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin widescreen-only {
+  @media only screen and (min-width: 1920px) {
     @content;
   }
 }

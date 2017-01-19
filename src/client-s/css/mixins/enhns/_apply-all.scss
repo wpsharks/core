@@ -1,7 +1,8 @@
 @import 'all';
 @include larger-fonts;
-@include body-scrollbar;
+@include responsive-imgs;
 @include fancy-blockquotes;
 @include fancy-monospace-tags;
+@include fancy-navigation-menus;
 @include fancy-pagination-menus;
 @include fancy-placeholders;
