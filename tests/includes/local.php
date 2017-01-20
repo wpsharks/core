@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes\App;
@@ -13,6 +13,7 @@ ${__FILE__}['instance_base'] = json_decode(ob_get_clean(), true);
 $App = new App(${__FILE__}['instance_base'], [
     '©debug' => [
         '©enable'        => true,
+        '©edge'          => true,
         '©log'           => true,
         '©er_enable'     => true,
         '©er_display'    => true,

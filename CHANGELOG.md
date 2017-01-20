@@ -12,6 +12,7 @@
 - Adding GitHub API and parsing utilities.
 - Adding ZenHub API utilities.
 - Enhancing CSS framework.
+- Adding `c::humanTimeDiff()`.
 
 ## v161013.18318
 

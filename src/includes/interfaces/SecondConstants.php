@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Interfaces;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @var int Seconds in minute.
+     * @type int Seconds in minute.
      */
     const SECONDS_IN_MINUTE = 60;
 
@@ -37,7 +37,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @var int Seconds in hour.
+     * @type int Seconds in hour.
      */
     const SECONDS_IN_HOUR = 3600;
 
@@ -46,7 +46,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @var int Seconds in day.
+     * @type int Seconds in day.
      */
     const SECONDS_IN_DAY = 86400;
 
@@ -55,7 +55,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @var int Seconds in week.
+     * @type int Seconds in week.
      */
     const SECONDS_IN_WEEK = 604800;
 
@@ -64,7 +64,7 @@ interface SecondConstants
      *
      * @since 160515 Second constants.
      *
-     * @var int Seconds in year.
+     * @type int Seconds in year.
      */
     const SECONDS_IN_YEAR = 31536000;
 }
