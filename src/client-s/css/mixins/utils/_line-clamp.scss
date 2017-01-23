@@ -1,0 +1,11 @@
+/*
+ * Line clamp utils.
+ */
+@mixin line-clamp-utils {
+  ._line_clamp {
+    max-width:                100% !important;
+    white-space:              nowrap !important;
+    overflow:                 hidden !important;
+    text-overflow:            ellipsis !important;
+  }
+}

@@ -2,23 +2,23 @@
  * Blurred utils.
  */
 @mixin blurred-utils {
-  ._blurred {
+  ._blurred:not([class*='_blurred _on_hover']),
+  ._blurred[class*='_blurred _on_hover']:hover {
     @include filter(blur(2px) !important);
 
     opacity:                  0.5 !important;
   }
 
-  [class*='_very _blurred'] {
+  ._very._blurred:not([class*='_blurred _on_hover']),
+  ._very._blurred[class*='_blurred _on_hover']:hover {
     @include filter(blur(4px) !important);
 
     opacity:                  0.25 !important;
   }
 
-  [class*='_blurred _when-not-hovering'] {
-    &:hover {
-      @include filter(none !important);
+  ._blurred[class*='_blurred _not_on_hover']:hover {
+    @include filter(none !important);
 
-      opacity:                1 !important;
-    }
+    opacity:                  1 !important;
   }
 }

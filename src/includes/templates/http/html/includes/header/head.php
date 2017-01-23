@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
@@ -57,7 +57,7 @@ use function get_defined_vars as vars;
         <meta property="og:article:author" content="<?= $this->c::escAttr($head['og']['article:author']); ?>" />
         <?php foreach ($head['og']['article:tags'] as $_tag) : ?>
             <meta property="og:article:tag" content="<?= $this->c::escAttr($_tag); ?>" />
-        <?php endforeach; // unset($_tag); ?>
+        <?php endforeach; // unset($_tag);?>
         <meta property="og:article:section" content="<?= $this->c::escAttr($head['og']['article:section']); ?>" />
         <meta property="og:article:published_time" content="<?= $this->c::escAttr($head['og']['article:published_time']); ?>" />
         <meta property="og:article:modified_time" content="<?= $this->c::escAttr($head['og']['article:modified_time']); ?>" />
