@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Time.
  *
- * @since 17xxxx
+ * @since 170124.74961
  */
 trait Time
 {
     /**
-     * @since 17xxxx Human time diff.
+     * @since 170124.74961 Human time diff.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

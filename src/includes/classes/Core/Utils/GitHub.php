@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * GitHub.
  *
- * @since 16xxxx GitHub utils.
+ * @since 170124.74961 GitHub utils.
  */
 class GitHub extends Classes\Core\Base\Core
 {
     /**
      * Cache directory.
      *
-     * @since 16xxxx
+     * @since 170124.74961
      *
      * @type string
      */
@@ -35,7 +35,7 @@ class GitHub extends Classes\Core\Base\Core
     /**
      * Class constructor.
      *
-     * @since 16xxxx GitHub utils.
+     * @since 170124.74961 GitHub utils.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -52,7 +52,7 @@ class GitHub extends Classes\Core\Base\Core
     /**
      * GET raw response.
      *
-     * @since 16xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param string $url  API URL.
      * @param array  $args Additional args.
@@ -105,7 +105,7 @@ class GitHub extends Classes\Core\Base\Core
     /**
      * GET JSON response.
      *
-     * @since 16xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param string $url  API URL.
      * @param array  $args Additional args.
@@ -158,7 +158,7 @@ class GitHub extends Classes\Core\Base\Core
     /**
      * Submit JSON data.
      *
-     * @since 16xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param string $url  API URL.
      * @param mixed  $data Data to submit.
@@ -219,7 +219,7 @@ class GitHub extends Classes\Core\Base\Core
     /**
      * POST JSON data.
      *
-     * @since 16xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param string $url  API URL.
      * @param mixed  $data Data to POST.
@@ -235,7 +235,7 @@ class GitHub extends Classes\Core\Base\Core
     /**
      * PATCH JSON data.
      *
-     * @since 16xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param string $url  API URL.
      * @param mixed  $data Data to PATCH.
@@ -251,7 +251,7 @@ class GitHub extends Classes\Core\Base\Core
     /**
      * Issues refs.
      *
-     * @since 16xxxx GitHub utils.
+     * @since 170124.74961 GitHub utils.
      *
      * @param mixed $value   Input value.
      * @param array $args    Additional args.
@@ -325,7 +325,7 @@ class GitHub extends Classes\Core\Base\Core
     /**
      * Markdown issue refs.
      *
-     * @since 16xxxx GitHub utils.
+     * @since 170124.74961 GitHub utils.
      *
      * @param mixed $value Input value.
      * @param array $args  Additional args.

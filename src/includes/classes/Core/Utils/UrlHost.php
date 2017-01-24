@@ -27,13 +27,13 @@ class UrlHost extends Classes\Core\Base\Core
      * Host parser.
      *
      * @since 151002 Adding host parser.
-     * @since 16xxxx Adding `port` key.
-     * @since 16xxxx Adding `root_name` key.
-     * @since 16xxxx Adding `root_port` key.
-     * @since 16xxxx Removing `root_as_name` key.
-     * @since 16xxxx The `name` key now contains only the name.
-     * @since 16xxxx The `root` key now contains a full root host (including port).
-     * @since 16xxxx Bug fix. Hosts with ports in their name are now exploded properly.
+     * @since 170124.74961 Adding `port` key.
+     * @since 170124.74961 Adding `root_name` key.
+     * @since 170124.74961 Adding `root_port` key.
+     * @since 170124.74961 Removing `root_as_name` key.
+     * @since 170124.74961 The `name` key now contains only the name.
+     * @since 170124.74961 The `root` key now contains a full root host (including port).
+     * @since 170124.74961 Bug fix. Hosts with ports in their name are now exploded properly.
      *
      * @param string $host The input host to parse.
      *
@@ -67,7 +67,7 @@ class UrlHost extends Classes\Core\Base\Core
      * Unparses a host.
      *
      * @since 151002 Adding host parser.
-     * @since 16xxxx Collecting both `name` and `port` now.
+     * @since 170124.74961 Collecting both `name` and `port` now.
      *
      * @param array $parts Input host parts.
      *

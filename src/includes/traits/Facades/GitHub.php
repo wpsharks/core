@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * GitHub.
  *
- * @since 16xxxx
+ * @since 170124.74961
  */
 trait GitHub
 {
     /**
-     * @since 16xxxx GitHub utilities.
+     * @since 170124.74961 GitHub utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait GitHub
     }
 
     /**
-     * @since 16xxxx GitHub utilities.
+     * @since 170124.74961 GitHub utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait GitHub
     }
 
     /**
-     * @since 16xxxx GitHub utilities.
+     * @since 170124.74961 GitHub utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -60,7 +60,7 @@ trait GitHub
     }
 
     /**
-     * @since 16xxxx GitHub utilities.
+     * @since 170124.74961 GitHub utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -72,7 +72,7 @@ trait GitHub
     }
 
     /**
-     * @since 16xxxx GitHub utilities.
+     * @since 170124.74961 GitHub utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -84,7 +84,7 @@ trait GitHub
     }
 
     /**
-     * @since 16xxxx GitHub utilities.
+     * @since 170124.74961 GitHub utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -96,7 +96,7 @@ trait GitHub
     }
 
     /**
-     * @since 16xxxx GitHub utilities.
+     * @since 170124.74961 GitHub utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * ZenHub.
  *
- * @since 16xxxx GitHub utils.
+ * @since 170124.74961 GitHub utils.
  */
 class ZenHub extends Classes\Core\Base\Core
 {
     /**
      * Cache directory.
      *
-     * @since 16xxxx
+     * @since 170124.74961
      *
      * @type string
      */
@@ -35,7 +35,7 @@ class ZenHub extends Classes\Core\Base\Core
     /**
      * Class constructor.
      *
-     * @since 16xxxx GitHub utils.
+     * @since 170124.74961 GitHub utils.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -52,7 +52,7 @@ class ZenHub extends Classes\Core\Base\Core
     /**
      * GET JSON response.
      *
-     * @since 16xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param string $url  API URL.
      * @param array  $args Additional args.

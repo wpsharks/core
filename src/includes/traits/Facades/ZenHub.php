@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * ZenHub.
  *
- * @since 16xxxx
+ * @since 170124.74961
  */
 trait ZenHub
 {
     /**
-     * @since 16xxxx ZenHub utilities.
+     * @since 170124.74961 ZenHub utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

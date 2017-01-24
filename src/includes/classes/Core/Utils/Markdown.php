@@ -94,7 +94,7 @@ class Markdown extends Classes\Core\Base\Core
     /**
      * First image URL.
      *
-     * @since 16xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param string $markdown Markdown.
      *

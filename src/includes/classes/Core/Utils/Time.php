@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Time utilities.
  *
- * @since 17xxxx Initial release.
+ * @since 170124.74961 Initial release.
  */
 class Time extends Classes\Core\Base\Core implements Interfaces\SecondConstants
 {
     /**
      * Human time difference.
      *
-     * @since 17xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param int      $from   From time.
      * @param int|null $to     Defaults to current time.

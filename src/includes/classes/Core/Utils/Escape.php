@@ -84,7 +84,7 @@ class Escape extends Classes\Core\Base\Core
     /**
      * Escape HTML chars.
      *
-     * @since 16xxxx Escapes.
+     * @since 170124.74961 Escapes.
      *
      * @param mixed Input value.
      *

@@ -27,8 +27,8 @@ class UrlParse extends Classes\Core\Base\Core
      * Parses a URL.
      *
      * @since 150424 Initial release.
-     * @since 16xxxx Adding `uri_no_fragment` key.
-     * @since 16xxxx Adding `$include_extra_parts` param.
+     * @since 170124.74961 Adding `uri_no_fragment` key.
+     * @since 170124.74961 Adding `$include_extra_parts` param.
      *
      * @param string $url_uri_qsl         Input URL, URI, or query string w/ a leading `?`.
      * @param int    $component           Optional component to retrieve a value for.

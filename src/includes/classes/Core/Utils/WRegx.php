@@ -151,8 +151,8 @@ class WRegx extends Classes\Core\Base\Core
     /**
      * Bracket special chars.
      *
-     * @since 16xxxx New name. Old name `bracket()`.
-     * @since 16xxxx Adding `$will_force_match_all` param.
+     * @since 170124.74961 New name. Old name `bracket()`.
+     * @since 170124.74961 Adding `$will_force_match_all` param.
      *
      * @param mixed $value                Input value(s) to bracket here.
      * @param bool  $will_force_match_all If true, don't treat `^$` as special chars.
@@ -182,8 +182,8 @@ class WRegx extends Classes\Core\Base\Core
      * URL to WRegx URI pattern.
      *
      * @since 160428 Watered-down regex.
-     * @since 16xxxx Adding `$will_force_match_all` param.
-     * @since 16xxxx Fixing bug in query string wildcard pattern.
+     * @since 170124.74961 Adding `$will_force_match_all` param.
+     * @since 170124.74961 Fixing bug in query string wildcard pattern.
      *
      * @param mixed $value                Input value(s) containing:
      *                                    URLs, URIs, or query strings w/ a leading `?`.

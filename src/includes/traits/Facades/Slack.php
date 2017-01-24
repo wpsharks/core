@@ -36,7 +36,7 @@ trait Slack
     }
 
     /**
-     * @since 16xxxx Slack utilities.
+     * @since 170124.74961 Slack utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

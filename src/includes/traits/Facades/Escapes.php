@@ -60,7 +60,7 @@ trait Escapes
     }
 
     /**
-     * @since 16xxxx HTML chars.
+     * @since 170124.74961 HTML chars.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

@@ -96,7 +96,7 @@ class UrlCurrent extends Classes\Core\Base\Core
     /**
      * Current port number (as string).
      *
-     * @since 16xxxx Enhancing support for ports.
+     * @since 170124.74961 Enhancing support for ports.
      *
      * @return string Current port (as string).
      */
@@ -131,7 +131,7 @@ class UrlCurrent extends Classes\Core\Base\Core
     /**
      * Current root port number (as string).
      *
-     * @since 16xxxx Enhancing support for ports.
+     * @since 170124.74961 Enhancing support for ports.
      *
      * @return string Current root port (as string).
      */

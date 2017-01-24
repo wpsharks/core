@@ -192,7 +192,7 @@ class Slack extends Classes\Core\Base\Core
     /**
      * Slack mrkdwn.
      *
-     * @since 16xxxx Initial release.
+     * @since 170124.74961 Initial release.
      *
      * @param mixed $value Input value.
      * @param array $args  Additional args.
