@@ -1,3 +1,7 @@
+## $v
+
+- Supporting new `hard_wrap` feature in PHP Markdown Extra flavor.
+
 ## v170124.74961
 
 - Enhanced debugging in Slack notifier utility.

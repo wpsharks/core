@@ -51,10 +51,10 @@ class Markdown extends Classes\Core\Base\Core
             'flavor' => 'markdown-extra',
             // `parsedown-extra` is faster, but buggy.
             // See: <https://github.com/erusev/parsedown-extra/issues/44>
-            'breaks'      => true, // Parsedown only.
+            'no_p'        => false,
+            'breaks'      => true,
             'anchorize'   => false,
             'anchor_rels' => [],
-            'no_p'        => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
@@ -76,6 +76,7 @@ class Markdown extends Classes\Core\Base\Core
             if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
                 $MarkdownExtra                    = new MarkdownExtra();
                 $MarkdownExtra->code_class_prefix = 'language-';
+                $MarkdownExtra->hard_wrap         = $breaks;
             }
             $string = $MarkdownExtra->transform($string);
         }
