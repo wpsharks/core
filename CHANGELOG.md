@@ -1,5 +1,6 @@
 ## $v
 
+- Adding `c::backtraceCallers()` and `c::hasBacktraceCaller()`.
 - Supporting new `hard_wrap` feature in PHP Markdown Extra flavor.
 
 ## v170124.74961

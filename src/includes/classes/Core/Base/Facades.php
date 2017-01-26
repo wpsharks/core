@@ -27,6 +27,7 @@ abstract class Facades
     use Traits\Facades\App;
     use Traits\Facades\Arrays;
     use Traits\Facades\Aws;
+    use Traits\Facades\Backtrace;
     use Traits\Facades\Base64;
     use Traits\Facades\Benchmark;
     use Traits\Facades\Bitly;

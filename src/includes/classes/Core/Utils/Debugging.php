@@ -299,30 +299,8 @@ class Debugging extends Classes\Core\Base\Core implements Interfaces\ByteConstan
     {
         // `[0]` is the call to this function.
         // `[1]` is the call to the utility function in this class.
-        // So we start searching from index `2` for a possible trigger.
-
-        if (!($callers = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))) {
-            return ''; // Not possible; unexpected trace.
-        }
-        for ($_i = 2; $_i < count($callers); ++$_i) {
-            $_caller   = $callers[$_i];
-            $_function = $_caller['function'] ?? '';
-            $_class    = $_caller['class'] ?? '';
-            $_type     = $_caller['type'] ?? '';
-
-            if (!$_function) { // Should not be empty.
-                return ''; // Unexpected caller in this case.
-            } elseif ($_class && mb_strpos($_function, '__') === 0) {
-                continue; // Bypass magic (middle-man) methods in classes.
-            } elseif ($_class && $_type === '::' && mb_stripos($_class, '\\Facades') !== false) {
-                continue; // Bypass facades that sit in the middle also.
-            }
-            $trigger = $_class && $_type ? $_class.$_type : '';
-            $trigger .= $_function; // i.e., `[class[->|::]]function`.
-            return $trigger; // The original caller; i.e. `class::method`.
-        } // unset($_caller, $_function, $_class); // Housekeeping.
-
-        return ''; // Unable to locate the original trigger.
+        $callers = $this->c::backtraceCallers(2);
+        return $callers ? $callers[0] : '';
     }
 
     /**
