@@ -28,23 +28,25 @@ class Backtrace extends Classes\Core\Base\Core
      *
      * @since 17xxxx Debugging utilities.
      *
-     * @param int  $at  Starting at position.
-     * @param bool $all Include magic middle-men?
+     * @param int|null $at        Starting at position.
+     * @param bool     $all       Include magic middle-men?
+     * @param int      $___offset For internal use only.
      *
      * @return array Backtrace callers.
      */
-    public function callers(int $at = 0, bool $all = false): array
+    public function callers(int $at = null, bool $all = false, $___offset = 0): array
     {
         $callers = []; // Initialize.
 
         // `[0]` is the call to this function.
-        // So we start searching from index `1`.
-        // An additional `$at` location is added to this.
+        // So we start searching from offset index `1`.
+        // An additional `$___offset` location is added to this.
+        // And then an additional `$at` location can be added also.
 
         if (!($backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))) {
             return $callers; // Not possible; unexpected trace.
         }
-        for ($_i = 1 + $at; $_i < count($backtrace); ++$_i) {
+        for ($_i = 1 + $___offset + $at; $_i < count($backtrace); ++$_i) {
             $_caller   = $backtrace[$_i];
             $_function = $_caller['function'] ?? '';
             $_class    = $_caller['class'] ?? '';
@@ -69,23 +71,35 @@ class Backtrace extends Classes\Core\Base\Core
      *
      * @since 17xxxx Debugging utilities.
      *
-     * @param string|array $caller Caller(s).
-     * @param int          $at     Starting at position.
-     * @param bool         $all    Include magic middle-men?
+     * @param string|array $caller    Caller(s).
+     * @param int|null     $at        Starting at position.
+     * @param bool         $all       Include magic middle-men?
+     * @param int          $___offset For internal use only.
      *
      * @return bool True if has backtrace caller(s).
      *
      * @note If `$caller` is an array, the order of the given array matters.
      * i.e., Callers must exist in a matching order as given by the `$caller` param.
+     *
+     * @note If `$at` is set (even if `0`), then position matters too.
+     * i.e., Caller(s) must exist starting at the given position.
+     * Conversely, if `$at` is not set, the position does not matter.
      */
-    public function hasCaller($caller, int $at = 0, bool $all = false): bool
+    public function hasCaller($caller, int $at = null, bool $all = false, $___offset = 0): bool
     {
+        if (!$caller) {
+            return false;
+        }
         $caller  = (array) $caller;
-        $callers = $this->callers(1 + $at, $all);
+        $caller  = array_map('strval', $caller);
+        $callers = $this->callers($at, $all, 1 + $___offset);
 
-        $caller  = implode('.', $caller).'.';
-        $callers = implode('.', $callers).'.';
+        $caller  = '.'.implode('.', $caller).'.';
+        $callers = '.'.implode('.', $callers).'.';
 
-        return mb_stripos($callers, $caller) === 0;
+        if (isset($at)) { // Position matters.
+            return mb_stripos($callers, $caller) === 0;
+        }
+        return mb_stripos($callers, $caller) !== false;
     }
 }

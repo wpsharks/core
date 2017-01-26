@@ -26,27 +26,27 @@ trait Backtrace
     /**
      * @since 170126.77069 Backtrace utils.
      *
-     * @param int  $at  Starting at position.
-     * @param bool $all Include magic middle-men?
+     * @param int|null $at  Starting at position.
+     * @param bool     $all Include magic middle-men?
      *
      * @see Classes\Core\Utils\Backtrace::callers()
      */
-    public static function backtraceCallers(int $at = 0, bool $all = false)
+    public static function backtraceCallers(int $at = null, bool $all = false)
     {
-        return $GLOBALS[static::class]->Utils->©Backtrace->callers(1 + $at, $all);
+        return $GLOBALS[static::class]->Utils->©Backtrace->callers($at, $all, 1);
     }
 
     /**
      * @since 170126.77069 Backtrace utils.
      *
      * @param string|array $caller Caller(s).
-     * @param int          $at     Starting at position.
+     * @param int|null     $at     Starting at position.
      * @param bool         $all    Include magic middle-men?
      *
      * @see Classes\Core\Utils\Backtrace::hasCaller()
      */
-    public static function hasBacktraceCaller($caller, int $at = 0, bool $all = false)
+    public static function hasBacktraceCaller($caller, int $at = null, bool $all = false)
     {
-        return $GLOBALS[static::class]->Utils->©Backtrace->hasCaller($caller, 1 + $at, $all);
+        return $GLOBALS[static::class]->Utils->©Backtrace->hasCaller($caller, $at, $all, 1);
     }
 }
