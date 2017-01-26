@@ -174,14 +174,15 @@ class Tokenizer extends Classes\Core\Base\Core
             return; // Not tokenizing these.
         } elseif (mb_strpos($this->string, '[') === false) {
             return; // No `[` shortcodes.
+        } elseif (mb_strpos($this->string, ']') === false) {
+            return; // No `[` shortcodes.
         }
         if ($this->args['shortcode_tag_names']) {
             $shortcode_tag_names = $this->args['shortcode_tag_names'];
         } elseif (!empty($GLOBALS['shortcode_tags']) && is_array($GLOBALS['shortcode_tags'])) {
             $shortcode_tag_names = array_keys($GLOBALS['shortcode_tags']);
         }
-        if (empty($shortcode_tag_names) || !$this->c::isWordPress()
-                || !$this->c::canCallFunc('get_shortcode_regex')) {
+        if (empty($shortcode_tag_names) || !$this->c::isWordPress() || !$this->c::canCallFunc('get_shortcode_regex')) {
             return; // Not possible at this time.
         }
         if ($this->args['shortcode_unautop_compat_tag_name']) {

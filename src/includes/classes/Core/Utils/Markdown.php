@@ -49,19 +49,29 @@ class Markdown extends Classes\Core\Base\Core
         }
         $default_args = [
             'flavor' => 'markdown-extra',
-            // `parsedown-extra` is faster, but buggy.
-            // See: <https://github.com/erusev/parsedown-extra/issues/44>
-            'no_p'        => false,
-            'breaks'      => true,
+
+            'code_class_prefix' => 'language-',
+            'fn_id_prefix'      => '',
+
+            'no_p'      => false,
+            'hard_wrap' => true,
+            'breaks'    => true,
+
             'anchorize'   => false,
             'anchor_rels' => [],
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $flavor      = (string) $args['flavor'];
-        $breaks      = (bool) $args['breaks'];
-        $no_p        = (bool) $args['no_p'];
+        $flavor = (string) $args['flavor'];
+
+        $code_class_prefix = (string) $args['code_class_prefix'];
+        $fn_id_prefix      = (string) $args['fn_id_prefix'];
+
+        $no_p      = (bool) $args['no_p'];
+        $hard_wrap = (bool) $args['hard_wrap'];
+        $breaks    = (bool) $args['breaks'];
+
         $anchorize   = (bool) $args['anchorize'];
         $anchor_rels = (array) $args['anchor_rels'];
 
@@ -69,14 +79,18 @@ class Markdown extends Classes\Core\Base\Core
             if (!($ParsedownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
                 $ParsedownExtra = new ParsedownExtra();
             }
-            $ParsedownExtra->setBreaksEnabled($breaks);
+            // @TODO Try to support all options.
+            $ParsedownExtra->setBreaksEnabled($breaks || $hard_wrap);
             $string = $ParsedownExtra->text($string);
-        } else {
+            //
+        } else { // Markdown Extra supports all configuration options.
             $flavor = 'markdown-extra'; // Default flavor.
+
             if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
                 $MarkdownExtra                    = new MarkdownExtra();
-                $MarkdownExtra->code_class_prefix = 'language-';
-                $MarkdownExtra->hard_wrap         = $breaks;
+                $MarkdownExtra->code_class_prefix = $code_class_prefix;
+                $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
+                $MarkdownExtra->hard_wrap         = $hard_wrap || $breaks;
             }
             $string = $MarkdownExtra->transform($string);
         }
@@ -89,7 +103,7 @@ class Markdown extends Classes\Core\Base\Core
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);
         }
-        return $string;
+        return $string; // HTML markup now.
     }
 
     /**
