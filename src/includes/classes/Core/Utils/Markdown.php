@@ -44,10 +44,13 @@ class Markdown extends Classes\Core\Base\Core
             } //unset($_key, $_value);
             return $value;
         }
-        if (!($string = (string) $value)) {
+        if (!($string = c::mbTrim((string) $value))) {
             return $string; // Nothing to do.
         }
-        $default_args = [
+        $default_args = [ // Defaults.
+            'cache'               => false,
+            'cache_expires_after' => '30 days',
+
             'flavor' => 'markdown-extra',
 
             'code_class_prefix' => 'language-',
@@ -63,6 +66,9 @@ class Markdown extends Classes\Core\Base\Core
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
+        $cache               = (bool) $args['cache'];
+        $cache_expires_after = (string) $args['cache_expires_after'];
+
         $flavor = (string) $args['flavor'];
 
         $code_class_prefix = (string) $args['code_class_prefix'];
@@ -75,16 +81,27 @@ class Markdown extends Classes\Core\Base\Core
         $anchorize   = (bool) $args['anchorize'];
         $anchor_rels = (array) $args['anchor_rels'];
 
+        if ($cache) { // Cache markdown?
+            $cache_sha1          = sha1($string.$post_id.serialize($args));
+            $cache_sha1_shard_id = $this->c::sha1ModShardId($cache_sha1, true);
+
+            $cache_dir             = $this->App->Config->©fs_paths['©cache_dir'].'/markdown/'.$cache_sha1_shard_id;
+            $cache_dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
+            $cache_file            = $cache_dir.'/'.$cache_sha1.'.html';
+
+            if (is_file($cache_file) && filemtime($cache_file) >= strtotime('-'.$cache_expires_after)) {
+                return (string) file_get_contents($cache_file);
+            } // Use the already-cached HTML markup.
+        }
         if ($flavor === 'parsedown-extra') {
             if (!($ParsedownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
                 $ParsedownExtra = new ParsedownExtra();
-            }
-            // @TODO Try to support all options.
+            } // @TODO Try to support all options.
             $ParsedownExtra->setBreaksEnabled($breaks || $hard_wrap);
             $string = $ParsedownExtra->text($string);
             //
-        } else { // Markdown Extra supports all configuration options.
-            $flavor = 'markdown-extra'; // Default flavor.
+        } else { // Default is Markdown Extra (supports all options).
+            $flavor = 'markdown-extra'; // Force default flavor.
 
             if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
                 $MarkdownExtra                    = new MarkdownExtra();
@@ -102,6 +119,17 @@ class Markdown extends Classes\Core\Base\Core
         }
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);
+        }
+        if ($cache && isset($cache_dir, $cache_dir_permissions, $cache_file)) {
+            if (!is_dir($cache_dir)) {
+                mkdir($cache_dir, $cache_dir_permissions, true);
+
+                if (!is_dir($cache_dir)) {
+                    debug(0, c::issue(vars(), 'Unable to create cache directory.'));
+                    return $string; // Soft failure.
+                }
+            } // Cache directory exists.
+            file_put_contents($cache_file, $string);
         }
         return $string; // HTML markup now.
     }
