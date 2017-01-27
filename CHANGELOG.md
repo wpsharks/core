@@ -1,5 +1,6 @@
 ## $v
 
+- Removing `parsedown-extra` flavor in Markdown parser.
 - Adding `c::backtraceCallers()` and `c::hasBacktraceCaller()`.
 - Supporting new `hard_wrap` feature in PHP Markdown Extra flavor.
 

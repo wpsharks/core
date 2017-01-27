@@ -16,7 +16,6 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 #
-use ParsedownExtra;
 use Michelf\MarkdownExtra;
 
 /**
@@ -30,6 +29,7 @@ class Markdown extends Classes\Core\Base\Core
      * A very simple markdown parser.
      *
      * @since 150424 Initial release.
+     * @since 17xxxx Removing `parsedown-extra` flavor.
      *
      * @param mixed $value Any input value.
      * @param array $args  Any additional behavioral args.
@@ -59,6 +59,7 @@ class Markdown extends Classes\Core\Base\Core
             'no_p'      => false,
             'hard_wrap' => true,
             'breaks'    => true,
+            // `breaks` deprecated, use `hard_wrap`.
 
             'anchorize'   => false,
             'anchor_rels' => [],
@@ -70,13 +71,14 @@ class Markdown extends Classes\Core\Base\Core
         $cache_expires_after = (string) $args['cache_expires_after'];
 
         $flavor = (string) $args['flavor'];
+        $flavor = 'markdown-extra'; // Only flavor.
+        // In the future this may support new flavors.
 
         $code_class_prefix = (string) $args['code_class_prefix'];
         $fn_id_prefix      = (string) $args['fn_id_prefix'];
 
         $no_p      = (bool) $args['no_p'];
-        $hard_wrap = (bool) $args['hard_wrap'];
-        $breaks    = (bool) $args['breaks'];
+        $hard_wrap = (bool) ($args['hard_wrap'] || $args['breaks']);
 
         $anchorize   = (bool) $args['anchorize'];
         $anchor_rels = (array) $args['anchor_rels'];
@@ -93,24 +95,14 @@ class Markdown extends Classes\Core\Base\Core
                 return (string) file_get_contents($cache_file);
             } // Use the already-cached HTML markup.
         }
-        if ($flavor === 'parsedown-extra') {
-            if (!($ParsedownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
-                $ParsedownExtra = new ParsedownExtra();
-            } // @TODO Try to support all options.
-            $ParsedownExtra->setBreaksEnabled($breaks || $hard_wrap);
-            $string = $ParsedownExtra->text($string);
-            //
-        } else { // Default is Markdown Extra (supports all options).
-            $flavor = 'markdown-extra'; // Force default flavor.
-
-            if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
-                $MarkdownExtra                    = new MarkdownExtra();
-                $MarkdownExtra->code_class_prefix = $code_class_prefix;
-                $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
-                $MarkdownExtra->hard_wrap         = $hard_wrap || $breaks;
-            }
-            $string = $MarkdownExtra->transform($string);
+        if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
+            $MarkdownExtra                    = new MarkdownExtra();
+            $MarkdownExtra->code_class_prefix = $code_class_prefix;
+            $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
+            $MarkdownExtra->hard_wrap         = $hard_wrap;
         }
+        $string = $MarkdownExtra->transform($string);
+
         if ($anchorize) {
             $string = $this->c::htmlAnchorize($string);
         }
