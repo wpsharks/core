@@ -44,7 +44,7 @@ class Markdown extends Classes\Core\Base\Core
             } //unset($_key, $_value);
             return $value;
         }
-        if (!($string = c::mbTrim((string) $value))) {
+        if (!($string = $this->c::mbTrim((string) $value))) {
             return $string; // Nothing to do.
         }
         $default_args = [ // Defaults.
