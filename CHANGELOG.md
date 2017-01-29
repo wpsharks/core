@@ -1,8 +1,10 @@
 ## $v
 
+- Adding SmartyPants to Markdown parser.
 - Removing `parsedown-extra` flavor in Markdown parser.
 - Adding `c::backtraceCallers()` and `c::hasBacktraceCaller()`.
 - Supporting new `hard_wrap` feature in PHP Markdown Extra flavor.
+- The `anchorize` and `smartypants` options in the Markdown parser are now enabled by default.
 
 ## v170124.74961
 

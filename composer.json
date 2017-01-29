@@ -73,6 +73,8 @@
     "websharks/sharkicons": "160620",
 
     "michelf/php-markdown": "1.*",
+    "michelf/php-smartypants": "1.*",
+
     "ramsey/uuid": "3.*",
     "hashids/hashids": "1.*",
     "embedly/embedly-php": "0.*",

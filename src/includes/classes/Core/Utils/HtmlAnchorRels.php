@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -29,6 +29,7 @@ class HtmlAnchorRels extends Classes\Core\Base\Core
      * @since 160115 `rel=""` attributes.
      *
      * @param mixed $value Any input value.
+     * @param array `rel=""` attribute values.
      *
      * @return string|array|object HTML markup.
      */
@@ -58,8 +59,6 @@ class HtmlAnchorRels extends Classes\Core\Base\Core
             return $anchor = str_replace('>', ' rel="'.$this->c::escAttr(implode(' ', $new_rels)).'">', $anchor);
         }, $string); // Adds new `rel=""` attributes.
 
-        $string = $Tokenizer->restoreGetString();
-
-        return $string;
+        return $string = $Tokenizer->restoreGetString();
     }
 }

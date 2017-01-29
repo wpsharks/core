@@ -17,6 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 #
 use Michelf\MarkdownExtra;
+use Michelf\SmartyPants;
 
 /**
  * Markdown utilities.
@@ -64,8 +65,10 @@ class Markdown extends Classes\Core\Base\Core
             'breaks'    => true,
             // `breaks` deprecated, use `hard_wrap`.
 
-            'anchorize'   => false,
+            'anchorize'   => true,
             'anchor_rels' => [],
+
+            'smartypants'   => true,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
@@ -87,6 +90,8 @@ class Markdown extends Classes\Core\Base\Core
 
         $anchorize   = (bool) $args['anchorize'];
         $anchor_rels = (array) $args['anchor_rels'];
+
+        $smartypants = (bool) $args['smartypants'];
 
         if ($cache) { // Cache?
             $cache_args = $args;
@@ -111,6 +116,10 @@ class Markdown extends Classes\Core\Base\Core
             $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
             $MarkdownExtra->hard_wrap         = $hard_wrap;
         }
+        if (!($SmartyPants = &$this->cacheKey(__FUNCTION__, 'smartypants'))) {
+            $SmartyPants               = new SmartyPants(1);
+            $SmartyPants->tags_to_skip = 'pre|code|samp|kbd|math|script|style';
+        }
         $string = $MarkdownExtra->transform($string);
 
         if ($anchorize) {
@@ -118,6 +127,10 @@ class Markdown extends Classes\Core\Base\Core
         }
         if ($anchor_rels) {
             $string = $this->c::htmlAnchorRels($string, $anchor_rels);
+        }
+        if ($smartypants) {
+            $string = $SmartyPants->transform($string);
+            $string = $SmartyPants->decodeEntitiesInConfiguration($string);
         }
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);
