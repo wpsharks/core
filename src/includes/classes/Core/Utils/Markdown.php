@@ -141,7 +141,7 @@ class Markdown extends Classes\Core\Base\Core
      *
      * @return string The `id=""` attribute value.
      */
-    protected function headerIdFunc(string $raw): string
+    public function headerIdFunc(string $raw): string
     {
         return $id = 'j2h.'.preg_replace('/[^\w]+/u', '-', mb_strtolower($raw));
         // Same as `marked()` in JS; i.e., `raw.toLowerCase().replace(/[^\w]+/g, '-')`.
