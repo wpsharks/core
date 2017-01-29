@@ -1,0 +1,61 @@
+/*
+ * Highlight.js <pre><code>.
+ */
+@mixin hljs-pre-code {
+  pre.hljs-pre {
+    padding:                  0;
+
+    //
+    border:                   0;
+    border-radius:            0;
+
+    //
+    box-shadow:               none;
+    text-shadow:              none;
+
+    //
+    width:                    100%;
+    height:                   auto;
+    max-height:               none;
+    overflow:                 visible;
+
+    //
+    display:                  block;
+    box-sizing:               border-box;
+
+    //
+    background:               none;
+
+    > code.hljs {
+      // background:               none;
+      // Determined by Highlight.js theme.
+
+      //
+      margin:                 0;
+      padding:                1em;
+
+      //
+      border:                 0;
+      border-radius:         .25em;
+
+      //
+      box-shadow:             none;
+      text-shadow:            none;
+
+      //
+      font-size:              1em;
+      line-height:            1.3;
+      white-space:            pre;
+
+      //
+      width:                  100%;
+      height:                 auto;
+      max-height:             400px;
+      overflow:               auto;
+
+      //
+      display:                block;
+      box-sizing:             border-box;
+    }
+  }
+}

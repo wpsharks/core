@@ -53,7 +53,10 @@ class Markdown extends Classes\Core\Base\Core
 
             'flavor' => 'markdown-extra',
 
-            'code_class_prefix' => 'language-',
+            'code_class_prefix' => 'lang-',
+            // Same as `marked()` in JS ↑.
+
+            'header_id_func'    => null,
             'fn_id_prefix'      => '',
 
             'no_p'      => false,
@@ -75,7 +78,9 @@ class Markdown extends Classes\Core\Base\Core
         // In the future this may support new flavors.
 
         $code_class_prefix = (string) $args['code_class_prefix'];
-        $fn_id_prefix      = (string) $args['fn_id_prefix'];
+
+        $header_id_func = $args['header_id_func'] ?: [$this, 'headerIdFunc'];
+        $fn_id_prefix   = (string) $args['fn_id_prefix'];
 
         $no_p      = (bool) $args['no_p'];
         $hard_wrap = (bool) ($args['hard_wrap'] || $args['breaks']);
@@ -98,6 +103,7 @@ class Markdown extends Classes\Core\Base\Core
         if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
             $MarkdownExtra                    = new MarkdownExtra();
             $MarkdownExtra->code_class_prefix = $code_class_prefix;
+            $MarkdownExtra->header_id_func    = $header_id_func;
             $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
             $MarkdownExtra->hard_wrap         = $hard_wrap;
         }
@@ -124,6 +130,22 @@ class Markdown extends Classes\Core\Base\Core
             file_put_contents($cache_file, $string);
         }
         return $string; // HTML markup now.
+    }
+
+    /**
+     * Default header `id=""` function.
+     *
+     * @since 17xxxx Header id function.
+     *
+     * @param string $raw Header text value.
+     *
+     * @return string The `id=""` attribute value.
+     */
+    protected function headerIdFunc(string $raw): string
+    {
+        return $id = 'j2h.'.preg_replace('/[^\w]+/u', '-', mb_strtolower($raw));
+        // Same as `marked()` in JS; i.e., `raw.toLowerCase().replace(/[^\w]+/g, '-')`.
+        // However, don't forget to set `headerPrefix: 'j2h.'` when using `marked()` .
     }
 
     /**
