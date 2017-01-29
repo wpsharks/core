@@ -119,6 +119,7 @@ class Markdown extends Classes\Core\Base\Core
         if (!($SmartyPants = &$this->cacheKey(__FUNCTION__, 'smartypants'))) {
             $SmartyPants               = new SmartyPants(1);
             $SmartyPants->tags_to_skip = 'pre|code|samp|kbd|math|script|style';
+            $SmartyPants->decodeEntitiesInConfiguration(); // Use UTF-8 symbols.
         }
         $string = $MarkdownExtra->transform($string);
 
@@ -130,7 +131,6 @@ class Markdown extends Classes\Core\Base\Core
         }
         if ($smartypants) {
             $string = $SmartyPants->transform($string);
-            $string = $SmartyPants->decodeEntitiesInConfiguration($string);
         }
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);
