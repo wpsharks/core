@@ -88,8 +88,12 @@ class Markdown extends Classes\Core\Base\Core
         $anchorize   = (bool) $args['anchorize'];
         $anchor_rels = (array) $args['anchor_rels'];
 
-        if ($cache) { // Cache markdown?
-            $cache_sha1          = sha1($string.$post_id.serialize($args));
+        if ($cache) { // Cache?
+            $cache_args = $args;
+            // Cannot serialize closures.
+            unset($cache_args['header_id_func']);
+
+            $cache_sha1          = sha1($string.$post_id.serialize($cache_args));
             $cache_sha1_shard_id = $this->c::sha1ModShardId($cache_sha1, true);
 
             $cache_dir             = $this->App->Config->©fs_paths['©cache_dir'].'/markdown/'.$cache_sha1_shard_id;
