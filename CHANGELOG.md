@@ -4,7 +4,9 @@
 - Removing `parsedown-extra` flavor in Markdown parser.
 - Adding `c::backtraceCallers()` and `c::hasBacktraceCaller()`.
 - Supporting new `hard_wrap` feature in PHP Markdown Extra flavor.
-- The `anchorize` and `smartypants` options in the Markdown parser are now enabled by default.
+- The `smartypants` option in the Markdown parser is now enabled by default.
+- Enhancing Anchorizer class that is used by the Markdown parser.
+- Adding `/typings` directory for TypeScript projects.
 
 ## v170124.74961
 

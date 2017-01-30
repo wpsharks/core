@@ -65,7 +65,7 @@ class Markdown extends Classes\Core\Base\Core
             'breaks'    => true,
             // `breaks` deprecated, use `hard_wrap`.
 
-            'anchorize'   => true,
+            'anchorize'   => false,
             'anchor_rels' => [],
 
             'smartypants'   => true,

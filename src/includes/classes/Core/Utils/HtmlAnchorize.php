@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -50,11 +50,11 @@ class HtmlAnchorize extends Classes\Core\Base\Core implements Interfaces\EmailCo
             return $m['before'].'<a href="'.$this->c::escUrl($m['url']).'">'.$this->c::escHtml($m['url']).'</a>';
         }, $string); // Converts full URLs into clickable links using regex.
 
-        $string = preg_replace_callback('/(?<before>^|[\s<])(?<host>(?:www|ftp)\.'.$this::URL_REGEX_FRAG_HOST_TLD_PORT.')/u', function ($m) {
+        $string = preg_replace_callback('/(?<before>^|[\s<])(?<host>(?:localhost|www|mail|smtp|imap|dev|git|sftp|ftp)\.'.$this::URL_REGEX_FRAG_HOST_TLD_PORT.')/u', function ($m) {
             return $m['before'].'<a href="'.$this->c::escUrl('http://'.$m['host'].'/').'">'.$this->c::escHtml($m['host']).'</a>';
         }, $string); // Converts obvious domain name references into clickable links.
 
-        $string = preg_replace_callback('/(?<before>^|[\s<])(?<host>'.$this::URL_REGEX_FRAG_HOST.'\.(?:com|net|org)'.$this::URL_REGEX_FRAG_PORT.')/u', function ($m) {
+        $string = preg_replace_callback('/(?<before>^|[\s<])(?<host>'.$this::URL_REGEX_FRAG_HOST.'\.(?:biz|com|edu|gov|io|net|org|pro|web|xxx|aero|asia|coop|info|museum|name|shop|рф)'.$this::URL_REGEX_FRAG_PORT.')/u', function ($m) {
             return $m['before'].'<a href="'.$this->c::escUrl('http://'.$m['host'].'/').'">'.$this->c::escHtml($m['host']).'</a>';
         }, $string); // Converts obvious domain name references into clickable links.
 

@@ -55,13 +55,26 @@ class Backtrace extends Classes\Core\Base\Core
             if (!$all) { // If not `$all`, exclude magicals, facades, and other middle-men.
                 if ($_class && mb_strpos($_function, '__') === 0 && isset($_function[2]) && $_function[2] !== '_') {
                     continue; // Bypass magic (middle-man) methods in classes.
+                    //
                 } elseif ($_class && $_type === '::' && mb_stripos($_class, '\\Facades') !== false) {
                     continue; // Bypass facades that sit in the middle also.
-                }
+                    //
+                } elseif ($_class && mb_strtolower($_class) === 'wp_hook') {
+                    continue; // Bypass everything in `WP_Hook` class.
+                    //
+                } elseif (!$_class) { // A few others.
+                    $_lc_function = mb_strtolower($_function);
+
+                    if (in_array($_lc_function, ['call_user_func', 'call_user_func_array'], true)) {
+                        continue; // Bypass these also.
+                    } elseif (in_array($_lc_function, ['do_action', 'apply_filters'], true)) {
+                        continue; // Bypass these also.
+                    }
+                } // This covers WordPress and the WP Sharks Core also.
             }
             $callers[] = ($_class && $_type ? $_class.$_type : '').$_function;
             // e.g., `a->method`, `b::method`, `function`, `__`, etc.
-        } // unset($_caller, $_function, $_class, $_type); // Housekeeping.
+        } // unset($_caller, $_function, $_lc_function, $_class, $_type); // Housekeeping.
 
         return $callers;
     }
