@@ -342,12 +342,16 @@ class Tokenizer extends Classes\Core\Base\Core
         if (!in_array('md-links', $this->tokenize, true)) {
             return; // Not tokenizing these.
         }
-        // This also tokenizes [Markdown]: <link> "definitions".
+        // This also tokenizes [Markdown]: <link> "definitions" too.
         // This routine includes considerations for images also.
 
         // The tokenizer does NOT deal with links that reference definitions, as this is not necessary.
         // So, while we DO tokenize <link> "definitions" themselves, the [actual][references] to
         // these definitions do not need to be tokenized; i.e., it is not necessary here.
+
+        // The tokenizer does NOT deal with footnotes either, as this is not necessary.
+        // `[^footnote]` references are not an issue in any parsers we have, and definitions
+        // are themselves made up of Markdown links, images, and other things.
 
         $this->string = preg_replace_callback(
             [

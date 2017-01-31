@@ -117,7 +117,7 @@ class Markdown extends Classes\Core\Base\Core
             $MarkdownExtra->hard_wrap         = $hard_wrap;
         }
         if (!($SmartyPants = &$this->cacheKey(__FUNCTION__, 'smartypants'))) {
-            $SmartyPants               = new SmartyPants(1);
+            $SmartyPants               = new SmartyPants(2); // Match JS libs.
             $SmartyPants->tags_to_skip = 'pre|code|samp|kbd|math|script|style';
             $SmartyPants->decodeEntitiesInConfiguration(); // Use UTF-8 symbols.
         }
