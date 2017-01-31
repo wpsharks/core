@@ -36,6 +36,8 @@ class Markdown extends Classes\Core\Base\Core
      * @param array $args  Any additional behavioral args.
      *
      * @return string|array|object Html markup value(s).
+     *
+     * @deprecated 170131 Use `hard_wrap` instead of `breaks`.
      */
     public function __invoke($value, array $args = [])
     {
@@ -55,15 +57,12 @@ class Markdown extends Classes\Core\Base\Core
             'flavor' => 'markdown-extra',
 
             'code_class_prefix' => 'lang-',
-            // Same as `marked()` in JS ↑.
-
             'header_id_func'    => null,
             'fn_id_prefix'      => '',
 
             'no_p'      => false,
             'hard_wrap' => true,
             'breaks'    => true,
-            // `breaks` deprecated, use `hard_wrap`.
 
             'anchorize'   => false,
             'anchor_rels' => [],
@@ -176,7 +175,7 @@ class Markdown extends Classes\Core\Base\Core
      */
     public function firstImageUrl(string $markdown): string
     {
-        $regex      = '/(?<=^|[\s;,])\!\[[^[\]]*\]\((?<url>https?\:\/\/[^\s()]+?\.(?:png|jpeg|jpg|gif))\)(?=$|[\s.!?;,])/ui';
+        $regex      = '/(?<=^|[\s;,])\!\[[^\v[\]]*\]\((?<url>https?\:\/\/[^\s()]+?\.(?:png|jpeg|jpg|gif))\)(?=$|[\s.!?;,])/ui';
         return $url = $markdown && preg_match($regex, $markdown, $_m) ? $_m['url'] : '';
     }
 

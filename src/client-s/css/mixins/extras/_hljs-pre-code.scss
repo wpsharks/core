@@ -2,7 +2,7 @@
  * Highlight.js <pre><code>.
  */
 @mixin hljs-pre-code {
-  pre.hljs-pre {
+  .hljs-pre {
     padding:                  0;
 
     //
@@ -26,7 +26,7 @@
     //
     background:               none;
 
-    > code.hljs {
+    > .hljs {
       // background:               none;
       // Determined by Highlight.js theme.
 

@@ -5,6 +5,7 @@
     "underscore": "registry:dt/underscore#1.8.3+20161123125004"
   },
   "dependencies": {
-    "markdown-it": "registry:dt/markdown-it#0.0.0+20161221020919"
+    "markdown-it": "registry:dt/markdown-it#0.0.0+20161221020919",
+    "pako": "registry:dt/pako#0.2.8+20161128184045"
   }
 }

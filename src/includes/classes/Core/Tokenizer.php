@@ -21,7 +21,7 @@ use function get_defined_vars as vars;
  *
  * @since 150424 Initial release.
  */
-class Tokenizer extends Classes\Core\Base\Core
+class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstants
 {
     /**
      * ID.
@@ -203,7 +203,7 @@ class Tokenizer extends Classes\Core\Base\Core
             // i.e., The entire shortcode (w/ possible escape brackets).
 
             if ($this->args['shortcode_unautop_compat']) {
-                return $token = '['.$this->shortcode_unautop_compat_tag_name.' _is_token="⁅⒯⁆"]'.
+                return $token = '['.$this->shortcode_unautop_compat_tag_name.' _is_token=⁅⒯⁆]'.
                                     '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆'.
                                 '[/'.$this->shortcode_unautop_compat_tag_name.']';
             } else { // Default behavior.
@@ -325,6 +325,7 @@ class Tokenizer extends Classes\Core\Base\Core
             return; // Nothing to tokenize here.
         }
         $regex = '/(~{3,}|`{3,}|`)(?s:.*?)\\1/ui';
+        // This picks up ```lang {attributes} also.
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
@@ -342,21 +343,28 @@ class Tokenizer extends Classes\Core\Base\Core
         if (!in_array('md-links', $this->tokenize, true)) {
             return; // Not tokenizing these.
         }
-        // This also tokenizes [Markdown]: <link> "definitions" too.
         // This routine includes considerations for images also.
+        // This also tokenizes [link][ids] that reference link definitions.
+        // This also tokenizes [named]: <link> "definitions" too (supports one-line definitions only).
+        // This also tokenizes *[ABBR]: definitions too (supports one-line definitions only).
+        // This also tokenizes [^1]: footnote definitions too (supports one-line definitions only).
+        // @TODO Add support for multiline definitions in a future revision.
 
-        // The tokenizer does NOT deal with links that reference definitions, as this is not necessary.
-        // So, while we DO tokenize <link> "definitions" themselves, the [actual][references] to
-        // these definitions do not need to be tokenized; i.e., it is not necessary here.
-
-        // The tokenizer does NOT deal with footnotes either, as this is not necessary.
-        // `[^footnote]` references are not an issue in any parsers we have, and definitions
-        // are themselves made up of Markdown links, images, and other things.
-
+        $url_re       = $this->c::regexFrag($this::URL_REGEX_VALID);
         $this->string = preg_replace_callback(
             [
-                '/^[ ]*(?:\[[^[\]]+\])+[ ]*\:[ ]*\<[^\s<>]+\>(?:[ ]+.+)?$/uim',
-                '/\!?\[(?:[^[\]]*|(?R))\]\([^\s()]+\)(?:[ ]+\{[^{}]*\})?/ui',
+                // In this first one there is a check for named link references too.
+                // The negative lookahed for `(?!\/)` is to avoid catching a tokenized shortcode.
+                // e.g., Whenever the `shortcode_unautop_compat` configuration option has been enabled.
+
+                // A [link][id] can also have spaces between; e.g., [link] [id]. This is according to the spec.
+                // A link or image using special attributes cannot have a space before `{attributes}`, according to the spec.
+                // Any type of definition is allowed to have spaces both before and after the `:`; e.g., `[^1] : footnote`.
+
+                '/\!?\[(?:[^\v[\]]*|(?R))\](?:[ ]*\[(?!\/)[^\v[\]]+\]|\([^\s()]+\))(?:[ ]*\{[^\v{}]*\})?/ui', // Links & images.
+                '/^[ ]*(?:\[[^\v\^[\]]+\])+[ ]*\:[ ]*[^\s]+(?:[ ]+"[^\v"]+")?$/uim', // Link definitions.
+                '/^[ ]*(?:\*\[[^\v[\]]+\])+[ ]*\:.*$/uim', // Abbreviation definitions.
+                '/^[ ]*(?:\[\^[0-9]+\])+[ ]*\:.*$/uim', // Footnote definitions.
             ],
             function ($m) {
                 $this->tokens[] = $m[0];  // Original data for token.
@@ -388,7 +396,7 @@ class Tokenizer extends Classes\Core\Base\Core
             $_token = '⁅⒯'.$this->id.'⒯'.$_token_id.'⒯⁆'; // Placeholder.
 
             if ($restore_shortcode_tokens) { // Restoring shortcode tokens in this class instance?
-                $this->string = str_replace('['.$this->shortcode_unautop_compat_tag_name.' _is_token="⁅⒯⁆"]'.
+                $this->string = str_replace('['.$this->shortcode_unautop_compat_tag_name.' _is_token=⁅⒯⁆]'.
                                                 $_token.// Token inside the shortcode token.
                                             '[/'.$this->shortcode_unautop_compat_tag_name.']', $_original, $this->string);
             }
