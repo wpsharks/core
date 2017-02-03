@@ -1,8 +1,10 @@
 @import 'all';
 @include align-utils;
 @include blurred-utils;
+@include box-shadow-utils;
 @include content-utils;
 @include display-utils;
 @include line-clamp-utils;
 @include muted-utils;
 @include responsive-utils;
+@include text-shadow-utils;

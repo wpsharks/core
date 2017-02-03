@@ -117,7 +117,7 @@ class Markdown extends Classes\Core\Base\Core
         }
         if (!($SmartyPants = &$this->cacheKey(__FUNCTION__, 'smartypants'))) {
             $SmartyPants               = new SmartyPants(2); // Match JS libs.
-            $SmartyPants->tags_to_skip = 'pre|code|samp|kbd|math|script|style';
+            $SmartyPants->tags_to_skip = 'pre|code|samp|kbd|tt|math|script|style';
             $SmartyPants->decodeEntitiesInConfiguration(); // Use UTF-8 symbols.
         }
         $string = $MarkdownExtra->transform($string);
