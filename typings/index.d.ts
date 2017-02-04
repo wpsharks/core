@@ -6,6 +6,7 @@
 /// <reference path="globals/markdown-it/index.d.ts" />
 /// <reference path="globals/marked/index.d.ts" />
 /// <reference path="globals/pako/index.d.ts" />
+/// <reference path="globals/require/index.d.ts" />
 /// <reference path="globals/underscore/index.d.ts" />
 /// <reference path="modules/markdown-it/index.d.ts" />
 /// <reference path="modules/pako/index.d.ts" />

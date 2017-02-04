@@ -3,6 +3,7 @@
     "ace": "registry:dt/ace#0.0.0+20160727012524",
     "highlight.js": "registry:dt/highlight.js#9.1.0+20161227120821",
     "jquery": "registry:dt/jquery#1.10.0+20170104155652",
+    "require": "registry:dt/require#2.1.20+20160919185614",
     "underscore": "registry:dt/underscore#1.8.3+20161123125004"
   },
   "dependencies": {
