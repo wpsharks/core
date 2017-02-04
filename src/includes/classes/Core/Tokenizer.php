@@ -224,7 +224,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
         } elseif (mb_stripos($this->string, '<pre') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/\<(pre)(?:\>|\s[^>]*\>)(?:(?s:(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
+        $regex = '/\<(pre)(?:\>|\s[^>]*\>)(?:(?s:[^<>]+|(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0]; // Original data for token.
@@ -244,7 +244,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
         } elseif (mb_stripos($this->string, '<code') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/\<(code)(?:\>|\s[^>]*\>)(?:(?s:(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
+        $regex = '/\<(code)(?:\>|\s[^>]*\>)(?:(?s:[^<>]+|(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
@@ -264,7 +264,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
         } elseif (mb_stripos($this->string, '<samp') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/\<(samp)(?:\>|\s[^>]*\>)(?:(?s:(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
+        $regex = '/\<(samp)(?:\>|\s[^>]*\>)(?:(?s:[^<>]+|(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
@@ -284,7 +284,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
         } elseif (mb_stripos($this->string, '<a') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/\<(a)(?:\>|\s[^>]*\>)(?:(?s:(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
+        $regex = '/\<(a)(?:\>|\s[^>]*\>)(?:(?s:[^<>]+|(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.

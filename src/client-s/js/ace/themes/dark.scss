@@ -1,0 +1,243 @@
+@import '../../../css/env';
+
+.ace-dark-theme {
+  color:                      $white-color;
+  background-color:           $woodsmoke-color;
+  box-shadow:                 inset 0 0 1px 0 transparentize($black-color, 0.25);
+
+  .ace_search {
+    &.ace_searchbtn {
+      width:                  auto;
+      min-width:              25px;
+    }
+  }
+
+  .ace_gutter {
+    color:                    transparentize($white-color, 0.75);
+    background-color:         darken($woodsmoke-color, 2);
+
+    .ace_gutter-active-line {
+      background-color:       darken($woodsmoke-color, 4);
+    }
+  }
+
+  .ace_scrollbar {
+    &::-webkit-scrollbar {
+      width:                 .75rem;
+    }
+
+    &::-webkit-scrollbar-button {
+      display:                none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      min-height:             5em;
+    }
+
+    &::-webkit-scrollbar-track {
+      background:             none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      opacity:               .5;
+      border-radius:         .25rem;
+      background:             lighten($woodsmoke-color, 15);
+      border:                 1px solid transparentize($black-color, 0.5);
+
+      &:active,
+      &:hover {
+        background:           lighten($woodsmoke-color, 15);
+        border-color:         transparentize($black-color, 0.25);
+      }
+    }
+  }
+
+  .ace_cursor-layer {
+    .ace_cursor {
+      color:                  $white-color;
+    }
+  }
+
+  .ace_print-margin-layer {
+    .ace_print-margin {
+      width:                  1px;
+      background-color:       lighten($woodsmoke-color, 3);
+    }
+  }
+
+  .ace_marker-layer {
+    .ace_bracket {
+      border-radius:         .1em;
+      background-color:       transparentize($white-color, 0.85);
+
+      .ace_start {
+        border:               1px dashed $alto-color;
+      }
+    }
+
+    .ace_active-line {
+      background-color:       darken($woodsmoke-color, 2);
+    }
+
+    .ace_selection {
+      background-color:       lighten($black-color, 2);
+    }
+
+    .ace_selected-word {
+      border-radius:         .1em;
+      box-shadow:             0 0 0 1px $white-color;
+    }
+  }
+
+  .ace_text-layer {
+    .ace_fold {
+      border-color:           $alto-color;
+      background-color:       $danube-color;
+    }
+
+    .ace_invisible {
+      color:                  lighten($woodsmoke-color, 3);
+
+      &.ace_invisible_eol,
+      &.ace_invisible_space {
+        color:                lighten($woodsmoke-color, 5);
+      }
+    }
+
+    .ace_indent-guide {
+      background:             url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMQERFpYLC1tf0PAAgOAnPnhxyiAAAAAElFTkSuQmCC') right repeat-y;
+    }
+
+    .ace_comment {
+      opacity:               .35;
+    }
+
+    .ace_paren {
+      &.ace_lparen,
+      &.ace_rparen {
+        opacity:             .75;
+      }
+    }
+
+    .ace_operator {
+      opacity:               .75;
+    }
+
+    .ace_punctuation {
+      opacity:               .75;
+    }
+
+    .ace_underline {
+      text-decoration:        underline;
+      color:                  $cornflower-blue-color;
+    }
+
+    .ace_class {
+      font-weight:            bold;
+      color:                  $ronchi-color;
+    }
+
+    .ace_type {
+      color:                  $persimmon-color;
+    }
+
+    .ace_function {
+      // Also `code` and ```blocks``` in MD mode.
+      color:                  $brandy-color;
+
+      // The name of a function being defined.
+      &.ace_name {
+        font-weight:          bold;
+      }
+    }
+
+    .ace_variable {
+      color:                  $bermuda-gray-color;
+    }
+
+    .ace_keyword {
+      &:not(.ace_operator) {
+        color:                $laser-color;
+      }
+    }
+
+    .ace_constant {
+      color:                  $raw-sienna-color;
+
+      &.ace_numeric {
+        font-weight:          lighten($raw-sienna-color, 5);
+      }
+    }
+
+    .ace_string {
+      color:                  $asparagus-color;
+
+      &.ace_strong {
+        font-weight:          bold;
+        color:                unset;
+      }
+
+      &.ace_emphasis {
+        font-style:           italic;
+        color:                unset;
+      }
+
+      &.ace_blockquote {
+        opacity:             .5;
+        font-style:           italic;
+        color:                unset;
+      }
+
+      &.ace_regexp {
+        font-weight:          bold;
+        color:                $porsche-color;
+      }
+    }
+
+    .ace_tag-open,
+    .ace_tag-name,
+    .ace_end-tag-open,
+    .ace_tag-close {
+      font-weight:            bold;
+      color:                  $muesli-color;
+    }
+
+    .ace_attribute-name {
+      color:                  $roman-color;
+    }
+
+    .ace_markup {
+      .ace_list {
+        color:                $texas-color;
+      }
+    }
+
+    .ace_heading {
+      font-weight:            bold;
+      color:                  $anakiwa-color;
+
+      &.ace_markup {
+        opacity:             .5;
+      }
+
+      ~ .ace_strong,
+      ~ .ace_emphasis {
+        color:                $anakiwa-color;
+      }
+
+      ~ .ace_strong {
+        font-weight:          bolder;
+      }
+    }
+  }
+
+  .ace_invalid {
+    color:                    $white-color;
+    background-color:         $red-berry-color;
+
+    &.ace_deprecated {
+      color:                  $pumice-color;
+      background-color:       $london-hue-color;
+    }
+  }
+}

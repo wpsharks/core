@@ -58,9 +58,6 @@ interface RequireConfig {
 	// Path mappings for module names not found directly under baseUrl.
 	paths?: { [key: string]: any; };
 
-	// SHA mappings for SRI security.
-	shas?: { [key: string]: any; };
-
 
 	// Dictionary of Shim's.
 	// does not cover case of key->string[]
@@ -106,7 +103,7 @@ interface RequireConfig {
 	* AMD configurations, use module.config() to access in
 	* define() functions
 	**/
-	config?: { [id: string]: {}; };
+	config?: { shas?: {}; [id: string]: {}; };
 
 	/**
 	* Configures loading modules from CommonJS packages.
