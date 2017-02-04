@@ -55,9 +55,11 @@ interface RequireConfig {
 	// The root path to use for all module lookups.
 	baseUrl?: string;
 
-	// Path mappings for module names not found directly under
-	// baseUrl.
+	// Path mappings for module names not found directly under baseUrl.
 	paths?: { [key: string]: any; };
+
+	// SHA mappings for SRI security.
+	shas?: { [key: string]: any; };
 
 
 	// Dictionary of Shim's.
@@ -177,7 +179,7 @@ interface RequireConfig {
 	* 	}
 	* });
 	**/
-	urlArgs?: string | ((id: string, url: string) => string); 
+	urlArgs?: string | ((id: string, url: string) => string);
 
 	/**
 	* Specify the value for the type="" attribute used for script
