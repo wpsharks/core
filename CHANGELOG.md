@@ -7,6 +7,8 @@
 - The `smartypants` option in the Markdown parser is now enabled by default.
 - Enhancing Anchorizer class that is used by the Markdown parser.
 - Adding `/typings` directory for TypeScript projects.
+- Adding custom compilation of Emmet + snippets.
+- Adding custom Emmet extension for ACE.
 
 ## v170124.74961
 

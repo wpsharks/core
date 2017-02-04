@@ -107,7 +107,7 @@ declare namespace AceAjax {
          * Provides access to require in packed noconflict mode
          * @param moduleName
         **/
-        require(moduleName: string): any;
+        require(moduleName: string, fn?: (module?: any) => any): any;
 
         /**
          * Embeds the Ace editor into the DOM, at the element provided by `el`.
