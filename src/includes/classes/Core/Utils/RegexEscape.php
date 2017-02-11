@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -47,5 +47,22 @@ class RegexEscape extends Classes\Core\Base\Core
         return preg_quote($string, $delimiter);
 
         // Multibyte safe. See: http://jas.xyz/1PvQJty
+    }
+
+    /**
+     * Matches zero or more escapable chars,
+     * and anything that's not vertical whitespace.
+     *
+     * @since 17xxxx Markdown enhancements.
+     *
+     * @param string $escapable_chars Escapable chars.
+     * @param bool   $ungreedy        Ungreedy matching?
+     *
+     * @return string Regex fragment suitable for `preg_*()`.
+     */
+    public function m0EscNoVws(string $escapable_chars, bool $ungreedy = false): string
+    {
+        $escapable_chars = $this->__invoke($escapable_chars);
+        return '(?:[^\v'.$escapable_chars.'\\\\]|\\\\['.$escapable_chars.'])*'.($ungreedy ? '?' : '');
     }
 }

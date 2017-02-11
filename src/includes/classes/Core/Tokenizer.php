@@ -78,6 +78,15 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     protected $shortcode_unautop_compat_tag_name;
 
     /**
+     * Escape char patterns.
+     *
+     * @since 17xxxx
+     *
+     * @type array|null
+     */
+    protected static $m0_esc_no_vws;
+
+    /**
      * Tokenize specific elements.
      *
      * @since 150424 Initial release.
@@ -112,6 +121,11 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
 
         $this->tokens = []; // Initialize tokens.
 
+        if (!isset(static::$m0_esc_no_vws)) {
+            static::$m0_esc_no_vws['[]'] = $this->c::regexM0EscNoVws('[]');
+            static::$m0_esc_no_vws['()'] = $this->c::regexM0EscNoVws('()');
+            static::$m0_esc_no_vws['{}'] = $this->c::regexM0EscNoVws('{}');
+        }
         if (!$this->string || !$this->tokenize) {
             return; // Nothing to do.
         }
@@ -336,7 +350,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     }
 
     /**
-     * Maybe tokenize `[markdown](links)`.
+     * Maybe tokenize `[md](links)`, et al.
      *
      * @since 150424 Initial release.
      */
@@ -345,29 +359,25 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
         if (!in_array('md-links', $this->tokenize, true)) {
             return; // Not tokenizing these.
         }
-        // This routine includes considerations for images also.
-        // This also tokenizes [link][ids] that reference link definitions.
-        // This also tokenizes [named]: <link> "definitions" too (supports one-line definitions only).
-        // This also tokenizes *[ABBR]: definitions too (supports one-line definitions only).
-        // This also tokenizes [^1]: footnote definitions too (supports one-line definitions only).
-        // @TODO Add support for [link](URL "title"); i.e., a "title" is not picked up right now.
-        // @TODO Add support for multiline definitions in a future revision.
+        $_ = static::$m0_esc_no_vws; // Shorter reference.
 
-        $url_re       = $this->c::regexFrag($this::URL_REGEX_VALID);
         $this->string = preg_replace_callback(
             [
-                // In this first one there is a check for named link references too.
+                // This one covers MD [links](), [link][references], and ![](images).
                 // The negative lookahed for `(?!\/)` is to avoid catching a tokenized shortcode.
                 // e.g., Whenever the `shortcode_unautop_compat` configuration option has been enabled.
+                '/\!?\[(?:'.$_['[]'].'|(?R))\](?:\h*\[(?!\/)'.$_['[]'].'\]|\('.$_['()'].'\))(?:\h*\{'.$_['{}'].'\})?/ui',
 
-                // A [link][id] can also have spaces between; e.g., [link] [id]. This is according to the spec.
-                // A link or image using special attributes cannot have a space before `{attributes}`, according to the spec.
-                // Any type of definition is allowed to have spaces both before and after the `:`; e.g., `[^1] : footnote`.
+                // In these, we should only tokenize the definition markers and the `<link>` in link definitions.
+                '/^\h{0,3}(?:\['.$_['[]'].'\])+\h*\:\h*(?:\<)?[^\s<>]*(?:\>)?/uim', // Link definition markers.
+                '/^\h{0,3}(?:\*\['.$_['[]'].'\])+\h*\:/uim', // Abbreviation definition markers.
+                '/^\h{0,3}(?:\[\^[0-9]+\])+\h*\:/uim', // Footnote definition markers.
 
-                '/\!?\[(?:[^\v[\]]*|(?R))\](?:[ ]*\[(?!\/)[^\v[\]]+\]|\([^\s()]+\))(?:[ ]*\{[^\v{}]*\})?/ui', // Links & images.
-                '/^[ ]{0,3}(?:\[[^\v\^[\]]+\])+[ ]*\:[ ]*[^\s]+(?:[ ]+"[^\v"]+")?$/uim', // Link definitions.
-                '/^[ ]{0,3}(?:\*\[[^\v[\]]+\])+[ ]*\:.*$/uim', // Abbreviation definitions.
-                '/^[ ]{0,3}(?:\[\^[0-9]+\])+[ ]*\:.*$/uim', // Footnote definitions.
+                // Also tokenize MD `<urls>` in brackets.
+                '/\<((?:[a-zA-Z][a-zA-Z0-9+.\-]*:)?\/{2}[^\v<>]*)\>/ui',
+
+                // Also tokenize checkbox markers.
+                '/^\h*(?:[*+\-]|[0-9]+\.)\h+\[[\sx]\]/uim',
             ],
             function ($m) {
                 $this->tokens[] = $m[0];  // Original data for token.

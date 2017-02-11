@@ -214,4 +214,16 @@ trait Escapes
     {
         return $GLOBALS[static::class]->Utils->©RegexEscape->__invoke(...$args);
     }
+
+    /**
+     * @since 17xxxx Markdown enhancements.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RegexEscape::m0EscNoVws()
+     */
+    public static function regexM0EscNoVws(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©RegexEscape->m0EscNoVws(...$args);
+    }
 }
