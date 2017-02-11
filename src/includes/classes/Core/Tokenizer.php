@@ -348,6 +348,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
         // This also tokenizes [named]: <link> "definitions" too (supports one-line definitions only).
         // This also tokenizes *[ABBR]: definitions too (supports one-line definitions only).
         // This also tokenizes [^1]: footnote definitions too (supports one-line definitions only).
+        // @TODO Add support for [link](URL "title"); i.e., a "title" is not picked up right now.
         // @TODO Add support for multiline definitions in a future revision.
 
         $url_re       = $this->c::regexFrag($this::URL_REGEX_VALID);
@@ -362,9 +363,9 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
                 // Any type of definition is allowed to have spaces both before and after the `:`; e.g., `[^1] : footnote`.
 
                 '/\!?\[(?:[^\v[\]]*|(?R))\](?:[ ]*\[(?!\/)[^\v[\]]+\]|\([^\s()]+\))(?:[ ]*\{[^\v{}]*\})?/ui', // Links & images.
-                '/^[ ]*(?:\[[^\v\^[\]]+\])+[ ]*\:[ ]*[^\s]+(?:[ ]+"[^\v"]+")?$/uim', // Link definitions.
-                '/^[ ]*(?:\*\[[^\v[\]]+\])+[ ]*\:.*$/uim', // Abbreviation definitions.
-                '/^[ ]*(?:\[\^[0-9]+\])+[ ]*\:.*$/uim', // Footnote definitions.
+                '/^[ ]{0,3}(?:\[[^\v\^[\]]+\])+[ ]*\:[ ]*[^\s]+(?:[ ]+"[^\v"]+")?$/uim', // Link definitions.
+                '/^[ ]{0,3}(?:\*\[[^\v[\]]+\])+[ ]*\:.*$/uim', // Abbreviation definitions.
+                '/^[ ]{0,3}(?:\[\^[0-9]+\])+[ ]*\:.*$/uim', // Footnote definitions.
             ],
             function ($m) {
                 $this->tokens[] = $m[0];  // Original data for token.
