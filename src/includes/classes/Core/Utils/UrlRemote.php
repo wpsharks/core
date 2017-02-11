@@ -164,7 +164,9 @@ class UrlRemote extends Classes\Core\Base\Core
 
         $curl = curl_init(); // Initialize.
         curl_setopt_array($curl, $curl_opts);
-        $curl_body = $this->c::mbTrim((string) curl_exec($curl));
+        $curl_body = (string) curl_exec($curl);
+        // Note: Do not trim body as it can cause problems.
+        // e.g., If a request is made for the purpose of generating a hash.
 
         # Collect cURL info after request is complete.
 

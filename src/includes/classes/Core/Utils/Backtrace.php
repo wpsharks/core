@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Backtrace utilities.
  *
- * @since 17xxxx Debugging utilities.
+ * @since 170211.63148 Debugging utilities.
  */
 class Backtrace extends Classes\Core\Base\Core
 {
     /**
      * Get backtrace callers.
      *
-     * @since 17xxxx Debugging utilities.
+     * @since 170211.63148 Debugging utilities.
      *
      * @param int|null $at        Starting at position.
      * @param bool     $all       Include magic middle-men?
@@ -82,7 +82,7 @@ class Backtrace extends Classes\Core\Base\Core
     /**
      * Has backtrace callers?
      *
-     * @since 17xxxx Debugging utilities.
+     * @since 170211.63148 Debugging utilities.
      *
      * @param string|array $caller    Caller(s).
      * @param int|null     $at        Starting at position.

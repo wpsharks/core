@@ -30,7 +30,7 @@ class Markdown extends Classes\Core\Base\Core
      * A very simple markdown parser.
      *
      * @since 150424 Initial release.
-     * @since 17xxxx Removing `parsedown-extra` flavor.
+     * @since 170211.63148 Removing `parsedown-extra` flavor.
      *
      * @param mixed $value Any input value.
      * @param array $args  Any additional behavioral args.
@@ -151,7 +151,7 @@ class Markdown extends Classes\Core\Base\Core
     /**
      * Default header `id=""` function.
      *
-     * @since 17xxxx Header id function.
+     * @since 170211.63148 Header id function.
      *
      * @param string $raw Header text value.
      *

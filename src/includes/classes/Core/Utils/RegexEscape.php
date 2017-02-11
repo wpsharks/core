@@ -53,7 +53,7 @@ class RegexEscape extends Classes\Core\Base\Core
      * Matches zero or more escapable chars,
      * and anything that's not vertical whitespace.
      *
-     * @since 17xxxx Markdown enhancements.
+     * @since 170211.63148 Markdown enhancements.
      *
      * @param string $escapable_chars Escapable chars.
      * @param bool   $ungreedy        Ungreedy matching?

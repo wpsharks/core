@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @var \Memcached
+     * @type \Memcached
      */
     protected $Pool;
 
@@ -37,7 +37,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @var bool
+     * @type bool
      */
     protected $enabled;
 
@@ -46,7 +46,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @var string
+     * @type string
      */
     protected $namespace;
 
@@ -55,7 +55,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @var array
+     * @type array
      */
     protected $servers;
 
@@ -64,7 +64,7 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216
      *
-     * @var int
+     * @type int
      */
     const MAX_WRITE_ATTEMPTS = 5;
 
@@ -79,7 +79,9 @@ class Memcache extends Classes\Core\Base\Core
     {
         parent::__construct($App);
 
-        $this->enabled   = $this->App->Config->©memcache['©enabled'];
+        $this->enabled = $this->App->Config->©memcache['©enabled'];
+        $this->enabled = $this->enabled ?? class_exists('Memcached');
+
         $this->namespace = $this->App->Config->©memcache['©namespace'];
         $this->servers   = $active_servers   = []; // Initialize.
 
@@ -90,10 +92,10 @@ class Memcache extends Classes\Core\Base\Core
             $this->servers[$_host.':'.$_port] = [$_host, $_port, $_weight];
         } // unset($_server, $_host, $_port, $_weight);
 
-        if (!class_exists('Memcached')) {
-            return; // Not possible.
-        } elseif (!$this->enabled || !$this->namespace || !$this->servers) {
+        if (!$this->enabled || !$this->namespace || !$this->servers) {
             return; // Disabled or lacking config values.
+        } elseif (!class_exists('Memcached')) {
+            return; // Not possible.
         }
         $this->Pool = new \Memcached($this->App->namespace_sha1);
 
@@ -162,8 +164,7 @@ class Memcache extends Classes\Core\Base\Core
         } elseif ($value === null || is_resource($value)) {
             throw $this->c::issue('Incompatible data type.');
         }
-        do { // Avoid race issues with a loop.
-
+        do { // Avoid race issues.
             $attempts = $attempts ?? 0;
             ++$attempts; // Counter.
 
@@ -252,10 +253,9 @@ class Memcache extends Classes\Core\Base\Core
         if (!($namespaced_primary_key = $this->nspKey($primary_key))) {
             return ''; // Not possible; e.g., empty key.
         }
-        $namespaced_primary_key_uuid = ''; // Initialize.
+        $namespaced_primary_key_uuid = '';
 
-        do { // Avoid race issues with a loop.
-
+        do { // Avoid race issues.
             $attempts = $attempts ?? 0;
             ++$attempts; // Counter.
 
@@ -363,6 +363,7 @@ class Memcache extends Classes\Core\Base\Core
             $this->Pool->addServers($this->servers);
         }
     }
+
     /*
     Memcached class constants in PHP v7.0.
 

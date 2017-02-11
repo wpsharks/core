@@ -197,8 +197,9 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©memcache' => [
-                '©enabled'   => (bool) ($_['CFG_MEMCACHE_ENABLED'] ?? $_ ? true : false),
-                '©namespace' => (string) ($_['CFG_MEMCACHE_NAMESPACE'] ?? 'app'),
+                '©enabled'   => (bool) ($_['CFG_MEMCACHE_ENABLED'] ?? $_ ? true : null),
+                // Note: A `null` value here indicates that auto-detection should be used (default).
+                '©namespace' => (string) ($_['CFG_MEMCACHE_NAMESPACE'] ?? $_['CFG_BRAND_SHORT_VAR'] ?? 'app'),
                 '©servers'   => [
                     [
                         '©host'   => (string) ($_['CFG_MEMCACHE_HOST'] ?? '127.0.0.1'),

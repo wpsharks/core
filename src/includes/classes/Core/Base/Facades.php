@@ -78,6 +78,7 @@ abstract class Facades
     use Traits\Facades\Slashes;
     use Traits\Facades\Slugs;
     use Traits\Facades\Spellcheck;
+    use Traits\Facades\Sris;
     use Traits\Facades\Templates;
     use Traits\Facades\Throwables;
     use Traits\Facades\Time;

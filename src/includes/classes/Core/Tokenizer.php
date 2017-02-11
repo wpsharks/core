@@ -80,7 +80,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     /**
      * Escape char patterns.
      *
-     * @since 17xxxx
+     * @since 170211.63148
      *
      * @type array|null
      */
