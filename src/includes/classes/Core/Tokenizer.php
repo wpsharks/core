@@ -324,8 +324,10 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
         } elseif (mb_strpos($this->string, '~') === false && mb_strpos($this->string, '`') === false) {
             return; // Nothing to tokenize here.
         }
-        $regex = '/(~{3,}|`{3,}|`)(?s:.*?)\\1/ui';
-        // This picks up ```lang {attributes} also.
+        $regex = '/(~{3,}|`{3,}|``|`)(?s:.*?)[^`]\\1/ui';
+        // Note: this covers ``a literal `tick inside`` also.
+        // See: <https://daringfireball.net/projects/markdown/syntax#code>
+        // This also picks up ```lang {attributes} in fenced code blocks.
 
         $this->string = preg_replace_callback($regex, function ($m) {
             $this->tokens[] = $m[0];  // Original data for token.
