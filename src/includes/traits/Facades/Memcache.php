@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -23,6 +23,18 @@ use function get_defined_vars as vars;
  */
 trait Memcache
 {
+    /**
+     * @since 17xxxx Memcache enabled?
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Memcache::enabled()
+     */
+    public static function memcacheEnabled(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Memcache->enabled(...$args);
+    }
+
     /**
      * @since 151214 First facades.
      *

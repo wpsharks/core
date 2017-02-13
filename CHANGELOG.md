@@ -1,5 +1,6 @@
 ## $v
 
+- Adding SRI utils w/ `c::sri([url])`.
 - Adding SmartyPants to Markdown parser.
 - Removing `parsedown-extra` flavor in Markdown parser.
 - Adding `c::backtraceCallers()` and `c::hasBacktraceCaller()`.

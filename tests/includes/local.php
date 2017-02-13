@@ -21,6 +21,7 @@ $App = new App(${__FILE__}['instance_base'], [
     ],
     '©fs_paths' => [ // Use config. file.
         '©logs_dir'  => dirname(__FILE__, 2).'/local/.~logs',
+        '©sris_dir'  => dirname(__FILE__, 2).'/local/.~sris',
         '©cache_dir' => dirname(__FILE__, 2).'/local/.~cache',
     ],
 ]);

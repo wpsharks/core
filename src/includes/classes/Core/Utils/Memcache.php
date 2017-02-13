@@ -19,7 +19,7 @@ use function get_defined_vars as vars;
 /**
  * Memcache utilities.
  *
- * @since 151216 Memcached utilities.
+ * @since 151216 Memcache utils.
  */
 class Memcache extends Classes\Core\Base\Core
 {
@@ -71,7 +71,7 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Class constructor.
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -79,8 +79,12 @@ class Memcache extends Classes\Core\Base\Core
     {
         parent::__construct($App);
 
+        if (!($extension_loaded = extension_loaded('memcached'))) {
+            $this->enabled = false; // Not possible.
+            return; // Not possible; extension missing.
+        }
         $this->enabled = $this->App->Config->©memcache['©enabled'];
-        $this->enabled = $this->enabled ?? class_exists('Memcached');
+        $this->enabled = $this->enabled ?? $extension_loaded;
 
         $this->namespace = $this->App->Config->©memcache['©namespace'];
         $this->servers   = $active_servers   = []; // Initialize.
@@ -93,29 +97,48 @@ class Memcache extends Classes\Core\Base\Core
         } // unset($_server, $_host, $_port, $_weight);
 
         if (!$this->enabled || !$this->namespace || !$this->servers) {
+            $this->enabled = false; // Not possible.
             return; // Disabled or lacking config values.
-        } elseif (!class_exists('Memcached')) {
-            return; // Not possible.
         }
-        $this->Pool = new \Memcached($this->App->namespace_sha1);
+        try { // Catch exceptions on init and fail gracefully.
+            // This also covers a scenario where the extension is loaded in PHP,
+            // but the `memcached` binary is not actually available on the server.
+            $this->Pool = new \Memcached($this->App->namespace_sha1);
 
-        $this->Pool->setOption(\Memcached::OPT_NO_BLOCK, true);
-        $this->Pool->setOption(\Memcached::OPT_SEND_TIMEOUT, 5);
-        $this->Pool->setOption(\Memcached::OPT_RECV_TIMEOUT, 5);
+            $this->Pool->setOption(\Memcached::OPT_NO_BLOCK, true);
+            $this->Pool->setOption(\Memcached::OPT_SEND_TIMEOUT, 5);
+            $this->Pool->setOption(\Memcached::OPT_RECV_TIMEOUT, 5);
 
-        $this->Pool->setOption(\Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
+            $this->Pool->setOption(\Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
 
-        if (\Memcached::HAVE_IGBINARY) { // Size and speed gains.
-            $this->Pool->setOption(\Memcached::OPT_BINARY_PROTOCOL, true);
-            $this->Pool->setOption(\Memcached::OPT_SERIALIZER, \Memcached::SERIALIZER_IGBINARY);
+            if (\Memcached::HAVE_IGBINARY) { // Size and speed gains.
+                $this->Pool->setOption(\Memcached::OPT_BINARY_PROTOCOL, true);
+                $this->Pool->setOption(\Memcached::OPT_SERIALIZER, \Memcached::SERIALIZER_IGBINARY);
+            }
+            $this->maybeAddServerConnections();
+            //
+        } catch (\Throwable $Exception) {
+            $this->enabled = false; // Not possible.
+            $this->c::issue(vars(), 'Memcached init failure. '.$Exception->getMessage());
         }
-        $this->maybeAddServerConnections();
+    }
+
+    /**
+     * Memcache enabled?
+     *
+     * @since 17xxxx Memcache utils.
+     *
+     * @return bool True if enabled.
+     */
+    public function enabled(): bool
+    {
+        return $this->enabled;
     }
 
     /**
      * Get cache value by key.
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      *
      * @param string     $primary_key Primary key.
      * @param string|int $sub_key     Sub-key to get.
@@ -124,10 +147,9 @@ class Memcache extends Classes\Core\Base\Core
      */
     public function get(string $primary_key, $sub_key)
     {
-        if (!$this->Pool) {
+        if (!$this->enabled) {
             return; // Not possible.
-        }
-        if (!($key = $this->key($primary_key, $sub_key))) {
+        } elseif (!($key = $this->key($primary_key, $sub_key))) {
             return; // Fail; e.g., race condition.
         }
         $value = $this->Pool->get($key); // Possibly `false`.
@@ -141,7 +163,7 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Set|update cache key.
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      *
      * @param string     $primary_key   Primary key.
      * @param string|int $sub_key       Sub-key to set.
@@ -152,7 +174,7 @@ class Memcache extends Classes\Core\Base\Core
      */
     public function set(string $primary_key, $sub_key, $value, int $expires_after = 0): bool
     {
-        if (!$this->Pool) {
+        if (!$this->enabled) {
             return false; // Not possible.
         }
         $time          = time();
@@ -188,7 +210,7 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Touch a cache key (i.e., new expiration).
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      *
      * @param string     $primary_key   Primary key.
      * @param string|int $sub_key       Sub-key to touch.
@@ -198,7 +220,7 @@ class Memcache extends Classes\Core\Base\Core
      */
     public function touch(string $primary_key, $sub_key, int $expires_after): bool
     {
-        if (!$this->Pool) {
+        if (!$this->enabled) {
             return false; // Not possible.
         }
         $time          = time();
@@ -214,7 +236,7 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Clear the cache.
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      *
      * @param string          $primary_key Primary key.
      * @param string|int|null $sub_key     Sub-key (optional).
@@ -224,7 +246,7 @@ class Memcache extends Classes\Core\Base\Core
      */
     public function clear(string $primary_key, $sub_key = null, int $delay = 0): bool
     {
-        if (!$this->Pool) {
+        if (!$this->enabled) {
             return false; // Not possible.
         }
         if (!isset($sub_key)) {
@@ -238,7 +260,7 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Namespace a key.
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      *
      * @param string     $primary_key Primary key.
      * @param string|int $sub_key     Sub-key.
@@ -247,13 +269,12 @@ class Memcache extends Classes\Core\Base\Core
      */
     protected function key(string $primary_key, $sub_key): string
     {
-        if (!$this->Pool) {
+        if (!$this->enabled) {
             return ''; // Not possible.
-        }
-        if (!($namespaced_primary_key = $this->nspKey($primary_key))) {
+        } elseif (!($namespaced_primary_key = $this->nspKey($primary_key))) {
             return ''; // Not possible; e.g., empty key.
         }
-        $namespaced_primary_key_uuid = '';
+        $namespaced_primary_key_uuid = ''; // Initialize.
 
         do { // Avoid race issues.
             $attempts = $attempts ?? 0;
@@ -290,7 +311,7 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Namespace primary key.
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      *
      * @param string $primary_key Primary key.
      *
@@ -298,10 +319,9 @@ class Memcache extends Classes\Core\Base\Core
      */
     protected function nspKey(string $primary_key): string
     {
-        if (!$this->Pool) {
+        if (!$this->enabled) {
             return ''; // Not possible.
-        }
-        if (!isset($primary_key[0])) {
+        } elseif (!isset($primary_key[0])) {
             return ''; // Not possible.
         }
         $namespace_prefix       = 'x___'.$this->namespace.'\\';
@@ -316,16 +336,16 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Servers differ? i.e., current vs. active.
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      *
      * @return bool True if servers differ.
      */
     protected function serversDiffer(): bool
     {
-        if (!$this->Pool) {
+        if (!$this->enabled) {
             return false; // Not possible.
         }
-        $active_servers = []; // Initialize array.
+        $active_servers = []; // Initialize.
 
         foreach ($this->Pool->getServerList() as $_server) {
             $active_servers[$_server['host'].':'.$_server['port']] = $_server;
@@ -350,11 +370,11 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Maybe add server connections.
      *
-     * @since 151216 Memcached utilities.
+     * @since 151216 Memcache utils.
      */
     protected function maybeAddServerConnections()
     {
-        if (!$this->Pool) {
+        if (!$this->enabled) {
             return; // Not possible.
         }
         if ($this->serversDiffer()) {

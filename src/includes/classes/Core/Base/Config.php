@@ -187,6 +187,7 @@ class Config extends Classes\Core\Base\Core
             '©fs_paths' => [
                 '©logs_dir'      => (string) ($_['CFG_LOGS_DIR'] ?? '/var/log/app/%%app_slug%%'),
                 '©cache_dir'     => (string) ($_['CFG_CACHE_DIR'] ?? '/tmp/app/%%app_slug%%/cache'),
+                '©sris_dir'      => (string) ($_['CFG_SRIS_DIR'] ?? '%%app_base_dir%%/src/client-s'),
                 '©routes_dir'    => (string) ($_['CFG_ROUTES_DIR'] ?? '%%app_base_dir%%/src/includes/routes'),
                 '©templates_dir' => (string) ($_['CFG_TEMPLATES_DIR'] ?? '%%app_base_dir%%/src/includes/templates'),
                 '©errors_dir'    => (string) ($_['CFG_ERRORS_DIR'] ?? ($_ ? '/bootstrap/src/html/errors' : '')),
@@ -198,7 +199,7 @@ class Config extends Classes\Core\Base\Core
 
             '©memcache' => [
                 '©enabled'   => (bool) ($_['CFG_MEMCACHE_ENABLED'] ?? $_ ? true : null),
-                // Note: A `null` value here indicates that auto-detection should be used (default).
+                // Note: A `null` value indicates that auto-detection should be used (default).
                 '©namespace' => (string) ($_['CFG_MEMCACHE_NAMESPACE'] ?? $_['CFG_BRAND_SHORT_VAR'] ?? 'app'),
                 '©servers'   => [
                     [
