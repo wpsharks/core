@@ -306,7 +306,7 @@ class Sri extends Classes\Core\Base\Core
             @mkdir($map_dir, $transient_perms, true);
         }
         $this->map[$url] = $sri; // Add to the map.
-        @file_put_contents($this->map_file, json_encode($this->map));
+        @file_put_contents($this->map_file, json_encode($this->map, JSON_PRETTY_PRINT));
     }
 
     /**
