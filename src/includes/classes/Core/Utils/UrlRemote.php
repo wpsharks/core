@@ -158,9 +158,10 @@ class UrlRemote extends Classes\Core\Base\Core
         };
         # Determine if we can follow location headers.
 
-        static $can_follow_location = // Static cache of this detection.
-            !filter_var(ini_get('safe_mode'), FILTER_VALIDATE_BOOLEAN) && !ini_get('open_basedir');
-
+        static $can_follow_location; // Static cache of this detection.
+        if (!isset($can_follow_location)) { // Safe mode and a base directory are problematic.
+            $can_follow_location = !filter_var(ini_get('safe_mode'), FILTER_VALIDATE_BOOLEAN) && !ini_get('open_basedir');
+        }
         $follow_location = $max_redirects > 0 && $can_follow_location;
         $max_redirects   = !$follow_location ? 0 : $max_redirects;
 

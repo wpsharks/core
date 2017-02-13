@@ -208,8 +208,7 @@ class Memcache extends Classes\Core\Base\Core
             throw $this->c::issue('Incompatible data type.');
         }
         do { // Avoid race issues.
-            $cas = $cas ?? 0;
-
+            $cas      = $cas ?? 0;
             $attempts = $attempts ?? 0;
             ++$attempts; // Counter.
 
