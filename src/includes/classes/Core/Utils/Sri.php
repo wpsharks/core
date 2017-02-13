@@ -122,24 +122,30 @@ class Sri extends Classes\Core\Base\Core
         if (!$url) { // URL is empty?
             return ''; // Stop here.
         }
+        if (mb_stripos($url, '//') === 0) {
+            $url = 'http:'.$url;
+        } // Always force a scheme.
+
         $sha1 = sha1($url); // Key for lookups.
 
-        if (($sri = &$this->checkProcess($url, $sha1))) {
+        // NOTE: The in-process cache by &reference.
+        // This &reference impacts all checks that follow.
+
+        if (($sri = &$this->checkProcess($url, $sha1)) !== null) {
             return $sri; // Avoids disk IO.
-        } elseif (($sri = $this->checkMemcache($url, $sha1))) {
+        } elseif (($sri = $this->checkMemcache($url, $sha1)) !== null) {
             return $sri; // Avoids disk IO.
-        } elseif (($sri = $this->checkMap($url, $sha1))) {
+        } elseif (($sri = $this->checkMap($url, $sha1)) !== null) {
             $this->memcacheIt($url, $sha1, $sri);
             return $sri; // Better than cache.
-        } elseif (($sri = $this->checkCache($url, $sha1))) {
+        } elseif (($sri = $this->checkCache($url, $sha1)) !== null) {
             $this->memcacheIt($url, $sha1, $sri);
             return $sri; // Slightly slower.
-        } elseif ($this->content_checks < $this->max_content_checks) {
-            $sri = $this->checkContents($url, $sha1);
+        } elseif (($sri = $this->checkContents($url, $sha1)) !== null) {
             $this->cacheIt($url, $sha1, $sri);
             return $sri; // Cached now.
         }
-        return ''; // Not possible at this time.
+        return $sri = ''; // Not possible at this time.
     }
 
     /**
@@ -150,15 +156,16 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      *
-     * @return string SRI hash, if exists.
+     * @return string|null SRI hash, else `null`.
      */
-    protected function &checkProcess(string $url, string $sha1): string
+    protected function &checkProcess(string $url, string $sha1)
     {
-        if (($sri = &$this->cacheGet('sris', $sha1))) {
+        if (is_string($sri = &$this->cacheGet('sris', $sha1))) {
             return $sri; // Cached this already.
+        } else { // Set in-process cache to `null`.
+            $sri = null; // Not in the cache.
+            return $sri; // By reference.
         }
-        $sri = ''; // Not in the cache.
-        return $sri; // By reference.
     }
 
     /**
@@ -169,16 +176,16 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      *
-     * @return string SRI hash, if exists.
+     * @return string|null SRI hash, else `null`.
      */
-    protected function checkMemcache(string $url, string $sha1): string
+    protected function checkMemcache(string $url, string $sha1)
     {
         if (!$this->memcache_enabled) {
-            return ''; // Not possible.
-        } elseif (($sri = $this->c::memcacheGet('sris', $sha1))) {
+            return $sri = null; // Not possible.
+        } elseif (is_string($sri = $this->c::memcacheGet('sris', $sha1))) {
             return $sri; // Ideal; this avoids disk IO.
         }
-        return $sri = ''; // Not in the cache.
+        return $sri = null; // Not in the cache.
     }
 
     /**
@@ -189,9 +196,9 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      *
-     * @return string SRI hash, if exists.
+     * @return string|null SRI hash, else `null`.
      */
-    protected function checkMap(string $url, string $sha1): string
+    protected function checkMap(string $url, string $sha1)
     {
         if (!isset($this->map) && is_file($this->map_file)) {
             $this->map = json_decode(file_get_contents($this->map_file), true);
@@ -199,9 +206,9 @@ class Sri extends Classes\Core\Base\Core
         } // JIT loading of the map; i.e., only when necessary.
 
         if ($this->map && isset($this->map[$url])) {
-            return $sri = $this->map[$url];
+            return $sri = (string) $this->map[$url];
         }
-        return $sri = ''; // Not in the map.
+        return $sri = null; // Not in the map.
     }
 
     /**
@@ -212,7 +219,7 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      *
-     * @return string SRI hash, if exists.
+     * @return string|null SRI hash, else `null`.
      */
     protected function checkCache(string $url, string $sha1)
     {
@@ -223,7 +230,7 @@ class Sri extends Classes\Core\Base\Core
         if (is_file($cache_file)) {
             return $sri = (string) file_get_contents($cache_file);
         }
-        return $sri = ''; // Not in the cache.
+        return $sri = null; // Not in the cache.
     }
 
     /**
@@ -234,17 +241,21 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      *
-     * @return string SRI hash from file contents.
+     * @return string|null SRI hash, else `null`.
      */
-    protected function checkContents(string $url, string $sha1): string
+    protected function checkContents(string $url, string $sha1)
     {
         if ($this->content_checks >= $this->max_content_checks) {
-            return $sri = ''; // Not possible at this time.
+            return $sri = null; // Not possible at this time.
         } // There is a limit on the number of checks per process.
 
         ++$this->content_checks; // Increment counter.
-        $contents   = $this->c::remoteRequest('GET::'.$url);
-        return $sri = 'sha256-'.base64_encode(hash('sha256', $contents, true));
+        $response = $this->c::remoteResponse('GET::'.$url);
+
+        if ($response->code !== 200) {
+            return $sri = null; // Unable to determine.
+        }
+        return $sri = 'sha256-'.base64_encode(hash('sha256', $response->body, true));
     }
 
     /**
@@ -255,6 +266,8 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      * @param string $sri  The SRI hash.
+     *
+     * @note The `$sri` is allowed to be empty.
      */
     protected function cacheIt(string $url, string $sha1, string $sri)
     {
@@ -271,6 +284,8 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      * @param string $sri  The SRI hash.
+     *
+     * @note The `$sri` is allowed to be empty.
      */
     protected function memcacheIt(string $url, string $sha1, string $sri)
     {
@@ -287,6 +302,8 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      * @param string $sri  The SRI hash.
+     *
+     * @note The `$sri` is allowed to be empty.
      */
     protected function mapCacheIt(string $url, string $sha1, string $sri)
     {
@@ -317,6 +334,8 @@ class Sri extends Classes\Core\Base\Core
      * @param string $url  URL to get SRI for.
      * @param string $sha1 SHA-1 hash of URL.
      * @param string $sri  The SRI hash.
+     *
+     * @note The `$sri` is allowed to be empty.
      */
     protected function fileCacheIt(string $url, string $sha1, string $sri)
     {

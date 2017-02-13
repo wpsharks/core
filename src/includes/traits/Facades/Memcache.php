@@ -36,6 +36,18 @@ trait Memcache
     }
 
     /**
+     * @since 17xxxx Memcache info.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Memcache::info()
+     */
+    public static function memcacheInfo(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Memcache->info(...$args);
+    }
+
+    /**
      * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.

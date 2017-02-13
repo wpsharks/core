@@ -136,6 +136,27 @@ class Memcache extends Classes\Core\Base\Core
     }
 
     /**
+     * Memcache info.
+     *
+     * @since 17xxxx Memcache utils.
+     *
+     * @return array Stats/keys/etc.
+     */
+    public function info(): array
+    {
+        if (!$this->enabled) {
+            return []; // Not possible.
+        }
+        return [
+            'stats' => $this->Pool->getStats() ?: [],
+            'keys'  => $this->Pool->getAllKeys() ?: [],
+            // NOTE: `getAllKeys()` returns `false` on some servers.
+            // There is a bug in the libmemcached library that makes it unreliable.
+            // See: <https://github.com/php-memcached-dev/php-memcached/issues/203>
+        ];
+    }
+
+    /**
      * Get cache value by key.
      *
      * @since 151216 Memcache utils.

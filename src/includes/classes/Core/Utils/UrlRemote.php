@@ -29,22 +29,40 @@ class UrlRemote extends Classes\Core\Base\Core
      * @param string $url  A URL to connect to.
      * @param array  $args Connection arguments.
      *
-     * @return string|array Based on arguments.
+     * @return string|\StdClass|array Based on arguments.
      */
     public function request(string $url, array $args = [])
     {
-        return $this->requestCurl($url, $args);
+        return $this->curl($url, $args);
+    }
+
+    /**
+     * Remote HTTP communication.
+     *
+     * @param string $url  A URL to connect to.
+     * @param array  $args Connection arguments.
+     *
+     * @return \StdClass Always returns a full response.
+     */
+    public function response(string $url, array $args = []): \StdClass
+    {
+        return $this->curl($url, array_merge($args, ['return' => 'object']));
     }
 
     /**
      * cURL for remote HTTP communication.
      *
+     * @since 17xxxx Replaces `requestCurl()`.
+     * @since 17xxxx Deprecated `return_array`.
+     *
      * @param string $url  A URL to connect to.
      * @param array  $args Connection arguments.
      *
-     * @return string|array Based on arguments.
+     * @return string|\StdClass|array Based on arguments.
+     *
+     * @TODO Break this apart into multiple solo routines.
      */
-    protected function requestCurl(string $url, array $args = [])
+    protected function curl(string $url, array $args = [])
     {
         # Parse arguments.
 
@@ -56,10 +74,16 @@ class UrlRemote extends Classes\Core\Base\Core
             'max_con_secs'    => 20,
             'max_stream_secs' => 20,
             'fail_on_error'   => true,
-            'return_array'    => false,
+            'return_array'    => false, // Deprecated.
+            'return'          => '', // Use this instead.
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
+
+        if (!empty($args['return_array']) && empty($args['return'])) {
+            $args['return'] = 'array'; // Back compat.
+        } // NOTE: Please use `return` instead of `return_array`.
+        unset($args['return_array']); // Ditch this old argument now.
 
         # Extract and sanitize all args.
 
@@ -70,31 +94,41 @@ class UrlRemote extends Classes\Core\Base\Core
         $max_con_secs    = max(1, (int) $max_con_secs);
         $max_stream_secs = max(1, (int) $max_stream_secs);
         $fail_on_error   = (bool) $fail_on_error;
-        $return_array    = (bool) $return_array;
+        $return          = (string) $return;
 
-        # Parse the URL for a possible request method; e.g., `POST::`.
+        # Parse request method from URL; e.g., `POST::`
 
-        $custom_request_method        = ''; // Initialize.
-        $custom_request_methods       = ['HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
-        $custom_request_methods_regex = '/^(?<method>(?:'.implode('|', $custom_request_methods).'))\:{2}(?<url>.+)/ui';
+        $custom_request_method = ''; // Initialize, parsed below.
+        static $custom_request_methods_regex; // Static cache.
 
-        if (preg_match($custom_request_methods_regex, $url, $_m)) {
+        if (!isset($custom_request_methods_regex)) {
+            $_custom_request_methods       = ['HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
+            $custom_request_methods_regex  = '/^(?<method>(?:'.implode('|', $_custom_request_methods).'))\:{2}(?<url>.+)/ui';
+        }
+        if (mb_stripos($url, '::') !== false && preg_match($custom_request_methods_regex, $url, $_m)) {
             $url                   = $_m['url']; // URL after `::`.
             $custom_request_method = mb_strtoupper($_m['method']);
 
-            if ($custom_request_method === 'HEAD') {
-                $return_array = true;
-            }
-        } // unset($_m); // Housekeeping.
+            if ($custom_request_method === 'HEAD' && !$return) {
+                $return = 'array'; // Default for `HEAD` requests.
+            } // This preserves back compat, otherwise it would be `object`.
+        } // unset($_m, $_custom_request_methods); // Housekeeping.
 
         # Validate URL.
 
         if (!$url) { // Failure.
-            return $return_array ? [
+            $response = [
                 'code'    => 0,
                 'headers' => [],
                 'body'    => '',
-            ] : '';
+            ];
+            if ($return === 'object') {
+                return (object) $response;
+            } elseif ($return === 'array') {
+                return $response;
+            } else { // Body only.
+                return $response['body'];
+            } // Default return type is `string`.
         }
         # Convert body to a string.
 
@@ -107,13 +141,13 @@ class UrlRemote extends Classes\Core\Base\Core
 
         foreach ($headers as $_key => $_header) {
             if (mb_stripos($_header, 'user-agent:') === 0) {
-                $has_user_agent = true;
+                $_has_user_agent = true;
+                break; // Stop here.
             }
         } // unset($_key, $_header); // Housekeeping.
 
-        if (empty($has_user_agent)) {
+        if (empty($_has_user_agent)) {
             $headers[]      = 'user-agent: '.__METHOD__;
-            $has_user_agent = true; // Does now!
         }
         # Setup header collection sub-routine.
 
@@ -124,10 +158,11 @@ class UrlRemote extends Classes\Core\Base\Core
         };
         # Determine if we can follow location headers.
 
-        $follow_location = $max_redirects > 0
-            && !filter_var(ini_get('safe_mode'), FILTER_VALIDATE_BOOLEAN)
-            && !ini_get('open_basedir');
-        $max_redirects = !$follow_location ? 0 : $max_redirects;
+        static $can_follow_location = // Static cache of this detection.
+            !filter_var(ini_get('safe_mode'), FILTER_VALIDATE_BOOLEAN) && !ini_get('open_basedir');
+
+        $follow_location = $max_redirects > 0 && $can_follow_location;
+        $max_redirects   = !$follow_location ? 0 : $max_redirects;
 
         # Configure cURL options.
 
@@ -212,12 +247,19 @@ class UrlRemote extends Classes\Core\Base\Core
                 ],
             ], 'Remote URL connection details.', __METHOD__.'#http');
         }
-        # Return final response; array or just the body.
+        # Return final response.
 
-        return $return_array ? [
+        $response = [
             'code'    => $curl_code,
             'headers' => $curl_headers,
             'body'    => $curl_body,
-        ] : $curl_body;
+        ];
+        if ($return === 'object') {
+            return (object) $response;
+        } elseif ($return === 'array') {
+            return $response;
+        } else { // Body only.
+            return $response['body'];
+        } // Default return type is `string`.
     }
 }

@@ -198,8 +198,8 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©memcache' => [
-                '©enabled'   => (bool) ($_['CFG_MEMCACHE_ENABLED'] ?? $_ ? true : null),
-                // Note: A `null` value indicates that auto-detection should be used (default).
+                // NOTE: A `null` value indicates that auto-detection should be used (default).
+                '©enabled'   => isset($_['CFG_MEMCACHE_ENABLED']) ? (bool) $_['CFG_MEMCACHE_ENABLED'] : null,
                 '©namespace' => (string) ($_['CFG_MEMCACHE_NAMESPACE'] ?? $_['CFG_BRAND_SHORT_VAR'] ?? 'app'),
                 '©servers'   => [
                     [

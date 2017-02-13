@@ -1,5 +1,8 @@
 ## $v
 
+- Adding `c::memcacheInfo()`.
+- Adding `c::memcacheEnabled()`.
+- Adding `c::requestResponse()`.
 - Adding SRI utils w/ `c::sri([url])`.
 - Adding SmartyPants to Markdown parser.
 - Removing `parsedown-extra` flavor in Markdown parser.

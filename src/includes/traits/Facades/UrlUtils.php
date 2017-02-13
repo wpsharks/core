@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -69,5 +69,17 @@ trait UrlUtils
     public static function remoteRequest(...$args)
     {
         return $GLOBALS[static::class]->Utils->©UrlRemote->request(...$args);
+    }
+
+    /**
+     * @since 17xxxx New URL utility.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlRemote::response()
+     */
+    public static function remoteResponse(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©UrlRemote->response(...$args);
     }
 }
