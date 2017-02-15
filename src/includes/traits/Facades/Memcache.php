@@ -24,7 +24,7 @@ use function get_defined_vars as vars;
 trait Memcache
 {
     /**
-     * @since 17xxxx Memcache enabled?
+     * @since 170215.53419 Memcache enabled?
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Memcache
     }
 
     /**
-     * @since 17xxxx Memcache info.
+     * @since 170215.53419 Memcache info.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

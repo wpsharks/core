@@ -26,7 +26,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Map.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type string
      */
@@ -35,7 +35,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Map file.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type string
      */
@@ -44,7 +44,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Map cache.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type string
      */
@@ -53,7 +53,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Map cache file.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type string
      */
@@ -62,7 +62,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Memcache enabled?
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type bool
      */
@@ -71,7 +71,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Cache max age.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type int Timestamp.
      */
@@ -80,7 +80,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Cache expires in.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type int Seconds.
      */
@@ -89,7 +89,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Counter.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type int
      */
@@ -98,7 +98,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Max checks.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type int
      */
@@ -107,7 +107,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Current scheme.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type string
      */
@@ -116,7 +116,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Current host.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type string
      */
@@ -422,7 +422,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Get the SRIs map.
      *
-     * @since 17xxxx SRI utils.
+     * @since 170215.53419 SRI utils.
      *
      * @return array Map of SRIs.
      */
@@ -443,7 +443,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * Get SRIs map cache.
      *
-     * @since 17xxxx SRI utils.
+     * @since 170215.53419 SRI utils.
      *
      * @return array SRIs map cache.
      */
@@ -464,7 +464,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     /**
      * URL is local?
      *
-     * @since 17xxxx SRI utils.
+     * @since 170215.53419 SRI utils.
      *
      * @param string $url URL to get SRI for.
      *

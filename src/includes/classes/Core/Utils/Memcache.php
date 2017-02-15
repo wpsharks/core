@@ -126,7 +126,7 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Memcache enabled?
      *
-     * @since 17xxxx Memcache utils.
+     * @since 170215.53419 Memcache utils.
      *
      * @return bool True if enabled.
      */
@@ -138,7 +138,7 @@ class Memcache extends Classes\Core\Base\Core
     /**
      * Memcache info.
      *
-     * @since 17xxxx Memcache utils.
+     * @since 170215.53419 Memcache utils.
      *
      * @return array Stats/keys/etc.
      */

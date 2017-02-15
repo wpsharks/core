@@ -1,4 +1,4 @@
-## $v
+## v170215.53419
 
 - Adding `c::memcacheInfo()`.
 - Adding `c::memcacheEnabled()`.

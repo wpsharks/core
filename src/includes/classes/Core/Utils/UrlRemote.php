@@ -26,7 +26,7 @@ class UrlRemote extends Classes\Core\Base\Core
     /**
      * Regex.
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type string
      */
@@ -35,7 +35,7 @@ class UrlRemote extends Classes\Core\Base\Core
     /**
      * Can follow?
      *
-     * @since 17xxxx
+     * @since 170215.53419
      *
      * @type bool
      */
@@ -44,7 +44,7 @@ class UrlRemote extends Classes\Core\Base\Core
     /**
      * Class constructor.
      *
-     * @since 17xxxx Enhancing.
+     * @since 170215.53419 Enhancing.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -85,8 +85,8 @@ class UrlRemote extends Classes\Core\Base\Core
     /**
      * cURL for remote HTTP communication.
      *
-     * @since 17xxxx Replaces `requestCurl()`.
-     * @since 17xxxx Deprecated `return_array`.
+     * @since 170215.53419 Replaces `requestCurl()`.
+     * @since 170215.53419 Deprecated `return_array`.
      *
      * @param string $url  A URL to connect to.
      * @param array  $args Connection arguments.
