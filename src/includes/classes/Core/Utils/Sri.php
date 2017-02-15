@@ -78,6 +78,15 @@ class Sri extends Classes\Core\Base\Core
     protected $max_content_checks;
 
     /**
+     * Current host.
+     *
+     * @since 17xxxx
+     *
+     * @type string
+     */
+    protected $current_host;
+
+    /**
      * Class constructor.
      *
      * @since 170211.63148 SRI utils.
@@ -106,6 +115,8 @@ class Sri extends Classes\Core\Base\Core
 
         $this->content_checks     = 0; // Initialize.
         $this->max_content_checks = (int) $args['max_content_checks'];
+
+        $this->current_host = $this->c::isCli() ? '' : $this->c::currentHost();
     }
 
     /**
@@ -121,10 +132,12 @@ class Sri extends Classes\Core\Base\Core
     {
         if (!$url) { // URL is empty?
             return ''; // Stop here.
+        } elseif ($this->isLocal($url)) {
+            return ''; // Unnecessary.
         }
         if (mb_stripos($url, '//') === 0) {
             $url = 'http:'.$url;
-        } // Always force a scheme.
+        } // Must have a scheme.
 
         $sha1 = sha1($url); // Key for lookups.
 
@@ -146,6 +159,24 @@ class Sri extends Classes\Core\Base\Core
             return $sri; // Cached now.
         }
         return $sri = ''; // Not possible at this time.
+    }
+
+    /**
+     * URL is local?
+     *
+     * @since 17xxxx SRI utils.
+     *
+     * @param string $url URL to get SRI for.
+     *
+     * @return bool|null True if URL is local.
+     */
+    protected function isLocal(string $url)
+    {
+        if (!$this->current_host) {
+            return null; // Unknown.
+        }
+        return mb_stripos($url, '//') === false
+            || mb_stripos($url, '//'.$this->current_host.'/') !== false;
     }
 
     /**

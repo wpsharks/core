@@ -24,6 +24,39 @@ use function get_defined_vars as vars;
 class UrlRemote extends Classes\Core\Base\Core
 {
     /**
+     * Regex.
+     *
+     * @since 17xxxx
+     *
+     * @type string
+     */
+    protected $method_regex;
+
+    /**
+     * Can follow?
+     *
+     * @since 17xxxx
+     *
+     * @type bool
+     */
+    protected $can_follow_location;
+
+    /**
+     * Class constructor.
+     *
+     * @since 17xxxx Enhancing.
+     *
+     * @param Classes\App $App Instance of App.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        $this->method_regex          = '/^(?<method>[^\/:]+)\:{2}(?<url>.+)/ui';
+        $this->can_follow_location   = !filter_var(ini_get('safe_mode'), FILTER_VALIDATE_BOOLEAN) && !ini_get('open_basedir');
+    }
+
+    /**
      * Remote HTTP communication.
      *
      * @param string $url  A URL to connect to.
@@ -59,8 +92,6 @@ class UrlRemote extends Classes\Core\Base\Core
      * @param array  $args Connection arguments.
      *
      * @return string|\StdClass|array Based on arguments.
-     *
-     * @TODO Break this apart into multiple solo routines.
      */
     protected function curl(string $url, array $args = [])
     {
@@ -88,6 +119,7 @@ class UrlRemote extends Classes\Core\Base\Core
         # Extract and sanitize all args.
 
         extract($args); // Typify args.
+
         $headers         = (array) $headers;
         $cookie_file     = (string) $cookie_file;
         $max_redirects   = max(0, (int) $max_redirects);
@@ -98,25 +130,20 @@ class UrlRemote extends Classes\Core\Base\Core
 
         # Parse request method from URL; e.g., `POST::`
 
-        $custom_request_method = ''; // Initialize, parsed below.
-        static $custom_request_methods_regex; // Static cache.
+        $method = ''; // Initialize, parsed below.
 
-        if (!isset($custom_request_methods_regex)) {
-            $_custom_request_methods       = ['HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
-            $custom_request_methods_regex  = '/^(?<method>(?:'.implode('|', $_custom_request_methods).'))\:{2}(?<url>.+)/ui';
-        }
-        if (mb_stripos($url, '::') !== false && preg_match($custom_request_methods_regex, $url, $_m)) {
-            $url                   = $_m['url']; // URL after `::`.
-            $custom_request_method = mb_strtoupper($_m['method']);
+        if (mb_stripos($url, '::') !== false && preg_match($this->method_regex, $url, $_m)) {
+            $method = mb_strtoupper($_m['method']);
+            $url    = $_m['url']; // URL after `::`.
 
-            if ($custom_request_method === 'HEAD' && !$return) {
+            if ($method === 'HEAD' && !$return) {
                 $return = 'array'; // Default for `HEAD` requests.
             } // This preserves back compat, otherwise it would be `object`.
-        } // unset($_m, $_custom_request_methods); // Housekeeping.
+        } // unset($_m); // Housekeeping.
 
         # Validate URL.
 
-        if (!$url) { // Failure.
+        if (!$url) {
             $response = [
                 'code'    => 0,
                 'headers' => [],
@@ -128,7 +155,7 @@ class UrlRemote extends Classes\Core\Base\Core
                 return $response;
             } else { // Body only.
                 return $response['body'];
-            } // Default return type is `string`.
+            }
         }
         # Convert body to a string.
 
@@ -142,7 +169,9 @@ class UrlRemote extends Classes\Core\Base\Core
         foreach ($headers as $_key => $_header) {
             if (mb_stripos($_header, 'user-agent:') === 0) {
                 $_has_user_agent = true;
-                break; // Stop here.
+                break; // NOTE: This stops on the first `user-agent` header, even if it's empty.
+                // If it's empty, or any thereafter are empty, we assume that is the desired behavior.
+                // i.e., To force an empty `user-agent` header for whatever reason.
             }
         } // unset($_key, $_header); // Housekeeping.
 
@@ -158,11 +187,7 @@ class UrlRemote extends Classes\Core\Base\Core
         };
         # Determine if we can follow location headers.
 
-        static $can_follow_location; // Static cache of this detection.
-        if (!isset($can_follow_location)) { // Safe mode and a base directory are problematic.
-            $can_follow_location = !filter_var(ini_get('safe_mode'), FILTER_VALIDATE_BOOLEAN) && !ini_get('open_basedir');
-        }
-        $follow_location = $max_redirects > 0 && $can_follow_location;
+        $follow_location = $max_redirects > 0 && $this->can_follow_location;
         $max_redirects   = !$follow_location ? 0 : $max_redirects;
 
         # Configure cURL options.
@@ -182,33 +207,31 @@ class UrlRemote extends Classes\Core\Base\Core
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
             CURLOPT_HEADERFUNCTION => $collect_output_headers,
-            CURLOPT_NOBODY         => $custom_request_method === 'HEAD',
+            CURLOPT_NOBODY         => $method === 'HEAD',
         ];
-        if ($body && $custom_request_method !== 'HEAD') {
-            if ($custom_request_method) {
-                $curl_opts += [CURLOPT_CUSTOMREQUEST => $custom_request_method, CURLOPT_POSTFIELDS => $body];
+        if ($body && $method !== 'HEAD') {
+            if ($method) {
+                $curl_opts += [CURLOPT_CUSTOMREQUEST => $method, CURLOPT_POSTFIELDS => $body];
             } else {
                 $curl_opts += [CURLOPT_POST => true, CURLOPT_POSTFIELDS => $body];
             }
-        } elseif ($custom_request_method) {
-            $curl_opts += [CURLOPT_CUSTOMREQUEST => $custom_request_method];
+        } elseif ($method) {
+            $curl_opts += [CURLOPT_CUSTOMREQUEST => $method];
         }
         if ($cookie_file) {
             $curl_opts += [CURLOPT_COOKIEJAR => $cookie_file, CURLOPT_COOKIEFILE => $cookie_file];
         }
-        # Perform HTTP request(s).
+        # Perform request.
 
         $curl = curl_init(); // Initialize.
         curl_setopt_array($curl, $curl_opts);
         $curl_body = (string) curl_exec($curl);
-        // Note: Do not trim body as it can cause problems.
-        // e.g., If a request is made for the purpose of generating a hash.
 
-        # Collect cURL info after request is complete.
+        # Collect cURL info.
 
-        $curl_info = curl_getinfo($curl); // All information.
-        $curl_info = is_array($curl_info) ? $curl_info : []; // Empty.
-        $curl_code = isset($curl_info['http_code']) ? (int) $curl_info['http_code'] : 0;
+        $curl_info = curl_getinfo($curl);
+        $curl_info = is_array($curl_info) ? $curl_info : [];
+        $curl_code = (int) ($curl_info['http_code'] ?? 0);
 
         # Parse the headers that we collected, if any.
 
@@ -233,21 +256,8 @@ class UrlRemote extends Classes\Core\Base\Core
         }
         # Close cURL resource handle.
 
-        curl_close($curl); // Close cURL resource.
+        curl_close($curl);
 
-        # Maybe review HTTP connection data.
-
-        if ($this->App->Config->©debug['©log']) {
-            $this->c::review([
-                'url'      => $url,
-                'args'     => $args,
-                'response' => [
-                    'code'    => $curl_code,
-                    'headers' => $curl_headers,
-                    'body'    => $curl_body,
-                ],
-            ], 'Remote URL connection details.', __METHOD__.'#http');
-        }
         # Return final response.
 
         $response = [
@@ -255,12 +265,19 @@ class UrlRemote extends Classes\Core\Base\Core
             'headers' => $curl_headers,
             'body'    => $curl_body,
         ];
+        if ($this->App->Config->©debug['©log']) {
+            $this->c::review([
+                'url'      => $url,
+                'args'     => $args,
+                'response' => $response,
+            ], 'Remote URL connection details.', __METHOD__.'#http');
+        }
         if ($return === 'object') {
             return (object) $response;
         } elseif ($return === 'array') {
             return $response;
         } else { // Body only.
             return $response['body'];
-        } // Default return type is `string`.
+        }
     }
 }

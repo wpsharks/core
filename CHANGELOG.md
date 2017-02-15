@@ -13,6 +13,7 @@
 - Adding `/typings` directory for TypeScript projects.
 - Adding custom compilation of Emmet + snippets.
 - Adding custom Emmet extension for ACE.
+- Deprecating `return_array` in `UrlRemote{}` class.
 
 ## v170124.74961
 
