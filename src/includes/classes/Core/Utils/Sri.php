@@ -21,7 +21,7 @@ use function get_defined_vars as vars;
  *
  * @since 170211.63148 SRI utils.
  */
-class Sri extends Classes\Core\Base\Core
+class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
 {
     /**
      * Map.
@@ -236,8 +236,10 @@ class Sri extends Classes\Core\Base\Core
             $this->map = is_array($this->map) ? $this->map : [];
         } // JIT loading of the map; i.e., only when necessary.
 
-        if ($this->map && isset($this->map[$url])) {
+        if (isset($this->map[$url])) {
             return $sri = (string) $this->map[$url];
+        } elseif (isset($this->map[${'//'} = preg_replace('/^https?\:/ui', '', $url)])) {
+            return $sri = (string) $this->map[${'//'}];
         }
         return $sri = null; // Not in the map.
     }
@@ -280,11 +282,25 @@ class Sri extends Classes\Core\Base\Core
             return $sri = null; // Not possible at this time.
         } // There is a limit on the number of checks per process.
 
+        $args = [ // HTTP args.
+            'max_con_secs'    => 2,
+            'max_stream_secs' => 6,
+            'max_stream_size' => $this::BYTES_IN_MB * 2,
+        ]; // Most servers can download 1MB+ in this time.
+
         ++$this->content_checks; // Increment counter.
-        $response = $this->c::remoteResponse('GET::'.$url);
+        $response = $this->c::remoteResponse('GET::'.$url, $args);
 
         if ($response->code !== 200) {
-            return $sri = null; // Unable to determine.
+            return $sri = ''; // Unable to determine.
+            // However, we do return an empty SRI in this case anyway,
+            // because we want failures cached also — to avoid failing again.
+
+            // NOTE: This may (at times) return an empty SRI whenever
+            // there is a temporary connectivity issue that is resolved later.
+            // However, if we chose not to cache failed responses, that could result in HTTP
+            // requests occurring over and over again, which is want we need to avoid at all costs.
+            // Therefore, if it fails initially, game is over until someone clears the cache.
         }
         return $sri = 'sha256-'.base64_encode(hash('sha256', $response->body, true));
     }

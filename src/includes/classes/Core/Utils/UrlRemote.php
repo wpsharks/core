@@ -104,6 +104,7 @@ class UrlRemote extends Classes\Core\Base\Core
             'max_redirects'   => 5,
             'max_con_secs'    => 20,
             'max_stream_secs' => 20,
+            'max_stream_size' => 0,
             'fail_on_error'   => true,
             'return_array'    => false, // Deprecated.
             'return'          => '', // Use this instead.
@@ -125,6 +126,7 @@ class UrlRemote extends Classes\Core\Base\Core
         $max_redirects   = max(0, (int) $max_redirects);
         $max_con_secs    = max(1, (int) $max_con_secs);
         $max_stream_secs = max(1, (int) $max_stream_secs);
+        $max_stream_size = max(0, (int) $max_stream_size);
         $fail_on_error   = (bool) $fail_on_error;
         $return          = (string) $return;
 
@@ -148,6 +150,9 @@ class UrlRemote extends Classes\Core\Base\Core
                 'code'    => 0,
                 'headers' => [],
                 'body'    => '',
+                'info'    => [],
+                'errno'   => 0,
+                'error'   => '',
             ];
             if ($return === 'object') {
                 return (object) $response;
@@ -194,19 +199,21 @@ class UrlRemote extends Classes\Core\Base\Core
 
         $curl_opts = [
             CURLOPT_URL            => $url,
+
             CURLOPT_CONNECTTIMEOUT => $max_con_secs,
             CURLOPT_TIMEOUT        => $max_stream_secs,
 
-            CURLOPT_ENCODING   => '',
-            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_ENCODING       => '',
+            CURLOPT_HTTPHEADER     => $headers,
 
             CURLOPT_FAILONERROR    => $fail_on_error,
             CURLOPT_FOLLOWLOCATION => $follow_location,
             CURLOPT_MAXREDIRS      => $max_redirects,
 
-            CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
             CURLOPT_HEADERFUNCTION => $collect_output_headers,
+
+            CURLOPT_RETURNTRANSFER => true,
             CURLOPT_NOBODY         => $method === 'HEAD',
         ];
         if ($body && $method !== 'HEAD') {
@@ -215,15 +222,24 @@ class UrlRemote extends Classes\Core\Base\Core
             } else {
                 $curl_opts += [CURLOPT_POST => true, CURLOPT_POSTFIELDS => $body];
             }
-        } elseif ($method) {
+        } elseif ($method) { // No body data.
             $curl_opts += [CURLOPT_CUSTOMREQUEST => $method];
         }
-        if ($cookie_file) {
+        if ($cookie_file) { // Store cookies in this case.
             $curl_opts += [CURLOPT_COOKIEJAR => $cookie_file, CURLOPT_COOKIEFILE => $cookie_file];
         }
-        # Perform request.
+        if ($max_stream_size) { // Monitor bytes.
+            $curl_opts += [CURLOPT_NOPROGRESS => false, CURLOPT_PROGRESSFUNCTION => #
+                function ($r, int $s, int $d) use ($max_stream_size) {
+                    return $d > $max_stream_size ? 1 : 0; // 1 = abort!
+                }, ]; // See: <http://jas.xyz/2kw2FQe>
+        }
+        # Initialize cURL and perform request now.
 
-        $curl = curl_init(); // Initialize.
+        if (!($curl = curl_init())) {
+            throw $this->c::issue(vars(), 'cURL init failure.');
+        } // Highly unexpected, given there are no arguments here.
+
         curl_setopt_array($curl, $curl_opts);
         $curl_body = (string) curl_exec($curl);
 
@@ -231,7 +247,12 @@ class UrlRemote extends Classes\Core\Base\Core
 
         $curl_info = curl_getinfo($curl);
         $curl_info = is_array($curl_info) ? $curl_info : [];
+
+        $curl_errno = (int) curl_errno($curl);
+        $curl_error = (string) curl_error($curl);
+
         $curl_code = (int) ($curl_info['http_code'] ?? 0);
+        $curl_code = $curl_errno ? 0 : $curl_code;
 
         # Parse the headers that we collected, if any.
 
@@ -251,8 +272,8 @@ class UrlRemote extends Classes\Core\Base\Core
 
         # Check if failing on error. If so, empty the response body.
 
-        if ($fail_on_error && ($curl_code === 0 || $curl_code >= 400)) {
-            $curl_body = ''; // Empty body in case of error.
+        if ($fail_on_error && ($curl_code === 0 || $curl_code >= 400 || $curl_errno)) {
+            $curl_body = ''; // Empty body on error.
         }
         # Close cURL resource handle.
 
@@ -264,6 +285,9 @@ class UrlRemote extends Classes\Core\Base\Core
             'code'    => $curl_code,
             'headers' => $curl_headers,
             'body'    => $curl_body,
+            'info'    => $curl_info,
+            'errno'   => $curl_errno,
+            'error'   => $curl_error,
         ];
         if ($this->App->Config->©debug['©log']) {
             $this->c::review([
