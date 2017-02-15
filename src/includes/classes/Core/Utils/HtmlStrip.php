@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -60,7 +60,6 @@ class HtmlStrip extends Classes\Core\Base\Core
             return $m['open'].preg_replace_callback($regex_attrs, function ($m) use ($allowed_attributes) {
                 return in_array(mb_strtolower($m['attr']), $allowed_attributes, true) ? $m[0] : '';
             }, $m['attrs']).$m['close']; // With modified attributes.
-
         }, $string); // Removes attributes; leaving only those allowed explicitly.
     }
 }
