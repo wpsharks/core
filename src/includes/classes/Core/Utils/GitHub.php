@@ -68,8 +68,10 @@ class GitHub extends Classes\Core\Base\Core
         ];
         $args += $default_args; // Merge defaults.
 
+        $time = time(); // Current time.
+
         $args['cache']            = (bool) $args['cache'];
-        $args['cache_max_age']    = (int) $args['cache_max_age'];
+        $args['cache_max_age']    = max(0, min($time, (int) $args['cache_max_age']));
         $args['api_access_token'] = (string) $args['api_access_token'];
 
         $cache_sha1            = sha1($url.$args['api_access_token']);
@@ -121,8 +123,10 @@ class GitHub extends Classes\Core\Base\Core
         ];
         $args += $default_args; // Merge defaults.
 
+        $time = time(); // Current time.
+
         $args['cache']            = (bool) $args['cache'];
-        $args['cache_max_age']    = (int) $args['cache_max_age'];
+        $args['cache_max_age']    = max(0, min($time, (int) $args['cache_max_age']));
         $args['api_access_token'] = (string) $args['api_access_token'];
 
         $cache_sha1            = sha1($url.$args['api_access_token']);
@@ -179,9 +183,11 @@ class GitHub extends Classes\Core\Base\Core
         ];
         $args += $default_args; // Merge defaults.
 
+        $time = time(); // Current time.
+
         $args['method']           = (string) $args['method'];
         $args['cache']            = (bool) $args['cache'];
-        $args['cache_max_age']    = (int) $args['cache_max_age'];
+        $args['cache_max_age']    = max(0, min($time, (int) $args['cache_max_age']));
         $args['api_access_token'] = (string) $args['api_access_token'];
 
         $cache_sha1            = sha1($args['method'].$url.$args['api_access_token'].serialize($data));

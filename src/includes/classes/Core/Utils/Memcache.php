@@ -186,21 +186,20 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216 Memcache utils.
      *
-     * @param string     $primary_key   Primary key.
-     * @param string|int $sub_key       Sub-key to set.
-     * @param string     $value         Value to cache (1MB max).
-     * @param int        $expires_after Expires after (in seconds).
+     * @param string     $primary_key Primary key.
+     * @param string|int $sub_key     Sub-key to set.
+     * @param string     $value       Value to cache (1MB max).
+     * @param int        $expires_in  Expires (in seconds).
      *
      * @return bool True on success.
      */
-    public function set(string $primary_key, $sub_key, $value, int $expires_after = 0): bool
+    public function set(string $primary_key, $sub_key, $value, int $expires_in = 0): bool
     {
         if (!$this->enabled) {
             return false; // Not possible.
         }
-        $time          = time();
-        $expires_after = max(0, $expires_after);
-        $expires       = $expires_after ? $time + $expires_after : 0;
+        $expires_in = max(0, $expires_in);
+        $expires    = $expires_in ? time() + $expires_in : 0;
 
         if (!($key = $this->key($primary_key, $sub_key))) {
             return false; // Fail; e.g., race condition.
@@ -234,20 +233,19 @@ class Memcache extends Classes\Core\Base\Core
      *
      * @since 151216 Memcache utils.
      *
-     * @param string     $primary_key   Primary key.
-     * @param string|int $sub_key       Sub-key to touch.
-     * @param int        $expires_after Expires after (in seconds).
+     * @param string     $primary_key Primary key.
+     * @param string|int $sub_key     Sub-key to touch.
+     * @param int        $expires_in  Expires (in seconds).
      *
      * @return bool True on success.
      */
-    public function touch(string $primary_key, $sub_key, int $expires_after): bool
+    public function touch(string $primary_key, $sub_key, int $expires_in): bool
     {
         if (!$this->enabled) {
             return false; // Not possible.
         }
-        $time          = time();
-        $expires_after = max(0, $expires_after);
-        $expires       = $expires_after ? $time + $expires_after : 0;
+        $expires_in = max(0, $expires_in);
+        $expires    = $expires_in ? time() + $expires_in : 0;
 
         if (!($key = $this->key($primary_key, $sub_key))) {
             return false; // Fail; e.g., race condition.

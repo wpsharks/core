@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ class Bitly extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var string
+     * @type string
      */
     protected $cache_dir;
 
@@ -85,7 +85,7 @@ class Bitly extends Classes\Core\Base\Core
         $request_args = [
             'max_con_secs'    => 5,
             'max_stream_secs' => 5,
-            'return_array'    => true,
+            'return'          => 'array',
         ];
         $endpoint = 'https://api-ssl.bitly.com/v3/shorten';
         $endpoint = $this->c::addUrlQueryArgs($endpoint_args, $endpoint);
@@ -171,7 +171,7 @@ class Bitly extends Classes\Core\Base\Core
         $request_args = [
             'max_con_secs'    => 5,
             'max_stream_secs' => 5,
-            'return_array'    => true,
+            'return'          => 'array',
         ];
         $endpoint = 'https://api-ssl.bitly.com/v3/user/link_history';
         $endpoint = $this->c::addUrlQueryArgs($endpoint_args, $endpoint);

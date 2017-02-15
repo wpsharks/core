@@ -68,8 +68,10 @@ class ZenHub extends Classes\Core\Base\Core
         ];
         $args += $default_args; // Merge defaults.
 
+        $time = time(); // Current time.
+
         $args['cache']            = (bool) $args['cache'];
-        $args['cache_max_age']    = (int) $args['cache_max_age'];
+        $args['cache_max_age']    = max(0, min($time, (int) $args['cache_max_age']));
         $args['api_access_token'] = (string) $args['api_access_token'];
 
         $url_sha1              = sha1($url); // A SHA-1 hash of the URL.

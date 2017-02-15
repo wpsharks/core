@@ -42,13 +42,22 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     protected $map_file;
 
     /**
-     * Cache directory.
+     * Map cache.
      *
-     * @since 170211.63148
+     * @since 17xxxx
      *
      * @type string
      */
-    protected $cache_dir;
+    protected $map_cache;
+
+    /**
+     * Map cache file.
+     *
+     * @since 17xxxx
+     *
+     * @type string
+     */
+    protected $map_cache_file;
 
     /**
      * Memcache enabled?
@@ -60,13 +69,31 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     protected $memcache_enabled;
 
     /**
+     * Cache max age.
+     *
+     * @since 17xxxx
+     *
+     * @type int Timestamp.
+     */
+    protected $cache_max_age;
+
+    /**
+     * Cache expires in.
+     *
+     * @since 17xxxx
+     *
+     * @type int Seconds.
+     */
+    protected $cache_expires_in;
+
+    /**
      * Counter.
      *
      * @since 17xxxx
      *
      * @type int
      */
-    protected $content_checks;
+    protected static $content_checks;
 
     /**
      * Max checks.
@@ -76,6 +103,15 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      * @type int
      */
     protected $max_content_checks;
+
+    /**
+     * Current scheme.
+     *
+     * @since 17xxxx
+     *
+     * @type string
+     */
+    protected $current_scheme;
 
     /**
      * Current host.
@@ -99,7 +135,14 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
         parent::__construct($App);
 
         $default_args = [
+            // NOTE: This is an instance-based configuration option.
+            // However, checks are counted statically across all instances.
+            // So while it's possible to increase the max for your instance, when doing so,
+            // please remember the counter is based on all checks that occur in a single process.
             'max_content_checks' => 2,
+
+            // Maximum age of any cache entry.
+            'cache_max_age'      => strtotime('-30 days'),
         ];
         $args += $default_args; // Merge defaults.
 
@@ -108,15 +151,20 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
         } elseif (!$this->App->Config->©fs_paths['©cache_dir']) {
             throw $this->c::issue('Missing cache directory.');
         }
-        $this->map              = null; // Initialize JIT via `__invoke()`.
-        $this->map_file         = $this->App->Config->©fs_paths['©sris_dir'].'/sris.json';
-        $this->cache_dir        = $this->App->Config->©fs_paths['©cache_dir'].'/sris';
-        $this->memcache_enabled = $this->c::memcacheEnabled();
+        $this->map_file           = $this->App->Config->©fs_paths['©sris_dir'].'/sris.json';
+        $this->map_cache_file     = $this->App->Config->©fs_paths['©cache_dir'].'/sris/map.json';
+        $this->memcache_enabled   = $this->c::memcacheEnabled();
 
-        $this->content_checks     = 0; // Initialize.
+        $time                     = time(); // Current time.
+        $this->cache_max_age      = max(0, min($time, (int) $args['cache_max_age']));
+        $this->cache_expires_in   = $time - $this->cache_max_age;
+
+        static::$content_checks   = static::$content_checks ?? 0;
         $this->max_content_checks = (int) $args['max_content_checks'];
 
-        $this->current_host = $this->c::isCli() ? '' : $this->c::currentHost();
+        $is_cli                   = $this->c::isCli();
+        $this->current_scheme     = $is_cli ? '' : $this->c::currentScheme();
+        $this->current_host       = $is_cli ? '' : $this->c::currentHost();
     }
 
     /**
@@ -135,14 +183,16 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
         } elseif ($this->isLocal($url)) {
             return ''; // Unnecessary.
         }
-        if (mb_stripos($url, '//') === 0) {
-            $url = 'http:'.$url;
-        } // Must have a scheme.
-
         $sha1 = sha1($url); // Key for lookups.
 
+        // ↑ NOTE: The sha is based on the URL given.
+        // It's important not to alter the scheme here.
+        // `https://` files may serve slightly different content.
+        // e.g., A dynamic script that alters paths based on scheme.
+        // However, when using a map, `//` can be used to cover all schemes.
+
         // NOTE: The in-process cache by &reference.
-        // This &reference impacts all checks that follow.
+        // ↓ This &reference impacts all checks that follow.
 
         if (($sri = &$this->checkProcess($url, $sha1)) !== null) {
             return $sri; // Avoids disk IO.
@@ -150,33 +200,15 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
             return $sri; // Avoids disk IO.
         } elseif (($sri = $this->checkMap($url, $sha1)) !== null) {
             $this->memcacheIt($url, $sha1, $sri);
-            return $sri; // Better than cache.
-        } elseif (($sri = $this->checkCache($url, $sha1)) !== null) {
+            return $sri; // Better than contents check.
+        } elseif (($sri = $this->checkMapCache($url, $sha1)) !== null) {
             $this->memcacheIt($url, $sha1, $sri);
-            return $sri; // Slightly slower.
+            return $sri; // Better than contents check.
         } elseif (($sri = $this->checkContents($url, $sha1)) !== null) {
             $this->cacheIt($url, $sha1, $sri);
             return $sri; // Cached now.
         }
         return $sri = ''; // Not possible at this time.
-    }
-
-    /**
-     * URL is local?
-     *
-     * @since 17xxxx SRI utils.
-     *
-     * @param string $url URL to get SRI for.
-     *
-     * @return bool|null True if URL is local.
-     */
-    protected function isLocal(string $url)
-    {
-        if (!$this->current_host) {
-            return null; // Unknown.
-        }
-        return mb_stripos($url, '//') === false
-            || mb_stripos($url, '//'.$this->current_host.'/') !== false;
     }
 
     /**
@@ -231,21 +263,23 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      */
     protected function checkMap(string $url, string $sha1)
     {
-        if (!isset($this->map) && is_file($this->map_file)) {
-            $this->map = json_decode(file_get_contents($this->map_file), true);
-            $this->map = is_array($this->map) ? $this->map : [];
-        } // JIT loading of the map; i.e., only when necessary.
+        $this->map = $this->getMap();
 
-        if (isset($this->map[$url])) {
-            return $sri = (string) $this->map[$url];
-        } elseif (isset($this->map[${'//'} = preg_replace('/^https?\:/ui', '', $url)])) {
-            return $sri = (string) $this->map[${'//'}];
+        if (isset($this->map[$url]['sri'])) {
+            return $sri = (string) $this->map[$url]['sri'];
+        }
+        if (mb_strpos($url, '//') !== 0) { // Should check `//`?
+            ${'//'} = preg_replace('/^https?\:/ui', '', $url);
+
+            if (isset($this->map[${'//'}]['sri'])) {
+                return $sri = (string) $this->map[${'//'}]['sri'];
+            } // i.e., If a map entry covers all schemes.
         }
         return $sri = null; // Not in the map.
     }
 
     /**
-     * Checks for SRI in cache.
+     * Checks for SRI in map cache.
      *
      * @since 170211.63148 SRI utils.
      *
@@ -254,16 +288,21 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @return string|null SRI hash, else `null`.
      */
-    protected function checkCache(string $url, string $sha1)
+    protected function checkMapCache(string $url, string $sha1)
     {
-        $shard_id   = $this->c::sha1ModShardId($sha1, true);
-        $cache_dir  = $this->cache_dir.'/'.$shard_id;
-        $cache_file = $cache_dir.'/'.$sha1;
+        $this->map_cache = $this->getMapCache();
 
-        if (is_file($cache_file)) {
-            return $sri = (string) file_get_contents($cache_file);
+        if (isset($this->map_cache[$url]['sri']) && $this->map_cache[$url]['time'] >= $this->cache_max_age) {
+            return $sri = (string) $this->map_cache[$url]['sri'];
         }
-        return $sri = null; // Not in the cache.
+        if (mb_strpos($url, '//') !== 0) { // Should check `//`?
+            ${'//'} = preg_replace('/^https?\:/ui', '', $url);
+
+            if (isset($this->map_cache[${'//'}]['sri']) && $this->map_cache[${'//'}]['time'] >= $this->cache_max_age) {
+                return $sri = (string) $this->map_cache[${'//'}]['sri'];
+            } // i.e., If a map entry covers all schemes.
+        }
+        return $sri = null; // Not in the map.
     }
 
     /**
@@ -278,9 +317,13 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      */
     protected function checkContents(string $url, string $sha1)
     {
-        if ($this->content_checks >= $this->max_content_checks) {
+        if (static::$content_checks >= $this->max_content_checks) {
             return $sri = null; // Not possible at this time.
         } // There is a limit on the number of checks per process.
+
+        if (mb_stripos($url, '//') === 0) {
+            $url = ($this->current_scheme ?: 'http').':'.$url;
+        } // Because we must have a scheme to do a lookup.
 
         $args = [ // HTTP args.
             'max_con_secs'    => 2,
@@ -288,19 +331,19 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
             'max_stream_size' => $this::BYTES_IN_MB * 2,
         ]; // Most servers can download 1MB+ in this time.
 
-        ++$this->content_checks; // Increment counter.
+        ++static::$content_checks; // Increment counter.
         $response = $this->c::remoteResponse('GET::'.$url, $args);
 
         if ($response->code !== 200) {
             return $sri = ''; // Unable to determine.
-            // However, we do return an empty SRI in this case anyway,
-            // because we want failures cached also — to avoid failing again.
+            // However, we do return an empty SRI in this case anyway.
 
             // NOTE: This may (at times) return an empty SRI whenever
             // there is a temporary connectivity issue that is resolved later.
-            // However, if we chose not to cache failed responses, that could result in HTTP
+
+            // Rationale: If we chose not to cache failed responses, that could result in HTTP
             // requests occurring over and over again, which is want we need to avoid at all costs.
-            // Therefore, if it fails initially, game is over until someone clears the cache.
+            // Therefore, if it fails, game is over until clearing the cache or adding a new map entry.
         }
         return $sri = 'sha256-'.base64_encode(hash('sha256', $response->body, true));
     }
@@ -320,7 +363,6 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     {
         $this->memcacheIt($url, $sha1, $sri);
         $this->mapCacheIt($url, $sha1, $sri);
-        $this->fileCacheIt($url, $sha1, $sri);
     }
 
     /**
@@ -337,7 +379,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
     protected function memcacheIt(string $url, string $sha1, string $sri)
     {
         if ($this->memcache_enabled) {
-            $this->c::memcacheSet('sris', $sha1, $sri);
+            $this->c::memcacheSet('sris', $sha1, $sri, $this->cache_expires_in);
         } // This is, by far, the fastest way.
     }
 
@@ -354,46 +396,87 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      */
     protected function mapCacheIt(string $url, string $sha1, string $sri)
     {
-        if (!isset($this->map) && is_file($this->map_file)) {
-            $this->map = json_decode(file_get_contents($this->map_file), true);
-            $this->map = is_array($this->map) ? $this->map : [];
-        } // JIT loading of the map; i.e., only when necessary.
+        $this->map_cache       = $this->getMapCache();
+        $this->map_cache[$url] = ['time' => time(), 'sri' => $sri];
 
-        $map_dir         = dirname($this->map_file);
+        if (mb_strpos($url, '//') === 0) {
+            unset($this->map_cache['http:'.$url]);
+            unset($this->map_cache['https:'.$url]);
+        } // Don't need all schemes, `//` will suffice.
+
+        foreach ($this->map_cache as $_url => $_entry) {
+            if ($_entry['time'] < $this->cache_max_age) {
+                unset($this->map_cache[$_url]);
+            } // Purges stale cache entries.
+        } // unset($_url, $_entry); // Housekeeping.
+
+        $map_cache_dir   = dirname($this->map_cache_file);
         $transient_perms = $this->App->Config->©fs_permissions['©transient_dirs'];
 
-        // Suppress write errors when building a map.
-        // The `sris` directory may or may not be writable.
-        // i.e., It is usually the `src/client-s` directory.
-
-        if (!is_dir($map_dir)) {
-            @mkdir($map_dir, $transient_perms, true);
+        if (!is_dir($map_cache_dir)) {
+            mkdir($map_cache_dir, $transient_perms, true);
         }
-        $this->map[$url] = $sri; // Add to the map.
-        @file_put_contents($this->map_file, json_encode($this->map, JSON_PRETTY_PRINT));
+        file_put_contents($this->map_cache_file, json_encode($this->map_cache, JSON_PRETTY_PRINT));
     }
 
     /**
-     * Cache the SRI hash.
+     * Get the SRIs map.
      *
-     * @since 170211.63148 SRI utils.
+     * @since 17xxxx SRI utils.
      *
-     * @param string $url  URL to get SRI for.
-     * @param string $sha1 SHA-1 hash of URL.
-     * @param string $sri  The SRI hash.
-     *
-     * @note The `$sri` is allowed to be empty.
+     * @return array Map of SRIs.
      */
-    protected function fileCacheIt(string $url, string $sha1, string $sri)
+    protected function &getMap(): array
     {
-        $shard_id        = $this->c::sha1ModShardId($sha1, true);
-        $cache_dir       = $this->cache_dir.'/'.$shard_id;
-        $cache_file      = $cache_dir.'/'.$sha1;
-        $transient_perms = $this->App->Config->©fs_permissions['©transient_dirs'];
+        if (!isset($this->map)) {
+            $this->map = []; // Define.
 
-        if (!is_dir($cache_dir)) {
-            mkdir($cache_dir, $transient_perms, true);
+            if (is_file($this->map_file)) {
+                $this->map = file_get_contents($this->map_file);
+                $this->map = json_decode($this->map, true);
+                $this->map = is_array($this->map) ? $this->map : [];
+            } // Only if file exists, otherwise empty array.
         }
-        file_put_contents($cache_file, $sri);
+        return $this->map;
+    }
+
+    /**
+     * Get SRIs map cache.
+     *
+     * @since 17xxxx SRI utils.
+     *
+     * @return array SRIs map cache.
+     */
+    protected function &getMapCache(): array
+    {
+        if (!isset($this->map_cache)) {
+            $this->map_cache = []; // Define.
+
+            if (is_file($this->map_cache_file)) {
+                $this->map_cache = file_get_contents($this->map_cache_file);
+                $this->map_cache = json_decode($this->map_cache, true);
+                $this->map_cache = is_array($this->map_cache) ? $this->map_cache : [];
+            } // Only if file exists, otherwise empty array.
+        }
+        return $this->map_cache;
+    }
+
+    /**
+     * URL is local?
+     *
+     * @since 17xxxx SRI utils.
+     *
+     * @param string $url URL to get SRI for.
+     *
+     * @return bool|null True if URL is local.
+     */
+    protected function isLocal(string $url)
+    {
+        if (mb_stripos($url, '//') === false) {
+            return true; // Relative.
+        } elseif ($this->current_host) {
+            return mb_stripos($url, '//'.$this->current_host.'/') !== false;
+        }
+        return null; // Unable to determine.
     }
 }
