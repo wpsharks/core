@@ -72,7 +72,7 @@
     "websharks/dicer": "160110",
     "websharks/sharkicons": "160620",
 
-    "michelf/php-markdown": "1.*",
+    "michelf/php-markdown": "dev-fork-1.7.0#170215",
     "michelf/php-smartypants": "1.*",
 
     "ramsey/uuid": "3.*",
@@ -140,5 +140,8 @@
     "preferred-install": "dist"
   },
 
-  "repositories": []
+  "repositories": [{
+    "type": "vcs",
+    "url": "https://github.com/websharks/php-markdown"
+  }]
 }
