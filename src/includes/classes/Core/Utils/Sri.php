@@ -416,7 +416,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
         if (!is_dir($map_cache_dir)) {
             mkdir($map_cache_dir, $transient_perms, true);
         }
-        file_put_contents($this->map_cache_file, json_encode($this->map_cache, JSON_PRETTY_PRINT));
+        file_put_contents($this->map_cache_file, json_encode($this->map_cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 
     /**
