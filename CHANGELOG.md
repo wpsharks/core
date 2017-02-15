@@ -14,6 +14,7 @@
 - Adding custom compilation of Emmet + snippets.
 - Adding custom Emmet extension for ACE.
 - Deprecating `return_array` in `UrlRemote{}` class.
+- Adding `max_stream_bytes` argument to `UrlRemote{}` class.
 
 ## v170124.74961
 
