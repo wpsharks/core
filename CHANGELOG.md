@@ -1,6 +1,8 @@
 ## $v
 
 - Adding `@position-offscreen` mixin.
+- Adding support for recursive SRI lookups.
+- Enhancing heading ID generator in MD parser.
 
 ## v170215.53419
 
