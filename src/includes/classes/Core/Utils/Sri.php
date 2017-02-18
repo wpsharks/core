@@ -172,12 +172,11 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @since 170211.63148 SRI utils.
      *
-     * @param string $url                URI to hash.
-     * @param bool   $___is_parent_check Internal use only.
+     * @param string $url URI to hash.
      *
      * @return string SRI hash, else empty string.
      */
-    public function __invoke(string $url, bool $___is_parent_check = false): string
+    public function __invoke(string $url): string
     {
         if (!$url) { // URL is empty?
             return ''; // Stop here.
