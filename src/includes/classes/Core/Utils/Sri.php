@@ -364,7 +364,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
             // requests occurring over and over again, which is want we need to avoid at all costs.
             // Therefore, if it fails, game is over until clearing the cache or adding a new map entry.
         }
-        return $sri = 'sha256-'.base64_encode(hash('sha256', $response->body, true));
+        return $sri = 'sha384-'.base64_encode(hash('sha384', $response->body, true));
     }
 
     /**
