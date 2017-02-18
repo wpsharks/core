@@ -215,12 +215,14 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
             $this->memcacheIt($url, $sha1, $sri);
             return $sri; // Via one read of the map file.
         } elseif ($p && ($p_sri = $p->checkMap($url, $sha1)) !== null) {
+            $p->memcacheIt($url, $sha1, $p_sri);
             return $p_sri; // Via parent map file.
         }
         if (($sri = $this->checkMapCache($url, $sha1)) !== null) {
             $this->memcacheIt($url, $sha1, $sri);
             return $sri; // Via additional read of map cache file.
         } elseif ($p && ($p_sri = $p->checkMapCache($url, $sha1)) !== null) {
+            $p->memcacheIt($url, $sha1, $p_sri);
             return $p_sri; // Via parent map cache file.
         }
         if (($sri = $this->checkContents($url, $sha1)) !== null) {
@@ -334,7 +336,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @return string|null SRI hash, else `null`.
      */
-    protected function checkContents(string $url, string $sha1)
+    public function checkContents(string $url, string $sha1)
     {
         if (static::$content_checks >= $this->max_content_checks) {
             return $sri = null; // Not possible at this time.
@@ -378,7 +380,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @note The `$sri` is allowed to be empty.
      */
-    protected function cacheIt(string $url, string $sha1, string $sri)
+    public function cacheIt(string $url, string $sha1, string $sri)
     {
         $this->memcacheIt($url, $sha1, $sri);
         $this->mapCacheIt($url, $sha1, $sri);
@@ -395,7 +397,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @note The `$sri` is allowed to be empty.
      */
-    protected function memcacheIt(string $url, string $sha1, string $sri)
+    public function memcacheIt(string $url, string $sha1, string $sri)
     {
         if ($this->memcache_enabled) {
             $this->c::memcacheSet('sris', $sha1, $sri, $this->cache_expires_in);
@@ -413,7 +415,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @note The `$sri` is allowed to be empty.
      */
-    protected function mapCacheIt(string $url, string $sha1, string $sri)
+    public function mapCacheIt(string $url, string $sha1, string $sri)
     {
         $this->map_cache       = $this->getMapCache();
         $this->map_cache[$url] = ['time' => time(), 'sri' => $sri];
