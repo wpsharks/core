@@ -172,11 +172,12 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @since 170211.63148 SRI utils.
      *
-     * @param string $url URI to hash.
+     * @param string $url                URI to hash.
+     * @param bool   $___is_parent_check Internal use only.
      *
      * @return string SRI hash, else empty string.
      */
-    public function __invoke(string $url): string
+    public function __invoke(string $url, bool $___is_parent_check = false): string
     {
         if (!$url) { // URL is empty?
             return ''; // Stop here.
@@ -191,22 +192,41 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
         // e.g., A dynamic script that alters paths based on scheme.
         // However, when using a map, `//` can be used to cover all schemes.
 
-        // NOTE: The in-process cache by &reference.
-        // ↓ This &reference impacts all checks that follow.
+        // ↓ NOTE: The way in which parent checks occur.
+        // Each parent check will result in additional parent checks.
+        // i.e., It runs all the way up the ladder recursively.
+
+        // ↓ NOTE: Remember the in-process cache variables by &reference.
+        // i.e., `&$sri` and `&$p_sri` are an in-process cache of all checks.
+
+        $p = $this->App->Parent; // Possibly a parent application.
+        $p = $p ? $p->Utils->©Sris : null; // Shorter reference.
 
         if (($sri = &$this->checkProcess($url, $sha1)) !== null) {
-            return $sri; // Avoids disk IO.
-        } elseif (($sri = $this->checkMemcache($url, $sha1)) !== null) {
-            return $sri; // Avoids disk IO.
-        } elseif (($sri = $this->checkMap($url, $sha1)) !== null) {
+            return $sri; // Via in-process cache of the SRI.
+        } elseif ($p && ($p_sri = &$p->checkProcess($url, $sha1)) !== null) {
+            return $p_sri; // Via parent in-process cache.
+        }
+        if (($sri = $this->checkMemcache($url, $sha1)) !== null) {
+            return $sri; // Via memcache; avoids disk IO.
+        } elseif ($p && ($p_sri = $p->checkMemcache($url, $sha1)) !== null) {
+            return $p_sri; // Via parent memcache.
+        }
+        if (($sri = $this->checkMap($url, $sha1)) !== null) {
             $this->memcacheIt($url, $sha1, $sri);
-            return $sri; // Better than contents check.
-        } elseif (($sri = $this->checkMapCache($url, $sha1)) !== null) {
+            return $sri; // Via one read of the map file.
+        } elseif ($p && ($p_sri = $p->checkMap($url, $sha1)) !== null) {
+            return $p_sri; // Via parent map file.
+        }
+        if (($sri = $this->checkMapCache($url, $sha1)) !== null) {
             $this->memcacheIt($url, $sha1, $sri);
-            return $sri; // Better than contents check.
-        } elseif (($sri = $this->checkContents($url, $sha1)) !== null) {
+            return $sri; // Via additional read of map cache file.
+        } elseif ($p && ($p_sri = $p->checkMapCache($url, $sha1)) !== null) {
+            return $p_sri; // Via parent map cache file.
+        }
+        if (($sri = $this->checkContents($url, $sha1)) !== null) {
             $this->cacheIt($url, $sha1, $sri);
-            return $sri; // Cached now.
+            return $sri; // First-time SHA.
         }
         return $sri = ''; // Not possible at this time.
     }
@@ -221,7 +241,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @return string|null SRI hash, else `null`.
      */
-    protected function &checkProcess(string $url, string $sha1)
+    public function &checkProcess(string $url, string $sha1)
     {
         if (is_string($sri = &$this->cacheGet('sris', $sha1))) {
             return $sri; // Cached this already.
@@ -241,7 +261,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @return string|null SRI hash, else `null`.
      */
-    protected function checkMemcache(string $url, string $sha1)
+    public function checkMemcache(string $url, string $sha1)
     {
         if (!$this->memcache_enabled) {
             return $sri = null; // Not possible.
@@ -261,7 +281,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @return string|null SRI hash, else `null`.
      */
-    protected function checkMap(string $url, string $sha1)
+    public function checkMap(string $url, string $sha1)
     {
         $this->map = $this->getMap();
 
@@ -288,7 +308,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
      *
      * @return string|null SRI hash, else `null`.
      */
-    protected function checkMapCache(string $url, string $sha1)
+    public function checkMapCache(string $url, string $sha1)
     {
         $this->map_cache = $this->getMapCache();
 
