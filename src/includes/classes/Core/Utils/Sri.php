@@ -199,7 +199,7 @@ class Sri extends Classes\Core\Base\Core implements Interfaces\ByteConstants
         // i.e., `&$sri` and `&$p_sri` are an in-process cache of all checks.
 
         $p = $this->App->Parent; // Possibly a parent application.
-        $p = $p ? $p->Utils->©Sris : null; // Shorter reference.
+        $p = $p ? $p->Utils->©Sri : null; // Shorter reference.
 
         if (($sri = &$this->checkProcess($url, $sha1)) !== null) {
             return $sri; // Via in-process cache of the SRI.
