@@ -159,9 +159,9 @@ class Markdown extends Classes\Core\Base\Core
      */
     public function headerIdFunc(string $raw): string
     {
-        return $id = 'j2h.'.preg_replace('/[^\w]+/u', '-', mb_strtolower($raw));
-        // Same as `marked()` in JS; i.e., `raw.toLowerCase().replace(/[^\w]+/g, '-')`.
-        // However, don't forget to set `headerPrefix: 'j2h.'` when using `marked()` .
+        $id        = mb_strtolower($raw);
+        $id        = preg_replace('/[^\w]+/u', '-', $id);
+        return $id = 'j2h.'.$this->c::mbTrim($id, '', '-');
     }
 
     /**
