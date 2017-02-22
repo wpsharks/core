@@ -12,8 +12,14 @@
  * Social network colors.
  */
 /*
+ * Our own named colors.
+ */
+/*
  * Name that color!
  * <http://chir.ag/projects/name-that-color>
+ */
+/*
+ * `._content` variables.
  */
 /*
  * Pixels to rem.
@@ -34,6 +40,9 @@
  * Fancy placeholders.
  */
 /*
+ * Font features.
+ */
+/*
  * Pixels to rem.
  */
 /*
@@ -50,6 +59,9 @@
  */
 /*
  * Highlight.js <pre><code>.
+ */
+/*
+ * Position utils.
  */
 /*
  * Mixins for responsive tweaks.
@@ -79,6 +91,9 @@
  * Muted utils.
  */
 /*
+ * Position utils.
+ */
+/*
  * Responsive utils.
  */
 /*
@@ -98,6 +113,9 @@
  */
 /*
  * Fancy placeholders.
+ */
+/*
+ * Font features.
  */
 /*
  * Pixels to rem.
@@ -290,6 +308,18 @@ nav > .menu .dropdown > .menu .item:not(a):not(.link) {
   opacity: 0.25;
 }
 
+body {
+  font-feature-settings: 'liga', 'dlig', 'frac';
+}
+
+sup {
+  font-feature-settings: 'liga', 'dlig', 'frac', 'sups';
+}
+
+sub {
+  font-feature-settings: 'liga', 'dlig', 'frac', 'subs';
+}
+
 /*
  * Align utils.
  */
@@ -310,6 +340,9 @@ nav > .menu .dropdown > .menu .item:not(a):not(.link) {
  */
 /*
  * Muted utils.
+ */
+/*
+ * Position utils.
  */
 /*
  * Responsive utils.
