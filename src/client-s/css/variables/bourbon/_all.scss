@@ -1,2 +1,4 @@
-$em-base: 16px; // Additional runtime variables for Bourbon.
-$monospace: 'Hack', 'Menlo', 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', monospace;
+$em-base: 16px !default;
+
+// Additional runtime variables for Bourbon.
+$monospace: 'Hack', 'Menlo', 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', monospace !default;

@@ -9,10 +9,13 @@
  * Fancy monospace tags.
  */
 /*
- * Social network colors.
+ * Named colors.
  */
 /*
- * Our own named colors.
+ * Social networks.
+ */
+/*
+ * Our own names.
  */
 /*
  * Name that color!
@@ -217,7 +220,7 @@ code,
 samp,
 kbd,
 tt {
-  font-family: "Hack", "Menlo", "Monaco", "Consolas", "Andale Mono", "DejaVu Sans Mono", monospace;
+  font-family: "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace;
 }
 
 kbd,
