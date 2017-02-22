@@ -1,0 +1,16 @@
+/*
+ * Font features.
+ */
+@mixin font-features {
+  body {
+    font-feature-settings:    'liga', 'dlig', 'frac';
+  }
+
+  sup {
+    font-feature-settings:    'liga', 'dlig', 'frac', 'sups';
+  }
+
+  sub {
+    font-feature-settings:    'liga', 'dlig', 'frac', 'subs';
+  }
+}

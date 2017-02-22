@@ -1,3 +1,7 @@
+## $v
+
+- Adding support for OpenType font features to SCSS framework.
+
 ## v170218.30778
 
 - Adding `@position-offscreen` mixin.
