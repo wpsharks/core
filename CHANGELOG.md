@@ -2,6 +2,7 @@
 
 - Adding support for OpenType font features to SCSS framework.
 - Adding `._content` variables to the SCSS framework for enhanced `._content` when desirable.
+- Adding `._inset` utility to the SCSS framework.
 
 ## v170218.30778
 

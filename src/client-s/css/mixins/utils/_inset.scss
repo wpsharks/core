@@ -1,0 +1,10 @@
+/*
+ * Inset utils.
+ */
+@mixin inset-utils {
+  ._inset {
+    background:               transparentize($black-color, 0.95) !important;
+    box-shadow:               inset 0 0 0 1px transparentize($black-color, 0.8) !important;
+    border:                   1px solid transparentize($white-color, 0.9) !important;
+  }
+}
