@@ -608,6 +608,14 @@ sub {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
+._inset._deep {
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+
+._inset._deep._very {
+  background: rgba(0, 0, 0, 0.25) !important;
+}
+
 ._line_clamp {
   max-width: 100% !important;
   white-space: nowrap !important;
