@@ -290,6 +290,7 @@ nav > .menu .dropdown > .menu .item:not(a):not(.link) {
 
 .ui.pagination.menu > .item > .icon {
   margin: 0;
+  height: auto;
 }
 
 .ui.pagination.menu > .item > .icon.chevron.left, .ui.pagination.menu > .item > .icon.angle.double.left {
