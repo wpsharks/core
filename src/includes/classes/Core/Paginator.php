@@ -51,7 +51,7 @@ class Paginator extends Classes\Core\Base\Core
             'page_active_class'        => 'active item',
             'page_disabled_class'      => 'disabled item',
             'page_icon_disabled_class' => 'disabled item',
-            'pages_class'              => 'ui pagination menu',
+            'pages_class'              => 'ui small pagination menu',
 
             'prev_page_text'  => __('Prev'),
             'prev_page_icon'  => '<i class="chevron left icon"></i>',
