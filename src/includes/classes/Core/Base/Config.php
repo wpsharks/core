@@ -255,6 +255,10 @@ class Config extends Classes\Core\Base\Core
             '©bitly' => [
                 '©api_key' => (string) ($_['CFG_BITLY_API_KEY'] ?? ''),
             ],
+            '©recaptcha' => [
+                '©site_key'   => (string) ($_['CFG_RECAPTCHA_SITE_KEY'] ?? ''),
+                '©secret_key' => (string) ($_['CFG_RECAPTCHA_SECRET_KEY'] ?? ''),
+            ],
             '©mailchimp' => [
                 '©list_id' => (string) ($_['CFG_MAILCHIMP_LIST_ID'] ?? ''),
                 '©api_key' => (string) ($_['CFG_MAILCHIMP_API_KEY'] ?? ''),

@@ -5,6 +5,7 @@
 - Adding `._inset` utility to the SCSS framework.
 - Making all SCSS variables the `!default` value.
 - Fixed vertical alignment in fancy pagination links.
+- Adding reCAPTCHA verification utility.
 
 ## v170218.30778
 

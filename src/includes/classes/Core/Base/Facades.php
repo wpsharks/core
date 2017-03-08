@@ -31,6 +31,7 @@ abstract class Facades
     use Traits\Facades\Base64;
     use Traits\Facades\Benchmark;
     use Traits\Facades\Bitly;
+    use Traits\Facades\Captcha;
     use Traits\Facades\Cli;
     use Traits\Facades\Clippers;
     use Traits\Facades\Color;
