@@ -31,6 +31,12 @@
  * Fancy blockquotes.
  */
 /*
+ * Fancy definitions.
+ */
+/*
+ * Fancy HR tags.
+ */
+/*
  * Fancy monospace tags.
  */
 /*
@@ -85,6 +91,9 @@
  * Content utils.
  */
 /*
+ * Definition utils.
+ */
+/*
  * Display utils.
  */
 /*
@@ -92,6 +101,9 @@
  */
 /*
  * Line clamp utils.
+ */
+/*
+ * List utils.
  */
 /*
  * Muted utils.
@@ -107,6 +119,12 @@
  */
 /*
  * Fancy blockquotes.
+ */
+/*
+ * Fancy definitions.
+ */
+/*
+ * Fancy HR tags.
  */
 /*
  * Fancy monospace tags.
@@ -213,6 +231,18 @@ blockquote::after {
   content: close-quote;
   margin: 0 .1em .25em 0;
   color: #ccc;
+}
+
+dl > dt {
+  font-weight: bold;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  background: none;
+  border-top: 1px solid rgba(37, 39, 44, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 pre,
@@ -340,6 +370,9 @@ sub {
  * Content utils.
  */
 /*
+ * Definition utils.
+ */
+/*
  * Display utils.
  */
 /*
@@ -347,6 +380,9 @@ sub {
  */
 /*
  * Line clamp utils.
+ */
+/*
+ * List utils.
  */
 /*
  * Muted utils.
@@ -586,6 +622,10 @@ sub {
   font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif;
 }
 
+._dt_margins > dl > dt:not(:first-child) {
+  margin-top: 1rem !important;
+}
+
 ._hidden {
   display: none !important;
 }
@@ -621,6 +661,11 @@ sub {
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+}
+
+._li_margins > ol > li:not(:first-child),
+._li_margins > ul > li:not(:first-child) {
+  margin-top: 1rem !important;
 }
 
 ._muted:not([class*='_muted _on_hover']),

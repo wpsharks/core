@@ -1,0 +1,12 @@
+/*
+ * Definition utils.
+ */
+@mixin definition-utils {
+  ._dt_margins {
+    > dl {
+      > dt:not(:first-child) {
+        margin-top:           1rem !important;
+      }
+    }
+  }
+}

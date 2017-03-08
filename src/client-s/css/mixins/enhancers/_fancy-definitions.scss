@@ -1,0 +1,10 @@
+/*
+ * Fancy definitions.
+ */
+@mixin fancy-definitions {
+  dl {
+    > dt {
+      font-weight:            bold;
+    }
+  }
+}
