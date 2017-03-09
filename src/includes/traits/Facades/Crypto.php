@@ -19,7 +19,7 @@ use function get_defined_vars as vars;
 /**
  * Crypto.
  *
- * @since 17xxxx
+ * @since 170309.60830
  */
 trait Crypto
 {
@@ -48,7 +48,7 @@ trait Crypto
     }
 
     /**
-     * @since 17xxxx Defuse keygen.
+     * @since 170309.60830 Defuse keygen.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -85,7 +85,7 @@ trait Crypto
 
     /**
      * @since 151214 First facades.
-     * @since 17xxxx Switched to Defuse.
+     * @since 170309.60830 Switched to Defuse.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -98,7 +98,7 @@ trait Crypto
 
     /**
      * @since 151214 First facades.
-     * @since 17xxxx Switched to Defuse.
+     * @since 170309.60830 Switched to Defuse.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

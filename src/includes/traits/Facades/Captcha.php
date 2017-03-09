@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Captcha.
  *
- * @since 17xxxx
+ * @since 170309.60830
  */
 trait Captcha
 {
     /**
-     * @since 17xxxx Captcha utils.
+     * @since 170309.60830 Captcha utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

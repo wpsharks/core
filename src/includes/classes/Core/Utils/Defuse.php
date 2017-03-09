@@ -22,14 +22,14 @@ use Defuse\Crypto\Crypto;
 /**
  * Defuse encryption.
  *
- * @since 17xxxx Defuse.
+ * @since 170309.60830 Defuse.
  */
 class Defuse extends Classes\Core\Base\Core
 {
     /**
      * Defuse keygen.
      *
-     * @since 17xxxx Defuse.
+     * @since 170309.60830 Defuse.
      *
      * @return string Defuse key.
      * @note Keys begin w/ `def00000`.
@@ -49,7 +49,7 @@ class Defuse extends Classes\Core\Base\Core
     /**
      * Defuse encryption.
      *
-     * @since 17xxxx Defuse.
+     * @since 170309.60830 Defuse.
      *
      * @param string $string String.
      * @param string $key    Encryption key.
@@ -77,7 +77,7 @@ class Defuse extends Classes\Core\Base\Core
     /**
      * Defuse decryption.
      *
-     * @since 17xxxx Defuse.
+     * @since 170309.60830 Defuse.
      *
      * @param string $string String.
      * @param string $key    Decryption key.

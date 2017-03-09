@@ -19,13 +19,13 @@ use function get_defined_vars as vars;
 /**
  * Deprecated.
  *
- * @since 17xxxx
+ * @since 170309.60830
  */
 trait Deprecated
 {
     /**
-     * @since 17xxxx Back compat.
-     * @deprecated 17xxxx Use `encrypt()`.
+     * @since 170309.60830 Back compat.
+     * @deprecated 170309.60830 Use `encrypt()`.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -37,8 +37,8 @@ trait Deprecated
     }
 
     /**
-     * @since 17xxxx Back compat.
-     * @deprecated 17xxxx Use `decrypt()`.
+     * @since 170309.60830 Back compat.
+     * @deprecated 170309.60830 Use `decrypt()`.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

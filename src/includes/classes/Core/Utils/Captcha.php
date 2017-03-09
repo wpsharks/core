@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Captcha utilities.
  *
- * @since 17xxxx Captcha utilities.
+ * @since 170309.60830 Captcha utilities.
  */
 class Captcha extends Classes\Core\Base\Core
 {
     /**
      * Verifies Google reCAPTCHA.
      *
-     * @since 17xxxx Captcha utilities.
+     * @since 170309.60830 Captcha utilities.
      *
      * @param string      $token      reCAPTCHA token from user.
      * @param string|null $ip         The user's remote IP address.
