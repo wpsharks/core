@@ -41,7 +41,6 @@
     "ext-hash": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
-    "ext-mcrypt": "*",
     "ext-session": "*",
     "ext-tokenizer": "*",
     "ext-zlib": "*",
@@ -75,6 +74,7 @@
     "websharks/php-markdown": "170215",
     "michelf/php-smartypants": "1.*",
 
+    "defuse/php-encryption": "2.*",
     "ramsey/uuid": "3.*",
     "hashids/hashids": "1.*",
     "embedly/embedly-php": "0.*",

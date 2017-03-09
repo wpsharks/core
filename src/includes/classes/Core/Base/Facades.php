@@ -36,12 +36,13 @@ abstract class Facades
     use Traits\Facades\Clippers;
     use Traits\Facades\Color;
     use Traits\Facades\Cookies;
+    use Traits\Facades\Crypto;
     use Traits\Facades\Debugging;
+    use Traits\Facades\Deprecated;
     use Traits\Facades\Dimensions;
     use Traits\Facades\Dirs;
     use Traits\Facades\Dump;
     use Traits\Facades\Email;
-    use Traits\Facades\Encryption;
     use Traits\Facades\Eols;
     use Traits\Facades\Errors;
     use Traits\Facades\Escapes;

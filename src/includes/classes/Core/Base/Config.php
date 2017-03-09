@@ -225,17 +225,20 @@ class Config extends Classes\Core\Base\Core
                 '©smtp_password' => (string) ($_['CFG_EMAIL_SMTP_PASSWORD'] ?? ''),
             ],
 
-            '©encryption' => [
+            '©encryption' => [ // A Defuse key w/ 64+ bytes.
                 '©key' => (string) ($_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
-            '©cookies' => [
+            '©cookies' => [ // Must be a Defuse key w/ 64+ bytes.
                 '©encryption_key' => (string) ($_['CFG_COOKIES_ENCRYPTION_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
+            '©hash' => [ // All hash keys should be a minimum of 64 bytes.
+                '©key' => (string) ($_['CFG_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
+            ],
             '©hash_ids' => [
-                '©hash_key' => (string) ($_['CFG_HASH_IDS_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
+                '©hash_key' => (string) ($_['CFG_HASH_IDS_HASH_KEY'] ?? $_['CFG_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
             '©passwords' => [
-                '©hash_key' => (string) ($_['CFG_PASSWORDS_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
+                '©hash_key' => (string) ($_['CFG_PASSWORDS_HASH_KEY'] ?? $_['CFG_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
 
             '©aws' => [

@@ -8,13 +8,12 @@ require_once dirname(__FILE__, 2).'/includes/local.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-$string = ' Lörem ipßüm dölör ßit ämet, cönßectetüer ädipißcing elit. ';
+$string = 'Lörem ipßüm dölör ßit ämet, cönßectetüer ädipißcing elit.';
+$key    = c::encryptionKey();
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-c::benchStart();
+echo $key."\n\n";
 
-for ($i = 0; $i < 500; ++$i) {
-    c::mbTrim($string);
-}
-c::benchPrint();
+echo($e = c::encrypt($string, $key))."\n";
+echo c::decrypt($e, $key)."\n";

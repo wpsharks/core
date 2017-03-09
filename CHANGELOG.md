@@ -1,11 +1,33 @@
 ## $v
 
-- Adding support for OpenType font features to SCSS framework.
+- Adding Google reCAPTCHA verification utility; for reCAPTCHA v2.
+
+- Adding package: [Defuse: `defuse/php-encryption`](https://github.com/defuse/php-encryption).
+
+- Deprecating `Rijndael256{}` class, which uses `mcrypt` (abandonware), in favor of Defuse for cryptography. The `c::encrypt()` and `c::decrypt()` Facades now point to Defuse in order to avoid problems when running on modern versions of PHP, where `mcrypt` has been removed entirely starting with PHP v7.2.
+
+  If you're running an older version of PHP and need `Rijndael256{}` encryption, please use `c::rjEncrypt()` and `c::rjDecrypt()` as a short-term transitional workaround.
+
+- Adding a new configuration key: `©hash['©key']` as a general purpose hash key fallback, which is currently used by calls to `c::sha256KeyedHash()` whenever no specific key is given.
+
+- Altering the intended use of configuration values: `©encryption['©key']` and `©cookies['©encryption_key']`. These should now be set to Defuse encryption keys in ASCII/hex format. Existing core-based applications that have these configuration values set to a 64-byte random key will need to update them.
+
+  As a short-term backward compatibility feature, if your keys are not in a valid Defuse format, the older Rijndael256 encryption will be attempted automatically, instead of using the newer Defuse library, which absolutely requires that you establish Defuse encryption keys. Defuse encryption keys in hex format, always begin with `def00000`.
+
+  Generating a Defuse encryption key:
+  - `$key = c::encryptionKey()` and save the output.
+  - Paste the `def00000...` key into your config file as: `©encryption['©key']`.
+  - Repeat and create another key for `©cookies['©encryption_key']`.
+
+- Adding support for OpenType font features in our SCSS framework.
+
 - Adding `._content` variables to the SCSS framework for enhanced `._content` when desirable.
+
 - Adding `._inset` utility to the SCSS framework.
+
 - Making all SCSS variables the `!default` value.
+
 - Fixed vertical alignment in fancy pagination links.
-- Adding reCAPTCHA verification utility.
 
 ## v170218.30778
 

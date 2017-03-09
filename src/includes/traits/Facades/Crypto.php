@@ -1,6 +1,6 @@
 <?php
 /**
- * Encryption.
+ * Crypto.
  *
  * @author @jaswsinc
  * @copyright WebSharks™
@@ -17,11 +17,11 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Encryption.
+ * Crypto.
  *
- * @since 160701
+ * @since 17xxxx
  */
-trait Encryption
+trait Crypto
 {
     /**
      * @since 160701 Unique ID.
@@ -45,6 +45,18 @@ trait Encryption
     public static function randomKey(...$args)
     {
         return $GLOBALS[static::class]->Utils->©RandomKey->__invoke(...$args);
+    }
+
+    /**
+     * @since 17xxxx Defuse keygen.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Defuse::keygen()
+     */
+    public static function encryptionKey(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Defuse->keygen(...$args);
     }
 
     /**
@@ -73,26 +85,28 @@ trait Encryption
 
     /**
      * @since 151214 First facades.
+     * @since 17xxxx Switched to Defuse.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Rijndael256::encrypt()
+     * @see Classes\Core\Utils\Defuse::encrypt()
      */
     public static function encrypt(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Rijndael256->encrypt(...$args);
+        return $GLOBALS[static::class]->Utils->©Defuse->encrypt(...$args);
     }
 
     /**
      * @since 151214 First facades.
+     * @since 17xxxx Switched to Defuse.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Rijndael256::decrypt()
+     * @see Classes\Core\Utils\Defuse::decrypt()
      */
     public static function decrypt(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Rijndael256->decrypt(...$args);
+        return $GLOBALS[static::class]->Utils->©Defuse->decrypt(...$args);
     }
 
     /**
