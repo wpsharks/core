@@ -2,7 +2,7 @@
 /**
  * WS version utilities.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare (strict_types = 1);

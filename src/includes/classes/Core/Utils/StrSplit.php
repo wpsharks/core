@@ -2,7 +2,7 @@
 /**
  * Multibyte `str_split()`.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare (strict_types = 1);

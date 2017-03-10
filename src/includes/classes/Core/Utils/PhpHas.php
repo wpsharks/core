@@ -2,7 +2,7 @@
 /**
  * Php has utilities.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare(strict_types=1);

@@ -2,7 +2,7 @@
 /**
  * Facades.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 // @codingStandardsIgnoreFile
@@ -20,7 +20,7 @@ $Facades = '<?php
 /**
  * Facades.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare (strict_types = 1);

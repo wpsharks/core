@@ -2,7 +2,7 @@
 /**
  * Stub.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 // @codingStandardsIgnoreFile

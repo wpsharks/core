@@ -2,7 +2,7 @@
 /**
  * UUID 64 parser/builder.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare (strict_types = 1);

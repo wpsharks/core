@@ -1,8 +1,8 @@
 /*
 Language: WP
 Requires: xml.js
-Author: @jaswsinc
-Website: https://jaswsinc.com
+Author: @jaswrks
+Website: https://jaswrks.com
 Description: Highlights WordPress shortcodes.
 Category: common, markup
 */

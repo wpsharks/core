@@ -2,7 +2,7 @@
 /**
  * Functions.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 // @codingStandardsIgnoreFile
@@ -20,7 +20,7 @@ $load = '<?php
 /**
  * Functions.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare (strict_types = 1);

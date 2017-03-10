@@ -2,7 +2,7 @@
 /**
  * Multibyte `substr_replace()`.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare(strict_types=1);
