@@ -3,34 +3,23 @@
  */
 @mixin content-utils {
   ._content {
-    @if $content-font-family != '' {
+    font-family:              $content-font-family;
+
+    .text {
       font-family:            $content-font-family;
-
-      .text {
-        font-family:          $content-font-family;
-      }
     }
 
-    @if $content-heading-font-family != '' {
-      h2,
-      h3,
-      h4,
-      h5,
-      .header {
-        font-family:          $content-heading-font-family;
-      }
+    h2,
+    h3,
+    h4,
+    h5,
+    .header {
+      font-family:            $content-heading-font-family;
     }
 
-    @if $content-pfot-font-family != '' {
-      > p:first-of-type:not([class]) {
-        font-size:            1.25em;
-        font-family:          $content-pfot-font-family;
-      }
-    } @else {
-      > p:first-of-type:not([class]) {
-        font-size:            1.25em;
-        font-family:          $georgia;
-      }
+    > p:first-of-type:not([class]) {
+      font-size:              1.25em;
+      font-family:            $content-lede-font-family;
     }
   }
 }

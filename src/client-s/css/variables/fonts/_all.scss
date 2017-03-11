@@ -1,0 +1,14 @@
+/*
+ * Font variables.
+ */
+$serif-font-family: $georgia !default;
+$sans-serif-font-family: 'Lato', 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif !default;
+$alt-font-family: $serif-font-family !default;
+$monospace-font-family: $monospace !default;
+
+/*
+ * Content font variables.
+ */
+$content-font-family: $sans-serif-font-family !default;
+$content-lede-font-family: $alt-font-family !default;
+$content-heading-font-family: $content-font-family !default;

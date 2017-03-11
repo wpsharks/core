@@ -22,7 +22,10 @@
  * <http://chir.ag/projects/name-that-color>
  */
 /*
- * `._content` variables.
+ * Font variables.
+ */
+/*
+ * Content font variables.
  */
 /*
  * Pixels to rem.
@@ -615,6 +618,22 @@ sub {
   right: .6em !important;
   left: auto !important;
   transform: skew(8deg) rotate(3deg) !important;
+}
+
+._content {
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
+._content .text {
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
+._content h2,
+._content h3,
+._content h4,
+._content h5,
+._content .header {
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
 ._content > p:first-of-type:not([class]) {

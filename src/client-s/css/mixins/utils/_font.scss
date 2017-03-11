@@ -1,0 +1,32 @@
+/*
+ * Font utils.
+ */
+@mixin font-utils {
+  ._ff_serif {
+    font-family:              $serif-font-family !important;
+  }
+
+  ._ff_sans_serif {
+    font-family:              $sans-serif-font-family !important;
+  }
+
+  ._ff_alt {
+    font-family:              $alt-font-family !important;
+  }
+
+  ._ff_monospace {
+    font-family:              $monospace-font-family !important;
+  }
+
+  ._cff {
+    font-family:              $content-font-family !important;
+  }
+
+  ._cff_lede {
+    font-family:              $content-lede-font-family !important;
+  }
+
+  ._cff_heading {
+    font-family:              $content-heading-font-family !important;
+  }
+}
