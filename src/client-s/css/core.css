@@ -256,7 +256,7 @@ code,
 samp,
 kbd,
 tt {
-  font-family: "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace;
+  font-family: "Hack", "Menlo", "Monaco", "Consolas", "Andale Mono", "DejaVu Sans Mono", monospace;
 }
 
 kbd,
@@ -667,6 +667,11 @@ sub {
   display: none !important;
 }
 
+._ff_smooth {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
 ._ff_serif {
   font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif !important;
 }
@@ -680,7 +685,7 @@ sub {
 }
 
 ._ff_monospace {
-  font-family: "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace !important;
+  font-family: "Hack", "Menlo", "Monaco", "Consolas", "Andale Mono", "DejaVu Sans Mono", monospace !important;
 }
 
 ._cff {
@@ -693,6 +698,22 @@ sub {
 
 ._cff_heading {
   font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif !important;
+}
+
+._ff_georgia {
+  font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif !important;
+}
+
+._ff_helvetica {
+  font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif !important;
+}
+
+._ff_lucida {
+  font-family: "Lucida Grande", "Tahoma", "Verdana", "Arial", sans-serif !important;
+}
+
+._ff_verdana {
+  font-family: "Verdana", "Geneva", sans-serif !important;
 }
 
 ._inset {

@@ -2,6 +2,11 @@
  * Font utils.
  */
 @mixin font-utils {
+  ._ff_smooth {
+    -webkit-font-smoothing:   antialiased !important;
+    -moz-osx-font-smoothing:  grayscale !important;
+  }
+
   ._ff_serif {
     font-family:              $serif-font-family !important;
   }
@@ -28,5 +33,23 @@
 
   ._cff_heading {
     font-family:              $content-heading-font-family !important;
+  }
+
+  // Additional font stacks via Bourbon.
+
+  ._ff_georgia {
+    font-family:              $georgia !important;
+  }
+
+  ._ff_helvetica {
+    font-family:              $helvetica !important;
+  }
+
+  ._ff_lucida {
+    font-family:              $lucida-grande !important;
+  }
+
+  ._ff_verdana {
+    font-family:              $verdana !important;
   }
 }
