@@ -100,6 +100,9 @@
  * Display utils.
  */
 /*
+ * Font utils.
+ */
+/*
  * Inset utils.
  */
 /*
@@ -377,6 +380,9 @@ sub {
  */
 /*
  * Display utils.
+ */
+/*
+ * Font utils.
  */
 /*
  * Inset utils.
@@ -659,6 +665,34 @@ sub {
 
 ._block {
   display: none !important;
+}
+
+._ff_serif {
+  font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif !important;
+}
+
+._ff_sans_serif {
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif !important;
+}
+
+._ff_alt {
+  font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif !important;
+}
+
+._ff_monospace {
+  font-family: "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace !important;
+}
+
+._cff {
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif !important;
+}
+
+._cff_lede {
+  font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif !important;
+}
+
+._cff_heading {
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif !important;
 }
 
 ._inset {
