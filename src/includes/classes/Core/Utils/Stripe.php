@@ -425,7 +425,7 @@ class Stripe extends Classes\Core\Base\Core
      */
     protected function parseArgs(string $func, array $args): array
     {
-        $default_api_key = $this->App->Config->©stripe['©api_key'];
+        $default_api_key = $this->App->Config->©stripe['©secret_key'];
         $api_key         = (string) ($args['api_key'] ?? '');
         $api_key         = $api_key ?: $default_api_key;
         unset($args['api_key']); // Ditch this now.

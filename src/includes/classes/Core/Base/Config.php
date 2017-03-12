@@ -242,7 +242,8 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©stripe' => [
-                '©api_key' => (string) ($_['CFG_STRIPE_API_KEY'] ?? ''),
+                '©secret_key' => (string) ($_['CFG_STRIPE_SECRET_KEY'] ?? ''),
+                '©public_key' => (string) ($_['CFG_STRIPE_PUBLIC_KEY'] ?? ''),
             ],
             '©aws' => [
                 '©region'     => (string) ($_['CFG_AWS_REGION'] ?? 'us-east-1'),
