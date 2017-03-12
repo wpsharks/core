@@ -241,6 +241,9 @@ class Config extends Classes\Core\Base\Core
                 '©hash_key' => (string) ($_['CFG_PASSWORDS_HASH_KEY'] ?? $_['CFG_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
 
+            '©stripe' => [
+                '©api_key' => (string) ($_['CFG_STRIPE_API_KEY'] ?? ''),
+            ],
             '©aws' => [
                 '©region'     => (string) ($_['CFG_AWS_REGION'] ?? 'us-east-1'),
                 '©access_key' => (string) ($_['CFG_AWS_ACCESS_KEY'] ?? ''),

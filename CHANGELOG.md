@@ -1,3 +1,10 @@
+## $v
+
+- Adding `c::stripeCustomer()`.
+- Adding `c::stripeCharge()`.
+- Adding `c::stripePlan()`.
+- Adding `c::stripeSubscription()`.
+
 ## v170309.60830
 
 - Adding Google reCAPTCHA verification utility; for reCAPTCHA v2.

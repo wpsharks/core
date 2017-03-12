@@ -74,13 +74,20 @@
     "websharks/php-markdown": "170215",
     "michelf/php-smartypants": "1.*",
 
-    "defuse/php-encryption": "2.*",
+    "ryakad/pandoc-php": "1.*",
+    "symfony/yaml": "2.*",
+
     "ramsey/uuid": "3.*",
     "hashids/hashids": "1.*",
+    "defuse/php-encryption": "2.*",
+
+    "stripe/stripe-php": "4.*",
+    "aws/aws-sdk-php": "3.*",
+
     "embedly/embedly-php": "0.*",
+    "corneltek/getoptionkit": "2.*",
     "jeremeamia/superclosure": "2.*",
-    "phpmailer/phpmailer": "5.*",
-    "symfony/yaml": "2.*"
+    "phpmailer/phpmailer": "5.*"
   },
   "require-dev": {
     "ext-Zend-OPcache": "*",
@@ -93,14 +100,7 @@
     "ext-gmp": "*",
     "ext-bcmath": "*",
     "ext-pspell": "*",
-    "ext-memcached": "*",
-
-    "ryakad/pandoc-php": "1.*",
-    "corneltek/getoptionkit": "2.*",
-    "lusitanian/oauth": "0.*",
-    "aws/aws-sdk-php": "3.*",
-
-    "gossi/docblock": "1.*"
+    "ext-memcached": "*"
   },
   "suggest": {
     "ext-Zend-OPcache": "* :: Highly recommended for faster processing.",
@@ -113,14 +113,7 @@
     "ext-gmp": "* :: Required by routines that deal with large numbers.",
     "ext-bcmath": "* :: Required by routines that deal with large numbers.",
     "ext-pspell": "* :: Required by routines that deal with spellcheck.",
-    "ext-memcached": "* :: Required by routines that deal Memcache.",
-
-    "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc.",
-    "corneltek/getoptionkit": "2.* :: Required for routines that parse CLI opts.",
-    "lusitanian/oauth": "0.* :: Required when using SSO and other related utils.",
-    "aws/aws-sdk-php": "3.* :: Required for routines that interact with the AWS API.",
-
-    "gossi/docblock": "1.* :: Required by routines that parse docBlocks."
+    "ext-memcached": "* :: Required by routines that deal Memcache."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
