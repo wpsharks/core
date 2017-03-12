@@ -4,6 +4,8 @@
 - Adding `c::stripeCharge()`.
 - Adding `c::stripePlan()`.
 - Adding `c::stripeSubscription()`.
+- Adding `c::escSq()`.
+- Adding `c::escDq()`.
 
 ## v170309.60830
 

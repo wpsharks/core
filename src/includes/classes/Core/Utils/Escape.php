@@ -24,11 +24,31 @@ use function get_defined_vars as vars;
 class Escape extends Classes\Core\Base\Core
 {
     /**
-     * Single-quote.
+     * Escape single-quote.
      *
      * @since 160708 Quotes.
      *
-     * @param mixed Input value.
+     * @param mixed $value Input value.
+     *
+     * @return string|array|object Output value.
+     */
+    public function sq($value)
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->sq($_value);
+            } // unset($_key, $_value);
+            return $value;
+        }
+        return str_replace("'", "\\'", (string) $value);
+    }
+
+    /**
+     * Single-quote encapsulation.
+     *
+     * @since 160708 Quotes.
+     *
+     * @param mixed $value Input value.
      *
      * @return string|array|object Output value.
      */
@@ -44,13 +64,33 @@ class Escape extends Classes\Core\Base\Core
     }
 
     /**
-     * Double-quote.
+     * Escape double-quote.
      *
      * @since 160708 Quotes.
      *
-     * @param mixed Input value.
-     * @param bool $for_csv Changes quote-style for CSV compat.
-     *                      CSV quoting requires the use of a double-quote as the escape char.
+     * @param mixed $value Input value.
+     *
+     * @return string|array|object Output value.
+     */
+    public function dq($value)
+    {
+        if (is_array($value) || is_object($value)) {
+            foreach ($value as $_key => &$_value) {
+                $_value = $this->sq($_value);
+            } // unset($_key, $_value);
+            return $value;
+        }
+        return str_replace('"', '\\"', (string) $value);
+    }
+
+    /**
+     * Double-quote encapsulation.
+     *
+     * @since 160708 Quotes.
+     *
+     * @param mixed $value   Input value.
+     * @param bool  $for_csv Changes quote-style for CSV compat.
+     *                       CSV quoting requires the use of a double-quote as the escape char.
      *
      * @return string|array|object Output value.
      *
@@ -72,7 +112,7 @@ class Escape extends Classes\Core\Base\Core
      *
      * @since 151122 Escapes.
      *
-     * @param mixed Input value.
+     * @param mixed $value Input value.
      *
      * @return string|array|object Output value.
      */
@@ -86,7 +126,7 @@ class Escape extends Classes\Core\Base\Core
      *
      * @since 170124.74961 Escapes.
      *
-     * @param mixed Input value.
+     * @param mixed $value Input value.
      *
      * @return string|array|object Output value.
      */
@@ -100,7 +140,7 @@ class Escape extends Classes\Core\Base\Core
      *
      * @since 151122 Escapes.
      *
-     * @param mixed Input value.
+     * @param mixed $value Input value.
      *
      * @return string|array|object Output value.
      */
@@ -114,7 +154,7 @@ class Escape extends Classes\Core\Base\Core
      *
      * @since 151122 Escapes.
      *
-     * @param mixed Input value.
+     * @param mixed $value Input value.
      *
      * @return string|array|object Output value.
      */
@@ -128,7 +168,7 @@ class Escape extends Classes\Core\Base\Core
      *
      * @since 151122 Escapes.
      *
-     * @param mixed Input value.
+     * @param mixed $value Input value.
      *
      * @return string|array|object Output value.
      */
@@ -142,7 +182,7 @@ class Escape extends Classes\Core\Base\Core
      *
      * @since 160110 Escapes.
      *
-     * @param mixed Input value.
+     * @param mixed $value Input value.
      *
      * @return string|array|object Output value.
      */

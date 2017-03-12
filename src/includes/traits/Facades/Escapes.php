@@ -24,6 +24,18 @@ use function get_defined_vars as vars;
 trait Escapes
 {
     /**
+     * @since 17xxxx Quote utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::sq()
+     */
+    public static function escSq(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Escape->sq(...$args);
+    }
+
+    /**
      * @since 160708 Quote utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -33,6 +45,18 @@ trait Escapes
     public static function sQuote(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Escape->singleQuote(...$args);
+    }
+
+    /**
+     * @since 17xxxx Quote utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Escape::dq()
+     */
+    public static function escDq(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Escape->dq(...$args);
     }
 
     /**
