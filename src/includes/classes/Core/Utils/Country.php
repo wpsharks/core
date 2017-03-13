@@ -64,7 +64,7 @@ class Country extends Classes\Core\Base\Core
             'ip'     => null,
             'use_ip' => true,
         ];
-        $args += $defaults;
+        $args += $default_args;
 
         $is_cli = $this->c::isCli();
 
@@ -103,7 +103,7 @@ class Country extends Classes\Core\Base\Core
             'ip'     => null,
             'use_ip' => true,
         ];
-        $args += $defaults;
+        $args += $default_args;
 
         $is_cli = $this->c::isCli();
 
