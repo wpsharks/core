@@ -36,6 +36,7 @@ abstract class Facades
     use Traits\Facades\Clippers;
     use Traits\Facades\Color;
     use Traits\Facades\Cookies;
+    use Traits\Facades\Country;
     use Traits\Facades\Crypto;
     use Traits\Facades\Debugging;
     use Traits\Facades\Deprecated;

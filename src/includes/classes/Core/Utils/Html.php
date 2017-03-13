@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -65,5 +65,20 @@ class Html extends Classes\Core\Base\Core
     public function selected($a, $b)
     {
         return (string) $a === (string) $b ? ' selected' : '';
+    }
+
+    /**
+     * Active?
+     *
+     * @since 150424 Initial release.
+     *
+     * @param mixed $a Input variable a.
+     * @param mixed $b Input variable b.
+     *
+     * @return string ` active` if true.
+     */
+    public function active($a, $b)
+    {
+        return (string) $a === (string) $b ? ' active' : '';
     }
 }

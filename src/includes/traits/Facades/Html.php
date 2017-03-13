@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -201,5 +201,17 @@ trait Html
     public static function selected(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Html->selected(...$args);
+    }
+
+    /**
+     * @since 17xxxx Adding active utility.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Html::active()
+     */
+    public static function active(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Html->active(...$args);
     }
 }
