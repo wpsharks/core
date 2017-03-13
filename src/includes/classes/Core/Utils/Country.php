@@ -54,11 +54,29 @@ class Country extends Classes\Core\Base\Core
      * @since 17xxxx Country utils.
      *
      * @param string $selected Selected value.
+     * @param array  $args     Any behavioral args.
      *
      * @return string HTML markup.
      */
-    public function selectOptions(string $selected = ''): string
+    public function selectOptions(string $selected = '', array $args = []): string
     {
+        $default_args = [
+            'ip'     => null,
+            'use_ip' => true,
+        ];
+        $args += $defaults;
+
+        $is_cli = $this->c::isCli();
+
+        if (!isset($args['ip']) && $args['use_ip']) {
+            $args['ip'] = $is_cli ? '' : $this->c::currentIp();
+        }
+        $args['ip']     = (string) $args['ip'];
+        $args['use_ip'] = (bool) $args['use_ip'];
+
+        if (!$selected && $args['ip'] && $args['use_ip']) {
+            $selected = $is_cli ? '' : $this->c::ipCountry($args['ip']);
+        }
         $markup   = ''; // Initialize.
         $selected = mb_strtoupper($selected);
 
@@ -75,11 +93,29 @@ class Country extends Classes\Core\Base\Core
      * @since 17xxxx Country utils.
      *
      * @param string $active Active value.
+     * @param array  $args   Any behavioral args.
      *
      * @return string HTML markup.
      */
-    public function dropdownItems(string $active = ''): string
+    public function dropdownItems(string $active = '', array $args = []): string
     {
+        $default_args = [
+            'ip'     => null,
+            'use_ip' => true,
+        ];
+        $args += $defaults;
+
+        $is_cli = $this->c::isCli();
+
+        if (!isset($args['ip']) && $args['use_ip']) {
+            $args['ip'] = $is_cli ? '' : $this->c::currentIp();
+        }
+        $args['ip']     = (string) $args['ip'];
+        $args['use_ip'] = (bool) $args['use_ip'];
+
+        if (!$selected && $args['ip'] && $args['use_ip']) {
+            $selected = $is_cli ? '' : $this->c::ipCountry($args['ip']);
+        }
         $markup = ''; // Initialize.
         $active = mb_strtoupper($active);
 

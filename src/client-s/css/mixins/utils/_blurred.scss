@@ -3,22 +3,21 @@
  */
 @mixin blurred-utils {
   ._blurred:not([class*='_blurred _on_hover']),
-  ._blurred[class*='_blurred _on_hover']:hover {
+  ._blurred._on_hover[class*='_blurred _on_hover']:hover {
     @include filter(blur(2px) !important);
-
     opacity:                  0.5 !important;
   }
 
-  ._very._blurred:not([class*='_blurred _on_hover']),
-  ._very._blurred[class*='_blurred _on_hover']:hover {
+  ._very._blurred[class*='_very _blurred']:not([class*='_blurred _on_hover']),
+  ._very._blurred._on_hover[class*='_very _blurred _on_hover']:hover {
     @include filter(blur(4px) !important);
-
     opacity:                  0.25 !important;
   }
 
-  ._blurred[class*='_blurred _not_on_hover']:hover {
+  ._blurred._not_on_hover[class*='_blurred _not_on_hover']:hover {
+    // NOTE: This is problematic. There's simply no way to guarantee
+    // that we are actually reverting to the originally defined styles.
     @include filter(none !important);
-
     opacity:                  1 !important;
   }
 }

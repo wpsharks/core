@@ -7,10 +7,10 @@
     box-shadow:               inset 0 0 0 1px transparentize($black-color, 0.8) !important;
     border:                   1px solid transparentize($white-color, 0.9) !important;
 
-    &._deep {
+    &._deep[class*='_deep _inset'] {
       background:             transparentize($black-color, 0.85) !important;
 
-      &._very {
+      &._very[class*='_very _deep _inset'] {
         background:           transparentize($black-color, 0.75) !important;
       }
     }

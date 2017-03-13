@@ -34,6 +34,9 @@
  * Fancy blockquotes.
  */
 /*
+ * Fancy checkboxes.
+ */
+/*
  * Fancy definitions.
  */
 /*
@@ -97,6 +100,9 @@
  * Definition utils.
  */
 /*
+ * Disabled utils.
+ */
+/*
  * Display utils.
  */
 /*
@@ -125,6 +131,9 @@
  */
 /*
  * Fancy blockquotes.
+ */
+/*
+ * Fancy checkboxes.
  */
 /*
  * Fancy definitions.
@@ -237,6 +246,22 @@ blockquote::after {
   content: close-quote;
   margin: 0 .1em .25em 0;
   color: #ccc;
+}
+
+.ui.toggle.checkbox > input:active ~ label, .ui.toggle.checkbox > input:focus ~ label {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.ui.toggle.checkbox > label {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.ui.toggle.checkbox > label::before {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.ui.toggle.checkbox > label::after {
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 dl > dt {
@@ -379,6 +404,9 @@ sub {
  * Definition utils.
  */
 /*
+ * Disabled utils.
+ */
+/*
  * Display utils.
  */
 /*
@@ -456,20 +484,20 @@ sub {
 }
 
 ._blurred:not([class*='_blurred _on_hover']),
-._blurred[class*='_blurred _on_hover']:hover {
+._blurred._on_hover[class*='_blurred _on_hover']:hover {
   -webkit-filter: blur(2px) !important;
   filter: blur(2px) !important;
   opacity: 0.5 !important;
 }
 
-._very._blurred:not([class*='_blurred _on_hover']),
-._very._blurred[class*='_blurred _on_hover']:hover {
+._very._blurred[class*='_very _blurred']:not([class*='_blurred _on_hover']),
+._very._blurred._on_hover[class*='_very _blurred _on_hover']:hover {
   -webkit-filter: blur(4px) !important;
   filter: blur(4px) !important;
   opacity: 0.25 !important;
 }
 
-._blurred[class*='_blurred _not_on_hover']:hover {
+._blurred._not_on_hover[class*='_blurred _not_on_hover']:hover {
   -webkit-filter: none !important;
   filter: none !important;
   opacity: 1 !important;
@@ -651,6 +679,37 @@ sub {
   margin-top: 1rem !important;
 }
 
+._disabled:not([class*='_disabled _on_hover']),
+._disabled._on_hover[class*='_disabled _on_hover']:hover {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+._disabled:not([class*='_disabled _on_hover']) *,
+._disabled._on_hover[class*='_disabled _on_hover']:hover * {
+  cursor: not-allowed !important;
+}
+
+._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']),
+._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover {
+  opacity: 0.25 !important;
+  cursor: not-allowed !important;
+}
+
+._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']) *,
+._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover * {
+  cursor: not-allowed !important;
+}
+
+._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover {
+  opacity: 1 !important;
+  cursor: initial !important;
+}
+
+._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover * {
+  cursor: initial !important;
+}
+
 ._hidden {
   display: none !important;
 }
@@ -722,11 +781,11 @@ sub {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-._inset._deep {
+._inset._deep[class*='_deep _inset'] {
   background: rgba(0, 0, 0, 0.15) !important;
 }
 
-._inset._deep._very {
+._inset._deep[class*='_deep _inset']._very[class*='_very _deep _inset'] {
   background: rgba(0, 0, 0, 0.25) !important;
 }
 
@@ -743,16 +802,16 @@ sub {
 }
 
 ._muted:not([class*='_muted _on_hover']),
-._muted[class*='_muted _on_hover']:hover {
+._muted._on_hover[class*='_muted _on_hover']:hover {
   opacity: 0.5 !important;
 }
 
-._very._muted:not([class*='_muted _on_hover']),
-._very._muted[class*='_muted _on_hover']:hover {
+._very._muted[class*='_very _muted']:not([class*='_muted _on_hover']),
+._very._muted._on_hover[class*='_very _muted _on_hover']:hover {
   opacity: 0.25 !important;
 }
 
-._muted[class*='_muted _not_on_hover']:hover {
+._muted._not_on_hover[class*='_muted _not_on_hover']:hover {
   opacity: 1 !important;
 }
 

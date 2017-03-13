@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -34,12 +34,13 @@ class Ip extends Classes\Core\Base\Core
      */
     public function current(): string
     {
-        if (!is_null($ip = &$this->cacheKey(__FUNCTION__))) {
+        if (($ip = &$this->cacheKey(__FUNCTION__)) !== null) {
             return $ip; // Already cached this.
         }
         if ($this->c::isCli()) {
             throw $this->c::issue('Not possible in CLI mode.');
-        }
+        } // @TODO Try detecting IP address in CLI mode.
+
         $sources = [
             'HTTP_CF_CONNECTING_IP',
             'HTTP_CLIENT_IP',
@@ -79,7 +80,7 @@ class Ip extends Classes\Core\Base\Core
         if (($geo = $this->geoData($ip))) {
             return $geo->region;
         }
-        return ''; // Empty string on failure.
+        return ''; // Failure.
     }
 
     /**
@@ -97,11 +98,12 @@ class Ip extends Classes\Core\Base\Core
             && $ip === $_SERVER['HTTP_CF_CONNECTING_IP'] ?? '' && $ip === $this->current()
             && mb_strlen((string) $_SERVER['HTTP_CF_IPCOUNTRY']) === 2) {
             return (string) $_SERVER['HTTP_CF_IPCOUNTRY'];
-        }
+        } // This saves time by using CloudFlare.
+
         if (($geo = $this->geoData($ip))) {
             return $geo->country;
         }
-        return ''; // Empty string on failure.
+        return ''; // Failure.
     }
 
     /**
@@ -111,18 +113,18 @@ class Ip extends Classes\Core\Base\Core
      *
      * @param string $ip An IP address.
      *
-     * @return \StdClass|bool Geo data for IP address.
+     * @return \StdClass|bool Geo data for IP.
      */
     protected function geoData(string $ip)
     {
-        # Valid  IP. Do we have one?
+        # Valid IP. Do we have one?
 
         if (!($ip = $this->c::mbTrim(mb_strtolower($ip)))) {
             return false; // Not possible.
         }
         # Check object cache. Did we already do this?
 
-        if (!is_null($geo = &$this->cacheKey(__FUNCTION__, $ip))) {
+        if (($geo = &$this->cacheKey(__FUNCTION__, $ip)) !== null) {
             return $geo; // Already cached this.
         }
         # Check filesystem cache. Did we already do this?
@@ -167,6 +169,7 @@ class Ip extends Classes\Core\Base\Core
         # Fill object cache; i.e., `\StdClass` or `false`.
 
         $geo = (object) compact('region', 'country');
+
         if (mb_strlen($geo->region) !== 2 || mb_strlen($geo->country) !== 2) {
             $geo = false; // Invalid (or insufficient) data.
         }
@@ -177,7 +180,7 @@ class Ip extends Classes\Core\Base\Core
         }
         file_put_contents($cache_file, json_encode($geo));
 
-        # Return object; or `false` on failure.
+        # Return, else `false` on failure.
 
         return $geo; // `\StdClass` or `false`.
     }
