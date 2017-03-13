@@ -8,7 +8,8 @@
     cursor:                   not-allowed !important;
 
     * {
-      cursor:                 not-allowed !important;
+      opacity:                1 !important;
+      pointer-events:         none !important;
     }
   }
 
@@ -18,18 +19,20 @@
     cursor:                   not-allowed !important;
 
     * {
-      cursor:                 not-allowed !important;
+      opacity:                1 !important;
+      pointer-events:         none !important;
     }
   }
 
   ._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover {
     // NOTE: This is problematic. There's simply no way to guarantee
     // that we are actually reverting to the originally defined styles.
-    opacity:                  1 !important;
+    opacity:                  initial !important;
     cursor:                   initial !important;
 
     * {
-      cursor:                 initial !important;
+      opacity:                initial !important;
+      pointer-events:         initial !important;
     }
   }
 }

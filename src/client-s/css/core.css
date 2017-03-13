@@ -516,7 +516,7 @@ sub {
 ._blurred._not_on_hover[class*='_blurred _not_on_hover']:hover {
   -webkit-filter: none !important;
   filter: none !important;
-  opacity: 1 !important;
+  opacity: initial !important;
 }
 
 ._bottom_shadow {
@@ -698,32 +698,52 @@ sub {
 ._disabled:not([class*='_disabled _on_hover']),
 ._disabled._on_hover[class*='_disabled _on_hover']:hover {
   opacity: 0.5 !important;
+  pointer-events: none !important;
   cursor: not-allowed !important;
 }
 
 ._disabled:not([class*='_disabled _on_hover']) *,
 ._disabled._on_hover[class*='_disabled _on_hover']:hover * {
+  pointer-events: none !important;
   cursor: not-allowed !important;
+}
+
+._disabled:not([class*='_disabled _on_hover']) .field :disabled,
+._disabled._on_hover[class*='_disabled _on_hover']:hover .field :disabled {
+  opacity: 0.5 !important;
 }
 
 ._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']),
 ._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover {
   opacity: 0.25 !important;
+  pointer-events: none !important;
   cursor: not-allowed !important;
 }
 
 ._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']) *,
 ._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover * {
+  pointer-events: none !important;
   cursor: not-allowed !important;
 }
 
+._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']) .field :disabled,
+._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover .field :disabled {
+  opacity: 0.25 !important;
+}
+
 ._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover {
-  opacity: 1 !important;
+  opacity: initial !important;
+  pointer-events: initial !important;
   cursor: initial !important;
 }
 
 ._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover * {
+  pointer-events: initial !important;
   cursor: initial !important;
+}
+
+._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover .field :disabled {
+  opacity: initial !important;
 }
 
 ._hidden {
@@ -836,7 +856,7 @@ sub {
 }
 
 ._muted._not_on_hover[class*='_muted _not_on_hover']:hover {
-  opacity: 1 !important;
+  opacity: initial !important;
 }
 
 @media only screen and (max-width: 767px) {

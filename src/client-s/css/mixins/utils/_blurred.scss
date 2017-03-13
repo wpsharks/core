@@ -18,6 +18,6 @@
     // NOTE: This is problematic. There's simply no way to guarantee
     // that we are actually reverting to the originally defined styles.
     @include filter(none !important);
-    opacity:                  1 !important;
+    opacity:                  initial !important;
   }
 }
