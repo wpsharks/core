@@ -15,6 +15,14 @@
   }
 
   ._block {
-    display:                  none !important;
+    display:                  block !important;
+  }
+
+  ._block {
+    display:                  block !important;
+  }
+
+  ._table_block {
+    display:                  table !important;
   }
 }

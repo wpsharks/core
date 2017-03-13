@@ -43,6 +43,9 @@
  * Fancy HR tags.
  */
 /*
+ * Fancy link targets.
+ */
+/*
  * Fancy monospace tags.
  */
 /*
@@ -140,6 +143,9 @@
  */
 /*
  * Fancy HR tags.
+ */
+/*
+ * Fancy link targets.
  */
 /*
  * Fancy monospace tags.
@@ -274,6 +280,17 @@ hr {
   background: none;
   border-top: 1px solid rgba(37, 39, 44, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+a[target='_new']:not(._no_icon)::after,
+a[target='_blank']:not(._no_icon)::after {
+  font-size: .75em;
+  font-family: 'Icons';
+  content: '\f08e';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0 0 0 .25em;
+  display: inline-block;
 }
 
 pre,
@@ -457,10 +474,9 @@ sub {
   text-align: center !important;
 }
 
-._center_block {
+._centered {
   margin-left: auto !important;
   margin-right: auto !important;
-  display: block !important;
 }
 
 ._right {
@@ -723,7 +739,15 @@ sub {
 }
 
 ._block {
-  display: none !important;
+  display: block !important;
+}
+
+._block {
+  display: block !important;
+}
+
+._table_block {
+  display: table !important;
 }
 
 ._ff_smooth {
