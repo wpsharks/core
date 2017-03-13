@@ -81,7 +81,7 @@ class Country extends Classes\Core\Base\Core
         $selected = mb_strtoupper($selected);
 
         foreach ($this->ISO3166->getAll() as $_country) {
-            $markup .= '<option value="'.$_country['alpha3'].'"'.($selected ? $this->c::selected($selected, $_country['alpha3']) : '').'>'.$_country['name'].'</option>';
+            $markup .= '<option value="'.$_country['alpha2'].'"'.($selected ? $this->c::selected($selected, $_country['alpha2']) : '').'>'.$_country['name'].'</option>';
         } // unset($_country); // Housekeeping.
 
         return $markup;
@@ -121,7 +121,7 @@ class Country extends Classes\Core\Base\Core
 
         foreach ($this->ISO3166->getAll() as $_country) {
             $_alpha2_lc = mb_strtolower($_country['alpha2']);
-            $markup .= '<div class="item'.($active ? $this->c::active($active, $_country['alpha3']) : '').'" data-value="'.$_country['alpha3'].'"><i class="'.$_alpha2_lc.' flag"></i>'.$_country['name'].'</div>';
+            $markup .= '<div class="item'.($active ? $this->c::active($active, $_country['alpha2']) : '').'" data-value="'.$_country['alpha2'].'"><i class="'.$_alpha2_lc.' flag"></i>'.$_country['name'].'</div>';
         } // unset($_country, $_alpha2_lc); // Housekeeping.
 
         return $markup;
