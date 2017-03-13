@@ -113,8 +113,8 @@ class Country extends Classes\Core\Base\Core
         $args['ip']     = (string) $args['ip'];
         $args['use_ip'] = (bool) $args['use_ip'];
 
-        if (!$selected && $args['ip'] && $args['use_ip']) {
-            $selected = $is_cli ? '' : $this->c::ipCountry($args['ip']);
+        if (!$active && $args['ip'] && $args['use_ip']) {
+            $active = $is_cli ? '' : $this->c::ipCountry($args['ip']);
         }
         $markup = ''; // Initialize.
         $active = mb_strtoupper($active);
