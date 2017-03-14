@@ -133,6 +133,9 @@
  * Text shadow utilities.
  */
 /*
+ * Width utils.
+ */
+/*
  * Fancy blockquotes.
  */
 /*
@@ -255,15 +258,15 @@ blockquote::after {
 }
 
 .ui.toggle.checkbox > input:active ~ label, .ui.toggle.checkbox > input:focus ~ label {
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .ui.toggle.checkbox > label {
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .ui.toggle.checkbox > label::before {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .ui.toggle.checkbox > label::after {
@@ -449,6 +452,9 @@ sub {
  */
 /*
  * Text shadow utilities.
+ */
+/*
+ * Width utils.
  */
 ._left {
   text-align: left !important;
@@ -698,52 +704,35 @@ sub {
 ._disabled:not([class*='_disabled _on_hover']),
 ._disabled._on_hover[class*='_disabled _on_hover']:hover {
   opacity: 0.5 !important;
-  pointer-events: none !important;
   cursor: not-allowed !important;
 }
 
 ._disabled:not([class*='_disabled _on_hover']) *,
 ._disabled._on_hover[class*='_disabled _on_hover']:hover * {
+  opacity: 1 !important;
   pointer-events: none !important;
-  cursor: not-allowed !important;
-}
-
-._disabled:not([class*='_disabled _on_hover']) .field :disabled,
-._disabled._on_hover[class*='_disabled _on_hover']:hover .field :disabled {
-  opacity: 0.5 !important;
 }
 
 ._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']),
 ._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover {
   opacity: 0.25 !important;
-  pointer-events: none !important;
   cursor: not-allowed !important;
 }
 
 ._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']) *,
 ._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover * {
+  opacity: 1 !important;
   pointer-events: none !important;
-  cursor: not-allowed !important;
-}
-
-._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']) .field :disabled,
-._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover .field :disabled {
-  opacity: 0.25 !important;
 }
 
 ._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover {
   opacity: initial !important;
-  pointer-events: initial !important;
   cursor: initial !important;
 }
 
 ._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover * {
-  pointer-events: initial !important;
-  cursor: initial !important;
-}
-
-._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover .field :disabled {
   opacity: initial !important;
+  pointer-events: initial !important;
 }
 
 ._hidden {
@@ -936,6 +925,10 @@ sub {
 
 ._text_shadow {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5) !important;
+}
+
+._100pw {
+  width: 100% !important;
 }
 
 /*

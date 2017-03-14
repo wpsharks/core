@@ -52,6 +52,18 @@ trait Stripe
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
+     * @see Classes\Core\Utils\Stripe::plan()
+     */
+    public static function stripePlan(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Stripe->plan(...$args);
+    }
+
+    /**
+     * @since 17xxxx Stripe utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
      * @see Classes\Core\Utils\Stripe::subscription()
      */
     public static function stripeSubscription(...$args)
@@ -64,10 +76,10 @@ trait Stripe
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Stripe::plan()
+     * @see Classes\Core\Utils\Stripe::tokenMarkup()
      */
-    public static function stripePlan(...$args)
+    public static function stripeTokenMarkup(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Stripe->plan(...$args);
+        return $GLOBALS[static::class]->Utils->©Stripe->tokenMarkup(...$args);
     }
 }

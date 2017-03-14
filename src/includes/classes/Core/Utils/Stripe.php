@@ -16,6 +16,7 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 #
+use Stripe\Token;
 use Stripe\Customer;
 use Stripe\Charge;
 use Stripe\Plan;
@@ -349,6 +350,63 @@ class Stripe extends Classes\Core\Base\Core
             return $this->exceptionError(new Exception($_error));
         }
         return $Subscription;
+    }
+
+    /**
+     * Token as HTML markup.
+     *
+     * @since 17xxxx Stripe utils.
+     *
+     * @param Token|\StdClass $Token Stripe token.
+     * @param array           $args  Any behavioral args.
+     *
+     * @return string HTML markup representation.
+     */
+    public function tokenMarkup($Token, array $args = []): string
+    {
+        // `\StdClass` is allowed for easy JS compatibility.
+
+        if (!($Token instanceof Token) && !($Token instanceof \StdClass)) {
+            throw $this->c::issue(vars(), 'Invalid token object.');
+        } elseif (!isset($Token->id) || !is_string($Token->id) || !$Token->id) {
+            throw $this->c::issue(vars(), 'Invalid token object.');
+        }
+        if (($Token->type ?? '') === 'card' && is_object($Token->card ?? null)
+                && is_string($Token->card->brand ?? null) && $Token->card->brand
+                && is_string($Token->card->last4 ?? null) && $Token->card->last4) {
+            //
+            if ($Token->card->brand === 'Visa') {
+                $_icon = '<i class="visa icon"></i>';
+            } elseif ($Token->card->brand === 'MasterCard') {
+                $_icon = '<i class="mastercard icon"></i>';
+            } elseif ($Token->card->brand === 'American Express') {
+                $_icon = '<i class="american express icon"></i>';
+            } elseif ($Token->card->brand === 'Discover') {
+                $_icon = '<i class="discover icon"></i>';
+            } elseif ($Token->card->brand === 'JCB') {
+                $_icon = '<i class="japan credit bureau icon"></i>';
+            } elseif ($Token->card->brand === 'Diners Club') {
+                $_icon = '<i class="diners club icon"></i>';
+            } else { // Just indicate that it's a credit card.
+                $_icon = '<i class="credit card alternative icon"></i>';
+            }
+            $markup = $_icon.' <tt data-token="'.$this->c::escAttr(json_encode($Token)).'">xxxx...'.$this->c::escHtml($Token->card->last4).'</tt>';
+            //
+        } elseif (($Token->type ?? '') === 'alipay_account' && is_object($Token->alipay_account ?? null)
+                && is_string($Token->alipay_account->username ?? null) && $Token->alipay_account->username) {
+            $markup = '<i class="yen icon"></i> <tt data-token="'.$this->c::escAttr(json_encode($Token)).'">'.$this->c::escHtml($Token->alipay_account->username).'</tt>';
+            //
+        } elseif (($Token->type ?? '') === 'bank_account' && is_object($Token->bank_account ?? null)
+                && is_string($Token->bank_account->last4 ?? null) && $Token->bank_account->last4) {
+            $markup = '<i class="university icon"></i> <tt data-token="'.$this->c::escAttr(json_encode($Token)).'">xxxx...'.$this->c::escHtml($Token->bank_account->last4).'</tt>';
+            //
+        } elseif (($Token->type ?? '') === 'bitcoin_receiver' && is_string($Token->inbound_address ?? null) && $Token->inbound_address) {
+            $markup = '<i class="bitcoin icon"></i> <tt data-token="'.$this->c::escAttr(json_encode($Token)).'">'.$this->c::escHtml($Token->inbound_address).'</tt>';
+            //
+        } else { // Generic default display using Stripe icon.
+            $markup = '<i class="stripe icon"></i> <tt data-token="'.$this->c::escAttr(json_encode($Token)).'">'.$this->c::escHtml($Token->id).'</tt>';
+        }
+        return $markup;
     }
 
     /**

@@ -7,16 +7,16 @@
       &:active,
       &:focus {
         ~ label {
-          color:              transparentize($black-color, 0.75);
+          color:              transparentize($black-color, 0.6);
         }
       }
     }
 
     > label {
-      color:                  transparentize($black-color, 0.75);
+      color:                  transparentize($black-color, 0.6);
 
       &::before {
-        background:           transparentize($black-color, 0.85);
+        background:           transparentize($black-color, 0.9);
       }
 
       &::after {
