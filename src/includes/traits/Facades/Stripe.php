@@ -76,10 +76,10 @@ trait Stripe
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Stripe::tokenMarkup()
+     * @see Classes\Core\Utils\Stripe::jsTokenMarkup()
      */
-    public static function stripeTokenMarkup(...$args)
+    public static function stripeJsTokenMarkup(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Stripe->tokenMarkup(...$args);
+        return $GLOBALS[static::class]->Utils->©Stripe->jsTokenMarkup(...$args);
     }
 }

@@ -118,6 +118,9 @@
  * Line clamp utils.
  */
 /*
+ * Line-height utils.
+ */
+/*
  * List utils.
  */
 /*
@@ -437,6 +440,9 @@ sub {
  */
 /*
  * Line clamp utils.
+ */
+/*
+ * Line-height utils.
  */
 /*
  * List utils.
@@ -827,6 +833,10 @@ sub {
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+}
+
+._lh1 {
+  line-height: 1 !important;
 }
 
 ._li_margins > ol > li:not(:first-child),
