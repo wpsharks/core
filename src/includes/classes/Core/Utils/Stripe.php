@@ -96,6 +96,9 @@ class Stripe extends Classes\Core\Base\Core
         $args = array_intersect_key($args, $default_args);
         extract($this->parseArgs(__FUNCTION__, $args));
 
+        if (!$args['description']) { // Full name.
+            $args['description'] = $this->c::mbTrim($args['fname'].' '.$args['lname']);
+        }
         $Customer = null; // Initialize.
 
         if ($args['customer']) {
@@ -155,7 +158,9 @@ class Stripe extends Classes\Core\Base\Core
 
             // Everything else is for a new charge.
             // A new charge requires a customer ID.
-            'customer' => '', // Customer ID to charge.
+            'customer'      => '', // Customer ID to charge.
+            'receipt_email' => '', // Force email receipt w/ this.
+            // i.e., An email receipt is sent regardless of account-level setting.
 
             'amount'      => .50, // New charge amount.
             'currency'    => 'USD', // New charge currency.
@@ -180,7 +185,8 @@ class Stripe extends Classes\Core\Base\Core
         } else { // Create a new charge.
             try {
                 $new_charge_args = [
-                    'customer' => $args['customer'],
+                    'customer'      => $args['customer'],
+                    'receipt_email' => $args['receipt_email'] ?: null,
 
                     'amount'      => $args['amount'],
                     'currency'    => $args['currency'],
