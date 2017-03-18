@@ -469,6 +469,9 @@ class Stripe extends Classes\Core\Base\Core
                 return $this->c::error('stripe-'.$code, $message, $json);
             }
         }
+        if ($this->App->Config->©debug['©log']) {
+            $this->c::review(vars(), 'Stripe error.', __METHOD__.'#stripe');
+        }
         return $this->c::error('stripe-error', __('Processing error, please try again.'), $Exception->getMessage());
     }
 
