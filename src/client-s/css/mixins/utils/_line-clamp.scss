@@ -8,4 +8,16 @@
     overflow:                 hidden !important;
     text-overflow:            ellipsis !important;
   }
+
+  ._inline_clamp {
+    // Set specific max-width elsewhere.
+    //
+    white-space:              nowrap !important;
+    overflow:                 hidden !important;
+    text-overflow:            ellipsis !important;
+
+    //
+    vertical-align:           middle !important;
+    display:                  inline-block !important;
+  }
 }

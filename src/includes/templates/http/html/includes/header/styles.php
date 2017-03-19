@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes;
@@ -17,8 +17,8 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 ?>
-<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css" />
-<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/github.min.css" />
+<link type="text/css" rel="stylesheet" href="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/semantic/dist/semantic.min.css?v='.urlencode($this->App::VERSION))); ?>" />
+<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/github.min.css" integrity="sha384-WtUWHyk39lfUpZQVgokNfSKCJaKAeD6adgLduBLrKTMUuPzFhLtL23y1guFy6lZn" crossorigin="anonymous" />
 <link type="text/css" rel="stylesheet" href="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/css/core.min.css?v='.urlencode($this->App::VERSION))); ?>" />
 
 <?= $this->get('http/html/includes/header/styles-append.php'); ?>
