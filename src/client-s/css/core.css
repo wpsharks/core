@@ -364,15 +364,15 @@ nav > .menu .dropdown > .menu .item:not(a):not(.link) {
 }
 
 body {
-  font-feature-settings: 'liga', 'dlig', 'frac';
+  font-feature-settings: 'liga', 'calt', 'frac';
 }
 
 sup {
-  font-feature-settings: 'liga', 'dlig', 'frac', 'sups';
+  font-feature-settings: 'liga', 'calt', 'frac', 'sups';
 }
 
 sub {
-  font-feature-settings: 'liga', 'dlig', 'frac', 'subs';
+  font-feature-settings: 'liga', 'calt', 'frac', 'subs';
 }
 
 /*
