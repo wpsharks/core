@@ -70,7 +70,7 @@
  * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
  */
 /*
- * Larger fonts.
+ * Responsive fonts.
  */
 /*
  * Responsive images.
@@ -178,14 +178,11 @@
  * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
  */
 /*
- * Larger fonts.
+ * Responsive fonts.
  */
 /*
  * Responsive images.
  */
-/*
-   * Base.
-   */
 html,
 body {
   font-size: 16px;
@@ -195,39 +192,6 @@ body {
   html,
   body {
     font-size: 14px;
-  }
-}
-
-/*
-   * Tag labels.
-   */
-@media only screen and (min-width: 992px) {
-  .ui.tag.label {
-    font-size: 0.875rem;
-  }
-  .ui.tag.label.mini {
-    font-size: 0.6875rem;
-  }
-  .ui.tag.label.tiny {
-    font-size: 0.75rem;
-  }
-  .ui.tag.label.small {
-    font-size: 0.8125rem;
-  }
-  .ui.tag.label.medium {
-    font-size: 0.875rem;
-  }
-  .ui.tag.label.large {
-    font-size: 1rem;
-  }
-  .ui.tag.label.big {
-    font-size: 1.25rem;
-  }
-  .ui.tag.label.huge {
-    font-size: 1.375rem;
-  }
-  .ui.tag.label.massive {
-    font-size: 1.625rem;
   }
 }
 

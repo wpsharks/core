@@ -1,0 +1,18 @@
+@import '../../functions/units';
+@import '../tools/responsive';
+
+/*
+ * Responsive fonts.
+ */
+@mixin responsive-fonts($small-screen: -2) {
+  $base: strip-units($em-base);
+
+  html,
+  body {
+    font-size:                #{$base}px;
+
+    @include handheld-only {
+      font-size:              #{$base + $small-screen}px;
+    }
+  }
+}
