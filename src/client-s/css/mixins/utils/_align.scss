@@ -1,3 +1,5 @@
+@import '../tools/responsive';
+
 /*
  * Align utils.
  */
@@ -26,7 +28,7 @@
     text-align:               center !important;
   }
 
-  @media only screen and (max-width: 767px) {
+  @include mobile-only {
     .ui.stackable.grid._center._if_stacked[class*='_center _if_stacked'] {
       > .row > .column,
       > .column {
@@ -58,9 +60,27 @@
     }
   }
 
-  ._centered {
+  ._centered:not([class*='_centered _if_stacked']) {
     margin-left:              auto !important;
     margin-right:             auto !important;
+  }
+
+  @include mobile-only {
+    .ui.stackable.grid {
+      > .row > .column > ._centered._if_stacked[class*='_centered _if_stacked'],
+      > .column > ._centered._if_stacked[class*='_centered _if_stacked'] {
+        margin-left:          auto !important;
+        margin-right:         auto !important;
+      }
+    }
+
+    .ui.form {
+      > .fields > .field > ._centered._if_stacked[class*='_centered _if_stacked'],
+      > .field > ._centered._if_stacked[class*='_centered _if_stacked'] {
+        margin-left:          auto !important;
+        margin-right:         auto !important;
+      }
+    }
   }
 
   ._right {

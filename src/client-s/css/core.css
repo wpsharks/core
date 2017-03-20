@@ -79,10 +79,25 @@
  * Responsive images.
  */
 /*
+ * Mixins for responsive tweaks.
+ * See: <http://semantic-ui.com/elements/container.html>
+ * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
+ * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
+ */
+/*
+ * Responsive reCAPTCHA.
+ */
+/*
  * Highlight.js <pre><code>.
  */
 /*
  * Position utils.
+ */
+/*
+ * Mixins for responsive tweaks.
+ * See: <http://semantic-ui.com/elements/container.html>
+ * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
+ * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
  */
 /*
  * Mixins for responsive tweaks.
@@ -189,6 +204,15 @@
 /*
  * Responsive images.
  */
+/*
+ * Mixins for responsive tweaks.
+ * See: <http://semantic-ui.com/elements/container.html>
+ * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
+ * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
+ */
+/*
+ * Responsive reCAPTCHA.
+ */
 .wf-loading {
   visibility: hidden;
 }
@@ -208,6 +232,21 @@ body {
 img {
   height: auto;
   max-width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  .g-recaptcha {
+    -webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    -ms-transform: scale(0.75);
+    -o-transform: scale(0.75);
+    transform: scale(0.75);
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
 }
 
 blockquote {
@@ -386,6 +425,12 @@ sub {
 }
 
 /*
+ * Mixins for responsive tweaks.
+ * See: <http://semantic-ui.com/elements/container.html>
+ * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
+ * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
+ */
+/*
  * Align utils.
  */
 /*
@@ -481,9 +526,22 @@ sub {
   }
 }
 
-._centered {
+._centered:not([class*='_centered _if_stacked']) {
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.stackable.grid > .row > .column > ._centered._if_stacked[class*='_centered _if_stacked'],
+  .ui.stackable.grid > .column > ._centered._if_stacked[class*='_centered _if_stacked'] {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .ui.form > .fields > .field > ._centered._if_stacked[class*='_centered _if_stacked'],
+  .ui.form > .field > ._centered._if_stacked[class*='_centered _if_stacked'] {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 
 ._right {

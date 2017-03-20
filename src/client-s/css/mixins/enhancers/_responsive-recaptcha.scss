@@ -1,0 +1,13 @@
+@import '../tools/responsive';
+
+/*
+ * Responsive reCAPTCHA.
+ */
+@mixin responsive-recaptcha {
+  @include mobile-only {
+    .g-recaptcha {
+      @include transform(scale(0.75));
+      @include transform-origin(0 0);
+    }
+  }
+}
