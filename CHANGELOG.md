@@ -8,6 +8,7 @@
 - Adding `c::escSq()`.
 - Adding `c::escDq()`.
 - Adding Semantic UI custom build directory `src/client-s/css/semantic`.
+- Adding `_center _if_stacked` responsive utility class.
 
 ## v170309.60830
 

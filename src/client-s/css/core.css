@@ -456,8 +456,29 @@ sub {
   margin-bottom: 2em !important;
 }
 
-._center {
+._center:not([class*='_center _if_stacked']) {
   text-align: center !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.stackable.grid._center._if_stacked[class*='_center _if_stacked'] > .row > .column,
+  .ui.stackable.grid._center._if_stacked[class*='_center _if_stacked'] > .column {
+    text-align: center !important;
+  }
+  .ui.stackable.grid > .row._center._if_stacked[class*='_center _if_stacked'] > .column,
+  .ui.stackable.grid > .row > .column._center._if_stacked[class*='_center _if_stacked'],
+  .ui.stackable.grid > .column._center._if_stacked[class*='_center _if_stacked'] {
+    text-align: center !important;
+  }
+  .ui.form._center._if_stacked[class*='_center _if_stacked'] > .fields > .field,
+  .ui.form._center._if_stacked[class*='_center _if_stacked'] > .field {
+    text-align: center !important;
+  }
+  .ui.form > .fields._center._if_stacked[class*='_center _if_stacked'] > .field,
+  .ui.form > .fields > .field._center._if_stacked[class*='_center _if_stacked'],
+  .ui.form > .field._center._if_stacked[class*='_center _if_stacked'] {
+    text-align: center !important;
+  }
 }
 
 ._centered {
