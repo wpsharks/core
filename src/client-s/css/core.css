@@ -58,6 +58,9 @@
  * Fancy placeholders.
  */
 /*
+ * Font events.
+ */
+/*
  * Font features.
  */
 /*
@@ -166,6 +169,9 @@
  * Fancy placeholders.
  */
 /*
+ * Font events.
+ */
+/*
  * Font features.
  */
 /*
@@ -183,6 +189,10 @@
 /*
  * Responsive images.
  */
+.wf-loading {
+  visibility: hidden;
+}
+
 html,
 body {
   font-size: 16px;
