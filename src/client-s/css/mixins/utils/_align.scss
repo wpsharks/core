@@ -15,47 +15,47 @@
       &:not([class*='_align _left _when _']) {
         text-align:           left !important;
       }
+    }
 
-      &[class*='_align _left _when _mobile'] {
-        @include mobile-device {
-          text-align:         left !important;
-        }
+    &[class*='_align _left _when _mobile'] {
+      @include mobile-device {
+        text-align:           left !important;
       }
+    }
 
-      &[class*='_align _left _when _tablet'] {
-        @include tablet-device {
-          text-align:         left !important;
-        }
+    &[class*='_align _left _when _tablet'] {
+      @include tablet-device {
+        text-align:           left !important;
       }
+    }
 
-      &[class*='_align _left _when _handheld'] {
-        @include handheld-only {
-          text-align:         left !important;
-        }
+    &[class*='_align _left _when _handheld'] {
+      @include handheld-only {
+        text-align:           left !important;
       }
+    }
 
-      &[class*='_align _left _when _computer'] {
-        @include computer-only {
-          text-align:         left !important;
-        }
+    &[class*='_align _left _when _computer'] {
+      @include computer-only {
+        text-align:           left !important;
       }
+    }
 
-      &[class*='_align _left _when _small _screen'] {
-        @include small-screen-only {
-          text-align:         left !important;
-        }
+    &[class*='_align _left _when _small _screen'] {
+      @include small-screen-only {
+        text-align:           left !important;
       }
+    }
 
-      &[class*='_align _left _when _large _screen'] {
-        @include large-screen-device {
-          text-align:         left !important;
-        }
+    &[class*='_align _left _when _large _screen'] {
+      @include large-screen-device {
+        text-align:           left !important;
       }
+    }
 
-      &[class*='_align _left _when _widescreen'] {
-        @include widescreen-device {
-          text-align:         left !important;
-        }
+    &[class*='_align _left _when _widescreen'] {
+      @include widescreen-device {
+        text-align:           left !important;
       }
     }
 
@@ -77,88 +77,88 @@
           text-align:         center !important;
         }
       }
+    }
 
-      &[class*='_align _center _when _mobile'] {
-        @include mobile-device {
+    &[class*='_align _center _when _mobile'] {
+      @include mobile-device {
+        text-align:           center !important;
+
+        &.ui.grid > .row > .column,
+        &.ui.grid > .column,
+        &.row > .column {
           text-align:         center !important;
-
-          &.ui.grid > .row > .column,
-          &.ui.grid > .column,
-          &.row > .column {
-            text-align:       center !important;
-          }
         }
       }
+    }
 
-      &[class*='_align _center _when _tablet'] {
-        @include tablet-device {
+    &[class*='_align _center _when _tablet'] {
+      @include tablet-device {
+        text-align:           center !important;
+
+        &.ui.grid > .row > .column,
+        &.ui.grid > .column,
+        &.row > .column {
           text-align:         center !important;
-
-          &.ui.grid > .row > .column,
-          &.ui.grid > .column,
-          &.row > .column {
-            text-align:       center !important;
-          }
         }
       }
+    }
 
-      &[class*='_align _center _when _handheld'] {
-        @include handheld-only {
+    &[class*='_align _center _when _handheld'] {
+      @include handheld-only {
+        text-align:           center !important;
+
+        &.ui.grid > .row > .column,
+        &.ui.grid > .column,
+        &.row > .column {
           text-align:         center !important;
-
-          &.ui.grid > .row > .column,
-          &.ui.grid > .column,
-          &.row > .column {
-            text-align:       center !important;
-          }
         }
       }
+    }
 
-      &[class*='_align _center _when _computer'] {
-        @include computer-only {
+    &[class*='_align _center _when _computer'] {
+      @include computer-only {
+        text-align:           center !important;
+
+        &.ui.grid > .row > .column,
+        &.ui.grid > .column,
+        &.row > .column {
           text-align:         center !important;
-
-          &.ui.grid > .row > .column,
-          &.ui.grid > .column,
-          &.row > .column {
-            text-align:       center !important;
-          }
         }
       }
+    }
 
-      &[class*='_align _center _when _small _screen'] {
-        @include small-screen-only {
+    &[class*='_align _center _when _small _screen'] {
+      @include small-screen-only {
+        text-align:           center !important;
+
+        &.ui.grid > .row > .column,
+        &.ui.grid > .column,
+        &.row > .column {
           text-align:         center !important;
-
-          &.ui.grid > .row > .column,
-          &.ui.grid > .column,
-          &.row > .column {
-            text-align:       center !important;
-          }
         }
       }
+    }
 
-      &[class*='_align _center _when _large _screen'] {
-        @include large-screen-device {
+    &[class*='_align _center _when _large _screen'] {
+      @include large-screen-device {
+        text-align:           center !important;
+
+        &.ui.grid > .row > .column,
+        &.ui.grid > .column,
+        &.row > .column {
           text-align:         center !important;
-
-          &.ui.grid > .row > .column,
-          &.ui.grid > .column,
-          &.row > .column {
-            text-align:       center !important;
-          }
         }
       }
+    }
 
-      &[class*='_align _center _when _widescreen'] {
-        @include widescreen-device {
+    &[class*='_align _center _when _widescreen'] {
+      @include widescreen-device {
+        text-align:           center !important;
+
+        &.ui.grid > .row > .column,
+        &.ui.grid > .column,
+        &.row > .column {
           text-align:         center !important;
-
-          &.ui.grid > .row > .column,
-          &.ui.grid > .column,
-          &.row > .column {
-            text-align:       center !important;
-          }
         }
       }
     }
@@ -170,47 +170,47 @@
       &:not([class*='_align _right _when _']) {
         text-align:           right !important;
       }
+    }
 
-      &[class*='_align _right _when _mobile'] {
-        @include mobile-device {
-          text-align:         right !important;
-        }
+    &[class*='_align _right _when _mobile'] {
+      @include mobile-device {
+        text-align:           right !important;
       }
+    }
 
-      &[class*='_align _right _when _tablet'] {
-        @include tablet-device {
-          text-align:         right !important;
-        }
+    &[class*='_align _right _when _tablet'] {
+      @include tablet-device {
+        text-align:           right !important;
       }
+    }
 
-      &[class*='_align _right _when _handheld'] {
-        @include handheld-only {
-          text-align:         right !important;
-        }
+    &[class*='_align _right _when _handheld'] {
+      @include handheld-only {
+        text-align:           right !important;
       }
+    }
 
-      &[class*='_align _right _when _computer'] {
-        @include computer-only {
-          text-align:         right !important;
-        }
+    &[class*='_align _right _when _computer'] {
+      @include computer-only {
+        text-align:           right !important;
       }
+    }
 
-      &[class*='_align _right _when _small _screen'] {
-        @include small-screen-only {
-          text-align:         right !important;
-        }
+    &[class*='_align _right _when _small _screen'] {
+      @include small-screen-only {
+        text-align:           right !important;
       }
+    }
 
-      &[class*='_align _right _when _large _screen'] {
-        @include large-screen-device {
-          text-align:         right !important;
-        }
+    &[class*='_align _right _when _large _screen'] {
+      @include large-screen-device {
+        text-align:           right !important;
       }
+    }
 
-      &[class*='_align _right _when _widescreen'] {
-        @include widescreen-device {
-          text-align:         right !important;
-        }
+    &[class*='_align _right _when _widescreen'] {
+      @include widescreen-device {
+        text-align:           right !important;
       }
     }
   }

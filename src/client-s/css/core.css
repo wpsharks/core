@@ -523,43 +523,43 @@ sub {
 }
 
 @media only screen and (max-width: 767px) {
-  ._align[class*='_align _left'][class*='_align _left _when _mobile'] {
+  ._align[class*='_align _left _when _mobile'] {
     text-align: left !important;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  ._align[class*='_align _left'][class*='_align _left _when _tablet'] {
+  ._align[class*='_align _left _when _tablet'] {
     text-align: left !important;
   }
 }
 
 @media only screen and (max-width: 991px) {
-  ._align[class*='_align _left'][class*='_align _left _when _handheld'] {
+  ._align[class*='_align _left _when _handheld'] {
     text-align: left !important;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  ._align[class*='_align _left'][class*='_align _left _when _computer'] {
+  ._align[class*='_align _left _when _computer'] {
     text-align: left !important;
   }
 }
 
 @media only screen and (max-width: 1199px) {
-  ._align[class*='_align _left'][class*='_align _left _when _small _screen'] {
+  ._align[class*='_align _left _when _small _screen'] {
     text-align: left !important;
   }
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1919px) {
-  ._align[class*='_align _left'][class*='_align _left _when _large _screen'] {
+  ._align[class*='_align _left _when _large _screen'] {
     text-align: left !important;
   }
 }
 
 @media only screen and (min-width: 1920px) {
-  ._align[class*='_align _left'][class*='_align _left _when _widescreen'] {
+  ._align[class*='_align _left _when _widescreen'] {
     text-align: left !important;
   }
 }
@@ -575,78 +575,78 @@ sub {
 }
 
 @media only screen and (max-width: 767px) {
-  ._align[class*='_align _center'][class*='_align _center _when _mobile'] {
+  ._align[class*='_align _center _when _mobile'] {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _mobile'].ui.grid > .row > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _mobile'].ui.grid > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _mobile'].row > .column {
+  ._align[class*='_align _center _when _mobile'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _mobile'].ui.grid > .column,
+  ._align[class*='_align _center _when _mobile'].row > .column {
     text-align: center !important;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  ._align[class*='_align _center'][class*='_align _center _when _tablet'] {
+  ._align[class*='_align _center _when _tablet'] {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _tablet'].ui.grid > .row > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _tablet'].ui.grid > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _tablet'].row > .column {
+  ._align[class*='_align _center _when _tablet'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _tablet'].ui.grid > .column,
+  ._align[class*='_align _center _when _tablet'].row > .column {
     text-align: center !important;
   }
 }
 
 @media only screen and (max-width: 991px) {
-  ._align[class*='_align _center'][class*='_align _center _when _handheld'] {
+  ._align[class*='_align _center _when _handheld'] {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _handheld'].ui.grid > .row > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _handheld'].ui.grid > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _handheld'].row > .column {
+  ._align[class*='_align _center _when _handheld'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _handheld'].ui.grid > .column,
+  ._align[class*='_align _center _when _handheld'].row > .column {
     text-align: center !important;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  ._align[class*='_align _center'][class*='_align _center _when _computer'] {
+  ._align[class*='_align _center _when _computer'] {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _computer'].ui.grid > .row > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _computer'].ui.grid > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _computer'].row > .column {
+  ._align[class*='_align _center _when _computer'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _computer'].ui.grid > .column,
+  ._align[class*='_align _center _when _computer'].row > .column {
     text-align: center !important;
   }
 }
 
 @media only screen and (max-width: 1199px) {
-  ._align[class*='_align _center'][class*='_align _center _when _small _screen'] {
+  ._align[class*='_align _center _when _small _screen'] {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _small _screen'].ui.grid > .row > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _small _screen'].ui.grid > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _small _screen'].row > .column {
+  ._align[class*='_align _center _when _small _screen'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _small _screen'].ui.grid > .column,
+  ._align[class*='_align _center _when _small _screen'].row > .column {
     text-align: center !important;
   }
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1919px) {
-  ._align[class*='_align _center'][class*='_align _center _when _large _screen'] {
+  ._align[class*='_align _center _when _large _screen'] {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _large _screen'].ui.grid > .row > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _large _screen'].ui.grid > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _large _screen'].row > .column {
+  ._align[class*='_align _center _when _large _screen'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _large _screen'].ui.grid > .column,
+  ._align[class*='_align _center _when _large _screen'].row > .column {
     text-align: center !important;
   }
 }
 
 @media only screen and (min-width: 1920px) {
-  ._align[class*='_align _center'][class*='_align _center _when _widescreen'] {
+  ._align[class*='_align _center _when _widescreen'] {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _widescreen'].ui.grid > .row > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _widescreen'].ui.grid > .column,
-  ._align[class*='_align _center'][class*='_align _center _when _widescreen'].row > .column {
+  ._align[class*='_align _center _when _widescreen'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _widescreen'].ui.grid > .column,
+  ._align[class*='_align _center _when _widescreen'].row > .column {
     text-align: center !important;
   }
 }
@@ -656,43 +656,43 @@ sub {
 }
 
 @media only screen and (max-width: 767px) {
-  ._align[class*='_align _right'][class*='_align _right _when _mobile'] {
+  ._align[class*='_align _right _when _mobile'] {
     text-align: right !important;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  ._align[class*='_align _right'][class*='_align _right _when _tablet'] {
+  ._align[class*='_align _right _when _tablet'] {
     text-align: right !important;
   }
 }
 
 @media only screen and (max-width: 991px) {
-  ._align[class*='_align _right'][class*='_align _right _when _handheld'] {
+  ._align[class*='_align _right _when _handheld'] {
     text-align: right !important;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  ._align[class*='_align _right'][class*='_align _right _when _computer'] {
+  ._align[class*='_align _right _when _computer'] {
     text-align: right !important;
   }
 }
 
 @media only screen and (max-width: 1199px) {
-  ._align[class*='_align _right'][class*='_align _right _when _small _screen'] {
+  ._align[class*='_align _right _when _small _screen'] {
     text-align: right !important;
   }
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1919px) {
-  ._align[class*='_align _right'][class*='_align _right _when _large _screen'] {
+  ._align[class*='_align _right _when _large _screen'] {
     text-align: right !important;
   }
 }
 
 @media only screen and (min-width: 1920px) {
-  ._align[class*='_align _right'][class*='_align _right _when _widescreen'] {
+  ._align[class*='_align _right _when _widescreen'] {
     text-align: right !important;
   }
 }
