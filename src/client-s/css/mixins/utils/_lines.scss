@@ -1,7 +1,7 @@
 /*
- * Line-height utils.
+ * Line utils.
  */
-@mixin line-height-utils {
+@mixin line-utils {
   ._lh {
     /*
      * Normal.
@@ -59,6 +59,33 @@
 
     &[class*='_lh _375'] {
       line-height:            3.75 !important;
+    }
+  }
+
+  /*
+   * Others.
+   */
+  ._line {
+    &[class*='_line _clamp']:not(._mxw) {
+      max-width:              100% !important;
+
+      //
+      white-space:            nowrap !important;
+      overflow:               hidden !important;
+      text-overflow:          ellipsis !important;
+    }
+
+    &[class*='_line _clamp']._mxw {
+      // Inline clamp w/ a specific max-width.
+      // e.g., `_mxw _50p`. See width utils.
+
+      white-space:            nowrap !important;
+      overflow:               hidden !important;
+      text-overflow:          ellipsis !important;
+
+      //
+      vertical-align:         middle !important;
+      display:                inline-block !important;
     }
   }
 }

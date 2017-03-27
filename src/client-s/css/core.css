@@ -148,10 +148,7 @@
  * Inset utils.
  */
 /*
- * Line clamp utils.
- */
-/*
- * Line-height utils.
+ * Line utils.
  */
 /*
  * List utils.
@@ -472,10 +469,7 @@ sub {
  * Inset utils.
  */
 /*
- * Line clamp utils.
- */
-/*
- * Line-height utils.
+ * Line utils.
  */
 /*
  * List utils.
@@ -1595,21 +1589,6 @@ img[align='right'],
   background: rgba(0, 0, 0, 0.25) !important;
 }
 
-._line_clamp {
-  max-width: 100% !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-}
-
-._inline_clamp {
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  vertical-align: middle !important;
-  display: inline-block !important;
-}
-
 ._lh {
   /*
      * Normal.
@@ -1669,6 +1648,24 @@ img[align='right'],
 
 ._lh[class*='_lh _375'] {
   line-height: 3.75 !important;
+}
+
+/*
+   * Others.
+   */
+._line[class*='_line _clamp']:not(._mxw) {
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+._line[class*='_line _clamp']._mxw {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
 }
 
 ._list[class*='_list _with _margins'] > ol > li:not(:first-child),
