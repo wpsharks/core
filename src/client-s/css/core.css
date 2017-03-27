@@ -231,12 +231,7 @@
 /*
  * Responsive images.
  */
-.wf-loading > body > div,
-.wf-loading > body > nav,
-.wf-loading > body > main,
-.wf-loading > body > aside,
-.wf-loading > body > header,
-.wf-loading > body > footer {
+.wf-loading > body > div {
   visibility: hidden !important;
 }
 
