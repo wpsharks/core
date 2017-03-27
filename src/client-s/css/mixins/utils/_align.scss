@@ -8,13 +8,22 @@
    * Horizontal.
    */
   ._align {
+    /*
+     * Left.
+     */
     &[class*='_align _left'] {
       &:not([class*='_align _left _when _']) {
         text-align:           left !important;
       }
 
       &[class*='_align _left _when _mobile'] {
-        @include mobile-only {
+        @include mobile-device {
+          text-align:         left !important;
+        }
+      }
+
+      &[class*='_align _left _when _tablet'] {
+        @include tablet-device {
           text-align:         left !important;
         }
       }
@@ -25,13 +34,39 @@
         }
       }
 
+      &[class*='_align _left _when _computer'] {
+        @include computer-only {
+          text-align:         left !important;
+        }
+      }
+
       &[class*='_align _left _when _small _screen'] {
         @include small-screen-only {
           text-align:         left !important;
         }
       }
+
+      &[class*='_align _left _when _large _screen'] {
+        @include large-screen-device {
+          text-align:         left !important;
+        }
+      }
+
+      &[class*='_align _left _when _widescreen'] {
+        @include widescreen-device {
+          text-align:         left !important;
+        }
+      }
     }
 
+    /*
+     * Center.
+     */
+    /*
+     * NOTE: Grid centering takes precedence,
+     * simply because the selectors are more specific.
+     * This behavior is desirable, so don't change it.
+     */
     &[class*='_align _center'] {
       &:not([class*='_align _center _when _']) {
         text-align:           center !important;
@@ -41,16 +76,10 @@
         &.row > .column {
           text-align:         center !important;
         }
-
-        &.ui.form > .fields > .field,
-        &.ui.form > .field,
-        &.fields > .field {
-          text-align:         center !important;
-        }
       }
 
       &[class*='_align _center _when _mobile'] {
-        @include mobile-only {
+        @include mobile-device {
           text-align:         center !important;
 
           &.ui.grid > .row > .column,
@@ -58,10 +87,16 @@
           &.row > .column {
             text-align:       center !important;
           }
+        }
+      }
 
-          &.ui.form > .fields > .field,
-          &.ui.form > .field,
-          &.fields > .field {
+      &[class*='_align _center _when _tablet'] {
+        @include tablet-device {
+          text-align:         center !important;
+
+          &.ui.grid > .row > .column,
+          &.ui.grid > .column,
+          &.row > .column {
             text-align:       center !important;
           }
         }
@@ -76,10 +111,16 @@
           &.row > .column {
             text-align:       center !important;
           }
+        }
+      }
 
-          &.ui.form > .fields > .field,
-          &.ui.form > .field,
-          &.fields > .field {
+      &[class*='_align _center _when _computer'] {
+        @include computer-only {
+          text-align:         center !important;
+
+          &.ui.grid > .row > .column,
+          &.ui.grid > .column,
+          &.row > .column {
             text-align:       center !important;
           }
         }
@@ -94,23 +135,50 @@
           &.row > .column {
             text-align:       center !important;
           }
+        }
+      }
 
-          &.ui.form > .fields > .field,
-          &.ui.form > .field,
-          &.fields > .field {
+      &[class*='_align _center _when _large _screen'] {
+        @include large-screen-device {
+          text-align:         center !important;
+
+          &.ui.grid > .row > .column,
+          &.ui.grid > .column,
+          &.row > .column {
+            text-align:       center !important;
+          }
+        }
+      }
+
+      &[class*='_align _center _when _widescreen'] {
+        @include widescreen-device {
+          text-align:         center !important;
+
+          &.ui.grid > .row > .column,
+          &.ui.grid > .column,
+          &.row > .column {
             text-align:       center !important;
           }
         }
       }
     }
 
+    /*
+     * Right.
+     */
     &[class*='_align _right'] {
       &:not([class*='_align _right _when _']) {
         text-align:           right !important;
       }
 
       &[class*='_align _right _when _mobile'] {
-        @include mobile-only {
+        @include mobile-device {
+          text-align:         right !important;
+        }
+      }
+
+      &[class*='_align _right _when _tablet'] {
+        @include tablet-device {
           text-align:         right !important;
         }
       }
@@ -121,8 +189,26 @@
         }
       }
 
+      &[class*='_align _right _when _computer'] {
+        @include computer-only {
+          text-align:         right !important;
+        }
+      }
+
       &[class*='_align _right _when _small _screen'] {
         @include small-screen-only {
+          text-align:         right !important;
+        }
+      }
+
+      &[class*='_align _right _when _large _screen'] {
+        @include large-screen-device {
+          text-align:         right !important;
+        }
+      }
+
+      &[class*='_align _right _when _widescreen'] {
+        @include widescreen-device {
           text-align:         right !important;
         }
       }
@@ -231,7 +317,13 @@
     }
 
     &[class*='_centered _when _mobile'] {
-      @include mobile-only {
+      @include mobile-device {
+        @include centered-conversion(true);
+      }
+    }
+
+    &[class*='_centered _when _tablet'] {
+      @include tablet-device {
         @include centered-conversion(true);
       }
     }
@@ -242,8 +334,26 @@
       }
     }
 
+    &[class*='_centered _when _computer'] {
+      @include computer-only {
+        @include centered-conversion(true);
+      }
+    }
+
     &[class*='_centered _when _small _screen'] {
       @include small-screen-only {
+        @include centered-conversion(true);
+      }
+    }
+
+    &[class*='_centered _when _large _screen'] {
+      @include large-screen-device {
+        @include centered-conversion(true);
+      }
+    }
+
+    &[class*='_centered _when _widescreen'] {
+      @include widescreen-device {
         @include centered-conversion(true);
       }
     }

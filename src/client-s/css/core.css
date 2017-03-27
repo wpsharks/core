@@ -501,6 +501,23 @@ sub {
 /*
    * Horizontal.
    */
+._align {
+  /*
+     * Left.
+     */
+  /*
+     * Center.
+     */
+  /*
+     * NOTE: Grid centering takes precedence,
+     * simply because the selectors are more specific.
+     * This behavior is desirable, so don't change it.
+     */
+  /*
+     * Right.
+     */
+}
+
 ._align[class*='_align _left']:not([class*='_align _left _when _']) {
   text-align: left !important;
 }
@@ -511,14 +528,38 @@ sub {
   }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  ._align[class*='_align _left'][class*='_align _left _when _tablet'] {
+    text-align: left !important;
+  }
+}
+
 @media only screen and (max-width: 991px) {
   ._align[class*='_align _left'][class*='_align _left _when _handheld'] {
     text-align: left !important;
   }
 }
 
+@media only screen and (min-width: 992px) {
+  ._align[class*='_align _left'][class*='_align _left _when _computer'] {
+    text-align: left !important;
+  }
+}
+
 @media only screen and (max-width: 1199px) {
   ._align[class*='_align _left'][class*='_align _left _when _small _screen'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
+  ._align[class*='_align _left'][class*='_align _left _when _large _screen'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  ._align[class*='_align _left'][class*='_align _left _when _widescreen'] {
     text-align: left !important;
   }
 }
@@ -533,12 +574,6 @@ sub {
   text-align: center !important;
 }
 
-._align[class*='_align _center']:not([class*='_align _center _when _']).ui.form > .fields > .field,
-._align[class*='_align _center']:not([class*='_align _center _when _']).ui.form > .field,
-._align[class*='_align _center']:not([class*='_align _center _when _']).fields > .field {
-  text-align: center !important;
-}
-
 @media only screen and (max-width: 767px) {
   ._align[class*='_align _center'][class*='_align _center _when _mobile'] {
     text-align: center !important;
@@ -548,9 +583,15 @@ sub {
   ._align[class*='_align _center'][class*='_align _center _when _mobile'].row > .column {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _mobile'].ui.form > .fields > .field,
-  ._align[class*='_align _center'][class*='_align _center _when _mobile'].ui.form > .field,
-  ._align[class*='_align _center'][class*='_align _center _when _mobile'].fields > .field {
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  ._align[class*='_align _center'][class*='_align _center _when _tablet'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center'][class*='_align _center _when _tablet'].ui.grid > .row > .column,
+  ._align[class*='_align _center'][class*='_align _center _when _tablet'].ui.grid > .column,
+  ._align[class*='_align _center'][class*='_align _center _when _tablet'].row > .column {
     text-align: center !important;
   }
 }
@@ -564,9 +605,15 @@ sub {
   ._align[class*='_align _center'][class*='_align _center _when _handheld'].row > .column {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _handheld'].ui.form > .fields > .field,
-  ._align[class*='_align _center'][class*='_align _center _when _handheld'].ui.form > .field,
-  ._align[class*='_align _center'][class*='_align _center _when _handheld'].fields > .field {
+}
+
+@media only screen and (min-width: 992px) {
+  ._align[class*='_align _center'][class*='_align _center _when _computer'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center'][class*='_align _center _when _computer'].ui.grid > .row > .column,
+  ._align[class*='_align _center'][class*='_align _center _when _computer'].ui.grid > .column,
+  ._align[class*='_align _center'][class*='_align _center _when _computer'].row > .column {
     text-align: center !important;
   }
 }
@@ -580,9 +627,26 @@ sub {
   ._align[class*='_align _center'][class*='_align _center _when _small _screen'].row > .column {
     text-align: center !important;
   }
-  ._align[class*='_align _center'][class*='_align _center _when _small _screen'].ui.form > .fields > .field,
-  ._align[class*='_align _center'][class*='_align _center _when _small _screen'].ui.form > .field,
-  ._align[class*='_align _center'][class*='_align _center _when _small _screen'].fields > .field {
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
+  ._align[class*='_align _center'][class*='_align _center _when _large _screen'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center'][class*='_align _center _when _large _screen'].ui.grid > .row > .column,
+  ._align[class*='_align _center'][class*='_align _center _when _large _screen'].ui.grid > .column,
+  ._align[class*='_align _center'][class*='_align _center _when _large _screen'].row > .column {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  ._align[class*='_align _center'][class*='_align _center _when _widescreen'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center'][class*='_align _center _when _widescreen'].ui.grid > .row > .column,
+  ._align[class*='_align _center'][class*='_align _center _when _widescreen'].ui.grid > .column,
+  ._align[class*='_align _center'][class*='_align _center _when _widescreen'].row > .column {
     text-align: center !important;
   }
 }
@@ -597,14 +661,38 @@ sub {
   }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  ._align[class*='_align _right'][class*='_align _right _when _tablet'] {
+    text-align: right !important;
+  }
+}
+
 @media only screen and (max-width: 991px) {
   ._align[class*='_align _right'][class*='_align _right _when _handheld'] {
     text-align: right !important;
   }
 }
 
+@media only screen and (min-width: 992px) {
+  ._align[class*='_align _right'][class*='_align _right _when _computer'] {
+    text-align: right !important;
+  }
+}
+
 @media only screen and (max-width: 1199px) {
   ._align[class*='_align _right'][class*='_align _right _when _small _screen'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
+  ._align[class*='_align _right'][class*='_align _right _when _large _screen'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  ._align[class*='_align _right'][class*='_align _right _when _widescreen'] {
     text-align: right !important;
   }
 }
@@ -716,6 +804,20 @@ img[align='right'],
   }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  ._centered[class*='_centered _when _tablet'] {
+    float: none !important;
+    display: block !important;
+    margin: 1rem auto !important;
+  }
+  ._centered[class*='_centered _when _tablet']:first-child {
+    margin-top: 0 !important;
+  }
+  ._centered[class*='_centered _when _tablet']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
+    margin-bottom: 0 !important;
+  }
+}
+
 @media only screen and (max-width: 991px) {
   ._centered[class*='_centered _when _handheld'] {
     float: none !important;
@@ -730,6 +832,20 @@ img[align='right'],
   }
 }
 
+@media only screen and (min-width: 992px) {
+  ._centered[class*='_centered _when _computer'] {
+    float: none !important;
+    display: block !important;
+    margin: 1rem auto !important;
+  }
+  ._centered[class*='_centered _when _computer']:first-child {
+    margin-top: 0 !important;
+  }
+  ._centered[class*='_centered _when _computer']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
+    margin-bottom: 0 !important;
+  }
+}
+
 @media only screen and (max-width: 1199px) {
   ._centered[class*='_centered _when _small _screen'] {
     float: none !important;
@@ -740,6 +856,34 @@ img[align='right'],
     margin-top: 0 !important;
   }
   ._centered[class*='_centered _when _small _screen']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
+  ._centered[class*='_centered _when _large _screen'] {
+    float: none !important;
+    display: block !important;
+    margin: 1rem auto !important;
+  }
+  ._centered[class*='_centered _when _large _screen']:first-child {
+    margin-top: 0 !important;
+  }
+  ._centered[class*='_centered _when _large _screen']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  ._centered[class*='_centered _when _widescreen'] {
+    float: none !important;
+    display: block !important;
+    margin: 1rem auto !important;
+  }
+  ._centered[class*='_centered _when _widescreen']:first-child {
+    margin-top: 0 !important;
+  }
+  ._centered[class*='_centered _when _widescreen']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
     margin-bottom: 0 !important;
   }
 }
@@ -2268,10 +2412,6 @@ img[align='right'],
 }
 
 ._invisible {
-  visibility: hidden;
-}
-
-._invisible:not([class*='_invisible _initially']) {
   visibility: hidden !important;
 }
 
