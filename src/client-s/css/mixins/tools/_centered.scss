@@ -1,0 +1,36 @@
+/*
+ * Centered tools.
+ */
+@mixin centered($_important: false) {
+  $important: '';
+
+  @if $_important {
+    $important: ' !important';
+  }
+
+  margin-left:                auto#{$important};
+  margin-right:               auto#{$important};
+}
+
+@mixin centered-conversion($_important: false) {
+  $important: '';
+
+  @if $_important {
+    $important: ' !important';
+  }
+
+  float:                      none#{$important};
+  display:                    block#{$important};
+  margin:                     1rem auto#{$important};
+
+  &:first-child {
+    margin-top:               0#{$important};
+  }
+
+  &:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
+    // Yanked, pulled, and WP-aligned elements are given bottom margin; do not override.
+    // These elements almost always have text that follows them. So while they might be the
+    // last child, they are probably not the last node. Leave bottom margin.
+    margin-bottom:            0#{$important};
+  }
+}

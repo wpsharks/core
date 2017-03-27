@@ -2,11 +2,19 @@
  * List utils.
  */
 @mixin list-utils {
-  ._li_margins {
-    > ol,
-    > ul {
-      > li:not(:first-child) {
-        margin-top:           1rem !important;
+  ._list {
+    &[class*='_list _with _margins'] {
+      > ol,
+      > ul {
+        > li:not(:first-child) {
+          margin-top:         1rem !important;
+        }
+      }
+
+      > dl {
+        > dt:not(:first-child) {
+          margin-top:         1rem !important;
+        }
       }
     }
   }

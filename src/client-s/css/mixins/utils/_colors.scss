@@ -1,0 +1,16 @@
+/*
+ * Color utils.
+ */
+@mixin color-utils {
+  ._c {
+    &[class*='_c _inverted'] {
+      color:                  $sm-inverted-color !important;
+    }
+  }
+
+  ._bc {
+    &[class*='_bc _inverted'] {
+      background-color:       $sm-inverted-bg-color !important;
+    }
+  }
+}

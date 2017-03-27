@@ -2,7 +2,11 @@
  * Font events.
  */
 @mixin font-events {
-  .wf-loading {
-    visibility:               hidden;
+  html.wf-loading {
+    > body {
+      > * {
+        visibility:           hidden !important;
+      }
+    }
   }
 }

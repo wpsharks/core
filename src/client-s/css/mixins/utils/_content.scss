@@ -3,16 +3,17 @@
  */
 @mixin content-utils {
   ._content {
-    font-family:              $content-font-family;
-
+    &,
     .text {
       font-family:            $content-font-family;
     }
 
+    h1,
     h2,
     h3,
     h4,
     h5,
+    h6,
     .header {
       font-family:            $content-heading-font-family;
     }
@@ -20,6 +21,22 @@
     > p:first-of-type:not([class]) {
       font-size:              1.25em;
       font-family:            $content-lede-font-family;
+    }
+
+    @include handheld-only {
+      // Exclude any that have `_when` directives.
+      // `_always` can be used to exclude explicitly.
+      img:not(._when):not(._always) {
+        &[align],
+        &.alignleft,
+        &.alignright,
+        &._float,
+        &._push,
+        &._pull,
+        &._yank {
+          @include centered-conversion(true);
+        }
+      }
     }
   }
 }

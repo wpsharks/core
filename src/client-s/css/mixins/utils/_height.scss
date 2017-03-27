@@ -1,0 +1,227 @@
+/*
+ * Height utils.
+ */
+@mixin height-utils {
+  ._h {
+    /*
+     * Em units.
+     */
+    &[class*='_h _025'] {
+      height:                .25em !important;
+    }
+
+    &[class*='_h _05'] {
+      height:                .5em !important;
+    }
+
+    &[class*='_h _1'] {
+      height:                 1em !important;
+    }
+
+    &[class*='_h _2'] {
+      height:                 2em !important;
+    }
+
+    &[class*='_h _3'] {
+      height:                 3em !important;
+    }
+
+    /*
+     * Percent of parent.
+     */
+    &[class*='_h _25p'] {
+      height:                 25% !important;
+    }
+
+    &[class*='_h _50p'] {
+      height:                 50% !important;
+    }
+
+    &[class*='_h _75p'] {
+      height:                 75% !important;
+    }
+
+    &[class*='_h _100p'] {
+      height:                 100% !important;
+    }
+
+    &[class*='_h _100p1'] {
+      height:                 calc(100% + 1px) !important;
+    }
+
+    /*
+     * Percent of viewport.
+     */
+    &[class*='_h _25v'] {
+      height:                 25vh !important;
+    }
+
+    &[class*='_h _50v'] {
+      height:                 50vh !important;
+    }
+
+    &[class*='_h _75v'] {
+      height:                 75vh !important;
+    }
+
+    &[class*='_h _100v'] {
+      height:                 100vh !important;
+    }
+
+    &[class*='_h _100v1'] {
+      height:                 calc(100vh + 1px) !important;
+    }
+  }
+
+  /*
+   * Min.
+   */
+  ._mnh {
+    /*
+     * Em units.
+     */
+    &[class*='_mnh _0'] {
+      min-height:             0 !important;
+    }
+
+    &[class*='_mnh _025'] {
+      min-height:            .25em !important;
+    }
+
+    &[class*='_mnh _05'] {
+      min-height:            .5em !important;
+    }
+
+    &[class*='_mnh _1'] {
+      min-height:             1em !important;
+    }
+
+    &[class*='_mnh _2'] {
+      min-height:             2em !important;
+    }
+
+    &[class*='_mnh _3'] {
+      min-height:             3em !important;
+    }
+
+    /*
+     * Percent of parent.
+     */
+    &[class*='_mnh _25p'] {
+      min-height:             25% !important;
+    }
+
+    &[class*='_mnh _50p'] {
+      min-height:             50% !important;
+    }
+
+    &[class*='_mnh _75p'] {
+      min-height:             75% !important;
+    }
+
+    &[class*='_mnh _100p'] {
+      min-height:             100% !important;
+    }
+
+    &[class*='_mnh _100p1'] {
+      min-height:             calc(100% + 1px) !important;
+    }
+
+    /*
+     * Percent of viewport.
+     */
+    &[class*='_mnh _25v'] {
+      min-height:             25vh !important;
+    }
+
+    &[class*='_mnh _50v'] {
+      min-height:             50vh !important;
+    }
+
+    &[class*='_mnh _75v'] {
+      min-height:             75vh !important;
+    }
+
+    &[class*='_mnh _100v'] {
+      min-height:             100vh !important;
+    }
+
+    &[class*='_mnh _100v1'] {
+      min-height:             calc(100vh + 1px) !important;
+    }
+  }
+
+  /*
+   * Max.
+   */
+  ._mxh {
+    /*
+     * Em units.
+     */
+    &[class*='_mxh _025'] {
+      max-height:            .25em !important;
+    }
+
+    &[class*='_mxh _05'] {
+      max-height:            .5em !important;
+    }
+
+    &[class*='_mxh _1'] {
+      max-height:             1em !important;
+    }
+
+    &[class*='_mxh _2'] {
+      max-height:             2em !important;
+    }
+
+    &[class*='_mxh _3'] {
+      max-height:             3em !important;
+    }
+
+    /*
+     * Percent of parent.
+     */
+    &[class*='_mxh _25p'] {
+      max-height:             25% !important;
+    }
+
+    &[class*='_mxh _50p'] {
+      max-height:             50% !important;
+    }
+
+    &[class*='_mxh _75p'] {
+      max-height:             75% !important;
+    }
+
+    &[class*='_mxh _100p'] {
+      max-height:             100% !important;
+    }
+
+    &[class*='_mxh _100p1'] {
+      max-height:             calc(100% + 1px) !important;
+    }
+
+    /*
+     * Percent of viewport.
+     */
+    &[class*='_mxh _25v'] {
+      max-height:             25vh !important;
+    }
+
+    &[class*='_mxh _50v'] {
+      max-height:             50vh !important;
+    }
+
+    &[class*='_mxh _75v'] {
+      max-height:             75vh !important;
+    }
+
+    &[class*='_mxh _100v'] {
+      max-height:             100vh !important;
+    }
+
+    &[class*='_mxh _100v1'] {
+      max-height:             calc(100vh + 1px) !important;
+    }
+  }
+}

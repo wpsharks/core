@@ -1,195 +1,38 @@
 /*
- * Box shadow utilities.
+ * Box shadow utils.
  */
 @mixin box-shadow-utils {
-  ._bottom_shadow {
-    box-shadow:               0 0.6em 0.35em -0.35em transparentize($black-color, 0.65) !important;
-  }
+  ._box_shadow {
+    &[class*='_box_shadow _glow _normal'] {
+      @include box-shadow-glow-normal(true);
+    }
 
-  /* --- */
+    &[class*='_box_shadow _glow _heavy'] {
+      @include box-shadow-glow-heavy(true);
+    }
 
-  ._bottom_left_shadow {
-    position:                 relative !important;
-  }
+    &[class*='_box_shadow _bottom _normal'] {
+      @include box-shadow-bottom-normal(true);
+    }
 
-  ._bottom_left_shadow::before {
-    content:                  '' !important;
+    &[class*='_box_shadow _bottom _left _normal'] {
+      @include box-shadow-bottom-left-normal(true);
+    }
 
-    //
-    z-index:                 -1 !important;
-    top:                      80% !important;
-    right:                    auto !important;
-    bottom:                  .95em !important;
-    left:                    .6em !important;
-    position:                 absolute !important;
+    &[class*='_box_shadow _bottom _right _normal'] {
+      @include box-shadow-bottom-right-normal(true);
+    }
 
-    //
-    width:                    50% !important;
-    max-width:                25em !important;
-    transform:                rotate(-3deg) !important;
+    &[class*='_box_shadow _bottom _left _right _normal'] {
+      @include box-shadow-bottom-left-right-normal(true);
+    }
 
-    //
-    background:               transparentize($black-color, 0.65) !important;
-    box-shadow:               0 0.95em 0.6em transparentize($black-color, 0.65) !important;
-  }
+    &[class*='_box_shadow _top _bottom _normal'] {
+      @include box-shadow-top-bottom-normal(true);
+    }
 
-  /* --- */
-
-  ._bottom_right_shadow {
-    position:                 relative !important;
-  }
-
-  ._bottom_right_shadow::after {
-    content:                  '' !important;
-
-    //
-    z-index:                 -1 !important;
-    top:                      80% !important;
-    right:                   .6em !important;
-    bottom:                  .95em !important;
-    left:                     auto !important;
-    position:                 absolute !important;
-
-    //
-    width:                    50% !important;
-    max-width:                25em !important;
-    transform:                rotate(3deg) !important;
-
-    //
-    background:               transparentize($black-color, 0.65) !important;
-    box-shadow:               0 0.95em 0.6em transparentize($black-color, 0.65) !important;
-  }
-
-  /* --- */
-
-  ._bottom_left_right_shadows {
-    position:                 relative !important;
-  }
-
-  ._bottom_left_right_shadows::before,
-  ._bottom_left_right_shadows::after {
-    content:                  '' !important;
-
-    //
-    z-index:                 -1 !important;
-    top:                      80% !important;
-    right:                    auto !important;
-    bottom:                  .95em !important;
-    left:                    .6em !important;
-    position:                 absolute !important;
-
-    //
-    width:                    50% !important;
-    max-width:                25em !important;
-    transform:                rotate(-3deg) !important;
-
-    //
-    background:               transparentize($black-color, 0.65) !important;
-    box-shadow:               0 0.95em 0.6em transparentize($black-color, 0.65) !important;
-  }
-
-  ._bottom_left_right_shadows::after {
-    right:                   .6em !important;
-    left:                     auto !important;
-    transform:                rotate(3deg) !important;
-  }
-
-  /* --- */
-
-  ._bottom_heavy_shadows {
-    position:                 relative !important;
-    box-shadow:               0 0.05em 0.15em transparentize($black-color, 0.5) !important;
-  }
-
-  ._bottom_heavy_shadows::before,
-  ._bottom_heavy_shadows::after {
-    content:                  '' !important;
-
-    //
-    z-index:                 -1 !important;
-    top:                      50% !important;
-    right:                   .6em !important;
-    bottom:                   0 !important;
-    left:                    .6em !important;
-    position:                 absolute !important;
-
-    //
-    border-radius:            10em !important;
-    box-shadow:               0 0 1.25em transparentize($black-color, 0.5) !important;
-  }
-
-  ._bottom_heavy_shadows::after {
-    right:                   .6em !important;
-    left:                     auto !important;
-    transform:                skew(8deg) rotate(3deg) !important;
-  }
-
-  /* --- */
-
-  ._top_bottom_heavy_shadows {
-    position:                 relative !important;
-    box-shadow:               0 0.05em 0.15em transparentize($black-color, 0.5) !important;
-  }
-
-  ._top_bottom_heavy_shadows::before {
-    content:                  '' !important;
-
-    //
-    z-index:                 -1 !important;
-    top:                      50% !important;
-    right:                   .6em !important;
-    bottom:                   0 !important;
-    left:                    .6em !important;
-    position:                 absolute !important;
-
-    //
-    border-radius:            10em !important;
-    box-shadow:               0 0 1.25em transparentize($black-color, 0.5) !important;
-  }
-
-  ._top_bottom_heavy_shadows::after {
-    content:                  '' !important;
-
-    //
-    z-index:                 -1 !important;
-    top:                      0 !important;
-    right:                   .6em !important;
-    bottom:                   50% !important;
-    left:                    .6em !important;
-    position:                 absolute !important;
-
-    //
-    border-radius:            10em !important;
-    box-shadow:               0 0 1em transparentize($black-color, 0.5) !important;
-  }
-
-  /* --- */
-
-  ._left_right_heavy_shadows {
-    position:                 relative !important;
-    box-shadow:               0 0.05em 0.15em transparentize($black-color, 0.5) !important;
-  }
-
-  ._left_right_heavy_shadows::before,
-  ._left_right_heavy_shadows::after {
-    content:                  '' !important;
-
-    //
-    z-index:                 -1 !important;
-    top:                     .6em !important;
-    right:                    0 !important;
-    bottom:                  .6em !important;
-    left:                     0 !important;
-    position:                 absolute !important;
-
-    //
-    border-radius:            2em !important;
-    box-shadow:               0 0 1.25em transparentize($black-color, 0.5) !important;
-  }
-
-  ._left_right_heavy_shadows::after {
-    right:                   .6em !important;
-    left:                     auto !important;
-    transform:                skew(8deg) rotate(3deg) !important;
+    &[class*='_box_shadow _left _right _normal'] {
+      @include box-shadow-left-right-normal(true);
+    }
   }
 }

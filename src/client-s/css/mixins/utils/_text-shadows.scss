@@ -3,6 +3,12 @@
  */
 @mixin text-shadow-utils {
   ._text_shadow {
-    text-shadow:              0 1px 1px transparentize($black-color, 0.5) !important;
+    &[class*='_text_shadow _glow _normal'] {
+      @include text-shadow-glow-normal(true);
+    }
+
+    &[class*='_text_shadow _glow _heavy'] {
+      @include text-shadow-glow-heavy(true);
+    }
   }
 }

@@ -4,7 +4,9 @@
 @mixin fancy-link-targets {
   a[target='_new'],
   a[target='_blank'] {
-    &:not(._no_icon) {
+    // Important to exclude icon buttons.
+    // And `_no _icon` to excludes explicitly.
+    &:not(.icon):not([class*='_no _icon']) {
       &::after {
         font-size:           .75em;
         font-family:          'Icons';

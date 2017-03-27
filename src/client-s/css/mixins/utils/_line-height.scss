@@ -2,7 +2,63 @@
  * Line-height utils.
  */
 @mixin line-height-utils {
-  ._lh1 {
-    line-height:              1 !important;
+  ._lh {
+    /*
+     * Normal.
+     */
+    &[class*='_lh _n'] {
+      line-height:            1.4285em !important;
+    }
+
+    /*
+     * Points.
+     */
+    &[class*='_lh _1'] {
+      line-height:            1 !important;
+    }
+
+    &[class*='_lh _125'] {
+      line-height:            1.25 !important;
+    }
+
+    &[class*='_lh _150'] {
+      line-height:            1.5 !important;
+    }
+
+    &[class*='_lh _175'] {
+      line-height:            1.75 !important;
+    }
+
+    &[class*='_lh _2'] {
+      line-height:            2 !important;
+    }
+
+    &[class*='_lh _225'] {
+      line-height:            2.25 !important;
+    }
+
+    &[class*='_lh _250'] {
+      line-height:            2.5 !important;
+    }
+
+    &[class*='_lh _275'] {
+      line-height:            2.75 !important;
+    }
+
+    &[class*='_lh _3'] {
+      line-height:            3 !important;
+    }
+
+    &[class*='_lh _325'] {
+      line-height:            3.25 !important;
+    }
+
+    &[class*='_lh _350'] {
+      line-height:            3.5 !important;
+    }
+
+    &[class*='_lh _375'] {
+      line-height:            3.75 !important;
+    }
   }
 }

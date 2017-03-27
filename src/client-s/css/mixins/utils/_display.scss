@@ -2,6 +2,10 @@
  * Display utils.
  */
 @mixin display-utils {
+  ._hide {
+    display:                  none;
+  }
+
   ._hidden {
     display:                  none !important;
   }
@@ -10,19 +14,15 @@
     display:                  inline !important;
   }
 
-  ._inline_block {
-    display:                  inline-block !important;
-  }
-
-  ._block {
-    display:                  block !important;
-  }
-
   ._block {
     display:                  block !important;
   }
 
   ._table_block {
     display:                  table !important;
+  }
+
+  ._inline_block {
+    display:                  inline-block !important;
   }
 }

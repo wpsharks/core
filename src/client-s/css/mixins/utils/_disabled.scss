@@ -2,37 +2,20 @@
  * Disabled utils.
  */
 @mixin disabled-utils {
-  ._disabled:not([class*='_disabled _on_hover']),
-  ._disabled._on_hover[class*='_disabled _on_hover']:hover {
-    opacity:                  0.5 !important;
-    cursor:                   not-allowed !important;
+  ._disabled {
+    &:not([class*='_disabled _on _']),
+    &[class*='_disabled _on _hover']:hover {
+      opacity:                0.5 !important;
+      cursor:                 not-allowed !important;
 
-    * {
-      opacity:                1 !important;
-      pointer-events:         none !important;
-    }
-  }
+      &[class*='_very _disabled'] {
+        opacity:              0.25 !important;
+      }
 
-  ._very._disabled[class*='_very _disabled']:not([class*='_disabled _on_hover']),
-  ._very._disabled._on_hover[class*='_very _disabled _on_hover']:hover {
-    opacity:                  0.25 !important;
-    cursor:                   not-allowed !important;
-
-    * {
-      opacity:                1 !important;
-      pointer-events:         none !important;
-    }
-  }
-
-  ._disabled._not_on_hover[class*='_disabled _not_on_hover']:hover {
-    // NOTE: This is problematic. There's simply no way to guarantee
-    // that we are actually reverting to the originally defined styles.
-    opacity:                  initial !important;
-    cursor:                   initial !important;
-
-    * {
-      opacity:                initial !important;
-      pointer-events:         initial !important;
+      * {
+        opacity:              1 !important;
+        pointer-events:       none !important;
+      }
     }
   }
 }

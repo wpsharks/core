@@ -8,21 +8,21 @@
     quotes:                   '“' '”';
     background:               $blockquote-bg-color;
     border-left:              0.1em solid $blockquote-border-color;
-  }
 
-  blockquote::before {
-    font-size:                3em;
-    float:                    left;
-    content:                  open-quote;
-    margin:                  .25em .1em 0 0;
-    color:                    $blockquote-quote-color;
-  }
+    &::before {
+      font-size:              3em;
+      float:                  left;
+      content:                open-quote;
+      margin:                .25em .1em 0 0;
+      color:                  $blockquote-quote-color;
+    }
 
-  blockquote::after {
-    font-size:                3em;
-    float:                    right;
-    content:                  close-quote;
-    margin:                   0 .1em .25em 0;
-    color:                    $blockquote-quote-color;
+    &::after {
+      font-size:              3em;
+      float:                  right;
+      content:                close-quote;
+      margin:                 0 .1em .25em 0;
+      color:                  $blockquote-quote-color;
+    }
   }
 }

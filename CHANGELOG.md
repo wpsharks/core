@@ -8,8 +8,8 @@
 - Adding `c::escSq()`.
 - Adding `c::escDq()`.
 - Adding Semantic UI custom build directory `src/client-s/css/semantic`.
-- Adding `_center _if_stacked` responsive utility class.
-- Adding `_centered _if_stacked` responsive utility class.
+- Rewrote many CSS utility classes to improve optimization.
+- Added many new CSS utility classes for common styles.
 - Adding responsive reCAPTCHA style utilities.
 
 ## v170309.60830

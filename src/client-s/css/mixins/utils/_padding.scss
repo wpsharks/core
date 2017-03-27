@@ -1,0 +1,207 @@
+/*
+ * Padding utils.
+ */
+@mixin padding-utils {
+  ._p {
+    /*
+     * All.
+     */
+    &[class*='_p _0'] {
+      padding:                0 !important;
+    }
+
+    &[class*='_p _025'] {
+      padding:               .25em !important;
+    }
+
+    &[class*='_p _05'] {
+      padding:               .5em !important;
+    }
+
+    &[class*='_p _1'] {
+      padding:                1em !important;
+    }
+
+    &[class*='_p _2'] {
+      padding:                2em !important;
+    }
+
+    &[class*='_p _3'] {
+      padding:                3em !important;
+    }
+
+    /*
+     * Top.
+     */
+    &[class*='_p _t0'] {
+      padding-top:            0 !important;
+    }
+
+    &[class*='_p _t025'] {
+      padding-top:           .25em !important;
+    }
+
+    &[class*='_p _t05'] {
+      padding-top:           .5em !important;
+    }
+
+    &[class*='_p _t1'] {
+      padding-top:            1em !important;
+    }
+
+    &[class*='_p _t2'] {
+      padding-top:            2em !important;
+    }
+
+    &[class*='_p _t3'] {
+      padding-top:            3em !important;
+    }
+
+    /*
+     * Right.
+     */
+    &[class*='_p _r0'] {
+      padding-right:          0 !important;
+    }
+
+    &[class*='_p _r025'] {
+      padding-right:         .25em !important;
+    }
+
+    &[class*='_p _r05'] {
+      padding-right:         .5em !important;
+    }
+
+    &[class*='_p _r1'] {
+      padding-right:          1em !important;
+    }
+
+    &[class*='_p _r2'] {
+      padding-right:          2em !important;
+    }
+
+    &[class*='_p _r3'] {
+      padding-right:          3em !important;
+    }
+
+    /*
+     * Bottom.
+     */
+    &[class*='_p _b0'] {
+      padding-bottom:         0 !important;
+    }
+
+    &[class*='_p _b025'] {
+      padding-bottom:        .25em !important;
+    }
+
+    &[class*='_p _b05'] {
+      padding-bottom:        .5em !important;
+    }
+
+    &[class*='_p _b1'] {
+      padding-bottom:         1em !important;
+    }
+
+    &[class*='_p _b2'] {
+      padding-bottom:         2em !important;
+    }
+
+    &[class*='_p _b3'] {
+      padding-bottom:         3em !important;
+    }
+
+    /*
+     * Left.
+     */
+    &[class*='_p _l0'] {
+      padding-left:           0 !important;
+    }
+
+    &[class*='_p _l025'] {
+      padding-left:          .25em !important;
+    }
+
+    &[class*='_p _l05'] {
+      padding-left:          .5em !important;
+    }
+
+    &[class*='_p _l1'] {
+      padding-left:           1em !important;
+    }
+
+    &[class*='_p _l2'] {
+      padding-left:           2em !important;
+    }
+
+    &[class*='_p _l3'] {
+      padding-left:           3em !important;
+    }
+
+    /*
+     * Horizontal.
+     */
+    &[class*='_p _h0'] {
+      padding-left:           0 !important;
+      padding-right:          0 !important;
+    }
+
+    &[class*='_p _h025'] {
+      padding-left:          .25em !important;
+      padding-right:         .25em !important;
+    }
+
+    &[class*='_p _h05'] {
+      padding-left:          .5em !important;
+      padding-right:         .5em !important;
+    }
+
+    &[class*='_p _h1'] {
+      padding-left:           1em !important;
+      padding-right:          1em !important;
+    }
+
+    &[class*='_p _h2'] {
+      padding-left:           2em !important;
+      padding-right:          2em !important;
+    }
+
+    &[class*='_p _h3'] {
+      padding-left:           3em !important;
+      padding-right:          3em !important;
+    }
+
+    /*
+     * Vertical.
+     */
+    &[class*='_p _v0'] {
+      padding-top:            0 !important;
+      padding-bottom:         0 !important;
+    }
+
+    &[class*='_p _v025'] {
+      padding-top:           .25em !important;
+      padding-bottom:        .25em !important;
+    }
+
+    &[class*='_p _v05'] {
+      padding-top:           .5em !important;
+      padding-bottom:        .5em !important;
+    }
+
+    &[class*='_p _v1'] {
+      padding-top:            1em !important;
+      padding-bottom:         1em !important;
+    }
+
+    &[class*='_p _v2'] {
+      padding-top:            2em !important;
+      padding-bottom:         2em !important;
+    }
+
+    &[class*='_p _v3'] {
+      padding-top:            3em !important;
+      padding-bottom:         3em !important;
+    }
+  }
+}

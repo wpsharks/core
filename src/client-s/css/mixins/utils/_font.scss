@@ -2,54 +2,196 @@
  * Font utils.
  */
 @mixin font-utils {
-  ._ff_smooth {
-    -webkit-font-smoothing:   antialiased !important;
-    -moz-osx-font-smoothing:  grayscale !important;
-  }
+  ._f {
+    /*
+     * Sizes.
+     */
+    &[class*='_f _025'] {
+      font-size:             .25em !important;
+    }
 
-  ._ff_serif {
-    font-family:              $serif-font-family !important;
-  }
+    &[class*='_f _05'] {
+      font-size:             .5em !important;
+    }
 
-  ._ff_sans_serif {
-    font-family:              $sans-serif-font-family !important;
-  }
+    &[class*='_f _055'] {
+      font-size:             .55em !important;
+    }
 
-  ._ff_alt {
-    font-family:              $alt-font-family !important;
-  }
+    &[class*='_f _065'] {
+      font-size:             .65em !important;
+    }
 
-  ._ff_monospace {
-    font-family:              $monospace-font-family !important;
-  }
+    &[class*='_f _075'] {
+      font-size:             .75em !important;
+    }
 
-  ._cff {
-    font-family:              $content-font-family !important;
-  }
+    &[class*='_f _085'] {
+      font-size:             .85em !important;
+    }
 
-  ._cff_lede {
-    font-family:              $content-lede-font-family !important;
-  }
+    &[class*='_f _095'] {
+      font-size:             .95em !important;
+    }
 
-  ._cff_heading {
-    font-family:              $content-heading-font-family !important;
-  }
+    &[class*='_f _1'] {
+      font-size:              1em !important;
+    }
 
-  // Additional font stacks via Bourbon.
+    &[class*='_f _125'] {
+      font-size:              1.25em !important;
+    }
 
-  ._ff_georgia {
-    font-family:              $georgia !important;
-  }
+    &[class*='_f _150'] {
+      font-size:              1.5em !important;
+    }
 
-  ._ff_helvetica {
-    font-family:              $helvetica !important;
-  }
+    &[class*='_f _175'] {
+      font-size:              1.75em !important;
+    }
 
-  ._ff_lucida {
-    font-family:              $lucida-grande !important;
-  }
+    &[class*='_f _2'] {
+      font-size:              2em !important;
+    }
 
-  ._ff_verdana {
-    font-family:              $verdana !important;
+    &[class*='_f _225'] {
+      font-size:              2.25em !important;
+    }
+
+    &[class*='_f _250'] {
+      font-size:              2.5em !important;
+    }
+
+    &[class*='_f _275'] {
+      font-size:              2.75em !important;
+    }
+
+    &[class*='_f _3'] {
+      font-size:              3em !important;
+    }
+
+    &[class*='_f _325'] {
+      font-size:              3.25em !important;
+    }
+
+    &[class*='_f _350'] {
+      font-size:              3.5em !important;
+    }
+
+    &[class*='_f _375'] {
+      font-size:              3.75em !important;
+    }
+
+    /*
+     * Weights.
+     */
+    &[class*='_f _light'] {
+      font-weight:            300 !important;
+    }
+
+    &[class*='_f _normal'] {
+      font-weight:            400 !important;
+    }
+
+    &[class*='_f _bold'] {
+      font-weight:            700 !important;
+    }
+
+    &[class*='_f _bolder'] {
+      font-weight:            900 !important;
+    }
+
+    /*
+     * Styles.
+     */
+    &[class*='_f _uline'] {
+      &:not([class*='_f _uline _on _']),
+      &[class*='_f _uline _on _hover']:hover {
+        text-decoration:      underline !important;
+      }
+
+      &[class*='_f _uline _not _on _hover']:hover {
+        text-decoration:      none !important;
+      }
+    }
+
+    &[class*='_f _strike'] {
+      text-decoration:        line-through !important;
+    }
+
+    &[class*='_f _italic'] {
+      font-style:             italic !important;
+    }
+
+    &[class*='_f _lower'] {
+      text-transform:         lowercase !important;
+    }
+
+    &[class*='_f _upper'] {
+      text-transform:         uppercase !important;
+    }
+
+    &[class*='_f _small_caps'] {
+      font-variant:           small-caps !important;
+    }
+
+    &[class*='_f _ucwords'] {
+      text-transform:         capitalize !important;
+    }
+
+    &[class*='_f _smooth'] {
+      -webkit-font-smoothing: antialiased !important;
+      -moz-osx-font-smoothing: grayscale !important;
+    }
+
+    /*
+     * Families.
+     */
+    &[class*='_f _serif'] {
+      font-family:            $serif-font-family !important;
+    }
+
+    &[class*='_f _sans_serif'] {
+      font-family:            $sans-serif-font-family !important;
+    }
+
+    &[class*='_f _alt'] {
+      font-family:            $alt-font-family !important;
+    }
+
+    &[class*='_f _monospace'] {
+      font-family:            $monospace-font-family !important;
+    }
+
+    &[class*='_f _cnt'] {
+      font-family:            $content-font-family !important;
+    }
+
+    &[class*='_f _cnt_lede'] {
+      font-family:            $content-lede-font-family !important;
+    }
+
+    &[class*='_f _cnt_heading'] {
+      font-family:            $content-heading-font-family !important;
+    }
+
+    /*
+     * Additional families.
+     */
+    &[class*='_f _georgia'] {
+      font-family:            $georgia !important;
+    }
+
+    &[class*='_f _helvetica'] {
+      font-family:            $helvetica !important;
+    }
+
+    &[class*='_f _lucida'] {
+      font-family:            $lucida-grande !important;
+    }
+
+    &[class*='_f _verdana'] {
+      font-family:            $verdana !important;
+    }
   }
 }

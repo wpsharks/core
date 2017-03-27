@@ -1,0 +1,73 @@
+/*
+ * Opacity utils.
+ */
+@mixin opacity-utils {
+  ._o {
+    &[class*='_o _0'] {
+      opacity:                0 !important;
+    }
+
+    &[class*='_o _01'] {
+      opacity:                0.1 !important;
+    }
+
+    &[class*='_o _02'] {
+      opacity:                0.2 !important;
+    }
+
+    &[class*='_o _025'] {
+      opacity:                0.25 !important;
+    }
+
+    &[class*='_o _03'] {
+      opacity:                0.3 !important;
+    }
+
+    &[class*='_o _04'] {
+      opacity:                0.4 !important;
+    }
+
+    &[class*='_o _05'] {
+      opacity:                0.5 !important;
+    }
+
+    &[class*='_o _06'] {
+      opacity:                0.6 !important;
+    }
+
+    &[class*='_o _07'] {
+      opacity:                0.7 !important;
+    }
+
+    &[class*='_o _075'] {
+      opacity:                0.75 !important;
+    }
+
+    &[class*='_o _08'] {
+      opacity:                0.8 !important;
+    }
+
+    &[class*='_o _09'] {
+      opacity:                0.9 !important;
+    }
+
+    &[class*='_o _1'] {
+      opacity:                1 !important;
+    }
+  }
+
+  /*
+   * Alias of `_opacity _05`.
+   * And also of `_opacity _025`.
+   */
+  ._muted {
+    &:not([class*='_muted _on _hover']),
+    &[class*='_muted _on _hover']:hover {
+      opacity:                0.5 !important;
+
+      &[class*='_very _muted'] {
+        opacity:              0.25 !important;
+      }
+    }
+  }
+}

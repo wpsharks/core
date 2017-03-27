@@ -4,14 +4,17 @@
 @mixin line-clamp-utils {
   ._line_clamp {
     max-width:                100% !important;
+
+    //
     white-space:              nowrap !important;
     overflow:                 hidden !important;
     text-overflow:            ellipsis !important;
   }
 
   ._inline_clamp {
-    // Set specific max-width elsewhere.
-    //
+    // Set a specific max-width elsewhere.
+    // e.g., `_mxw _50p`. See width utils.
+
     white-space:              nowrap !important;
     overflow:                 hidden !important;
     text-overflow:            ellipsis !important;

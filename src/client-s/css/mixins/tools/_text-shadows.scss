@@ -1,0 +1,22 @@
+/*
+ * Text shadow tools.
+ */
+@mixin text-shadow-glow-normal($_important: false) {
+  $important: '';
+
+  @if $_important {
+    $important: ' !important';
+  }
+
+  text-shadow:                unquote('#{0 1px 1px transparentize($black-color, 0.5)}#{$important}');
+}
+
+@mixin text-shadow-glow-heavy($_important: false) {
+  $important: '';
+
+  @if $_important {
+    $important: ' !important';
+  }
+
+  text-shadow:                unquote('#{0 2px 2px transparentize($black-color, 0.25)}#{$important}');
+}

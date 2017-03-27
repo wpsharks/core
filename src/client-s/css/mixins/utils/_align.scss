@@ -4,102 +4,252 @@
  * Align utils.
  */
 @mixin align-utils {
-  ._left {
-    text-align:               left !important;
+  /*
+   * Horizontal.
+   */
+  ._align {
+    &[class*='_align _left'] {
+      &:not([class*='_align _left _when _']) {
+        text-align:           left !important;
+      }
+
+      &[class*='_align _left _when _mobile'] {
+        @include mobile-only {
+          text-align:         left !important;
+        }
+      }
+
+      &[class*='_align _left _when _handheld'] {
+        @include handheld-only {
+          text-align:         left !important;
+        }
+      }
+
+      &[class*='_align _left _when _small _screen'] {
+        @include small-screen-only {
+          text-align:         left !important;
+        }
+      }
+    }
+
+    &[class*='_align _center'] {
+      &:not([class*='_align _center _when _']) {
+        text-align:           center !important;
+
+        &.ui.grid > .row > .column,
+        &.ui.grid > .column,
+        &.row > .column {
+          text-align:         center !important;
+        }
+
+        &.ui.form > .fields > .field,
+        &.ui.form > .field,
+        &.fields > .field {
+          text-align:         center !important;
+        }
+      }
+
+      &[class*='_align _center _when _mobile'] {
+        @include mobile-only {
+          text-align:         center !important;
+
+          &.ui.grid > .row > .column,
+          &.ui.grid > .column,
+          &.row > .column {
+            text-align:       center !important;
+          }
+
+          &.ui.form > .fields > .field,
+          &.ui.form > .field,
+          &.fields > .field {
+            text-align:       center !important;
+          }
+        }
+      }
+
+      &[class*='_align _center _when _handheld'] {
+        @include handheld-only {
+          text-align:         center !important;
+
+          &.ui.grid > .row > .column,
+          &.ui.grid > .column,
+          &.row > .column {
+            text-align:       center !important;
+          }
+
+          &.ui.form > .fields > .field,
+          &.ui.form > .field,
+          &.fields > .field {
+            text-align:       center !important;
+          }
+        }
+      }
+
+      &[class*='_align _center _when _small _screen'] {
+        @include small-screen-only {
+          text-align:         center !important;
+
+          &.ui.grid > .row > .column,
+          &.ui.grid > .column,
+          &.row > .column {
+            text-align:       center !important;
+          }
+
+          &.ui.form > .fields > .field,
+          &.ui.form > .field,
+          &.fields > .field {
+            text-align:       center !important;
+          }
+        }
+      }
+    }
+
+    &[class*='_align _right'] {
+      &:not([class*='_align _right _when _']) {
+        text-align:           right !important;
+      }
+
+      &[class*='_align _right _when _mobile'] {
+        @include mobile-only {
+          text-align:         right !important;
+        }
+      }
+
+      &[class*='_align _right _when _handheld'] {
+        @include handheld-only {
+          text-align:         right !important;
+        }
+      }
+
+      &[class*='_align _right _when _small _screen'] {
+        @include small-screen-only {
+          text-align:         right !important;
+        }
+      }
+    }
   }
 
-  ._float_left,
-  ._pull_left,
-  ._yank_left {
+  /*
+   * Vertical.
+   */
+  ._valign {
+    &[class*='_valign _top'] {
+      vertical-align:         top !important;
+    }
+
+    &[class*='_valign _middle'] {
+      vertical-align:         middle !important;
+    }
+
+    &[class*='_valign _bottom'] {
+      vertical-align:         bottom !important;
+    }
+
+    &[class*='_valign _flex_top'] {
+      align-items:            flex-start !important;
+    }
+
+    &[class*='_valign _flex_middle'] {
+      align-items:            center !important;
+    }
+
+    &[class*='_valign _flex_bottom'] {
+      align-items:            flex-end !important;
+    }
+  }
+
+  /*
+   * Floats.
+   */
+  .icon {
+    &._float,
+    &._push,
+    &._pull,
+    &._yank {
+      // Zero-out existing & set below.
+      margin-left:            0 !important;
+      margin-right:           0 !important;
+    }
+  }
+
+  .alignleft,
+  img[align='left'],
+  ._float[class*='_float _left'],
+  ._push[class*='_push _left'],
+  ._pull[class*='_pull _left'],
+  ._yank[class*='_yank _left'] {
     float:                    left !important;
   }
 
-  ._pull_left {
-    margin-right:             1em !important;
-    margin-bottom:            1em !important;
+  ._push[class*='_push _left'],
+  ._pull[class*='_pull _left'] {
+    margin-right:             1rem !important;
   }
 
-  ._yank_left {
-    margin-right:             2em !important;
-    margin-bottom:            2em !important;
+  ._pull[class*='_pull _left'] {
+    margin-bottom:            1rem !important;
   }
 
-  ._center:not([class*='_center _if_stacked']) {
-    text-align:               center !important;
+  .alignleft,
+  img[align='left'],
+  ._yank[class*='_yank _left'] {
+    margin-right:             2rem !important;
+    margin-bottom:            2rem !important;
   }
 
-  @include mobile-only {
-    .ui.stackable.grid._center._if_stacked[class*='_center _if_stacked'] {
-      > .row > .column,
-      > .column {
-        text-align:           center !important;
-      }
-    }
-
-    .ui.stackable.grid {
-      > .row._center._if_stacked[class*='_center _if_stacked'] > .column,
-      > .row > .column._center._if_stacked[class*='_center _if_stacked'],
-      > .column._center._if_stacked[class*='_center _if_stacked'] {
-        text-align:           center !important;
-      }
-    }
-
-    .ui.form._center._if_stacked[class*='_center _if_stacked'] {
-      > .fields > .field,
-      > .field {
-        text-align:           center !important;
-      }
-    }
-
-    .ui.form {
-      > .fields._center._if_stacked[class*='_center _if_stacked'] > .field,
-      > .fields > .field._center._if_stacked[class*='_center _if_stacked'],
-      > .field._center._if_stacked[class*='_center _if_stacked'] {
-        text-align:           center !important;
-      }
-    }
-  }
-
-  ._centered:not([class*='_centered _if_stacked']) {
-    margin-left:              auto !important;
-    margin-right:             auto !important;
-  }
-
-  @include mobile-only {
-    .ui.stackable.grid {
-      > .row > .column > ._centered._if_stacked[class*='_centered _if_stacked'],
-      > .column > ._centered._if_stacked[class*='_centered _if_stacked'] {
-        margin-left:          auto !important;
-        margin-right:         auto !important;
-      }
-    }
-
-    .ui.form {
-      > .fields > .field > ._centered._if_stacked[class*='_centered _if_stacked'],
-      > .field > ._centered._if_stacked[class*='_centered _if_stacked'] {
-        margin-left:          auto !important;
-        margin-right:         auto !important;
-      }
-    }
-  }
-
-  ._right {
-    text-align:               right !important;
-  }
-
-  ._float_right,
-  ._pull_right,
-  ._yank_right {
+  .alignright,
+  img[align='right'],
+  ._float[class*='_float _right'],
+  ._push[class*='_push _right'],
+  ._pull[class*='_pull _right'],
+  ._yank[class*='_yank _right'] {
     float:                    right !important;
   }
 
-  ._pull_right {
-    margin-left:              1em !important;
-    margin-bottom:            1em !important;
+  ._push[class*='_push _right'],
+  ._pull[class*='_pull _right'] {
+    margin-left:              1rem !important;
   }
 
-  ._yank_right {
-    margin-left:              2em !important;
-    margin-bottom:            2em !important;
+  ._pull[class*='_pull _right'] {
+    margin-bottom:            1rem !important;
+  }
+
+  .alignright,
+  img[align='right'],
+  ._yank[class*='_yank _right'] {
+    margin-left:              2rem !important;
+    margin-bottom:            2rem !important;
+  }
+
+  /*
+   * Centered.
+   */
+  ._centered {
+    &:not([class*='_centered _when _']) {
+      @include centered(true);
+    }
+
+    &[class*='_centered _when _mobile'] {
+      @include mobile-only {
+        @include centered-conversion(true);
+      }
+    }
+
+    &[class*='_centered _when _handheld'] {
+      @include handheld-only {
+        @include centered-conversion(true);
+      }
+    }
+
+    &[class*='_centered _when _small _screen'] {
+      @include small-screen-only {
+        @include centered-conversion(true);
+      }
+    }
+  }
+
+  .aligncenter {
+    @include centered-conversion(true);
   }
 }

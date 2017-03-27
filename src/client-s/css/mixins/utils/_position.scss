@@ -2,7 +2,9 @@
  * Position utils.
  */
 @mixin position-utils {
-  ._position_offscreen {
-    @include position-offscreen;
+  ._position {
+    &[class*='_position _offscreen'] {
+      @include position-offscreen(true);
+    }
   }
 }

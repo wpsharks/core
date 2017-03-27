@@ -2,105 +2,69 @@
  * Responsive utils.
  */
 @mixin responsive-utils {
-  // `mobile only` hide.
-  @media only screen and (max-width: 767px) {
-    .tablet.only:not(.grid):not(.row):not(.column)[class*='tablet only'] {
-      display:                none !important;
-    }
-
-    .computer.only:not(.grid):not(.row):not(.column)[class*='computer only'] {
-      display:                none !important;
-    }
-
-    .large.screen.only:not(.grid):not(.row):not(.column)[class*='large screen only'] {
-      display:                none !important;
-    }
-
-    .widescreen.only:not(.grid):not(.row):not(.column)[class*='widescreen only'] {
-      display:                none !important;
+  // A mobile device.
+  @include mobile-device {
+    .only {
+      &[class*='tablet only'],
+      &[class*='computer only'],
+      &[class*='large screen only'],
+      &[class*='widescreen only'] {
+        display:              none !important;
+      }
     }
   }
 
-  // `tablet only` hide.
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .mobile.only:not(.grid):not(.row):not(.column)[class*='mobile only'] {
-      display:                none !important;
-    }
 
-    .computer.only:not(.grid):not(.row):not(.column)[class*='computer only'] {
-      display:                none !important;
-    }
-
-    .large.screen.only:not(.grid):not(.row):not(.column)[class*='large screen only'] {
-      display:                none !important;
-    }
-
-    .widescreen.only:not(.grid):not(.row):not(.column)[class*='widescreen only'] {
-      display:                none !important;
+  // A tablet device.
+  @include tablet-device {
+    .only {
+      &[class*='mobile only'],
+      &[class*='computer only'],
+      &[class*='large screen only'],
+      &[class*='widescreen only'] {
+        display:              none !important;
+      }
     }
   }
 
-  // -------------------------------------------------------------------------------------------------------------------
-  // Note: `handheld only` is already covered in other sequences ↑ ↓
-  // Note also, the `:not(.grid):not(.row):not(.column)` check is removed for `handheld only`.
-  // The reason is because Semantic UI doesn't support `handheld only` natively, so we add it in.
-  // In other words, there is no overlap in functionality when it comes to `handheld only`, so no need to exclude.
-  // -------------------------------------------------------------------------------------------------------------------
 
-  // `computer only` hide.
-  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .mobile.only:not(.grid):not(.row):not(.column)[class*='mobile only'] {
-      display:                none !important;
-    }
-
-    .tablet.only:not(.grid):not(.row):not(.column)[class*='tablet only'] {
-      display:                none !important;
-    }
-
-    .handheld.only[class*='handheld only'] {
-      display:                none !important;
-    }
-
-    .large.screen.only:not(.grid):not(.row):not(.column)[class*='large screen only'] {
-      display:                none !important;
-    }
-
-    .widescreen.only:not(.grid):not(.row):not(.column)[class*='widescreen only'] {
-      display:                none !important;
+  // A computer device.
+  @include computer-device {
+    .only {
+      &[class*='mobile only'],
+      &[class*='tablet only'],
+      &[class*='handheld only'],
+      &[class*='large screen only'],
+      &[class*='widescreen only'] {
+        display:              none !important;
+      }
     }
   }
 
-  // `large screen only` hide.
-  @media only screen and (min-width: 1200px) and (max-width: 1919px) {
-    .mobile.only:not(.grid):not(.row):not(.column)[class*='mobile only'] {
-      display:                none !important;
-    }
 
-    .tablet.only:not(.grid):not(.row):not(.column)[class*='tablet only'] {
-      display:                none !important;
-    }
-
-    .handheld.only[class*='handheld only'] {
-      display:                none !important;
-    }
-
-    .widescreen.only:not(.grid):not(.row):not(.column)[class*='widescreen only'] {
-      display:                none !important;
+  // A large screen device.
+  @include large-screen-device {
+    .only {
+      &[class*='mobile only'],
+      &[class*='tablet only'],
+      &[class*='handheld only'],
+      &[class*='small screen only'],
+      &[class*='widescreen only'] {
+        display:              none !important;
+      }
     }
   }
 
-  // `widescreen only` hide.
-  @media only screen and (min-width: 1920px) {
-    .mobile.only:not(.grid):not(.row):not(.column)[class*='mobile only'] {
-      display:                none !important;
-    }
 
-    .tablet.only:not(.grid):not(.row):not(.column)[class*='tablet only'] {
-      display:                none !important;
-    }
-
-    .handheld.only[class*='handheld only'] {
-      display:                none !important;
+  // A widescreen device.
+  @include widescreen-device {
+    .only {
+      &[class*='mobile only'],
+      &[class*='tablet only'],
+      &[class*='handheld only'],
+      &[class*='small screen only'] {
+        display:              none !important;
+      }
     }
   }
 }

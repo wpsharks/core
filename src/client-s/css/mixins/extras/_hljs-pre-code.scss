@@ -50,12 +50,17 @@
       //
       width:                  100%;
       height:                 auto;
-      max-height:             400px;
+      max-height:             50vh;
       overflow:               auto;
 
       //
       display:                block;
       box-sizing:             border-box;
+
+      &[class*='_no _scroll'] {
+        max-height:           none !important;
+        white-space:          pre-wrap !important;
+      }
     }
   }
 }

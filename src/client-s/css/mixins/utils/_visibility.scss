@@ -1,0 +1,16 @@
+/*
+ * Visibility utils.
+ */
+@mixin visibility-utils {
+  ._invisible {
+    visibility:               hidden;
+
+    &:not([class*='_invisible _initially']) {
+      visibility:             hidden !important;
+    }
+  }
+
+  ._visible {
+    visibility:               visible !important;
+  }
+}
