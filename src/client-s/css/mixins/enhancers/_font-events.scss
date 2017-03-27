@@ -2,9 +2,17 @@
  * Font events.
  */
 @mixin font-events {
-  html.wf-loading {
+  .wf-loading {
     > body {
-      > * {
+      // This avoids the entire body being invisible.
+      // Listing all of the most common elements just in case.
+      // Best practice = `<div>` container caught by `> div`.
+      > div,
+      > nav,
+      > main,
+      > aside,
+      > header,
+      > footer {
         visibility:           hidden !important;
       }
     }
