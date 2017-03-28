@@ -97,6 +97,7 @@ $.fn.sticky = function(parameters) {
 
         destroy: function() {
           module.verbose('Destroying previous instance');
+          clearTimeout(module.timer);
           module.reset();
           if(documentObserver) {
             documentObserver.disconnect();
@@ -109,6 +110,7 @@ $.fn.sticky = function(parameters) {
             .off('resize' + eventNamespace, module.event.resize)
           ;
           $scroll
+            .off('scroll' + eventNamespace, module.event.scroll)
             .off('scrollchange' + eventNamespace, module.event.scrollchange)
           ;
           $module.removeData(moduleNamespace);

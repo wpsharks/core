@@ -499,232 +499,6 @@ sub {
  * Width utils.
  */
 /*
-   * Horizontal.
-   */
-._align {
-  /*
-     * Left.
-     */
-  /*
-     * Center.
-     */
-  /*
-     * NOTE: Grid centering takes precedence,
-     * simply because the selectors are more specific.
-     * This behavior is desirable, so don't change it.
-     */
-  /*
-     * Right.
-     */
-}
-
-._align[class*='_align _left']:not([class*='_align _left _when _']) {
-  text-align: left !important;
-}
-
-@media only screen and (max-width: 767px) {
-  ._align[class*='_align _left _when _mobile'] {
-    text-align: left !important;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  ._align[class*='_align _left _when _tablet'] {
-    text-align: left !important;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  ._align[class*='_align _left _when _handheld'] {
-    text-align: left !important;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  ._align[class*='_align _left _when _computer'] {
-    text-align: left !important;
-  }
-}
-
-@media only screen and (max-width: 1199px) {
-  ._align[class*='_align _left _when _small _screen'] {
-    text-align: left !important;
-  }
-}
-
-@media only screen and (min-width: 1200px) and (max-width: 1919px) {
-  ._align[class*='_align _left _when _large _screen'] {
-    text-align: left !important;
-  }
-}
-
-@media only screen and (min-width: 1920px) {
-  ._align[class*='_align _left _when _widescreen'] {
-    text-align: left !important;
-  }
-}
-
-._align[class*='_align _center']:not([class*='_align _center _when _']) {
-  text-align: center !important;
-}
-
-._align[class*='_align _center']:not([class*='_align _center _when _']).ui.grid > .row > .column,
-._align[class*='_align _center']:not([class*='_align _center _when _']).ui.grid > .column,
-._align[class*='_align _center']:not([class*='_align _center _when _']).row > .column {
-  text-align: center !important;
-}
-
-@media only screen and (max-width: 767px) {
-  ._align[class*='_align _center _when _mobile'] {
-    text-align: center !important;
-  }
-  ._align[class*='_align _center _when _mobile'].ui.grid > .row > .column,
-  ._align[class*='_align _center _when _mobile'].ui.grid > .column,
-  ._align[class*='_align _center _when _mobile'].row > .column {
-    text-align: center !important;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  ._align[class*='_align _center _when _tablet'] {
-    text-align: center !important;
-  }
-  ._align[class*='_align _center _when _tablet'].ui.grid > .row > .column,
-  ._align[class*='_align _center _when _tablet'].ui.grid > .column,
-  ._align[class*='_align _center _when _tablet'].row > .column {
-    text-align: center !important;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  ._align[class*='_align _center _when _handheld'] {
-    text-align: center !important;
-  }
-  ._align[class*='_align _center _when _handheld'].ui.grid > .row > .column,
-  ._align[class*='_align _center _when _handheld'].ui.grid > .column,
-  ._align[class*='_align _center _when _handheld'].row > .column {
-    text-align: center !important;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  ._align[class*='_align _center _when _computer'] {
-    text-align: center !important;
-  }
-  ._align[class*='_align _center _when _computer'].ui.grid > .row > .column,
-  ._align[class*='_align _center _when _computer'].ui.grid > .column,
-  ._align[class*='_align _center _when _computer'].row > .column {
-    text-align: center !important;
-  }
-}
-
-@media only screen and (max-width: 1199px) {
-  ._align[class*='_align _center _when _small _screen'] {
-    text-align: center !important;
-  }
-  ._align[class*='_align _center _when _small _screen'].ui.grid > .row > .column,
-  ._align[class*='_align _center _when _small _screen'].ui.grid > .column,
-  ._align[class*='_align _center _when _small _screen'].row > .column {
-    text-align: center !important;
-  }
-}
-
-@media only screen and (min-width: 1200px) and (max-width: 1919px) {
-  ._align[class*='_align _center _when _large _screen'] {
-    text-align: center !important;
-  }
-  ._align[class*='_align _center _when _large _screen'].ui.grid > .row > .column,
-  ._align[class*='_align _center _when _large _screen'].ui.grid > .column,
-  ._align[class*='_align _center _when _large _screen'].row > .column {
-    text-align: center !important;
-  }
-}
-
-@media only screen and (min-width: 1920px) {
-  ._align[class*='_align _center _when _widescreen'] {
-    text-align: center !important;
-  }
-  ._align[class*='_align _center _when _widescreen'].ui.grid > .row > .column,
-  ._align[class*='_align _center _when _widescreen'].ui.grid > .column,
-  ._align[class*='_align _center _when _widescreen'].row > .column {
-    text-align: center !important;
-  }
-}
-
-._align[class*='_align _right']:not([class*='_align _right _when _']) {
-  text-align: right !important;
-}
-
-@media only screen and (max-width: 767px) {
-  ._align[class*='_align _right _when _mobile'] {
-    text-align: right !important;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  ._align[class*='_align _right _when _tablet'] {
-    text-align: right !important;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  ._align[class*='_align _right _when _handheld'] {
-    text-align: right !important;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  ._align[class*='_align _right _when _computer'] {
-    text-align: right !important;
-  }
-}
-
-@media only screen and (max-width: 1199px) {
-  ._align[class*='_align _right _when _small _screen'] {
-    text-align: right !important;
-  }
-}
-
-@media only screen and (min-width: 1200px) and (max-width: 1919px) {
-  ._align[class*='_align _right _when _large _screen'] {
-    text-align: right !important;
-  }
-}
-
-@media only screen and (min-width: 1920px) {
-  ._align[class*='_align _right _when _widescreen'] {
-    text-align: right !important;
-  }
-}
-
-/*
-   * Vertical.
-   */
-._valign[class*='_valign _top'] {
-  vertical-align: top !important;
-}
-
-._valign[class*='_valign _middle'] {
-  vertical-align: middle !important;
-}
-
-._valign[class*='_valign _bottom'] {
-  vertical-align: bottom !important;
-}
-
-._valign[class*='_valign _flex_top'] {
-  align-items: flex-start !important;
-}
-
-._valign[class*='_valign _flex_middle'] {
-  align-items: center !important;
-}
-
-._valign[class*='_valign _flex_bottom'] {
-  align-items: flex-end !important;
-}
-
-/*
    * Floats.
    */
 .icon._float, .icon._push, .icon._pull, .icon._yank {
@@ -783,39 +557,236 @@ img[align='right'],
 }
 
 /*
+   * Vertical.
+   */
+._valign[class*='_valign _top'] {
+  vertical-align: top !important;
+}
+
+._valign[class*='_valign _middle'] {
+  vertical-align: middle !important;
+}
+
+._valign[class*='_valign _bottom'] {
+  vertical-align: bottom !important;
+}
+
+._valign[class*='_valign _flex_top'] {
+  align-items: flex-start !important;
+}
+
+._valign[class*='_valign _flex_middle'] {
+  align-items: center !important;
+}
+
+._valign[class*='_valign _flex_bottom'] {
+  align-items: flex-end !important;
+}
+
+/*
+   * Horizontal.
+   */
+._align {
+  /*
+     * NOTE: These are listed in order of priority.
+     * Specific device constraints take precedence over
+     * things like handheld, computer, and small screen only.
+     *
+     * NOTE: Grid centering takes precedence, simply because
+     * the selectors are more specific; i.e., `.ui.grid`, etc.
+     * This behavior is desirable, so don't change it.
+     */
+}
+
+._align[class*='_align _left']:not([class*='_align _left _when _']) {
+  text-align: left !important;
+}
+
+._align[class*='_align _right']:not([class*='_align _right _when _']) {
+  text-align: right !important;
+}
+
+._align[class*='_align _center']:not([class*='_align _center _when _']) {
+  text-align: center !important;
+}
+
+._align[class*='_align _center']:not([class*='_align _center _when _']).ui.grid > .row > .column,
+._align[class*='_align _center']:not([class*='_align _center _when _']).ui.grid > .column,
+._align[class*='_align _center']:not([class*='_align _center _when _']).row > .column {
+  text-align: center !important;
+}
+
+._align[class*='_align _justify'] {
+  text-align: justify !important;
+}
+
+@media only screen and (max-width: 991px) {
+  ._align[class*='_align _left _when _handheld'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  ._align[class*='_align _right _when _handheld'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  ._align[class*='_align _center _when _handheld'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center _when _handheld'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _handheld'].ui.grid > .column,
+  ._align[class*='_align _center _when _handheld'].row > .column {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  ._align[class*='_align _left _when _computer'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  ._align[class*='_align _right _when _computer'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  ._align[class*='_align _center _when _computer'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center _when _computer'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _computer'].ui.grid > .column,
+  ._align[class*='_align _center _when _computer'].row > .column {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  ._align[class*='_align _left _when _small _screen'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  ._align[class*='_align _right _when _small _screen'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  ._align[class*='_align _center _when _small _screen'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center _when _small _screen'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _small _screen'].ui.grid > .column,
+  ._align[class*='_align _center _when _small _screen'].row > .column {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ._align[class*='_align _left _when _mobile'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ._align[class*='_align _right _when _mobile'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ._align[class*='_align _center _when _mobile'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center _when _mobile'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _mobile'].ui.grid > .column,
+  ._align[class*='_align _center _when _mobile'].row > .column {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  ._align[class*='_align _left _when _tablet'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  ._align[class*='_align _right _when _tablet'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  ._align[class*='_align _center _when _tablet'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center _when _tablet'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _tablet'].ui.grid > .column,
+  ._align[class*='_align _center _when _tablet'].row > .column {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
+  ._align[class*='_align _left _when _large _screen'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
+  ._align[class*='_align _right _when _large _screen'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
+  ._align[class*='_align _center _when _large _screen'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center _when _large _screen'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _large _screen'].ui.grid > .column,
+  ._align[class*='_align _center _when _large _screen'].row > .column {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  ._align[class*='_align _left _when _widescreen'] {
+    text-align: left !important;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  ._align[class*='_align _right _when _widescreen'] {
+    text-align: right !important;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  ._align[class*='_align _center _when _widescreen'] {
+    text-align: center !important;
+  }
+  ._align[class*='_align _center _when _widescreen'].ui.grid > .row > .column,
+  ._align[class*='_align _center _when _widescreen'].ui.grid > .column,
+  ._align[class*='_align _center _when _widescreen'].row > .column {
+    text-align: center !important;
+  }
+}
+
+/*
    * Centered.
    */
 ._centered:not([class*='_centered _when _']) {
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
-@media only screen and (max-width: 767px) {
-  ._centered[class*='_centered _when _mobile'] {
-    float: none !important;
-    display: block !important;
-    margin: 1rem auto !important;
-  }
-  ._centered[class*='_centered _when _mobile']:first-child {
-    margin-top: 0 !important;
-  }
-  ._centered[class*='_centered _when _mobile']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
-    margin-bottom: 0 !important;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  ._centered[class*='_centered _when _tablet'] {
-    float: none !important;
-    display: block !important;
-    margin: 1rem auto !important;
-  }
-  ._centered[class*='_centered _when _tablet']:first-child {
-    margin-top: 0 !important;
-  }
-  ._centered[class*='_centered _when _tablet']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
-    margin-bottom: 0 !important;
-  }
 }
 
 @media only screen and (max-width: 991px) {
@@ -856,6 +827,34 @@ img[align='right'],
     margin-top: 0 !important;
   }
   ._centered[class*='_centered _when _small _screen']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ._centered[class*='_centered _when _mobile'] {
+    float: none !important;
+    display: block !important;
+    margin: 1rem auto !important;
+  }
+  ._centered[class*='_centered _when _mobile']:first-child {
+    margin-top: 0 !important;
+  }
+  ._centered[class*='_centered _when _mobile']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  ._centered[class*='_centered _when _tablet'] {
+    float: none !important;
+    display: block !important;
+    margin: 1rem auto !important;
+  }
+  ._centered[class*='_centered _when _tablet']:first-child {
+    margin-top: 0 !important;
+  }
+  ._centered[class*='_centered _when _tablet']:last-child:not(._yank):not(._pull):not(.alignleft):not(.alignright):not(img[align]) {
     margin-bottom: 0 !important;
   }
 }
