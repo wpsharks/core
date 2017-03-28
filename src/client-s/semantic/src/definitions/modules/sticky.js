@@ -105,15 +105,19 @@ $.fn.sticky = function(parameters) {
             observer.disconnect();
           }
           $window
-            .off('load' + eventNamespace, module.event.load)
-            .off('resize' + eventNamespace, module.event.resize)
+            .off('load' + eventNamespace)
+            .off('resize' + eventNamespace)
           ;
           $scroll
-            .off('scroll' + eventNamespace, module.event.scroll)
-            .off('scrollchange' + eventNamespace, module.event.scrollchange)
+            .off('scroll' + eventNamespace)
+            .off('scrollchange' + eventNamespace)
           ;
-          clearTimeout(module.timer); module.reset();
-          $module.removeData(moduleNamespace);
+          clearTimeout(module.timer);
+
+          module.reset(), // Classes, offsets, etc.
+            $module.removeData(moduleNamespace);
+
+          $container = $container || $();
 
           var clearCSS = function() {
             $container.add($module).css({
@@ -134,11 +138,13 @@ $.fn.sticky = function(parameters) {
               'max-height' : '',
 
               'margin-top': '',
+              'margin-right': '',
               'margin-bottom': '',
+              'margin-left': '',
             });
           };
           requestAnimationFrame(clearCSS),
-            setTimeout(clearCSS, 0);
+            setTimeout(clearCSS, 100);
         },
 
         observeChanges: function() {
