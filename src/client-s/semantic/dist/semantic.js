@@ -16526,7 +16526,9 @@ $.fn.sticky = function(parameters) {
 
         documentObserver,
         observer,
-        module
+        module,
+
+        isDestroyed;
       ;
 
       module      = {
@@ -16572,39 +16574,36 @@ $.fn.sticky = function(parameters) {
             .off('scroll' + eventNamespace)
             .off('scrollchange' + eventNamespace)
           ;
-          clearTimeout(module.timer);
+          clearTimeout(module.timer)
 
           module.reset(), // Classes, offsets, etc.
-            $module.removeData(moduleNamespace);
+            $module.removeData(moduleNamespace),
+            isDestroyed = true;
 
           $container = $container || $();
 
-          var clearCSS = function() {
-            $container.add($module).css({
-              'position' : '',
-              'z-index' : '',
+          $container.add($module).css({
+            'position' : '',
+            'z-index' : '',
 
-              'top' : '',
-              'right' : '',
-              'bottom' : '',
-              'left' : '',
+            'top' : '',
+            'right' : '',
+            'bottom' : '',
+            'left' : '',
 
-              'width' : '',
-              'min-width' : '',
-              'max-width' : '',
+            'width' : '',
+            'min-width' : '',
+            'max-width' : '',
 
-              'height' : '',
-              'min-height' : '',
-              'max-height' : '',
+            'height' : '',
+            'min-height' : '',
+            'max-height' : '',
 
-              'margin-top': '',
-              'margin-right': '',
-              'margin-bottom': '',
-              'margin-left': '',
-            });
-          };
-          requestAnimationFrame(clearCSS),
-            setTimeout(clearCSS, 100);
+            'margin-top': '',
+            'margin-right': '',
+            'margin-bottom': '',
+            'margin-left': '',
+          });
         },
 
         observeChanges: function() {
@@ -16715,6 +16714,8 @@ $.fn.sticky = function(parameters) {
         },
 
         refresh: function(hardRefresh) {
+          if (isDestroyed ) return;
+
           module.reset();
           if(!settings.context) {
             module.determineContext();
