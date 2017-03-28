@@ -1,0 +1,15 @@
+/*
+ * Fancy messages.
+ */
+@mixin fancy-messages {
+  .ui.message {
+    @include handheld-only {
+      &.icon,
+      &.icon > .icon:not(.close) {
+        @include centered-conversion(true);
+      }
+
+      text-align:             center !important;
+    }
+  }
+}

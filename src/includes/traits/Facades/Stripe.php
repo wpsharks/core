@@ -40,6 +40,18 @@ trait Stripe
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
+     * @see Classes\Core\Utils\Stripe::updateCustomer()
+     */
+    public static function stripeUpdateCustomer(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Stripe->updateCustomer(...$args);
+    }
+
+    /**
+     * @since 17xxxx Stripe utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
      * @see Classes\Core\Utils\Stripe::charge()
      */
     public static function stripeCharge(...$args)

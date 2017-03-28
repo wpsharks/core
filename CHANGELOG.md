@@ -1,6 +1,7 @@
 ## $v
 
 - Adding `c::stripeCustomer()`.
+- Adding `c::stripeUpdateCustomer()`.
 - Adding `c::stripeCharge()`.
 - Adding `c::stripePlan()`.
 - Adding `c::stripeSubscription()`.

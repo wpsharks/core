@@ -8,13 +8,15 @@ require_once dirname(__FILE__, 2).'/includes/local.php';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-$App                         = c::app();
-$Config                      = $App->Config;
-$Config->©stripe['©api_key'] = 'sk_test_xxxxxxxxxxxxxxxxxxxxxxxxx';
+$App                            = c::app();
+$Config                         = $App->Config;
+$Config->©stripe['©secret_key'] = '';
+
+$existing_customer_id     = 'cus_AN770dvG5I94gK';
+$existing_customer_source = 'card_1A2MucGVi5cyjiDwJJC6Q363';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Test customer creation.
 $Customer = c::stripeCustomer([
     'ip'        => 'xxx.xxx.xxx.xxx',
     'email'     => 'billy@example.com',
@@ -29,8 +31,6 @@ $Customer = c::stripeCustomer([
 if (c::isError($Error = $Customer)) {
     throw c::issue($Customer, $Error->message());
 }
-
-// Test customer retrieval by ID.
 $Customer = c::stripeCustomer($Customer->id);
 if (c::isError($Error = $Customer)) {
     throw c::issue($Customer, $Error->message());
@@ -38,33 +38,51 @@ if (c::isError($Error = $Customer)) {
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// After adding a test card manually.
+if ($existing_customer_id && $existing_customer_source) {
+    $Customer = c::stripeUpdateCustomer([
+        'customer'  => $existing_customer_id,
 
-// Test charging the customer.
-$Charge = c::stripeCharge([
-    'customer'  => 'cus_AH36AxjaOk2vvO',
+        'ip'        => '~xxx.xxx.xxx.xxx',
+        'email'     => '~billy@example.com',
+        'fname'     => '~Billy',
+        'lname'     => '~Bob',
 
-    'amount'    => 1.25,
-    'currency'  => 'USD',
-
-    'order_id'  => 1,
-    'metadata'  => [
-        'hello' => 'world',
-    ],
-]);
-if (c::isError($Error = $Charge)) {
-    throw c::issue($Charge, $Error->message());
-}
-
-// Test charge retrieval by ID.
-$Charge = c::stripeCharge($Charge->id);
-if (c::isError($Error = $Charge)) {
-    throw c::issue($Charge, $Error->message());
+        'user_id'   => 1,
+        'metadata'  => [
+            'hello' => '~world',
+            'hi'    => '~there',
+        ],
+    ]);
+    if (c::isError($Error = $Customer)) {
+        throw c::issue($Customer, $Error->message());
+    }
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Test plan creation.
+if ($existing_customer_id && $existing_customer_source) {
+    $Charge = c::stripeCharge([
+        'customer'  => $existing_customer_id,
+
+        'amount'    => 1.25,
+        'currency'  => 'USD',
+
+        'order_id'  => 1,
+        'metadata'  => [
+            'hello' => 'world',
+        ],
+    ]);
+    if (c::isError($Error = $Charge)) {
+        throw c::issue($Charge, $Error->message());
+    }
+    $Charge = c::stripeCharge($Charge->id);
+    if (c::isError($Error = $Charge)) {
+        throw c::issue($Charge, $Error->message());
+    }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
 $Plan = c::stripePlan([
     'name' => 'Monthly Plan',
 
@@ -81,8 +99,6 @@ $Plan = c::stripePlan([
 if (c::isError($Error = $Plan)) {
     throw c::issue($Plan, $Error->message());
 }
-
-// Test plan retrieval by ID.
 $Plan = c::stripePlan($Plan->id);
 if (c::isError($Error = $Plan)) {
     throw c::issue($Plan, $Error->message());
@@ -90,22 +106,21 @@ if (c::isError($Error = $Plan)) {
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Test subscription creation.
-$Subscription = c::stripeSubscription([
-    'customer'  => 'cus_AH36AxjaOk2vvO',
-    'plan'      => $Plan->id,
+if ($existing_customer_id && $existing_customer_source) {
+    $Subscription = c::stripeSubscription([
+        'customer'  => $existing_customer_id,
+        'plan'      => $Plan->id,
 
-    'order_id'  => 1,
-    'metadata'  => [
-        'hello' => 'world',
-    ],
-]);
-if (c::isError($Error = $Subscription)) {
-    throw c::issue($Subscription, $Error->message());
-}
-
-// Test subscription retrieval by ID.
-$Subscription = c::stripeSubscription($Subscription->id);
-if (c::isError($Error = $Subscription)) {
-    throw c::issue($Subscription, $Error->message());
+        'order_id'  => 1,
+        'metadata'  => [
+            'hello' => 'world',
+        ],
+    ]);
+    if (c::isError($Error = $Subscription)) {
+        throw c::issue($Subscription, $Error->message());
+    }
+    $Subscription = c::stripeSubscription($Subscription->id);
+    if (c::isError($Error = $Subscription)) {
+        throw c::issue($Subscription, $Error->message());
+    }
 }

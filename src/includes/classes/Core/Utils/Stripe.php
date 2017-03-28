@@ -59,7 +59,7 @@ class Stripe extends Classes\Core\Base\Core
     }
 
     /**
-     * Get (or create) customer.
+     * Get, update, or create customer.
      *
      * @since 17xxxx Stripe utils.
      *
@@ -75,9 +75,12 @@ class Stripe extends Classes\Core\Base\Core
 
         $default_args = [
             'api_key'  => '', // Stripe API key.
-            'customer' => '', // Get existing ID.
+            'customer' => '', // Existing customer ID.
 
-            // Everything else is for a new customer.
+            // Everything else is for a new customer, or for an update.
+            // i.e., If `update_existing=true`, customer is updated to this info.
+            // ~ Anything that is not passed in will not be changed in any way.
+            'update_existing' => false, // Update if exists?
 
             'ip'    => '', // New customer IP address.
             'email' => '', // New customer email address.
@@ -85,8 +88,9 @@ class Stripe extends Classes\Core\Base\Core
             'fname' => '', // New customer first name.
             'lname' => '', // New customer last name.
 
-            'source'      => '', // New customer source.
-            'description' => '', // New customer description.
+            'source'            => '', // New customer source.
+            'is_default_source' => true, // Is the default source?
+            'description'       => '', // New customer description.
 
             'user_id'  => '', // New customer user ID.
             'metadata' => '', // New customer metadata.
@@ -106,6 +110,9 @@ class Stripe extends Classes\Core\Base\Core
                 $Customer = Customer::retrieve($args['customer'], $opts);
             } catch (\Throwable $Exception) {
                 return $this->exceptionError($Exception);
+            }
+            if ($Customer instanceof Customer && $args['update_existing']) {
+                $Customer = $this->updateCustomer($args, $Customer);
             }
         } else { // Create a new customer.
             try {
@@ -133,6 +140,91 @@ class Stripe extends Classes\Core\Base\Core
         if (!($Customer instanceof Customer)) {
             $_error = sprintf('Failed to acquire customer.');
             return $this->exceptionError(new Exception($_error));
+        }
+        return $Customer;
+    }
+
+    /**
+     * Update existing customer.
+     *
+     * @since 17xxxx Stripe utils.
+     *
+     * @param array         $args     Arguments.
+     * @param Customer|null $Customer Instance (optional).
+     *
+     * @return Customer|Error Customer on success.
+     */
+    public function updateCustomer(array $args, Customer $Customer = null)
+    {
+        $default_args = [
+            'api_key'  => '', // Stripe API key.
+            'customer' => '', // Existing customer ID.
+
+            // Everything else is optional (for update).
+            // Anything not passed in will not be changed.
+
+            'ip'    => '', // New IP address for customer.
+            'email' => '', // New email address for customer.
+
+            'fname' => '', // New first name for customer.
+            'lname' => '', // New last name for customer.
+
+            'source'            => '', // New source for customer.
+            'is_default_source' => true, // Is the default source?
+            'description'       => '', // New description for customer.
+
+            'user_id'  => '', // New user ID for customer.
+            'metadata' => '', // New metadata for customer.
+        ];
+        $args = (array) $args; // Force array.
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
+        extract($this->parseArgs(__FUNCTION__, $args));
+
+        if (!$Customer && $args['customer']) {
+            $Customer = $this->customer($args['customer']);
+        }
+        if (!($Customer instanceof Customer)) {
+            $_error = sprintf('Failed to acquire customer for update.');
+            return $this->exceptionError(new Exception($_error));
+        }
+        try { // Update.
+            if ($args['email']) {
+                $Customer->email = $args['email'];
+            }
+            if ($args['source']) {
+                $Customer->source = $args['source'];
+
+                if ($args['is_default_source']) {
+                    $Customer->default_source = $args['source'];
+                } // Update customer's default source.
+            }
+            if ($args['description']) {
+                $Customer->description = $args['description'];
+            }
+            if ($args['ip']) {
+                $Customer->metadata->ip = $args['ip'];
+            }
+            if ($args['email']) {
+                $Customer->metadata->email = $args['email'];
+            }
+            if ($args['fname']) {
+                $Customer->metadata->fname = $args['fname'];
+            }
+            if ($args['lname']) {
+                $Customer->metadata->lname = $args['lname'];
+            }
+            if ($args['user_id']) {
+                $Customer->metadata->user_id = $args['user_id'];
+            }
+            if ($args['metadata']) {
+                foreach ($args['metadata'] as $_key => $_value) {
+                    $Customer->metadata->{$_key} = $_value;
+                } // unset($_key, $_value);
+            }
+            $Customer->save();
+        } catch (\Throwable $Exception) {
+            return $this->exceptionError($Exception);
         }
         return $Customer;
     }
@@ -516,6 +608,9 @@ class Stripe extends Classes\Core\Base\Core
                     $__value = $this->c::clip((string) $__value, 500);
                 } // Must unset value in sub-loop by reference.
                 unset($__key, $__value); // Housekeeping.
+                //
+            } elseif (in_array($_key, ['update_existing', 'is_default_source'], true)) {
+                $_value = (bool) $_value; // Booleans.
                 //
             } elseif (in_array($_key, ['trial_period_days', 'interval_count'], true)) {
                 $_value = (int) $_value; // Integers.
