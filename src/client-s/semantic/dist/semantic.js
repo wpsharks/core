@@ -16557,8 +16557,10 @@ $.fn.sticky = function(parameters) {
 
         destroy: function() {
           module.verbose('Destroying previous instance');
+
           clearTimeout(module.timer);
           module.reset();
+
           if(documentObserver) {
             documentObserver.disconnect();
           }
@@ -16574,6 +16576,24 @@ $.fn.sticky = function(parameters) {
             .off('scrollchange' + eventNamespace, module.event.scrollchange)
           ;
           $module.removeData(moduleNamespace);
+
+          $container.add($module).css({
+            'position' : '',
+            'z-index' : '',
+
+            'top' : '',
+            'right' : '',
+            'bottom' : '',
+            'left' : '',
+
+            'width' : '',
+            'min-width' : '',
+            'max-width' : '',
+
+            'height' : '',
+            'min-height' : '',
+            'max-height' : '',
+          });
         },
 
         observeChanges: function() {
