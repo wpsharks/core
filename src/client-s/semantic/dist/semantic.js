@@ -16558,15 +16558,15 @@ $.fn.sticky = function(parameters) {
         destroy: function() {
           module.verbose('Destroying previous instance');
 
-          clearTimeout(module.timer);
-          module.reset();
-
           if(documentObserver) {
             documentObserver.disconnect();
           }
           if(observer) {
             observer.disconnect();
           }
+          clearTimeout(module.timer);
+          module.reset();
+
           $window
             .off('load' + eventNamespace, module.event.load)
             .off('resize' + eventNamespace, module.event.resize)
@@ -16577,22 +16577,27 @@ $.fn.sticky = function(parameters) {
           ;
           $module.removeData(moduleNamespace);
 
-          $container.add($module).css({
-            'position' : '',
-            'z-index' : '',
+          requestAnimationFrame(function() {
+            $container.add($module).css({
+              'position' : '',
+              'z-index' : '',
 
-            'top' : '',
-            'right' : '',
-            'bottom' : '',
-            'left' : '',
+              'top' : '',
+              'right' : '',
+              'bottom' : '',
+              'left' : '',
 
-            'width' : '',
-            'min-width' : '',
-            'max-width' : '',
+              'width' : '',
+              'min-width' : '',
+              'max-width' : '',
 
-            'height' : '',
-            'min-height' : '',
-            'max-height' : '',
+              'height' : '',
+              'min-height' : '',
+              'max-height' : '',
+
+              'margin-top': '',
+              'margin-bottom': '',
+            });
           });
         },
 
