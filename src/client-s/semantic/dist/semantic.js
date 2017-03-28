@@ -16564,9 +16564,6 @@ $.fn.sticky = function(parameters) {
           if(observer) {
             observer.disconnect();
           }
-          clearTimeout(module.timer);
-          module.reset();
-
           $window
             .off('load' + eventNamespace, module.event.load)
             .off('resize' + eventNamespace, module.event.resize)
@@ -16575,9 +16572,10 @@ $.fn.sticky = function(parameters) {
             .off('scroll' + eventNamespace, module.event.scroll)
             .off('scrollchange' + eventNamespace, module.event.scrollchange)
           ;
+          clearTimeout(module.timer); module.reset();
           $module.removeData(moduleNamespace);
 
-          requestAnimationFrame(function() {
+          var clearCSS = function() {
             $container.add($module).css({
               'position' : '',
               'z-index' : '',
@@ -16598,7 +16596,9 @@ $.fn.sticky = function(parameters) {
               'margin-top': '',
               'margin-bottom': '',
             });
-          });
+          };
+          requestAnimationFrame(clearCSS),
+            setTimeout(clearCSS, 0);
         },
 
         observeChanges: function() {
