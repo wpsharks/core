@@ -17067,6 +17067,7 @@ $.fn.sticky = function(parameters) {
 
         bindTop: function() {
           module.debug('Binding element to top of parent container');
+          module.set.minimumSize();
           module.remove.offset();
           $module
             .css({
@@ -17084,6 +17085,7 @@ $.fn.sticky = function(parameters) {
         },
         bindBottom: function() {
           module.debug('Binding element to bottom of parent container');
+          module.set.minimumSize();
           module.remove.offset();
           $module
             .css({
