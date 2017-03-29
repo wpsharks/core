@@ -21,14 +21,14 @@ use League\ISO3166\ISO3166;
 /**
  * Country utilities.
  *
- * @since 17xxxx Country utils.
+ * @since 170329.13807 Country utils.
  */
 class Country extends Classes\Core\Base\Core
 {
     /**
      * ISO3166.
      *
-     * @since 17xxxx
+     * @since 170329.13807
      *
      * @type ISO3166.
      */
@@ -37,7 +37,7 @@ class Country extends Classes\Core\Base\Core
     /**
      * Class constructor.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -51,7 +51,7 @@ class Country extends Classes\Core\Base\Core
     /**
      * Select menu options.
      *
-     * @since 17xxxx Country utils.
+     * @since 170329.13807 Country utils.
      *
      * @param string $selected Selected value.
      * @param array  $args     Any behavioral args.
@@ -90,7 +90,7 @@ class Country extends Classes\Core\Base\Core
     /**
      * Dropdown menu items.
      *
-     * @since 17xxxx Country utils.
+     * @since 170329.13807 Country utils.
      *
      * @param string $active Active value.
      * @param array  $args   Any behavioral args.

@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Stripe.
  *
- * @since 17xxxx
+ * @since 170329.13807
  */
 trait Stripe
 {
     /**
-     * @since 17xxxx Stripe utilities.
+     * @since 170329.13807 Stripe utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Stripe
     }
 
     /**
-     * @since 17xxxx Stripe utilities.
+     * @since 170329.13807 Stripe utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait Stripe
     }
 
     /**
-     * @since 17xxxx Stripe utilities.
+     * @since 170329.13807 Stripe utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -60,7 +60,7 @@ trait Stripe
     }
 
     /**
-     * @since 17xxxx Stripe utilities.
+     * @since 170329.13807 Stripe utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -72,7 +72,7 @@ trait Stripe
     }
 
     /**
-     * @since 17xxxx Stripe utilities.
+     * @since 170329.13807 Stripe utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -84,7 +84,7 @@ trait Stripe
     }
 
     /**
-     * @since 17xxxx Stripe utilities.
+     * @since 170329.13807 Stripe utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

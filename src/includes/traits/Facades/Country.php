@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Country.
  *
- * @since 17xxxx
+ * @since 170329.13807
  */
 trait Country
 {
     /**
-     * @since 17xxxx Country utils.
+     * @since 170329.13807 Country utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Country
     }
 
     /**
-     * @since 17xxxx Country utils.
+     * @since 170329.13807 Country utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

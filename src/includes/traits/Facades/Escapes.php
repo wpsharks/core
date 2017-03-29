@@ -24,7 +24,7 @@ use function get_defined_vars as vars;
 trait Escapes
 {
     /**
-     * @since 17xxxx Quote utils.
+     * @since 170329.13807 Quote utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait Escapes
     }
 
     /**
-     * @since 17xxxx Quote utils.
+     * @since 170329.13807 Quote utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

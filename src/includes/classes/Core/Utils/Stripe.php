@@ -33,14 +33,14 @@ use Stripe\Error\Permission as StripePermissionError;
 /**
  * Stripe utilities.
  *
- * @since 17xxxx Stripe utils.
+ * @since 170329.13807 Stripe utils.
  */
 class Stripe extends Classes\Core\Base\Core
 {
     /**
      * Stripe API version.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @type string Stripe API version.
      */
@@ -49,7 +49,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Class constructor.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -61,7 +61,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Get, update, or create customer.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param string|array $args ID or args.
      *
@@ -147,7 +147,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Update existing customer.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param array         $args     Arguments.
      * @param Customer|null $Customer Instance (optional).
@@ -232,7 +232,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Get (or create) a charge.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param string|array $args ID or args.
      *
@@ -304,7 +304,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Get (or create) a plan.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param string|array $args ID or args.
      *
@@ -389,7 +389,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Get (or create) a subscription.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param string|array $args ID or args.
      *
@@ -453,7 +453,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * JS token as HTML markup.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param \StdClass $token JS token.
      * @param array     $args  Behavioral args.
@@ -505,7 +505,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Smallest currency unit.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param float  $amount   Amount.
      * @param string $currency Currency code.
@@ -542,7 +542,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Exception to error.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param \Throwable $Exception Exception
      *
@@ -570,7 +570,7 @@ class Stripe extends Classes\Core\Base\Core
     /**
      * Argument parser.
      *
-     * @since 17xxxx Stripe utils.
+     * @since 170329.13807 Stripe utils.
      *
      * @param string $func Function.
      * @param array  $args Request args.
