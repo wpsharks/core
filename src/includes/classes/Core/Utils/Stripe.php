@@ -485,13 +485,13 @@ class Stripe extends Classes\Core\Base\Core
             } else { // Just indicate that it's a credit card.
                 $_icon = '<i class="credit card alternative icon"></i>';
             }
-            $markup = $_icon.' <tt data-token="'.$this->c::escAttr(json_encode($token)).'">xxxx...'.$this->c::escHtml($token->card->last4).'</tt>';
+            $markup = $_icon.' <tt data-token="'.$this->c::escAttr(json_encode($token)).'">•••• •••• •••• …'.$this->c::escHtml($token->card->last4).'</tt>';
             //
         } elseif ($token->type === 'alipay_account' && !empty($token->alipay_account->username) && is_string($token->alipay_account->username)) {
             $markup = '<i class="yen icon"></i> <tt data-token="'.$this->c::escAttr(json_encode($token)).'">'.$this->c::escHtml($token->alipay_account->username).'</tt>';
             //
         } elseif ($token->type === 'bank_account' && !empty($token->bank_account->last4) && is_string($token->bank_account->last4)) {
-            $markup = '<i class="university icon"></i> <tt data-token="'.$this->c::escAttr(json_encode($token)).'">xxxx...'.$this->c::escHtml($token->bank_account->last4).'</tt>';
+            $markup = '<i class="university icon"></i> <tt data-token="'.$this->c::escAttr(json_encode($token)).'">••••••••…'.$this->c::escHtml($token->bank_account->last4).'</tt>';
             //
         } elseif ($token->type === 'source_bitcoin' && !empty($token->bitcoin->address) && is_string($token->bitcoin->address)) {
             $markup = '<i class="bitcoin icon"></i> <tt data-token="'.$this->c::escAttr(json_encode($token)).'">'.$this->c::escHtml($token->bitcoin->address).'</tt>';
