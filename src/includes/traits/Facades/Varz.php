@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -69,5 +69,17 @@ trait Varz
     public static function varToSlug(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Varz->toSlug(...$args);
+    }
+
+    /**
+     * @since 17xxxx Var utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Varz::toCamelCase()
+     */
+    public static function varToCamelCase(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Varz->toCamelCase(...$args);
     }
 }

@@ -1,3 +1,7 @@
+## $v
+
+- Adding `c::varToCamelCase()`.
+
 ## v170329.13807
 
 - Adding `c::stripeCustomer()`.

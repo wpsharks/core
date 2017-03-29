@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -48,12 +48,10 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      */
     public function toName(string $var): string
     {
-        $name = $var; // Working copy.
-        $name = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $name);
-        $name = $this->c::mbUcWords($name);
-        $name = $this->c::mbTrim($name);
-
-        return $name;
+        $name        = $var; // Working copy.
+        $name        = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $name);
+        $name        = $this->c::mbUcWords($name);
+        return $name = $this->c::mbTrim($name);
     }
 
     /**
@@ -90,5 +88,28 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
             $slug = 'x'.$slug; // Force `^[a-z]`.
         }
         return $slug;
+    }
+
+    /**
+     * Convert var to camelCase.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param string $var Var to convert to camelCase.
+     *
+     * @return string camelCase; based on var.
+     */
+    public function toCamelCase(string $var): string
+    {
+        $var = mb_strtolower($this->c::forceAscii($var));
+        $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
+        $var = $this->c::mbTrim($var, '', '_');
+
+        if ($var && !preg_match('/^[a-z]/u', $var)) {
+            $var = 'x'.$var; // Force `^[a-z]`.
+        }
+        return $camelCase = $var ? preg_replace_callback('/_(.)/u', function (array $m): string {
+            return mb_strtoupper($m[1]); // e.g., `_x` becomes `X` for camelCase.
+        }, $var) : $var; // Converts variable into camelCase variable.
     }
 }
