@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -81,24 +81,22 @@ class MailChimp extends Classes\Core\Base\Core
                 'content-type: application/json',
                 'authorization: Basic '.base64_encode('_:'.$args['api_key']),
             ],
-            'body'            => json_encode($request_data),
-            'max_con_secs'    => 5,
-            'max_stream_secs' => 5,
-            'fail_on_error'   => false,
-            'return_array'    => true,
+            'body'          => json_encode($request_data),
+            'max_con_secs'  => 5, 'max_stream_secs' => 5,
+            'fail_on_error' => false,
         ];
         $dc       = preg_replace('/^.+?\-/u', '', $args['api_key']);
         $endpoint = 'https://'.$dc.'.api.mailchimp.com/3.0/lists/'.urlencode($args['list_id']).'/members/';
 
         # Query for remote response via API endpoint URL.
 
-        $response = $this->c::remoteRequest('POST::'.$endpoint, $request_args);
+        $response = $this->c::remoteResponse('POST::'.$endpoint, $request_args);
 
         # Return structured response data w/ `success` property.
 
         return (object) [
-            'success'  => $response['code'] === 200,
-            'data'     => json_decode($response['body']),
+            'success'  => $response->code === 200,
+            'data'     => json_decode($response->body),
             'response' => $response,
         ];
     }
@@ -149,24 +147,22 @@ class MailChimp extends Classes\Core\Base\Core
                 'content-type: application/json',
                 'authorization: Basic '.base64_encode('_:'.$args['api_key']),
             ],
-            'body'            => json_encode($request_data),
-            'max_con_secs'    => 5,
-            'max_stream_secs' => 5,
-            'fail_on_error'   => false,
-            'return_array'    => true,
+            'body'          => json_encode($request_data),
+            'max_con_secs'  => 5, 'max_stream_secs' => 5,
+            'fail_on_error' => false,
         ];
         $dc       = preg_replace('/^.+?\-/u', '', $args['api_key']);
         $endpoint = 'https://'.$dc.'.api.mailchimp.com/3.0/lists/'.urlencode($args['list_id']).'/members/'.md5($args['email_address']);
 
         # Query for remote response via API endpoint URL.
 
-        $response = $this->c::remoteRequest('PUT::'.$endpoint, $request_args);
+        $response = $this->c::remoteResponse('PUT::'.$endpoint, $request_args);
 
         # Return structured response data w/ `success` property.
 
         return (object) [
-            'success'  => $response['code'] === 200,
-            'data'     => json_decode($response['body']),
+            'success'  => $response->code === 200,
+            'data'     => json_decode($response->body),
             'response' => $response,
         ];
     }
@@ -213,24 +209,22 @@ class MailChimp extends Classes\Core\Base\Core
                 'content-type: application/json',
                 'authorization: Basic '.base64_encode('_:'.$args['api_key']),
             ],
-            'body'            => json_encode($request_data),
-            'max_con_secs'    => 5,
-            'max_stream_secs' => 5,
-            'fail_on_error'   => false,
-            'return_array'    => true,
+            'body'          => json_encode($request_data),
+            'max_con_secs'  => 5, 'max_stream_secs' => 5,
+            'fail_on_error' => false,
         ];
         $dc       = preg_replace('/^.+?\-/u', '', $args['api_key']);
         $endpoint = 'https://'.$dc.'.api.mailchimp.com/3.0/lists/'.urlencode($args['list_id']).'/members/'.md5($args['email_address']);
 
         # Query for remote response via API endpoint URL.
 
-        $response = $this->c::remoteRequest('PATCH::'.$endpoint, $request_args);
+        $response = $this->c::remoteResponse('PATCH::'.$endpoint, $request_args);
 
         # Return structured response data w/ `success` property.
 
         return (object) [
-            'success'  => $response['code'] === 200,
-            'data'     => json_decode($response['body']),
+            'success'  => $response->code === 200,
+            'data'     => json_decode($response->body),
             'response' => $response,
         ];
     }
@@ -267,23 +261,21 @@ class MailChimp extends Classes\Core\Base\Core
                 'content-type: application/json',
                 'authorization: Basic '.base64_encode('_:'.$args['api_key']),
             ],
-            'max_con_secs'    => 5,
-            'max_stream_secs' => 5,
-            'fail_on_error'   => false,
-            'return_array'    => true,
+            'max_con_secs'  => 5, 'max_stream_secs' => 5,
+            'fail_on_error' => false,
         ];
         $dc       = preg_replace('/^.+?\-/u', '', $args['api_key']);
         $endpoint = 'https://'.$dc.'.api.mailchimp.com/3.0/lists/'.urlencode($args['list_id']).'/members/'.md5($args['email_address']);
 
         # Query for remote response via API endpoint URL.
 
-        $response = $this->c::remoteRequest('GET::'.$endpoint, $request_args);
+        $response = $this->c::remoteResponse('GET::'.$endpoint, $request_args);
 
         # Return structured response data w/ `success` property.
 
         return (object) [
-            'success'  => $response['code'] === 200,
-            'data'     => json_decode($response['body']),
+            'success'  => $response->code === 200,
+            'data'     => json_decode($response->body),
             'response' => $response,
         ];
     }
