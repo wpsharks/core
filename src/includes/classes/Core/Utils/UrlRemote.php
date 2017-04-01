@@ -247,12 +247,10 @@ class UrlRemote extends Classes\Core\Base\Core
 
         $curl_info = curl_getinfo($curl);
         $curl_info = is_array($curl_info) ? $curl_info : [];
+        $curl_code = (int) ($curl_info['http_code'] ?? 0);
 
         $curl_errno = (int) curl_errno($curl);
         $curl_error = (string) curl_error($curl);
-
-        $curl_code = (int) ($curl_info['http_code'] ?? 0);
-        $curl_code = $curl_errno ? 0 : $curl_code;
 
         # Parse the headers that we collected, if any.
 

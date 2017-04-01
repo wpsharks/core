@@ -1,6 +1,7 @@
 ## $v
 
 - Adding `c::varToCamelCase()`.
+- Bug fix. `curl_errno` should not impact the `http_code` return value.
 
 ## v170329.13807
 

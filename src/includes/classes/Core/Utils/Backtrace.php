@@ -43,6 +43,9 @@ class Backtrace extends Classes\Core\Base\Core
         // An additional `$___offset` location is added to this.
         // And then an additional `$at` location can be added also.
 
+        // @TODO Use the limit parameter to `debug_backtrace()` as a way
+        // of further optimizing this routine. No need to pull everything at all times.
+
         if (!($backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))) {
             return $callers; // Not possible; unexpected trace.
         }
