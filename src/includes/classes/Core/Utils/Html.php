@@ -81,4 +81,19 @@ class Html extends Classes\Core\Base\Core
     {
         return (string) $a === (string) $b ? ' active' : '';
     }
+
+    /**
+     * Active & selected?
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param mixed $a Input variable a.
+     * @param mixed $b Input variable b.
+     *
+     * @return string ` active selected` if true.
+     */
+    public function activeSelected($a, $b)
+    {
+        return (string) $a === (string) $b ? ' active selected' : '';
+    }
 }

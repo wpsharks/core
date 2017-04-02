@@ -214,4 +214,16 @@ trait Html
     {
         return $GLOBALS[static::class]->Utils->©Html->active(...$args);
     }
+
+    /**
+     * @since 17xxxx Adding active utility.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Html::activeSelected()
+     */
+    public static function activeSelected(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Html->activeSelected(...$args);
+    }
 }
