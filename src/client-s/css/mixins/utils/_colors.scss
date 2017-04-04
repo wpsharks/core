@@ -6,6 +6,10 @@
     &[class*='_c _inverted'] {
       color:                  $sm-inverted-color !important;
     }
+
+    &[class*='_c _fill _current'] {
+      fill:                   currentColor !important;
+    }
   }
 
   ._bc {

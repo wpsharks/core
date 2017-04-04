@@ -1,0 +1,35 @@
+/*
+ * Better inversions.
+ */
+@mixin better-inversions {
+  .ui.inverted {
+    /*
+     * Link lists.
+     */
+    &.link.list {
+      &.celled,
+      &.bulleted {
+        > .item {
+          > .icon {
+            transition:       none;
+            color:            inherit;
+          }
+        }
+      }
+
+      &.celled {
+        > .item {
+          border-color:       transparentize($sm-inverted-color, 0.9);
+        }
+      }
+
+      &.bulleted {
+        > .item {
+          &::before {
+            color:            transparentize($sm-inverted-color, 0.9);
+          }
+        }
+      }
+    }
+  }
+}

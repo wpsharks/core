@@ -28,18 +28,25 @@
 
   ._flex {
     display:                  flex !important;
-
-    > a,
-    > div {
-      flex:                   1 1 auto;
-    }
+    align-items:              stretch;
+    justify-content:          center;
 
     &[class*='_flex _row'] {
       flex-flow:              row wrap;
+
+      > a,
+      > div {
+        flex:                 1 1 auto;
+      }
     }
 
     &[class*='_flex _column'] {
       flex-flow:              column nowrap;
+
+      > a,
+      > div {
+        flex:                 0 1 auto;
+      }
     }
   }
 }

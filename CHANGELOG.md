@@ -3,6 +3,7 @@
 - Adding `c::varToCamelCase()`.
 - Adding `c::activeSelected()`.
 - Adding CSS filter shadow utilities.
+- Enhancing inverted CSS selectors in SUI.
 - Optimizing CSS utilities that set unit values.
 - Bug fix. `curl_errno` should not impact the `http_code` return value.
 
