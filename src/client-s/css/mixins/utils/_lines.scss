@@ -6,59 +6,47 @@
     /*
      * Normal.
      */
-    &[class*='_lh _n'] {
+    &[class*='_lh _normal'] {
       line-height:            1.4285em !important;
     }
 
     /*
-     * Points.
+     * Unitless.
      */
-    &[class*='_lh _1'] {
+    &[class*='_lh _1u'] {
       line-height:            1 !important;
     }
 
-    &[class*='_lh _125'] {
+    &[class*='_lh _125u'] {
       line-height:            1.25 !important;
     }
 
-    &[class*='_lh _150'] {
+    &[class*='_lh _150u'] {
       line-height:            1.5 !important;
     }
 
-    &[class*='_lh _175'] {
+    &[class*='_lh _175u'] {
       line-height:            1.75 !important;
     }
 
-    &[class*='_lh _2'] {
+    &[class*='_lh _2u'] {
       line-height:            2 !important;
     }
 
-    &[class*='_lh _225'] {
+    &[class*='_lh _225u'] {
       line-height:            2.25 !important;
     }
 
-    &[class*='_lh _250'] {
+    &[class*='_lh _250u'] {
       line-height:            2.5 !important;
     }
 
-    &[class*='_lh _275'] {
+    &[class*='_lh _275u'] {
       line-height:            2.75 !important;
     }
 
-    &[class*='_lh _3'] {
+    &[class*='_lh _3u'] {
       line-height:            3 !important;
-    }
-
-    &[class*='_lh _325'] {
-      line-height:            3.25 !important;
-    }
-
-    &[class*='_lh _350'] {
-      line-height:            3.5 !important;
-    }
-
-    &[class*='_lh _375'] {
-      line-height:            3.75 !important;
     }
   }
 

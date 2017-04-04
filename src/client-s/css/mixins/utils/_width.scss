@@ -2,43 +2,126 @@
  * Width utils.
  */
 @mixin width-utils {
+  /*
+   * Alias of `_w 100p`.
+   */
+  ._fluid {
+    width:                    100% !important;
+  }
+
   ._w {
     /*
      * Em units.
      */
-    &[class*='_w _025'] {
+    &[class*='_w _025e'] {
       width:                 .25em !important;
     }
 
-    &[class*='_w _05'] {
+    &[class*='_w _05e'] {
       width:                 .5em !important;
     }
 
-    &[class*='_w _1'] {
+    &[class*='_w _075e'] {
+      width:                 .75em !important;
+    }
+
+    &[class*='_w _1e'] {
       width:                  1em !important;
     }
 
-    &[class*='_w _2'] {
+    &[class*='_w _125e'] {
+      width:                  1.25em !important;
+    }
+
+    &[class*='_w _150e'] {
+      width:                  1.5em !important;
+    }
+
+    &[class*='_w _175e'] {
+      width:                  1.75em !important;
+    }
+
+    &[class*='_w _2e'] {
       width:                  2em !important;
     }
 
-    &[class*='_w _3'] {
+    &[class*='_w _225e'] {
+      width:                  2.25em !important;
+    }
+
+    &[class*='_w _250e'] {
+      width:                  2.5em !important;
+    }
+
+    &[class*='_w _275e'] {
+      width:                  2.75em !important;
+    }
+
+    &[class*='_w _3e'] {
       width:                  3em !important;
+    }
+
+    &[class*='_w _5e'] {
+      width:                  5em !important;
+    }
+
+    &[class*='_w _10e'] {
+      width:                  10em !important;
+    }
+
+    &[class*='_w _20e'] {
+      width:                  20em !important;
+    }
+
+    &[class*='_w _30e'] {
+      width:                  30em !important;
     }
 
     /*
      * Percent of parent.
      */
+    &[class*='_w _05p'] {
+      width:                  05% !important;
+    }
+
+    &[class*='_w _15p'] {
+      width:                  15% !important;
+    }
+
     &[class*='_w _25p'] {
       width:                  25% !important;
+    }
+
+    &[class*='_w _35p'] {
+      width:                  35% !important;
+    }
+
+    &[class*='_w _45p'] {
+      width:                  45% !important;
     }
 
     &[class*='_w _50p'] {
       width:                  50% !important;
     }
 
+    &[class*='_w _55p'] {
+      width:                  55% !important;
+    }
+
+    &[class*='_w _65p'] {
+      width:                  65% !important;
+    }
+
     &[class*='_w _75p'] {
       width:                  75% !important;
+    }
+
+    &[class*='_w _85p'] {
+      width:                  85% !important;
+    }
+
+    &[class*='_w _95p'] {
+      width:                  95% !important;
     }
 
     &[class*='_w _100p'] {
@@ -66,43 +149,9 @@
   }
 
   /*
-   * Alias of `_w 100p`.
-   */
-  ._fluid {
-    width:                    100% !important;
-  }
-
-  /*
    * Min.
    */
   ._mnw {
-    /*
-     * Em units.
-     */
-    &[class*='_mnw _0'] {
-      min-width:              0 !important;
-    }
-
-    &[class*='_mnw _025'] {
-      min-width:             .25em !important;
-    }
-
-    &[class*='_mnw _05'] {
-      min-width:             .5em !important;
-    }
-
-    &[class*='_mnw _1'] {
-      min-width:              1em !important;
-    }
-
-    &[class*='_mnw _2'] {
-      min-width:              2em !important;
-    }
-
-    &[class*='_mnw _3'] {
-      min-width:              3em !important;
-    }
-
     /*
      * Percent of parent.
      */
@@ -146,29 +195,6 @@
    * Max.
    */
   ._mxw {
-    /*
-     * Em units.
-     */
-    &[class*='_mxw _025'] {
-      max-width:             .25em !important;
-    }
-
-    &[class*='_mxw _05'] {
-      max-width:             .5em !important;
-    }
-
-    &[class*='_mxw _1'] {
-      max-width:              1em !important;
-    }
-
-    &[class*='_mxw _2'] {
-      max-width:              2em !important;
-    }
-
-    &[class*='_mxw _3'] {
-      max-width:              3em !important;
-    }
-
     /*
      * Percent of parent.
      */

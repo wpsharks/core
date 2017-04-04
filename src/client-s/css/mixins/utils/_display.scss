@@ -25,4 +25,21 @@
   ._iblock {
     display:                  inline-block !important;
   }
+
+  ._flex {
+    display:                  flex !important;
+
+    > a,
+    > div {
+      flex:                   1 1 auto;
+    }
+
+    &[class*='_flex _row'] {
+      flex-flow:              row wrap;
+    }
+
+    &[class*='_flex _column'] {
+      flex-flow:              column nowrap;
+    }
+  }
 }

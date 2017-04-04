@@ -6,80 +6,92 @@
     /*
      * Sizes.
      */
-    &[class*='_f _025'] {
+    &[class*='_f _025e'] {
       font-size:             .25em !important;
     }
 
-    &[class*='_f _05'] {
+    &[class*='_f _035e'] {
+      font-size:             .35em !important;
+    }
+
+    &[class*='_f _045e'] {
+      font-size:             .45em !important;
+    }
+
+    &[class*='_f _05e'] {
       font-size:             .5em !important;
     }
 
-    &[class*='_f _055'] {
+    &[class*='_f _055e'] {
       font-size:             .55em !important;
     }
 
-    &[class*='_f _065'] {
+    &[class*='_f _065e'] {
       font-size:             .65em !important;
     }
 
-    &[class*='_f _075'] {
+    &[class*='_f _075e'] {
       font-size:             .75em !important;
     }
 
-    &[class*='_f _085'] {
+    &[class*='_f _085e'] {
       font-size:             .85em !important;
     }
 
-    &[class*='_f _095'] {
+    &[class*='_f _095e'] {
       font-size:             .95em !important;
     }
 
-    &[class*='_f _1'] {
+    &[class*='_f _1e'] {
       font-size:              1em !important;
     }
 
-    &[class*='_f _125'] {
+    &[class*='_f _125e'] {
       font-size:              1.25em !important;
     }
 
-    &[class*='_f _150'] {
+    &[class*='_f _150e'] {
       font-size:              1.5em !important;
     }
 
-    &[class*='_f _175'] {
+    &[class*='_f _175e'] {
       font-size:              1.75em !important;
     }
 
-    &[class*='_f _2'] {
+    &[class*='_f _2e'] {
       font-size:              2em !important;
     }
 
-    &[class*='_f _225'] {
+    &[class*='_f _225e'] {
       font-size:              2.25em !important;
     }
 
-    &[class*='_f _250'] {
+    &[class*='_f _250e'] {
       font-size:              2.5em !important;
     }
 
-    &[class*='_f _275'] {
+    &[class*='_f _275e'] {
       font-size:              2.75em !important;
     }
 
-    &[class*='_f _3'] {
+    &[class*='_f _3e'] {
       font-size:              3em !important;
     }
 
-    &[class*='_f _325'] {
-      font-size:              3.25em !important;
+    &[class*='_f _5e'] {
+      font-size:              5em !important;
     }
 
-    &[class*='_f _350'] {
-      font-size:              3.5em !important;
+    &[class*='_f _10e'] {
+      font-size:              10em !important;
     }
 
-    &[class*='_f _375'] {
-      font-size:              3.75em !important;
+    &[class*='_f _20e'] {
+      font-size:              20em !important;
+    }
+
+    &[class*='_f _30e'] {
+      font-size:              30em !important;
     }
 
     /*
@@ -131,12 +143,12 @@
       text-transform:         uppercase !important;
     }
 
-    &[class*='_f _small_caps'] {
-      font-variant:           small-caps !important;
-    }
-
     &[class*='_f _ucwords'] {
       text-transform:         capitalize !important;
+    }
+
+    &[class*='_f _small_caps'] {
+      font-variant:           small-caps !important;
     }
 
     &[class*='_f _smooth'] {
@@ -192,6 +204,77 @@
 
     &[class*='_f _verdana'] {
       font-family:            $verdana !important;
+    }
+
+    /*
+     * Make UI lists behave.
+     */
+    &.ui.list {
+      &[class*='_f _0'],
+      &[class*='_f _1'],
+      &[class*='_f _2'],
+      &[class*='_f _3'],
+      &[class*='_f _5'] {
+        > .item {
+          font-size:          inherit;
+        }
+      }
+
+      &[class*='_f _light'],
+      &[class*='_f _normal'],
+      &[class*='_f _bold'] {
+        > .item {
+          font-weight:        inherit;
+        }
+      }
+
+      &[class*='_f _uline'],
+      &[class*='_f _strike'] {
+        > .item {
+          text-decoration:    inherit;
+        }
+      }
+
+      &[class*='_f _italic'] {
+        > .item {
+          font-style:         inherit;
+        }
+      }
+
+      &[class*='_f _lower'],
+      &[class*='_f _upper'],
+      &[class*='_f _ucwords'] {
+        > .item {
+          text-transform:     inherit;
+        }
+      }
+
+      &[class*='_f _small_caps'] {
+        > .item {
+          font-variant:       inherit;
+        }
+      }
+
+      &[class*='_f _smooth'] {
+        > .item {
+          -webkit-font-smoothing: inherit;
+          -moz-osx-font-smoothing: inherit;
+        }
+      }
+
+      &[class*='_f _serif'],
+      &[class*='_f _sans_serif'],
+      &[class*='_f _alt'],
+      &[class*='_f _monospace'],
+      &[class*='_f _cnt'],
+      &[class*='_f _georgia'],
+      &[class*='_f _helvetica'],
+      &[class*='_f _lucida'],
+      &[class*='_f _verdana'] {
+        > .item {
+          font-family:        inherit;
+        }
+      }
     }
   }
 }

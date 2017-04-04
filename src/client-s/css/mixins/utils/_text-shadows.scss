@@ -3,12 +3,12 @@
  */
 @mixin text-shadow-utils {
   ._text_shadow {
-    &[class*='_text_shadow _glow _normal'] {
-      @include text-shadow-glow-normal(true);
+    &[class*='_text_shadow _bottom _normal'] {
+      @include text-shadow-bottom-normal(true);
     }
 
-    &[class*='_text_shadow _glow _heavy'] {
-      @include text-shadow-glow-heavy(true);
+    &[class*='_text_shadow _bottom _heavy'] {
+      @include text-shadow-bottom-heavy(true);
     }
   }
 }

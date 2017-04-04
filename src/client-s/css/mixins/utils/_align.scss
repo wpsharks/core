@@ -83,17 +83,40 @@
     &[class*='_valign _bottom'] {
       vertical-align:         bottom !important;
     }
+  }
 
-    &[class*='_valign _flex_top'] {
+  /*
+   * Flex alignments.
+   */
+  ._align {
+    /*
+     * All flex items.
+     */
+    &[class*='_align _flex_start'] {
       align-items:            flex-start !important;
     }
 
-    &[class*='_valign _flex_middle'] {
+    &[class*='_align _flex_center'] {
       align-items:            center !important;
     }
 
-    &[class*='_valign _flex_bottom'] {
+    &[class*='_align _flex_end'] {
       align-items:            flex-end !important;
+    }
+
+    /*
+     * Individual flex items.
+     */
+    &[class*='_align _self _flex_start'] {
+      align-self:             flex-start !important;
+    }
+
+    &[class*='_align _self _flex_center'] {
+      align-self:             center !important;
+    }
+
+    &[class*='_align _self _flex_end'] {
+      align-self:             flex-end !important;
     }
   }
 

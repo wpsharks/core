@@ -1,0 +1,14 @@
+/*
+ * Filter shadow utilities.
+ */
+@mixin filter-shadow-utils {
+  ._filter_shadow {
+    &[class*='_filter_shadow _bottom _normal'] {
+      @include filter-shadow-bottom-normal(true);
+    }
+
+    &[class*='_filter_shadow _bottom _heavy'] {
+      @include filter-shadow-bottom-heavy(true);
+    }
+  }
+}

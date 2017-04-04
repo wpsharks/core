@@ -3,55 +3,58 @@
  */
 @mixin opacity-utils {
   ._o {
-    &[class*='_o _0'] {
+    /*
+     * Unitless.
+     */
+    &[class*='_o _0u'] {
       opacity:                0 !important;
     }
 
-    &[class*='_o _01'] {
+    &[class*='_o _01u'] {
       opacity:                0.1 !important;
     }
 
-    &[class*='_o _02'] {
+    &[class*='_o _02u'] {
       opacity:                0.2 !important;
     }
 
-    &[class*='_o _025'] {
+    &[class*='_o _025u'] {
       opacity:                0.25 !important;
     }
 
-    &[class*='_o _03'] {
+    &[class*='_o _03u'] {
       opacity:                0.3 !important;
     }
 
-    &[class*='_o _04'] {
+    &[class*='_o _04u'] {
       opacity:                0.4 !important;
     }
 
-    &[class*='_o _05'] {
+    &[class*='_o _05u'] {
       opacity:                0.5 !important;
     }
 
-    &[class*='_o _06'] {
+    &[class*='_o _06u'] {
       opacity:                0.6 !important;
     }
 
-    &[class*='_o _07'] {
+    &[class*='_o _07u'] {
       opacity:                0.7 !important;
     }
 
-    &[class*='_o _075'] {
+    &[class*='_o _075u'] {
       opacity:                0.75 !important;
     }
 
-    &[class*='_o _08'] {
+    &[class*='_o _08u'] {
       opacity:                0.8 !important;
     }
 
-    &[class*='_o _09'] {
+    &[class*='_o _09u'] {
       opacity:                0.9 !important;
     }
 
-    &[class*='_o _1'] {
+    &[class*='_o _1u'] {
       opacity:                1 !important;
     }
   }

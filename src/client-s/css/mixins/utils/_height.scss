@@ -2,51 +2,130 @@
  * Height utils.
  */
 @mixin height-utils {
+  /*
+   * Alias of `_h 100p`.
+   */
+  ._stretched {
+    height:                   100% !important;
+  }
+
   ._h {
     /*
      * Em units.
      */
-    &[class*='_h _025'] {
+    &[class*='_h _025e'] {
       height:                .25em !important;
     }
 
-    &[class*='_h _05'] {
+    &[class*='_h _05e'] {
       height:                .5em !important;
     }
 
-    &[class*='_h _1'] {
+    &[class*='_h _075e'] {
+      height:                .75em !important;
+    }
+
+    &[class*='_h _1e'] {
       height:                 1em !important;
     }
 
-    &[class*='_h _2'] {
+    &[class*='_h _125e'] {
+      height:                 1.25em !important;
+    }
+
+    &[class*='_h _150e'] {
+      height:                 1.5em !important;
+    }
+
+    &[class*='_h _175e'] {
+      height:                 1.75em !important;
+    }
+
+    &[class*='_h _2e'] {
       height:                 2em !important;
     }
 
-    &[class*='_h _3'] {
+    &[class*='_h _225e'] {
+      height:                 2.25em !important;
+    }
+
+    &[class*='_h _250e'] {
+      height:                 2.5em !important;
+    }
+
+    &[class*='_h _275e'] {
+      height:                 2.75em !important;
+    }
+
+    &[class*='_h _3e'] {
       height:                 3em !important;
+    }
+
+    &[class*='_h _5e'] {
+      height:                 5em !important;
+    }
+
+    &[class*='_h _10e'] {
+      height:                 10em !important;
+    }
+
+    &[class*='_h _20e'] {
+      height:                 20em !important;
+    }
+
+    &[class*='_h _30e'] {
+      height:                 30em !important;
     }
 
     /*
      * Percent of parent.
      */
+    &[class*='_h _05p'] {
+      height:                 05% !important;
+    }
+
+    &[class*='_h _15p'] {
+      height:                 15% !important;
+    }
+
     &[class*='_h _25p'] {
       height:                 25% !important;
+    }
+
+    &[class*='_h _35p'] {
+      height:                 35% !important;
+    }
+
+    &[class*='_h _45p'] {
+      height:                 45% !important;
     }
 
     &[class*='_h _50p'] {
       height:                 50% !important;
     }
 
+    &[class*='_h _55p'] {
+      height:                 55% !important;
+    }
+
+    &[class*='_h _65p'] {
+      height:                 65% !important;
+    }
+
     &[class*='_h _75p'] {
       height:                 75% !important;
     }
 
-    &[class*='_h _100p'] {
-      height:                 100% !important;
+    &[class*='_h _85p'] {
+      height:                 85% !important;
     }
 
-    &[class*='_h _100p1'] {
-      height:                 calc(100% + 1px) !important;
+    &[class*='_h _95p'] {
+      height:                 95% !important;
+    }
+
+    &[class*='_h _100p'] {
+      height:                 100% !important;
     }
 
     /*
@@ -67,43 +146,12 @@
     &[class*='_h _100v'] {
       height:                 100vh !important;
     }
-
-    &[class*='_h _100v1'] {
-      height:                 calc(100vh + 1px) !important;
-    }
   }
 
   /*
    * Min.
    */
   ._mnh {
-    /*
-     * Em units.
-     */
-    &[class*='_mnh _0'] {
-      min-height:             0 !important;
-    }
-
-    &[class*='_mnh _025'] {
-      min-height:            .25em !important;
-    }
-
-    &[class*='_mnh _05'] {
-      min-height:            .5em !important;
-    }
-
-    &[class*='_mnh _1'] {
-      min-height:             1em !important;
-    }
-
-    &[class*='_mnh _2'] {
-      min-height:             2em !important;
-    }
-
-    &[class*='_mnh _3'] {
-      min-height:             3em !important;
-    }
-
     /*
      * Percent of parent.
      */
@@ -121,10 +169,6 @@
 
     &[class*='_mnh _100p'] {
       min-height:             100% !important;
-    }
-
-    &[class*='_mnh _100p1'] {
-      min-height:             calc(100% + 1px) !important;
     }
 
     /*
@@ -145,39 +189,12 @@
     &[class*='_mnh _100v'] {
       min-height:             100vh !important;
     }
-
-    &[class*='_mnh _100v1'] {
-      min-height:             calc(100vh + 1px) !important;
-    }
   }
 
   /*
    * Max.
    */
   ._mxh {
-    /*
-     * Em units.
-     */
-    &[class*='_mxh _025'] {
-      max-height:            .25em !important;
-    }
-
-    &[class*='_mxh _05'] {
-      max-height:            .5em !important;
-    }
-
-    &[class*='_mxh _1'] {
-      max-height:             1em !important;
-    }
-
-    &[class*='_mxh _2'] {
-      max-height:             2em !important;
-    }
-
-    &[class*='_mxh _3'] {
-      max-height:             3em !important;
-    }
-
     /*
      * Percent of parent.
      */
@@ -197,10 +214,6 @@
       max-height:             100% !important;
     }
 
-    &[class*='_mxh _100p1'] {
-      max-height:             calc(100% + 1px) !important;
-    }
-
     /*
      * Percent of viewport.
      */
@@ -218,10 +231,6 @@
 
     &[class*='_mxh _100v'] {
       max-height:             100vh !important;
-    }
-
-    &[class*='_mxh _100v1'] {
-      max-height:             calc(100vh + 1px) !important;
     }
   }
 }
