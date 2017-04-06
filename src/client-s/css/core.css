@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*
- * Semantic colors.
+ * General colors.
  */
 /*
  * Fancy blockquotes.
@@ -370,6 +370,9 @@ a[target='_blank']:not(.icon):not([class*='_no _icon'])::after {
   }
 }
 
+/*
+   * Monospace.
+   */
 pre,
 code,
 samp,
@@ -378,46 +381,467 @@ tt {
   font-family: "Hack", "Menlo", "Monaco", "Consolas", "Andale Mono", "DejaVu Sans Mono", monospace;
 }
 
+/*
+   * Inline code.
+   */
 kbd,
 samp,
 code {
-  line-height: 1;
-  font-size: .875em;
+  display: inline-block;
   white-space: nowrap;
   margin: 0 .15em;
   padding: .2em .4em;
-  display: inline-block;
+  line-height: 1;
+  font-size: .875em;
   color: #0f0f0f;
-  text-shadow: 0 1px 0 #fff;
-  box-shadow: none;
-  border-radius: .15em;
   background: #f9f9f9;
+  text-shadow: 0 1px 0 #fff;
+  border-radius: .15em;
   border: 1px solid #ececec;
 }
 
+/*
+   * Keyboard key.
+   */
+kbd {
+  color: #666;
+  background: #fff;
+  text-shadow: 0 1px 0 #fff;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.75), 0 0 0 2px #fff inset;
+  border-radius: .15em;
+  border: 1px solid #ececec;
+}
+
+/*
+   * Inside anchor.
+   */
 a kbd,
 a samp,
 a code {
   color: inherit;
 }
 
+/*
+   * `<pre>` tag.
+   */
 pre {
+  white-space: pre-wrap;
   padding: 1em;
+  color: #000;
+  background: #f8f8f8;
   border-radius: .25em;
+  /*
+     * `<pre><code>`.
+     */
+}
+
+pre._scroll:not([class*='_no _scroll']) {
+  max-height: 50vh !important;
+  overflow: auto !important;
+}
+
+pre.code {
+  /*
+       * `<pre>` wrapper.
+       */
+  position: relative;
+  white-space: normal;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  /*
+       * `<code>` container.
+       */
+  /*
+       * Title bar.
+       */
+  /*
+       * HTML.
+       */
+  /*
+       * CSS.
+       */
+  /*
+       * JavaScript.
+       */
+  /*
+       * PHP.
+       */
+  /*
+       * Other server-side langs.
+       */
+  /*
+       * Web servers.
+       */
+  /*
+       * Command-line.
+       */
+  /*
+       * Databases.
+       */
+}
+
+pre.code > code {
+  display: block;
+  white-space: pre;
+  margin: 0;
+  padding: 1em;
+  max-height: 50vh;
+  overflow: auto;
+  font-size: 1em;
+  line-height: 1.3;
+  text-shadow: none;
+  border: 0;
+  border-radius: .25em;
+}
+
+pre.code > code:not(.hljs) {
+  color: #000;
   background: #f8f8f8;
 }
 
-tt {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
+pre.code > code._no[class*='_no _scroll'] {
+  max-height: none !important;
+  overflow: visible !important;
+  white-space: pre-wrap !important;
 }
 
-kbd {
-  color: #666;
-  background: #fff;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.75), 0 0 0 2px #fff inset;
+pre.code[title]::before {
+  display: block;
+  content: attr(title);
+  padding: .25em .5em;
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  color: #fff;
+  background: #707070;
+  border-radius: .25em .25em 0 0;
+}
+
+pre.code[title]::after {
+  top: -.18em;
+  right: .125em;
+  position: absolute;
+  max-height: .8em;
+  overflow-y: hidden;
+  line-height: 1;
+  font-size: 3em;
+  content: '\f121';
+  font-family: icons;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #303030;
+}
+
+pre.code[title] > code {
+  border-radius: 0 0 .25em .25em;
+}
+
+pre.code[title^='HTML']::before {
+  background: #4f9d5d;
+}
+
+pre.code[title^='HTML']::after {
+  content: '\e7f7';
+  font-family: devicon;
+  color: #24482b;
+}
+
+pre.code[title^='CSS']::before {
+  background: #4e7f9e;
+}
+
+pre.code[title^='CSS']::after {
+  padding-top: .025em;
+  content: '\e679';
+  font-family: devicon;
+  color: #243a49;
+}
+
+pre.code[title^='SASS']::before {
+  background: #894367;
+}
+
+pre.code[title^='SASS']::after {
+  content: '\ebcb';
+  font-family: devicon;
+  color: #331927;
+}
+
+pre.code[title^='LESS']::before {
+  background: #1e385b;
+}
+
+pre.code[title^='LESS']::after {
+  content: '\e853';
+  font-family: devicon;
+  color: black;
+}
+
+pre.code[title^='JavaScript']::before {
+  background: #ac8a56;
+}
+
+pre.code[title^='JavaScript']::after {
+  line-height: .85em;
+  content: '\e845';
+  font-family: devicon;
+  color: #58462b;
+}
+
+pre.code[title^='TypeScript']::before {
+  background: #204852;
+}
+
+pre.code[title^='TypeScript']::after {
+  line-height: .85em;
+  content: '\e920';
+  font-family: devicon;
+  color: black;
+}
+
+pre.code[title^='CoffeeScript']::before {
+  background: #204852;
+}
+
+pre.code[title^='CoffeeScript']::after {
+  content: '\e66a';
+  font-family: devicon;
+  color: black;
+}
+
+pre.code[title^='Node']::before {
+  background: #3d7d52;
+}
+
+pre.code[title^='Node']::after {
+  content: '\eb69';
+  font-family: devicon;
+  color: #13271a;
+}
+
+pre.code[title^='jQuery']::before {
+  background: #9e5b40;
+}
+
+pre.code[title^='jQuery']::after {
+  content: '\e84a';
+  font-family: devicon;
+  color: #43271b;
+}
+
+pre.code[title^='Babel']::before {
+  background: #ac8a56;
+}
+
+pre.code[title^='Babel']::after {
+  content: '\e921';
+  font-family: devicon;
+  color: #58462b;
+}
+
+pre.code[title^='Gulp']::before {
+  background: #ca3435;
+}
+
+pre.code[title^='Gulp']::after {
+  content: '\e7ec';
+  font-family: devicon;
+  color: #651a1a;
+}
+
+pre.code[title^='Grunt']::before {
+  background: #ae6020;
+}
+
+pre.code[title^='Grunt']::after {
+  content: '\e7eb';
+  font-family: devicon;
+  color: #42250c;
+}
+
+pre.code[title^='PHP']::before {
+  background: #507096;
+}
+
+pre.code[title^='PHP']::after {
+  content: '\eb71';
+  font-family: devicon;
+  color: #243243;
+}
+
+pre.code[title^='WordPress']::before {
+  background: #507096;
+}
+
+pre.code[title^='WordPress']::after {
+  content: '\ebfe';
+  font-family: devicon;
+  color: #243243;
+}
+
+pre.code[title^='Java']:not([title^='JavaScript'])::before {
+  background: #ca3435;
+}
+
+pre.code[title^='Java']:not([title^='JavaScript'])::after {
+  content: '\e842';
+  font-family: devicon;
+  color: #651a1a;
+}
+
+pre.code[title^='Python']::before {
+  background: #327da0;
+}
+
+pre.code[title^='Python']::after {
+  content: '\eb89';
+  font-family: devicon;
+  color: #14313f;
+}
+
+pre.code[title^='Ruby']::before {
+  background: #8a3324;
+}
+
+pre.code[title^='Ruby']::after {
+  padding-top: .075em;
+  content: '\ebca';
+  font-family: devicon;
+  color: #250e0a;
+}
+
+pre.code[title^='Apache']::before {
+  background: #863c3c;
+}
+
+pre.code[title^='Apache']::after {
+  content: '\e627';
+  font-family: devicon;
+  color: #2e1515;
+}
+
+pre.code[title^='Nginx']::before {
+  background: #4f7942;
+}
+
+pre.code[title^='Nginx']::after {
+  content: '\e615';
+  font-family: devicon;
+  color: #192715;
+}
+
+pre.code[title^='Linux']::before, pre.code[title^='Command-Line']::before {
+  background: #434c59;
+}
+
+pre.code[title^='Linux']::after, pre.code[title^='Command-Line']::after {
+  padding-top: .05em;
+  content: '\eb1c';
+  font-family: devicon;
+  color: #0c0e10;
+}
+
+pre.code[title^='macOS']::before, pre.code[title^='Apple']::before {
+  background: #4a4244;
+}
+
+pre.code[title^='macOS']::after, pre.code[title^='Apple']::after {
+  content: '\e622';
+  font-family: devicon;
+  color: #070606;
+}
+
+pre.code[title^='Ubuntu']::before {
+  background: #bd5e2e;
+}
+
+pre.code[title^='Ubuntu']::after {
+  padding-top: .05em;
+  content: '\ebd1';
+  font-family: devicon;
+  color: #562b15;
+}
+
+pre.code[title^='Windows']::before {
+  background: #007ec7;
+}
+
+pre.code[title^='Windows']::after {
+  padding-top: .05em;
+  content: '\ebf5';
+  font-family: devicon;
+  color: #002d48;
+}
+
+pre.code[title^='Docker']::before {
+  background: #007ec7;
+}
+
+pre.code[title^='Docker']::after {
+  content: '\e61f';
+  font-family: devicon;
+  color: #002d48;
+}
+
+pre.code[title^='Git']::before {
+  background: #c02b18;
+}
+
+pre.code[title^='Git']::after {
+  content: '\e7a8';
+  font-family: devicon;
+  color: #4f120a;
+}
+
+pre.code[title^='SSH']::before {
+  background: #6d6c6c;
+}
+
+pre.code[title^='SSH']::after {
+  content: '\e916';
+  font-family: devicon;
+  color: #2d2d2d;
+}
+
+pre.code[title^='MySQL']::before {
+  background: #017987;
+}
+
+pre.code[title^='MySQL']::after {
+  content: '\eb61';
+  font-family: devicon;
+  color: #000808;
+}
+
+pre.code[title^='PostgreSQL']::before {
+  background: #017987;
+}
+
+pre.code[title^='PostgreSQL']::after {
+  padding-top: .15em;
+  content: '\eb7d';
+  font-family: devicon;
+  color: #000808;
+}
+
+pre.code[title^='Mongo']::before {
+  background: #4f7942;
+}
+
+pre.code[title^='Mongo']::after {
+  content: '\eb44';
+  font-family: devicon;
+  color: #192715;
+}
+
+pre.code[title^='Redis']::before {
+  background: #8a3324;
+}
+
+pre.code[title^='Redis']::after {
+  padding-top: .05em;
+  content: '\e607';
+  font-family: devicon;
+  color: #250e0a;
 }
 
 nav > .menu .dropdown.item:not(a):not(.link),

@@ -2,6 +2,9 @@
  * Fancy monospace tags.
  */
 @mixin fancy-monospace-tags {
+  /*
+   * Monospace.
+   */
   pre,
   code,
   samp,
@@ -10,29 +13,54 @@
     font-family:              $monospace-font-family;
   }
 
+  /*
+   * Inline code.
+   */
   kbd,
   samp,
   code {
-    line-height:              1;
-    font-size:               .875em;
+    display:                  inline-block;
     white-space:              nowrap;
 
     //
     margin:                   0 .15em;
     padding:                 .2em .4em;
-    display:                  inline-block;
+
+    //
+    line-height:              1;
+    font-size:               .875em;
 
     //
     color:                    $code-color;
+    background:               $code-bg-color;
+
+    //
     text-shadow:              0 1px 0 $code-text-shadow-color;
 
     //
-    box-shadow:               none;
     border-radius:           .15em;
-    background:               $code-bg-color;
     border:                   1px solid $code-border-color;
   }
 
+  /*
+   * Keyboard key.
+   */
+  kbd {
+    color:                    $kbd-color;
+    background:               $kbd-bg-color;
+
+    //
+    text-shadow:              0 1px 0 $kbd-text-shadow-color;
+    box-shadow:               0 1px 0 $kbd-box-shadow-color1, 0 0 0 2px $kbd-box-shadow-color2 inset;
+
+    //
+    border-radius:           .15em;
+    border:                   1px solid $kbd-border-color;
+  }
+
+  /*
+   * Inside anchor.
+   */
   a {
     kbd,
     samp,
@@ -41,22 +69,531 @@
     }
   }
 
+  /*
+   * `<pre>` tag.
+   */
   pre {
+    white-space:              pre-wrap;
+
+    //
     padding:                  1em;
-    border-radius:           .25em;
+
+    //
+    color:                    $pre-color;
     background:               $pre-bg-color;
-  }
 
-  tt {
-    margin:                   0;
-    padding:                  0;
-    border:                   0;
-    background:               none;
-  }
+    //
+    border-radius:           .25em;
 
-  kbd {
-    color:                    $kbd-color;
-    background:               $kbd-bg-color;
-    box-shadow:               0 1px 0 $kbd-box-shadow-color1, 0 0 0 2px $kbd-box-shadow-color2 inset;
+    &._scroll:not([class*='_no _scroll']) {
+      max-height:             50vh !important;
+      overflow:               auto !important;
+    }
+
+    /*
+     * `<pre><code>`.
+     */
+    &.code {
+      /*
+       * `<pre>` wrapper.
+       */
+      position:               relative;
+      white-space:            normal;
+
+      //
+      padding:                0;
+
+      //
+      background:             none;
+
+      //
+      border-radius:          0;
+
+      /*
+       * `<code>` container.
+       */
+      > code {
+        display:              block;
+        white-space:          pre;
+
+        //
+        margin:               0;
+        padding:              1em;
+
+        //
+        max-height:           50vh;
+        overflow:             auto;
+
+        //
+        font-size:            1em;
+        line-height:          1.3;
+
+        //
+        text-shadow:          none;
+
+        //
+        border:               0;
+        border-radius:       .25em;
+
+        &:not(.hljs) {
+          // Don't step on HLJS theme.
+          color:              $pre-color;
+          background:         $pre-bg-color;
+        }
+
+        &._no[class*='_no _scroll'] {
+          max-height:         none !important;
+          overflow:           visible !important;
+          white-space:        pre-wrap !important;
+        }
+      }
+
+      /*
+       * Title bar.
+       */
+      &[title] {
+        &::before {
+          display:            block;
+          content:            attr(title);
+
+          //
+          padding:           .25em .5em;
+
+          //
+          font-family:        $sans-serif-font-family;
+
+          //
+          color:              $pre-title-color;
+          background:         $pre-title-bg-color;
+
+          //
+          border-radius:     .25em .25em 0 0;
+        }
+
+        &::after {
+          top:               -.18em;
+          right:             .125em;
+          position:           absolute;
+
+          //
+          max-height:        .8em;
+          overflow-y:         hidden;
+
+          //
+          line-height:        1;
+          font-size:          3em;
+
+          //
+          content:            '\f121';
+          font-family:        icons;
+
+          //
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+
+          //
+          color:              darken($pre-title-bg-color, 25%);
+        }
+
+        > code {
+          border-radius:      0 0 .25em .25em;
+        }
+      }
+
+      /*
+       * HTML.
+       */
+      &[title^='HTML'] {
+        &::before {
+          background:         $fruit-salad-color;
+        }
+
+        &::after {
+          content:            '\e7f7';
+          font-family:        devicon;
+          color:              darken($fruit-salad-color, 25%);
+        }
+      }
+
+      /*
+       * CSS.
+       */
+      &[title^='CSS'] {
+        &::before {
+          background:         $wedgewood-color;
+        }
+
+        &::after {
+          padding-top:       .025em;
+          content:            '\e679';
+          font-family:        devicon;
+          color:              darken($wedgewood-color, 25%);
+        }
+      }
+
+      &[title^='SASS'] {
+        &::before {
+          background:         $cannon-pink-color;
+        }
+
+        &::after {
+          content:            '\ebcb';
+          font-family:        devicon;
+          color:              darken($cannon-pink-color, 25%);
+        }
+      }
+
+      &[title^='LESS'] {
+        &::before {
+          background:         $cello-color;
+        }
+
+        &::after {
+          content:            '\e853';
+          font-family:        devicon;
+          color:              darken($cello-color, 25%);
+        }
+      }
+
+      /*
+       * JavaScript.
+       */
+      &[title^='JavaScript'] {
+        &::before {
+          background:         $limed-oak-color;
+        }
+
+        &::after {
+          line-height:       .85em;
+          content:            '\e845';
+          font-family:        devicon;
+          color:              darken($limed-oak-color, 25%);
+        }
+      }
+
+      &[title^='TypeScript'] {
+        &::before {
+          background:         $blue-dianne-color;
+        }
+
+        &::after {
+          line-height:       .85em;
+          content:            '\e920';
+          font-family:        devicon;
+          color:              darken($blue-dianne-color, 25%);
+        }
+      }
+
+      &[title^='CoffeeScript'] {
+        &::before {
+          background:         $blue-dianne-color;
+        }
+
+        &::after {
+          content:            '\e66a';
+          font-family:        devicon;
+          color:              darken($blue-dianne-color, 25%);
+        }
+      }
+
+      &[title^='Node'] {
+        &::before {
+          background:         $goblin-color;
+        }
+
+        &::after {
+          content:            '\eb69';
+          font-family:        devicon;
+          color:              darken($goblin-color, 25%);
+        }
+      }
+
+      &[title^='jQuery'] {
+        &::before {
+          background:         $sepia-skin-color;
+        }
+
+        &::after {
+          content:            '\e84a';
+          font-family:        devicon;
+          color:              darken($sepia-skin-color, 25%);
+        }
+      }
+
+      &[title^='Babel'] {
+        &::before {
+          background:         $limed-oak-color;
+        }
+
+        &::after {
+          content:            '\e921';
+          font-family:        devicon;
+          color:              darken($limed-oak-color, 25%);
+        }
+      }
+
+      &[title^='Gulp'] {
+        &::before {
+          background:         $flush-mahogany-color;
+        }
+
+        &::after {
+          content:            '\e7ec';
+          font-family:        devicon;
+          color:              darken($flush-mahogany-color, 25%);
+        }
+      }
+
+      &[title^='Grunt'] {
+        &::before {
+          background:         $desert-color;
+        }
+
+        &::after {
+          content:            '\e7eb';
+          font-family:        devicon;
+          color:              darken($desert-color, 25%);
+        }
+      }
+
+      /*
+       * PHP.
+       */
+      &[title^='PHP'] {
+        &::before {
+          background:         $kashmir-blue-color;
+        }
+
+        &::after {
+          content:            '\eb71';
+          font-family:        devicon;
+          color:              darken($kashmir-blue-color, 25%);
+        }
+      }
+
+      &[title^='WordPress'] {
+        &::before {
+          background:         $kashmir-blue-color;
+        }
+
+        &::after {
+          content:            '\ebfe';
+          font-family:        devicon;
+          color:              darken($kashmir-blue-color, 25%);
+        }
+      }
+
+      /*
+       * Other server-side langs.
+       */
+      &[title^='Java']:not([title^='JavaScript']) {
+        &::before {
+          background:         $flush-mahogany-color;
+        }
+
+        &::after {
+          content:            '\e842';
+          font-family:        devicon;
+          color:              darken($flush-mahogany-color, 25%);
+        }
+      }
+
+      &[title^='Python'] {
+        &::before {
+          background:         $astral-color;
+        }
+
+        &::after {
+          content:            '\eb89';
+          font-family:        devicon;
+          color:              darken($astral-color, 25%);
+        }
+      }
+
+      &[title^='Ruby'] {
+        &::before {
+          background:         $burnt-umber-color;
+        }
+
+        &::after {
+          padding-top:       .075em;
+          content:            '\ebca';
+          font-family:        devicon;
+          color:              darken($burnt-umber-color, 25%);
+        }
+      }
+
+      /*
+       * Web servers.
+       */
+      &[title^='Apache'] {
+        &::before {
+          background:         $lotus-color;
+        }
+
+        &::after {
+          content:            '\e627';
+          font-family:        devicon;
+          color:              darken($lotus-color, 25%);
+        }
+      }
+
+      &[title^='Nginx'] {
+        &::before {
+          background:         $fern-green-color;
+        }
+
+        &::after {
+          content:            '\e615';
+          font-family:        devicon;
+          color:              darken($fern-green-color, 25%);
+        }
+      }
+
+      /*
+       * Command-line.
+       */
+      &[title^='Linux'],
+      &[title^='Command-Line'] {
+        &::before {
+          background:         $river-bed-color;
+        }
+
+        &::after {
+          padding-top:       .05em;
+          content:            '\eb1c';
+          font-family:        devicon;
+          color:              darken($river-bed-color, 25%);
+        }
+      }
+
+      &[title^='macOS'],
+      &[title^='Apple'] {
+        &::before {
+          background:         $tundora-color;
+        }
+
+        &::after {
+          content:            '\e622';
+          font-family:        devicon;
+          color:              darken($tundora-color, 25%);
+        }
+      }
+
+      &[title^='Ubuntu'] {
+        &::before {
+          background:         $tuscany-color;
+        }
+
+        &::after {
+          padding-top:       .05em;
+          content:            '\ebd1';
+          font-family:        devicon;
+          color:              darken($tuscany-color, 25%);
+        }
+      }
+
+      &[title^='Windows'] {
+        &::before {
+          background:         $lochmara-color;
+        }
+
+        &::after {
+          padding-top:       .05em;
+          content:            '\ebf5';
+          font-family:        devicon;
+          color:              darken($lochmara-color, 25%);
+        }
+      }
+
+      &[title^='Docker'] {
+        &::before {
+          background:         $lochmara-color;
+        }
+
+        &::after {
+          content:            '\e61f';
+          font-family:        devicon;
+          color:              darken($lochmara-color, 25%);
+        }
+      }
+
+      &[title^='Git'] {
+        &::before {
+          background:         $thunderbird-color;
+        }
+
+        &::after {
+          content:            '\e7a8';
+          font-family:        devicon;
+          color:              darken($thunderbird-color, 25%);
+        }
+      }
+
+      &[title^='SSH'] {
+        &::before {
+          background:         $dove-gray-color;
+        }
+
+        &::after {
+          content:            '\e916';
+          font-family:        devicon;
+          color:              darken($dove-gray-color, 25%);
+        }
+      }
+
+      /*
+       * Databases.
+       */
+      &[title^='MySQL'] {
+        &::before {
+          background:         $blue-lagoon-color;
+        }
+
+        &::after {
+          content:            '\eb61';
+          font-family:        devicon;
+          color:              darken($blue-lagoon-color, 25%);
+        }
+      }
+
+      &[title^='PostgreSQL'] {
+        &::before {
+          background:         $blue-lagoon-color;
+        }
+
+        &::after {
+          padding-top:       .15em;
+          content:            '\eb7d';
+          font-family:        devicon;
+          color:              darken($blue-lagoon-color, 25%);
+        }
+      }
+
+      &[title^='Mongo'] {
+        &::before {
+          background:         $fern-green-color;
+        }
+
+        &::after {
+          content:            '\eb44';
+          font-family:        devicon;
+          color:              darken($fern-green-color, 25%);
+        }
+      }
+
+      &[title^='Redis'] {
+        &::before {
+          background:         $burnt-umber-color;
+        }
+
+        &::after {
+          padding-top:       .05em;
+          content:            '\e607';
+          font-family:        devicon;
+          color:              darken($burnt-umber-color, 25%);
+        }
+      }
+    }
   }
 }

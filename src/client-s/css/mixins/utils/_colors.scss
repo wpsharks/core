@@ -4,7 +4,7 @@
 @mixin color-utils {
   ._c {
     &[class*='_c _inverted'] {
-      color:                  $sm-inverted-color !important;
+      color:                  $inverted-color !important;
     }
 
     &[class*='_c _fill _current'] {
@@ -14,7 +14,7 @@
 
   ._bc {
     &[class*='_bc _inverted'] {
-      background-color:       $sm-inverted-bg-color !important;
+      background-color:       $inverted-bg-color !important;
     }
   }
 }

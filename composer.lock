@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2aedc06c5b48ceebe6524c43d20118c9",
-    "content-hash": "19b27c63b77a80404d98ecdb5eaec22d",
+    "hash": "651a5bd641d78b45bb7287b9148dd963",
+    "content-hash": "bb1b07786f5c23d9fdeed89c3a05d416",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.24.7",
+            "version": "3.25.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f062d7ea2123fe2aefef91da855c10ef8ff3af1c"
+                "reference": "f5181b893c8822c5dc3986e4e52eddff66bbd04f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f062d7ea2123fe2aefef91da855c10ef8ff3af1c",
-                "reference": "f062d7ea2123fe2aefef91da855c10ef8ff3af1c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f5181b893c8822c5dc3986e4e52eddff66bbd04f",
+                "reference": "f5181b893c8822c5dc3986e4e52eddff66bbd04f",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-03-23 22:17:20"
+            "time": "2017-04-05 23:01:19"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1187,16 +1187,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.18",
+            "version": "v2.8.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "2a7bab3c16f6f452c47818fdd08f3b1e49ffcf7d"
+                "reference": "286d84891690b0e2515874717e49360d1c98a703"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/2a7bab3c16f6f452c47818fdd08f3b1e49ffcf7d",
-                "reference": "2a7bab3c16f6f452c47818fdd08f3b1e49ffcf7d",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/286d84891690b0e2515874717e49360d1c98a703",
+                "reference": "286d84891690b0e2515874717e49360d1c98a703",
                 "shasum": ""
             },
             "require": {
@@ -1232,7 +1232,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-01 18:13:50"
+            "time": "2017-03-20 09:41:44"
         },
         {
             "name": "websharks/dicer",
@@ -1287,16 +1287,16 @@
         },
         {
             "name": "websharks/php-markdown",
-            "version": "170215",
+            "version": "170406",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/php-markdown.git",
-                "reference": "da47e3586f3b5c24112d73c4fba867e156793e1c"
+                "reference": "a0bb441347dd50546a30a191280a77e9d067b04a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/da47e3586f3b5c24112d73c4fba867e156793e1c",
-                "reference": "da47e3586f3b5c24112d73c4fba867e156793e1c",
+                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/a0bb441347dd50546a30a191280a77e9d067b04a",
+                "reference": "a0bb441347dd50546a30a191280a77e9d067b04a",
                 "shasum": ""
             },
             "require": {
@@ -1332,7 +1332,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2017-02-15 20:06:57"
+            "time": "2017-04-06 04:06:23"
         },
         {
             "name": "websharks/sharkicons",

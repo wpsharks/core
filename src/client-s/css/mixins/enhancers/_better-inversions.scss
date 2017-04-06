@@ -19,14 +19,14 @@
 
       &.celled {
         > .item {
-          border-color:       transparentize($sm-inverted-color, 0.9);
+          border-color:       transparentize($inverted-color, 0.9);
         }
       }
 
       &.bulleted {
         > .item {
           &::before {
-            color:            transparentize($sm-inverted-color, 0.9);
+            color:            transparentize($inverted-color, 0.9);
           }
         }
       }

@@ -56,7 +56,9 @@ class Markdown extends Classes\Core\Base\Core
 
             'flavor' => 'markdown-extra',
 
+            'code_attr_on_pre'  => false,
             'code_class_prefix' => 'lang-',
+
             'header_id_func'    => null,
             'fn_id_prefix'      => '',
 
@@ -79,6 +81,7 @@ class Markdown extends Classes\Core\Base\Core
         $flavor = 'markdown-extra'; // Only flavor.
         // In the future this may support new flavors.
 
+        $code_attr_on_pre  = (bool) $args['code_attr_on_pre'];
         $code_class_prefix = (string) $args['code_class_prefix'];
 
         $header_id_func = $args['header_id_func'] ?: [$this, 'headerIdFunc'];
@@ -110,6 +113,7 @@ class Markdown extends Classes\Core\Base\Core
         }
         if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
             $MarkdownExtra                    = new MarkdownExtra();
+            $MarkdownExtra->code_attr_on_pre  = $code_attr_on_pre;
             $MarkdownExtra->code_class_prefix = $code_class_prefix;
             $MarkdownExtra->header_id_func    = $header_id_func;
             $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
@@ -121,16 +125,10 @@ class Markdown extends Classes\Core\Base\Core
             $SmartyPants->decodeEntitiesInConfiguration(); // Use UTF-8 symbols.
         }
         $string = $MarkdownExtra->transform($string);
+        $string = $anchorize ? $this->c::htmlAnchorize($string) : $string;
+        $string = $anchor_rels ? $this->c::htmlAnchorRels($string, $anchor_rels) : $string;
+        $string = $smartypants ? $SmartyPants->transform($string) : $string;
 
-        if ($anchorize) {
-            $string = $this->c::htmlAnchorize($string);
-        }
-        if ($anchor_rels) {
-            $string = $this->c::htmlAnchorRels($string, $anchor_rels);
-        }
-        if ($smartypants) {
-            $string = $SmartyPants->transform($string);
-        }
         if ($no_p) { // Strip ` ^<p>|</p>$ ` tags?
             $string = preg_replace('/^\s*(?:\<p(?:\s[^>]*)?\>)+|(?:\<\/p\>)+\s*$/ui', '', $string);
         }

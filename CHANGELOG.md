@@ -6,6 +6,8 @@
 - Enhancing inverted CSS selectors in SUI.
 - Optimizing CSS utilities that set unit values.
 - Bug fix. `curl_errno` should not impact the `http_code` return value.
+- Updating to latest release of PHP Markdown fork.
+- Enhancing monospace styles.
 
 ## v170329.13807
 

@@ -3,64 +3,55 @@
  */
 @mixin hljs-pre-code {
   .hljs-pre {
+    display:                  block;
+    white-space:              normal;
+
+    //
+    max-height:               none;
+    overflow:                 visible;
+
+    //
     padding:                  0;
+
+    //
+    background:               none;
+
+    //
+    text-shadow:              none;
+    box-shadow:               none;
 
     //
     border:                   0;
     border-radius:            0;
 
-    //
-    box-shadow:               none;
-    text-shadow:              none;
-
-    //
-    width:                    100%;
-    height:                   auto;
-    max-height:               none;
-    overflow:                 visible;
-
-    //
-    display:                  block;
-    box-sizing:               border-box;
-
-    //
-    background:               none;
-
     > .hljs {
-      // background:               none;
-      // Determined by Highlight.js theme.
+      display:                block;
+      white-space:            pre;
 
       //
       margin:                 0;
       padding:                1em;
 
       //
-      border:                 0;
-      border-radius:         .25em;
-
-      //
-      box-shadow:             none;
-      text-shadow:            none;
-
-      //
-      font-size:              1em;
-      line-height:            1.3;
-      white-space:            pre;
-
-      //
-      width:                  100%;
-      height:                 auto;
       max-height:             50vh;
       overflow:               auto;
 
       //
-      display:                block;
-      box-sizing:             border-box;
+      font-size:              1em;
+      line-height:            1.3;
+      font-family:            $monospace-font-family;
 
-      &[class*='_no _scroll'] {
-        max-height:           none !important;
-        white-space:          pre-wrap !important;
-      }
+      // color:                  ;
+      // background:             ;
+      // Set by Highlight.js theme.
+
+      //
+      text-shadow:            none;
+      box-shadow:             none;
+
+      //
+      border:                 0;
+      border-radius:         .25em;
     }
   }
 }

@@ -1,11 +1,11 @@
 /*
- * Semantic colors.
+ * General colors.
  */
-$sm-link-color: #4183c4 !default;
-$sm-link-hover-color: #1e70bf !default;
+$link-color: #4183c4 !default;
+$link-hover-color: #1e70bf !default;
 
-$sm-inverted-color: #fff !default;
-$sm-inverted-bg-color: #151515 !default;
+$inverted-color: #fff !default;
+$inverted-bg-color: #151515 !default;
 
 /*
  * Fancy blockquotes.
@@ -17,8 +17,6 @@ $blockquote-quote-color: #ccc !default;
 /*
  * Fancy monospace tags.
  */
-$pre-bg-color: #f8f8f8 !default;
-
 $code-color: #0f0f0f !default;
 $code-bg-color: #f9f9f9 !default;
 $code-border-color: #ececec !default;
@@ -26,8 +24,15 @@ $code-text-shadow-color: #fff !default;
 
 $kbd-color: #666 !default;
 $kbd-bg-color: #fff !default;
+$kbd-border-color: #ececec !default;
+$kbd-text-shadow-color: #fff !default;
 $kbd-box-shadow-color1: rgba(0, 0, 0, 0.75) !default;
 $kbd-box-shadow-color2: #fff !default;
+
+$pre-color: #000 !default;
+$pre-bg-color: #f8f8f8 !default;
+$pre-title-color: #fff !default;
+$pre-title-bg-color: #707070 !default;
 
 /*
  * Named colors.
