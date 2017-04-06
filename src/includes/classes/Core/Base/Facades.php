@@ -93,6 +93,7 @@ abstract class Facades
     use Traits\Facades\UrlParsers;
     use Traits\Facades\UrlQuerys;
     use Traits\Facades\UrlUtils;
+    use Traits\Facades\UserAgent;
     use Traits\Facades\Uuid64;
     use Traits\Facades\Uuids;
     use Traits\Facades\Varz;

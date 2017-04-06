@@ -2,6 +2,7 @@
 
 - Adding `c::varToCamelCase()`.
 - Adding `c::activeSelected()`.
+- Adding `c::uaIsEngine()`.
 - Adding CSS filter shadow utilities.
 - Enhancing inverted CSS selectors in SUI.
 - Optimizing CSS utilities that set unit values.
