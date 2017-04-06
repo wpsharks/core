@@ -480,6 +480,9 @@ pre.code {
   /*
        * Databases.
        */
+  /*
+       * URLs/methods.
+       */
 }
 
 pre.code > code {
@@ -505,6 +508,10 @@ pre.code > code._no[class*='_no _scroll'] {
   max-height: none !important;
   overflow: visible !important;
   white-space: pre-wrap !important;
+}
+
+pre.code[title] {
+  overflow: hidden;
 }
 
 pre.code[title]::before {
@@ -614,6 +621,9 @@ pre.code[title^='Node']::before {
 }
 
 pre.code[title^='Node']::after {
+  right: .5em;
+  top: -.275em;
+  transform: scale(1.75);
   content: '\eb69';
   font-family: devicon;
   color: #13271a;
@@ -742,13 +752,13 @@ pre.code[title^='Nix']::after, pre.code[title^='Linux']::after, pre.code[title^=
 }
 
 pre.code[title^='macOS']::before, pre.code[title^='Apple']::before {
-  background: #4a4244;
+  background: #7a7a7a;
 }
 
 pre.code[title^='macOS']::after, pre.code[title^='Apple']::after {
   content: '\e622';
   font-family: devicon;
-  color: #fff;
+  color: #3a3a3a;
 }
 
 pre.code[title^='Ubuntu']::before {
@@ -788,6 +798,7 @@ pre.code[title^='Git']::before {
 }
 
 pre.code[title^='Git']::after {
+  padding-top: .05em;
   content: '\e7a8';
   font-family: devicon;
   color: #4f120a;
@@ -843,6 +854,43 @@ pre.code[title^='Redis']::after {
   content: '\e607';
   font-family: devicon;
   color: #250e0a;
+}
+
+pre.code[title^='Feed']::after, pre.code[title^='URL']::after, pre.code[title^='HEAD']::after, pre.code[title^='GET']::after, pre.code[title^='POST']::after, pre.code[title^='PUT']::after, pre.code[title^='PATCH']::after, pre.code[title^='DELETE']::after {
+  padding-top: .075em;
+  content: '\f0c1';
+}
+
+pre.code[title^='Feed']::before {
+  background: #b87333;
+}
+
+pre.code[title^='Feed']::after {
+  color: #543517;
+}
+
+pre.code[title^='URL']::before, pre.code[title^='HEAD']::before, pre.code[title^='GET']::before {
+  background: #7ba05b;
+}
+
+pre.code[title^='URL']::after, pre.code[title^='HEAD']::after, pre.code[title^='GET']::after {
+  color: #3d4f2d;
+}
+
+pre.code[title^='POST']::before, pre.code[title^='PUT']::before, pre.code[title^='PATCH']::before {
+  background: #7a89b8;
+}
+
+pre.code[title^='POST']::after, pre.code[title^='PUT']::after, pre.code[title^='PATCH']::after {
+  color: #3e4b74;
+}
+
+pre.code[title^='DELETE']::before {
+  background: #944747;
+}
+
+pre.code[title^='DELETE']::after {
+  color: #3e1e1e;
 }
 
 nav > .menu .dropdown.item:not(a):not(.link),

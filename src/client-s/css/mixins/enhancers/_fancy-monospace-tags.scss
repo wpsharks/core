@@ -101,6 +101,8 @@
        * `<pre>` wrapper.
        */
       position:               relative;
+
+      //
       white-space:            normal;
 
       //
@@ -155,6 +157,8 @@
        * Title bar.
        */
       &[title] {
+        overflow:             hidden;
+
         &::before {
           display:            block;
           content:            attr(title);
@@ -227,7 +231,6 @@
         }
 
         &::after {
-          padding-top:       .025em;
           content:            '\e679';
           font-family:        devicon;
           color:              darken($wedgewood-color, 25%);
@@ -276,14 +279,14 @@
 
       &[title^='TypeScript'] {
         &::before {
-          background:         $blue-dianne-color;
+          background:         $steel-blue-color;
         }
 
         &::after {
           line-height:       .85em;
           content:            '\e920';
           font-family:        devicon;
-          color:              darken($blue-dianne-color, 25%);
+          color:              darken($steel-blue-color, 25%);
         }
       }
 
@@ -422,7 +425,6 @@
         }
 
         &::after {
-          padding-top:       .075em;
           content:            '\ebca';
           font-family:        devicon;
           color:              darken($burnt-umber-color, 25%);
@@ -460,18 +462,35 @@
       /*
        * Command-line.
        */
-      &[title^='Nix'],
-      &[title^='Linux'],
+      &[title^='Zsh'],
+      &[title^='Bash'],
+      &[title^='Shell'],
+      &[title^='Terminal'],
       &[title^='Command-Line'] {
         &::before {
-          background:         $river-bed-color;
+          background:         $gothic-color;
         }
 
         &::after {
-          padding-top:       .05em;
-          content:            '\eb1c';
-          font-family:        devicon;
-          color:              darken($river-bed-color, 25%);
+          content:            '\f120';
+          transform:          scale(0.65);
+          -webkit-font-smoothing: auto;
+          -moz-osx-font-smoothing: auto;
+          color:              darken($gothic-color, 25%);
+        }
+      }
+
+      &[title^='Nix'],
+      &[title^='Unix'],
+      &[title^='Linux'] {
+        &::before {
+          background:         $rolling-stone-color;
+        }
+
+        &::after {
+          padding-top:       .15em;
+          content:            '\f17c';
+          color:              darken($rolling-stone-color, 30%);
         }
       }
 
@@ -494,7 +513,6 @@
         }
 
         &::after {
-          padding-top:       .05em;
           content:            '\ebd1';
           font-family:        devicon;
           color:              darken($tuscany-color, 25%);
@@ -507,7 +525,6 @@
         }
 
         &::after {
-          padding-top:       .05em;
           content:            '\ebf5';
           font-family:        devicon;
           color:              darken($lochmara-color, 25%);
@@ -532,7 +549,6 @@
         }
 
         &::after {
-          padding-top:       .05em;
           content:            '\e7a8';
           font-family:        devicon;
           color:              darken($thunderbird-color, 25%);
@@ -572,7 +588,6 @@
         }
 
         &::after {
-          padding-top:       .15em;
           content:            '\eb7d';
           font-family:        devicon;
           color:              darken($blue-lagoon-color, 25%);
@@ -597,7 +612,6 @@
         }
 
         &::after {
-          padding-top:       .05em;
           content:            '\e607';
           font-family:        devicon;
           color:              darken($burnt-umber-color, 25%);
@@ -605,8 +619,9 @@
       }
 
       /*
-       * Request methods.
+       * URLs/methods.
        */
+      &[title^='Feed'],
       &[title^='URL'],
       &[title^='HEAD'],
       &[title^='GET'],
@@ -615,8 +630,17 @@
       &[title^='PATCH'],
       &[title^='DELETE'] {
         &::after {
-          padding-top:       .05em;
           content:            '\f0c1';
+        }
+      }
+
+      &[title^='Feed'] {
+        &::before {
+          background:         $copper-color;
+        }
+
+        &::after {
+          color:              darken($copper-color, 25%);
         }
       }
 
