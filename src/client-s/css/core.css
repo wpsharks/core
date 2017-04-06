@@ -427,6 +427,7 @@ a code {
 pre {
   white-space: pre-wrap;
   padding: 1em;
+  overflow: visible;
   color: #000;
   background: #f8f8f8;
   border-radius: .25em;
@@ -517,7 +518,7 @@ pre.code[title]::before {
 }
 
 pre.code[title]::after {
-  top: -.18em;
+  top: -.185em;
   right: .125em;
   position: absolute;
   max-height: .8em;
@@ -716,24 +717,24 @@ pre.code[title^='Apache']::before {
 pre.code[title^='Apache']::after {
   content: '\e627';
   font-family: devicon;
-  color: #2e1515;
+  color: #fff;
 }
 
-pre.code[title^='Nginx']::before {
+pre.code[title^='Nginx']::before, pre.code[title^='NGINX']::before {
   background: #4f7942;
 }
 
-pre.code[title^='Nginx']::after {
+pre.code[title^='Nginx']::after, pre.code[title^='NGINX']::after {
   content: '\e615';
   font-family: devicon;
   color: #192715;
 }
 
-pre.code[title^='Linux']::before, pre.code[title^='Command-Line']::before {
+pre.code[title^='Nix']::before, pre.code[title^='Linux']::before, pre.code[title^='Command-Line']::before {
   background: #434c59;
 }
 
-pre.code[title^='Linux']::after, pre.code[title^='Command-Line']::after {
+pre.code[title^='Nix']::after, pre.code[title^='Linux']::after, pre.code[title^='Command-Line']::after {
   padding-top: .05em;
   content: '\eb1c';
   font-family: devicon;
@@ -747,7 +748,7 @@ pre.code[title^='macOS']::before, pre.code[title^='Apple']::before {
 pre.code[title^='macOS']::after, pre.code[title^='Apple']::after {
   content: '\e622';
   font-family: devicon;
-  color: #070606;
+  color: #fff;
 }
 
 pre.code[title^='Ubuntu']::before {

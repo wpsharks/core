@@ -79,6 +79,9 @@
     padding:                  1em;
 
     //
+    overflow:                 visible;
+
+    //
     color:                    $pre-color;
     background:               $pre-bg-color;
 
@@ -171,7 +174,7 @@
         }
 
         &::after {
-          top:               -.18em;
+          top:               -.185em;
           right:             .125em;
           position:           absolute;
 
@@ -302,6 +305,9 @@
         }
 
         &::after {
+          right:             .5em;
+          top:               -.275em;
+          transform:          scale(1.75);
           content:            '\eb69';
           font-family:        devicon;
           color:              darken($goblin-color, 25%);
@@ -434,11 +440,12 @@
         &::after {
           content:            '\e627';
           font-family:        devicon;
-          color:              darken($lotus-color, 25%);
+          color:              $white-color;
         }
       }
 
-      &[title^='Nginx'] {
+      &[title^='Nginx'],
+      &[title^='NGINX'] {
         &::before {
           background:         $fern-green-color;
         }
@@ -453,6 +460,7 @@
       /*
        * Command-line.
        */
+      &[title^='Nix'],
       &[title^='Linux'],
       &[title^='Command-Line'] {
         &::before {
@@ -470,13 +478,13 @@
       &[title^='macOS'],
       &[title^='Apple'] {
         &::before {
-          background:         $tundora-color;
+          background:         $boulder-color;
         }
 
         &::after {
           content:            '\e622';
           font-family:        devicon;
-          color:              darken($tundora-color, 25%);
+          color:              darken($boulder-color, 25%);
         }
       }
 
@@ -524,6 +532,7 @@
         }
 
         &::after {
+          padding-top:       .05em;
           content:            '\e7a8';
           font-family:        devicon;
           color:              darken($thunderbird-color, 25%);
@@ -592,6 +601,56 @@
           content:            '\e607';
           font-family:        devicon;
           color:              darken($burnt-umber-color, 25%);
+        }
+      }
+
+      /*
+       * Request methods.
+       */
+      &[title^='URL'],
+      &[title^='HEAD'],
+      &[title^='GET'],
+      &[title^='POST'],
+      &[title^='PUT'],
+      &[title^='PATCH'],
+      &[title^='DELETE'] {
+        &::after {
+          padding-top:       .05em;
+          content:            '\f0c1';
+        }
+      }
+
+      &[title^='URL'],
+      &[title^='HEAD'],
+      &[title^='GET'] {
+        &::before {
+          background:         $asparagus-color;
+        }
+
+        &::after {
+          color:              darken($asparagus-color, 25%);
+        }
+      }
+
+      &[title^='POST'],
+      &[title^='PUT'],
+      &[title^='PATCH'] {
+        &::before {
+          background:         $wild-blue-yonder-color;
+        }
+
+        &::after {
+          color:              darken($wild-blue-yonder-color, 25%);
+        }
+      }
+
+      &[title^='DELETE'] {
+        &::before {
+          background:         $copper-rust-color;
+        }
+
+        &::after {
+          color:              darken($copper-rust-color, 25%);
         }
       }
     }
