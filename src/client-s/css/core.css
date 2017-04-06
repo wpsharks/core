@@ -558,7 +558,6 @@ pre.code[title^='CSS']::before {
 }
 
 pre.code[title^='CSS']::after {
-  padding-top: .025em;
   content: '\e679';
   font-family: devicon;
   color: #243a49;
@@ -596,14 +595,14 @@ pre.code[title^='JavaScript']::after {
 }
 
 pre.code[title^='TypeScript']::before {
-  background: #204852;
+  background: #4682b4;
 }
 
 pre.code[title^='TypeScript']::after {
   line-height: .85em;
   content: '\e920';
   font-family: devicon;
-  color: black;
+  color: #224058;
 }
 
 pre.code[title^='CoffeeScript']::before {
@@ -714,7 +713,6 @@ pre.code[title^='Ruby']::before {
 }
 
 pre.code[title^='Ruby']::after {
-  padding-top: .075em;
   content: '\ebca';
   font-family: devicon;
   color: #250e0a;
@@ -740,15 +738,26 @@ pre.code[title^='Nginx']::after, pre.code[title^='NGINX']::after {
   color: #192715;
 }
 
-pre.code[title^='Nix']::before, pre.code[title^='Linux']::before, pre.code[title^='Command-Line']::before {
-  background: #434c59;
+pre.code[title^='Zsh']::before, pre.code[title^='Bash']::before, pre.code[title^='Shell']::before, pre.code[title^='Terminal']::before, pre.code[title^='Command-Line']::before {
+  background: #6d92a1;
 }
 
-pre.code[title^='Nix']::after, pre.code[title^='Linux']::after, pre.code[title^='Command-Line']::after {
-  padding-top: .05em;
-  content: '\eb1c';
-  font-family: devicon;
-  color: #0c0e10;
+pre.code[title^='Zsh']::after, pre.code[title^='Bash']::after, pre.code[title^='Shell']::after, pre.code[title^='Terminal']::after, pre.code[title^='Command-Line']::after {
+  content: '\f120';
+  transform: scale(0.65);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  color: #384e57;
+}
+
+pre.code[title^='Nix']::before, pre.code[title^='Unix']::before, pre.code[title^='Linux']::before {
+  background: #747d83;
+}
+
+pre.code[title^='Nix']::after, pre.code[title^='Unix']::after, pre.code[title^='Linux']::after {
+  padding-top: .15em;
+  content: '\f17c';
+  color: #2c3032;
 }
 
 pre.code[title^='macOS']::before, pre.code[title^='Apple']::before {
@@ -766,7 +775,6 @@ pre.code[title^='Ubuntu']::before {
 }
 
 pre.code[title^='Ubuntu']::after {
-  padding-top: .05em;
   content: '\ebd1';
   font-family: devicon;
   color: #562b15;
@@ -777,7 +785,6 @@ pre.code[title^='Windows']::before {
 }
 
 pre.code[title^='Windows']::after {
-  padding-top: .05em;
   content: '\ebf5';
   font-family: devicon;
   color: #002d48;
@@ -798,7 +805,6 @@ pre.code[title^='Git']::before {
 }
 
 pre.code[title^='Git']::after {
-  padding-top: .05em;
   content: '\e7a8';
   font-family: devicon;
   color: #4f120a;
@@ -829,7 +835,6 @@ pre.code[title^='PostgreSQL']::before {
 }
 
 pre.code[title^='PostgreSQL']::after {
-  padding-top: .15em;
   content: '\eb7d';
   font-family: devicon;
   color: #000808;
@@ -850,14 +855,12 @@ pre.code[title^='Redis']::before {
 }
 
 pre.code[title^='Redis']::after {
-  padding-top: .05em;
   content: '\e607';
   font-family: devicon;
   color: #250e0a;
 }
 
 pre.code[title^='Feed']::after, pre.code[title^='URL']::after, pre.code[title^='HEAD']::after, pre.code[title^='GET']::after, pre.code[title^='POST']::after, pre.code[title^='PUT']::after, pre.code[title^='PATCH']::after, pre.code[title^='DELETE']::after {
-  padding-top: .075em;
   content: '\f0c1';
 }
 
@@ -3318,6 +3321,31 @@ img[align='right'],
 ._p[class*='_p _v30e'] {
   padding-top: 30em !important;
   padding-bottom: 30em !important;
+}
+
+._z {
+  position: relative;
+}
+
+._z[class*='_z _1u'] {
+  z-index: 1 !important;
+}
+
+._z[class*='_z _2u'] {
+  z-index: 2 !important;
+}
+
+._z[class*='_z _3u'] {
+  z-index: 3 !important;
+}
+
+._position[class*='_position _offscreen'] {
+  position: fixed !important;
+  top: -99999px !important;
+  left: -99999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
 }
 
 @media only screen and (max-width: 767px) {

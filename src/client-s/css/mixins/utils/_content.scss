@@ -23,6 +23,10 @@
       font-family:            $content-lede-font-family;
     }
 
+    .ui.label {
+      font-family:            $sans-serif-font-family;
+    }
+
     @include handheld-only {
       // Exclude any that have `_when` directives.
       // `_always` can be used to exclude explicitly.

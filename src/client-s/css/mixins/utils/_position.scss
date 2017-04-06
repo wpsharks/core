@@ -2,6 +2,22 @@
  * Position utils.
  */
 @mixin position-utils {
+  ._z {
+    position:                 relative;
+
+    &[class*='_z _1u'] {
+      z-index:                1 !important;
+    }
+
+    &[class*='_z _2u'] {
+      z-index:                2 !important;
+    }
+
+    &[class*='_z _3u'] {
+      z-index:                3 !important;
+    }
+  }
+
   ._position {
     &[class*='_position _offscreen'] {
       @include position-offscreen(true);
