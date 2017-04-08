@@ -70,4 +70,16 @@ trait Color
     {
         return $GLOBALS[static::class]->Utils->©Color->cleanHex(...$args);
     }
+
+    /**
+     * @since 17xxxx Color utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Color::md5Gradient()
+     */
+    public static function md5GradientImage(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Color->md5GradientImage(...$args);
+    }
 }

@@ -107,4 +107,93 @@ class Color extends Classes\Core\Base\Core
         }
         return $hex;
     }
+
+    /**
+     * MD5 gradient image.
+     *
+     * @since 17xxxx Color utilities.
+     *
+     * @param string $md5    MD5 hash.
+     * @param int    $width  Width of gradient image.
+     * @param int    $height Height of gradient image.
+     * @param array  $args   Any additional behavioral args.
+     *
+     * @return string Raw PNG image data.
+     *
+     * @see <https://github.com/alterebro/text2image>
+     */
+    public function md5GradientImage(string $md5, int $width, int $height, array $args = []): string
+    {
+        if (strlen($md5) !== 32) {
+            $md5 = md5($md5);
+        }
+        $width  = min(1920, max(16, $width));
+        $height = min(1080, max(16, $height));
+
+        $default_args = [
+            'steps'  => 60,
+            'smooth' => true,
+        ];
+        $args += $default_args;
+        $args['steps']  = (int) $args['steps'];
+        $args['smooth'] = (bool) $args['smooth'];
+
+        $md5_blocks = str_split($md5, 6);
+        $img        = imagecreatetruecolor($width, $height);
+        imagefilledrectangle($img, 0, 0, $width, $height, imagecolorallocate($img, 0, 0, 0));
+
+        $bg_blocks = str_split($md5_blocks[4], 2);
+        $bg_alpha  = floor((255 - hexdec($md5_blocks[5])) / 2);
+        $bg_color  = imagecolorallocatealpha($img, hexdec($bg_blocks[0]), hexdec($bg_blocks[1]), hexdec($bg_blocks[2]), $bg_alpha);
+        imagefilledrectangle($img, 0, 0, $width, $height, $bg_color);
+
+        $gradient_steps      = min(60, max(1, $args['steps']));
+        $gradient_step_alpha = 127 / $gradient_steps;
+        $gradient_step_size  = (max($gradient_steps + 1, $width, $height) * 2) / $gradient_steps;
+
+        for ($_i=0; $_i < 4; ++$_i) {
+            switch ($_i) {
+                case 0:
+                    $_x  = 0;
+                    $_y  = 0;
+                    break;
+
+                case 1:
+                    $_x  = $width;
+                    $_y  = 0;
+                    break;
+
+                case 2:
+                    $_x  = $width;
+                    $_y  = $height;
+                    break;
+
+                case 3:
+                default:
+                    $_x  = 0;
+                    $_y  = $height;
+                    break;
+            }
+            $_gradient_blocks = str_split($md5_blocks[$_i], 2);
+            $_gradient_color  = imagecolorallocate($img, hexdec($_gradient_blocks[0]), hexdec($_gradient_blocks[1]), hexdec($_gradient_blocks[2]));
+            $_gradient_colors = [0xFF & ($_gradient_color >> 0x10), 0xFF & ($_gradient_color >> 0x8), 0xFF & $_gradient_color];
+
+            for ($_gradient_step = 0; $_gradient_step < $gradient_steps; ++$_gradient_step) {
+                $_gradient_alpha_color = imagecolorallocatealpha($img, $_gradient_colors[0], $_gradient_colors[1], $_gradient_colors[2], 127 - ($gradient_step_alpha * ($gradient_steps - $_gradient_step) / 8));
+                imagefilledellipse($img, $_x, $_y, $gradient_step_size * $_gradient_step, $gradient_step_size * $_gradient_step, $_gradient_alpha_color);
+            } // unset($_gradient_step, $_gradient_alpha_color); // Housekeeping.
+        } // unset($_i, $_x, $_y, $_gradient_blocks, $_gradient_color, $_gradient_colors);
+
+        if ($args['smooth']) { // Apply filters?
+            imagefilter($img, IMG_FILTER_GAUSSIAN_BLUR);
+            imagefilter($img, IMG_FILTER_SELECTIVE_BLUR);
+            imagefilter($img, IMG_FILTER_SMOOTH, -4);
+        }
+        ob_start();
+        imagepng($img);
+        $data = ob_get_clean();
+        imagedestroy($img);
+
+        return $data;
+    }
 }

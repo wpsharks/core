@@ -1,5 +1,6 @@
 ## $v
 
+- Adding `c::md5GradientImage()`.
 - Adding `c::varToCamelCase()`.
 - Adding `c::activeSelected()`.
 - Adding `c::uaIsEngine()`.
