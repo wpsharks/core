@@ -1,0 +1,24 @@
+/*
+ * Fancy lists.
+ */
+@mixin fancy-lists {
+  dt {
+    > label {
+      font-weight:            400;
+      font-size:             .85em;
+    }
+  }
+
+  li,
+  dd {
+    > p:first-child,
+    > .ui.message:first-child {
+      margin-top:             0;
+    }
+
+    > p:last-child,
+    > .ui.message:last-child {
+      margin-bottom:          1rem;
+    }
+  }
+}

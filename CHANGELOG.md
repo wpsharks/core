@@ -9,6 +9,7 @@
 - Optimizing CSS utilities that set unit values.
 - Bug fix. `curl_errno` should not impact the `http_code` return value.
 - Updating to latest release of PHP Markdown fork.
+- Enhancing support for HTML markup in clipping utils.
 - Enhancing monospace styles.
 
 ## v170329.13807

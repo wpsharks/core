@@ -4,7 +4,7 @@
 @mixin content-utils {
   ._content {
     &,
-    .text {
+    .text:not(.icon) {
       font-family:            $content-font-family;
     }
 

@@ -1,21 +1,4 @@
 /*
  * List utils.
  */
-@mixin list-utils {
-  ._list {
-    &[class*='_list _with _margins'] {
-      > ol,
-      > ul {
-        > li:not(:first-child) {
-          margin-top:         1rem !important;
-        }
-      }
-
-      > dl {
-        > dt:not(:first-child) {
-          margin-top:         1rem !important;
-        }
-      }
-    }
-  }
-}
+@mixin list-utils {}

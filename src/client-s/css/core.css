@@ -46,7 +46,13 @@
  * Fancy HR tags.
  */
 /*
+ * Fancy labels.
+ */
+/*
  * Fancy link targets.
+ */
+/*
+ * Fancy lists.
  */
 /*
  * Fancy messages.
@@ -154,6 +160,9 @@
  * Font utils.
  */
 /*
+ * Heading utils.
+ */
+/*
  * Height utils.
  */
 /*
@@ -205,7 +214,13 @@
  * Fancy HR tags.
  */
 /*
+ * Fancy labels.
+ */
+/*
  * Fancy link targets.
+ */
+/*
+ * Fancy lists.
  */
 /*
  * Fancy messages.
@@ -350,6 +365,25 @@ a[target='_blank']:not(.icon):not([class*='_no _icon'])::after {
   display: inline-block;
 }
 
+dt > label {
+  font-weight: 400;
+  font-size: .85em;
+}
+
+li > p:first-child,
+li > .ui.message:first-child,
+dd > p:first-child,
+dd > .ui.message:first-child {
+  margin-top: 0;
+}
+
+li > p:last-child,
+li > .ui.message:last-child,
+dd > p:last-child,
+dd > .ui.message:last-child {
+  margin-bottom: 1rem;
+}
+
 @media only screen and (max-width: 991px) {
   .ui.message {
     text-align: center !important;
@@ -428,8 +462,8 @@ pre {
   white-space: pre-wrap;
   padding: 1em;
   overflow: visible;
-  color: #000;
-  background: #f8f8f8;
+  color: #fff;
+  background: #222;
   border-radius: .25em;
   /*
      * `<pre><code>`.
@@ -500,8 +534,8 @@ pre.code > code {
 }
 
 pre.code > code:not(.hljs) {
-  color: #000;
-  background: #f8f8f8;
+  color: #fff;
+  background: #222;
 }
 
 pre.code > code._no[class*='_no _scroll'] {
@@ -997,6 +1031,9 @@ sub {
  */
 /*
  * Font utils.
+ */
+/*
+ * Heading utils.
  */
 /*
  * Height utils.
@@ -1808,6 +1845,10 @@ img[align='right'],
   font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
+._content .ui.label {
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
 ._content > p:first-of-type:not([class]) {
   font-size: 1.25em;
   font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif;
@@ -2136,6 +2177,56 @@ img[align='right'],
   font-family: inherit;
 }
 
+h1._block,
+h2._block,
+h3._block,
+h4._block,
+h5._block,
+h6._block {
+  margin-left: -.5em;
+  margin-right: -.5em;
+  padding: .6em .75em .5em;
+  line-height: 1em;
+  color: #000;
+  background: #edf6ff;
+  border-radius: .25em;
+  border: 1px solid #000;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.25);
+}
+
+h1._block > code,
+h2._block > code,
+h3._block > code,
+h4._block > code,
+h5._block > code,
+h6._block > code {
+  display: inline;
+  white-space: normal;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  background: none;
+  color: inherit;
+  border: 0;
+  border-radius: 0;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+h1._block > label,
+h2._block > label,
+h3._block > label,
+h4._block > label,
+h5._block > label,
+h6._block > label {
+  float: right;
+  margin-left: 1em;
+  font-size: .75em;
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  color: #00376e;
+}
+
 /*
    * Alias of `_h 100p`.
    */
@@ -2450,15 +2541,6 @@ img[align='right'],
   text-overflow: ellipsis !important;
   vertical-align: middle !important;
   display: inline-block !important;
-}
-
-._list[class*='_list _with _margins'] > ol > li:not(:first-child),
-._list[class*='_list _with _margins'] > ul > li:not(:first-child) {
-  margin-top: 1rem !important;
-}
-
-._list[class*='_list _with _margins'] > dl > dt:not(:first-child) {
-  margin-top: 1rem !important;
 }
 
 ._m {
