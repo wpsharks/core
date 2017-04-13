@@ -85,7 +85,7 @@ class Html extends Classes\Core\Base\Core
     /**
      * Active & selected?
      *
-     * @since 17xxxx Initial release.
+     * @since 170413.34876 Initial release.
      *
      * @param mixed $a Input variable a.
      * @param mixed $b Input variable b.

@@ -111,7 +111,7 @@ class Color extends Classes\Core\Base\Core
     /**
      * MD5 gradient image.
      *
-     * @since 17xxxx Color utilities.
+     * @since 170413.34876 Color utilities.
      *
      * @param string $md5    MD5 hash.
      * @param int    $width  Width of gradient image.

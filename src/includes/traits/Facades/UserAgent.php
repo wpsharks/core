@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * User-Agent.
  *
- * @since 17xxxx
+ * @since 170413.34876
  */
 trait UserAgent
 {
     /**
-     * @since 17xxxx User-Agent utils.
+     * @since 170413.34876 User-Agent utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

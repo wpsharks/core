@@ -93,7 +93,7 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
     /**
      * Convert var to camelCase.
      *
-     * @since 17xxxx Initial release.
+     * @since 170413.34876 Initial release.
      *
      * @param string $var Var to convert to camelCase.
      *

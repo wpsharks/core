@@ -1,4 +1,4 @@
-## $v
+## v170413.34876
 
 - Adding `c::md5GradientImage()`.
 - Adding `c::varToCamelCase()`.

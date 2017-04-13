@@ -72,7 +72,7 @@ trait Color
     }
 
     /**
-     * @since 17xxxx Color utilities.
+     * @since 170413.34876 Color utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

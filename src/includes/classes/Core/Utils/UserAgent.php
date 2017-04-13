@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * User-Agent utils.
  *
- * @since 17xxxx User-Agent utils.
+ * @since 170413.34876 User-Agent utils.
  */
 class UserAgent extends Classes\Core\Base\Core
 {
     /**
      * Class constructor.
      *
-     * @since 17xxxx User-Agent utils.
+     * @since 170413.34876 User-Agent utils.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -42,7 +42,7 @@ class UserAgent extends Classes\Core\Base\Core
     /**
      * Is a browser engine.
      *
-     * @since 17xxxx User-Agent utils.
+     * @since 170413.34876 User-Agent utils.
      *
      * @return bool True if is engine.
      *

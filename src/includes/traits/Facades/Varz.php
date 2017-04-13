@@ -72,7 +72,7 @@ trait Varz
     }
 
     /**
-     * @since 17xxxx Var utils.
+     * @since 170413.34876 Var utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
