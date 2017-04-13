@@ -78,6 +78,10 @@
       font-size:              3em !important;
     }
 
+    &[class*='_f _4e'] {
+      font-size:              4em !important;
+    }
+
     &[class*='_f _5e'] {
       font-size:              5em !important;
     }
@@ -218,6 +222,7 @@
       &[class*='_f _1'],
       &[class*='_f _2'],
       &[class*='_f _3'],
+      &[class*='_f _4'],
       &[class*='_f _5'] {
         > .item {
           font-size:          inherit;

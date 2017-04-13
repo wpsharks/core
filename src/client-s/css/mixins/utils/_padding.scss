@@ -30,6 +30,10 @@
       padding:                3em !important;
     }
 
+    &[class*='_p _4e'] {
+      padding:                4em !important;
+    }
+
     &[class*='_p _5e'] {
       padding:                5em !important;
     }
@@ -71,6 +75,10 @@
 
     &[class*='_p _t3e'] {
       padding-top:            3em !important;
+    }
+
+    &[class*='_p _t4e'] {
+      padding-top:            4em !important;
     }
 
     &[class*='_p _t5e'] {
@@ -116,6 +124,10 @@
       padding-right:          3em !important;
     }
 
+    &[class*='_p _r4e'] {
+      padding-right:          4em !important;
+    }
+
     &[class*='_p _r5e'] {
       padding-right:          5em !important;
     }
@@ -159,6 +171,10 @@
       padding-bottom:         3em !important;
     }
 
+    &[class*='_p _b4e'] {
+      padding-bottom:         4em !important;
+    }
+
     &[class*='_p _b5e'] {
       padding-bottom:         5em !important;
     }
@@ -200,6 +216,10 @@
 
     &[class*='_p _l3e'] {
       padding-left:           3em !important;
+    }
+
+    &[class*='_p _l4e'] {
+      padding-left:           4em !important;
     }
 
     &[class*='_p _l5e'] {
@@ -249,6 +269,11 @@
     &[class*='_p _h3e'] {
       padding-left:           3em !important;
       padding-right:          3em !important;
+    }
+
+    &[class*='_p _h4e'] {
+      padding-left:           4em !important;
+      padding-right:          4em !important;
     }
 
     &[class*='_p _h5e'] {
@@ -302,6 +327,11 @@
     &[class*='_p _v3e'] {
       padding-top:            3em !important;
       padding-bottom:         3em !important;
+    }
+
+    &[class*='_p _v4e'] {
+      padding-top:            4em !important;
+      padding-bottom:         4em !important;
     }
 
     &[class*='_p _v5e'] {

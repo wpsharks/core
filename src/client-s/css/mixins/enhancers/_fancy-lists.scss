@@ -21,4 +21,14 @@
       margin-bottom:          1rem;
     }
   }
+
+  .ui.list {
+    > .item {
+      > .image {
+        + .content {
+          max-width:          calc(100% - 2.5em);
+        }
+      }
+    }
+  }
 }

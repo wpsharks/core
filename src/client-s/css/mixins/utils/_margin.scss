@@ -30,6 +30,10 @@
       margin:                 3rem !important;
     }
 
+    &[class*='_m _4r'] {
+      margin:                 4rem !important;
+    }
+
     &[class*='_m _5r'] {
       margin:                 5rem !important;
     }
@@ -63,6 +67,10 @@
 
     &[class*='_m _t-5r'] {
       margin-top:            -5rem !important;
+    }
+
+    &[class*='_m _t-4r'] {
+      margin-top:            -4rem !important;
     }
 
     &[class*='_m _t-3r'] {
@@ -109,6 +117,10 @@
       margin-top:             3rem !important;
     }
 
+    &[class*='_m _t4r'] {
+      margin-top:             4rem !important;
+    }
+
     &[class*='_m _t5r'] {
       margin-top:             5rem !important;
     }
@@ -142,6 +154,10 @@
 
     &[class*='_m _r-5r'] {
       margin-right:          -5rem !important;
+    }
+
+    &[class*='_m _r-4r'] {
+      margin-right:          -4rem !important;
     }
 
     &[class*='_m _r-3r'] {
@@ -188,6 +204,10 @@
       margin-right:           3rem !important;
     }
 
+    &[class*='_m _r4r'] {
+      margin-right:           4rem !important;
+    }
+
     &[class*='_m _r5r'] {
       margin-right:           5rem !important;
     }
@@ -221,6 +241,10 @@
 
     &[class*='_m _b-5r'] {
       margin-bottom:         -5rem !important;
+    }
+
+    &[class*='_m _b-4r'] {
+      margin-bottom:         -4rem !important;
     }
 
     &[class*='_m _b-3r'] {
@@ -267,6 +291,10 @@
       margin-bottom:          3rem !important;
     }
 
+    &[class*='_m _b4r'] {
+      margin-bottom:          4rem !important;
+    }
+
     &[class*='_m _b5r'] {
       margin-bottom:          5rem !important;
     }
@@ -300,6 +328,10 @@
 
     &[class*='_m _l-5r'] {
       margin-left:           -5rem !important;
+    }
+
+    &[class*='_m _l-4r'] {
+      margin-left:           -4rem !important;
     }
 
     &[class*='_m _l-3r'] {
@@ -344,6 +376,10 @@
 
     &[class*='_m _l3r'] {
       margin-left:            3rem !important;
+    }
+
+    &[class*='_m _l4r'] {
+      margin-left:            4rem !important;
     }
 
     &[class*='_m _l5r'] {
@@ -393,6 +429,11 @@
     &[class*='_m _h3r'] {
       margin-left:            3rem !important;
       margin-right:           3rem !important;
+    }
+
+    &[class*='_m _h4r'] {
+      margin-left:            4rem !important;
+      margin-right:           4rem !important;
     }
 
     &[class*='_m _h5r'] {
@@ -446,6 +487,11 @@
     &[class*='_m _v3r'] {
       margin-top:             3rem !important;
       margin-bottom:          3rem !important;
+    }
+
+    &[class*='_m _v4r'] {
+      margin-top:             4rem !important;
+      margin-bottom:          4rem !important;
     }
 
     &[class*='_m _v5r'] {

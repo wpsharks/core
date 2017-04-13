@@ -161,19 +161,19 @@
       text-align:             justify !important;
     }
 
-    &[class*='_align _left _when _handheld'] {
+    &[class*='_align _left _when _handheld']:not(#x) {
       @include handheld-only {
         text-align:           left !important;
       }
     }
 
-    &[class*='_align _right _when _handheld'] {
+    &[class*='_align _right _when _handheld']:not(#x) {
       @include handheld-only {
         text-align:           right !important;
       }
     }
 
-    &[class*='_align _center _when _handheld'] {
+    &[class*='_align _center _when _handheld']:not(#x) {
       @include handheld-only {
         text-align:           center !important;
 
@@ -185,19 +185,19 @@
       }
     }
 
-    &[class*='_align _left _when _computer'] {
+    &[class*='_align _left _when _computer']:not(#x) {
       @include computer-only {
         text-align:           left !important;
       }
     }
 
-    &[class*='_align _right _when _computer'] {
+    &[class*='_align _right _when _computer']:not(#x) {
       @include computer-only {
         text-align:           right !important;
       }
     }
 
-    &[class*='_align _center _when _computer'] {
+    &[class*='_align _center _when _computer']:not(#x) {
       @include computer-only {
         text-align:           center !important;
 
@@ -209,19 +209,19 @@
       }
     }
 
-    &[class*='_align _left _when _small _screen'] {
+    &[class*='_align _left _when _small _screen']:not(#x) {
       @include small-screen-only {
         text-align:           left !important;
       }
     }
 
-    &[class*='_align _right _when _small _screen'] {
+    &[class*='_align _right _when _small _screen']:not(#x) {
       @include small-screen-only {
         text-align:           right !important;
       }
     }
 
-    &[class*='_align _center _when _small _screen'] {
+    &[class*='_align _center _when _small _screen']:not(#x) {
       @include small-screen-only {
         text-align:           center !important;
 
@@ -233,19 +233,19 @@
       }
     }
 
-    &[class*='_align _left _when _mobile'] {
+    &[class*='_align _left _when _mobile']:not(#x) {
       @include mobile-device {
         text-align:           left !important;
       }
     }
 
-    &[class*='_align _right _when _mobile'] {
+    &[class*='_align _right _when _mobile']:not(#x) {
       @include mobile-device {
         text-align:           right !important;
       }
     }
 
-    &[class*='_align _center _when _mobile'] {
+    &[class*='_align _center _when _mobile']:not(#x) {
       @include mobile-device {
         text-align:           center !important;
 
@@ -257,19 +257,19 @@
       }
     }
 
-    &[class*='_align _left _when _tablet'] {
+    &[class*='_align _left _when _tablet']:not(#x) {
       @include tablet-device {
         text-align:           left !important;
       }
     }
 
-    &[class*='_align _right _when _tablet'] {
+    &[class*='_align _right _when _tablet']:not(#x) {
       @include tablet-device {
         text-align:           right !important;
       }
     }
 
-    &[class*='_align _center _when _tablet'] {
+    &[class*='_align _center _when _tablet']:not(#x) {
       @include tablet-device {
         text-align:           center !important;
 
@@ -281,19 +281,19 @@
       }
     }
 
-    &[class*='_align _left _when _large _screen'] {
+    &[class*='_align _left _when _large _screen']:not(#x) {
       @include large-screen-device {
         text-align:           left !important;
       }
     }
 
-    &[class*='_align _right _when _large _screen'] {
+    &[class*='_align _right _when _large _screen']:not(#x) {
       @include large-screen-device {
         text-align:           right !important;
       }
     }
 
-    &[class*='_align _center _when _large _screen'] {
+    &[class*='_align _center _when _large _screen']:not(#x) {
       @include large-screen-device {
         text-align:           center !important;
 
@@ -305,19 +305,19 @@
       }
     }
 
-    &[class*='_align _left _when _widescreen'] {
+    &[class*='_align _left _when _widescreen']:not(#x) {
       @include widescreen-device {
         text-align:           left !important;
       }
     }
 
-    &[class*='_align _right _when _widescreen'] {
+    &[class*='_align _right _when _widescreen']:not(#x) {
       @include widescreen-device {
         text-align:           right !important;
       }
     }
 
-    &[class*='_align _center _when _widescreen'] {
+    &[class*='_align _center _when _widescreen']:not(#x) {
       @include widescreen-device {
         text-align:           center !important;
 
@@ -338,43 +338,43 @@
       @include centered(true);
     }
 
-    &[class*='_centered _when _handheld'] {
+    &[class*='_centered _when _handheld']:not(#x) {
       @include handheld-only {
         @include centered-conversion(true);
       }
     }
 
-    &[class*='_centered _when _computer'] {
+    &[class*='_centered _when _computer']:not(#x) {
       @include computer-only {
         @include centered-conversion(true);
       }
     }
 
-    &[class*='_centered _when _small _screen'] {
+    &[class*='_centered _when _small _screen']:not(#x) {
       @include small-screen-only {
         @include centered-conversion(true);
       }
     }
 
-    &[class*='_centered _when _mobile'] {
+    &[class*='_centered _when _mobile']:not(#x) {
       @include mobile-device {
         @include centered-conversion(true);
       }
     }
 
-    &[class*='_centered _when _tablet'] {
+    &[class*='_centered _when _tablet']:not(#x) {
       @include tablet-device {
         @include centered-conversion(true);
       }
     }
 
-    &[class*='_centered _when _large _screen'] {
+    &[class*='_centered _when _large _screen']:not(#x) {
       @include large-screen-device {
         @include centered-conversion(true);
       }
     }
 
-    &[class*='_centered _when _widescreen'] {
+    &[class*='_centered _when _widescreen']:not(#x) {
       @include widescreen-device {
         @include centered-conversion(true);
       }
