@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. Integer instead of float in `c::md5GradientImage()`.
+
 ## v170413.34876
 
 - Adding `c::md5GradientImage()`.

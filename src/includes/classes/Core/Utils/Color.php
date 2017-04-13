@@ -143,13 +143,13 @@ class Color extends Classes\Core\Base\Core
         imagefilledrectangle($img, 0, 0, $width, $height, imagecolorallocate($img, 0, 0, 0));
 
         $bg_blocks = str_split($md5_blocks[4], 2);
-        $bg_alpha  = floor((255 - hexdec($md5_blocks[5])) / 2);
+        $bg_alpha  = (int) floor((255 - hexdec($md5_blocks[5])) / 2);
         $bg_color  = imagecolorallocatealpha($img, hexdec($bg_blocks[0]), hexdec($bg_blocks[1]), hexdec($bg_blocks[2]), $bg_alpha);
         imagefilledrectangle($img, 0, 0, $width, $height, $bg_color);
 
         $gradient_steps      = min(60, max(1, $args['steps']));
-        $gradient_step_alpha = 127 / $gradient_steps;
-        $gradient_step_size  = (max($gradient_steps + 1, $width, $height) * 2) / $gradient_steps;
+        $gradient_step_alpha = (int) floor(127 / $gradient_steps);
+        $gradient_step_size  = (int) floor((max($gradient_steps + 1, $width, $height) * 2) / $gradient_steps);
 
         for ($_i=0; $_i < 4; ++$_i) {
             switch ($_i) {
@@ -179,9 +179,10 @@ class Color extends Classes\Core\Base\Core
             $_gradient_colors = [0xFF & ($_gradient_color >> 0x10), 0xFF & ($_gradient_color >> 0x8), 0xFF & $_gradient_color];
 
             for ($_gradient_step = 0; $_gradient_step < $gradient_steps; ++$_gradient_step) {
-                $_gradient_alpha_color = imagecolorallocatealpha($img, $_gradient_colors[0], $_gradient_colors[1], $_gradient_colors[2], 127 - ($gradient_step_alpha * ($gradient_steps - $_gradient_step) / 8));
+                $_gradient_alpha       = (int) floor(127 - ($gradient_step_alpha * ($gradient_steps - $_gradient_step) / 8));
+                $_gradient_alpha_color = imagecolorallocatealpha($img, $_gradient_colors[0], $_gradient_colors[1], $_gradient_colors[2], $_gradient_alpha);
                 imagefilledellipse($img, $_x, $_y, $gradient_step_size * $_gradient_step, $gradient_step_size * $_gradient_step, $_gradient_alpha_color);
-            } // unset($_gradient_step, $_gradient_alpha_color); // Housekeeping.
+            } // unset($_gradient_step, $_gradient_alpha, $_gradient_alpha_color); // Housekeeping.
         } // unset($_i, $_x, $_y, $_gradient_blocks, $_gradient_color, $_gradient_colors);
 
         if ($args['smooth']) { // Apply filters?

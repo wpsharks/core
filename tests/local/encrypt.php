@@ -15,5 +15,5 @@ $key    = c::encryptionKey();
 
 echo $key."\n\n";
 
-echo($e = c::encrypt($string, $key))."\n";
-echo c::decrypt($e, $key)."\n";
+//echo($e = c::encrypt($string, $key))."\n";
+//echo c::decrypt($e, $key)."\n";
