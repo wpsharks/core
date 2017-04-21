@@ -24,30 +24,51 @@ use function get_defined_vars as vars;
 trait Aws
 {
     /**
-     * @since 160719 AWS utilities.
-     * @see Classes\Core\Utils\Aws::$Sdk
+     * @since 17xxxx AWS utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Aws::sdk()
      */
-    public static function awsSdk()
+    public static function awsSdk(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Aws->Sdk;
+        return $GLOBALS[static::class]->Utils->©Aws->sdk(...$args);
     }
 
     /**
-     * @since 160719 AWS utilities.
-     * @see Classes\Core\Utils\Aws::$S3Client
+     * @since 17xxxx `awsSdk()` alias.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Aws::sdk()
      */
-    public static function awsS3Client()
+    public static function awsSdkConfig(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Aws->S3Client;
+        return $GLOBALS[static::class]->Utils->©Aws->sdk(...$args);
     }
 
     /**
      * @since 17xxxx AWS utilities.
-     * @see Classes\Core\Utils\Aws::$CloudFrontClient
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Aws::s3Client()
      */
-    public static function awsCloudFrontClient()
+    public static function awsS3Client(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Aws->CloudFrontClient;
+        return $GLOBALS[static::class]->Utils->©Aws->s3Client($args);
+    }
+
+    /**
+     * @since 17xxxx AWS utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Aws::cloudFrontClient()
+     */
+    public static function awsCloudFrontClient(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Aws->cloudFrontClient($args);
     }
 
     /**

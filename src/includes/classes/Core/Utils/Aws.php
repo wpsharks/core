@@ -16,7 +16,9 @@ use WebSharks\Core\Traits;
 use function assert as debug;
 use function get_defined_vars as vars;
 #
-use Aws as AwsLib;
+use Aws\Sdk;
+use Aws\S3\S3Client;
+use Aws\CloudFront\CloudFrontClient;
 
 /**
  * AWS utilities.
@@ -26,67 +28,72 @@ use Aws as AwsLib;
 class Aws extends Classes\Core\Base\Core
 {
     /**
-     * AWS SDK.
+     * Get SDK instance.
      *
-     * @since 160719
+     * @since 17xxxx SDK instance.
      *
-     * @type AwsLib\Sdk
+     * @param array $args Instance args.
+     *
+     * @return Sdk SDK instance.
      */
-    public $Sdk;
-
-    /**
-     * AWS clients.
-     *
-     * @since 17xxxx
-     *
-     * @type \StdClass
-     */
-    protected $clients;
-
-    /**
-     * Constructor.
-     *
-     * @since 160719 Initial release.
-     *
-     * @param Classes\App $App Instance of App.
-     */
-    public function __construct(Classes\App $App)
+    public function sdk(array $args = []): Sdk
     {
-        parent::__construct($App);
-
-        $this->Sdk = new AwsLib\Sdk([
-            'version' => 'latest', // Default version.
+        if (($Sdk = &$this->cacheKey(__FUNCTION__, $args)) !== null) {
+            return $Sdk; // Cached this already.
+        }
+        $default_args = [ // Global defaults.
+            'version' => 'latest', // Dynamic.
             'region'  => $this->App->Config->©aws['©region'],
 
             'credentials' => [
                 'key'    => $this->App->Config->©aws['©access_key'],
                 'secret' => $this->App->Config->©aws['©secret_key'],
             ],
-        ]);
-        $this->clients = (object) [];
+        ];
+        $args       = array_replace_recursive($default_args, $args);
+        return $Sdk = new Sdk($args); // Aws\Sdk instance.
     }
 
     /**
-     * Magic/overload property getter.
+     * Get S3 client.
      *
-     * @since 17xxxx Magic overload handler.
+     * @since 17xxxx SDK instance.
      *
-     * @param string $property Property to get.
+     * @param array $args Instance args.
      *
-     * @return mixed AWS client else parent return value.
+     * @return S3Client Client instance.
      */
-    public function __get(string $property)
+    public function s3Client(array $args = []): S3Client
     {
-        if ($property === 'S3Client') {
-            return $this->clients->S3Client = $this->clients->S3Client ?? $this->Sdk->createS3([
-                'version' => $this->App->Config->©aws['©s3_version'],
-            ]);
-        } elseif ($property === 'CloudFrontClient') {
-            return $this->clients->CloudFrontClient = $this->clients->CloudFrontClient ?? $this->Sdk->createCloudFront([
-                'version' => $this->App->Config->©aws['©cf_version'],
-            ]);
+        if (($S3Client = &$this->cacheKey(__FUNCTION__, $args)) !== null) {
+            return $S3Client; // Cached this already.
         }
-        return parent::__get($property);
+        $default_args = [ // Global config defaults.
+            'version' => $this->App->Config->©aws['©s3_version'],
+        ];
+        $args            = array_replace_recursive($default_args, $args);
+        return $S3Client = $this->sdk()->createS3($args);
+    }
+
+    /**
+     * Get CloudFront client.
+     *
+     * @since 17xxxx SDK instance.
+     *
+     * @param array $args Instance args.
+     *
+     * @return CloudFrontClient Client instance.
+     */
+    public function cloudFrontClient(array $args = []): CloudFrontClient
+    {
+        if (($CloudFrontClient = &$this->cacheKey(__FUNCTION__, $args)) !== null) {
+            return $CloudFrontClient; // Cached this already.
+        }
+        $default_args = [ // Global config defaults.
+            'version' => $this->App->Config->©aws['©cf_version'],
+        ];
+        $args                    = array_replace_recursive($default_args, $args);
+        return $CloudFrontClient = $this->sdk()->createCloudFront($args);
     }
 
     /**
@@ -96,22 +103,22 @@ class Aws extends Classes\Core\Base\Core
      *
      * @param string $url           URL to sign.
      * @param int    $expires_after Expiration in seconds.
+     * @param array  $args          Args to URL signer.
+     * @param array  $client_args   Client instance args.
      *
-     * @return string Signed URL.
+     * @return string Digitally signed URL.
      */
-    public function cloudFrontSignUrl(string $url, int $expires_after = 86400): string
+    public function cloudFrontSignUrl(string $url, int $expires_after = 86400, array $args = [], array $client_args = []): string
     {
-        $expires = time() + max(0, $expires_after);
+        $default_args = [ // Global config defaults.
+            'key_pair_id' => $this->App->Config->©aws['©cf_key_pair_id'],
+            'private_key' => $this->App->Config->©aws['©cf_private_key_file'],
+        ];
+        $args            = array_replace_recursive($default_args, $args);
+        $args['url']     = $url; // `url` and `expires` via params.
+        $args['expires'] = time() + max(0, $expires_after);
 
-        try { // Catch and rethrow exceptions.
-            return $this->CloudFrontClient->getSignedUrl([
-                'url'         => $url,
-                'expires'     => $expires,
-                'key_pair_id' => $this->App->Config->©aws['©cf_key_pair_id'],
-                'private_key' => $this->App->Config->©aws['©cf_private_key_file'],
-            ]);
-        } catch (\Throwable $Exception) {
-            throw $this->c::issue(vars(), $Exception->getMessage());
-        }
+        $CloudFrontClient  = $this->cloudFrontClient($client_args);
+        return $signed_url = $CloudFrontClient->getSignedUrl($args);
     }
 }
