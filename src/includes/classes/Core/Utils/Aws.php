@@ -30,7 +30,7 @@ class Aws extends Classes\Core\Base\Core
     /**
      * Get SDK instance.
      *
-     * @since 17xxxx SDK instance.
+     * @since 170421.57490 SDK instance.
      *
      * @param array $args Instance args.
      *
@@ -57,7 +57,7 @@ class Aws extends Classes\Core\Base\Core
     /**
      * Get S3 client.
      *
-     * @since 17xxxx SDK instance.
+     * @since 170421.57490 SDK instance.
      *
      * @param array $args Instance args.
      *
@@ -78,7 +78,7 @@ class Aws extends Classes\Core\Base\Core
     /**
      * Get CloudFront client.
      *
-     * @since 17xxxx SDK instance.
+     * @since 170421.57490 SDK instance.
      *
      * @param array $args Instance args.
      *
@@ -99,7 +99,7 @@ class Aws extends Classes\Core\Base\Core
     /**
      * CloudFront URL signer.
      *
-     * @since 17xxxx Magic overload handler.
+     * @since 170421.57490 Magic overload handler.
      *
      * @param string $url           URL to sign.
      * @param int    $expires_after Expiration in seconds.

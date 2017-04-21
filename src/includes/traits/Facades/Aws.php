@@ -24,7 +24,7 @@ use function get_defined_vars as vars;
 trait Aws
 {
     /**
-     * @since 17xxxx AWS utilities.
+     * @since 170421.57490 AWS utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Aws
     }
 
     /**
-     * @since 17xxxx `awsSdk()` alias.
+     * @since 170421.57490 `awsSdk()` alias.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait Aws
     }
 
     /**
-     * @since 17xxxx AWS utilities.
+     * @since 170421.57490 AWS utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -60,7 +60,7 @@ trait Aws
     }
 
     /**
-     * @since 17xxxx AWS utilities.
+     * @since 170421.57490 AWS utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -72,7 +72,7 @@ trait Aws
     }
 
     /**
-     * @since 17xxxx AWS utilities.
+     * @since 170421.57490 AWS utilities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
