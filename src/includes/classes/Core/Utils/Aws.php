@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -30,18 +30,18 @@ class Aws extends Classes\Core\Base\Core
      *
      * @since 160719
      *
-     * @var AwsLib\Sdk
+     * @type AwsLib\Sdk
      */
     public $Sdk;
 
     /**
-     * AWS S3 client.
+     * AWS clients.
      *
-     * @since 160719
+     * @since 17xxxx
      *
-     * @var AwsLib\S3\S3Client
+     * @type \StdClass
      */
-    public $S3Client;
+    protected $clients;
 
     /**
      * Constructor.
@@ -55,7 +55,7 @@ class Aws extends Classes\Core\Base\Core
         parent::__construct($App);
 
         $this->Sdk = new AwsLib\Sdk([
-            'version' => 'latest', // Default.
+            'version' => 'latest', // Default version.
             'region'  => $this->App->Config->©aws['©region'],
 
             'credentials' => [
@@ -63,11 +63,55 @@ class Aws extends Classes\Core\Base\Core
                 'secret' => $this->App->Config->©aws['©secret_key'],
             ],
         ]);
-        $this->S3Client = $this->Sdk->createS3([
-            'version' => $this->App->Config->©aws['©s3_version'],
-        ]);
-        // A quick example of how this can be used in PHP.
-        // $this->S3Client->registerStreamWrapper();
-        // See: <http://docs.aws.amazon.com/aws-sdk-php/v3/guide/service/s3-stream-wrapper.html>
+        $this->clients = (object) [];
+    }
+
+    /**
+     * Magic/overload property getter.
+     *
+     * @since 17xxxx Magic overload handler.
+     *
+     * @param string $property Property to get.
+     *
+     * @return mixed AWS client else parent return value.
+     */
+    public function __get(string $property)
+    {
+        if ($property === 'S3Client') {
+            return $this->clients->S3Client = $this->clients->S3Client ?? $this->Sdk->createS3([
+                'version' => $this->App->Config->©aws['©s3_version'],
+            ]);
+        } elseif ($property === 'CloudFrontClient') {
+            return $this->clients->CloudFrontClient = $this->clients->CloudFrontClient ?? $this->Sdk->createCloudFront([
+                'version' => $this->App->Config->©aws['©cf_version'],
+            ]);
+        }
+        return parent::__get($property);
+    }
+
+    /**
+     * CloudFront URL signer.
+     *
+     * @since 17xxxx Magic overload handler.
+     *
+     * @param string $url           URL to sign.
+     * @param int    $expires_after Expiration in seconds.
+     *
+     * @return string Signed URL.
+     */
+    public function cloudFrontSignUrl(string $url, int $expires_after = 86400): string
+    {
+        $expires = time() + max(0, $expires_after);
+
+        try { // Catch and rethrow exceptions.
+            return $this->CloudFrontClient->getSignedUrl([
+                'url'         => $url,
+                'expires'     => $expires,
+                'key_pair_id' => $this->App->Config->©aws['©cf_key_pair_id'],
+                'private_key' => $this->App->Config->©aws['©cf_private_key_file'],
+            ]);
+        } catch (\Throwable $Exception) {
+            throw $this->c::issue(vars(), $Exception->getMessage());
+        }
     }
 }

@@ -1,5 +1,7 @@
 ## $v
 
+- Adding `c::awsCloudFrontClient()`
+- Adding `c::awsCloudFrontSignUrl()`
 - Bug fix. Integer instead of float in `c::md5GradientImage()`.
 
 ## v170413.34876

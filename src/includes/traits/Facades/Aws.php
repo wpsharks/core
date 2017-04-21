@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -39,5 +39,26 @@ trait Aws
     public static function awsS3Client()
     {
         return $GLOBALS[static::class]->Utils->©Aws->S3Client;
+    }
+
+    /**
+     * @since 17xxxx AWS utilities.
+     * @see Classes\Core\Utils\Aws::$CloudFrontClient
+     */
+    public static function awsCloudFrontClient()
+    {
+        return $GLOBALS[static::class]->Utils->©Aws->CloudFrontClient;
+    }
+
+    /**
+     * @since 17xxxx AWS utilities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Aws::cloudFrontSignUrl()
+     */
+    public static function awsCloudFrontSignUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Aws->cloudFrontSignUrl(...$args);
     }
 }
