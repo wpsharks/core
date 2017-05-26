@@ -215,6 +215,40 @@
     }
 
     /*
+     * Make headings behave.
+     */
+    &[class*='_f _0'],
+    &[class*='_f _1'],
+    &[class*='_f _2'],
+    &[class*='_f _3'],
+    &[class*='_f _4'],
+    &[class*='_f _5'] {
+      h1 {
+        font-size:            2em;
+      }
+
+      h2 {
+        font-size:            1.71428571em;
+      }
+
+      h3 {
+        font-size:            1.28571429em;
+      }
+
+      h4 {
+        font-size:            1.07142857em;
+      }
+
+      h5 {
+        font-size:            1em;
+      }
+
+      h6 {
+        font-size:            0.67em;
+      }
+    }
+
+    /*
      * Make UI lists behave.
      */
     &.ui.list {
