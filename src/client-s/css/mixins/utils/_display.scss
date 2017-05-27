@@ -6,7 +6,7 @@
     display:                  none;
   }
 
-  ._hidden {
+  ._hidden:not([class*='_hidden _when']) {
     display:                  none !important;
   }
 

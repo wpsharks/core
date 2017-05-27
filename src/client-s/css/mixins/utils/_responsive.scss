@@ -12,6 +12,14 @@
         display:              none !important;
       }
     }
+
+    ._hidden {
+      &[class*='_hidden _when _mobile'],
+      &[class*='_hidden _when _handheld'],
+      &[class*='_hidden _when _small _screen'] {
+        display:              none !important;
+      }
+    }
   }
 
 
@@ -22,6 +30,14 @@
       &[class*='computer only'],
       &[class*='large screen only'],
       &[class*='widescreen only'] {
+        display:              none !important;
+      }
+    }
+
+    ._hidden {
+      &[class*='_hidden _when _tablet'],
+      &[class*='_hidden _when _handheld'],
+      &[class*='_hidden _when _small _screen'] {
         display:              none !important;
       }
     }
@@ -39,6 +55,13 @@
         display:              none !important;
       }
     }
+
+    ._hidden {
+      &[class*='_hidden _when _computer'],
+      &[class*='_hidden _when _small _screen'] {
+        display:              none !important;
+      }
+    }
   }
 
 
@@ -53,6 +76,13 @@
         display:              none !important;
       }
     }
+
+    ._hidden {
+      &[class*='_hidden _when _large _screen'],
+      &[class*='_hidden _when _computer'] {
+        display:              none !important;
+      }
+    }
   }
 
 
@@ -63,6 +93,13 @@
       &[class*='tablet only'],
       &[class*='handheld only'],
       &[class*='small screen only'] {
+        display:              none !important;
+      }
+    }
+
+    ._hidden {
+      &[class*='_hidden _when _widescreen'],
+      &[class*='_hidden _when _computer'] {
         display:              none !important;
       }
     }
