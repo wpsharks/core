@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -57,5 +57,29 @@ trait RequestType
     public static function doingRestAction(...$args)
     {
         return $GLOBALS[static::class]->Utils->©RequestType->doingRestAction(...$args);
+    }
+
+    /**
+     * @since 17xxxx Action utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RequestType::doingAction()
+     */
+    public static function doingAction(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©RequestType->doingAction(...$args);
+    }
+
+    /**
+     * @since 17xxxx Action utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\RequestType::didAction()
+     */
+    public static function didAction(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©RequestType->didAction(...$args);
     }
 }

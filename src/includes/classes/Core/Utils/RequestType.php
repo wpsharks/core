@@ -24,31 +24,49 @@ use function get_defined_vars as vars;
 class RequestType extends Classes\Core\Base\Core
 {
     /**
-     * Request type is AJAX?
+     * Is AJAX?
      *
      * @since 160531 Request types.
      *
-     * @param bool|null Request type is AJAX?
+     * @param bool|null Is AJAX?
      */
     protected $is_ajax;
 
     /**
-     * Request type is API?
+     * Is API?
      *
      * @since 160531 Request types.
      *
-     * @param bool|null Request type is API?
+     * @param bool|null Is API?
      */
     protected $is_api;
 
     /**
-     * Doing a REsT action?
+     * REsT action.
      *
      * @since 160531 Request types.
      *
      * @param string|null REsT action.
      */
     protected $doing_rest_action;
+
+    /**
+     * Doing actions.
+     *
+     * @since 17xxxx Action utils.
+     *
+     * @param array Actions.
+     */
+    protected $doing_actions;
+
+    /**
+     * Completed actions & data.
+     *
+     * @since 17xxxx Action utils.
+     *
+     * @param array Actions & data.
+     */
+    protected $did_actions;
 
     /**
      * Is WordPress?
@@ -70,50 +88,50 @@ class RequestType extends Classes\Core\Base\Core
     {
         parent::__construct($App);
 
-        $this->is_wordpress = $this->c::isWordPress();
+        $this->doing_actions = [];
+        $this->did_actions   = [];
+        $this->is_wordpress  = $this->c::isWordPress();
     }
 
     /**
-     * Request type is AJAX?
+     * An AJAX request?
      *
      * @since 160531 Request types.
      *
-     * @param bool|null $value If setting value.
+     * @param bool|null $flag If setting flag.
      *
      * @return bool Is an AJAX request?
      */
-    public function isAjax(bool $value = null): bool
+    public function isAjax(bool $flag = null): bool
     {
-        if (isset($value)) {
-            $this->is_ajax = $value;
+        if (isset($flag)) {
+            $this->is_ajax = $flag;
         }
         if (!isset($this->is_ajax) && $this->is_wordpress) {
             if (defined('DOING_AJAX') && DOING_AJAX) {
-                $this->is_ajax = true;
+                $this->is_ajax = true; // Via WP constants.
             }
         }
         return (bool) $this->is_ajax;
     }
 
     /**
-     * Request type is API?
+     * An API request?
      *
      * @since 160605 Request types.
      *
-     * @param bool|null $value If setting value.
+     * @param bool|null $flag If setting flag.
      *
      * @return bool Is an API request?
      */
-    public function isApi(bool $value = null): bool
+    public function isApi(bool $flag = null): bool
     {
-        if (isset($value)) {
-            $this->is_api = $value;
+        if (isset($flag)) {
+            $this->is_api = $flag;
         }
         if (!isset($this->is_api) && $this->is_wordpress) {
-            if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) {
-                $this->is_api = true;
-            } elseif (defined('REST_REQUEST') && REST_REQUEST) {
-                $this->is_api = true;
+            if ((defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) || (defined('REST_REQUEST') && REST_REQUEST)) {
+                $this->is_api = true; // Via WP constants.
             }
         }
         return (bool) $this->is_api;
@@ -124,15 +142,63 @@ class RequestType extends Classes\Core\Base\Core
      *
      * @since 160531 Request types.
      *
-     * @param string|null $value If setting value.
+     * @param string|null $action Only to set action.
      *
      * @return string The REsT action being done.
      */
-    public function doingRestAction(string $value = null): string
+    public function doingRestAction(string $action = null): string
     {
-        if (isset($value)) {
-            $this->doing_rest_action = $value;
+        if (isset($action)) {
+            $this->doing_rest_action = $action;
+            $this->doingAction($action, true);
         }
         return (string) $this->doing_rest_action;
+    }
+
+    /**
+     * Doing an action?
+     *
+     * @since 17xxxx Action utils.
+     *
+     * @param string     $action Action to add or check.
+     * @param mixed|null $data   If adding action data.
+     *
+     * @return bool True if doing the action.
+     */
+    public function doingAction(string $action = '', bool $flag = null): bool
+    {
+        if ($action && isset($flag)) {
+            $this->doing_actions[$action] = $flag;
+        }
+        if ($action) {
+            return $this->doing_actions[$action] ?? false;
+        } else {
+            return !empty($this->doing_actions);
+        }
+    }
+
+    /**
+     * Did (completed) an action?
+     *
+     * @since 17xxxx Action utils.
+     *
+     * @param string     $action Action to add or check.
+     * @param mixed|null $data   If adding truthy action data.
+     *
+     * @return mixed|null Action data, else `null`.
+     */
+    public function didAction(string $action = '', $data = null)
+    {
+        if ($action && isset($data)) {
+            if (!$data) { // Empty/falsey?
+                throw $this->c::issue('Data must be truthy.');
+            } // Avoid falsey data, which leads to confusion.
+            $this->did_actions[$action] = $data;
+        }
+        if ($action) {
+            return $this->did_actions[$action] ?? null;
+        } else {
+            return !empty($this->did_actions);
+        }
     }
 }
