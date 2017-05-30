@@ -4,9 +4,7 @@
 @mixin font-events {
   .wf-loading {
     > body {
-      // This avoids the entire body being invisible.
-      // Requires a `<div>` container caught by `> div`.
-      > div {
+      * {
         visibility:           hidden !important;
       }
     }
