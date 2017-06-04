@@ -122,15 +122,15 @@ class Markdown extends Classes\Core\Base\Core
             $SmartyPants->tags_to_skip = 'pre|code|samp|kbd|tt|math|script|style';
             $SmartyPants->decodeEntitiesInConfiguration(); // Use UTF-8 symbols.
         }
+        $this->header_id_counter = []; // Reset counter.
+
         $MarkdownExtra->code_attr_on_pre  = $code_attr_on_pre;
         $MarkdownExtra->code_class_prefix = $code_class_prefix;
         $MarkdownExtra->header_id_func    = $header_id_func;
         $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
         $MarkdownExtra->hard_wrap         = $hard_wrap;
 
-        $this->header_id_counter = []; // Reset counter.
-        $string                  = $MarkdownExtra->transform($string);
-
+        $string = $MarkdownExtra->transform($string);
         $string = $anchorize ? $this->c::htmlAnchorize($string) : $string;
         $string = $anchor_rels ? $this->c::htmlAnchorRels($string, $anchor_rels) : $string;
         $string = $smartypants ? $SmartyPants->transform($string) : $string;
