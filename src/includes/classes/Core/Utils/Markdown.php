@@ -39,8 +39,9 @@ class Markdown extends Classes\Core\Base\Core
      * A very simple markdown parser.
      *
      * @since 150424 Initial release.
-     * @since 170211.63148 Removing `parsedown-extra` flavor.
+     * @since 170211.63148 Removing `parsedown-extra`.
      * @deprecated 170131 Use `hard_wrap` instead of `breaks`.
+     * @deprecated 170604 `flavor` no longer available.
      *
      * @param mixed $value Any input value.
      * @param array $args  Any additional behavioral args.
@@ -62,8 +63,6 @@ class Markdown extends Classes\Core\Base\Core
             'cache'               => false,
             'cache_expires_after' => '30 days',
 
-            'flavor' => 'markdown-extra',
-
             'code_attr_on_pre'  => false,
             'code_class_prefix' => 'lang-',
 
@@ -84,10 +83,6 @@ class Markdown extends Classes\Core\Base\Core
 
         $cache               = (bool) $args['cache'];
         $cache_expires_after = (string) $args['cache_expires_after'];
-
-        $flavor = (string) $args['flavor'];
-        $flavor = 'markdown-extra'; // Only flavor.
-        // In the future this may support new flavors.
 
         $code_attr_on_pre  = (bool) $args['code_attr_on_pre'];
         $code_class_prefix = (string) $args['code_class_prefix'];
@@ -119,19 +114,20 @@ class Markdown extends Classes\Core\Base\Core
                 return (string) file_get_contents($cache_file);
             } // Use the already-cached HTML markup.
         }
-        if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__, $flavor))) {
-            $MarkdownExtra                    = new MarkdownExtra();
-            $MarkdownExtra->code_attr_on_pre  = $code_attr_on_pre;
-            $MarkdownExtra->code_class_prefix = $code_class_prefix;
-            $MarkdownExtra->header_id_func    = $header_id_func;
-            $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
-            $MarkdownExtra->hard_wrap         = $hard_wrap;
+        if (!($MarkdownExtra = &$this->cacheKey(__FUNCTION__.'extra'))) {
+            $MarkdownExtra = new MarkdownExtra(); // New instance.
         }
         if (!($SmartyPants = &$this->cacheKey(__FUNCTION__, 'smartypants'))) {
             $SmartyPants               = new SmartyPants(2); // Match JS libs.
             $SmartyPants->tags_to_skip = 'pre|code|samp|kbd|tt|math|script|style';
             $SmartyPants->decodeEntitiesInConfiguration(); // Use UTF-8 symbols.
         }
+        $MarkdownExtra->code_attr_on_pre  = $code_attr_on_pre;
+        $MarkdownExtra->code_class_prefix = $code_class_prefix;
+        $MarkdownExtra->header_id_func    = $header_id_func;
+        $MarkdownExtra->fn_id_prefix      = $fn_id_prefix;
+        $MarkdownExtra->hard_wrap         = $hard_wrap;
+
         $this->header_id_counter = []; // Reset counter.
         $string                  = $MarkdownExtra->transform($string);
 
