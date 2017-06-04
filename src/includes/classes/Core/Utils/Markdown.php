@@ -27,17 +27,25 @@ use Michelf\SmartyPants;
 class Markdown extends Classes\Core\Base\Core
 {
     /**
+     * Header ID counter.
+     *
+     * @since 17xxxx Enhancing headers.
+     *
+     * @type array Counter.
+     */
+    protected $header_id_counter = [];
+
+    /**
      * A very simple markdown parser.
      *
      * @since 150424 Initial release.
      * @since 170211.63148 Removing `parsedown-extra` flavor.
+     * @deprecated 170131 Use `hard_wrap` instead of `breaks`.
      *
      * @param mixed $value Any input value.
      * @param array $args  Any additional behavioral args.
      *
      * @return string|array|object Html markup value(s).
-     *
-     * @deprecated 170131 Use `hard_wrap` instead of `breaks`.
      */
     public function __invoke($value, array $args = [])
     {
@@ -84,7 +92,7 @@ class Markdown extends Classes\Core\Base\Core
         $code_attr_on_pre  = (bool) $args['code_attr_on_pre'];
         $code_class_prefix = (string) $args['code_class_prefix'];
 
-        $header_id_func = $args['header_id_func'] ?: [$this, 'headerIdFunc'];
+        $header_id_func = $args['header_id_func'] ?: [$this, 'headerIdCallback'];
         $fn_id_prefix   = (string) $args['fn_id_prefix'];
 
         $no_p      = (bool) $args['no_p'];
@@ -124,7 +132,9 @@ class Markdown extends Classes\Core\Base\Core
             $SmartyPants->tags_to_skip = 'pre|code|samp|kbd|tt|math|script|style';
             $SmartyPants->decodeEntitiesInConfiguration(); // Use UTF-8 symbols.
         }
-        $string = $MarkdownExtra->transform($string);
+        $this->header_id_counter = []; // Reset counter.
+        $string                  = $MarkdownExtra->transform($string);
+
         $string = $anchorize ? $this->c::htmlAnchorize($string) : $string;
         $string = $anchor_rels ? $this->c::htmlAnchorRels($string, $anchor_rels) : $string;
         $string = $smartypants ? $SmartyPants->transform($string) : $string;
@@ -147,19 +157,27 @@ class Markdown extends Classes\Core\Base\Core
     }
 
     /**
-     * Default header `id=""` function.
+     * Default header `id=""` callback.
      *
-     * @since 170211.63148 Header id function.
+     * @since 170211.63148 ID callback.
      *
      * @param string $raw Header text value.
      *
      * @return string The `id=""` attribute value.
      */
-    public function headerIdFunc(string $raw): string
+    public function headerIdCallback(string $raw): string
     {
-        $id        = mb_strtolower($raw);
-        $id        = preg_replace('/[^\w]+/u', '-', $id);
-        return $id = 'j2h.'.$this->c::mbTrim($id, '', '-');
+        $id = mb_strtolower($raw);
+        $id = preg_replace('/[^\w]+/u', '-', $id);
+        $id = 'j2h.'.$this->c::mbTrim($id, '', '-');
+
+        $this->header_id_counter[$id] = $this->header_id_counter[$id] ?? 0;
+        ++$this->header_id_counter[$id]; // Increment counter.
+
+        if ($this->header_id_counter[$id] > 1) {
+            $id .= '-'.$this->header_id_counter[$id];
+        }
+        return $id; // `id=""` attribute value.
     }
 
     /**
