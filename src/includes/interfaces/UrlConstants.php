@@ -57,8 +57,8 @@ interface UrlConstants
      * @var string Regex fragment for use in `preg_match()`.
      */
     const URL_REGEX_FRAG_HOST = // Punycode-compatible.
-        '(?:xn\-\-)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*'.// `[xn--]a[-b][-c]`
-            '(?:\.(?:xn\-\-)?[a-zA-Z0-9]+(?:\-*[a-zA-Z0-9]+)*)*?';// `.[xn--]a[-b][-c]`
+        '(?:xn\-\-)?[a-zA-Z0-9]+(?:\-+[a-zA-Z0-9]+)*'.// `[xn--]a[-b][-c]`
+            '(?:\.(?:xn\-\-)?[a-zA-Z0-9]+(?:\-+[a-zA-Z0-9]+)*)*?';// `.[xn--]a[-b][-c]`
 
     /**
      * Regex matches a `host.tld` name.
