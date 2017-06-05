@@ -1,7 +1,3 @@
 /*******************************
      User Global Variables
 *******************************/
-
-@emSize            : 16px;
-@fontSize          : 16px;
-@importGoogleFonts : false;
