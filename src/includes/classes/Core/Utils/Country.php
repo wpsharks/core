@@ -102,6 +102,7 @@ class Country extends Classes\Core\Base\Core
         $default_args = [
             'ip'     => null,
             'use_ip' => true,
+            'flags'  => false,
         ];
         $args += $default_args;
 
@@ -112,6 +113,7 @@ class Country extends Classes\Core\Base\Core
         }
         $args['ip']     = (string) $args['ip'];
         $args['use_ip'] = (bool) $args['use_ip'];
+        $args['flags']  = (bool) $args['flags'];
 
         if (!$active && $args['ip'] && $args['use_ip']) {
             $active = $is_cli ? '' : $this->c::ipCountry($args['ip']);
@@ -121,8 +123,9 @@ class Country extends Classes\Core\Base\Core
 
         foreach ($this->ISO3166->getAll() as $_country) {
             $_alpha2_lc = mb_strtolower($_country['alpha2']);
-            $markup .= '<div class="item'.($active ? $this->c::activeSelected($active, $_country['alpha2']) : '').'" data-value="'.$_country['alpha2'].'"><i class="'.$_alpha2_lc.' flag"></i>'.$_country['name'].'</div>';
-        } // unset($_country, $_alpha2_lc); // Housekeeping.
+            $_flag      = $args['flags'] ? '<i class="'.$_alpha2_lc.' flag"></i>' : '';
+            $markup .= '<div class="item'.($active ? $this->c::activeSelected($active, $_country['alpha2']) : '').'" data-value="'.$_country['alpha2'].'">'.$_flag.$_country['name'].'</div>';
+        } // unset($_country, $_alpha2_lc, $_flag); // Housekeeping.
 
         return $markup;
     }
