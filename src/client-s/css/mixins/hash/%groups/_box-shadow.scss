@@ -1,0 +1,27 @@
+// Raise.
+
+%hash--box-shadow-raise {
+  @include -box-shadow-raise;
+}
+
+%hash-box-shadow-raise {
+  @include box-shadow-raise;
+}
+
+%hash-\+box-shadow-raise {
+  @include \+box-shadow-raise;
+}
+
+// Inset.
+
+%hash-box-shadow-inset {
+  @include box-shadow-inset;
+}
+
+%hash-\+box-shadow-inset {
+  @include \+box-shadow-inset;
+}
+
+%hash-\+\+box-shadow-inset {
+  @include \+\+box-shadow-inset;
+}

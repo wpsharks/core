@@ -1,0 +1,26 @@
+$semantic: false !default;
+
+$apply-defaults: true !default;
+$apply-custom-tag-defaults: true !default;
+
+$import-urls: () !default;
+
+$import-font-faces: (
+  $serif-font-faces,
+  $sans-serif-font-faces,
+  $monospace-font-faces,
+
+  $alt1-font-faces,
+  $alt2-font-faces,
+
+  $body-font-faces,
+  $body-hx-font-faces,
+  $body-h1-font-faces,
+  $body-h2-font-faces,
+
+  $content-font-faces,
+  $content-hx-font-faces,
+  $content-h1-font-faces,
+  $content-h2-font-faces,
+  $content-lede-font-faces,
+) !default;

@@ -1,0 +1,89 @@
+@mixin box-shadow-hashes {
+  // Flatten.
+
+  .\#flat {
+    box-shadow:               none !important;
+  }
+
+  // Raise.
+
+  .-\#raise {
+    @include -box-shadow-raise(true);
+  }
+
+  .\#raise {
+    @include box-shadow-raise(true);
+  }
+
+  .\+\#raise {
+    @include \+box-shadow-raise(true);
+  }
+
+  // Inset.
+
+  .\#inset {
+    @include box-shadow-inset(true);
+  }
+
+  .\+\#inset {
+    @include \+box-shadow-inset(true);
+  }
+
+  .\+\+\#inset {
+    @include \+\+box-shadow-inset(true);
+  }
+
+  // Glow.
+
+  .-\#glow {
+    @include -box-shadow-glow(true, $white-color);
+  }
+
+  .\#glow {
+    @include box-shadow-glow(true, $white-color);
+  }
+
+  .\+\#glow {
+    @include \+box-shadow-glow(true, $white-color);
+  }
+
+  // Box shadow.
+
+  .-\#box-shadow {
+    @include -box-shadow-glow(true, $black-color);
+  }
+
+  .\#box-shadow {
+    @include box-shadow-glow(true, $black-color);
+  }
+
+  .\+\#box-shadow {
+    @include \+box-shadow-glow(true, $black-color);
+  }
+
+  // More box shadows.
+
+  .\#box-shadow\:b {
+    @include box-shadow-bottom(true);
+  }
+
+  .\#box-shadow\:bl {
+    @include box-shadow-bottom-left(true);
+  }
+
+  .\#box-shadow\:br {
+    @include box-shadow-bottom-right(true);
+  }
+
+  .\#box-shadow\:blr {
+    @include box-shadow-bottom-left-right(true);
+  }
+
+  .\#box-shadow\:tb {
+    @include box-shadow-top-bottom(true);
+  }
+
+  .\#box-shadow\:lr {
+    @include box-shadow-left-right(true);
+  }
+}

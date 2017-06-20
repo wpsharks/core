@@ -1,0 +1,25 @@
+$swatch: (
+  'fg': $fg-color,
+  'bg': $bg-color,
+
+  'default': $default-color,
+  'primary': $primary-color,
+  'secondary': $secondary-color,
+  'neutral': $neutral-color,
+  'accented': $accent-color,
+
+  'white': $white-color,
+  'gray': $gray-color,
+  'onyx': $cod-gray-color,
+  'black': $black-color,
+
+  'blue': desaturate($azure-color, $desaturate-swatch-by),
+  'green': desaturate($sea-green-color, $desaturate-swatch-by),
+  'orange': desaturate($orange-roughy-color, $desaturate-swatch-by),
+  'pink': desaturate($hibiscus-color, $desaturate-swatch-by),
+  'purple': desaturate($vivid-violet-color, $desaturate-swatch-by),
+  'red': desaturate($flush-mahogany-color, $desaturate-swatch-by),
+  'tan': desaturate($cape-palliser-color, $desaturate-swatch-by),
+  'teal': desaturate($eastern-blue-color, $desaturate-swatch-by),
+  'yellow': desaturate($yellow-color, $desaturate-swatch-by),
+) !default;

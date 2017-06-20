@@ -1,0 +1,23 @@
+@mixin fancy-content {
+  .\#content {
+    .text:not(.icon) {
+      @extend                 %hash-content-font-family;
+    }
+
+    .header {
+      @extend                 %hash-content-hx-font-family;
+
+      h1 {
+        @extend               %hash-content-h1-font-family;
+      }
+
+      h2 {
+        @extend               %hash-content-h2-font-family;
+      }
+    }
+
+    .ui.label {
+      @extend                 %hash-sans-serif-font-family;
+    }
+  }
+}

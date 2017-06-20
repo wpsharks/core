@@ -1,0 +1,27 @@
+@mixin padding-hashes {
+  @each $v in '0', '.25', '.5', '1', '1.5', '2', '2.5', '3', '5', '10', '20', '30' {
+    .\#p\:#{esc-class($v)},
+    .\#p\:t#{esc-class($v)},
+    .\#p\:v#{esc-class($v)} {
+      padding-top:            #{$v}em !important;
+    }
+
+    .\#p\:#{esc-class($v)},
+    .\#p\:r#{esc-class($v)},
+    .\#p\:h#{esc-class($v)} {
+      padding-right:          #{$v}em !important;
+    }
+
+    .\#p\:#{esc-class($v)},
+    .\#p\:b#{esc-class($v)},
+    .\#p\:v#{esc-class($v)} {
+      padding-bottom:         #{$v}em !important;
+    }
+
+    .\#p\:#{esc-class($v)},
+    .\#p\:l#{esc-class($v)},
+    .\#p\:h#{esc-class($v)} {
+      padding-left:           #{$v}em !important;
+    }
+  }
+}

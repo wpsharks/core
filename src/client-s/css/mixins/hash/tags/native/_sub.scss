@@ -1,0 +1,15 @@
+@mixin sub-tag-hashes {
+  // Defaults.
+
+  %hash-sub-tag-defaults {
+    font-feature-settings:    'liga', 'calt', 'frac', 'subs';
+  }
+
+  // Subscript.
+
+  @if $apply-defaults {
+    sub {
+      @extend                 %hash-sub-tag-defaults;
+    }
+  }
+}

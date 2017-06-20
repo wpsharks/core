@@ -1,0 +1,48 @@
+@mixin hr-tag-hashes {
+  // Defaults.
+
+  %hash-hr-tag-defaults {
+    @extend                   %hash-block-margins;
+
+    height:                   0;
+
+    //
+    border:                   0;
+    background:               none;
+
+    &::before,
+    &::after {
+      content:                '';
+      display:                block;
+      height:                 1px;
+    }
+
+    &::before {
+      background-image:       linear-gradient(to right, rgba($black-color, 0), rgba($black-color, 0.25), rgba($black-color, 0));
+    }
+
+    &::after {
+      background-image:       linear-gradient(to right, rgba($white-color, 0), rgba($white-color, 0.25), rgba($white-color, 0));
+    }
+
+    // Modifiers.
+
+    &.\~basic {
+      &::before {
+        background:           rgba($black-color, 0.15);
+      }
+
+      &::after {
+        background:           rgba($white-color, 0.15);
+      }
+    }
+  }
+
+  // Horizontal rules.
+
+  @if $apply-defaults {
+    hr {
+      @extend                 %hash-hr-tag-defaults;
+    }
+  }
+}

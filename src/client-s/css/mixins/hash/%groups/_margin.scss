@@ -1,0 +1,20 @@
+%hash-block-margins {
+  display:                    block;
+  margin:                     1rem 0;
+
+  @extend                     %hash-block-margins-first-last-child;
+}
+
+%hash-block-margins-first-last-child {
+  &:first-child {
+    margin-top:               0;
+  }
+
+  &:last-child {
+    margin-bottom:            0;
+  }
+}
+
+%hash-0-margin {
+  margin:                     0;
+}

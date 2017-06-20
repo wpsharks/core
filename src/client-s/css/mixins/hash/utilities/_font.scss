@@ -1,0 +1,181 @@
+@mixin font-hashes {
+  // Weights.
+
+  .\#f\:thin {
+    font-weight:              100 !important;
+  }
+
+  .\#f\:light {
+    font-weight:              300 !important;
+  }
+
+  .\#f\:normal {
+    font-weight:              400 !important;
+  }
+
+  .\#f\:medium {
+    font-weight:              500 !important;
+  }
+
+  .\#f\:bold {
+    font-weight:              700 !important;
+  }
+
+  .\#f\:thick {
+    font-weight:              900 !important;
+  }
+
+  .\#f\:thin,
+  .\#f\:light,
+  .\#f\:normal,
+  .\#f\:medium,
+  .\#f\:bold,
+  .\!\#f\:smooth {
+    @include font-smoothing('auto', true);
+  }
+
+  .\#f\:thick,
+  .\#f\:smooth {
+    @include font-smoothing('antialiased', true);
+  }
+
+  // Styles.
+
+  .\#f\:uline\:on-hover {
+    text-decoration:          none !important;
+  }
+
+  .\#f\:uline,
+  .\#f\:uline\:\!on-hover,
+  .\#f\:uline\:on-hover:hover {
+    text-decoration:          underline !important;
+  }
+
+  .\#f\:uline\:\!on-hover:hover {
+    text-decoration:          none !important;
+  }
+
+  .\#f\:strike {
+    text-decoration:          line-through !important;
+  }
+
+  .\#f\:italic {
+    font-style:               italic !important;
+  }
+
+  .\#f\:s-normal {
+    font-style:               normal !important;
+  }
+
+  .\#f\:lower {
+    text-transform:           lowercase !important;
+  }
+
+  .\#f\:upper {
+    text-transform:           uppercase !important;
+  }
+
+  .\#f\:ucwords {
+    text-transform:           capitalize !important;
+  }
+
+  .\#f\:small-caps {
+    font-variant:             small-caps !important;
+  }
+
+  // Families.
+
+  .\#f\:serif {
+    @include serif-font-family(true);
+  }
+
+  .\#f\:sans-serif {
+    @include sans-serif-font-family(true);
+  }
+
+  .\#f\:monospace {
+    @include monospace-font-family(true);
+  }
+
+  .\#f\:alt1 {
+    @include alt1-font-family(true);
+  }
+
+  .\#f\:alt2 {
+    @include alt2-font-family(true);
+  }
+
+  .\#f\:body {
+    @include body-font-family(true);
+  }
+
+  .\#f\:body-hx {
+    @include body-hx-font-family(true);
+  }
+
+  .\#f\:body-h1 {
+    @include body-h1-font-family(true);
+  }
+
+  .\#f\:body-h2 {
+    @include body-h2-font-family(true);
+  }
+
+  .\#f\:content {
+    @include content-font-family(true);
+  }
+
+  .\#f\:content-hx {
+    @include content-hx-font-family(true);
+  }
+
+  .\#f\:content-h1 {
+    @include content-h1-font-family(true);
+  }
+
+  .\#f\:content-h2 {
+    @include content-h2-font-family(true);
+  }
+
+  .\#f\:content-lede {
+    @include content-lede-font-family(true);
+  }
+
+  // Additional families.
+
+  .\#f\:system,
+  .\#f\:georgia,
+  .\#f\:helvetica,
+  .\#f\:lucida,
+  .\#f\:verdana {
+    letter-spacing:           normal !important;
+  }
+
+  .\#f\:system {
+    font-family:              $system !important;
+  }
+
+  .\#f\:georgia {
+    font-family:              $georgia !important;
+  }
+
+  .\#f\:helvetica {
+    font-family:              $helvetica !important;
+  }
+
+  .\#f\:lucida {
+    font-family:              $lucida-grande !important;
+  }
+
+  .\#f\:verdana {
+    font-family:              $verdana !important;
+  }
+
+  // Em unit font sizes.
+
+  @each $v in '.25', '.35', '.45', '.5', '.55', '.65', '.75', '.85', '.95', '1', '1.25', '1.5', '1.75', '2', '2.25', '2.5', '2.75', '3', '5', '10', '20', '30' {
+    .\#f\:#{esc-class($v)} {
+      font-size:              #{$v}em !important;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+@mixin width-hashes {
+  // Names/aliases.
+
+  .\#fluid {
+    width:                    auto !important;
+    min-width:                100% !important;
+    max-width:                100% !important;
+  }
+
+  // Intrinsic.
+
+  .\#w\:auto {
+    width:                    auto !important;
+  }
+
+  .\#w\:min-con {
+    width:                    min-content !important;
+  }
+
+  // Em units.
+
+  @each $v in '.25', '.5', '.75', '1', '1.25', '1.5', '1.75', '2', '2.25', '2.5', '2.75', '3', '5', '10', '20', '30' {
+    .\#w\:#{esc-class($v)} {
+      width:                  #{to-unit($v, 'em')} !important;
+    }
+  }
+
+  // Percentages.
+
+  @each $v in '5', '10', '15', '20', '25', '30', '33.3', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95', '100' {
+    .\#w\:#{esc-class($v)}\% {
+      width:                  #{to-unit($v, '%')} !important;
+    }
+
+    .\#min-w\:#{esc-class($v)}\% {
+      min-width:              #{to-unit($v, '%')} !important;
+    }
+
+    .\#max-w\:#{esc-class($v)}\% {
+      max-width:              #{to-unit($v, '%')} !important;
+    }
+  }
+
+  // Viewport percentages.
+
+  @each $v in '20', '25', '33.3', '50', '75', '100' {
+    .\#w\:#{esc-class($v)}vw {
+      width:                  #{to-unit($v, 'vw')} !important;
+    }
+
+    .\#min-w\:#{esc-class($v)}vw {
+      min-width:              #{to-unit($v, 'vw')} !important;
+    }
+
+    .\#max-w\:#{esc-class($v)}vw {
+      max-width:              #{to-unit($v, 'vw')} !important;
+    }
+  }
+}

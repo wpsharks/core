@@ -1,0 +1,176 @@
+@mixin align-hashes {
+  // float: Float only.
+  // push: Float w/ side margin.
+  // pull: Float w/ side & bottom margin.
+  // yank: Float w/ extra side & bottom margin.
+  // `.alignleft` = Yank alias.
+
+  .alignleft,
+  .\#float\:l,
+  .\#push\:l,
+  .\#pull\:l,
+  .\#yank\:l {
+    float:                    left !important;
+  }
+
+  .\#push\:l,
+  .\#pull\:l {
+    margin-right:             1rem !important;
+  }
+
+  .\#pull\:l {
+    margin-bottom:            1rem !important;
+  }
+
+  .alignleft,
+  .\#yank\:l {
+    margin-right:             2rem !important;
+    margin-bottom:            2rem !important;
+  }
+
+  // float: Float only.
+  // push: Float w/ side margin.
+  // pull: Float w/ side & bottom margin.
+  // yank: Float w/ extra side & bottom margin.
+  // `.alignright` = Yank alias.
+
+  .alignright,
+  .\#float\:r,
+  .\#push\:r,
+  .\#pull\:r,
+  .\#yank\:r {
+    float:                    right !important;
+  }
+
+  .\#push\:r,
+  .\#pull\:r {
+    margin-left:              1rem !important;
+  }
+
+  .\#pull\:r {
+    margin-bottom:            1rem !important;
+  }
+
+  .alignright,
+  .\#yank\:r {
+    margin-left:              2rem !important;
+    margin-bottom:            2rem !important;
+  }
+
+  // Horizontal.
+
+  .\#ai\:left {
+    justify-content:          flex-start !important;
+  }
+
+  .\#ai\:space-between {
+    justify-content:          space-between !important;
+  }
+
+  .\#ai\:space-around {
+    justify-content:          space-around !important;
+  }
+
+  .\#ai\:center {
+    justify-content:          center !important;
+  }
+
+  .\#ai\:right {
+    justify-content:          flex-end !important;
+  }
+
+  .\#a\:left {
+    text-align:               left !important;
+  }
+
+  .\#a\:justify {
+    text-align:               justify !important;
+  }
+
+  .\#a\:center {
+    text-align:               center !important;
+  }
+
+  .\#a\:right {
+    text-align:               right !important;
+  }
+
+  @each $d in $devices {
+    @include device($d) {
+      .\#a\:left\:if-#{esc-class($d)} {
+        text-align:           left !important;
+      }
+
+      .\#a\:center\:if-#{esc-class($d)} {
+        text-align:           center !important;
+      }
+
+      .\#a\:right\:if-#{esc-class($d)} {
+        text-align:           right !important;
+      }
+    }
+  }
+
+  // Vertical.
+
+  .\#vai\:top {
+    align-items:              flex-start !important;
+    align-self:               flex-start !important;
+  }
+
+  .\#vai\:middle {
+    align-items:              center !important;
+    align-self:               center !important;
+  }
+
+  .\#vai\:baseline {
+    align-items:              baseline !important;
+    align-self:               baseline !important;
+  }
+
+  .\#vai\:bottom {
+    align-items:              flex-end !important;
+    align-self:               flex-end !important;
+  }
+
+  .\#va\:top {
+    vertical-align:           top !important;
+  }
+
+  .\#va\:middle {
+    vertical-align:           middle !important;
+  }
+
+  .\#va\:baseline {
+    vertical-align:           baseline !important;
+  }
+
+  .\#va\:bottom {
+    vertical-align:           bottom !important;
+  }
+
+  // Center.
+
+  .\#center {
+    @include center(true);
+  }
+
+  .aligncenter {
+    @include center-conversion(true);
+  }
+
+  @each $d in $devices {
+    @include device($d) {
+      .\#center\:if-#{esc-class($d)} {
+        @include center-conversion(true);
+      }
+    }
+  }
+
+  .abs\#center {
+    left:                     50% !important;
+    top:                      50% !important;
+    position:                 absolute !important;
+    transform:                translate(-50%, -50%) !important;
+  }
+}

@@ -1,0 +1,50 @@
+@function diff($number1, $number2) {
+  @return abs($number1 - $number2);
+}
+
+@function pow($number, $power) {
+  $exponent: 1;
+
+  @if $power > 0 {
+    @for $i from 1 through $power {
+      $exponent: $exponent * $number;
+    }
+  }
+  @else if $power < 0 {
+    @for $i from 1 through $power {
+      $exponent: $exponent / $number;
+    }
+  }
+
+  @return $exponent;
+}
+
+@function dec-round($number, $decimals: 0, $mode: 'round') {
+  $number: to-number($number);
+
+  $x-tens: 1;
+
+  @if $decimals > 0 {
+    @for $i from 1 through $decimals {
+      $x-tens: $x-tens * 10;
+    }
+  }
+
+  @if $mode == 'ceil' {
+    @return ceil($number * $x-tens) / $x-tens;
+  }
+  @else if $mode == 'floor' {
+    @return floor($number * $x-tens) / $x-tens;
+  }
+  @else {
+    @return round($number * $x-tens) / $x-tens;
+  }
+}
+
+@function dec-ceil($number, $decimals: 0) {
+  @return dec-round($number, $decimals, 'ceil');
+}
+
+@function dec-floor($number, $decimals: 0) {
+  @return dec-round($number, $decimals, 'floor');
+}

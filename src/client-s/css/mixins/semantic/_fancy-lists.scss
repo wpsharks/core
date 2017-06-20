@@ -1,0 +1,91 @@
+@mixin fancy-lists {
+  .ui.list {
+    > .item {
+      > .image {
+        + .content {
+          max-width:          calc(100% - 2.5em);
+        }
+      }
+    }
+  }
+
+  .ui.list {
+    &[class*='#f:.'],
+    &[class*='#f:1'],
+    &[class*='#f:2'],
+    &[class*='#f:3'],
+    &[class*='#f:5'] {
+      > .item {
+        font-size:            inherit;
+      }
+    }
+
+    &.\#f\:thin,
+    &.\#f\:light,
+    &.\#f\:normal,
+    &.\#f\:medium,
+    &.\#f\:bold,
+    &.\#f\:thick {
+      > .item {
+        font-weight:          inherit;
+        @include font-smoothing('inherit', true);
+      }
+    }
+
+    &.\#f\:uline,
+    &.\#f\:strike {
+      > .item {
+        text-decoration:      inherit;
+      }
+    }
+
+    &.\#f\:italic {
+      > .item {
+        font-style:           inherit;
+      }
+    }
+
+    &.\#f\:lower,
+    &.\#f\:upper,
+    &.\#f\:ucwords {
+      > .item {
+        text-transform:       inherit;
+      }
+    }
+
+    &.\#f\:small-caps {
+      > .item {
+        font-variant:         inherit;
+      }
+    }
+
+    &.\#f\:system,
+    &.\#f\:georgia,
+    &.\#f\:helvetica,
+    &.\#f\:lucida,
+    &.\#f\:verdana,
+    //
+    &.\#f\:serif,
+    &.\#f\:sans-serif,
+    &.\#f\:monospace,
+    //
+    &.\#f\:alt1,
+    &.\#f\:alt2,
+    //
+    &.\#f\:body,
+    &.\#f\:body-hx,
+    &.\#f\:body-h1,
+    &.\#f\:body-h2,
+    //
+    &.\#f\:content,
+    &.\#f\:content-hx,
+    &.\#f\:content-h1,
+    &.\#f\:content-h2,
+    &.\#f\:content-lede {
+      > .item {
+        font-family:          inherit;
+        letter-spacing:       inherit;
+      }
+    }
+  }
+}

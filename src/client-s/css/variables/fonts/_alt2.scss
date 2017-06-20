@@ -1,0 +1,31 @@
+$alt2-font-letter-spacing: normal !default;
+$alt2-font-family: 'pw-brusheez', 'trebuchet ms', sans-serif !default;
+$alt2-font-faces: (
+  'family': 'pw-brusheez',
+  'base-url': '//src.works/wp-content/uploads/2017/06/pw-brusheez-',
+
+  'thin': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+  'light': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+  'normal': (
+    'sub-path': '400',
+    'italic-sub-path': '',
+  ),
+  'medium': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+  'bold': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+  'thick': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+) !default;

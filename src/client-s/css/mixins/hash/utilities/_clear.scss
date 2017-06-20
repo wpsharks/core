@@ -1,0 +1,21 @@
+@mixin clear-hashes {
+  // Clearfix.
+
+  .\#clear\:fix {
+    @include clearfix(true);
+  }
+
+  // Clear sides.
+
+  .\#clear\:l {
+    clear:                    left !important;
+  }
+
+  .\#clear\:r {
+    clear:                    right !important;
+  }
+
+  .\#clear\:b {
+    clear:                    both !important;
+  }
+}

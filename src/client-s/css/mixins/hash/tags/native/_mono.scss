@@ -1,0 +1,694 @@
+@mixin mono-tag-hashes {
+  // Filters.
+
+  $black-filter: 'brightness(0)';
+  $white-filter: 'brightness(100)';
+
+  // Defaults.
+
+  %hash-mono-tag-default-family {
+    @extend                   %hash-monospace-font-family;
+  }
+
+  %hash-mono-inline-tag-defaults {
+    @extend                   %hash-inline-mark-defaults;
+
+    color:                    $fg-color;
+    background:               darken($bg-color, 3%);
+    border-color:             darken($bg-color, 6%);
+  }
+
+  %hash-mono-kbd-tag-defaults {
+    font-family:              'arial', sans-serif;
+
+    //
+    position:                 relative;
+    top:                      calc(-.25em / 2);
+
+    //
+    font-size:               .75em;
+    padding:                  calc(1ex + .25em) 0.4em;
+
+    //
+    color:                    lighten($fg-color, 6%);
+    background:               darken($bg-color, 6%);
+    border-color:             darken($bg-color, 15%);
+    box-shadow:               0 1px 0 rgba($black-color, 0.25), 0 0 0 0.1em $bg-color inset;
+  }
+
+  %hash-mono-a-tag-defaults {
+    code,
+    samp,
+    kbd,
+    tt {
+      color:                  inherit;
+    }
+  }
+
+  %hash-mono-pre-tag-defaults {
+    @extend                   %hash-block-margins;
+    @extend                   %hash-block-padding;
+    @extend                   %hash-default-colors;
+    @extend                   %hash-default-border-props;
+
+    //
+    white-space:              pre-wrap;
+
+    &.code {
+      white-space:            normal;
+      position:               relative;
+
+      //
+      padding:                0;
+
+      //
+      border:                 0;
+      border-radius:          0;
+
+      //
+      background:             none;
+
+      //
+      text-shadow:            none;
+      box-shadow:             none;
+
+      //
+      max-height:             none;
+      overflow:               visible;
+
+      > code {
+        white-space:          pre;
+        display:              block;
+
+        //
+        margin:               0;
+        padding:              1em;
+
+        //
+        max-height:           50vh;
+        overflow:             auto;
+
+        //
+        font-size:            1em;
+        line-height:          1.3;
+        text-decoration:      none;
+
+        //
+        text-shadow:          none;
+        box-shadow:           none;
+
+        //
+        border:               0;
+        border-radius:       .25em;
+
+        &:not(.hljs) {
+          // Don't step on HLJS theme.
+          color:              $bg-color;
+          background:         darken($bg-color, 80.5%);
+        }
+      }
+
+      &[title] {
+        overflow:             hidden;
+
+        &::before {
+          @extend             %hash-sans-serif-font-family;
+
+          display:            block;
+
+          //
+          padding:           .25em .5em .15em;
+
+          //
+          content:            attr(title);
+
+          //
+          color:              $white-color;
+          background:         $steel-blue-color;
+
+          //
+          border-radius:     .25em .25em 0 0;
+        }
+
+        &::after {
+          top:               -.3em;
+          right:             .5em;
+          position:           absolute;
+
+          //
+          width:              2.5em;
+          max-height:         2.15em;
+          overflow-y:         hidden;
+
+          //
+          opacity:           .5;
+          filter:             #{$black-filter};
+          content:            url('https://src.works/wp-content/uploads/2017/06/code.svg');
+        }
+
+        > code {
+          border-radius:      0 0 .25em .25em;
+        }
+      }
+
+      // HTML.
+
+      &[title^='HTML'] {
+        &::before {
+          background:         $fruit-salad-color;
+        }
+
+        &::after {
+          content:            url('https://src.works/wp-content/uploads/2017/06/html5.svg');
+        }
+      }
+
+      // CSS.
+
+      &[title^='CSS'] {
+        &::before {
+          background:         $wedgewood-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/css3.svg');
+        }
+      }
+
+      &[title^='SASS'] {
+        &::before {
+          background:         $cannon-pink-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/sass.svg');
+        }
+      }
+
+      &[title^='LESS'] {
+        &::before {
+          background:         $cello-color;
+        }
+
+        &::after {
+          filter:             #{$white-filter};
+          content:            url('//src.works/wp-content/uploads/2017/06/less.svg');
+        }
+      }
+
+      // JavaScript.
+
+      &[title^='JavaScript'] {
+        &::before {
+          background:         $limed-oak-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/javascript.svg');
+        }
+      }
+
+      &[title^='TypeScript'] {
+        &::before {
+          background:         $steel-blue-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/typescript.svg');
+        }
+      }
+
+      &[title^='CoffeeScript'] {
+        &::before {
+          background:         $blue-dianne-color;
+        }
+
+        &::after {
+          opacity:            0.3;
+          filter:             #{$white-filter};
+          content:            url('//src.works/wp-content/uploads/2017/06/coffeescript.svg');
+        }
+      }
+
+      &[title^='Node'] {
+        &::before {
+          background:         $goblin-color;
+        }
+
+        &::after {
+          top:               -1.9em;
+          right:             .25em;
+
+          //
+          width:              5.5em;
+          max-height:         3.75em;
+
+          //
+          content:            url('//src.works/wp-content/uploads/2017/06/nodejs.svg');
+        }
+      }
+
+      &[title^='NPM'] {
+        &::before {
+          background:         $cardinal-color;
+        }
+
+        &::after {
+          top:               .3em;
+          right:             .3em;
+
+          //
+          width:              3.5em;
+          max-height:         1.5em;
+
+          //
+          opacity:           .85;
+          filter:             none;
+          content:            url('//src.works/wp-content/uploads/2017/05/npm.svg');
+        }
+      }
+
+      &[title^='Yarn'] {
+        &::before {
+          background:         $boston-blue-color;
+        }
+
+        &::after {
+          right:             .15em;
+
+          //
+          filter:             none;
+          content:            url('//src.works/wp-content/uploads/2017/06/yarn.svg');
+        }
+      }
+
+      &[title^='Babel'] {
+        &::before {
+          color:              $black-color;
+          background:         $energy-yellow-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/babel.svg');
+        }
+      }
+
+      &[title^='Gulp'] {
+        &::before {
+          background:         $flush-mahogany-color;
+        }
+
+        &::after {
+          top:               -1em;
+          right:             -.15em;
+
+          //
+          width:              4em;
+          max-height:         2.8em;
+
+          //
+          content:            url('//src.works/wp-content/uploads/2017/06/gulp.svg');
+        }
+      }
+
+      &[title^='Grunt'] {
+        &::before {
+          background:         $desert-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/grunt.svg');
+        }
+      }
+
+      &[title^='jQuery'] {
+        &::before {
+          background:         $sepia-skin-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/jquery.svg');
+        }
+      }
+
+      // PHP.
+
+      &[title^='PHP'] {
+        &::before {
+          background:         $kashmir-blue-color;
+        }
+
+        &::after {
+          top:               -.2em;
+
+          //
+          content:            url('//src.works/wp-content/uploads/2017/06/php.svg');
+        }
+      }
+
+      &[title^='WordPress'] {
+        &::before {
+          background:         $mine-shaft-color;
+        }
+
+        &::after {
+          top:               -.75em;
+
+          //
+          width:              4em;
+          max-height:         2.6em;
+
+          //
+          opacity:           .4;
+          filter:             #{$white-filter};
+          content:            url('//src.works/wp-content/uploads/2017/06/wordpress.svg');
+        }
+      }
+
+      // Other server-side langs.
+
+      &[title^='Java']:not([title^='JavaScript']) {
+        &::before {
+          background:         $flush-mahogany-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/java.svg');
+        }
+      }
+
+      &[title^='Python'] {
+        &::before {
+          background:         $astral-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/python.svg');
+        }
+      }
+
+      &[title^='Ruby'] {
+        &::before {
+          background:         $burnt-umber-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/ruby.svg');
+        }
+      }
+
+      // Web servers.
+
+      &[title^='Apache'] {
+        &::before {
+          background:         $lotus-color;
+        }
+
+        &::after {
+          top:               -1em;
+
+          //
+          width:              4em;
+          max-height:         2.8em;
+
+          //
+          filter:             #{$white-filter};
+          content:            url('//src.works/wp-content/uploads/2017/06/apache.svg');
+        }
+      }
+
+      &[title^='Nginx'],
+      &[title^='NGINX'] {
+        &::before {
+          background:         $fern-green-color;
+        }
+
+        &::after {
+          top:               -1em;
+
+          //
+          width:              4em;
+          max-height:         2.75em;
+
+          //
+          content:            url('//src.works/wp-content/uploads/2017/06/nginx.svg');
+        }
+      }
+
+      // Command-line.
+
+      &[title^='Zsh'],
+      &[title^='Bash'],
+      &[title^='Shell'],
+      &[title^='Terminal'],
+      &[title^='Command-Line'] {
+        &::before {
+          background:         $gothic-color;
+        }
+
+        &::after {
+          top:                0.2em;
+
+          //
+          width:              1.5em;
+          max-height:         1.6em;
+
+          //
+          content:            url('//src.works/wp-content/uploads/2017/06/terminal.svg');
+        }
+      }
+
+      &[title^='SSH'] {
+        &::before {
+          background:         $dove-gray-color;
+        }
+
+        &::after {
+          top:               .25em;
+          right:             .25em;
+
+          //
+          width:              3em;
+          max-height:         1.5em;
+
+          //
+          content:            url('//src.works/wp-content/uploads/2017/06/ssh.svg');
+        }
+      }
+
+      &[title^='Git'] {
+        &::before {
+          background:         $thunderbird-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/git.svg');
+        }
+      }
+
+      &[title^='Docker'] {
+        &::before {
+          background:         $lochmara-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/docker.svg');
+        }
+      }
+
+      // Operating systems.
+
+      &[title^='Nix'],
+      &[title^='Unix'],
+      &[title^='Linux'] {
+        &::before {
+          background:         $rolling-stone-color;
+        }
+
+        &::after {
+          top:                0;
+          right:             -.25em;
+
+          //
+          width:              4em;
+          max-height:         1.8em;
+
+          //
+          content:            url('//src.works/wp-content/uploads/2017/06/linux.svg');
+        }
+      }
+
+      &[title^='macOS'],
+      &[title^='Apple'] {
+        &::before {
+          color:              $black-color;
+          background:         $alto-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/apple.svg');
+        }
+      }
+
+      &[title^='Ubuntu'] {
+        &::before {
+          background:         $tuscany-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/ubuntu.svg');
+        }
+      }
+
+      &[title^='Windows'] {
+        &::before {
+          background:         $lochmara-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/windows.svg');
+        }
+      }
+
+      // Databases.
+
+      &[title^='MySQL'] {
+        &::before {
+          background:         $blue-lagoon-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/mysql.svg');
+        }
+      }
+
+      &[title^='PostgreSQL'] {
+        &::before {
+          background:         $blue-lagoon-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/postgresql.svg');
+        }
+      }
+
+      &[title^='Mongo'] {
+        &::before {
+          background:         $fern-green-color;
+        }
+
+        &::after {
+          right:              0;
+
+          //
+          content:            url('//src.works/wp-content/uploads/2017/06/mongodb.svg');
+        }
+      }
+
+      &[title^='Redis'] {
+        &::before {
+          background:         $burnt-umber-color;
+        }
+
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/redis.svg');
+        }
+      }
+
+      // URLs/methods.
+
+      &[title^='Feed'],
+      &[title^='URL'],
+      &[title^='HEAD'],
+      &[title^='GET'],
+      &[title^='POST'],
+      &[title^='PUT'],
+      &[title^='PATCH'],
+      &[title^='DELETE'] {
+        &::after {
+          content:            url('//src.works/wp-content/uploads/2017/06/link.svg');
+        }
+      }
+
+      &[title^='Feed'] {
+        &::before {
+          background:         $copper-color;
+        }
+
+        &::after {
+          color:              darken($copper-color, 25%);
+        }
+      }
+
+      &[title^='URL'],
+      &[title^='HEAD'],
+      &[title^='GET'] {
+        &::before {
+          background:         $asparagus-color;
+        }
+
+        &::after {
+          color:              darken($asparagus-color, 25%);
+        }
+      }
+
+      &[title^='POST'],
+      &[title^='PUT'],
+      &[title^='PATCH'] {
+        &::before {
+          background:         $wild-blue-yonder-color;
+        }
+
+        &::after {
+          color:              darken($wild-blue-yonder-color, 25%);
+        }
+      }
+
+      &[title^='DELETE'] {
+        &::before {
+          background:         $copper-rust-color;
+        }
+
+        &::after {
+          color:              darken($copper-rust-color, 25%);
+        }
+      }
+    }
+  }
+
+  // Monospace tags.
+
+  @if $apply-defaults {
+    pre,
+    code,
+    samp,
+    kbd,
+    tt {
+      @extend                 %hash-mono-tag-default-family;
+    }
+
+    code,
+    samp,
+    kbd {
+      @extend                 %hash-mono-inline-tag-defaults;
+    }
+
+    kbd {
+      @extend                 %hash-mono-kbd-tag-defaults;
+    }
+
+    a {
+      @extend                 %hash-mono-a-tag-defaults;
+    }
+
+    pre {
+      @extend                 %hash-mono-pre-tag-defaults;
+    }
+  }
+  @else {
+    .\@pre {
+      @extend                 %hash-mono-tag-defaults;
+      @extend                 %hash-mono-pre-tag-defaults;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@mixin q-tag-hashes {
+  // Defaults.
+
+  %hash-q-tag-defaults {
+    font-style:               italic;
+  }
+
+  // Inline quotes.
+
+  @if $apply-defaults {
+    q {
+      @extend                 %hash-q-tag-defaults;
+    }
+  }
+}

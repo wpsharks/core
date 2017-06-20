@@ -1,0 +1,36 @@
+@mixin center($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  margin-left:                auto #{$important};
+  margin-right:               auto #{$important};
+}
+
+@mixin center-conversion($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  float:                      none #{$important};
+  display:                    block #{$important};
+  margin:                     1rem auto #{$important};
+
+  &:first-child {
+    margin-top:               0 #{$important};
+  }
+
+  &:last-child {
+    &:not(.alignleft):not(.alignright):not([class*='#float:']):not([class*='#push:']):not([class*='#pull:']):not([class*='#yank:']) {
+      // These elements almost always have text that follows them. So while they might be the
+      // last child, they are probably not the last node. Leave bottom margin.
+      margin-bottom:          0 #{$important};
+    }
+  }
+}

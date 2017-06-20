@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -49,16 +49,54 @@ class Html2RichText extends Classes\Core\Base\Core implements Interfaces\HtmlCon
 
             'allowed_tags' => [
                 'a',
-                'strong', 'b',
-                'i', 'em',
-                'ul', 'ol', 'li',
-                'code', 'pre',
-                'q', 'blockquote',
+                'abbr',
+                'b',
+                'blockquote',
+                'code',
+                'dd',
+                'del',
+                'dl',
+                'dt',
+                'em',
+                'hr',
+                'i',
+                'img',
+                'ins',
+                'li',
+                'mark',
+                'ol',
+                'pre',
+                'q',
+                's',
+                'samp',
+                'strike',
+                'strong',
+                'table',
+                'tbody',
+                'td',
+                'tfoot',
+                'th',
+                'thead',
+                'tr',
+                'tt',
+                'u',
+                'ul',
             ],
             'allowed_attributes' => [
+                'align',
+                'alt',
+                'cite',
+                'colspan',
+                'height',
                 'href',
+                'hspace',
+                'scope',
+                'src',
+                'title',
+                'valign',
+                'vspace',
+                'width',
             ],
-
             'strip_content_in_tags' => $this::HTML_INVISIBLE_TAGS,
             'inject_eol_after_tags' => $this::HTML_BLOCK_TAGS,
         ];
@@ -77,15 +115,19 @@ class Html2RichText extends Classes\Core\Base\Core implements Interfaces\HtmlCon
         $strip_content_in_tags            = (array) $args['strip_content_in_tags'];
         $strip_content_in_tags            = array_map('mb_strtolower', $strip_content_in_tags);
         $strip_content_in_tags            = array_diff($strip_content_in_tags, $allowed_tags);
-        $strip_content_in_tags_regex_frag = implode('|', $this->c::escRegex($strip_content_in_tags));
+        $strip_content_in_tags_regex_frag = implode('|', $strip_content_in_tags);
 
         $inject_eol_after_tags            = (array) $args['inject_eol_after_tags'];
         $inject_eol_after_tags            = array_map('mb_strtolower', $inject_eol_after_tags);
-        $inject_eol_after_tags_regex_frag = implode('|', $this->c::escRegex($inject_eol_after_tags));
+        $inject_eol_after_tags_regex_frag = implode('|', $inject_eol_after_tags);
 
         $string = preg_replace('/\<('.$strip_content_in_tags_regex_frag.')(?:\>|\s[^>]*\>).*?\<\/\\1\>/uis', '', $string);
+
         $string = preg_replace('/\<\/(?:'.$inject_eol_after_tags_regex_frag.')\>/ui', '${0}'."\n", $string);
         $string = preg_replace('/\<(?:'.$inject_eol_after_tags_regex_frag.')(?:\/\s*\>|\s[^\/>]*\/\s*\>)/ui', '${0}'."\n", $string);
+
+        $string = preg_replace('/(?:^|['."\r\n".']+)\h*\<\/(?:'.$maybe_inject_eol_after_tags_regex_frag.')\>\h*(?:['."\r\n".']+|$)/ui', '${0}'."\n", $string);
+        $string = preg_replace('/(?:^|['."\r\n".']+)\h*\<(?:'.$maybe_inject_eol_after_tags_regex_frag.')(?:\/\s*\>|\s[^\/>]*\/\s*\>)\h*(?:['."\r\n".']+|$)/ui', '${0}'."\n", $string);
 
         $string = strip_tags($string, $allowed_tags ? '<'.implode('><', $allowed_tags).'>' : '');
         $string = $this->c::stripHtmlAttrs($string, compact('allowed_attributes'));

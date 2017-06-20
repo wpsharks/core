@@ -1,0 +1,35 @@
+// Basic colors.
+
+%hash-basic-color {
+  @include basic-color;
+}
+
+%hash-basic-border-color {
+  @include basic-border-color;
+}
+
+%hash-basic-bg-color {
+  @include basic-bg-color;
+}
+
+%hash-basic-colors {
+  @include basic-colors;
+}
+
+// Default colors.
+
+%hash-default-color {
+  @include default-color;
+}
+
+%hash-default-border-color {
+  @include default-border-color;
+}
+
+%hash-default-bg-color {
+  @include default-bg-color;
+}
+
+%hash-default-colors {
+  @include default-colors;
+}

@@ -1,0 +1,17 @@
+@mixin ins-tag-hashes {
+  // Defaults.
+
+  %hash-ins-tag-defaults {
+    text-decoration:          underline;
+    text-decoration-style:    double;
+    text-decoration-skip:     ink;
+  }
+
+  // Insertions.
+
+  @if $apply-defaults {
+    ins {
+      @extend                 %hash-ins-tag-defaults;
+    }
+  }
+}

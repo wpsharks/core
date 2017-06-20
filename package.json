@@ -1,0 +1,8 @@
+{
+  "name": "core",
+  "license": "GPL-3.0",
+  "repository": "websharks/core",
+  "devDependencies": {
+    "semantic-ui": "2.2.10"
+  }
+}

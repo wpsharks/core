@@ -1,80 +1,90 @@
-/*
- * Device breakpoints.
- * Following Semantic UI breakpoints.
- */
-@mixin mobile-device {
+@mixin mobile {
   @media only screen and (max-width: 767px) {
     @content;
   }
 }
 
-@mixin tablet-device {
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    @content;
-  }
-}
-
-@mixin computer-device {
-  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    @content;
-  }
-}
-
-@mixin large-screen-device {
-  @media only screen and (min-width: 1200px) and (max-width: 1919px) {
-    @content;
-  }
-}
-
-@mixin widescreen-device {
-  @media only screen and (min-width: 1920px) {
-    @content;
-  }
-}
-
-/*
- * Responsive utils.
- * Following Semantic UI breakpoints.
- * + custom `handheld` & `small screen` breakpoints.
- */
-@mixin mobile-only {
-  @media only screen and (max-width: 767px) {
-    @content;
-  }
-}
-
-@mixin tablet-only {
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    @content;
-  }
-}
-
-@mixin handheld-only {
+@mixin lte-tablet {
   @media only screen and (max-width: 991px) {
     @content;
   }
 }
 
-@mixin computer-only {
-  @media only screen and (min-width: 992px) {
+@mixin tablet {
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
     @content;
   }
 }
 
-@mixin small-screen-only {
+@mixin gte-tablet {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lte-notebook {
   @media only screen and (max-width: 1199px) {
     @content;
   }
 }
 
-@mixin large-screen-only {
+@mixin notebook {
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    @content;
+  }
+}
+
+@mixin gte-notebook {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin desktop {
   @media only screen and (min-width: 1200px) {
     @content;
   }
 }
 
-@mixin widescreen-only {
-  @media only screen and (min-width: 1920px) {
-    @content;
+@mixin device($device) {
+  @if $device == 'mobile' {
+    @include mobile {
+      @content;
+    }
+  }
+  @else if $device == 'lte-tablet' {
+    @include lte-tablet {
+      @content;
+    }
+  }
+  @else if $device == 'tablet' {
+    @include tablet {
+      @content;
+    }
+  }
+  @else if $device == 'gte-tablet' {
+    @include gte-tablet {
+      @content;
+    }
+  }
+  @else if $device == 'lte-notebook' {
+    @include lte-notebook {
+      @content;
+    }
+  }
+  @else if $device == 'notebook' {
+    @include notebook {
+      @content;
+    }
+  }
+  @else if $device == 'gte-notebook' {
+    @include gte-notebook {
+      @content;
+    }
+  }
+  @else if $device == 'desktop' {
+    @include desktop {
+      @content;
+    }
   }
 }

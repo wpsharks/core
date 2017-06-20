@@ -1,0 +1,22 @@
+@mixin abbr-tag-hashes {
+  // Defaults.
+
+  %hash-abbr-tag-defaults {
+    &[title] {
+      text-decoration:        none;
+      border:                 0 dotted;
+      border-width:           0 0 .063em;
+
+      //
+      cursor:                 help;
+    }
+  }
+
+  // Abbrevs.
+
+  @if $apply-defaults {
+    abbr {
+      @extend                 %hash-abbr-tag-defaults;
+    }
+  }
+}

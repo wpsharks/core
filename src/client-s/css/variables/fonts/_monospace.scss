@@ -1,0 +1,31 @@
+$monospace-font-letter-spacing: normal !default;
+$monospace-font-family: $monospace !default;
+$monospace-font-faces: (
+  'family': '',
+  'base-url': '',
+
+  'thin': (
+    'sub-path': '100',
+    'italic-sub-path': '100i',
+  ),
+  'light': (
+    'sub-path': '300',
+    'italic-sub-path': '300i',
+  ),
+  'normal': (
+    'sub-path': '400',
+    'italic-sub-path': '400i',
+  ),
+  'medium': (
+    'sub-path': '500',
+    'italic-sub-path': '500i',
+  ),
+  'bold': (
+    'sub-path': '700',
+    'italic-sub-path': '700i',
+  ),
+  'thick': (
+    'sub-path': '900',
+    'italic-sub-path': '900i',
+  ),
+) !default;

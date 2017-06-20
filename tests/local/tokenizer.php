@@ -68,6 +68,8 @@ Some code and a backtick `.
 [^1]: A footnote definition that is referenced above.
 [google]: <http://google.com> "Link Definition"
 [github]: https://github.com "GitHub Link Definition"
+
+Most of our Products are also hosted by GitHub, so another way to obtain the latest available release of most Products is by visiting [github.com/src-works](https://github.com/src-works). There you\'ll find download links, installation instructions, and, at times, other resources.
 ';
 $Tokenizer = c::tokenize($markdown, [
     'pre',
@@ -77,6 +79,7 @@ $Tokenizer = c::tokenize($markdown, [
     'tags',
     'md-fences',
     'md-links',
+    'shortcodes',
 ]);
 echo $Tokenizer->getString()."\n\n";
 echo '--------------------------------------'."\n\n";

@@ -1,0 +1,192 @@
+@mixin serif-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $serif-font-family #{$important};
+  letter-spacing:             $serif-font-letter-spacing #{$important};
+}
+
+@mixin sans-serif-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $sans-serif-font-family #{$important};
+  letter-spacing:             $sans-serif-font-letter-spacing #{$important};
+}
+
+@mixin monospace-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $monospace-font-family #{$important};
+  letter-spacing:             $monospace-font-letter-spacing #{$important};
+}
+
+@mixin alt1-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $alt1-font-family #{$important};
+  letter-spacing:             $alt1-font-letter-spacing #{$important};
+}
+
+@mixin alt2-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $alt2-font-family #{$important};
+  letter-spacing:             $alt2-font-letter-spacing #{$important};
+}
+
+@mixin body-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $body-font-family #{$important};
+  letter-spacing:             $body-font-letter-spacing #{$important};
+}
+
+@mixin body-hx-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-weight:                $body-hx-font-weight #{$important};
+  font-family:                $body-hx-font-family #{$important};
+  letter-spacing:             $body-hx-font-letter-spacing #{$important};
+}
+
+@mixin body-h1-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-weight:                $body-h1-font-weight #{$important};
+  font-family:                $body-h1-font-family #{$important};
+  letter-spacing:             $body-h1-font-letter-spacing #{$important};
+}
+
+@mixin body-h2-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-weight:                $body-h2-font-weight #{$important};
+  font-family:                $body-h2-font-family #{$important};
+  letter-spacing:             $body-h2-font-letter-spacing #{$important};
+}
+
+@mixin content-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $content-font-family #{$important};
+  letter-spacing:             $content-font-letter-spacing #{$important};
+}
+
+@mixin content-hx-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-weight:                $content-hx-font-weight #{$important};
+  font-family:                $content-hx-font-family #{$important};
+  letter-spacing:             $content-hx-font-letter-spacing #{$important};
+}
+
+@mixin content-h1-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-weight:                $content-h1-font-weight #{$important};
+  font-family:                $content-h1-font-family #{$important};
+  letter-spacing:             $content-h1-font-letter-spacing #{$important};
+}
+
+@mixin content-h2-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-weight:                $content-h2-font-weight #{$important};
+  font-family:                $content-h2-font-family #{$important};
+  letter-spacing:             $content-h2-font-letter-spacing #{$important};
+}
+
+@mixin content-lede-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $content-lede-font-family #{$important};
+  letter-spacing:             $content-lede-font-letter-spacing #{$important};
+}
+
+@mixin font-smoothing($smoothing: 'antialiased', $important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  $moz-smoothing: $smoothing;
+
+  @if $moz-smoothing == 'antialiased' {
+    $moz-smoothing: 'grayscale';
+  }
+
+  -webkit-font-smoothing:     #{$smoothing} #{$important};
+  -moz-osx-font-smoothing:    #{$moz-smoothing} #{$important};
+  font-smoothing:             #{$smoothing} #{$important};
+}

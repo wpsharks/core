@@ -1,0 +1,56 @@
+@function to-string($value) {
+  @return if(type-of($value) == 'string', $value, inspect($value));
+}
+
+@function to-number($value) {
+  @if type-of($value) == 'number' {
+    @return $value;
+  }
+
+  $number: 0;
+  $digits: 0;
+  $value: to-string($value);
+
+  $negative: str-slice($value, 1, 1) == '-';
+  $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+
+  @for $i from if($negative, 2, 1) through str-length($value) {
+    $character: str-slice($value, $i, $i);
+
+    @if $character != '.' and index(map-keys($numbers), $character) == null {
+      @return to-unit(if($negative, -$number, $number), str-slice($value, $i));
+    }
+
+    @if $character == '.' {
+      $digits: 1;
+    }
+    @else if $digits == 0 {
+      $number: $number * 10 + map-get($numbers, $character);
+    }
+    @else {
+      $digits: $digits * 10;
+      $number: $number + map-get($numbers, $character) / $digits;
+    }
+  }
+
+  @return if($negative, -$number, $number);
+}
+
+@function to-unit($number, $unit) {
+  @if map-get($units, $unit) == null {
+    @error 'Unknown unit: #{$unit}';
+  }
+
+  @return to-unitless($number) * map-get($units, $unit);
+}
+
+@function to-unitless($number) {
+  $number: to-number($number);
+
+  @if unitless($number) {
+    @return $number;
+  }
+  @else {
+    @return $number / ($number * 0 + 1);
+  }
+}

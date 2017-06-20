@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Interfaces;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @var array Ampersand entities.
+     * @type array Ampersand entities.
      */
     const HTML_AMPERSAND_ENTITIES = [
         '&amp;'       => '&amp;',
@@ -41,7 +41,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @var array HTML whitespace.
+     * @type array HTML whitespace.
      */
     const HTML_WHITESPACE = [
         '\0',
@@ -58,7 +58,7 @@ interface HtmlConstants
      *
      * @since 160720 Initial release.
      *
-     * @var array Vertical HTML whitespace.
+     * @type array Vertical HTML whitespace.
      */
     const HTML_HORIZONTAL_WHITESPACE = [
         '\0',
@@ -74,7 +74,7 @@ interface HtmlConstants
      *
      * @since 160720 Initial release.
      *
-     * @var array Vertical HTML whitespace.
+     * @type array Vertical HTML whitespace.
      */
     const HTML_VERTICAL_WHITESPACE = [
         "\r",
@@ -88,7 +88,7 @@ interface HtmlConstants
      *
      * @since 150424 Initial release.
      *
-     * @var array Quote entities.
+     * @type array Quote entities.
      */
     const HTML_QUOTE_ENTITIES = [
         '&apos;'           => '&apos;',
@@ -112,27 +112,34 @@ interface HtmlConstants
     ];
 
     /**
-     * HTML5 invisible tags.
+     * HTML5 invisible tag patterns.
      *
      * @since 150424 Initial release.
+     * @since 17xxxx Converting to patterns.
      *
-     * @var array HTML5 invisible tags.
+     * @type array HTML5 invisible tag patterns.
      */
     const HTML_INVISIBLE_TAGS = [
         'head',
-        'title',
-        'style',
+        'link',
+        'meta',
+        'noscript',
         'script',
+        'style',
+        'template',
+        'title',
     ];
 
     /**
-     * HTML5 block-level tags.
+     * HTML5 block-level tag patterns.
      *
      * @since 150424 Initial release.
+     * @since 17xxxx Converting to patterns.
      *
-     * @var array HTML5 block-level tags.
+     * @type array HTML5 block-level tag patterns.
      */
     const HTML_BLOCK_TAGS = [
+        '[a-z][a-z\-0-9]*?\-div',
         'address',
         'article',
         'aside',
@@ -142,6 +149,7 @@ interface HtmlConstants
         'dd',
         'div',
         'dl',
+        'dt',
         'fieldset',
         'figcaption',
         'figure',
@@ -156,6 +164,10 @@ interface HtmlConstants
         'header',
         'hgroup',
         'hr',
+        'iframe',
+        'li',
+        'main',
+        'nav',
         'noscript',
         'ol',
         'output',
@@ -164,7 +176,21 @@ interface HtmlConstants
         'section',
         'table',
         'tfoot',
+        'thead',
         'ul',
         'video',
+    ];
+
+    /**
+     * HTML5 block-level tag patterns.
+     *
+     * @since 17xxxx Converting to patterns.
+     *
+     * @type array HTML5 block-level tag patterns.
+     *
+     * @note Blocks when on a line of their own.
+     */
+    const HTML_MAYBE_BLOCK_TAGS = [
+        '[a-z][a-z\-0-9]*?\-(?!div)[a-z0-9]+',
     ];
 }

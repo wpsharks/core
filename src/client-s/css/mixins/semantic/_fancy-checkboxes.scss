@@ -1,0 +1,24 @@
+@mixin fancy-checkboxes {
+  .ui.toggle.checkbox {
+    > input {
+      &:active,
+      &:focus {
+        ~ label {
+          color:              rgba($black-color, 0.4);
+        }
+      }
+    }
+
+    > label {
+      color:                  rgba($black-color, 0.4);
+
+      &::before {
+        background:           rgba($black-color, 0.1);
+      }
+
+      &::after {
+        border:               1px solid rgba($black-color, 0.15);
+      }
+    }
+  }
+}

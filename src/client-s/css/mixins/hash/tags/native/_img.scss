@@ -1,0 +1,15 @@
+@mixin img-tag-hashes {
+  // Defaults.
+
+  %hash-img-tag-defaults {
+    @extend                   %hash-responsive-media-dimensions;
+  }
+
+  // Images.
+
+  @if $apply-defaults {
+    img {
+      @extend                 %hash-img-tag-defaults;
+    }
+  }
+}

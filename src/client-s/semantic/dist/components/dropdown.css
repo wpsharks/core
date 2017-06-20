@@ -112,7 +112,7 @@
   text-align: left;
   border-top: none;
   line-height: 1em;
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
   padding: 0.8125rem 1.125rem !important;
   font-size: 1rem;
   text-transform: none;
@@ -353,7 +353,7 @@
   background: #FFFFFF;
   display: inline-block;
   padding: 0.6875em 1.975em 0.6875em 0.875em;
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
   box-shadow: none;
   border: 1px solid rgba(34, 36, 38, 0.15);
   border-radius: 0.25rem;
@@ -588,7 +588,7 @@ select.ui.dropdown {
   opacity: 0.45;
 }
 .ui.active.search.dropdown input.search:focus + .text {
-  color: rgba(115, 115, 115, 0.87) !important;
+  color: #8c8c8c !important;
 }
 
 /* Search Menu */
@@ -828,11 +828,11 @@ select.ui.dropdown {
 
 .ui.dropdown:not(.button) > .default.text,
 .ui.default.dropdown:not(.button) > .text {
-  color: rgba(191, 191, 191, 0.87);
+  color: #d8d8d8;
 }
 .ui.dropdown:not(.button) > input:focus + .default.text,
 .ui.default.dropdown:not(.button) > input:focus + .text {
-  color: rgba(115, 115, 115, 0.87);
+  color: #8c8c8c;
 }
 
 /*--------------------

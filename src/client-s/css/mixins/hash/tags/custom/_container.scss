@@ -1,0 +1,59 @@
+@mixin container-tag-hashes {
+  // Variables.
+
+  $scrollbar-width: 17;
+
+  $mobile-margin: 1 * $em-base;
+  $mobile-margins: $mobile-margin * 2;
+
+  $tablet-margin: 1 * $em-base;
+  $tablet-margins: $tablet-margin * 2;
+
+  $notebook-margin: 1.5 * $em-base;
+  $notebook-margins: $notebook-margin * 2;
+
+  $desktop-margin: 2 * $em-base;
+  $desktop-margins: $desktop-margin * 2;
+
+  // Defaults.
+
+  %hash-container-tag-defaults {
+    @extend                   %hash-clearfix;
+
+    display:                  block;
+
+    //
+    margin-left:              auto;
+    margin-right:             auto;
+
+    @include mobile {
+      margin-left:            $mobile-margin;
+      margin-right:           $mobile-margin;
+    }
+
+    @include tablet {
+      width:                  #{to-unit(768 - $tablet-margins - $scrollbar-width, 'px')};
+    }
+
+    @include notebook {
+      width:                  #{to-unit(992 - $notebook-margins - $scrollbar-width, 'px')};
+    }
+
+    @include desktop {
+      width:                  #{to-unit(1200 - $desktop-margins - $scrollbar-width, 'px')};
+    }
+  }
+
+  @if not $semantic {
+    @if $apply-custom-tag-defaults {
+      a-container {
+        @extend               %hash-container-tag-defaults;
+      }
+    }
+    @else {
+      .\@container {
+        @extend               %hash-container-tag-defaults;
+      }
+    }
+  }
+}

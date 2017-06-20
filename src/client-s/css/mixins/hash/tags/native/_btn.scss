@@ -1,0 +1,75 @@
+@mixin btn-tag-hashes {
+  // Defaults.
+
+  %hash-btn-tag-defaults {
+    @extend                   %hash-default-colors;
+    @extend                   %hash-default-border-props;
+
+    //
+    display:                  inline-block;
+
+    //
+    margin:                   0;
+    padding:                 .75em .75em .575em;
+
+    //
+    line-height:              1;
+    min-height:               1em;
+
+    //
+    font-size:                1em;
+    font-weight:              400;
+    font-style:               normal;
+    white-space:              nowrap;
+
+    //
+    text-align:               center;
+    vertical-align:           middle;
+
+    //
+    text-decoration:          none;
+    text-shadow:              none;
+    text-transform:           none;
+
+    //
+    user-select:              none;
+    cursor:                   pointer;
+
+    //
+    outline:                  0;
+    -webkit-tap-highlight-color: transparent;
+
+    //
+    background-image:         linear-gradient(rgba($black-color, 0.05), rgba($black-color, 0.05));
+
+    &:hover {
+      background-image:       linear-gradient(rgba($white-color, 0.05), rgba($white-color, 0.05));
+    }
+
+    &:active {
+      transform:              scale(0.95);
+      box-shadow:             0 0.75em 0.75em -0.75em rgba($black-color, 0.25) inset !important;
+      background-image:       linear-gradient(rgba($black-color, 0.1), rgba($black-color, 0.1));
+    }
+
+    // Modifiers.
+
+    &.\~basic {
+      @extend                 %hash-basic-colors;
+    }
+  }
+
+  // Buttons.
+
+  @if not $semantic {
+    @if $apply-defaults {
+      button {
+        @extend               %hash-btn-tag-defaults;
+      }
+    }
+
+    .\@btn {
+      @extend                 %hash-btn-tag-defaults;
+    }
+  }
+}

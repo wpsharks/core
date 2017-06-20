@@ -1,0 +1,92 @@
+@mixin height-hashes {
+  // Scroll/overflow.
+
+  .\!\#scroll,
+  pre.\!\#scroll > code {
+    max-height:               none !important;
+    overflow:                 visible !important;
+  }
+
+  pre.\!\#scroll > code {
+    white-space:              pre-wrap !important;
+  }
+
+  .-\#scroll,
+  .\#scroll,
+  .\+\#scroll {
+    max-height:               50vh;
+    overflow:                 auto !important;
+  }
+
+  .-\#scroll {
+    max-height:               25vh;
+  }
+
+  .\+\#scroll {
+    max-height:               75vh;
+  }
+
+  // Stretch.
+
+  .\#stretch {
+    height:                   auto !important;
+    min-height:               100% !important;
+    max-height:               100% !important;
+  }
+
+  .\+\#stretch {
+    height:                   auto !important;
+    min-height:               calc(100% + 1px) !important;
+    max-height:               calc(100% + 1px) !important;
+  }
+
+  // Intrinsic.
+
+  .\#h\:auto {
+    height:                   auto !important;
+  }
+
+  .\#h\:min-con {
+    height:                   min-content !important;
+  }
+
+  // Em units.
+
+  @each $v in '.25', '.5', '.75', '1', '1.25', '1.5', '1.75', '2', '2.25', '2.5', '2.75', '3', '5', '10', '20', '30' {
+    .\#h\:#{esc-class($v)} {
+      height:                 #{to-unit($v, 'em')} !important;
+    }
+  }
+
+  // Percentages.
+
+  @each $v in '5', '10', '15', '20', '25', '30', '33.3', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95', '100' {
+    .\#h\:#{esc-class($v)}\% {
+      height:                 #{to-unit($v, '%')} !important;
+    }
+
+    .\#min-h\:#{esc-class($v)}\% {
+      min-height:             #{to-unit($v, '%')} !important;
+    }
+
+    .\#max-h\:#{esc-class($v)}\% {
+      max-height:             #{to-unit($v, '%')} !important;
+    }
+  }
+
+  // Viewport percentages.
+
+  @each $v in '20', '25', '33.3', '50', '75', '100' {
+    .\#h\:#{esc-class($v)}vh {
+      height:                 #{to-unit($v, 'vh')} !important;
+    }
+
+    .\#min-h\:#{esc-class($v)}vh {
+      min-height:             #{to-unit($v, 'vh')} !important;
+    }
+
+    .\#max-h\:#{esc-class($v)}vh {
+      max-height:             #{to-unit($v, 'vh')} !important;
+    }
+  }
+}

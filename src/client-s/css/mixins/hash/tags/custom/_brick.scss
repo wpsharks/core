@@ -1,0 +1,23 @@
+@mixin brick-tag-hashes {
+  // Defaults.
+
+  %hash-brick-tag-defaults {
+    @extend                   %hash-clearfix;
+    @extend                   %hash-block-margins;
+    @extend                   %hash-block-padding;
+    @extend                   %hash-default-0-border-props;
+  }
+
+  // Bricks.
+
+  @if $apply-custom-tag-defaults {
+    a-brick {
+      @extend                 %hash-brick-tag-defaults;
+    }
+  }
+  @else {
+    .\@brick {
+      @extend                 %hash-brick-tag-defaults;
+    }
+  }
+}

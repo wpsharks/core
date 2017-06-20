@@ -1,0 +1,58 @@
+@mixin setup-html-body-hashes {
+  // Defaults.
+
+  %hash-font-loading-defaults {
+    &.wf-loading > :not(#x) {
+      *,
+      ::before,
+      ::after {
+        visibility:           hidden !important;
+      }
+    }
+  }
+
+  %hash-font-size-defaults {
+    line-height:              $line-height;
+    font-size:                #{to-unit($em-base, 'px')};
+
+    @include lte-tablet {
+      font-size:              #{to-unit($em-base - 2, 'px')};
+    }
+  }
+
+  %hash-font-family-defaults {
+    @include body-font-family;
+  }
+
+  %hash-font-feature-defaults {
+    font-feature-settings:    'liga', 'calt', 'frac';
+  }
+
+  %hash-font-color-defaults {
+    color:                    $fg-color;
+    background:               $bg-color;
+  }
+
+  // HTML settings.
+
+  @each $url in $import-urls {
+    @include import-url($url);
+  }
+
+  @each $faces in $import-font-faces {
+    @include import-font-faces($faces);
+  }
+
+  @if $apply-defaults {
+    html {
+      @extend                 %hash-font-loading-defaults;
+    }
+
+    body {
+      @extend                 %hash-font-size-defaults;
+      @extend                 %hash-font-family-defaults;
+      @extend                 %hash-font-feature-defaults;
+      @extend                 %hash-font-color-defaults;
+    }
+  }
+}

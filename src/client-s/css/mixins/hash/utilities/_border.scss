@@ -1,0 +1,59 @@
+@mixin border-hashes {
+  // Names/aliases.
+
+  .\!\#radius {
+    border-radius:            0 !important;
+  }
+
+  .-\#radius {
+    border-radius:           .15em !important;
+  }
+
+  .\#radius {
+    border-radius:           .25em !important;
+  }
+
+  .\+\#radius {
+    border-radius:           .5em !important;
+  }
+
+  .\#round {
+    border-radius:            50% !important;
+  }
+
+  // Borders (pixels to em).
+
+  @each $v in '0', '1', '2', '3', '5', '10', '20', '30' {
+    .\#b\:#{esc-class($v)},
+    .\#b\:t#{esc-class($v)},
+    .\#b\:v#{esc-class($v)} {
+      @extend                 %hash-default-0-border-props;
+
+      border-top-width:       #{em($v)} !important;
+    }
+
+    .\#b\:#{esc-class($v)},
+    .\#b\:r#{esc-class($v)},
+    .\#b\:h#{esc-class($v)} {
+      @extend                 %hash-default-0-border-props;
+
+      border-right-width:     #{em($v)} !important;
+    }
+
+    .\#b\:#{esc-class($v)},
+    .\#b\:b#{esc-class($v)},
+    .\#b\:v#{esc-class($v)} {
+      @extend                 %hash-default-0-border-props;
+
+      border-bottom-width:    #{em($v)} !important;
+    }
+
+    .\#b\:#{esc-class($v)},
+    .\#b\:l#{esc-class($v)},
+    .\#b\:h#{esc-class($v)} {
+      @extend                 %hash-default-0-border-props;
+
+      border-left-width:      #{em($v)} !important;
+    }
+  }
+}

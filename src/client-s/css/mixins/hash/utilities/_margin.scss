@@ -1,0 +1,27 @@
+@mixin margin-hashes {
+  @each $v in '-30', '-20', '-10', '-5', '-3', '-2.5', '-2', '-1.5', '-1', '-.5', '-.25', '0', '.25', '.5', '1', '1.5', '2', '2.5', '3', '5', '10', '20', '30' {
+    .\#m\:#{esc-class($v)},
+    .\#m\:t#{esc-class($v)},
+    .\#m\:v#{esc-class($v)} {
+      margin-top:             #{$v}rem !important;
+    }
+
+    .\#m\:#{esc-class($v)},
+    .\#m\:r#{esc-class($v)},
+    .\#m\:h#{esc-class($v)} {
+      margin-right:           #{$v}rem !important;
+    }
+
+    .\#m\:#{esc-class($v)},
+    .\#m\:b#{esc-class($v)},
+    .\#m\:v#{esc-class($v)} {
+      margin-bottom:          #{$v}rem !important;
+    }
+
+    .\#m\:#{esc-class($v)},
+    .\#m\:l#{esc-class($v)},
+    .\#m\:h#{esc-class($v)} {
+      margin-left:            #{$v}rem !important;
+    }
+  }
+}

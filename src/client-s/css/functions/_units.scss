@@ -1,13 +1,7 @@
-/*
- * Pixels to rem.
- */
-@function _rem($pixels, $base: $em-base) {
-  $pixels: strip-units($pixels);
-  $base: strip-units($base);
-
-  @return #{$pixels / $base}rem;
+@function em($number) {
+  @return dec-round(to-unitless($number) / to-unitless($em-base), 3) * 1em;
 }
 
-// Note: `rem($pixels)` exists in Bourbon.
-// However, it is deprecated and does not support `$base`.
-// On the up side, `em($pixels, $base)` already exists in Bourbon.
+@function rem($number) {
+  @return dec-round(to-unitless($number) / to-unitless($em-base), 3) * 1rem;
+}

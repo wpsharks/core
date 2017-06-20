@@ -1,0 +1,27 @@
+@mixin tag-tag-hashes {
+  // Defaults.
+
+  %hash-tag-tag-defaults {
+    @extend                   %hash-inline-mark-defaults;
+    @extend                   %hash-default-colors;
+
+    // Modifiers.
+
+    &.\~basic {
+      @extend                 %hash-basic-colors;
+    }
+  }
+
+  // Tags.
+
+  @if $apply-custom-tag-defaults {
+    a-tag {
+      @extend                 %hash-tag-tag-defaults;
+    }
+  }
+  @else {
+    .\@tag {
+      @extend                 %hash-tag-tag-defaults;
+    }
+  }
+}

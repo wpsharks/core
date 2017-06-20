@@ -1,19 +1,17 @@
-/*
- * Position tools.
- */
-@mixin position-offscreen($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin offscreen($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  position:                   fixed#{$important};
-  top:                       -99999px#{$important};
-  left:                      -99999px#{$important};
+  position:                   fixed #{$important};
+  top:                       -99999px #{$important};
+  left:                      -99999px #{$important};
 
   //
-  width:                      1px#{$important};
-  height:                     1px#{$important};
-  overflow:                   hidden#{$important};
+  width:                      1px #{$important};
+  height:                     1px #{$important};
+  overflow:                   hidden #{$important};
 }

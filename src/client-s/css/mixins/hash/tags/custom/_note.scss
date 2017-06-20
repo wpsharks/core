@@ -1,0 +1,34 @@
+@mixin note-tag-hashes {
+  // Defaults.
+
+  %hash-note-tag-defaults {
+    @extend                   %hash-clearfix;
+    @extend                   %hash-block-margins;
+    @extend                   %hash-block-padding;
+    @extend                   %hash-default-colors;
+    @extend                   %hash-default-border-props;
+
+    border-width:             0 0 0 .3em;
+
+    // Modifiers.
+
+    &.\~basic {
+      @extend                 %hash-basic-colors;
+
+      border-width:           0.063em 0.063em 0.063em .3em;
+    }
+  }
+
+  // Notes.
+
+  @if $apply-custom-tag-defaults {
+    a-note {
+      @extend                 %hash-note-tag-defaults;
+    }
+  }
+  @else {
+    .\@note {
+      @extend                 %hash-note-tag-defaults;
+    }
+  }
+}

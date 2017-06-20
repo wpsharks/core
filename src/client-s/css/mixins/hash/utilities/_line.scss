@@ -1,0 +1,39 @@
+@mixin line-hashes {
+  // Names/aliases.
+
+  .\#lh\:normal {
+    line-height:              $line-height !important;
+  }
+
+  // Line clamps.
+
+  .\#line-clamp {
+    max-width:                100% !important;
+
+    //
+    white-space:              nowrap !important;
+    overflow:                 hidden !important;
+    text-overflow:            ellipsis !important;
+  }
+
+  .in\#line-clamp {
+    // Inline clamp w/ a specific max-width.
+    // Max width set via `#max-w:[x]`.
+
+    white-space:              nowrap !important;
+    overflow:                 hidden !important;
+    text-overflow:            ellipsis !important;
+
+    //
+    vertical-align:           middle !important;
+    display:                  inline-block !important;
+  }
+
+  // Unitless line heights.
+
+  @each $v in '1px', '1', '1.25', '1.5', '1.75', '2', '2.25', '2.5', '2.75', '3', '5', '10', '20', '30' {
+    .\#lh\:#{esc-class($v)} {
+      line-height:            #{$v} !important;
+    }
+  }
+}

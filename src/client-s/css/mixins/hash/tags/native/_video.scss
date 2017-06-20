@@ -1,0 +1,16 @@
+@mixin video-tag-hashes {
+  // Defaults.
+
+  %hash-video-tag-defaults {
+    @extend                   %hash-block-margins;
+    @extend                   %hash-responsive-media-dimensions;
+  }
+
+  // Videos.
+
+  @if $apply-defaults {
+    video {
+      @extend                 %hash-video-tag-defaults;
+    }
+  }
+}

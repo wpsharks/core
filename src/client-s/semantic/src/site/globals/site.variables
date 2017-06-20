@@ -2,7 +2,23 @@
      User Global Variables
 *******************************/
 
+@pageBackground    : #ffffff;
+@textColor         : #191919;
+
 @emSize            : 16px;
 @fontSize          : 16px;
+@lineHeight        : 1.4285em;
+
+@fontSmoothing     : auto;
 @importGoogleFonts : false;
-@pageFont          : 'lato', sans-serif;
+@pageFont          : 'terfens', 'trebuchet ms', sans-serif;
+@headerFont        : 'terfens', 'trebuchet ms', sans-serif;
+
+@h1 : 2.986em;
+@h2 : 2.488em;
+@h3 : 2.074em;
+@h4 : 1.728em;
+@h5 : 1.44em;
+@h6 : 1.2em;
+
+@headerLineHeight  : 1.286em;

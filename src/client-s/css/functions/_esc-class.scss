@@ -1,0 +1,12 @@
+@function esc-class($string) {
+  $string: to-string($string);
+
+  $string: str-replace($string, '@', '\\@');
+  $string: str-replace($string, '#', '\\#');
+  $string: str-replace($string, ':', '\\:');
+  $string: str-replace($string, '~', '\\~');
+  $string: str-replace($string, '.', '\\.');
+  $string: str-replace($string, '%', '\\%');
+
+  @return $string;
+}

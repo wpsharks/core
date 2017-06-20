@@ -1,0 +1,15 @@
+@mixin u-tag-hashes {
+  // Defaults.
+
+  %hash-u-tag-defaults {
+    text-decoration-skip:     ink;
+  }
+
+  // Underlines.
+
+  @if $apply-defaults {
+    u {
+      @extend                 %hash-u-tag-defaults;
+    }
+  }
+}

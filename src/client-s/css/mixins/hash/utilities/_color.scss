@@ -1,0 +1,239 @@
+@mixin color-hashes {
+  $fg: map-get($swatch, 'fg');
+  $bg: map-get($swatch, 'bg');
+
+  // SVG fill.
+
+  .f\#current {
+    fill:                     currentColor !important;
+  }
+
+  // Holders.
+
+  %color-a-decor-events {
+    text-decoration:          underline;
+
+    &:hover {
+      color:                  inherit;
+    }
+  }
+
+  %color-white {
+    color:                    $white-color !important;
+
+    > a {
+      color:                  darken($white-color, 10%);
+
+      @extend                 %color-a-decor-events;
+    }
+  }
+
+  %color-black {
+    color:                    $black-color !important;
+
+    > a {
+      color:                  lighten($black-color, 10%);
+
+      @extend                 %color-a-decor-events;
+    }
+  }
+
+  %border-color-white {
+    border-color:             $white-color !important;
+  }
+
+  %border-color-black {
+    border-color:             $black-color !important;
+  }
+
+  %bg-color-white {
+    background-color:         $white-color !important;
+    border-color:             darken($white-color, 15%) !important;
+  }
+
+  %bg-color-black {
+    background-color:         $black-color !important;
+    border-color:             lighten($black-color, 15%) !important;
+  }
+
+  // Swatch colors.
+
+  @each $k, $v in $swatch {
+    .c\##{esc-class($k)} {
+      @if $v == $white-color {
+        @extend               %color-white;
+      }
+      @else if $v == $black-color {
+        @extend               %color-black;
+      }
+      @else {
+        color:                $v !important;
+
+        > a {
+          color:              darken($v, 10%);
+
+          @extend             %color-a-decor-events;
+        }
+      }
+    }
+
+    @if diff(lightness($bg), lightness($v)) > 2% {
+      .\##{esc-class($k)} {
+        @if contrast($v) == $white-color {
+          @extend             %color-white;
+        }
+        @else {
+          @extend             %color-black;
+        }
+      }
+    }
+
+    .b\##{esc-class($k)} {
+      @if $v == $white-color {
+        @extend               %border-color-white;
+      }
+      @else if $v == $black-color {
+        @extend               %border-color-black;
+      }
+      @else {
+        border-color:         $v !important;
+      }
+    }
+
+    .\##{esc-class($k)},
+    .bg\##{esc-class($k)} {
+      @if $v == $white-color {
+        @extend               %bg-color-white;
+      }
+      @else if $v == $black-color {
+        @extend               %bg-color-black;
+      }
+      @else {
+        background-color:     $v !important;
+        border-color:         darken($v, 15%) !important;
+      }
+    }
+  }
+
+  // Swatch colors (lighter).
+
+  @each $m, $p in ('--': 45%, '-': 25%) {
+    @each $k, $v in $swatch {
+      .c#{esc-class($m)}\##{esc-class($k)} {
+        @if lighten($v, $p) == $white-color {
+          @extend             %color-white;
+        }
+        @else if lighten($v, $p) == $black-color {
+          @extend             %color-black;
+        }
+        @else {
+          color:              lighten($v, $p) !important;
+
+          > a {
+            color:            darken(lighten($v, $p), 10%);
+
+            @extend           %color-a-decor-events;
+          }
+        }
+      }
+
+      @if diff(lightness($bg), lightness(lighten($v, $p))) > 2% {
+        .#{esc-class($m)}\##{esc-class($k)} {
+          @if contrast(lighten($v, $p)) == $white-color {
+            @extend           %color-white;
+          }
+          @else {
+            @extend           %color-black;
+          }
+        }
+      }
+
+      .b#{esc-class($m)}\##{esc-class($k)} {
+        @if lighten($v, $p) == $white-color {
+          @extend             %border-color-white;
+        }
+        @else if lighten($v, $p) == $black-color {
+          @extend             %border-color-black;
+        }
+        @else {
+          border-color:       lighten($v, $p) !important;
+        }
+      }
+
+      .#{esc-class($m)}\##{esc-class($k)},
+      .bg#{esc-class($m)}\##{esc-class($k)} {
+        @if lighten($v, $p) == $white-color {
+          @extend             %bg-color-white;
+        }
+        @else if lighten($v, $p) == $black-color {
+          @extend             %bg-color-black;
+        }
+        @else {
+          background-color:   lighten($v, $p) !important;
+          border-color:       darken(lighten($v, $p), 15%) !important;
+        }
+      }
+    }
+  }
+
+  // Swatch colors (darker).
+
+  @each $m, $p in ('\\+': 10%, '\\+\\+': 20%) {
+    @each $k, $v in $swatch {
+      .c#{esc-class($m)}\##{esc-class($k)} {
+        @if darken($v, $p) == $white-color {
+          @extend             %color-white;
+        }
+        @else if darken($v, $p) == $black-color {
+          @extend             %color-black;
+        }
+        @else {
+          color:              darken($v, $p) !important;
+
+          > a {
+            color:            darken(darken($v, $p), 10%);
+
+            @extend           %color-a-decor-events;
+          }
+        }
+      }
+
+      @if diff(lightness($bg), lightness(darken($v, $p))) > 2% {
+        .#{esc-class($m)}\##{esc-class($k)} {
+          @if contrast(darken($v, $p)) == $white-color {
+            @extend           %color-white;
+          }
+          @else {
+            @extend           %color-black;
+          }
+        }
+      }
+
+      .b#{esc-class($m)}\##{esc-class($k)} {
+        @if darken($v, $p) == $white-color {
+          @extend             %border-color-white;
+        }
+        @else if darken($v, $p) == $black-color {
+          @extend             %border-color-black;
+        }
+        @else {
+          border-color:       darken($v, $p) !important;
+        }
+      }
+
+      .#{esc-class($m)}\##{esc-class($k)},
+      .bg#{esc-class($m)}\##{esc-class($k)} {
+        @if darken($v, $p) == $white-color {
+          @extend             %bg-color-white;
+        }
+        @else if darken($v, $p) == $black-color {
+          @extend             %bg-color-black;
+        }
+        @else {
+          background-color:   darken($v, $p) !important;
+          border-color:       darken(darken($v, $p), 15%) !important;
+        }
+      }
+    }
+  }
+}

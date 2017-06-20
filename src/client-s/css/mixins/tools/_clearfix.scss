@@ -1,0 +1,14 @@
+@mixin clearfix($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  &::after {
+    content:                  '' #{$important};
+    display:                  table #{$important};
+    clear:                    both #{$important};
+  }
+}

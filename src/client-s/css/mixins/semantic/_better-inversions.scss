@@ -1,0 +1,29 @@
+@mixin better-inversions {
+  .ui.inverted {
+    &.link.list {
+      &.celled,
+      &.bulleted {
+        > .item {
+          > .icon {
+            transition:       none;
+            color:            inherit;
+          }
+        }
+      }
+
+      &.celled {
+        > .item {
+          border-color:       rgba($alabaster-color, 0.1);
+        }
+      }
+
+      &.bulleted {
+        > .item {
+          &::before {
+            color:            rgba($alabaster-color, 0.1);
+          }
+        }
+      }
+    }
+  }
+}

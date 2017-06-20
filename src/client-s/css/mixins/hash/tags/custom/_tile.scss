@@ -1,0 +1,32 @@
+@mixin tile-tag-hashes {
+  // Defaults.
+
+  %hash-tile-tag-defaults {
+    @extend                   %hash-clearfix;
+    @extend                   %hash-block-margins;
+    @extend                   %hash-block-padding;
+    @extend                   %hash-default-colors;
+    @extend                   %hash-default-border-props;
+
+    border-width:            .3em 0.063em 0.063em;
+
+    // Modifiers.
+
+    &.\~basic {
+      @extend                 %hash-basic-colors;
+    }
+  }
+
+  // Tiles.
+
+  @if $apply-custom-tag-defaults {
+    a-tile {
+      @extend                 %hash-tile-tag-defaults;
+    }
+  }
+  @else {
+    .\@tile {
+      @extend                 %hash-tile-tag-defaults;
+    }
+  }
+}

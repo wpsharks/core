@@ -1,0 +1,40 @@
+@mixin shine-hashes {
+  .\#shine {
+    position:                 relative;
+    overflow:                 hidden;
+
+    &::before,
+    &::after {
+      content:                '';
+      display:                block;
+
+      //
+      top:                    0;
+      left:                   0;
+      position:               absolute;
+      width:                  50%;
+      height:                 30%;
+
+      //
+      filter:                 blur(1.5em);
+      background:             $white-color;
+      transform:              translateX(-125%) skewX(-15deg);
+    }
+
+    &::after {
+      transform:              translate(250%, 250%) skewX(15deg);
+    }
+
+    &:hover {
+      &::before,
+      &::after {
+        transition:           all .5s ease-in-out;
+        transform:            translateX(250%) skewX(-15deg);
+      }
+
+      &::after {
+        transform:            translate(-125%, 250%) skewX(15deg);
+      }
+    }
+  }
+}

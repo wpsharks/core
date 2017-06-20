@@ -1,0 +1,63 @@
+@mixin list-tag-hashes {
+  // Defaults.
+
+  %hash-list-defaults {
+    @extend                   %hash-block-margins;
+  }
+
+  %hash-list-dt-defaults {
+    font-weight:              700;
+
+    > label {
+      font-weight:            400;
+      font-size:             .85em;
+    }
+  }
+
+  %hash-list-item-defaults {
+    > ol,
+    > ul,
+    > dl {
+      &:last-child:not(:only-child) {
+        margin-bottom:        1rem;
+      }
+    }
+
+    > p,
+    > div,
+    > pre,
+    > table,
+    > video,
+    > iframe,
+    > figure,
+    > blockquote,
+    > a-block,
+    > a-brick,
+    > a-flex,
+    > a-note,
+    > a-tile {
+      &:last-child {
+        margin-bottom:        1rem;
+      }
+    }
+  }
+
+  // Lists.
+
+  @if $apply-defaults {
+    ol,
+    ul,
+    dl {
+      @extend                 %hash-list-defaults;
+    }
+
+    dt {
+      @extend                 %hash-list-dt-defaults;
+    }
+
+    li,
+    dd {
+      @extend                 %hash-list-item-defaults;
+    }
+  }
+}

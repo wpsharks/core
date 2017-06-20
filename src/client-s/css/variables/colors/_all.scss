@@ -1,40 +1,23 @@
-/*
- * General colors.
- */
-$link-color: #4183c4 !default;
-$link-hover-color: #1e70bf !default;
+// Named colors.
 
-$inverted-color: #fff !default;
-$inverted-bg-color: #151515 !default;
-
-/*
- * Fancy blockquotes.
- */
-$blockquote-bg-color: #f9f9f9 !default;
-$blockquote-border-color: #ccc !default;
-$blockquote-quote-color: #ccc !default;
-
-/*
- * Fancy monospace tags.
- */
-$code-color: #0f0f0f !default;
-$code-bg-color: #f9f9f9 !default;
-$code-border-color: #ececec !default;
-$code-text-shadow-color: #fff !default;
-
-$kbd-color: #666 !default;
-$kbd-bg-color: #fff !default;
-$kbd-border-color: #ececec !default;
-$kbd-text-shadow-color: #fff !default;
-$kbd-box-shadow-color1: rgba(0, 0, 0, 0.75) !default;
-$kbd-box-shadow-color2: #fff !default;
-
-$pre-color: #fff !default;
-$pre-bg-color: #222 !default;
-$pre-title-color: #fff !default;
-$pre-title-bg-color: #707070 !default;
-
-/*
- * Named colors.
- */
 @import 'named';
+
+// Basic color scheme.
+
+$bg-color: $white-color !default;
+$fg-color: $cod-gray-color !default;
+
+$link-color: lighten($denim-color, 15%) !default;
+$link-hover-color: $denim-color !default;
+
+$default-color: darken($bg-color, 2%) !default;
+$primary-color: $san-marino-color !default;
+$secondary-color: $comet-color !default;
+$neutral-color: $leather-color !default;
+$accent-color: $tuscany-color !default;
+
+// Swatch settings.
+
+$desaturate-swatch-by: 0% !default;
+
+@import 'swatch';

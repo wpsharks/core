@@ -1,0 +1,47 @@
+@mixin fancy-pagination-menus {
+  .ui.pagination.menu {
+    > .item {
+      min-width:              4em;
+      display:                none;
+      justify-content:        center;
+
+      &.-prev-page,
+      &.-next-page {
+        display:              flex;
+      }
+
+      &.-first-page,
+      &.-last-page {
+        min-width:            5.15em;
+      }
+
+      &.disabled {
+        pointer-events:       none;
+      }
+
+      > .icon {
+        margin:               0;
+        height:               auto;
+
+        &.chevron.left,
+        &.angle.double.left {
+          margin-right:      .5em;
+        }
+
+        &.chevron.right,
+        &.angle.double.right {
+          margin-left:       .5em;
+        }
+
+        &.angle.double.left,
+        &.angle.double.right {
+          opacity:           .5;
+        }
+      }
+
+      @include desktop {
+        display:              flex;
+      }
+    }
+  }
+}

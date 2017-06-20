@@ -3,6 +3,7 @@
 # Local
 
 .~*
+._*
 
 # Logs
 
@@ -37,6 +38,14 @@ vendor/
 # NodeJS
 
 node_modules/
+
+# JSPM
+
+jspm_packages/
+
+# Bower
+
+bower_components/
 
 # SASS
 

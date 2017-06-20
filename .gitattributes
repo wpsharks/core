@@ -16,6 +16,7 @@
 # YAML
 
 *.yml
+*.yaml
 
 # Properties.
 
@@ -61,7 +62,10 @@
 *.jsx text
 *.tsx text
 *.json text
+*.json5 text
 *.js.map text
+*.babelrc text
+*.npmrc text
 
 # Applescript
 
@@ -105,6 +109,7 @@
 # Documents
 
 *.csv text
+*.tsv text
 *.doc binary
 *.docx binary
 *.odt binary
@@ -190,11 +195,12 @@
 *.so binary
 
 # Export Ignore — this follows `.gitignore` almost exactly. ------------------------------------------------------------
-# The only exceptions are that we don't ignore `node_modules/` or `vendor/`.
+# Exceptions: don't ignore `node_modules/`, `jspm_packages/`, `bower_components/` or `vendor/`.
 
 # Local
 
 .~* export-ignore
+._* export-ignore
 
 # Logs
 

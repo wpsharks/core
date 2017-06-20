@@ -1,0 +1,33 @@
+$imported-urls: () !global;
+$imported-font-families: () !global;
+
+@mixin import-url($url) {
+  @if index($imported-urls, $url) == null {
+    $imported-urls: append($imported-urls, $url) !global;
+    @import url($url);
+  }
+}
+
+@mixin import-font-faces($face) {
+  $family: map-get($face, 'family');
+  $base-url: map-get($face, 'base-url');
+
+  @if $family != '' and $base-url != '' and index($imported-font-families, $family) == null {
+    $imported-font-families: append($imported-font-families, $family) !global;
+
+    @each $type, $weight in ('thin': 100, 'light': 300, 'normal': 400, 'medium': 500, 'bold': 700, 'thick': 900) {
+      @each $key, $style in ('sub-path': normal, 'italic-sub-path': italic) {
+        $sub-path: map-get(map-get($face, $type), $key);
+
+        @if $sub-path != '' {
+          @font-face {
+            font-family:      $family;
+            font-weight:      $weight;
+            font-style:       $style;
+            src:              url('#{$base-url + $sub-path}.woff2') format('woff2'), url('#{$base-url + $sub-path}.woff') format('woff');
+          }
+        }
+      }
+    }
+  }
+}

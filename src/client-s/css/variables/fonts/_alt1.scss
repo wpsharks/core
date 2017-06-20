@@ -1,0 +1,31 @@
+$alt1-font-letter-spacing: normal !default;
+$alt1-font-family: 'gubblebum-blocky', 'trebuchet ms', sans-serif !default;
+$alt1-font-faces: (
+  'family': 'gubblebum-blocky',
+  'base-url': '//src.works/wp-content/uploads/2017/06/gubblebum-blocky-',
+
+  'thin': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+  'light': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+  'normal': (
+    'sub-path': '400',
+    'italic-sub-path': '',
+  ),
+  'medium': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+  'bold': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+  'thick': (
+    'sub-path': '',
+    'italic-sub-path': '',
+  ),
+) !default;

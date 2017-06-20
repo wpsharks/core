@@ -1,0 +1,13 @@
+@mixin text-shadow-hashes {
+  .-\#text-shadow {
+    @include -text-shadow(true);
+  }
+
+  .\#text-shadow {
+    @include text-shadow(true);
+  }
+
+  .\+\#text-shadow {
+    @include \+text-shadow(true);
+  }
+}

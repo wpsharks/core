@@ -25,7 +25,7 @@
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
 }
 .ui.input input {
   margin: 0em;
@@ -37,11 +37,11 @@
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   text-align: left;
   line-height: 1.21428571em;
-  font-family: 'lato', sans-serif;
+  font-family: 'terfens', 'trebuchet ms', sans-serif;
   padding: 0.58035714em 0.875em;
   background: #FFFFFF;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
   border-radius: 0.25rem;
   -webkit-transition: box-shadow 0.1s ease, border-color 0.1s ease;
   transition: box-shadow 0.1s ease, border-color 0.1s ease;
@@ -55,13 +55,13 @@
 
 /* browsers require these rules separate */
 .ui.input input::-webkit-input-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #d8d8d8;
 }
 .ui.input input::-moz-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #d8d8d8;
 }
 .ui.input input:-ms-input-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #d8d8d8;
 }
 
 
@@ -91,7 +91,7 @@
 .ui.input.down input {
   border-color: rgba(0, 0, 0, 0.3);
   background: #FAFAFA;
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
   box-shadow: none;
 }
 
@@ -142,15 +142,15 @@
 }
 .ui.input.focus input::-webkit-input-placeholder,
 .ui.input input:focus::-webkit-input-placeholder {
-  color: rgba(115, 115, 115, 0.87);
+  color: #8c8c8c;
 }
 .ui.input.focus input::-moz-placeholder,
 .ui.input input:focus::-moz-placeholder {
-  color: rgba(115, 115, 115, 0.87);
+  color: #8c8c8c;
 }
 .ui.input.focus input:-ms-input-placeholder,
 .ui.input input:focus:-ms-input-placeholder {
-  color: rgba(115, 115, 115, 0.87);
+  color: #8c8c8c;
 }
 
 /*--------------------

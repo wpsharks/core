@@ -1,0 +1,54 @@
+@mixin blockquote-tag-hashes {
+  // Defaults.
+
+  %hash-blockquote-tag-defaults {
+    @extend                   %hash-block-margins;
+    @extend                   %hash-default-colors;
+    @extend                   %hash-default-border-props;
+    @extend                   %hash-sans-serif-font-family;
+
+    //
+    padding:                  1em;
+    border-width:             0 0 0 .1em;
+    quotes:                   '“' '”';
+
+    &::before,
+    &::after {
+      line-height:            1;
+      font-size:              3em;
+      font-family:            $georgia;
+      color:                  rgba($black-color, 0.25);
+    }
+
+    &::before {
+      float:                  left;
+      content:                open-quote;
+      margin:                -.1em .25em 0 0;
+    }
+
+    &::after {
+      float:                  right;
+      content:                close-quote;
+      margin:                 0 0 -.1em .25em;
+    }
+
+    // Modifiers.
+
+    &.\~basic {
+      @extend                 %hash-basic-colors;
+    }
+  }
+
+  // Quotes.
+
+  @if $apply-defaults {
+    blockquote {
+      @extend                 %hash-blockquote-tag-defaults;
+    }
+  }
+  @else {
+    .\@quote {
+      @extend                 %hash-blockquote-tag-defaults;
+    }
+  }
+}

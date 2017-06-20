@@ -1,0 +1,11 @@
+@mixin icon-margins {
+  .icon {
+    &[class*='#float:'],
+    &[class*='#push:'],
+    &[class*='#pull:'],
+    &[class*='#yank:'] {
+      margin-left:            0 !important;
+      margin-right:           0 !important;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@mixin sup-tag-hashes {
+  // Defaults.
+
+  %hash-sup-tag-defaults {
+    font-feature-settings:    'liga', 'calt', 'frac', 'sups';
+  }
+
+  // Superscript.
+
+  @if $apply-defaults {
+    sup {
+      @extend                 %hash-sup-tag-defaults;
+    }
+  }
+}

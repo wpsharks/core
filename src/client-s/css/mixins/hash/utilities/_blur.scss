@@ -1,0 +1,22 @@
+@mixin blur-hashes {
+  .-\#blur,
+  .-\#blur\:\!on-hover {
+    filter:                   blur(0.05em) !important;
+  }
+
+  .\#blur,
+  .\#blur\:\!on-hover {
+    filter:                   blur(0.1em) !important;
+  }
+
+  .\+\#blur,
+  .\+\#blur\:\!on-hover {
+    filter:                   blur(0.25em) !important;
+  }
+
+  .-\#blur\:\!on-hover:hover,
+  .\#blur\:\!on-hover:hover,
+  .\+\#blur\:\!on-hover:hover {
+    filter:                   none !important;
+  }
+}

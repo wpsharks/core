@@ -1,0 +1,9 @@
+@mixin visibility-hashes {
+  .\#invisible {
+    visibility:               hidden !important;
+  }
+
+  .\#visible {
+    visibility:               visible !important;
+  }
+}

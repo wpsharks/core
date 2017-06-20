@@ -1,0 +1,19 @@
+@mixin mark-tag-hashes {
+  // Defaults.
+
+  %hash-mark-tag-defaults {
+    @extend                   %hash-inline-mark-defaults;
+
+    color:                    $black-color;
+    border-color:             darken($yellow-color, 5%);
+    background:               lighten($yellow-color, 35%);
+  }
+
+  // Highlight markers.
+
+  @if $apply-defaults {
+    mark {
+      @extend                 %hash-mark-tag-defaults;
+    }
+  }
+}

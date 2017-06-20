@@ -1,0 +1,21 @@
+@mixin block-tag-hashes {
+  // Defaults.
+
+  %hash-block-tag-defaults {
+    @extend                   %hash-clearfix;
+    @extend                   %hash-block-margins;
+  }
+
+  // Blocks.
+
+  @if $apply-custom-tag-defaults {
+    a-block {
+      @extend                 %hash-block-tag-defaults;
+    }
+  }
+  @else {
+    .\@block {
+      @extend                 %hash-block-tag-defaults;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@mixin strong-tag-hashes {
+  // Defaults.
+
+  %hash-strong-tag-defaults {
+    // Nothing for now.
+  }
+
+  // Strong.
+
+  @if $apply-defaults {
+    b,
+    strong {
+      // @extend                 %hash-strong-tag-defaults;
+    }
+  }
+}

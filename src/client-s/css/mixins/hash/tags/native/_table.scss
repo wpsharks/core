@@ -1,0 +1,237 @@
+@mixin table-tag-hashes {
+  // Mixins.
+
+  @mixin hash-table-tag-horiz-tweaks {
+    &:not(#x) {
+      margin-left:            auto;
+      margin-right:           auto;
+
+      //
+      max-width:              100%;
+      width:                  min-content;
+
+      &,
+      > *,
+      > * > *,
+      > * > * > * {
+        display:              block;
+      }
+
+      > * > * > * {
+        border-width:         0;
+        white-space:          nowrap;
+      }
+
+      > thead {
+        float:                left;
+        box-shadow:          -0.2em 0 0.05em -0.05em rgba($black-color, 0.35) inset, -2.2px 0 0.2px -0.2px rgba($white-color, 1) inset, 0.2em 0 0.2em -0.2em rgba($black-color, 0.15);
+
+        > * > * {
+          border-right-width: 0.063em;
+
+          &:not(:last-child) {
+            border-bottom-width: 0.063em;
+          }
+        }
+      }
+
+      > tbody {
+        display:              flex;
+        overflow-x:           auto;
+
+        > * > :first-child {
+          font-weight:        700;
+        }
+
+        > :not(:first-child) > * {
+          border-left-width:  0.063em;
+        }
+
+        > * > :not(:last-child) {
+          border-bottom-width: 0.063em;
+        }
+      }
+
+      > tfoot {
+        display:              none;
+      }
+
+      &.\~stripe\:on-hover {
+        > tbody {
+          > :hover > :not(.x) {
+            // This has higher precedence.
+            background-image: linear-gradient(to right, $black-color 0, $white-color 1px, rgba($black-color, 0.08) 2px), linear-gradient(to left, $black-color 0, $white-color 1px, rgba($black-color, 0.08) 2px);
+          }
+        }
+      }
+    }
+  }
+
+  // Defaults.
+
+  %hash-table-tag-defaults {
+    @extend                   %hash-block-margins;
+    @extend                   %hash-default-colors;
+    @extend                   %hash-default-border-props;
+
+    //
+    display:                  table;
+    position:                 relative;
+
+    //
+    width:                    100%;
+
+    //
+    border-spacing:           0;
+    border-collapse:          separate;
+
+    > * > * > * {
+      vertical-align:         middle;
+      text-align:             inherit;
+
+      //
+      padding:               .75em;
+      border:                 0 solid;
+      border-color:           inherit;
+
+      &:not(:first-child) {
+        border-left-width:   .063em;
+      }
+    }
+
+    > * > * > th {
+      font-weight:            700;
+    }
+
+    > thead {
+      > * {
+        > th {
+          border-bottom-width: .063em;
+          background-image:   linear-gradient(rgba($black-color, 0.075) 2%, rgba($black-color, 0.1));
+        }
+
+        > th:first-child {
+          border-radius:     .25em 0 0;
+        }
+
+        > th:last-child {
+          border-radius:      0 .25em 0 0;
+        }
+      }
+    }
+
+    > tbody {
+      > :not(:last-child) > * {
+        border-bottom-width: .063em;
+      }
+
+      > * > th {
+        background-image:     linear-gradient(to right, rgba($black-color, 0.075) 2%, rgba($black-color, 0.1));
+      }
+    }
+
+    > tfoot {
+      > * {
+        > th {
+          border-top-width:   0.063em;
+          background-image:   linear-gradient(rgba($black-color, 0.1) 98%, rgba($black-color, 0.075));
+        }
+
+        > th:first-child {
+          border-radius:      0 0 0 .25em;
+        }
+
+        > th:last-child {
+          border-radius:      0 0 .25em;
+        }
+      }
+    }
+
+    // Modifiers.
+
+    &.\~basic {
+      @extend                 %hash-basic-colors;
+    }
+
+    &.\~horiz {
+      @include hash-table-tag-horiz-tweaks;
+    }
+
+    &.\~fixed {
+      table-layout:           fixed;
+    }
+
+    &.\~undivided {
+      > * > * > :not(#x):not(#y) {
+        // Priority greater than horiz tweaks.
+        border-width:         0;
+      }
+    }
+
+    &.--\~p {
+      > * > * > * {
+        padding:             .25em;
+      }
+    }
+
+    &.-\~p {
+      > * > * > * {
+        padding:             .5em;
+      }
+    }
+
+    &.\~p {
+      > * > * > * {
+        padding:              1em;
+      }
+    }
+
+    &.\+\~p {
+      > * > * > * {
+        padding:              1.5em;
+      }
+    }
+
+    &.\+\+\~p {
+      > * > * > * {
+        padding:              2em;
+      }
+    }
+
+    &.\~striped {
+      > tbody {
+        > :nth-child(even) > td {
+          background-image:   linear-gradient(rgba($black-color, 0.05), rgba($black-color, 0.05));
+        }
+      }
+    }
+
+    &.\~stripe\:on-hover {
+      > tbody {
+        > :hover > :not(.x) {
+          // This has higher precedence.
+          background-image:   linear-gradient(to bottom, $black-color 0, $white-color 1px, rgba($black-color, 0.08) 2px), linear-gradient(to top, $black-color 0, $white-color 1px, rgba($black-color, 0.08) 2px);
+        }
+      }
+    }
+
+    // Responsive flip.
+
+    @include lte-tablet {
+      @include hash-table-tag-horiz-tweaks;
+    }
+  }
+
+  // Tables.
+
+  @if $apply-defaults {
+    table {
+      @extend                 %hash-table-tag-defaults;
+    }
+  }
+  @else {
+    .\@table {
+      @extend                 %hash-table-tag-defaults;
+    }
+  }
+}

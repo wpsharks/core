@@ -1,22 +1,32 @@
-/*
- * Text shadow tools.
- */
-@mixin text-shadow-bottom-normal($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin -text-shadow($important: false, $color: $black-color) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  text-shadow:                unquote('#{0 1px 1px transparentize($black-color, 0.5)}#{$important}');
+  text-shadow:                0 0.2px 0.4px rgba($color, 0.15) #{$important};
 }
 
-@mixin text-shadow-bottom-heavy($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin text-shadow($important: false, $color: $black-color) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  text-shadow:                unquote('#{0 2px 1px transparentize($black-color, 0.25)}#{$important}');
+  text-shadow:                0 0.4px 0.4px rgba($color, 0.25) #{$important};
+}
+
+@mixin \+text-shadow($important: false, $color: $black-color) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  text-shadow:                0 0.8px 0.4px rgba($color, 0.5) #{$important};
 }

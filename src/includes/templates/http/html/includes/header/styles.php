@@ -17,10 +17,6 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 ?>
-<link type="text/css" rel="stylesheet" href="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/semantic/dist/semantic.min.css?v='.urlencode($this->App::VERSION))); ?>" />
-<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/github.min.css" integrity="sha384-WtUWHyk39lfUpZQVgokNfSKCJaKAeD6adgLduBLrKTMUuPzFhLtL23y1guFy6lZn" crossorigin="anonymous" />
-<link type="text/css" rel="stylesheet" href="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/css/core.min.css?v='.urlencode($this->App::VERSION))); ?>" />
-
 <?= $this->get('http/html/includes/header/styles-append.php'); ?>
 
 <?php if (is_file($this->App->base_dir.'/src/client-s/css/app.min.css')) : ?>

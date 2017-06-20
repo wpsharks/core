@@ -1,0 +1,73 @@
+// Main styles.
+
+%hash-serif-font-family {
+  @include serif-font-family;
+}
+
+%hash-sans-serif-font-family {
+  @include sans-serif-font-family;
+}
+
+%hash-monospace-font-family {
+  @include monospace-font-family;
+}
+
+// Alternatives.
+
+%hash-alt1-font-family {
+  @include alt1-font-family;
+}
+
+%hash-alt2-font-family {
+  @include alt2-font-family;
+}
+
+// Body fonts.
+
+%hash-body-font-family {
+  @include body-font-family;
+}
+
+%hash-body-hx-font-family {
+  @include body-hx-font-family;
+}
+
+%hash-body-h1-font-family {
+  @include body-h1-font-family;
+}
+
+%hash-body-h2-font-family {
+  @include body-h2-font-family;
+}
+
+// Content fonts.
+
+%hash-content-font-family {
+  @include content-font-family;
+}
+
+%hash-content-hx-font-family {
+  @include content-hx-font-family;
+}
+
+%hash-content-h1-font-family {
+  @include content-h1-font-family;
+}
+
+%hash-content-h2-font-family {
+  @include content-h2-font-family;
+}
+
+%hash-content-lede-font-family {
+  @include content-lede-font-family;
+}
+
+// Font smoothing.
+
+%hash-font-smoothing-antialiased {
+  @include font-smoothing('antialiased');
+}
+
+%hash-font-smoothing-defaults {
+  @include font-smoothing('auto');
+}

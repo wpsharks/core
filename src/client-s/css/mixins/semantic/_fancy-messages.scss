@@ -1,0 +1,12 @@
+@mixin fancy-messages {
+  .ui.message {
+    @include lte-tablet {
+      &.icon,
+      &.icon > .icon:not(.close) {
+        @include center-conversion(true);
+      }
+
+      text-align:             center !important;
+    }
+  }
+}

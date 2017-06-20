@@ -1,0 +1,15 @@
+{
+  "compileOnSave": true,
+
+  "compilerOptions": {
+    "target": "ES5",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "outFile": "../app.js"
+  },
+  "filesGlob": [
+    "./typings/index.d.ts",
+    "./app.ts"
+  ]
+}

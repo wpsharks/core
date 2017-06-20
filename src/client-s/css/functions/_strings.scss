@@ -1,0 +1,10 @@
+@function str-replace($haystack, $needle, $replacement) {
+  $haystack: to-string($haystack);
+  $index: str-index($haystack, $needle);
+
+  @if $index != null {
+    @return str-slice($haystack, 1, $index - 1) + $replacement + str-replace(str-slice($haystack, $index + str-length($needle)), $needle, $replacement);
+  }
+
+  @return $haystack;
+}

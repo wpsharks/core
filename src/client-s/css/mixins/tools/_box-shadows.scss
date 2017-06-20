@@ -1,35 +1,123 @@
-/*
- * Box shadow tools.
- */
-@mixin box-shadow-glow-normal($_important: false) {
-  $important: '';
+// Glow.
 
-  @if $_important {
-    $important: ' !important';
+@mixin -box-shadow-glow($important: false, $color: $black-color) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  box-shadow:                 unquote('#{0 0 0.5em 0 transparentize($black-color, 0.5)}#{$important}');
+  box-shadow:                 0 0 0.25em 0 rgba($color, 0.25) #{$important};
 }
 
-@mixin box-shadow-glow-heavy($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin box-shadow-glow($important: false, $color: $black-color) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  box-shadow:                 unquote('#{0 0 0.75em 0 transparentize($black-color, 0.25)}#{$important}');
+  box-shadow:                 0 0 0.5em 0 rgba($color, 0.5) #{$important};
 }
 
-@mixin box-shadow-bottom-normal($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin \+box-shadow-glow($important: false, $color: $black-color) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  position:                   relative#{$important};
-  box-shadow:                 unquote('#{0 0.05em 0.15em transparentize($black-color, 0.5)}#{$important}');
+  box-shadow:                 0 0 0.75em 0 rgba($color, 0.75) #{$important};
+}
+
+// Raise.
+
+@mixin -box-shadow-raise($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  box-shadow:                 0 0.3px 0 0 $white-color inset, 0 -0.3px 0 0 rgba($black-color, 0.15) inset #{$important};
+}
+
+@mixin box-shadow-raise($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  box-shadow:                 0 0.5px 0 0 $white-color inset, 0 -0.5px 0 0 rgba($black-color, 0.25) inset #{$important};
+}
+
+@mixin \+box-shadow-raise($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  box-shadow:                 0 1px 0 0 $white-color inset, 0 -1px 0 0 rgba($black-color, 0.5) inset #{$important};
+}
+
+// Inset.
+
+@mixin box-shadow-inset($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  background-image:           linear-gradient(rgba($black-color, 0.05), rgba($black-color, 0.05)) #{$important};
+  box-shadow:                 0 0 0 0.4px rgba($black-color, 0.2) inset, 0 0 0 0.4px rgba($white-color, 0.1) #{$important};
+}
+
+@mixin \+box-shadow-inset($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  background-image:           linear-gradient(rgba($black-color, 0.15), rgba($black-color, 0.15)) #{$important};
+  box-shadow:                 0 0 0 0.4px rgba($black-color, 0.2) inset, 0 0 0 0.4px rgba($white-color, 0.1) #{$important};
+}
+
+@mixin \+\+box-shadow-inset($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  background-image:           linear-gradient(rgba($black-color, 0.25), rgba($black-color, 0.25)) #{$important};
+  box-shadow:                 0 0 0 0.4px rgba($black-color, 0.2) inset, 0 0 0 0.4px rgba($white-color, 0.1) #{$important};
+}
+
+// Other shadows.
+
+@mixin box-shadow-bottom($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  position:                   relative #{$important};
+  box-shadow:                 0 0.05em 0.15em rgba($black-color, 0.5) #{$important};
 
   &::before,
   &::after {
@@ -45,7 +133,7 @@
 
     //
     border-radius:            10em;
-    box-shadow:               0 0 1.25em transparentize($black-color, 0.5);
+    box-shadow:               0 0 1.25em rgba($black-color, 0.5);
   }
 
   &::after {
@@ -55,14 +143,15 @@
   }
 }
 
-@mixin box-shadow-bottom-left-normal($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin box-shadow-bottom-left($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  position:                   relative#{$important};
+  position:                   relative #{$important};
 
   &::before {
     content:                  '';
@@ -81,19 +170,20 @@
     transform:                rotate(-3deg);
 
     //
-    background:               transparentize($black-color, 0.65);
-    box-shadow:               0 0.95em 0.6em transparentize($black-color, 0.65);
+    background:               rgba($black-color, 0.35);
+    box-shadow:               0 0.95em 0.6em rgba($black-color, 0.35);
   }
 }
 
-@mixin box-shadow-bottom-right-normal($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin box-shadow-bottom-right($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  position:                   relative#{$important};
+  position:                   relative #{$important};
 
   &::after {
     content:                  '';
@@ -112,19 +202,20 @@
     transform:                rotate(3deg);
 
     //
-    background:               transparentize($black-color, 0.65);
-    box-shadow:               0 0.95em 0.6em transparentize($black-color, 0.65);
+    background:               rgba($black-color, 0.35);
+    box-shadow:               0 0.95em 0.6em rgba($black-color, 0.35);
   }
 }
 
-@mixin box-shadow-bottom-left-right-normal($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin box-shadow-bottom-left-right($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  position:                   relative#{$important};
+  position:                   relative #{$important};
 
   &::before,
   &::after {
@@ -144,8 +235,8 @@
     transform:                rotate(-3deg);
 
     //
-    background:               transparentize($black-color, 0.65);
-    box-shadow:               0 0.95em 0.6em transparentize($black-color, 0.65);
+    background:               rgba($black-color, 0.35);
+    box-shadow:               0 0.95em 0.6em rgba($black-color, 0.35);
   }
 
   &::after {
@@ -155,15 +246,16 @@
   }
 }
 
-@mixin box-shadow-top-bottom-normal($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin box-shadow-top-bottom($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  position:                   relative#{$important};
-  box-shadow:                 unquote('#{0 0.05em 0.15em transparentize($black-color, 0.5)}#{$important}');
+  position:                   relative #{$important};
+  box-shadow:                 0 0.05em 0.15em rgba($black-color, 0.5) #{$important};
 
   &::before {
     content:                  '';
@@ -178,7 +270,7 @@
 
     //
     border-radius:            10em;
-    box-shadow:               0 0 1.25em transparentize($black-color, 0.5);
+    box-shadow:               0 0 1.25em rgba($black-color, 0.5);
   }
 
   &::after {
@@ -194,19 +286,20 @@
 
     //
     border-radius:            10em;
-    box-shadow:               0 0 0.5em transparentize($black-color, 0.5);
+    box-shadow:               0 0 0.5em rgba($black-color, 0.5);
   }
 }
 
-@mixin box-shadow-left-right-normal($_important: false) {
-  $important: '';
-
-  @if $_important {
-    $important: ' !important';
+@mixin box-shadow-left-right($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
   }
 
-  position:                   relative#{$important};
-  box-shadow:                 unquote('#{0 0.05em 0.15em transparentize($black-color, 0.5)}#{$important}');
+  position:                   relative #{$important};
+  box-shadow:                 0 0.05em 0.15em rgba($black-color, 0.5) #{$important};
 
   &::before,
   &::after {
@@ -222,7 +315,7 @@
 
     //
     border-radius:            2em;
-    box-shadow:               0 0 1.25em transparentize($black-color, 0.5);
+    box-shadow:               0 0 1.25em rgba($black-color, 0.5);
   }
 
   &::after {

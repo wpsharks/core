@@ -1,0 +1,12 @@
+@mixin default-border-props($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  border-width:               0.063em #{$important};
+  border-style:               solid #{$important};
+  border-radius:              0.25em #{$important};
+}

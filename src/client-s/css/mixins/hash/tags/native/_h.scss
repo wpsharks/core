@@ -1,0 +1,141 @@
+@mixin h-tag-hashes {
+  // Defaults.
+
+  %hash-h-tag-defaults {
+    // Modifiers.
+
+    @extend                   %hash-0-padding;
+    @extend                   %hash-block-margins;
+    @extend                   %hash-body-hx-font-family;
+
+    line-height:              1.286;
+    margin-top:               calc(2rem -  0.143em);
+  }
+
+  %hash-h1-tag-defaults {
+    @extend                   %hash-body-h1-font-family;
+
+    min-height:               1rem;
+    font-size:                2.986em;
+  }
+
+  %hash-h2-tag-defaults {
+    @extend                   %hash-body-h2-font-family;
+
+    font-size:                2.488em;
+  }
+
+  %hash-h3-tag-defaults {
+    font-size:                2.074em;
+  }
+
+  %hash-h4-tag-defaults {
+    font-size:                1.728em;
+  }
+
+  %hash-h5-tag-defaults {
+    font-size:                1.44em;
+  }
+
+  %hash-h6-tag-defaults {
+    font-size:                1.2em;
+  }
+
+  %hash-h-tag-modifier-defaults {
+    // Modifiers.
+
+    &.\~block {
+      @extend                 %hash-default-colors;
+      @extend                 %hash-box-shadow-raise;
+      @extend                 %hash-default-border-props;
+
+      //
+      line-height:            1em;
+      border-width:           1px;
+
+      //
+      margin-left:           -.5em;
+      margin-right:          -.5em;
+      padding:               .6em .75em .5em;
+
+      > code {
+        display:              inline;
+        white-space:          normal;
+
+        //
+        margin:               0;
+        padding:              0;
+
+        //
+        font-size:            1em;
+
+        //
+        background:           none;
+        color:                inherit;
+
+        //
+        border:               0;
+        border-radius:        0;
+
+        //
+        text-shadow:          none;
+        box-shadow:           none;
+      }
+
+      > label {
+        float:                right;
+        margin-left:          1em;
+
+        //
+        font-size:           .65em;
+        color:                inherit;
+      }
+    }
+  }
+
+  // Headings.
+
+  @if $apply-defaults {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @extend                 %hash-h-tag-defaults;
+    }
+
+    h1 {
+      @extend                 %hash-h1-tag-defaults;
+    }
+
+    h2 {
+      @extend                 %hash-h2-tag-defaults;
+    }
+
+    h3 {
+      @extend                 %hash-h3-tag-defaults;
+    }
+
+    h4 {
+      @extend                 %hash-h4-tag-defaults;
+    }
+
+    h5 {
+      @extend                 %hash-h5-tag-defaults;
+    }
+
+    h6 {
+      @extend                 %hash-h6-tag-defaults;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @extend                 %hash-h-tag-modifier-defaults;
+    }
+  }
+}

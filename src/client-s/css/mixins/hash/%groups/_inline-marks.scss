@@ -1,0 +1,18 @@
+%hash-inline-mark-defaults {
+  @extend                     %hash-default-border-props;
+
+  white-space:                nowrap;
+  display:                    inline-block;
+
+  //
+  line-height:                0;
+  padding:                    1ex .4em;
+  margin:                     0 .15em;
+
+  //
+  text-decoration:            inherit;
+
+  &.\~has-caps {
+    padding-top:              1.15ex;
+  }
+}

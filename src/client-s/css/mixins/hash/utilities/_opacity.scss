@@ -1,0 +1,29 @@
+@mixin opacity-hashes {
+  // Disable.
+
+  .\#disable {
+    opacity:                 .5;
+    pointer-events:           none !important;
+
+    * {
+      opacity:                1 !important;
+    }
+  }
+
+  // Opacity percentages.
+
+  %hash-opacity-not-on-hover {
+    opacity:                  1 !important;
+  }
+
+  @each $v in '0', '.1', '.2', '.25', '.3', '.4', '.5', '.6', '.7', '.75', '.8', '.9', '1' {
+    .\#o\:#{esc-class($v)},
+    .\#o\:#{esc-class($v)}\:\!on-hover {
+      opacity:                #{$v} !important;
+    }
+
+    .\#o\:#{esc-class($v)}\:\!on-hover:hover {
+      @extend                 %hash-opacity-not-on-hover;
+    }
+  }
+}

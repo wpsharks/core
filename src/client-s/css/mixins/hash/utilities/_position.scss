@@ -1,0 +1,23 @@
+@mixin position-hashes {
+  // Position.
+
+  .\#offscreen {
+    @include offscreen(true);
+  }
+
+  .\#relative {
+    position:                 relative !important;
+  }
+
+  .\#absolute {
+    position:                 absolute !important;
+  }
+
+  // Z index.
+
+  @each $v in '-1', '0', '1', '2', '3' {
+    .\#z\:#{esc-class($v)} {
+      z-index:                #{$v} !important;
+    }
+  }
+}

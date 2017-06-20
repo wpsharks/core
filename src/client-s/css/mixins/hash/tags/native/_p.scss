@@ -1,0 +1,15 @@
+@mixin p-tag-hashes {
+  // Defaults.
+
+  %hash-p-tag-defaults {
+    @extend                   %hash-block-margins;
+  }
+
+  // Paragraphs.
+
+  @if $apply-defaults {
+    p {
+      @extend                 %hash-p-tag-defaults;
+    }
+  }
+}

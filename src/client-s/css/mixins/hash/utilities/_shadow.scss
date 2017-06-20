@@ -1,0 +1,29 @@
+@mixin shadow-hashes {
+  // Glow.
+
+  .-\#shadow {
+    @include -shadow-glow(true);
+  }
+
+  .\#shadow {
+    @include shadow-glow(true);
+  }
+
+  .\+\#shadow {
+    @include \+shadow-glow(true);
+  }
+
+  // Other shadows.
+
+  .-\#shadow\:b {
+    @include -shadow-bottom(true);
+  }
+
+  .\#shadow\:b {
+    @include shadow-bottom(true);
+  }
+
+  .\+\#shadow\:b {
+    @include \+shadow-bottom(true);
+  }
+}

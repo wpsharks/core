@@ -1,0 +1,248 @@
+@mixin flex-tag-hashes {
+  // Defaults.
+
+  %hash-flex-tag-defaults {
+    display:                  flex;
+
+    //
+    flex-flow:                row wrap;
+    justify-content:          flex-start;
+    align-items:              stretch;
+
+    //
+    margin:                  -1rem;
+
+    & + & {
+      margin-top:             1rem;
+    }
+
+    // Columns.
+
+    > * {
+      display:                block;
+
+      //
+      flex-grow:              0;
+      flex-shrink:            1;
+      flex-basis:             auto;
+
+      //
+      width:                  auto;
+      padding:                1rem;
+    }
+
+    // Basic modifier.
+
+    &.\~basic {
+      margin:                 0;
+
+      > * {
+        padding:              0;
+      }
+    }
+
+    // Flex modifiers.
+
+    &.\~fluid > * {
+      flex-grow:              1;
+    }
+
+    &.\~even > *,
+    &.\~evenly > * {
+      flex-grow:              1;
+      flex-basis:             0;
+    }
+
+    // Horiz. alignment modifiers.
+
+    &.\~ai\:left {
+      justify-content:        flex-start;
+    }
+
+    &.\~ai\:space-between {
+      justify-content:        space-between;
+    }
+
+    &.\~ai\:space-around {
+      justify-content:        space-around;
+    }
+
+    &.\~ai\:center {
+      justify-content:        center;
+    }
+
+    &.\~ai\:right {
+      justify-content:        flex-end;
+    }
+
+    // Vert. alignment modifiers.
+
+    &.\~vai\:top {
+      align-items:            flex-start;
+    }
+
+    &.\~vai\:middle {
+      align-items:            center;
+    }
+
+    &.\~vai\:baseline {
+      align-items:            baseline;
+    }
+
+    &.\~vai\:bottom {
+      align-items:            flex-end;
+    }
+
+    // Count & width modifiers.
+
+    %hash-flex-tag-cc-common {
+      flex-basis:             auto;
+    }
+
+    @for $n from 1 through $grid-columns {
+      &.\~#{esc-class($n)} > * {
+        @extend               %hash-flex-tag-cc-common;
+
+        width:                dec-round(100% / $n, 3);
+      }
+
+      > .\~#{esc-class($n)}:not(.x) {
+        // This has higher precedence.
+        @extend               %hash-flex-tag-cc-common;
+
+        width:                dec-round(100% / $grid-columns * $n, 3);
+      }
+    }
+
+    @each $d in $devices {
+      @include device($d) {
+        %hash-flex-tag-cc-if-#{esc-class($d)}-common {
+          flex-basis:         auto;
+        }
+
+        @for $n from 1 through $grid-columns {
+          &.\~#{esc-class($n)}\:if-#{esc-class($d)} > * {
+            @extend           %hash-flex-tag-cc-if-#{esc-class($d)}-common;
+
+            width:            dec-round(100% / $n, 3);
+          }
+
+          > .\~#{esc-class($n)}\:if-#{esc-class($d)}:not(.x) {
+            // This has higher precedence.
+            @extend           %hash-flex-tag-cc-if-#{esc-class($d)}-common;
+
+            width:            dec-round(100% / $grid-columns * $n, 3);
+          }
+        }
+      }
+    }
+
+    // Padding modifiers.
+
+    &.--\~p {
+      margin:                -.25rem;
+
+      > * {
+        padding:             .25rem;
+      }
+    }
+
+    &.-\~p {
+      margin:                -.75rem;
+
+      > * {
+        padding:             .75rem;
+      }
+    }
+
+    &.\~p {
+      margin:                -1.25rem;
+
+      > * {
+        padding:              1.25rem;
+      }
+    }
+
+    &.\+\~p {
+      margin:                -1.5rem;
+
+      > * {
+        padding:              1.5rem;
+      }
+    }
+
+    &.\+\+\~p {
+      margin:                -2rem;
+
+      > * {
+        padding:              2rem;
+      }
+    }
+
+    // Divided modifiers.
+
+    &.\~divided {
+      flex-wrap:              nowrap;
+
+      > :not(:first-child) {
+        box-shadow:          -1px 0 0 0 rgba($black-color, 0.15), 1px 0 0 0 rgba($white-color, 0.15) inset;
+      }
+
+      & + &.\~divided {
+        box-shadow:           0 -1px 0 0 rgba($black-color, 0.15), 0 1px 0 0 rgba($white-color, 0.15) inset;
+      }
+    }
+
+    // Stacking modifiers.
+
+    @each $d in $devices {
+      @include device($d) {
+        &.\~stack\:if-#{esc-class($d)},
+        &.c\~stack\:if-#{esc-class($d)} {
+          flex-wrap:          wrap !important;
+          box-shadow:         none !important;
+
+          > * {
+            flex-basis:       auto !important;
+            width:            100% !important;
+            box-shadow:       none !important;
+          }
+
+          &.\~divided {
+            > :not(:first-child) {
+              box-shadow:     0 -1px 0 0 rgba($black-color, 0.15), 0 1px 0 0 rgba($white-color, 0.15) inset !important;
+            }
+          }
+
+          & + &.\~divided {
+            > :first-child {
+              box-shadow:     0 -1px 0 0 rgba($black-color, 0.15), 0 1px 0 0 rgba($white-color, 0.15) inset !important;
+            }
+          }
+        }
+
+        &.c\~stack\:if-#{esc-class($d)} {
+          justify-content:    center !important;
+
+          > :not(#x) {
+            // Priority > `#a:*` directives.
+            text-align:       center !important;
+          }
+        }
+      }
+    }
+  }
+
+  // Flex grids.
+
+  @if $apply-custom-tag-defaults {
+    a-flex {
+      @extend                 %hash-flex-tag-defaults;
+    }
+  }
+  @else {
+    .\@flex {
+      @extend                 %hash-flex-tag-defaults;
+    }
+  }
+}

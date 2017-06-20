@@ -1,3 +1,12 @@
 /*******************************
     User Variable Overrides
 *******************************/
+
+@fontPath  : "//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/themes/default/assets/fonts";
+
+@src:
+  url("@{fontPath}/@{fontName}.eot?#iefix") format('embedded-opentype'),
+  url("@{fontPath}/@{fontName}.woff") format('woff'),
+  url("@{fontPath}/@{fontName}.ttf") format('truetype'),
+  url("@{fontPath}/@{fontName}.svg#icons") format('svg')
+;

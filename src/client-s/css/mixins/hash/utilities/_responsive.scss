@@ -1,0 +1,50 @@
+@mixin responsive-hashes {
+  @each $d in $devices {
+    @include device($d) {
+      .\#hide\:if-#{esc-class($d)} {
+        display:              none !important;
+      }
+    }
+  }
+
+  @include mobile {
+    .\#show\:if-tablet,
+    .\#show\:if-gte-tablet,
+    .\#show\:if-notebook,
+    .\#show\:if-gte-notebook,
+    .\#show\:if-desktop {
+      display:                none !important;
+    }
+  }
+
+
+  @include tablet {
+    .\#show\:if-mobile,
+    .\#show\:if-notebook,
+    .\#show\:if-gte-notebook,
+    .\#show\:if-desktop {
+      display:                none !important;
+    }
+  }
+
+
+  @include notebook {
+    .\#show\:if-mobile,
+    .\#show\:if-lte-tablet,
+    .\#show\:if-tablet,
+    .\#show\:if-desktop {
+      display:                none !important;
+    }
+  }
+
+
+  @include desktop {
+    .\#show\:if-mobile,
+    .\#show\:if-lte-tablet,
+    .\#show\:if-tablet,
+    .\#show\:if-lte-notebook,
+    .\#show\:if-notebook {
+      display:                none !important;
+    }
+  }
+}

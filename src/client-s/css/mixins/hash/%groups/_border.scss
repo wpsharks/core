@@ -1,0 +1,9 @@
+%hash-default-border-props {
+  @include default-border-props;
+}
+
+%hash-default-0-border-props {
+  @extend                     %hash-default-border-props;
+
+  border-width:               0;
+}

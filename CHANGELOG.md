@@ -1,3 +1,8 @@
+## $v
+
+- Enhancing CSS framework.
+- Correcting a MD bug causing shortcode leakage.
+
 ## v170421.57490
 
 - Adding `c::awsCloudFrontClient()`.

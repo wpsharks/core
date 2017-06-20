@@ -1,0 +1,28 @@
+@mixin display-hashes {
+  .\~\#hide,
+  .\~\#hidden {
+    display:                  none;
+  }
+
+  .\#hide,
+  .\#hidden,
+  [hidden] {
+    display:                  none !important;
+  }
+
+  .\#inline {
+    display:                  inline !important;
+  }
+
+  .\#block {
+    display:                  block !important;
+  }
+
+  .\#tblock {
+    display:                  table !important;
+  }
+
+  .\#iblock {
+    display:                  inline-block !important;
+  }
+}

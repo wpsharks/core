@@ -1,0 +1,95 @@
+// Basic colors.
+
+@mixin basic-color($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  color:                      $fg-color #{$important};
+}
+
+@mixin basic-border-color($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  border-color:               darken($bg-color, 15%) #{$important};
+}
+
+@mixin basic-bg-color($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  background-color:           $bg-color #{$important};
+}
+
+@mixin basic-colors($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  color:                      $fg-color #{$important};
+  border-color:               darken($bg-color, 15%) #{$important};
+  background-color:           $bg-color #{$important};
+}
+
+// Default colors.
+
+@mixin default-color($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  color:                      contrast(map-get($swatch, default)) #{$important};
+}
+
+@mixin default-border-color($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  border-color:               darken(map-get($swatch, default), 15%) #{$important};
+}
+
+@mixin default-bg-color($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  background-color:           map-get($swatch, default) #{$important};
+}
+
+@mixin default-colors($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  color:                      contrast(map-get($swatch, default)) #{$important};
+  border-color:               darken(map-get($swatch, default), 15%) #{$important};
+  background-color:           map-get($swatch, default) #{$important};
+}

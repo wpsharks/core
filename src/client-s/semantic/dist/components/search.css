@@ -29,7 +29,7 @@
   font-size: 1em;
   background: #FFFFFF;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
   box-shadow: 0em 0em 0em 0em transparent inset;
   -webkit-transition: background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
   transition: background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
@@ -83,7 +83,7 @@
   overflow: hidden;
   font-size: 1em;
   padding: 0.875em 1.125em;
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
   line-height: 1.33;
   border-bottom: 1px solid rgba(34, 36, 38, 0.1);
 }
@@ -114,8 +114,8 @@
   margin: 0em 6em 0em 0em;
 }
 .ui.search > .results .result .title {
-  margin: -0.14285714em 0em 0em;
-  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  margin: -0.143em 0em 0em;
+  font-family: 'terfens', 'trebuchet ms', sans-serif;
   font-weight: bold;
   font-size: 1em;
   color: rgba(0, 0, 0, 0.85);
@@ -138,15 +138,15 @@
   padding: 1em 1em;
 }
 .ui.search > .results > .message .header {
-  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'terfens', 'trebuchet ms', sans-serif;
   font-size: 1rem;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
 }
 .ui.search > .results > .message .description {
   margin-top: 0.25rem;
   font-size: 1em;
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
 }
 
 /* View All Results */
@@ -155,7 +155,7 @@
   border-top: none;
   background: #F3F4F5;
   padding: 0.9375em 1em;
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
   font-weight: bold;
   text-align: center;
 }
@@ -230,7 +230,7 @@
   background: #F3F4F5;
 }
 .ui.category.search > .results .category.active > .name {
-  color: rgba(0, 0, 0, 0.87);
+  color: #191919;
 }
 .ui.search > .results .result.active,
 .ui.category.search > .results .category .result.active {
@@ -333,7 +333,7 @@
 .ui.category.search > .results .category > .name {
   width: 100px;
   background: transparent;
-  font-family: 'lato', sans-serif;
+  font-family: 'terfens', 'trebuchet ms', sans-serif;
   font-size: 1em;
   float: 1em;
   float: left;

@@ -1,0 +1,13 @@
+@mixin fancy-headings {
+  .header {
+    @extend                   %hash-body-hx-font-family;
+
+    h1 {
+      @extend                 %hash-body-h1-font-family;
+    }
+
+    h2 {
+      @extend                 %hash-body-h2-font-family;
+    }
+  }
+}

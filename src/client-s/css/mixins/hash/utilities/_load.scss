@@ -1,0 +1,56 @@
+@mixin load-hashes {
+  .\#load {
+    position:                 relative !important;
+    color:                    transparent !important;
+    pointer-events:           none !important;
+
+    > * {
+      opacity:               .5 !important;
+    }
+
+    &::before,
+    &::after {
+      content:                '';
+
+      //
+      top:                    50%;
+      left:                   50%;
+      position:               absolute;
+
+      //
+      width:                  1.25em;
+      height:                 1.25em;
+
+      //
+      border-radius:          50%;
+
+      //
+      opacity:                1;
+      filter:                 none;
+      background:             none;
+      transform:              translate(-50%, -50%);
+    }
+
+    &::before {
+      border-color:           rgba($black-color, 0.1);
+      border:                 0.2em solid rgba($black-color, 0.15);
+    }
+
+    &::after {
+      border:                .2em solid;
+      box-shadow:             0 0 0 1px transparent;
+      border-color:           $white-color transparent transparent;
+      animation:             .5s infinite linear \@loading-360;
+    }
+
+    @keyframes \@loading-360 {
+      from {
+        transform:            translate(-50%, -50%) rotate(0deg);
+      }
+
+      to {
+        transform:            translate(-50%, -50%) rotate(360deg);
+      }
+    }
+  }
+}
