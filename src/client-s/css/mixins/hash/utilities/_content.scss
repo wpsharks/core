@@ -27,6 +27,10 @@
       font-size:              1.25em;
     }
 
+    a {
+      text-decoration:        underline;
+    }
+
     @include lte-tablet {
       img {
         &.alignleft,

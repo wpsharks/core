@@ -71,7 +71,7 @@
     "websharks/dicer": "160110",
     "websharks/sharkicons": "160620",
 
-    "websharks/php-markdown": "170406",
+    "websharks/php-markdown": "170620",
     "michelf/php-smartypants": "1.*",
 
     "ryakad/pandoc-php": "1.*",
