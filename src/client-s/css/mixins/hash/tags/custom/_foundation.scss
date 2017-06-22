@@ -1,0 +1,21 @@
+@mixin foundation-tag-hashes {
+  // Defaults.
+
+  %hash-foundation-tag-defaults {
+    @extend                   %hash-stretch-vh;
+    @extend                   %hash-display-block;
+  }
+
+  // Foundations.
+
+  @if $apply-custom-tag-defaults {
+    a-foundation {
+      @extend                 %hash-foundation-tag-defaults;
+    }
+  }
+  @else {
+    .\@foundation {
+      @extend                 %hash-foundation-tag-defaults;
+    }
+  }
+}

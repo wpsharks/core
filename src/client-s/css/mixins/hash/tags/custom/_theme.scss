@@ -1,0 +1,21 @@
+@mixin theme-tag-hashes {
+  // Defaults.
+
+  %hash-theme-tag-defaults {
+    @extend                   %hash-stretch-vh;
+    @extend                   %hash-display-block;
+  }
+
+  // Themes.
+
+  @if $apply-custom-tag-defaults {
+    a-theme {
+      @extend                 %hash-theme-tag-defaults;
+    }
+  }
+  @else {
+    .\@theme {
+      @extend                 %hash-theme-tag-defaults;
+    }
+  }
+}

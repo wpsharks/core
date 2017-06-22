@@ -1,0 +1,21 @@
+@mixin slab-tag-hashes {
+  // Defaults.
+
+  %hash-slab-tag-defaults {
+    @extend                   %hash-stretch-vh;
+    @extend                   %hash-display-block;
+  }
+
+  // Slabs.
+
+  @if $apply-custom-tag-defaults {
+    a-slab {
+      @extend                 %hash-slab-tag-defaults;
+    }
+  }
+  @else {
+    .\@slab {
+      @extend                 %hash-slab-tag-defaults;
+    }
+  }
+}

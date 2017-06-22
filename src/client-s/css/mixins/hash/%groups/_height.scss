@@ -1,0 +1,23 @@
+%hash-stretch-defaults {
+  @include stretch-defaults;
+}
+
+%hash-stretch {
+  @extend                     %hash-stretch-defaults;
+  @include stretch;
+}
+
+%hash-\+stretch {
+  @extend                     %hash-stretch-defaults;
+  @include \+stretch;
+}
+
+%hash-stretch-vh {
+  @extend                     %hash-stretch-defaults;
+  @include stretch-vh;
+}
+
+%hash-\+stretch-vh {
+  @extend                     %hash-stretch-defaults;
+  @include \+stretch-vh;
+}

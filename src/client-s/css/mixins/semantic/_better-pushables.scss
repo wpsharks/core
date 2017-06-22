@@ -1,0 +1,46 @@
+@mixin better-pushables {
+  %semantic-better-pushable-defaults {
+    @include stretch-defaults(true);
+  }
+
+  %semantic-better-pushable-slab-defaults {
+    @include stretch-vh(true);
+
+    position:                 relative !important;
+    overflow:                 visible !important;
+    transform:                none !important;
+  }
+
+  %semantic-better-pushable-structure-defaults {
+    @include \+stretch-vh(true);
+  }
+
+  @if $apply-custom-tag-defaults {
+    a-slab.pushable,
+    a-structure.pusher {
+      @extend                 %semantic-better-pushable-defaults;
+    }
+
+    a-slab.pushable {
+      @extend                 %semantic-better-pushable-slab-defaults;
+    }
+
+    a-structure.pusher {
+      @extend                 %semantic-better-pushable-structure-defaults;
+    }
+  }
+  @else {
+    .\@slab.pushable,
+    .\@structure.pusher {
+      @extend                 %semantic-better-pushable-defaults;
+    }
+
+    .\@slab.pushable {
+      @extend                 %semantic-better-pushable-slab-defaults;
+    }
+
+    .\@structure.pusher {
+      @extend                 %semantic-better-pushable-structure-defaults;
+    }
+  }
+}

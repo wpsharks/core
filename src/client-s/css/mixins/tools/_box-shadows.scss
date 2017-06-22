@@ -78,7 +78,7 @@
     $important: '';
   }
 
-  background-image:           linear-gradient(rgba($black-color, 0.05), rgba($black-color, 0.05)) #{$important};
+  background:                 linear-gradient(rgba($black-color, 0.05), rgba($black-color, 0.05)) #{$important};
   box-shadow:                 0 0 0 0.4px rgba($black-color, 0.2) inset, 0 0 0 0.4px rgba($white-color, 0.1) #{$important};
 }
 
@@ -90,8 +90,8 @@
     $important: '';
   }
 
-  background-image:           linear-gradient(rgba($black-color, 0.15), rgba($black-color, 0.15)) #{$important};
-  box-shadow:                 0 0 0 0.4px rgba($black-color, 0.2) inset, 0 0 0 0.4px rgba($white-color, 0.1) #{$important};
+  background:                 linear-gradient(rgba($black-color, 0.15), rgba($black-color, 0.15)) #{$important};
+  box-shadow:                 0 0 0 0.4px rgba($black-color, 0.2) inset, 0 0 0 0.4px rgba($white-color, 0.2) #{$important};
 }
 
 @mixin \+\+box-shadow-inset($important: false) {
@@ -102,8 +102,8 @@
     $important: '';
   }
 
-  background-image:           linear-gradient(rgba($black-color, 0.25), rgba($black-color, 0.25)) #{$important};
-  box-shadow:                 0 0 0 0.4px rgba($black-color, 0.2) inset, 0 0 0 0.4px rgba($white-color, 0.1) #{$important};
+  background:                 linear-gradient(rgba($black-color, 0.25), rgba($black-color, 0.25)) #{$important};
+  box-shadow:                 0 0 0 0.4px rgba($black-color, 0.2) inset, 0 0 0 0.4px rgba($white-color, 0.2) #{$important};
 }
 
 // Other shadows.

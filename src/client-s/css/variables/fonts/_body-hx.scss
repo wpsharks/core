@@ -1,4 +1,8 @@
+$body-hx-line-height: 1.2 !default;
+
 $body-hx-font-weight: 700 !default;
-$body-hx-font-letter-spacing: $body-font-letter-spacing !default;
-$body-hx-font-family: $body-font-family !default;
-$body-hx-font-faces: $body-font-faces !default;
+$body-hx-font-weight-enforce: false !default;
+
+$body-hx-font-letter-spacing: $serif-font-letter-spacing !default;
+$body-hx-font-family: $serif-font-family !default;
+$body-hx-font-faces: $serif-font-faces !default;

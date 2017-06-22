@@ -4,6 +4,8 @@
   %hash-btn-tag-defaults {
     @extend                   %hash-default-colors;
     @extend                   %hash-default-border-props;
+    @extend                   %hash-user-select-none;
+    @extend                   %hash-cursor-pointer;
 
     //
     display:                  inline-block;
@@ -30,10 +32,6 @@
     text-decoration:          none;
     text-shadow:              none;
     text-transform:           none;
-
-    //
-    user-select:              none;
-    cursor:                   pointer;
 
     //
     outline:                  0;

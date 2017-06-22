@@ -1,0 +1,107 @@
+// Body line heights.
+
+@mixin body-hx-line-height($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  line-height:                $body-hx-line-height #{$important};
+}
+
+@mixin body-h1-line-height($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  line-height:                $body-h1-line-height #{$important};
+}
+
+@mixin body-h2-line-height($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  line-height:                $body-h2-line-height #{$important};
+}
+
+@mixin content-hx-line-height($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  line-height:                $content-hx-line-height #{$important};
+}
+
+// Content line heights.
+
+@mixin content-h1-line-height($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  line-height:                $content-h1-line-height #{$important};
+}
+
+@mixin content-h2-line-height($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  line-height:                $content-h2-line-height #{$important};
+}
+
+// Line clamps.
+
+@mixin line-clamp($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  max-width:                  100% #{$important};
+
+  //
+  white-space:                nowrap #{$important};
+  overflow:                   hidden #{$important};
+  text-overflow:              ellipsis #{$important};
+}
+
+@mixin inline-clamp($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  // Inline clamp w/ a specific max-width.
+  // Max width set via `#max-w:[x]`.
+
+  white-space:                nowrap #{$important};
+  overflow:                   hidden #{$important};
+  text-overflow:              ellipsis #{$important};
+
+  //
+  vertical-align:             middle #{$important};
+  display:                    inline-block #{$important};
+}

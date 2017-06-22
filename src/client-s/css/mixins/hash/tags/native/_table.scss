@@ -12,12 +12,12 @@
 
       &,
       > *,
-      > * > *,
-      > * > * > * {
+      > :not(caption) > *,
+      > :not(caption) > * > * {
         display:              block;
       }
 
-      > * > * > * {
+      > :not(caption) > * > * {
         border-width:         0;
         white-space:          nowrap;
       }
@@ -85,22 +85,46 @@
     border-spacing:           0;
     border-collapse:          separate;
 
-    > * > * > * {
+    > caption,
+    > :not(caption) > * > * {
       vertical-align:         middle;
       text-align:             inherit;
 
       //
       padding:               .75em;
+
+      //
       border:                 0 solid;
       border-color:           inherit;
+    }
 
+    > :not(caption) > * > * {
       &:not(:first-child) {
         border-left-width:   .063em;
       }
     }
 
-    > * > * > th {
+    > :not(caption) > * > th {
       font-weight:            700;
+    }
+
+    > caption {
+      position:               relative;
+      bottom:                -.125em;
+
+      //
+      text-align:             center;
+
+      //
+      padding:               .5em;
+
+      //
+      border-width:          .063em .063em 0;
+      border-radius:         .25em .25em 0 0;
+
+      //
+      background:             inherit;
+      background-image:       linear-gradient(rgba($black-color, 0.095) 2%, rgba($black-color, 0.175));
     }
 
     > thead {
@@ -162,38 +186,38 @@
     }
 
     &.\~undivided {
-      > * > * > :not(#x):not(#y) {
+      > :not(caption) > * > :not(#x):not(#y) {
         // Priority greater than horiz tweaks.
         border-width:         0;
       }
     }
 
     &.--\~p {
-      > * > * > * {
+      > :not(caption) > * > * {
         padding:             .25em;
       }
     }
 
     &.-\~p {
-      > * > * > * {
+      > :not(caption) > * > * {
         padding:             .5em;
       }
     }
 
     &.\~p {
-      > * > * > * {
+      > :not(caption) > * > * {
         padding:              1em;
       }
     }
 
     &.\+\~p {
-      > * > * > * {
+      > :not(caption) > * > * {
         padding:              1.5em;
       }
     }
 
     &.\+\+\~p {
-      > * > * > * {
+      > :not(caption) > * > * {
         padding:              2em;
       }
     }

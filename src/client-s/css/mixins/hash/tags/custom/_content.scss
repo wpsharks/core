@@ -1,0 +1,95 @@
+@mixin content-tag-hashes {
+  // Defaults.
+
+  %hash-content-tag-defaults {
+    @extend                   %hash-display-block;
+    @extend                   %hash-content-font-family;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @extend                 %hash-content-hx-font-family;
+      @extend                 %hash-content-hx-line-height;
+
+      // Set weight if not set by extender.
+      @if $content-hx-font-weight-enforce != true {
+        font-weight:          $content-hx-font-weight;
+      }
+    }
+
+    h1 {
+      @extend                 %hash-content-h1-font-family;
+      @extend                 %hash-content-h1-line-height;
+
+      // Set weight if not set by extender.
+      @if $content-h1-font-weight-enforce != true {
+        font-weight:          $content-h1-font-weight;
+      }
+
+      font-size:              $content-h1-font-size;
+    }
+
+    h2 {
+      @extend                 %hash-content-h2-font-family;
+      @extend                 %hash-content-h2-line-height;
+
+      // Set weight if not set by extender.
+      @if $content-h2-font-weight-enforce != true {
+        font-weight:          $content-h2-font-weight;
+      }
+
+      font-size:              $content-h2-font-size;
+    }
+
+    > p:first-of-type:not([class]) {
+      @extend                 %hash-content-lede-font-family;
+
+      font-size:              1.25em;
+    }
+
+    em {
+      font-weight:            300;
+      margin-right:          .1em;
+
+      > small:only-child {
+        font-weight:          400;
+      }
+    }
+
+    a {
+      // This can be changed w/o negatively affecting other areas.
+      text-decoration:        none;
+    }
+
+    @include lte-tablet {
+      img {
+        &.alignleft,
+        &.alignright,
+        &[class*='#float:'],
+        &[class*='#push:'],
+        &[class*='#pull:'],
+        &[class*='#yank:'] {
+          &:not([class*=':if-']) {
+            @include center-conversion(true);
+          }
+        }
+      }
+    }
+  }
+
+  // Content bodies.
+
+  @if $apply-custom-tag-defaults {
+    content-body {
+      @extend                 %hash-content-tag-defaults;
+    }
+  }
+  @else {
+    .\@content-body {
+      @extend                 %hash-content-tag-defaults;
+    }
+  }
+}

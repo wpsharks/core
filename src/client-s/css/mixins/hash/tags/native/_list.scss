@@ -15,14 +15,6 @@
   }
 
   %hash-list-item-defaults {
-    > ol,
-    > ul,
-    > dl {
-      &:last-child:not(:only-child) {
-        margin-bottom:        1rem;
-      }
-    }
-
     > p,
     > div,
     > pre,
@@ -38,6 +30,28 @@
     > a-tile {
       &:last-child {
         margin-bottom:        1rem;
+      }
+    }
+
+    // Add margin to nested lists too.
+    // ~ but only if they follow something.
+    > ol,
+    > ul,
+    > dl {
+      &:last-child:not(:only-child) {
+        margin-bottom:        1rem;
+      }
+    }
+
+    // Exclude & fit nested link lists.
+    // These follow a link, nothing more.
+    > a:first-child:only-of-type {
+      + ol,
+      + ul {
+        &:nth-child(2):last-child {
+          margin-top:         0;
+          margin-bottom:      0;
+        }
       }
     }
   }

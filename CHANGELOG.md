@@ -2,6 +2,7 @@
 
 - Enhancing CSS framework.
 - Correcting a MD bug causing shortcode leakage.
+- Updating to latest release of PHP Markdown (fork maintained by WebSharks).
 
 ## v170421.57490
 

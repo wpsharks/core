@@ -4,6 +4,13 @@
 
 %hash-default-0-border-props {
   @extend                     %hash-default-border-props;
+  @extend                     %hash-0-border-width;
+}
 
+%hash-0-border-width {
   border-width:               0;
+}
+
+%hash-0-border-radius {
+  border-radius:              0;
 }

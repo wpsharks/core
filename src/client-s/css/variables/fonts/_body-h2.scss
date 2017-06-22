@@ -1,4 +1,9 @@
-$body-h2-font-weight: 400 !default;
-$body-h2-font-letter-spacing: $alt2-font-letter-spacing !default;
-$body-h2-font-family: $alt2-font-family !default;
-$body-h2-font-faces: $alt2-font-faces !default;
+$body-h2-font-size: 2.369em !default;
+$body-h2-line-height: 1 !default;
+
+$body-h2-font-weight: 700 !default;
+$body-h2-font-weight-enforce: false !default;
+
+$body-h2-font-letter-spacing: $serif-font-letter-spacing !default;
+$body-h2-font-family: $serif-font-family !default;
+$body-h2-font-faces: $serif-font-faces !default;

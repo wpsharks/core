@@ -10,6 +10,7 @@
 
   %hash-a-tag-defaults {
     text-decoration-skip:     ink;
+    text-decoration:          none;
     color:                    $link-color;
 
     &:hover {

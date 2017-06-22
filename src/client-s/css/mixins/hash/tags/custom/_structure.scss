@@ -1,0 +1,44 @@
+@mixin structure-tag-hashes {
+  // Defaults.
+
+  %hash-structure-tag-defaults {
+    @extend                   %hash-\+stretch-vh;
+
+    display:                  flex;
+    flex-flow:                column;
+
+    > * {
+      flex:                   none;
+    }
+
+    @if $apply-custom-tag-defaults {
+      > structure-body {
+        @extend               %hash-structure-body-tag-defaults;
+      }
+    }
+    @else {
+      > .\~structure-body {
+        @extend               %hash-structure-body-tag-defaults;
+      }
+    }
+  }
+
+  %hash-structure-body-tag-defaults {
+    @extend                   %hash-display-block;
+
+    flex:                     1 0 auto;
+  }
+
+  // Structures.
+
+  @if $apply-custom-tag-defaults {
+    a-structure {
+      @extend                 %hash-structure-tag-defaults;
+    }
+  }
+  @else {
+    .\@structure {
+      @extend                 %hash-structure-tag-defaults;
+    }
+  }
+}

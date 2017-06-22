@@ -139,7 +139,7 @@ interface HtmlConstants
      * @type array HTML5 block-level tag patterns.
      */
     const HTML_BLOCK_TAGS = [
-        '[a-z][a-z\-0-9]*?\-div',
+        '[a-z][a-z\-0-9]*\-div',
         'address',
         'article',
         'aside',
@@ -191,6 +191,6 @@ interface HtmlConstants
      * @note Blocks when on a line of their own.
      */
     const HTML_MAYBE_BLOCK_TAGS = [
-        '[a-z][a-z\-0-9]*?\-(?!div)[a-z0-9]+',
+        '[a-z][a-z\-0-9]*\-(?!div)[a-z0-9]+',
     ];
 }

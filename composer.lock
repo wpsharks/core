@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d6a98edce04c7428f101ef52013edd46",
-    "content-hash": "64fb2f6f3d585e2dad559609a98b9040",
+    "hash": "70e0e42b3a6e54f0cc67510b44feec06",
+    "content-hash": "5309d184dcf179f4a0a325ea7bbfec7e",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.29.8",
+            "version": "3.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c60a477ad5ba1b120d4d80cbddf97fbe36573996"
+                "reference": "c84ce7a758ce3bbe8ff54abfa2e0646941fe5fc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c60a477ad5ba1b120d4d80cbddf97fbe36573996",
-                "reference": "c60a477ad5ba1b120d4d80cbddf97fbe36573996",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c84ce7a758ce3bbe8ff54abfa2e0646941fe5fc4",
+                "reference": "c84ce7a758ce3bbe8ff54abfa2e0646941fe5fc4",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-06-19 19:14:37"
+            "time": "2017-06-21 21:38:23"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1289,16 +1289,16 @@
         },
         {
             "name": "websharks/php-markdown",
-            "version": "170620",
+            "version": "170622",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/php-markdown.git",
-                "reference": "fab424ad5522dff8c3b5dcc3ec18cb162cb879af"
+                "reference": "d86758aa409c1eabadf8cb84aae38201db9620c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/fab424ad5522dff8c3b5dcc3ec18cb162cb879af",
-                "reference": "fab424ad5522dff8c3b5dcc3ec18cb162cb879af",
+                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/d86758aa409c1eabadf8cb84aae38201db9620c1",
+                "reference": "d86758aa409c1eabadf8cb84aae38201db9620c1",
                 "shasum": ""
             },
             "require": {
@@ -1334,7 +1334,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2017-06-14 17:14:56"
+            "time": "2017-06-22 14:04:43"
         },
         {
             "name": "websharks/sharkicons",

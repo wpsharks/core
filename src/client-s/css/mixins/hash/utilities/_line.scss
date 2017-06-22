@@ -8,25 +8,11 @@
   // Line clamps.
 
   .\#line-clamp {
-    max-width:                100% !important;
-
-    //
-    white-space:              nowrap !important;
-    overflow:                 hidden !important;
-    text-overflow:            ellipsis !important;
+    @include line-clamp(true);
   }
 
   .in\#line-clamp {
-    // Inline clamp w/ a specific max-width.
-    // Max width set via `#max-w:[x]`.
-
-    white-space:              nowrap !important;
-    overflow:                 hidden !important;
-    text-overflow:            ellipsis !important;
-
-    //
-    vertical-align:           middle !important;
-    display:                  inline-block !important;
+    @include inline-clamp(true);
   }
 
   // Unitless line heights.

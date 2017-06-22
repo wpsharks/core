@@ -1,5 +1,8 @@
+// Block styles.
+
 %hash-block-padding {
-  display:                    block;
+  @extend                     %hash-display-block;
+
   padding:                    1em;
 }
 

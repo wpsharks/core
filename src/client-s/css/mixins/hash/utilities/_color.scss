@@ -8,34 +8,27 @@
     fill:                     currentColor !important;
   }
 
-  // Holders.
+  // Groups.
 
   %color-a-decor-events {
-    text-decoration:          underline;
-
-    &:hover {
+    a:not(.\@btn) {
+      opacity:               .8;
       color:                  inherit;
+      text-decoration:        underline;
+
+      &:hover {
+        opacity:              1;
+        color:                inherit;
+      }
     }
   }
 
   %color-white {
     color:                    $white-color !important;
-
-    > a {
-      color:                  darken($white-color, 10%);
-
-      @extend                 %color-a-decor-events;
-    }
   }
 
   %color-black {
     color:                    $black-color !important;
-
-    > a {
-      color:                  lighten($black-color, 10%);
-
-      @extend                 %color-a-decor-events;
-    }
   }
 
   %border-color-white {
@@ -60,6 +53,9 @@
 
   @each $k, $v in $swatch {
     .c\##{esc-class($k)} {
+      @extend                 %color-a-decor-events;
+
+      //
       @if $v == $white-color {
         @extend               %color-white;
       }
@@ -68,23 +64,18 @@
       }
       @else {
         color:                $v !important;
-
-        > a {
-          color:              darken($v, 10%);
-
-          @extend             %color-a-decor-events;
-        }
       }
     }
 
-    @if diff(lightness($bg), lightness($v)) > 2% {
-      .\##{esc-class($k)} {
-        @if contrast($v) == $white-color {
-          @extend             %color-white;
-        }
-        @else {
-          @extend             %color-black;
-        }
+    .\##{esc-class($k)} {
+      @extend                 %color-a-decor-events;
+
+      //
+      @if contrast($v) == $white-color {
+        @extend               %color-white;
+      }
+      @else {
+        @extend               %color-black;
       }
     }
 
@@ -120,6 +111,9 @@
   @each $m, $p in ('--': 45%, '-': 25%) {
     @each $k, $v in $swatch {
       .c#{esc-class($m)}\##{esc-class($k)} {
+        @extend               %color-a-decor-events;
+
+        //
         @if lighten($v, $p) == $white-color {
           @extend             %color-white;
         }
@@ -128,23 +122,18 @@
         }
         @else {
           color:              lighten($v, $p) !important;
-
-          > a {
-            color:            darken(lighten($v, $p), 10%);
-
-            @extend           %color-a-decor-events;
-          }
         }
       }
 
-      @if diff(lightness($bg), lightness(lighten($v, $p))) > 2% {
-        .#{esc-class($m)}\##{esc-class($k)} {
-          @if contrast(lighten($v, $p)) == $white-color {
-            @extend           %color-white;
-          }
-          @else {
-            @extend           %color-black;
-          }
+      .#{esc-class($m)}\##{esc-class($k)} {
+        @extend               %color-a-decor-events;
+
+        //
+        @if contrast(lighten($v, $p)) == $white-color {
+          @extend             %color-white;
+        }
+        @else {
+          @extend             %color-black;
         }
       }
 
@@ -181,6 +170,9 @@
   @each $m, $p in ('\\+': 10%, '\\+\\+': 20%) {
     @each $k, $v in $swatch {
       .c#{esc-class($m)}\##{esc-class($k)} {
+        @extend               %color-a-decor-events;
+
+        //
         @if darken($v, $p) == $white-color {
           @extend             %color-white;
         }
@@ -189,23 +181,18 @@
         }
         @else {
           color:              darken($v, $p) !important;
-
-          > a {
-            color:            darken(darken($v, $p), 10%);
-
-            @extend           %color-a-decor-events;
-          }
         }
       }
 
-      @if diff(lightness($bg), lightness(darken($v, $p))) > 2% {
-        .#{esc-class($m)}\##{esc-class($k)} {
-          @if contrast(darken($v, $p)) == $white-color {
-            @extend           %color-white;
-          }
-          @else {
-            @extend           %color-black;
-          }
+      .#{esc-class($m)}\##{esc-class($k)} {
+        @extend               %color-a-decor-events;
+
+        //
+        @if contrast(darken($v, $p)) == $white-color {
+          @extend             %color-white;
+        }
+        @else {
+          @extend             %color-black;
         }
       }
 

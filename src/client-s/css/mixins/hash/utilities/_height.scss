@@ -28,16 +28,27 @@
 
   // Stretch.
 
+  .\#stretch,
+  .\+\#stretch,
+  .\#stretch\:vh,
+  .\+\#stretch\:vh {
+    @include stretch-defaults(true);
+  }
+
   .\#stretch {
-    height:                   auto !important;
-    min-height:               100% !important;
-    max-height:               100% !important;
+    @include stretch(true);
   }
 
   .\+\#stretch {
-    height:                   auto !important;
-    min-height:               calc(100% + 1px) !important;
-    max-height:               calc(100% + 1px) !important;
+    @include \+stretch(true);
+  }
+
+  .\#stretch\:vh {
+    @include stretch-vh(true);
+  }
+
+  .\+\#stretch\:vh {
+    @include \+stretch-vh(true);
   }
 
   // Intrinsic.

@@ -1,0 +1,71 @@
+@mixin stretch-defaults($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  height:                     auto #{$important};
+  max-height:                 none #{$important};
+}
+
+@mixin stretch($important: false, $set-defaults: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  @if $set-defaults {
+    @include stretch-defaults($important);
+  }
+
+  min-height:                 100% #{$important};
+}
+
+@mixin \+stretch($important: false, $set-defaults: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  @if $set-defaults {
+    @include stretch-defaults($important);
+  }
+
+  min-height:                 calc(100% + 1px) #{$important};
+}
+
+@mixin stretch-vh($important: false, $set-defaults: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  @if $set-defaults {
+    @include stretch-defaults($important);
+  }
+
+  min-height:                 100vh #{$important};
+}
+
+@mixin \+stretch-vh($important: false, $set-defaults: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  @if $set-defaults {
+    @include stretch-defaults($important);
+  }
+
+  min-height:                 calc(100vh + 1px) #{$important};
+}

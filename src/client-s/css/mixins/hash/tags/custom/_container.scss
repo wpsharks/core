@@ -19,8 +19,7 @@
 
   %hash-container-tag-defaults {
     @extend                   %hash-clearfix;
-
-    display:                  block;
+    @extend                   %hash-display-block;
 
     //
     margin-left:              auto;
@@ -31,13 +30,16 @@
       margin-right:           $mobile-margin;
     }
 
+
     @include tablet {
       width:                  #{to-unit(768 - $tablet-margins - $scrollbar-width, 'px')};
     }
 
+
     @include notebook {
       width:                  #{to-unit(992 - $notebook-margins - $scrollbar-width, 'px')};
     }
+
 
     @include desktop {
       width:                  #{to-unit(1200 - $desktop-margins - $scrollbar-width, 'px')};

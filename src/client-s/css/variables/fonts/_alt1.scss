@@ -1,8 +1,11 @@
+$alt1-font-weight: 400 !default;
+$alt1-font-weight-enforce: true !default;
+
 $alt1-font-letter-spacing: normal !default;
-$alt1-font-family: 'gubblebum-blocky', 'trebuchet ms', sans-serif !default;
+$alt1-font-family: 'pw-brusheez', 'trebuchet ms', sans-serif !default;
 $alt1-font-faces: (
-  'family': 'gubblebum-blocky',
-  'base-url': '//src.works/wp-content/uploads/2017/06/gubblebum-blocky-',
+  'family': 'pw-brusheez',
+  'base-url': '//src.works/wp-content/uploads/2017/06/pw-brusheez-',
 
   'thin': (
     'sub-path': '',

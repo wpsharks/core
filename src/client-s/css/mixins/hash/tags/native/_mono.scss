@@ -8,6 +8,7 @@
 
   %hash-mono-tag-default-family {
     @extend                   %hash-monospace-font-family;
+    @extend                   %hash-font-smoothing-antialiased;
   }
 
   %hash-mono-inline-tag-defaults {
@@ -15,7 +16,7 @@
 
     color:                    $fg-color;
     background:               darken($bg-color, 3%);
-    border-color:             darken($bg-color, 6%);
+    border-color:             darken($bg-color, 9%);
   }
 
   %hash-mono-kbd-tag-defaults {
@@ -41,6 +42,7 @@
     samp,
     kbd,
     tt {
+      text-decoration:        none;
       color:                  inherit;
     }
   }
@@ -112,12 +114,14 @@
         overflow:             hidden;
 
         &::before {
-          @extend             %hash-sans-serif-font-family;
+          @extend             %hash-serif-font-family;
+          @extend             %hash-user-select-none;
 
           display:            block;
 
           //
-          padding:           .25em .5em .15em;
+          line-height:        0;
+          padding:            1.95ex .5em 1.5ex;
 
           //
           content:            attr(title);
@@ -131,6 +135,8 @@
         }
 
         &::after {
+          @extend             %hash-user-select-none;
+
           top:               -.3em;
           right:             .5em;
           position:           absolute;

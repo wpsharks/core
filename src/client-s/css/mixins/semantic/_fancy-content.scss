@@ -1,23 +1,27 @@
 @mixin fancy-content {
-  .\#content {
+  %semantic-fancy-content-defaults {
     .text:not(.icon) {
       @extend                 %hash-content-font-family;
     }
 
-    .ui.header {
-      @extend                 %hash-content-hx-font-family;
-
-      h1 {
-        @extend               %hash-content-h1-font-family;
-      }
-
-      h2 {
-        @extend               %hash-content-h2-font-family;
+    li,
+    dd {
+      > .ui.message:last-child {
+        margin-bottom:        1rem;
       }
     }
+  }
 
-    .ui.label {
-      @extend                 %hash-sans-serif-font-family;
+  // Content bodies.
+
+  @if $apply-custom-tag-defaults {
+    content-body {
+      @extend                 %semantic-fancy-content-defaults;
+    }
+  }
+  @else {
+    .\@content-body {
+      @extend                 %semantic-fancy-content-defaults;
     }
   }
 }

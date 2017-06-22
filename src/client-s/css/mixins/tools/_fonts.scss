@@ -78,7 +78,10 @@
     $important: '';
   }
 
-  font-weight:                $body-hx-font-weight #{$important};
+  @if $body-hx-font-weight-enforce {
+    font-weight:              $body-hx-font-weight #{$important};
+  }
+
   font-family:                $body-hx-font-family #{$important};
   letter-spacing:             $body-hx-font-letter-spacing #{$important};
 }
@@ -91,7 +94,10 @@
     $important: '';
   }
 
-  font-weight:                $body-h1-font-weight #{$important};
+  @if $body-h1-font-weight-enforce {
+    font-weight:              $body-h1-font-weight #{$important};
+  }
+
   font-family:                $body-h1-font-family #{$important};
   letter-spacing:             $body-h1-font-letter-spacing #{$important};
 }
@@ -104,7 +110,10 @@
     $important: '';
   }
 
-  font-weight:                $body-h2-font-weight #{$important};
+  @if $body-h2-font-weight-enforce {
+    font-weight:              $body-h2-font-weight #{$important};
+  }
+
   font-family:                $body-h2-font-family #{$important};
   letter-spacing:             $body-h2-font-letter-spacing #{$important};
 }
@@ -129,7 +138,10 @@
     $important: '';
   }
 
-  font-weight:                $content-hx-font-weight #{$important};
+  @if $content-hx-font-weight-enforce {
+    font-weight:              $content-hx-font-weight #{$important};
+  }
+
   font-family:                $content-hx-font-family #{$important};
   letter-spacing:             $content-hx-font-letter-spacing #{$important};
 }
@@ -142,7 +154,10 @@
     $important: '';
   }
 
-  font-weight:                $content-h1-font-weight #{$important};
+  @if $content-h1-font-weight-enforce {
+    font-weight:              $content-h1-font-weight #{$important};
+  }
+
   font-family:                $content-h1-font-family #{$important};
   letter-spacing:             $content-h1-font-letter-spacing #{$important};
 }
@@ -155,7 +170,10 @@
     $important: '';
   }
 
-  font-weight:                $content-h2-font-weight #{$important};
+  @if $content-h2-font-weight-enforce {
+    font-weight:              $content-h2-font-weight #{$important};
+  }
+
   font-family:                $content-h2-font-family #{$important};
   letter-spacing:             $content-h2-font-letter-spacing #{$important};
 }
