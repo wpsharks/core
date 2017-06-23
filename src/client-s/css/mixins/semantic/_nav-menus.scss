@@ -1,4 +1,4 @@
-@mixin fancy-navigation-menus {
+@mixin semantic-nav-menus {
   nav {
     > .menu {
       .dropdown.item:not(a):not(.link),

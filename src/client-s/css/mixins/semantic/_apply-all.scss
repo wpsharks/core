@@ -1,12 +1,15 @@
 @import 'all';
 
-//
-@include better-inversions;
-@include better-pushables;
-@include fancy-checkboxes;
-@include fancy-lists;
-@include fancy-messages;
-@include fancy-navigation-menus;
-@include fancy-pagination-menus;
-@include icon-margins;
-@include fancy-content;
+// Includes.
+@include semantic-checkboxes;
+@include semantic-icon-margins;
+@include semantic-inversions;
+@include semantic-labels;
+@include semantic-lists;
+@include semantic-messages;
+@include semantic-nav-menus;
+@include semantic-page-menus;
+@include semantic-pushables;
+
+// Content overrides.
+@include semantic-content;

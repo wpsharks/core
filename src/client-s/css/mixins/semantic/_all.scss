@@ -1,11 +1,10 @@
-@import 'better-inversions';
-@import 'better-pushables';
-@import 'fancy-checkboxes';
-@import 'fancy-lists';
-@import 'fancy-messages';
-@import 'fancy-navigation-menus';
-@import 'fancy-pagination-menus';
+@import 'checkboxes';
+@import 'content';
 @import 'icon-margins';
-
-// Content overrides.
-@import 'fancy-content';
+@import 'inversions';
+@import 'labels';
+@import 'lists';
+@import 'messages';
+@import 'nav-menus';
+@import 'page-menus';
+@import 'pushables';

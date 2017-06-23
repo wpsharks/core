@@ -1,5 +1,5 @@
-@mixin fancy-content {
-  %semantic-fancy-content-defaults {
+@mixin semantic-content {
+  %semantic-content-defaults {
     .text:not(.icon) {
       @extend                 %hash-content-font-family;
     }
@@ -16,12 +16,12 @@
 
   @if $apply-custom-tag-defaults {
     content-body {
-      @extend                 %semantic-fancy-content-defaults;
+      @extend                 %semantic-content-defaults;
     }
   }
   @else {
     .\@content-body {
-      @extend                 %semantic-fancy-content-defaults;
+      @extend                 %semantic-content-defaults;
     }
   }
 }

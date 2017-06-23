@@ -25,16 +25,10 @@
     font-weight:              900 !important;
   }
 
-  .\#f\:thin,
-  .\#f\:light,
-  .\#f\:normal,
-  .\#f\:medium,
-  .\#f\:bold,
   .\!\#f\:smooth {
     @include font-smoothing('auto', true);
   }
 
-  .\#f\:thick,
   .\#f\:smooth {
     @include font-smoothing('antialiased', true);
   }

@@ -1,4 +1,4 @@
-@mixin fancy-lists {
+@mixin semantic-lists {
   .ui.list {
     > .item {
       > .image {
@@ -28,7 +28,6 @@
     &.\#f\:thick {
       > .item {
         font-weight:          inherit;
-        @include font-smoothing('inherit', true);
       }
     }
 

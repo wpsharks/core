@@ -5,6 +5,38 @@
     @extend                   %hash-block-margins;
   }
 
+  %hash-list-ol-defaults {
+    list-style-type:          decimal;
+
+    > li > ol {
+      list-style-type:        lower-alpha;
+
+      > li > ol {
+        list-style-type:      lower-roman;
+
+        ol {
+          list-style-type:    circle;
+        }
+      }
+    }
+  }
+
+  %hash-list-ul-defaults {
+    list-style-type:          disc;
+
+    > li > ul {
+      list-style-type:        circle;
+
+      > li > ul {
+        list-style-type:      disc;
+
+        ul {
+          list-style-type:    circle;
+        }
+      }
+    }
+  }
+
   %hash-list-dt-defaults {
     font-weight:              700;
 
@@ -14,7 +46,7 @@
     }
   }
 
-  %hash-list-item-defaults {
+  %hash-list-li-dd-defaults {
     > p,
     > div,
     > pre,
@@ -65,13 +97,21 @@
       @extend                 %hash-list-defaults;
     }
 
+    ol {
+      @extend                 %hash-list-ol-defaults;
+    }
+
+    ul {
+      @extend                 %hash-list-ul-defaults;
+    }
+
     dt {
       @extend                 %hash-list-dt-defaults;
     }
 
     li,
     dd {
-      @extend                 %hash-list-item-defaults;
+      @extend                 %hash-list-li-dd-defaults;
     }
   }
 }

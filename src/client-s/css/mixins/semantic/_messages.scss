@@ -1,4 +1,4 @@
-@mixin fancy-messages {
+@mixin semantic-messages {
   .ui.message {
     @include lte-tablet {
       &.icon,

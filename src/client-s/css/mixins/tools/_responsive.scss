@@ -1,48 +1,66 @@
+// `class='!@'` = No media queries.
+
 @mixin mobile {
-  @media only screen and (max-width: 767px) {
-    @content;
+  @media screen and (max-width: 767px) {
+    @at-root :not(.\!\@) #{&} {
+      @content;
+    }
   }
 }
 
 @mixin lte-tablet {
-  @media only screen and (max-width: 991px) {
-    @content;
+  @media screen and (max-width: 991px) {
+    @at-root :not(.\!\@) #{&} {
+      @content;
+    }
   }
 }
 
 @mixin tablet {
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    @content;
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    @at-root :not(.\!\@) #{&} {
+      @content;
+    }
   }
 }
 
 @mixin gte-tablet {
-  @media only screen and (min-width: 768px) {
-    @content;
+  @media screen and (min-width: 768px) {
+    @at-root :not(.\!\@) #{&} {
+      @content;
+    }
   }
 }
 
 @mixin lte-notebook {
-  @media only screen and (max-width: 1199px) {
-    @content;
+  @media screen and (max-width: 1199px) {
+    @at-root :not(.\!\@) #{&} {
+      @content;
+    }
   }
 }
 
 @mixin notebook {
-  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    @content;
+  @media screen and (min-width: 992px) and (max-width: 1199px) {
+    @at-root :not(.\!\@) #{&} {
+      @content;
+    }
   }
 }
 
 @mixin gte-notebook {
-  @media only screen and (min-width: 992px) {
-    @content;
+  @media screen and (min-width: 992px) {
+    @at-root :not(.\!\@) #{&} {
+      @content;
+    }
   }
 }
 
 @mixin desktop {
-  @media only screen and (min-width: 1200px) {
-    @content;
+  @media screen and (min-width: 1200px) {
+    @at-root :not(.\!\@) #{&} {
+      @content;
+    }
   }
 }
 
