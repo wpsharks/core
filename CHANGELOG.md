@@ -1,4 +1,4 @@
-## $v
+## v170623.50532
 
 - Enhancing CSS framework.
 - Correcting a MD bug causing shortcode leakage.

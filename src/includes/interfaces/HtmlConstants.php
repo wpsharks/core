@@ -115,7 +115,7 @@ interface HtmlConstants
      * HTML5 invisible tag patterns.
      *
      * @since 150424 Initial release.
-     * @since 17xxxx Converting to patterns.
+     * @since 170623.50532 Converting to patterns.
      *
      * @type array HTML5 invisible tag patterns.
      */
@@ -134,7 +134,7 @@ interface HtmlConstants
      * HTML5 block-level tag patterns.
      *
      * @since 150424 Initial release.
-     * @since 17xxxx Converting to patterns.
+     * @since 170623.50532 Converting to patterns.
      *
      * @type array HTML5 block-level tag patterns.
      */
@@ -184,7 +184,7 @@ interface HtmlConstants
     /**
      * HTML5 block-level tag patterns.
      *
-     * @since 17xxxx Converting to patterns.
+     * @since 170623.50532 Converting to patterns.
      *
      * @type array HTML5 block-level tag patterns.
      *

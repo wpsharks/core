@@ -29,7 +29,7 @@ class Markdown extends Classes\Core\Base\Core
     /**
      * Header ID counter.
      *
-     * @since 17xxxx Enhancing headers.
+     * @since 170623.50532 Enhancing headers.
      *
      * @type array Counter.
      */

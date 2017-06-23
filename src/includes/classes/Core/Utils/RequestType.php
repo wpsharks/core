@@ -53,7 +53,7 @@ class RequestType extends Classes\Core\Base\Core
     /**
      * Doing actions.
      *
-     * @since 17xxxx Action utils.
+     * @since 170623.50532 Action utils.
      *
      * @param array Actions.
      */
@@ -62,7 +62,7 @@ class RequestType extends Classes\Core\Base\Core
     /**
      * Completed actions & data.
      *
-     * @since 17xxxx Action utils.
+     * @since 170623.50532 Action utils.
      *
      * @param array Actions & data.
      */
@@ -158,7 +158,7 @@ class RequestType extends Classes\Core\Base\Core
     /**
      * Doing an action?
      *
-     * @since 17xxxx Action utils.
+     * @since 170623.50532 Action utils.
      *
      * @param string     $action Action to add or check.
      * @param mixed|null $data   If adding action data.
@@ -180,7 +180,7 @@ class RequestType extends Classes\Core\Base\Core
     /**
      * Did (completed) an action?
      *
-     * @since 17xxxx Action utils.
+     * @since 170623.50532 Action utils.
      *
      * @param string     $action Action to add or check.
      * @param mixed|null $data   If adding truthy action data.

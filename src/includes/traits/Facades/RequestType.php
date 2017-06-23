@@ -60,7 +60,7 @@ trait RequestType
     }
 
     /**
-     * @since 17xxxx Action utils.
+     * @since 170623.50532 Action utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -72,7 +72,7 @@ trait RequestType
     }
 
     /**
-     * @since 17xxxx Action utils.
+     * @since 170623.50532 Action utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
