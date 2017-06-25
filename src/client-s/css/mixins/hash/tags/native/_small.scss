@@ -1,0 +1,15 @@
+@mixin small-tag-hashes {
+  // Defaults.
+
+  %hash-small-tag-defaults {
+    font-size:               .778em;
+  }
+
+  // Small tags.
+
+  @if $apply-defaults {
+    small {
+      @extend                 %hash-small-tag-defaults;
+    }
+  }
+}

@@ -22,9 +22,11 @@
 
     &.\#f\:thin,
     &.\#f\:light,
+    &.\#f\:lighter,
     &.\#f\:normal,
     &.\#f\:medium,
     &.\#f\:bold,
+    &.\#f\:bolder,
     &.\#f\:thick {
       > .item {
         font-weight:          inherit;
@@ -66,6 +68,7 @@
     &.\#f\:serif,
     &.\#f\:sans-serif,
     &.\#f\:monospace,
+    &.\#f\:monofance,
     &.\#f\:alt1,
     &.\#f\:alt2,
     &.\#f\:body,

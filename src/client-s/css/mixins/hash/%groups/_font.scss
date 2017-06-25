@@ -12,6 +12,10 @@
   @include monospace-font-family;
 }
 
+%hash-monofance-font-family {
+  @include monofance-font-family;
+}
+
 // Alternatives.
 
 %hash-alt1-font-family {

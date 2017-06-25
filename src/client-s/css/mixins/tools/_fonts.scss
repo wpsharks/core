@@ -34,6 +34,18 @@
   letter-spacing:             $monospace-font-letter-spacing #{$important};
 }
 
+@mixin monofance-font-family($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  font-family:                $monofance-font-family #{$important};
+  letter-spacing:             $monofance-font-letter-spacing #{$important};
+}
+
 @mixin alt1-font-family($important: false) {
   @if $important {
     $important: '!important';

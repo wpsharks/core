@@ -1,0 +1,15 @@
+@mixin i-tag-hashes {
+  // Defaults.
+
+  %hash-i-tag-defaults {
+    font-style:               normal;
+  }
+
+  // Inline spans.
+
+  @if $apply-defaults {
+    i {
+      @extend                 %hash-i-tag-defaults;
+    }
+  }
+}

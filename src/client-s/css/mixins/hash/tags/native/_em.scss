@@ -1,0 +1,15 @@
+@mixin em-tag-hashes {
+  // Defaults.
+
+  %hash-em-tag-defaults {
+    margin-right:            .1em;
+  }
+
+  // Inline emphasis.
+
+  @if $apply-defaults {
+    em {
+      @extend                 %hash-em-tag-defaults;
+    }
+  }
+}

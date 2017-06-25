@@ -40,9 +40,12 @@
   %hash-list-dt-defaults {
     font-weight:              700;
 
-    > label {
+    > small {
       font-weight:            400;
-      font-size:             .85em;
+    }
+
+    > code:first-child {
+      @extend                 %hash-inline-mark-monofance;
     }
   }
 

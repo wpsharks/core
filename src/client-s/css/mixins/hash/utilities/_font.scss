@@ -9,6 +9,10 @@
     font-weight:              300 !important;
   }
 
+  .\#f\:lighter {
+    font-weight:              lighter !important;
+  }
+
   .\#f\:normal {
     font-weight:              400 !important;
   }
@@ -19,6 +23,10 @@
 
   .\#f\:bold {
     font-weight:              700 !important;
+  }
+
+  .\#f\:bolder {
+    font-weight:              bolder !important;
   }
 
   .\#f\:thick {
@@ -89,6 +97,10 @@
 
   .\#f\:monospace {
     @include monospace-font-family(true);
+  }
+
+  .\#f\:monofance {
+    @include monofance-font-family(true);
   }
 
   .\#f\:alt1 {

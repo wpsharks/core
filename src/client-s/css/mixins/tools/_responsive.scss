@@ -2,7 +2,7 @@
 
 @mixin mobile {
   @media screen and (max-width: 767px) {
-    @at-root :not(.\!\@) #{&} {
+    @at-root html:not(.\!\@) #{&} {
       @content;
     }
   }
@@ -10,7 +10,7 @@
 
 @mixin lte-tablet {
   @media screen and (max-width: 991px) {
-    @at-root :not(.\!\@) #{&} {
+    @at-root html:not(.\!\@) #{&} {
       @content;
     }
   }
@@ -18,7 +18,7 @@
 
 @mixin tablet {
   @media screen and (min-width: 768px) and (max-width: 991px) {
-    @at-root :not(.\!\@) #{&} {
+    @at-root html:not(.\!\@) #{&} {
       @content;
     }
   }
@@ -26,7 +26,7 @@
 
 @mixin gte-tablet {
   @media screen and (min-width: 768px) {
-    @at-root :not(.\!\@) #{&} {
+    @at-root html:not(.\!\@) #{&} {
       @content;
     }
   }
@@ -34,7 +34,7 @@
 
 @mixin lte-notebook {
   @media screen and (max-width: 1199px) {
-    @at-root :not(.\!\@) #{&} {
+    @at-root html:not(.\!\@) #{&} {
       @content;
     }
   }
@@ -42,7 +42,7 @@
 
 @mixin notebook {
   @media screen and (min-width: 992px) and (max-width: 1199px) {
-    @at-root :not(.\!\@) #{&} {
+    @at-root html:not(.\!\@) #{&} {
       @content;
     }
   }
@@ -50,7 +50,7 @@
 
 @mixin gte-notebook {
   @media screen and (min-width: 992px) {
-    @at-root :not(.\!\@) #{&} {
+    @at-root html:not(.\!\@) #{&} {
       @content;
     }
   }
@@ -58,7 +58,7 @@
 
 @mixin desktop {
   @media screen and (min-width: 1200px) {
-    @at-root :not(.\!\@) #{&} {
+    @at-root html:not(.\!\@) #{&} {
       @content;
     }
   }
