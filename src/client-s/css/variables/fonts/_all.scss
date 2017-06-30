@@ -5,8 +5,7 @@ $line-height: 1.4285 !default;
 
 // Font variables.
 
-$monospace: 'menlo', 'consolas', monospace !default;
-$monofance: 'monaco', 'menlo', 'consolas', monospace !default;
+$mono: 'operator mono', 'monaco', monospace !default;
 $system: -apple-system, system-ui, BlinkMacSystemFont, sans-serif !default;
 $georgia: 'georgia', 'cambria', 'times new roman', 'times', serif !default;
 $helvetica: 'helvetica neue', 'helvetica', 'roboto', 'arial', sans-serif !default;
@@ -18,11 +17,12 @@ $verdana: 'verdana', 'geneva', sans-serif !default;
 @import 'serif';
 @import 'sans-serif';
 @import 'monospace';
-@import 'monofance';
 
 //
 @import 'alt1';
 @import 'alt2';
+@import 'alt3';
+@import 'alt4';
 
 //
 @import 'body';

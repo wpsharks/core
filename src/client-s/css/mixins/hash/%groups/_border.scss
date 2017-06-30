@@ -2,6 +2,10 @@
   @include default-border-props;
 }
 
+%hash-default-border-radius {
+  border-radius:             .25em;
+}
+
 %hash-default-0-border-props {
   @extend                     %hash-default-border-props;
   @extend                     %hash-0-border-width;

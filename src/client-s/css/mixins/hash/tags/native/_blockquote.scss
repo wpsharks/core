@@ -3,18 +3,19 @@
 
   %hash-blockquote-tag-defaults {
     @extend                   %hash-block-margins;
+    @extend                   %hash-block-padding;
     @extend                   %hash-default-colors;
     @extend                   %hash-default-border-props;
     @extend                   %hash-sans-serif-font-family;
 
     //
-    padding:                  1em;
     border-width:             0 0 0 .1em;
     quotes:                   '“' '”';
 
     &::before,
     &::after {
-      line-height:            1;
+      @extend                 %hash-1-line-height;
+
       font-size:              3em;
       font-family:            $georgia;
       color:                  rgba($black-color, 0.25);

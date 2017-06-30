@@ -38,14 +38,14 @@
   }
 
   %hash-list-dt-defaults {
-    font-weight:              700;
+    font-weight:              500;
 
     > small {
       font-weight:            400;
     }
 
     > code:first-child {
-      @extend                 %hash-inline-mark-monofance;
+      @extend                 %hash-inline-unmark-defaults;
     }
   }
 

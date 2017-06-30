@@ -72,13 +72,11 @@
   %hash-table-tag-defaults {
     @extend                   %hash-block-margins;
     @extend                   %hash-default-colors;
+    @extend                   %hash-position-relative;
     @extend                   %hash-default-border-props;
 
     //
     display:                  table;
-    position:                 relative;
-
-    //
     width:                    100%;
 
     //
@@ -109,7 +107,8 @@
     }
 
     > caption {
-      position:               relative;
+      @extend                 %hash-position-relative;
+
       bottom:                -.125em;
 
       //
@@ -188,7 +187,7 @@
     &.\~undivided {
       > :not(caption) > * > :not(#x):not(#y) {
         // Priority greater than horiz tweaks.
-        border-width:         0;
+        @extend               %hash-0-border-width;
       }
     }
 

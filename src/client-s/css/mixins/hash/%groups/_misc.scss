@@ -1,7 +1,23 @@
+%hash-outline-none {
+  outline:                    none;
+}
+
 %hash-user-select-none {
   user-select:                none;
 }
 
+%hash-no-pointer-events {
+  pointer-events:             none;
+}
+
 %hash-cursor-pointer {
   cursor:                     pointer;
+}
+
+%hash-white-space-nowrap {
+  white-space:                nowrap;
+}
+
+%hash-white-space-normal {
+  white-space:                normal;
 }

@@ -1,31 +1,3 @@
-// Body line heights.
-
-%hash-body-hx-line-height {
-  @include body-hx-line-height;
-}
-
-%hash-body-h1-line-height {
-  @include body-h1-line-height;
-}
-
-%hash-body-h2-line-height {
-  @include body-h2-line-height;
-}
-
-// Content line heights.
-
-%hash-content-hx-line-height {
-  @include content-hx-line-height;
-}
-
-%hash-content-h1-line-height {
-  @include content-h1-line-height;
-}
-
-%hash-content-h2-line-height {
-  @include content-h2-line-height;
-}
-
 // Line clamps.
 
 %hash-line-clamp {

@@ -1,4 +1,4 @@
-// Main styles.
+// Main families.
 
 %hash-serif-font-family {
   @include serif-font-family;
@@ -12,10 +12,6 @@
   @include monospace-font-family;
 }
 
-%hash-monofance-font-family {
-  @include monofance-font-family;
-}
-
 // Alternatives.
 
 %hash-alt1-font-family {
@@ -24,6 +20,14 @@
 
 %hash-alt2-font-family {
   @include alt2-font-family;
+}
+
+%hash-alt3-font-family {
+  @include alt3-font-family;
+}
+
+%hash-alt4-font-family {
+  @include alt4-font-family;
 }
 
 // Body fonts.
@@ -64,6 +68,34 @@
 
 %hash-content-lede-font-family {
   @include content-lede-font-family;
+}
+
+// Body font weights.
+
+%hash-body-hx-font-weight {
+  @include body-hx-font-weight;
+}
+
+%hash-body-h1-font-weight {
+  @include body-h1-font-weight;
+}
+
+%hash-body-h2-font-weight {
+  @include body-h2-font-weight;
+}
+
+// Content font weights.
+
+%hash-content-hx-font-weight {
+  @include content-hx-font-weight;
+}
+
+%hash-content-h1-font-weight {
+  @include content-h1-font-weight;
+}
+
+%hash-content-h2-font-weight {
+  @include content-h2-font-weight;
 }
 
 // Font smoothing.

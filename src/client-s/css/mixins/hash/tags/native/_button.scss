@@ -1,32 +1,24 @@
-@mixin btn-tag-hashes {
+@mixin button-tag-hashes {
   // Defaults.
 
-  %hash-btn-tag-defaults {
-    @extend                   %hash-default-colors;
+  %hash-button-tag-defaults {
+    @extend                   %hash-display-inline-block-middle;
     @extend                   %hash-default-border-props;
+    @extend                   %hash-default-colors;
+    @extend                   %hash-white-space-nowrap;
     @extend                   %hash-user-select-none;
     @extend                   %hash-cursor-pointer;
+    @extend                   %hash-1-line-height;
+    @extend                   %hash-0-margin;
 
-    //
-    display:                  inline-block;
-
-    //
-    margin:                   0;
-    padding:                 .75em .75em .575em;
-
-    //
-    line-height:              1;
     min-height:               1em;
+    padding:                 .75em .75em .575em;
 
     //
     font-size:                1em;
     font-weight:              400;
     font-style:               normal;
-    white-space:              nowrap;
-
-    //
     text-align:               center;
-    vertical-align:           middle;
 
     //
     text-decoration:          none;
@@ -62,12 +54,12 @@
   @if not $semantic {
     @if $apply-defaults {
       button {
-        @extend               %hash-btn-tag-defaults;
+        @extend               %hash-button-tag-defaults;
       }
     }
 
     .\@btn {
-      @extend                 %hash-btn-tag-defaults;
+      @extend                 %hash-button-tag-defaults;
     }
   }
 }

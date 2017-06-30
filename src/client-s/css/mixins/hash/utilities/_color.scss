@@ -11,15 +11,19 @@
   // Groups.
 
   %color-a-decor-events {
-    a:not(.\@btn) {
+    a:not(.\@btn),
+    summary {
       opacity:               .8;
       color:                  inherit;
-      text-decoration:        underline;
 
       &:hover {
         opacity:              1;
         color:                inherit;
       }
+    }
+
+    a:not(.\@btn) {
+      text-decoration:        underline;
     }
   }
 

@@ -99,16 +99,20 @@
     @include monospace-font-family(true);
   }
 
-  .\#f\:monofance {
-    @include monofance-font-family(true);
-  }
-
   .\#f\:alt1 {
     @include alt1-font-family(true);
   }
 
   .\#f\:alt2 {
     @include alt2-font-family(true);
+  }
+
+  .\#f\:alt3 {
+    @include alt3-font-family(true);
+  }
+
+  .\#f\:alt4 {
+    @include alt4-font-family(true);
   }
 
   .\#f\:body {
@@ -149,12 +153,17 @@
 
   // Additional families.
 
+  .\#f\:mono,
   .\#f\:system,
   .\#f\:georgia,
   .\#f\:helvetica,
   .\#f\:lucida,
   .\#f\:verdana {
     letter-spacing:           normal !important;
+  }
+
+  .\#f\:mono {
+    font-family:              $mono !important;
   }
 
   .\#f\:system {

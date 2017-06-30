@@ -9,6 +9,8 @@ var Hash;
             this.hljsScriptUrl = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js';
             this.hljsStyleUrl = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/codepen-embed.min.css';
             this.hljsWpLangScriptUrl = 'https://cdn.rawgit.com/websharks/core/170421.57490/src/client-s/js/hljs/langs/wp.min.js';
+            this.hljsTypeScriptLangScriptUrl = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js';
+            this.hljsScssLangScriptUrl = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scss.min.js';
             this.loadStyles();
             this.loadScripts();
         }
@@ -21,7 +23,11 @@ var Hash;
                 _this.loadScript(_this.lodashScriptUrl, function () {
                     _this.loadScript(_this.hljsScriptUrl, function () {
                         _this.loadScript(_this.hljsWpLangScriptUrl, function () {
-                            _this.onScriptsReady();
+                            _this.loadScript(_this.hljsTypeScriptLangScriptUrl, function () {
+                                _this.loadScript(_this.hljsScssLangScriptUrl, function () {
+                                    _this.onScriptsReady();
+                                });
+                            });
                         });
                     });
                 });

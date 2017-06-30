@@ -7,7 +7,10 @@ namespace Hash {
 
     hljsScriptUrl = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js';
     hljsStyleUrl = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/codepen-embed.min.css';
+
     hljsWpLangScriptUrl = 'https://cdn.rawgit.com/websharks/core/170421.57490/src/client-s/js/hljs/langs/wp.min.js';
+    hljsTypeScriptLangScriptUrl = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js';
+    hljsScssLangScriptUrl = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scss.min.js';
 
     constructor() {
       this.loadStyles();
@@ -23,7 +26,11 @@ namespace Hash {
         this.loadScript(this.lodashScriptUrl, () => {
           this.loadScript(this.hljsScriptUrl, () => {
             this.loadScript(this.hljsWpLangScriptUrl, () => {
-              this.onScriptsReady();
+              this.loadScript(this.hljsTypeScriptLangScriptUrl, () => {
+                this.loadScript(this.hljsScssLangScriptUrl, () => {
+                  this.onScriptsReady();
+                });
+              });
             });
           });
         });

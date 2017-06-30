@@ -30,3 +30,16 @@
 
   text-shadow:                0 0.8px 0.4px rgba($color, 0.5) #{$important};
 }
+
+@mixin text-shadow-3d-white($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  // See: <http://markdotto.com/playground/3d-text/>
+  color:                      $white-color #{$important};
+  text-shadow:                0 1px 0 rgb(204, 204, 204), 0 2px 0 rgb(201, 201, 201), 0 3px 0 rgb(187, 187, 187), 0 4px 0 rgb(185, 185, 185), 0 5px 0 rgb(170, 170, 170), 0 6px 1px rgba(0, 0, 0, 0.09804), 0 0 5px rgba(0, 0, 0, 0.09804), 0 1px 3px rgba(0, 0, 0, 0.29804), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.24706), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.14902) #{$important};
+}

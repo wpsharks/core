@@ -8,45 +8,47 @@
 
   %hash-mono-tag-default-family {
     @extend                   %hash-monospace-font-family;
-    @extend                   %hash-font-smoothing-antialiased;
+
+    font-feature-settings:    normal;
   }
 
-  %hash-mono-inline-tag-defaults {
+  %hash-mono-inline-code-tag-defaults {
     @extend                   %hash-inline-mark-defaults;
 
+    font-size:               .889em;
     color:                    $fg-color;
     background:               darken($bg-color, 3%);
     border-color:             darken($bg-color, 9%);
   }
 
-  %hash-mono-kbd-tag-defaults {
+  %hash-mono-inline-samp-tag-defaults {
+    @extend                   %hash-display-inline-block-middle;
+
+    font-size:               .889em;
+    margin:                   0 .15em;
+  }
+
+  %hash-mono-inline-kbd-tag-defaults {
+    @extend                   %hash-position-relative;
+    @extend                   %hash-inline-mark-defaults;
+
     top:                     -.063em;
-    position:                 relative;
 
     //
-    font-size:               .722em;
+    font-size:               .778em;
     font-family:              'arial', sans-serif;
-    padding:                  calc(1ex + .308em) 0.6em;
+    padding:                  calc(1ex + .275em) 0.6em;
 
     //
     color:                    lighten($fg-color, 6%);
     background:               darken($bg-color, 6%);
     border-color:             darken($bg-color, 15%);
     box-shadow:               0 0.063em 0 rgba($black-color, 0.25), 0 0 0 0.1em $bg-color inset;
-
-    &.\~has-caps {
-      padding-top:            calc(1.15ex + .308em);
-    }
   }
 
-  %hash-mono-a-tag-defaults {
-    code,
-    samp,
-    kbd,
-    tt {
-      text-decoration:        none;
-      color:                  inherit;
-    }
+  %hash-mono-inline-a-mono-tag-defaults {
+    text-decoration:          none;
+    color:                    inherit;
   }
 
   %hash-mono-pre-tag-defaults {
@@ -59,20 +61,13 @@
     white-space:              pre-wrap;
 
     &.code {
-      white-space:            normal;
-      position:               relative;
+      @extend                 %hash-0-padding;
+      @extend                 %hash-0-border-width;
+      @extend                 %hash-0-border-radius;
+      @extend                 %hash-white-space-normal;
+      @extend                 %hash-position-relative;
 
-      //
-      padding:                0;
-
-      //
-      border:                 0;
-      border-radius:          0;
-
-      //
       background:             none;
-
-      //
       text-shadow:            none;
       box-shadow:             none;
 
@@ -81,16 +76,16 @@
       overflow:               visible;
 
       > code {
+        @extend               %hash-0-margin;
+        @extend               %hash-0-border-width;
+        @extend               %hash-default-border-radius;
+        @extend               %hash-block-padding;
+
         white-space:          pre;
-        display:              block;
         vertical-align:       baseline;
 
         //
-        margin:               0;
-        padding:              1em;
-
-        //
-        max-height:           50vh;
+        max-height:           500px;
         overflow:             auto;
 
         //
@@ -102,14 +97,84 @@
         text-shadow:          none;
         box-shadow:           none;
 
-        //
-        border:               0;
-        border-radius:       .25em;
-
         &:not(.hljs) {
           // Don't step on HLJS theme.
           color:              $bg-color;
-          background:         darken($bg-color, 80.5%);
+          background:         $fg-color;
+        }
+
+        // Default to antialiased, but remove for code.
+        @extend               %hash-font-smoothing-antialiased;
+
+        &.lang-xml,
+        &.lang-rss,
+        &.lang-atom,
+        &.lang-html {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-css,
+        &.lang-scss,
+        &.lang-less {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-js,
+        &.lang-jsx,
+        &.lang-ts,
+        &.lang-tsx,
+        &.lang-coffee {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-jsp,
+        &.lang-java {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-wp,
+        &.lang-php {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-py,
+        &.lang-python {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-rb,
+        &.lang-ruby {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-objc,
+        &.lang-obj-c {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-osascript,
+        &.lang-applescript {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-go,
+        &.lang-lua,
+        &.lang-clj,
+        &.lang-lisp {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        &.lang-zsh,
+        &.lang-bash {
+          @extend             %hash-font-smoothing-defaults;
+        }
+
+        .hljs-comment,
+        .hljs-keyword,
+        .hljs-built_in,
+        .hljs-literal,
+        &.lang-html .hljs-attr {
+          font-style:         italic;
         }
       }
 
@@ -117,19 +182,17 @@
         overflow:             hidden;
 
         &::before {
-          @extend             %hash-font-smoothing-defaults;
-          @extend             %hash-serif-font-family;
+          @extend             %hash-0-line-height;
+          @extend             %hash-display-block;
           @extend             %hash-user-select-none;
+          @extend             %hash-content-font-family;
 
-          display:            block;
-
-          //
-          line-height:        0;
-          padding:            1.85ex .5em 1.65ex;
-
-          //
+          font-size:         .833em;
           font-weight:        lighter;
           content:            attr(title);
+
+          //
+          padding:            1.85ex .5em 1.65ex;
 
           //
           color:              $white-color;
@@ -148,7 +211,7 @@
 
           //
           width:              2.5em;
-          max-height:         2.15em;
+          max-height:         2.175em;
           overflow-y:         hidden;
 
           //
@@ -673,23 +736,28 @@
     pre,
     code,
     samp,
-    kbd,
-    tt {
+    kbd {
       @extend                 %hash-mono-tag-default-family;
     }
 
-    code,
-    samp,
-    kbd {
-      @extend                 %hash-mono-inline-tag-defaults;
+    code {
+      @extend                 %hash-mono-inline-code-tag-defaults;
+    }
+
+    samp {
+      @extend                 %hash-mono-inline-samp-tag-defaults;
     }
 
     kbd {
-      @extend                 %hash-mono-kbd-tag-defaults;
+      @extend                 %hash-mono-inline-kbd-tag-defaults;
     }
 
     a {
-      @extend                 %hash-mono-a-tag-defaults;
+      code,
+      samp,
+      kbd {
+        @extend               %hash-mono-inline-a-mono-tag-defaults;
+      }
     }
 
     pre {
@@ -698,7 +766,7 @@
   }
   @else {
     .\@pre {
-      @extend                 %hash-mono-tag-defaults;
+      @extend                 %hash-mono-tag-default-family;
       @extend                 %hash-mono-pre-tag-defaults;
     }
   }

@@ -1,52 +1,31 @@
 %hash-inline-mark-defaults {
+  @extend                     %hash-0-line-height;
+  @extend                     %hash-white-space-nowrap;
+  @extend                     %hash-display-inline-block-middle;
   @extend                     %hash-default-border-props;
 
-  white-space:                nowrap;
-
-  //
-  display:                    inline-block;
-  vertical-align:             middle;
-
-  //
   margin:                     0 .15em;
-  padding:                    calc(1ex + .2em) 0.4em;
+  padding:                    calc(1ex + .1em) 0.4em;
 
   //
-  font-size:                 .778em;
-  line-height:                0;
-
-  //
+  font-size:                 .833em;
   text-decoration:            inherit;
-
-  &.\~has-caps {
-    padding-top:              calc(1.15ex + .12em);
-  }
 }
 
-%hash-inline-mark-monofance {
-  @extend                     %hash-monofance-font-family;
+%hash-inline-unmark-defaults {
+  @extend                     %hash-0-margin;
+  @extend                     %hash-0-padding;
+  @extend                     %hash-0-border-width;
+  @extend                     %hash-0-border-radius;
+  @extend                     %hash-white-space-normal;
+  @extend                     %hash-display-inline-baseline;
 
-  white-space:                normal;
-
-  //
-  display:                    inline;
-  vertical-align:             baseline;
-
-  //
-  margin:                     0;
-  padding:                    0;
-
-  //
   font-size:                  1em;
   line-height:                inherit;
 
   //
   background:                 none;
   color:                      inherit;
-
-  //
-  border:                     0;
-  border-radius:              0;
 
   //
   text-shadow:                none;

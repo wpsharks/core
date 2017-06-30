@@ -3,11 +3,9 @@
 
   %hash-hr-tag-defaults {
     @extend                   %hash-block-margins;
+    @extend                   %hash-0-border-width;
 
     height:                   0;
-
-    //
-    border:                   0;
     background:               none;
 
     &::before,

@@ -9,10 +9,15 @@ $imported-font-families: () !global;
 }
 
 @mixin import-font-faces($face) {
+  $import: map-get($face, 'import');
   $family: map-get($face, 'family');
   $base-url: map-get($face, 'base-url');
 
-  @if $family != '' and $base-url != '' and index($imported-font-families, $family) == null {
+  @if $import != '' and $family != '' and index($imported-font-families, $family) == null {
+    $imported-font-families: append($imported-font-families, $family) !global;
+    @include import-url($import);
+  }
+  @else if $family != '' and $base-url != '' and index($imported-font-families, $family) == null {
     $imported-font-families: append($imported-font-families, $family) !global;
 
     @each $type, $weight in ('thin': 100, 'light': 300, 'normal': 400, 'medium': 500, 'bold': 700, 'thick': 900) {

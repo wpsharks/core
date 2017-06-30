@@ -1,6 +1,7 @@
 $sans-serif-font-letter-spacing: normal !default;
-$sans-serif-font-family: 'terfens', 'trebuchet ms', sans-serif !default;
+$sans-serif-font-family: 'terfens', sans-serif !default;
 $sans-serif-font-faces: (
+  'import': '',
   'family': 'terfens',
   'base-url': '//src.works/wp-content/uploads/2017/06/terfens-',
 
@@ -25,7 +26,7 @@ $sans-serif-font-faces: (
     'italic-sub-path': '700i',
   ),
   'thick': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '900',
+    'italic-sub-path': '900i',
   ),
 ) !default;

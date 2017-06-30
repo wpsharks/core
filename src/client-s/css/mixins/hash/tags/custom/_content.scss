@@ -14,36 +14,19 @@
     h5,
     h6 {
       @extend                 %hash-content-hx-font-family;
-      @extend                 %hash-content-hx-line-height;
-
-      // Set weight if not set by extender.
-      @if $content-hx-font-weight-enforce != true {
-        font-weight:          $content-hx-font-weight;
-      }
+      @extend                 %hash-content-hx-font-weight;
     }
 
     h1 {
       @extend                 %hash-content-h1-font-family;
-      @extend                 %hash-content-h1-line-height;
+      @extend                 %hash-content-h1-font-weight;
 
-      // Set weight if not set by extender.
-      @if $content-h1-font-weight-enforce != true {
-        font-weight:          $content-h1-font-weight;
-      }
-
-      font-size:              $content-h1-font-size;
+      font-size:              3.157em;
     }
 
     h2 {
       @extend                 %hash-content-h2-font-family;
-      @extend                 %hash-content-h2-line-height;
-
-      // Set weight if not set by extender.
-      @if $content-h2-font-weight-enforce != true {
-        font-weight:          $content-h2-font-weight;
-      }
-
-      font-size:              $content-h2-font-size;
+      @extend                 %hash-content-h2-font-weight;
     }
 
     > p:first-of-type:not([class]) {

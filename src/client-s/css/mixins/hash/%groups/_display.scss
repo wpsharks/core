@@ -6,6 +6,20 @@
   display:                    inline-block;
 }
 
+%hash-display-inline-block-middle {
+  vertical-align:             middle;
+  display:                    inline-block;
+}
+
+%hash-display-inline {
+  display:                    inline;
+}
+
+%hash-display-inline-baseline {
+  display:                    inline;
+  vertical-align:             baseline;
+}
+
 %hash-display-none {
   display:                    none;
 }

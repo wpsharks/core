@@ -1,7 +1,8 @@
 $monospace-font-letter-spacing: normal !default;
-$monospace-font-family: $monospace !default;
+$monospace-font-family: 'operator mono ssm a', 'operator mono ssm b', monospace !default;
 $monospace-font-faces: (
-  'family': '',
+  'import': '//cloud.typography.com/7715196/6490572/css/fonts.css',
+  'family': 'operator mono ssm',
   'base-url': '',
 
   'thin': (

@@ -7,47 +7,35 @@
     @extend                   %hash-0-padding;
     @extend                   %hash-block-margins;
     @extend                   %hash-body-hx-font-family;
-    @extend                   %hash-body-hx-line-height;
+    @extend                   %hash-body-hx-font-weight;
 
-    // Set weight if not set by extender.
-    @if $body-hx-font-weight-enforce != true {
-      font-weight:            $body-hx-font-weight;
-    }
-
+    line-height:              1.2;
     margin-top:               calc(2rem -  0.143em);
 
     > small {
-      font-weight:            400;
+      font-weight:            lighter;
     }
 
     > code {
-      @extend                 %hash-inline-mark-monofance;
+      @extend                 %hash-inline-unmark-defaults;
     }
   }
 
   %hash-h1-tag-defaults {
     @extend                   %hash-body-h1-font-family;
-    @extend                   %hash-body-h1-line-height;
+    @extend                   %hash-body-h1-font-weight;
 
-    // Set weight if not set by extender.
-    @if $body-h1-font-weight-enforce != true {
-      font-weight:            $body-h1-font-weight;
-    }
-
+    line-height:              1.1;
     min-height:               1rem;
-    font-size:                $body-h1-font-size;
+    font-size:                3.557em;
   }
 
   %hash-h2-tag-defaults {
     @extend                   %hash-body-h2-font-family;
-    @extend                   %hash-body-h2-line-height;
+    @extend                   %hash-body-h2-font-weight;
 
-    // Set weight if not set by extender.
-    @if $body-h2-font-weight-enforce != true {
-      font-weight:            $body-h2-font-weight;
-    }
-
-    font-size:                $body-h2-font-size;
+    line-height:              1.1;
+    font-size:                2.369em;
   }
 
   %hash-h3-tag-defaults {

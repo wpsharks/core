@@ -10,4 +10,8 @@
   .\+\#text-shadow {
     @include \+text-shadow(true);
   }
+
+  .\#text-shadow\:3d\:white {
+    @include text-shadow-3d-white(true);
+  }
 }

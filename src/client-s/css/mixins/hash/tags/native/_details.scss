@@ -1,0 +1,93 @@
+@mixin details-tag-hashes {
+  // Defaults.
+
+  %hash-details-tag-defaults {
+    @extend                   %hash-block-margins;
+    @extend                   %hash-0-border-width;
+
+    > summary {
+      @extend                 %hash-display-block;
+      @extend                 %hash-cursor-pointer;
+      @extend                 %hash-outline-none;
+
+      width:                  max-content;
+
+      //
+      color:                  $link-color;
+
+      &:hover {
+        color:                $link-hover-color;
+      }
+
+      &#{'::-webkit-details-marker'} {
+        @extend               %hash-display-none;
+      }
+
+      &::before {
+        @extend               %hash-display-inline-block;
+
+        content:              '\25B6';
+
+        //
+        width:               .5em;
+        height:              .5em;
+        margin:               0 .5em 0 0;
+
+        //
+        font-size:           .5em;
+      }
+
+      &::after {
+        @extend               %hash-display-block;
+
+        content:              '';
+
+        //
+        height:              .063em;
+        margin-left:          1em;
+
+        //
+        border-bottom:       .063em dotted;
+      }
+    }
+
+    &[open] {
+      @extend                 %hash-block-padding;
+      @extend                 %hash-default-border-props;
+
+      border-image:           linear-gradient(172deg, transparent, transparent 2em, currentColor) 1;
+
+      > summary {
+        margin:              -1.063em -1.063em 1rem;
+
+        &::before {
+          content:            '\25BC';
+        }
+
+        ~ * {
+          animation:          \@nm-summary .15s ease-in;
+        }
+      }
+    }
+  }
+
+  @keyframes \@nm-summary {
+    0% {
+      opacity:                0;
+      margin-top:            -1rem;
+    }
+
+    100% {
+      opacity:                1;
+      margin-top:             0;
+    }
+  }
+
+  // Details.
+
+  @if $apply-defaults {
+    details {
+      @extend                 %hash-details-tag-defaults;
+    }
+  }
+}

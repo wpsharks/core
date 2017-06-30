@@ -4523,7 +4523,7 @@
 ---------------*/
 
 h1.ui.header {
-  font-size: 3.157em;
+  font-size: 3.5em;
 }
 
 h2.ui.header {
@@ -4570,7 +4570,7 @@ h5.ui.header .sub.header {
 
 .ui.huge.header {
   min-height: 1em;
-  font-size: 3.157em;
+  font-size: 3.5em;
 }
 
 .ui.large.header {
