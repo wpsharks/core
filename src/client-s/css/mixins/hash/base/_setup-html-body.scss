@@ -33,8 +33,8 @@
     background:               $bg-color;
 
     ::selection {
-      color:                  $black-color;
-      background-color:       $perano-color;
+      color:                  $white-color;
+      background-color:       rgba($danube-color, 0.99);
     }
   }
 

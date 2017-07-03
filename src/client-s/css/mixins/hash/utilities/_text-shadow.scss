@@ -11,7 +11,11 @@
     @include \+text-shadow(true);
   }
 
-  .\#text-shadow\:3d\:white {
-    @include text-shadow-3d-white(true);
+  .\#text-shadow\:raise {
+    @include text-shadow-raise(true);
+  }
+
+  .\+\#text-shadow\:raise {
+    @include \+text-shadow-raise(true);
   }
 }

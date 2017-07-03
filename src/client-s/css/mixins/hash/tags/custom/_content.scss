@@ -13,6 +13,7 @@
     h4,
     h5,
     h6 {
+      @include text-shadow-raise;
       @extend                 %hash-content-hx-font-family;
       @extend                 %hash-content-hx-font-weight;
     }

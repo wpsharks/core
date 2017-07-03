@@ -1,9 +1,9 @@
 $alt3-font-letter-spacing: normal !default;
-$alt3-font-family: 'bang', sans-serif !default;
+$alt3-font-family: 'pencil', sans-serif !default;
 $alt3-font-faces: (
   'import': '',
-  'family': 'bang',
-  'base-url': '//src.works/wp-content/uploads/2017/06/bang-',
+  'family': 'pencil',
+  'base-url': '//src.works/wp-content/uploads/2017/06/pencil-',
 
   'thin': (
     'sub-path': '',
@@ -22,7 +22,7 @@ $alt3-font-faces: (
     'italic-sub-path': '',
   ),
   'bold': (
-    'sub-path': '',
+    'sub-path': '700',
     'italic-sub-path': '',
   ),
   'thick': (

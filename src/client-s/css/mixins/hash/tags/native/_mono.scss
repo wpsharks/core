@@ -46,7 +46,7 @@
     box-shadow:               0 0.063em 0 rgba($black-color, 0.25), 0 0 0 0.1em $bg-color inset;
   }
 
-  %hash-mono-inline-a-mono-tag-defaults {
+  %hash-mono-inline-a-tag-defaults {
     text-decoration:          none;
     color:                    inherit;
   }
@@ -58,6 +58,8 @@
     @extend                   %hash-default-border-props;
 
     //
+    font-weight:              300;
+    font-size:               .889em;
     white-space:              pre-wrap;
 
     &.code {
@@ -77,9 +79,9 @@
 
       > code {
         @extend               %hash-0-margin;
+        @extend               %hash-block-padding;
         @extend               %hash-0-border-width;
         @extend               %hash-default-border-radius;
-        @extend               %hash-block-padding;
 
         white-space:          pre;
         vertical-align:       baseline;
@@ -103,72 +105,6 @@
           background:         $fg-color;
         }
 
-        // Default to antialiased, but remove for code.
-        @extend               %hash-font-smoothing-antialiased;
-
-        &.lang-xml,
-        &.lang-rss,
-        &.lang-atom,
-        &.lang-html {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-css,
-        &.lang-scss,
-        &.lang-less {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-js,
-        &.lang-jsx,
-        &.lang-ts,
-        &.lang-tsx,
-        &.lang-coffee {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-jsp,
-        &.lang-java {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-wp,
-        &.lang-php {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-py,
-        &.lang-python {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-rb,
-        &.lang-ruby {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-objc,
-        &.lang-obj-c {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-osascript,
-        &.lang-applescript {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-go,
-        &.lang-lua,
-        &.lang-clj,
-        &.lang-lisp {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
-        &.lang-zsh,
-        &.lang-bash {
-          @extend             %hash-font-smoothing-defaults;
-        }
-
         .hljs-comment,
         .hljs-keyword,
         .hljs-built_in,
@@ -187,12 +123,11 @@
           @extend             %hash-user-select-none;
           @extend             %hash-content-font-family;
 
-          font-size:         .833em;
-          font-weight:        lighter;
+          font-size:         .889em;
           content:            attr(title);
 
           //
-          padding:            1.85ex .5em 1.65ex;
+          padding:            1.65ex .5em;
 
           //
           color:              $white-color;
@@ -756,7 +691,7 @@
       code,
       samp,
       kbd {
-        @extend               %hash-mono-inline-a-mono-tag-defaults;
+        @extend               %hash-mono-inline-a-tag-defaults;
       }
     }
 

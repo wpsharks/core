@@ -36,6 +36,18 @@ trait Html
     }
 
     /**
+     * @since 17xxxx HTML compression.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\HtmlCompress::__invoke()
+     */
+    public static function htmlCompress(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©HtmlCompress->__invoke(...$args);
+    }
+
+    /**
      * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.

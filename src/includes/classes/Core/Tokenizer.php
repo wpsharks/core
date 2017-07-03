@@ -130,12 +130,20 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
             return; // Nothing to do.
         }
         $this->maybeTokenizeShortcodes();
+        $this->maybeTokenizeIfCondTags();
 
         $this->maybeTokenizePreTags();
         $this->maybeTokenizeCodeTags();
         $this->maybeTokenizeSampTags();
+
+        $this->maybeTokenizeStyleTags();
+        $this->maybeTokenizeScriptTags();
+
+        $this->maybeTokenizeTextareaTags();
         $this->maybeTokenizeAnchorTags();
+
         $this->maybeTokenizeAllTags();
+        $this->maybeTokenizeSpecialAttrs();
 
         $this->maybeTokenizeMdFences();
         $this->maybeTokenizeMdLinks();
@@ -227,6 +235,26 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     }
 
     /**
+     * Maybe tokenize `<!--[if`, `<![if` tags.
+     *
+     * @since 17xxxx Initial release.
+     */
+    protected function maybeTokenizeIfCondTags()
+    {
+        if (!in_array('if-conds', $this->tokenize, true)) {
+            return; // Not tokenizing these.
+        } elseif (mb_stripos($this->string, '<!--[') === false && mb_stripos($this->string, '<![') === false) {
+            return; // Nothing to tokenize here.
+        }
+        $regex = '/\<\![^[>]*?\[if\W[^\]]*?\][^>]*?\>(?s:.*?)\<\![^[>]*?\[endif\][^>]*?\>/ui';
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
+        }, $this->string); // Tags replaced by tokens.
+    }
+
+    /**
      * Maybe tokenize `<pre>` tags.
      *
      * @since 150424 Initial release.
@@ -287,6 +315,66 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     }
 
     /**
+     * Maybe tokenize `<style>` tags.
+     *
+     * @since 17xxxx Initial release.
+     */
+    protected function maybeTokenizeStyleTags()
+    {
+        if (!in_array('style', $this->tokenize, true)) {
+            return; // Not tokenizing these.
+        } elseif (mb_stripos($this->string, '<style') === false) {
+            return; // Nothing to tokenize here.
+        }
+        $regex = '/\<(style)(?:\>|\s[^>]*\>)(?:(?s:[^<>]+|(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
+        }, $this->string); // Tags replaced by tokens.
+    }
+
+    /**
+     * Maybe tokenize `<script>` tags.
+     *
+     * @since 17xxxx Initial release.
+     */
+    protected function maybeTokenizeScriptTags()
+    {
+        if (!in_array('script', $this->tokenize, true)) {
+            return; // Not tokenizing these.
+        } elseif (mb_stripos($this->string, '<script') === false) {
+            return; // Nothing to tokenize here.
+        }
+        $regex = '/\<(script)(?:\>|\s[^>]*\>)(?:(?s:[^<>]+|(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
+        }, $this->string); // Tags replaced by tokens.
+    }
+
+    /**
+     * Maybe tokenize `<textarea>` tags.
+     *
+     * @since 17xxxx Initial release.
+     */
+    protected function maybeTokenizeTextareaTags()
+    {
+        if (!in_array('textarea', $this->tokenize, true)) {
+            return; // Not tokenizing these.
+        } elseif (mb_stripos($this->string, '<textarea') === false) {
+            return; // Nothing to tokenize here.
+        }
+        $regex = '/\<(textarea)(?:\>|\s[^>]*\>)(?:(?s:[^<>]+|(?!\<\\1[\s>]).)+?|(?R))*?\<\/\\1\>/ui';
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
+        }, $this->string); // Tags replaced by tokens.
+    }
+
+    /**
      * Maybe tokenize `<a>` tags.
      *
      * @since 150424 Initial release.
@@ -324,6 +412,26 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
             $this->tokens[] = $m[0];  // Original data for token.
             return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
         }, $this->string); // Tags replaced by tokens.
+    }
+
+    /**
+     * Maybe tokenize `<x style|on*|data-*="">` attrs.
+     *
+     * @since 17xxxx Initial release.
+     */
+    protected function maybeTokenizeSpecialAttrs()
+    {
+        if (!in_array('s-attrs', $this->tokenize, true)) {
+            return; // Not tokenizing these.
+        } elseif (mb_stripos($this->string, '<') === false) {
+            return; // Nothing to tokenize here.
+        }
+        $regex = '/(?<=\s)(?:style|on[a-z]+|data\-[a-z\-]+)\s*\=\s*(["\'])(?s:.*?)\\1/ui';
+
+        $this->string = preg_replace_callback($regex, function ($m) {
+            $this->tokens[] = $m[0];  // Original data for token.
+            return $token = '⁅⒯'.$this->id.'⒯'.(count($this->tokens) - 1).'⒯⁆';
+        }, $this->string); // Attributes replaced by tokens.
     }
 
     /**

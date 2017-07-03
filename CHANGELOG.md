@@ -1,3 +1,7 @@
+## $v
+
+- Adding `c::htmlCompress()`.
+
 ## v170623.50532
 
 - Enhancing CSS framework.
