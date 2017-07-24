@@ -45,7 +45,7 @@
     }
 
     > code:first-child {
-      @extend                 %hash-inline-unmark-defaults;
+      @extend                 %hash-inline-unmark-code;
     }
   }
 

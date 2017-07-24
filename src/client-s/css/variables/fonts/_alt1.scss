@@ -1,9 +1,11 @@
+$alt1-font-smoothing: auto !default;
+$alt1-font-word-spacing: normal !default;
 $alt1-font-letter-spacing: normal !default;
-$alt1-font-family: 'handy', sans-serif !default;
+$alt1-font-family: 'bubblegum sans', sans-serif !default;
 $alt1-font-faces: (
-  'import': '',
-  'family': 'handy',
-  'base-url': '//src.works/wp-content/uploads/2017/06/handy-',
+  'import': '//fonts.googleapis.com/css?family=Bubblegum+Sans',
+  'family': 'bubblegum sans',
+  'base-url': '',
 
   'thin': (
     'sub-path': '',

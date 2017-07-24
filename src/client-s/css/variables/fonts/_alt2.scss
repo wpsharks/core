@@ -1,32 +1,34 @@
+$alt2-font-smoothing: auto !default;
+$alt2-font-word-spacing: normal !default;
 $alt2-font-letter-spacing: normal !default;
-$alt2-font-family: 'architech', sans-serif !default;
+$alt2-font-family: 'ubuntu', sans-serif !default;
 $alt2-font-faces: (
-  'import': '',
-  'family': 'architech',
-  'base-url': '//src.works/wp-content/uploads/2017/06/architech-',
+  'import': '//fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i',
+  'family': 'ubuntu',
+  'base-url': '',
 
   'thin': (
     'sub-path': '',
     'italic-sub-path': '',
   ),
   'light': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '300',
+    'italic-sub-path': '300i',
   ),
   'normal': (
     'sub-path': '400',
-    'italic-sub-path': '',
+    'italic-sub-path': '400i',
   ),
   'medium': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '500',
+    'italic-sub-path': '500i',
   ),
   'bold': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '700',
+    'italic-sub-path': '700i',
   ),
   'thick': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '900',
+    'italic-sub-path': '900i',
   ),
 ) !default;

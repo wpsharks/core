@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -24,15 +24,40 @@ use function get_defined_vars as vars;
 trait Output
 {
     /**
-     * @since 160622 Adding file output prep.
+     * @since 17xxxx Early close of request.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Output::filePrep()
+     * @see Classes\Core\Utils\Output::closeRequestEarly()
+     */
+    public static function closeRequestEarly(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Output->closeRequestEarly(...$args);
+    }
+
+    /**
+     * @since 17xxxx Shorter alias.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Output::prepFile()
+     */
+    public static function prepFileOutput(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Output->prepFile(...$args);
+    }
+
+    /**
+     * @since 160622 Adding file output prep.
+     * @deprecated 17xxxx Use shorter `prepFileOutput()`.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Output::prepFile()
      */
     public static function prepareForFileOutput(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Output->filePrep(...$args);
+        return $GLOBALS[static::class]->Utils->©Output->prepFile(...$args);
     }
 
     /**
@@ -69,5 +94,17 @@ trait Output
     public static function obEndCleanAll(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Output->buffersEndClean(...$args);
+    }
+
+    /**
+     * @since 17xxxx Buffer end/flush.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Output::buffersEndFlush()
+     */
+    public static function obEndFlushAll(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Output->buffersEndFlush(...$args);
     }
 }

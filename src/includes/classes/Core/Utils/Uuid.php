@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -106,6 +106,24 @@ class Uuid extends Classes\Core\Base\Core
         $uuid = UuidGen::uuid4()->toString();
 
         return $optimize ? str_replace('-', '', $uuid) : $uuid;
+    }
+
+    /**
+     * UUID v4 generator x 2.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param bool $optimize Optimize?
+     *
+     * @return string Version 4 UUID x 2 (64 bytes optimized).
+     *                Or 73 bytes unoptimized; i.e., w/ dashes + one extra.
+     */
+    public function v4x2(bool $optimize = true): string
+    {
+        $uuid1 = UuidGen::uuid4()->toString();
+        $uuid2 = UuidGen::uuid4()->toString();
+
+        return $optimize ? str_replace('-', '', $uuid1.$uuid2) : $uuid1.'-'.$uuid2;
     }
 
     /**

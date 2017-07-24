@@ -8,12 +8,16 @@
     font-size:                1.125em;
 
     h1,
+    h2 {
+      @include text-shadow-raise;
+    }
+
+    h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
-      @include text-shadow-raise;
       @extend                 %hash-content-hx-font-family;
       @extend                 %hash-content-hx-font-weight;
     }
@@ -21,8 +25,6 @@
     h1 {
       @extend                 %hash-content-h1-font-family;
       @extend                 %hash-content-h1-font-weight;
-
-      font-size:              3.157em;
     }
 
     h2 {
@@ -37,17 +39,12 @@
     }
 
     em {
+      letter-spacing:        .02em;
       font-size:             .889em;
-      letter-spacing:        .035em;
 
-      :not(a) {
+      :not(a):not(small) {
         letter-spacing:       normal;
       }
-    }
-
-    a {
-      // This can be changed w/o negatively affecting other areas.
-      text-decoration:        none;
     }
 
     @include lte-tablet {

@@ -1,32 +1,34 @@
+$alt4-font-smoothing: auto !default;
+$alt4-font-word-spacing: normal !default;
 $alt4-font-letter-spacing: normal !default;
-$alt4-font-family: 'npm', sans-serif !default;
+$alt4-font-family: 'exo 2', sans-serif !default;
 $alt4-font-faces: (
-  'import': '',
-  'family': 'npm',
-  'base-url': '//src.works/wp-content/uploads/2017/06/npm-',
+  'import': '//fonts.googleapis.com/css?family=Exo+2:300,300i,400,400i,500,500i,700,700i,900,900i',
+  'family': 'exo 2',
+  'base-url': '',
 
   'thin': (
     'sub-path': '',
     'italic-sub-path': '',
   ),
   'light': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '300',
+    'italic-sub-path': '300i',
   ),
   'normal': (
     'sub-path': '400',
-    'italic-sub-path': '',
+    'italic-sub-path': '400i',
   ),
   'medium': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '500',
+    'italic-sub-path': '500i',
   ),
   'bold': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '700',
+    'italic-sub-path': '700i',
   ),
   'thick': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '900',
+    'italic-sub-path': '900i',
   ),
 ) !default;

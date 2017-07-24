@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
      *
      * @since 150424 Initial release.
      *
-     * @param string $slug Slug to validate.
+     * @param string $slug Slug.
      *
      * @return bool True if slug is valid.
      */
@@ -42,7 +42,7 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
      *
      * @since 150424 Reserved slugs.
      *
-     * @param string $slug Slug to check.
+     * @param string $slug Slug.
      *
      * @return bool True if slug is reserved.
      */
@@ -74,7 +74,7 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
      *
      * @since 150424 Initial release.
      *
-     * @param string $slug Slug to convert to name.
+     * @param string $slug Slug.
      *
      * @return string Name; based on slug.
      */
@@ -93,13 +93,14 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
      *
      * @since 160220 Initial release.
      *
-     * @param string $slug Slug to convert to acronym.
+     * @param string $slug   Slug.
+     * @param bool   $strict Strict?
      *
      * @return string Acronym; based on slug.
      */
-    public function toAcronym(string $slug): string
+    public function toAcronym(string $slug, bool $strict = true): string
     {
-        return $this->c::nameToAcronym($this->toName($slug));
+        return $this->c::nameToAcronym($this->toName($slug), $strict);
     }
 
     /**
@@ -107,18 +108,19 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
      *
      * @since 160220 Initial release.
      *
-     * @param string $slug Slug to convert to var.
+     * @param string $slug   Slug.
+     * @param bool   $strict Strict?
      *
      * @return string Var; based on slug.
      */
-    public function toVar(string $slug): string
+    public function toVar(string $slug, bool $strict = true): string
     {
         $var = $slug; // Working copy.
         $var = mb_strtolower($this->c::forceAscii($var));
         $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
         $var = $this->c::mbTrim($var, '', '_');
 
-        if ($var && !preg_match('/^[a-z]/u', $var)) {
+        if ($strict && $var && !preg_match('/^[a-z]/u', $var)) {
             $var = 'x'.$var; // Force `^[a-z]`.
         }
         return $var;

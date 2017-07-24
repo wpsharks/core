@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -57,6 +57,18 @@ trait Uuids
     public static function uuidV4(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Uuid->v4(...$args);
+    }
+
+    /**
+     * @since 17xxxx UUID v4 x 2.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Uuid::v4x2()
+     */
+    public static function uuidV4x2(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Uuid->v4x2(...$args);
     }
 
     /**

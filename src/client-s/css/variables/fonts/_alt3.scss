@@ -1,32 +1,34 @@
+$alt3-font-smoothing: auto !default;
+$alt3-font-word-spacing: normal !default;
 $alt3-font-letter-spacing: normal !default;
-$alt3-font-family: 'pencil', sans-serif !default;
+$alt3-font-family: 'montserrat alternates', sans-serif !default;
 $alt3-font-faces: (
-  'import': '',
-  'family': 'pencil',
-  'base-url': '//src.works/wp-content/uploads/2017/06/pencil-',
+  'import': '//fonts.googleapis.com/css?family=Montserrat+Alternates:300,300i,400,400i,500,500i,700,700i,900,900i',
+  'family': 'montserrat alternates',
+  'base-url': '',
 
   'thin': (
     'sub-path': '',
     'italic-sub-path': '',
   ),
   'light': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '300',
+    'italic-sub-path': '300i',
   ),
   'normal': (
     'sub-path': '400',
-    'italic-sub-path': '',
+    'italic-sub-path': '400i',
   ),
   'medium': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '500',
+    'italic-sub-path': '500i',
   ),
   'bold': (
     'sub-path': '700',
-    'italic-sub-path': '',
+    'italic-sub-path': '700i',
   ),
   'thick': (
-    'sub-path': '',
-    'italic-sub-path': '',
+    'sub-path': '900',
+    'italic-sub-path': '900i',
   ),
 ) !default;

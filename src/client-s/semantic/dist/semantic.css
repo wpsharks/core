@@ -31,7 +31,7 @@
   vertical-align: baseline;
   background: #E0E1E2 none;
   color: rgba(0, 0, 0, 0.6);
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   margin: 0em 0.25em 0em 0em;
   padding: 0.6875em 1.5em 0.6875em;
   text-transform: none;
@@ -4074,7 +4074,7 @@
 /* Text Container */
 
 .ui.text.container {
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   max-width: 700px !important;
   line-height: 1.5;
 }
@@ -4404,17 +4404,17 @@
 
 .ui.header {
   border: none;
-  margin: calc(2rem -  0.1em ) 0em 1rem;
+  margin: calc(2rem -  0em ) 0em 1rem;
   padding: 0em 0em;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   font-weight: bold;
-  line-height: 1.2;
+  line-height: 1;
   text-transform: none;
   color: #191919;
 }
 
 .ui.header:first-child {
-  margin-top: -0.1em;
+  margin-top: 0em;
 }
 
 .ui.header:last-child {
@@ -4443,7 +4443,7 @@
   display: table-cell;
   opacity: 1;
   font-size: 1.5em;
-  padding-top: 0.1em;
+  padding-top: 0em;
   vertical-align: middle;
 }
 
@@ -4462,7 +4462,7 @@
 .ui.header > .image:not(.icon),
 .ui.header > img {
   display: inline-block;
-  margin-top: 0.1em;
+  margin-top: 0em;
   width: 2.5em;
   height: auto;
   vertical-align: middle;
@@ -4523,23 +4523,23 @@
 ---------------*/
 
 h1.ui.header {
-  font-size: 3.5em;
+  font-size: 3.75rem;
 }
 
 h2.ui.header {
-  font-size: 2.369em;
+  font-size: 2.75rem;
 }
 
 h3.ui.header {
-  font-size: 1.777em;
+  font-size: 2rem;
 }
 
 h4.ui.header {
-  font-size: 1.333em;
+  font-size: 1.667rem;
 }
 
 h5.ui.header {
-  font-size: 1em;
+  font-size: 1.389rem;
 }
 
 /* Sub Header */
@@ -4570,23 +4570,23 @@ h5.ui.header .sub.header {
 
 .ui.huge.header {
   min-height: 1em;
-  font-size: 3.5em;
+  font-size: 3.75em;
 }
 
 .ui.large.header {
-  font-size: 2.369em;
+  font-size: 2.75em;
 }
 
 .ui.medium.header {
-  font-size: 1.777em;
+  font-size: 2em;
 }
 
 .ui.small.header {
-  font-size: 1.333em;
+  font-size: 1.667em;
 }
 
 .ui.tiny.header {
-  font-size: 1em;
+  font-size: 1.389em;
 }
 
 /* Sub Header */
@@ -5197,7 +5197,7 @@ a.ui.inverted.grey.header:hover {
 --------------------*/
 
 .ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
-  font-size: 1.777em;
+  font-size: 2em;
 }
 
 /*******************************
@@ -9812,7 +9812,7 @@ img.ui.bordered.image {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   text-align: left;
   line-height: 1.21428571em;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   padding: 0.58035714em 0.875em;
   background: #FFFFFF;
   border: 1px solid rgba(34, 36, 38, 0.15);
@@ -11939,7 +11939,7 @@ ol.ui.list ol li,
 .ui.list > .item .header {
   display: block;
   margin: 0em;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   font-weight: bold;
   color: #191919;
 }
@@ -13823,7 +13823,7 @@ ol.ui.horizontal.list li:before,
 .ui.form input[type="text"],
 .ui.form input[type="file"],
 .ui.form input[type="url"] {
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   margin: 0em;
   outline: none;
   -webkit-appearance: none;
@@ -14910,7 +14910,7 @@ ol.ui.horizontal.list li:before,
   display: -ms-flexbox;
   display: flex;
   margin: 1rem 0em;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   background: #FFFFFF;
   font-weight: normal;
   border: 1px solid rgba(34, 36, 38, 0.15);
@@ -17173,9 +17173,9 @@ Floated Menu / Item
 
 .ui.message .header {
   display: block;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   font-weight: bold;
-  margin: -0.1em 0em 0rem 0em;
+  margin: 0em 0em 0rem 0em;
 }
 
 /* Default font size */
@@ -17850,7 +17850,7 @@ Floated Menu / Item
 .ui.card > .content > .header {
   display: block;
   margin: '';
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   color: rgba(0, 0, 0, 0.85);
 }
 
@@ -17861,7 +17861,7 @@ Floated Menu / Item
   font-weight: bold;
   font-size: 1.3125em;
   margin-top: -0.21425em;
-  line-height: 1.2;
+  line-height: 1;
 }
 
 .ui.cards > .card > .content > .meta + .description,
@@ -18892,7 +18892,7 @@ a.ui.card:hover,
 .ui.items > .item > .content > .header {
   display: inline-block;
   margin: -0.21425em 0em 0em;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.85);
 }
@@ -21839,8 +21839,8 @@ select.ui.dropdown {
 }
 
 .ui.search > .results .result .title {
-  margin: -0.1em 0em 0em;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  margin: 0em 0em 0em;
+  font-family: inherit;
   font-weight: bold;
   font-size: 1em;
   color: rgba(0, 0, 0, 0.85);
@@ -21866,7 +21866,7 @@ select.ui.dropdown {
 }
 
 .ui.search > .results > .message .header {
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   font-size: 1rem;
   font-weight: bold;
   color: #191919;
@@ -22076,7 +22076,7 @@ select.ui.dropdown {
 .ui.category.search > .results .category > .name {
   width: 100px;
   background: transparent;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   font-size: 1em;
   float: 1em;
   float: left;

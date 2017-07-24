@@ -1,7 +1,9 @@
 @mixin semantic-content {
   %semantic-content-defaults {
-    .text:not(.icon) {
-      @extend                 %hash-content-font-family;
+    .ui.header {
+      .sub.header {
+        text-shadow:          none;
+      }
     }
 
     li,

@@ -28,7 +28,7 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      *
      * @since 160220 Initial release.
      *
-     * @param string $var Var to validate.
+     * @param string $var Var.
      *
      * @return bool True if var is valid.
      */
@@ -42,7 +42,7 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      *
      * @since 160220 Initial release.
      *
-     * @param string $var Var to convert to name.
+     * @param string $var Var.
      *
      * @return string Name; based on var.
      */
@@ -59,13 +59,14 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      *
      * @since 160220 Initial release.
      *
-     * @param string $var Var to convert to acronym.
+     * @param string $var    Var.
+     * @param bool   $strict Strict?
      *
      * @return string Acronym; based on var.
      */
-    public function toAcronym(string $var): string
+    public function toAcronym(string $var, bool $strict = true): string
     {
-        return $this->c::nameToAcronym($this->toName($var));
+        return $this->c::nameToAcronym($this->toName($var), $strict);
     }
 
     /**
@@ -73,18 +74,19 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      *
      * @since 160220 Initial release.
      *
-     * @param string $var Var to convert to slug.
+     * @param string $var    Var.
+     * @param bool   $strict Strict?
      *
      * @return string Slug; based on var.
      */
-    public function toSlug(string $var): string
+    public function toSlug(string $var, bool $strict = true): string
     {
         $slug = $var; // Working copy.
         $slug = mb_strtolower($this->c::forceAscii($slug));
         $slug = preg_replace('/[^a-z0-9]+/u', '-', $slug);
         $slug = $this->c::mbTrim($slug, '', '-');
 
-        if ($slug && !preg_match('/^[a-z]/u', $slug)) {
+        if ($strict && $slug && !preg_match('/^[a-z]/u', $slug)) {
             $slug = 'x'.$slug; // Force `^[a-z]`.
         }
         return $slug;
@@ -95,17 +97,18 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      *
      * @since 170413.34876 Initial release.
      *
-     * @param string $var Var to convert to camelCase.
+     * @param string $var    Var.
+     * @param bool   $strict Strict?
      *
      * @return string camelCase; based on var.
      */
-    public function toCamelCase(string $var): string
+    public function toCamelCase(string $var, bool $strict = true): string
     {
         $var = mb_strtolower($this->c::forceAscii($var));
         $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
         $var = $this->c::mbTrim($var, '', '_');
 
-        if ($var && !preg_match('/^[a-z]/u', $var)) {
+        if ($strict && $var && !preg_match('/^[a-z]/u', $var)) {
             $var = 'x'.$var; // Force `^[a-z]`.
         }
         return $camelCase = $var ? preg_replace_callback('/_(.)/u', function (array $m): string {

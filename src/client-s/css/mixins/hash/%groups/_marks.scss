@@ -1,7 +1,7 @@
 %hash-inline-mark-defaults {
   @extend                     %hash-0-line-height;
   @extend                     %hash-white-space-nowrap;
-  @extend                     %hash-display-inline-block-middle;
+  @extend                     %hash-display-inline-block;
   @extend                     %hash-default-border-props;
 
   margin:                     0 .15em;
@@ -20,7 +20,6 @@
   @extend                     %hash-white-space-normal;
   @extend                     %hash-display-inline-baseline;
 
-  font-size:                  1em;
   line-height:                inherit;
 
   //
@@ -28,6 +27,12 @@
   color:                      inherit;
 
   //
-  text-shadow:                none;
+  text-shadow:                inherit;
   box-shadow:                 none;
+}
+
+%hash-inline-unmark-code {
+  @extend                     %hash-inline-unmark-defaults;
+
+  font-size:                 .889em;
 }

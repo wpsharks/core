@@ -1,6 +1,22 @@
 ## $v
 
+- Adding `c::split()`.
+- Adding `c::redirect()`.
+- Adding `c::spinReload()`.
 - Adding `c::htmlCompress()`.
+- Adding `c::getUeCookie()`
+- Adding `c::setUeCookie()`
+- Adding `c::uuidV4x2()`
+- Adding `c::licenseKey()`
+- Adding `c::publicApiKey()`
+- Adding `c::secretApiKey()`
+- Adding `c::secretSigKey()`
+- Adding `c::crc32KeyedHash()`
+- Adding `c::closeRequestEarly()`
+- Adding `c::die()`
+- Adding `c::dieInvalid()`
+- Adding `c::dieForbidden()`
+- Adding `$strict` param in all slug, var, and acronym utils.
 
 ## v170623.50532
 

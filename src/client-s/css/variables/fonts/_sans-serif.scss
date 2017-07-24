@@ -1,9 +1,11 @@
+$sans-serif-font-smoothing: auto !default;
+$sans-serif-font-word-spacing: normal !default;
 $sans-serif-font-letter-spacing: normal !default;
-$sans-serif-font-family: 'terfens', sans-serif !default;
+$sans-serif-font-family: 'fira sans', sans-serif !default;
 $sans-serif-font-faces: (
-  'import': '',
-  'family': 'terfens',
-  'base-url': '//src.works/wp-content/uploads/2017/06/terfens-',
+  'import': '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,700,700i,900,900i',
+  'family': 'fira sans',
+  'base-url': '',
 
   'thin': (
     'sub-path': '',

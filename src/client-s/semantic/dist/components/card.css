@@ -167,7 +167,7 @@
 .ui.card > .content > .header {
   display: block;
   margin: '';
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   color: rgba(0, 0, 0, 0.85);
 }
 
@@ -177,7 +177,7 @@
   font-weight: bold;
   font-size: 1.3125em;
   margin-top: -0.21425em;
-  line-height: 1.2;
+  line-height: 1;
 }
 .ui.cards > .card > .content > .meta + .description,
 .ui.cards > .card > .content > .header + .description,

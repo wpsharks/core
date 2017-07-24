@@ -34,11 +34,11 @@
   }
 
   .\!\#f\:smooth {
-    @include font-smoothing('auto', true);
+    @include font-smoothing(auto, true);
   }
 
   .\#f\:smooth {
-    @include font-smoothing('antialiased', true);
+    @include font-smoothing(antialiased, true);
   }
 
   // Styles.

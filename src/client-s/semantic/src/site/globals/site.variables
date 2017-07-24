@@ -11,14 +11,14 @@
 
 @fontSmoothing     : auto;
 @importGoogleFonts : false;
-@pageFont          : 'terfens', 'trebuchet ms', sans-serif;
-@headerFont        : 'terfens', 'trebuchet ms', sans-serif;
+@pageFont          : inherit;
+@headerFont        : inherit;
 
-@h1 : 3.5em;
-@h2 : 2.369em;
-@h3 : 1.777em;
-@h4 : 1.333em;
-@h5 : 1em;
-@h6 : 1em;
+@h1 : 3.75rem;
+@h2 : 2.75rem;
+@h3 : 2rem;
+@h4 : 1.667rem;
+@h5 : 1.389rem;
+@h6 : 1.389rem;
 
-@headerLineHeight  : 1.2;
+@headerLineHeight  : 1;

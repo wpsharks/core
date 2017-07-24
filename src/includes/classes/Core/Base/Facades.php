@@ -47,6 +47,7 @@ abstract class Facades
     use Traits\Facades\Eols;
     use Traits\Facades\Errors;
     use Traits\Facades\Escapes;
+    use Traits\Facades\Fatalities;
     use Traits\Facades\Files;
     use Traits\Facades\GitHub;
     use Traits\Facades\Gravatar;
@@ -56,6 +57,7 @@ abstract class Facades
     use Traits\Facades\Indents;
     use Traits\Facades\Ips;
     use Traits\Facades\Iterators;
+    use Traits\Facades\Keygen;
     use Traits\Facades\MailChimp;
     use Traits\Facades\Markdown;
     use Traits\Facades\Memcache;
@@ -70,6 +72,7 @@ abstract class Facades
     use Traits\Facades\Pdo;
     use Traits\Facades\Percentages;
     use Traits\Facades\Php;
+    use Traits\Facades\Redirect;
     use Traits\Facades\Replacements;
     use Traits\Facades\RequestType;
     use Traits\Facades\Routes;
@@ -81,6 +84,8 @@ abstract class Facades
     use Traits\Facades\Slashes;
     use Traits\Facades\Slugs;
     use Traits\Facades\Spellcheck;
+    use Traits\Facades\SpinReload;
+    use Traits\Facades\Split;
     use Traits\Facades\Sris;
     use Traits\Facades\Stripe;
     use Traits\Facades\Templates;

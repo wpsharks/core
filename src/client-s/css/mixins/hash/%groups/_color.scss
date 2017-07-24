@@ -16,6 +16,24 @@
   @include basic-colors;
 }
 
+// Inverted colors.
+
+%hash-inverted-color {
+  @include inverted-color;
+}
+
+%hash-inverted-border-color {
+  @include inverted-border-color;
+}
+
+%hash-inverted-bg-color {
+  @include inverted-bg-color;
+}
+
+%hash-inverted-colors {
+  @include inverted-colors;
+}
+
 // Default colors.
 
 %hash-default-color {
@@ -32,4 +50,32 @@
 
 %hash-default-colors {
   @include default-colors;
+}
+
+// Color <a> decor.
+
+%hash-color-a-decor {
+  @include color-a-decor(false, 0.9);
+}
+
+%hash-color-a-decor-opacity-on-img-only {
+  @include color-a-decor(false, 0.9, true);
+}
+
+%hash-color-a-decor-no-opacity {
+  @include color-a-decor(false, false);
+}
+
+// Inverted color <a> decor.
+
+%hash-inverted-color-a-decor {
+  @include color-a-decor(false, 0.9, false, $bg-color, false);
+}
+
+%hash-inverted-color-a-decor-opacity-on-img-only {
+  @include color-a-decor(false, 0.9, true, $bg-color, false);
+}
+
+%hash-inverted-color-a-decor-no-opacity {
+  @include color-a-decor(false, false, false, $bg-color, false);
 }

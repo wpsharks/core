@@ -101,9 +101,9 @@
 // Font smoothing.
 
 %hash-font-smoothing-antialiased {
-  @include font-smoothing('antialiased');
+  @include font-smoothing(antialiased);
 }
 
 %hash-font-smoothing-defaults {
-  @include font-smoothing('auto');
+  @include font-smoothing(auto);
 }

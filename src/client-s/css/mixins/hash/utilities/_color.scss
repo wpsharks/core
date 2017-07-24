@@ -10,23 +10,6 @@
 
   // Groups.
 
-  %color-a-decor-events {
-    a:not(.\@btn),
-    summary {
-      opacity:               .8;
-      color:                  inherit;
-
-      &:hover {
-        opacity:              1;
-        color:                inherit;
-      }
-    }
-
-    a:not(.\@btn) {
-      text-decoration:        underline;
-    }
-  }
-
   %color-white {
     color:                    $white-color !important;
   }
@@ -57,7 +40,7 @@
 
   @each $k, $v in $swatch {
     .c\##{esc-class($k)} {
-      @extend                 %color-a-decor-events;
+      @extend                 %hash-color-a-decor;
 
       //
       @if $v == $white-color {
@@ -72,7 +55,7 @@
     }
 
     .\##{esc-class($k)} {
-      @extend                 %color-a-decor-events;
+      @extend                 %hash-color-a-decor;
 
       //
       @if contrast($v) == $white-color {
@@ -115,7 +98,7 @@
   @each $m, $p in ('--': 45%, '-': 25%) {
     @each $k, $v in $swatch {
       .c#{esc-class($m)}\##{esc-class($k)} {
-        @extend               %color-a-decor-events;
+        @extend               %hash-color-a-decor;
 
         //
         @if lighten($v, $p) == $white-color {
@@ -130,7 +113,7 @@
       }
 
       .#{esc-class($m)}\##{esc-class($k)} {
-        @extend               %color-a-decor-events;
+        @extend               %hash-color-a-decor;
 
         //
         @if contrast(lighten($v, $p)) == $white-color {
@@ -174,7 +157,7 @@
   @each $m, $p in ('\\+': 10%, '\\+\\+': 20%) {
     @each $k, $v in $swatch {
       .c#{esc-class($m)}\##{esc-class($k)} {
-        @extend               %color-a-decor-events;
+        @extend               %hash-color-a-decor;
 
         //
         @if darken($v, $p) == $white-color {
@@ -189,7 +172,7 @@
       }
 
       .#{esc-class($m)}\##{esc-class($k)} {
-        @extend               %color-a-decor-events;
+        @extend               %hash-color-a-decor;
 
         //
         @if contrast(darken($v, $p)) == $white-color {

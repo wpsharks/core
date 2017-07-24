@@ -1,6 +1,6 @@
 // Basic colors.
 
-@mixin basic-color($important: false) {
+@mixin basic-color($important: false, $alpha: 1) {
   @if $important {
     $important: '!important';
   }
@@ -8,10 +8,10 @@
     $important: '';
   }
 
-  color:                      $fg-color #{$important};
+  color:                      rgba($fg-color, $alpha) #{$important};
 }
 
-@mixin basic-border-color($important: false) {
+@mixin basic-border-color($important: false, $alpha: 1) {
   @if $important {
     $important: '!important';
   }
@@ -19,10 +19,10 @@
     $important: '';
   }
 
-  border-color:               darken($bg-color, 15%) #{$important};
+  border-color:               rgba(darken($bg-color, 15%), $alpha) #{$important};
 }
 
-@mixin basic-bg-color($important: false) {
+@mixin basic-bg-color($important: false, $alpha: 1) {
   @if $important {
     $important: '!important';
   }
@@ -30,7 +30,7 @@
     $important: '';
   }
 
-  background-color:           $bg-color #{$important};
+  background-color:           rgba($bg-color, $alpha) #{$important};
 }
 
 @mixin basic-colors($important: false) {
@@ -46,9 +46,57 @@
   background-color:           $bg-color #{$important};
 }
 
+// Inverted colors.
+
+@mixin inverted-color($important: false, $alpha: 1) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  color:                      rgba($bg-color, $alpha) #{$important};
+}
+
+@mixin inverted-border-color($important: false, $alpha: 1) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  border-color:               rgba(darken($fg-color, 15%), $alpha) #{$important};
+}
+
+@mixin inverted-bg-color($important: false, $alpha: 1) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  background-color:           rgba($fg-color, $alpha) #{$important};
+}
+
+@mixin inverted-colors($important: false) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  color:                      $bg-color #{$important};
+  border-color:               darken($fg-color, 15%) #{$important};
+  background-color:           $fg-color #{$important};
+}
+
 // Default colors.
 
-@mixin default-color($important: false) {
+@mixin default-color($important: false, $alpha: 1) {
   @if $important {
     $important: '!important';
   }
@@ -56,10 +104,10 @@
     $important: '';
   }
 
-  color:                      contrast(map-get($swatch, default)) #{$important};
+  color:                      rgba(contrast(map-get($swatch, default)), $alpha) #{$important};
 }
 
-@mixin default-border-color($important: false) {
+@mixin default-border-color($important: false, $alpha: 1) {
   @if $important {
     $important: '!important';
   }
@@ -67,10 +115,10 @@
     $important: '';
   }
 
-  border-color:               darken(map-get($swatch, default), 15%) #{$important};
+  border-color:               rgba(darken(map-get($swatch, default), 15%), $alpha) #{$important};
 }
 
-@mixin default-bg-color($important: false) {
+@mixin default-bg-color($important: false, $alpha: 1) {
   @if $important {
     $important: '!important';
   }
@@ -78,7 +126,7 @@
     $important: '';
   }
 
-  background-color:           map-get($swatch, default) #{$important};
+  background-color:           rgba(map-get($swatch, default), $alpha) #{$important};
 }
 
 @mixin default-colors($important: false) {
@@ -92,4 +140,62 @@
   color:                      contrast(map-get($swatch, default)) #{$important};
   border-color:               darken(map-get($swatch, default), 15%) #{$important};
   background-color:           map-get($swatch, default) #{$important};
+}
+
+// Color hover/decoration.
+
+@mixin color-a-decor($important: false, $opacity: 0.9, $opacity-on-img-only: false, $hover-color: inherit, $underline: true) {
+  @if $important {
+    $important: '!important';
+  }
+  @else {
+    $important: '';
+  }
+
+  @if $opacity == false {
+    a:not(.\@btn),
+    summary {
+      color:                  inherit #{$important};
+
+      &:hover {
+        color:                $hover-color #{$important};
+      }
+    }
+  }
+  @else if $opacity-on-img-only {
+    a:not(.\@btn),
+    summary {
+      color:                  inherit #{$important};
+
+      > img {
+        opacity:              $opacity #{$important};
+      }
+
+      &:hover {
+        color:                $hover-color #{$important};
+
+        > img {
+          opacity:            1 #{$important};
+        }
+      }
+    }
+  }
+  @else {
+    a:not(.\@btn),
+    summary {
+      opacity:                $opacity #{$important};
+      color:                  inherit #{$important};
+
+      &:hover {
+        opacity:              1 #{$important};
+        color:                $hover-color #{$important};
+      }
+    }
+  }
+
+  @if $underline {
+    a:not(.\@btn) {
+      text-decoration:        underline #{$important};
+    }
+  }
 }

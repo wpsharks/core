@@ -6,18 +6,12 @@
 
     @extend                   %hash-0-padding;
     @extend                   %hash-block-margins;
-    @extend                   %hash-body-hx-font-family;
-    @extend                   %hash-body-hx-font-weight;
+    @extend                   %hash-1-line-height;
 
-    line-height:              1.2;
     margin-top:               calc(2rem -  0.143em);
 
     > small {
       font-weight:            lighter;
-    }
-
-    > code {
-      @extend                 %hash-inline-unmark-defaults;
     }
   }
 
@@ -25,35 +19,50 @@
     @extend                   %hash-body-h1-font-family;
     @extend                   %hash-body-h1-font-weight;
 
-    line-height:              1.1;
-    min-height:               1rem;
-    font-size:                3.557em;
+    font-size:                3.75rem;
   }
 
   %hash-h2-tag-defaults {
     @extend                   %hash-body-h2-font-family;
     @extend                   %hash-body-h2-font-weight;
 
-    line-height:              1.1;
-    font-size:                2.369em;
+    font-size:                2.75rem;
   }
 
   %hash-h3-tag-defaults {
-    font-size:                1.777em;
+    @extend                   %hash-body-hx-font-family;
+    @extend                   %hash-body-hx-font-weight;
+
+    font-size:                2rem;
   }
 
   %hash-h4-tag-defaults {
-    font-size:                1.333em;
+    @extend                   %hash-body-hx-font-family;
+    @extend                   %hash-body-hx-font-weight;
+
+    font-size:                1.667rem;
   }
 
   %hash-h5-tag-defaults {
-    font-size:                1em;
+    @extend                   %hash-body-hx-font-family;
+    @extend                   %hash-body-hx-font-weight;
+
+    font-size:                1.389rem;
   }
 
   %hash-h6-tag-defaults {
-    font-size:                1em;
-    margin-top:               1rem;
+    @extend                   %hash-body-hx-font-family;
+    @extend                   %hash-body-hx-font-weight;
+
+    margin-bottom:            0;
+
+    //
+    font-size:                1.389rem;
     line-height:              $line-height;
+
+    + * {
+      margin-top:             0;
+    }
   }
 
   %hash-h-tag-modifier-defaults {
@@ -66,12 +75,12 @@
 
       //
       line-height:            1em;
-      border-width:           1px;
+      border-width:           0 0 1px;
 
       //
       margin-left:           -.5em;
       margin-right:          -.5em;
-      padding:               .5em .75em;
+      padding:               .25em .5em;
 
       > label {
         float:                right;
@@ -80,6 +89,10 @@
         //
         font-size:           .5em;
         color:                inherit;
+      }
+
+      > code {
+        @extend               %hash-inline-unmark-code;
       }
     }
   }

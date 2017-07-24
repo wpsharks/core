@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -101,11 +101,12 @@ class Name extends Classes\Core\Base\Core
      *
      * @since 160220 Initial release.
      *
-     * @param string $name Full name.
+     * @param string $name   Full name.
+     * @param bool   $strict Strict?
      *
      * @return string Acronym; based on name.
      */
-    public function toAcronym(string $name): string
+    public function toAcronym(string $name, bool $strict = true): string
     {
         $acronym = ''; // Initialize.
 
@@ -123,7 +124,7 @@ class Name extends Classes\Core\Base\Core
             }
         } // unset($_word);
 
-        if (mb_strlen($acronym) < 2) {
+        if ($strict && mb_strlen($acronym) < 2) {
             $acronym = $this->c::mbStrPad(mb_substr($acronym, 0, 2), 2, 'x');
         }
         return mb_strtoupper($acronym);
@@ -134,11 +135,12 @@ class Name extends Classes\Core\Base\Core
      *
      * @since 150424 Initial release.
      *
-     * @param string $name Full name.
+     * @param string $name   Full name.
+     * @param bool   $strict Strict?
      *
      * @return string Slug; based on name.
      */
-    public function toSlug(string $name): string
+    public function toSlug(string $name, bool $strict = true): string
     {
         $name = $this->stripClean($name);
 
@@ -147,7 +149,7 @@ class Name extends Classes\Core\Base\Core
         $slug = preg_replace('/[^a-z0-9]+/u', '-', $slug);
         $slug = $this->c::mbTrim($slug, '', '-');
 
-        if ($slug && !preg_match('/^[a-z]/u', $slug)) {
+        if ($strict && $slug && !preg_match('/^[a-z]/u', $slug)) {
             $slug = 'x'.$slug; // Force `^[a-z]`.
         }
         return $slug;
@@ -158,11 +160,12 @@ class Name extends Classes\Core\Base\Core
      *
      * @since 160220 Var utils.
      *
-     * @param string $name Full name.
+     * @param string $name   Full name.
+     * @param bool   $strict Strict?
      *
      * @return string Var; based on name.
      */
-    public function toVar(string $name): string
+    public function toVar(string $name, bool $strict = true): string
     {
         $name = $this->stripClean($name);
 
@@ -171,7 +174,7 @@ class Name extends Classes\Core\Base\Core
         $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
         $var = $this->c::mbTrim($var, '', '_');
 
-        if ($var && !preg_match('/^[a-z]/u', $var)) {
+        if ($strict && $var && !preg_match('/^[a-z]/u', $var)) {
             $var = 'x'.$var; // Force `^[a-z]`.
         }
         return $var;

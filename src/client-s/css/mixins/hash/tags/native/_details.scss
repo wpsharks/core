@@ -20,7 +20,7 @@
       }
 
       &#{'::-webkit-details-marker'} {
-        @extend               %hash-display-none;
+        display:              none;
       }
 
       &::before {

@@ -4,10 +4,10 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES5",
-    "outFile": "../app.js"
+    "outFile": "../default-app.js"
   },
   "include": [
     "./typings/index.d.ts",
-    "./app.ts"
+    "./default-app.ts"
   ]
 }

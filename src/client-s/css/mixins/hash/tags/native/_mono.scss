@@ -9,13 +9,14 @@
   %hash-mono-tag-default-family {
     @extend                   %hash-monospace-font-family;
 
+    font-kerning:             auto;
+    text-rendering:           auto;
     font-feature-settings:    normal;
   }
 
   %hash-mono-inline-code-tag-defaults {
     @extend                   %hash-inline-mark-defaults;
 
-    font-size:               .889em;
     color:                    $fg-color;
     background:               darken($bg-color, 3%);
     border-color:             darken($bg-color, 9%);
@@ -105,6 +106,10 @@
           background:         $fg-color;
         }
 
+        > strong {
+          font-weight:        700;
+        }
+
         .hljs-comment,
         .hljs-keyword,
         .hljs-built_in,
@@ -123,11 +128,10 @@
           @extend             %hash-user-select-none;
           @extend             %hash-content-font-family;
 
-          font-size:         .889em;
           content:            attr(title);
 
           //
-          padding:            1.65ex .5em;
+          padding:            1.54ex .5em;
 
           //
           color:              $white-color;

@@ -99,7 +99,7 @@
 .ui.form input[type="text"],
 .ui.form input[type="file"],
 .ui.form input[type="url"] {
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   margin: 0em;
   outline: none;
   -webkit-appearance: none;

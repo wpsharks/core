@@ -1,9 +1,11 @@
+$serif-font-smoothing: auto !default;
+$serif-font-word-spacing: normal !default;
 $serif-font-letter-spacing: normal !default;
-$serif-font-family: 'stafford', serif !default;
+$serif-font-family: 'taviraj', serif !default;
 $serif-font-faces: (
-  'import': '',
-  'family': 'stafford',
-  'base-url': '//src.works/wp-content/uploads/2017/06/stafford-',
+  'import': '//fonts.googleapis.com/css?family=Taviraj:300,300i,400,400i,500,500i,700,700i,900,900i',
+  'family': 'taviraj',
+  'base-url': '',
 
   'thin': (
     'sub-path': '',

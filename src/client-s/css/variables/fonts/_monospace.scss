@@ -1,13 +1,15 @@
+$monospace-font-smoothing: auto !default;
+$monospace-font-word-spacing: normal !default;
 $monospace-font-letter-spacing: normal !default;
-$monospace-font-family: 'operator mono ssm a', 'operator mono ssm b', $mono !default;
+$monospace-font-family: 'roboto mono', 'monaco', monospace !default;
 $monospace-font-faces: (
-  'import': '',
-  'family': '',
+  'import': '//fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400,400i,500,500i,700,700i',
+  'family': 'roboto mono',
   'base-url': '',
 
   'thin': (
-    'sub-path': '100',
-    'italic-sub-path': '100i',
+    'sub-path': '',
+    'italic-sub-path': '',
   ),
   'light': (
     'sub-path': '300',
@@ -26,7 +28,7 @@ $monospace-font-faces: (
     'italic-sub-path': '700i',
   ),
   'thick': (
-    'sub-path': '900',
-    'italic-sub-path': '900i',
+    'sub-path': '',
+    'italic-sub-path': '',
   ),
 ) !default;

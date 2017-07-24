@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -36,6 +36,18 @@ trait Cookies
     }
 
     /**
+     * @since 17xxxx Unencrypted cookies.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Cookie::getUe()
+     */
+    public static function getUeCookie(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Cookie->getUe(...$args);
+    }
+
+    /**
      * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -45,5 +57,17 @@ trait Cookies
     public static function setCookie(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Cookie->set(...$args);
+    }
+
+    /**
+     * @since 17xxxx Unencrypted cookies.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Cookie::setUe()
+     */
+    public static function setUeCookie(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Cookie->setUe(...$args);
     }
 }

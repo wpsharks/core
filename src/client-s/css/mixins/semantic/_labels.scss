@@ -2,7 +2,6 @@
   .ui.label {
     &.pointing {
       &::before {
-        // Bug fix in Semantic UI v2.2.10.
         border-style:         solid;
       }
     }

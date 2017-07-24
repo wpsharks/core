@@ -59,33 +59,5 @@
         font-variant:         inherit;
       }
     }
-
-    &.\#f\:mono,
-    &.\#f\:system,
-    &.\#f\:georgia,
-    &.\#f\:helvetica,
-    &.\#f\:lucida,
-    &.\#f\:verdana,
-    &.\#f\:serif,
-    &.\#f\:sans-serif,
-    &.\#f\:monospace,
-    &.\#f\:alt1,
-    &.\#f\:alt2,
-    &.\#f\:alt3,
-    &.\#f\:alt4,
-    &.\#f\:body,
-    &.\#f\:body-hx,
-    &.\#f\:body-h1,
-    &.\#f\:body-h2,
-    &.\#f\:content,
-    &.\#f\:content-hx,
-    &.\#f\:content-h1,
-    &.\#f\:content-h2,
-    &.\#f\:content-lede {
-      > .item {
-        font-family:          inherit;
-        letter-spacing:       inherit;
-      }
-    }
   }
 }

@@ -41,9 +41,9 @@
 /* Header */
 .ui.message .header {
   display: block;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   font-weight: bold;
-  margin: -0.1em 0em 0rem 0em;
+  margin: 0em 0em 0rem 0em;
 }
 
 /* Default font size */

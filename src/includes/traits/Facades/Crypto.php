@@ -122,6 +122,18 @@ trait Crypto
     }
 
     /**
+     * @since 17xxxx First facades.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Crc32::keyedHash()
+     */
+    public static function crc32KeyedHash(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Crc32->keyedHash(...$args);
+    }
+
+    /**
      * @since 161003 Encode one ID.
      *
      * @param mixed ...$args Variadic args to underlying utility.

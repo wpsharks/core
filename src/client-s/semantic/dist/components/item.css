@@ -138,7 +138,7 @@
 .ui.items > .item > .content > .header {
   display: inline-block;
   margin: -0.21425em 0em 0em;
-  font-family: 'terfens', 'trebuchet ms', sans-serif;
+  font-family: inherit;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.85);
 }

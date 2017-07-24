@@ -1,3 +1,5 @@
+// Text shadows.
+
 @mixin -text-shadow($important: false, $color: $black-color) {
   @if $important {
     $important: '!important';
@@ -31,6 +33,8 @@
   text-shadow:                0 0.8px 0.4px rgba($color, 0.5) #{$important};
 }
 
+// Raised text-shadow effect.
+
 @mixin text-shadow-raise($important: false, $color: $black-color, $bg-color: $bg-color) {
   @if $important {
     $important: '!important';
@@ -39,7 +43,7 @@
     $important: '';
   }
 
-  text-shadow:               -0.015em -0.015em 0 $bg-color, -0.03em -0.03em 0 $bg-color, 0.015em 0.015em 0 $bg-color, 0.03em 0.03em 0 $bg-color, 0.06em 0.06em 0 rgba($color, 0.25) #{$important};
+  text-shadow:               -0.015em -0.015em 0 $bg-color, -0.03em -0.03em 0 $bg-color, 0.015em 0.015em 0 $bg-color, 0.03em 0.03em 0 $bg-color, 0.06em 0.06em 0 rgba($color, 0.15) #{$important};
 }
 
 @mixin \+text-shadow-raise($important: false, $color: $black-color, $bg-color: $bg-color) {
@@ -53,6 +57,8 @@
   text-shadow:               -0.025em -0.025em 0 $bg-color, -0.05em -0.05em 0 $bg-color, 0.025em 0.025em 0 $bg-color, 0.05em 0.05em 0 $bg-color, 0.085em 0.085em 0.025em rgba($color, 0.25) #{$important};
 }
 
+// 3d text-shadow effect (on white).
+
 @mixin text-shadow-3d-white($important: false) {
   @if $important {
     $important: '!important';
@@ -62,5 +68,5 @@
   }
 
   color:                      $white-color #{$important};
-  text-shadow:                0 1px 0 rgb(204, 204, 204), 0 2px 0 rgb(201, 201, 201), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.24706), 0 10px 10px rgba(0, 0, 0, 0.2) #{$important};
+  text-shadow:                0 1px 0 rgb(204, 204, 204), 0 2px 0 rgb(201, 201, 201), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2) #{$important};
 }
