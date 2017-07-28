@@ -34,19 +34,18 @@ $time               = time(); // Time now.
 $_r                 = $this->c::unslash($_REQUEST);
 $_reloads           = (int) ($_r['_reloads'] ?? 0);
 $_first_reload_time = (int) ($_r['_first_reload_time'] ?? 0);
-$_elapsed_time      = $time - $_first_reload_time;
-
-$query_args = [
-    '_reloads'           => $_reloads + 1,
-    '_first_reload_time' => $_first_reload_time ?: $time,
-];
-$url = $this->c::addUrlQueryArgs($query_args, $url);
+$_elapsed_time      = $_first_reload_time ? $time - $_first_reload_time : 0;
 
 if ($max_reloads && $_reloads > $max_reloads) {
     $this->c::die($max_message);
 } elseif ($max_time && $_elapsed_time > $max_time) {
     $this->c::die($max_message);
 }
+$query_args = [
+    '_reloads'           => $_reloads + 1,
+    '_first_reload_time' => $_first_reload_time ?: $time,
+];
+$url = $this->c::addUrlQueryArgs($query_args, $url);
 ?>
 <!DOCTYPE html>
 <html>

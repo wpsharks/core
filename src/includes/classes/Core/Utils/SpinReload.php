@@ -34,6 +34,7 @@ class SpinReload extends Classes\Core\Base\Core
     {
         $this->c::noCacheFlags();
         $this->c::noCacheHeaders();
+
         header('content-type: text/html; charset=utf-8');
         exit($this->c::getTemplate('http/html/utils/spin-reload.php')->parse($vars));
     }
