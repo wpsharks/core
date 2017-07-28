@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -26,9 +26,9 @@ class Sha1Mod extends Classes\Core\Base\Core
     /**
      * Total MySQL DB shards.
      *
-     * @since 160225
+     * @since 160225 SHA-1 modulus.
      *
-     * @var int
+     * @type int Total MySQL DB shards.
      */
     protected $total_mysql_db_shards;
 

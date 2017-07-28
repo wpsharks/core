@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -37,11 +37,9 @@ class DirDelete extends Classes\Core\Base\Core
     {
         if (!$dir || !is_dir($dir)) {
             return true;
-        }
-        if (!is_writable($dir)) {
+        } elseif (!is_writable($dir)) {
             return false;
-        }
-        if (!$recursively) {
+        } elseif (!$recursively) {
             return rmdir($dir);
         }
         if (!($opendir = opendir($dir))) {
@@ -61,6 +59,6 @@ class DirDelete extends Classes\Core\Base\Core
         } // unset($_dir_file); // Housekeeping.
         closedir($opendir); // Close resource now.
 
-        return rmdir($dir);
+        return rmdir($dir); // Boolean.
     }
 }

@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -32,7 +32,7 @@ class Serializer extends Classes\Core\Base\Core
      *
      * @since 160712
      *
-     * @var ClosureSerializer
+     * @type ClosureSerializer
      */
     protected $ClosureAstSerializer;
 
@@ -41,7 +41,7 @@ class Serializer extends Classes\Core\Base\Core
      *
      * @since 160712
      *
-     * @var ClosureSerializer
+     * @type ClosureSerializer
      */
     protected $ClosureTokenSerializer;
 
@@ -50,7 +50,7 @@ class Serializer extends Classes\Core\Base\Core
      *
      * @since 160712 Serializer.
      *
-     * @var string `⌗🆂🅲⫶` Four UTF-8 chars.
+     * @type string `⌗🆂🅲⫶` Four UTF-8 chars.
      */
     const CLOSURE = "\u{2317}\u{1F182}\u{1F172}\u{2AF6}";
 
@@ -129,21 +129,31 @@ class Serializer extends Classes\Core\Base\Core
      * Maybe serialize value.
      *
      * @since 150424 Serializer.
+     * @since 17xxxx `$strict` param (= true).
      *
-     * @param mixed $value Value to serialize.
+     * @param mixed $value  Value to serialize.
+     * @param bool  $strict Enable strict types?
      *
      * @return string A string (possibly serialized).
      */
-    public function maybeSerialize($value): string
+    public function maybeSerialize($value, bool $strict = true): string
     {
-        if (is_string($value)) {
-            return $string = $value;
-        } elseif (is_bool($value)) {
-            return $string = (string) (int) $value;
-        } elseif (is_int($value) || is_float($value)) {
-            return $string = (string) $value;
-        } else { // Serialize.
-            return $string = $this->__invoke($value);
+        if (!$strict) {
+            if (is_string($value)) {
+                return $string = $value;
+            } elseif (is_bool($value)) {
+                return $string = (string) (int) $value;
+            } elseif (is_int($value) || is_float($value)) {
+                return $string = (string) $value;
+            } else { // Serialize.
+                return $string = $this->__invoke($value);
+            }
+        } else { // Default.
+            if (is_string($value)) {
+                return $string = $value;
+            } else { // Serialize.
+                return $string = $this->__invoke($value);
+            }
         }
     }
 

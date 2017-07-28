@@ -1,22 +1,35 @@
 ## $v
 
+- Adding `c::isTruthy()`.
+- Adding `c::isFalsy()`.
+- Adding `c::yesNo()`.
+- Adding `c::onOff()`.
+- Adding `c::trueFalse()`.
+- Adding `c::oneZero()`.
 - Adding `c::split()`.
+- Adding `c::isSha1()`.
 - Adding `c::redirect()`.
 - Adding `c::spinReload()`.
+- Adding `c::currencySymbol()`.
 - Adding `c::htmlCompress()`.
-- Adding `c::getUeCookie()`
-- Adding `c::setUeCookie()`
-- Adding `c::uuidV4x2()`
-- Adding `c::licenseKey()`
-- Adding `c::publicApiKey()`
-- Adding `c::secretApiKey()`
-- Adding `c::secretSigKey()`
-- Adding `c::crc32KeyedHash()`
-- Adding `c::closeRequestEarly()`
-- Adding `c::die()`
-- Adding `c::dieInvalid()`
-- Adding `c::dieForbidden()`
+- Adding `c::getUeCookie()`.
+- Adding `c::setUeCookie()`.
+- Adding `c::uuidV4x2()`.
+- Adding `c::licenseKey()`.
+- Adding `c::publicApiKey()`.
+- Adding `c::secretApiKey()`.
+- Adding `c::secretSigKey()`.
+- Adding `c::crc32KeyedHash()`.
+- Adding `c::closeRequestEarly()`.
+- Adding `c::die()`.
+- Adding `c::dieInvalid()`.
+- Adding `c::dieForbidden()`.
+- Adding `c::dirCacheGet()`.
+- Adding `c::dirCacheSet()`.
+- Adding `c::dirCacheClear()`.
+- Adding `c::remoteFileSize()`.
 - Adding `$strict` param in all slug, var, and acronym utils.
+- Adding a new parameter to `c::sQuote()` that allows it to detect string-literals.
 
 ## v170623.50532
 

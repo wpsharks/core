@@ -31,6 +31,7 @@ abstract class Facades
     use Traits\Facades\Base64;
     use Traits\Facades\Benchmark;
     use Traits\Facades\Bitly;
+    use Traits\Facades\Boolean;
     use Traits\Facades\Captcha;
     use Traits\Facades\Cli;
     use Traits\Facades\Clippers;
@@ -38,9 +39,11 @@ abstract class Facades
     use Traits\Facades\Cookies;
     use Traits\Facades\Country;
     use Traits\Facades\Crypto;
+    use Traits\Facades\Currency;
     use Traits\Facades\Debugging;
     use Traits\Facades\Deprecated;
     use Traits\Facades\Dimensions;
+    use Traits\Facades\DirCache;
     use Traits\Facades\Dirs;
     use Traits\Facades\Dump;
     use Traits\Facades\Email;
@@ -78,6 +81,7 @@ abstract class Facades
     use Traits\Facades\Routes;
     use Traits\Facades\SearchTerms;
     use Traits\Facades\Serializer;
+    use Traits\Facades\Sha1;
     use Traits\Facades\Sha1Mods;
     use Traits\Facades\SimpleExpressions;
     use Traits\Facades\Slack;

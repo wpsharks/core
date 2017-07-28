@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ trait CacheMembers
      *
      * @since 150424 Initial release.
      *
-     * @var array Instance cache.
+     * @type array Instance cache.
      */
     protected $x___cache = [];
 
@@ -51,7 +51,7 @@ trait CacheMembers
         if ($primary_key === 'x___keys' || $primary_key === 'x___refs') {
             throw $this->c::issue('Attempting to set a reserved primary key.');
         }
-        $sub_key                               = (string) $sub_key;
+        $sub_key                                 = (string) $sub_key;
         $this->x___cache[$primary_key][$sub_key] = $value;
         return $this->x___cache[$primary_key][$sub_key];
     }
@@ -97,7 +97,7 @@ trait CacheMembers
         if ($primary_key === 'x___keys' || $primary_key === 'x___refs') {
             throw $this->c::issue('Attempting to unset a reserved primary key.');
         }
-        $sub_key                               = (string) $sub_key;
+        $sub_key                                 = (string) $sub_key;
         $this->x___cache[$primary_key][$sub_key] = null;
         unset($this->x___cache[$primary_key][$sub_key]);
     }
@@ -143,7 +143,7 @@ trait CacheMembers
      */
     protected function cacheAddByRef(string $primary_key, $ref_key, &$value)
     {
-        $ref_key                                           = (string) $ref_key;
+        $ref_key                                               = (string) $ref_key;
         $this->x___cache['x___refs'][$primary_key][$ref_key][] = &$value;
     }
 

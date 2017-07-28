@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -27,12 +27,13 @@ class Memory extends Classes\Core\Base\Core
      * Get/set available memory.
      *
      * @since 150424 Initial release.
+     * @since 17xxxx Returns `int` instead of `float`.
      *
      * @param string|null $limit Size abbr.
      *
-     * @return float Current max memory; in bytes.
+     * @return int Current max memory, in bytes.
      */
-    public function limit(string $limit = null): float
+    public function limit(string $limit = null): int
     {
         if (isset($limit) && $limit) {
             @ini_set('memory_limit', $limit);

@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -37,20 +37,20 @@ class SimpleExpression extends Classes\Core\Base\Core implements Interfaces\Simp
      *
      * @return string PHP expression from a simple expression string.
      *
-     * @internal The following reserved characters should NOT be used as a part of any test-fragment or comparison-value.
+     * @note The following reserved characters should NOT be used as a part of any test-fragment or comparison-value.
      *  Reserved chars are: `(`, `)`, and all whitespace. Brackets & whitespace are delimiters in the expression.
      *
-     * @internal Another special char is `!`, which can appear before any test-fragment to negate the test.
+     * @note Another special char is `!`, which can appear before any test-fragment to negate the test.
      *  This is not considered a reserved char though, because it is only valid as the first char in a test-fragment.
      *  Also, it is only valid when the test-fragment contains a total of 2+ chars (counting the `!` symbol itself).
      *  It's also worth noting that the `!` symbol is not passed to the `$callback` when it's a valid negation.
      *
-     * @internal There are also reserved sequences that form logical-operators and/or comparison-operators that should NOT be
+     * @note There are also reserved sequences that form logical-operators and/or comparison-operators that should NOT be
      *  used as any stand-alone test-fragment or comparison-value. They can be part of a test-fragment or comparison-value,
      *  but not stand-alone; i.e., any of these preceded by `^|[\s()]` and followed by `[\s()]|$` form an operator.
      *  Reserved sequences include: `AND`, `OR`, `&&`, `||`, `===`, `!==`, `==`, `!=`, `<=`, `>=`, `<>`, `>`, `<`.
      *
-     * @internal Other special chars can be implemented by the caller as a part of the test-fragment.
+     * @note Other special chars can be implemented by the caller as a part of the test-fragment.
      *  For instance, it might be desirable to allow for a test-fragment that starts with a function name.
      *  e.g., `function:arg`, `function:arg,arg`, etc. So long as it doesn't use reserved chars you're fine.
      *  Just be sure to document special chars. In this example, `[:,]` would be reserved in test-fragments.
@@ -140,25 +140,13 @@ class SimpleExpression extends Classes\Core\Base\Core implements Interfaces\Simp
      *
      * @return string Quoted string literal. If empty, returns `''`.
      *
-     * @internal This trims existing 'single' and/or "double" quoted encapsulations before quoting again.
-     * However, for that reason, escaped quotes inside an already-quoted string are always escaped again.
-     * So if you're going to quote a string literal in a simple expression, you should not escape inner quotes.
+     * @note Please see {@link c::sQuote()} for further details.
      *
-     * @internal The simple expression syntax does NOT allow for spaces (or brackets) in any individual token.
+     * @note The simple expression syntax does NOT allow for spaces (or brackets) in any individual token.
      *  i.e., It is NOT possible to quote a string containing a space (or brackets) at this time.
      */
     protected function quoteStrLiteral(string $string): string
     {
-        if (!isset($string[0])) {
-            return "''"; // Empty string.
-        } elseif ($string === "''" || $string === '""') {
-            return "''"; // Empty string.
-        } elseif (mb_strpos($string, "'") === 0 && mb_substr($string, -1) === "'") {
-            return "'".str_replace("'", "\\'", mb_substr($string, 1, -1))."'";
-        } elseif (mb_strpos($string, '"') === 0 && mb_substr($string, -1) === '"') {
-            return "'".str_replace("'", "\\'", mb_substr($string, 1, -1))."'";
-        } else {
-            return "'".str_replace("'", "\\'", $string)."'";
-        }
+        return $this->c::sQuote($string, true);
     }
 }

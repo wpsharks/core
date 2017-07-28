@@ -48,11 +48,24 @@ class Escape extends Classes\Core\Base\Core
      *
      * @since 160708 Quotes.
      *
-     * @param mixed $value Input value.
+     * @param mixed $value         Input value.
+     * @param bool  $maybe_use_sld Maybe; i.e., detect string-literals?
      *
      * @return string|array|object Output value.
+     *
+     * --- When `$maybe_use_sld` = `true` ...
+     *
+     * String literals are detected automatically; e.g., `'an already-quoted string'`.
+     *
+     * @note This trims existing 'single' and/or "double" quoted encapsulations before quoting again.
+     * For that reason, escaped quotes inside an already-quoted string are always escaped again.
+     * So if you're going to quote a string literal, you should NOT escape inner quotes.
+     *
+     * e.g., `'Here's a good example, don't escape inner quotes.'`.
+     *
+     * @note This function is used by our Simple Expression parser.
      */
-    public function singleQuote($value)
+    public function singleQuote($value, bool $maybe_use_sld = false)
     {
         if (is_array($value) || is_object($value)) {
             foreach ($value as $_key => &$_value) {
@@ -60,7 +73,23 @@ class Escape extends Classes\Core\Base\Core
             } // unset($_key, $_value);
             return $value;
         }
-        return "'".str_replace("'", "\\'", (string) $value)."'";
+        $string = (string) $value;
+
+        if ($maybe_use_sld) {
+            if (!isset($string[0])) {
+                return "''"; // Empty string.
+            } elseif ($string === "''" || $string === '""') {
+                return "''"; // Empty string.
+            } elseif (mb_strpos($string, "'") === 0 && mb_substr($string, -1) === "'") {
+                return "'".str_replace("'", "\\'", mb_substr($string, 1, -1))."'";
+            } elseif (mb_strpos($string, '"') === 0 && mb_substr($string, -1) === '"') {
+                return "'".str_replace("'", "\\'", mb_substr($string, 1, -1))."'";
+            } else {
+                return "'".str_replace("'", "\\'", $string)."'"; // Defaul behavior.
+            }
+        } else {
+            return "'".str_replace("'", "\\'", $string)."'"; // Defaul behavior.
+        }
     }
 
     /**

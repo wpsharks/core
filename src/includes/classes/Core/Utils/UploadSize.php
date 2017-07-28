@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -27,10 +27,11 @@ class UploadSize extends Classes\Core\Base\Core
      * Max allowed file upload size.
      *
      * @since 150424 Initial release.
+     * @since 17xxxx Returns `int` instead of `float`.
      *
-     * @return float A floating point number.
+     * @return int Max allowed file upload size, in bytes.
      */
-    public function limit(): float
+    public function limit(): int
     {
         $limits = [PHP_INT_MAX]; // Initialize.
 

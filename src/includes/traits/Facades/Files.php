@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -69,6 +69,18 @@ trait Files
     public static function abbrToBytes(...$args)
     {
         return $GLOBALS[static::class]->Utils->©FileSize->abbrBytes(...$args);
+    }
+
+    /**
+     * @since 17xxxx Remote file size.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\FileSize::remoteBytes()
+     */
+    public static function remoteFileSize(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©FileSize->remoteBytes(...$args);
     }
 
     /**

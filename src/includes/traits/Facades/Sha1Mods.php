@@ -1,11 +1,11 @@
 <?php
 /**
- * SHA1 modulus.
+ * SHA-1 modulus.
  *
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -17,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * SHA1 modulus.
+ * SHA-1 modulus.
  *
  * @since 151214
  */
