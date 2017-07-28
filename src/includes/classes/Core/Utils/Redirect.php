@@ -50,8 +50,8 @@ class Redirect extends Classes\Core\Base\Core
         $args['exit']      = (bool) $args['exit'];
 
         if (!$args['cacheable']) {
-            c::noCacheFlags();
-            c::noCacheHeaders();
+            $this->c::noCacheFlags();
+            $this->c::noCacheHeaders();
         }
         if ($args['top']) {
             echo '<!DOCTYPE html>';
