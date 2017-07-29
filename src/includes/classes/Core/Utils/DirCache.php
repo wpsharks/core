@@ -122,6 +122,10 @@ class DirCache extends Classes\Core\Base\Core
         $file .= '/'.$this->subPath($primary_key, $sub_key, $args);
         $tmp_file = $this->tmp_dir.'/'.$this->c::uniqueId();
 
+        $dir             = dirname($file); // May need to create this.
+        $tmp_dir         = dirname($tmp_file); // May need to create this.
+        $dir_permissions = $this->App->Config->©fs_permissions['©transient_dirs'];
+
         if ($expires_after > 0) {
             $expires = time() + $expires_after;
         } else {
@@ -131,6 +135,12 @@ class DirCache extends Classes\Core\Base\Core
             'x___value'   => $value,
             'x___expires' => $expires,
         ]);
+        if (!is_dir($dir)) {
+            mkdir($dir, $dir_permissions, true);
+        }
+        if (!is_dir($tmp_dir)) {
+            mkdir($tmp_dir, $dir_permissions, true);
+        }
         if (file_put_contents($tmp_file, $cache) === false) {
             @unlink($tmp_file); // Cleanup on error.
             throw $this->c::issue(vars(), 'Cache `$tmp_file` write failure.');
