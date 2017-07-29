@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "70e0e42b3a6e54f0cc67510b44feec06",
-    "content-hash": "5309d184dcf179f4a0a325ea7bbfec7e",
+    "hash": "2db17948a5c2ee8697391c066f5a96e3",
+    "content-hash": "12211db8fd2163355cb3c1a68b2b1bd2",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.30.0",
+            "version": "3.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c84ce7a758ce3bbe8ff54abfa2e0646941fe5fc4"
+                "reference": "ca8791495696a1620fe2275df4983d063627aba7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c84ce7a758ce3bbe8ff54abfa2e0646941fe5fc4",
-                "reference": "c84ce7a758ce3bbe8ff54abfa2e0646941fe5fc4",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ca8791495696a1620fe2275df4983d063627aba7",
+                "reference": "ca8791495696a1620fe2275df4983d063627aba7",
                 "shasum": ""
             },
             "require": {
@@ -85,32 +85,29 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-06-21 21:38:23"
+            "time": "2017-07-27 19:46:08"
         },
         {
             "name": "corneltek/getoptionkit",
-            "version": "2.5.4",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/c9s/GetOptionKit.git",
-                "reference": "9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80"
+                "reference": "995607ddf4fc90ebdb4a7d58fe972d581ad8495f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80",
-                "reference": "9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80",
+                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/995607ddf4fc90ebdb4a7d58fe972d581ad8495f",
+                "reference": "995607ddf4fc90ebdb4a7d58fe972d581ad8495f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "require-dev": {
-                "satooshi/php-coveralls": "^1"
-            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5.x-dev"
+                    "dev-master": "2.6.x-dev"
                 }
             },
             "autoload": {
@@ -125,12 +122,12 @@
             "authors": [
                 {
                     "name": "Yo-An Lin",
-                    "email": "cornelius.howl@gmail.com"
+                    "email": "yoanlin93@gmail.com"
                 }
             ],
             "description": "Powerful command-line option toolkit",
             "homepage": "http://github.com/c9s/GetOptionKit",
-            "time": "2017-04-30 09:31:04"
+            "time": "2017-06-30 14:54:48"
         },
         {
             "name": "defuse/php-encryption",
@@ -242,16 +239,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.3",
+            "version": "6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006"
+                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/8d6c6cc55186db87b7dc5009827429ba4e9dc006",
-                "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f4db5a78a5ea468d4831de7f0bf9d9415e348699",
+                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699",
                 "shasum": ""
             },
             "require": {
@@ -261,8 +258,11 @@
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.0",
+                "phpunit/phpunit": "^4.0 || ^5.0",
                 "psr/log": "^1.0"
+            },
+            "suggest": {
+                "psr/log": "Required for using the Log middleware"
             },
             "type": "library",
             "extra": {
@@ -300,7 +300,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-02-28 22:50:30"
+            "time": "2017-06-22 18:50:49"
         },
         {
             "name": "guzzlehttp/promises",
@@ -693,16 +693,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.0.5",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "2b9e2f71b722f7c53918ab0c25f7646c2013f17d"
+                "reference": "4d4896e553f2094e657fe493506dc37c509d4e2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/2b9e2f71b722f7c53918ab0c25f7646c2013f17d",
-                "reference": "2b9e2f71b722f7c53918ab0c25f7646c2013f17d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4d4896e553f2094e657fe493506dc37c509d4e2b",
+                "reference": "4d4896e553f2094e657fe493506dc37c509d4e2b",
                 "shasum": ""
             },
             "require": {
@@ -740,7 +740,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-03-05 18:23:57"
+            "time": "2017-07-28 14:45:09"
         },
         {
             "name": "paragonie/random_compat",
@@ -792,19 +792,20 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.23",
+            "version": "v5.2.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "7115df4a6f76281109ebe352900c42403b728bb4"
+                "reference": "22d04c6a58145a244696f3f254c1875aa653b26a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/7115df4a6f76281109ebe352900c42403b728bb4",
-                "reference": "7115df4a6f76281109ebe352900c42403b728bb4",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/22d04c6a58145a244696f3f254c1875aa653b26a",
+                "reference": "22d04c6a58145a244696f3f254c1875aa653b26a",
                 "shasum": ""
             },
             "require": {
+                "ext-ctype": "*",
                 "php": ">=5.0.0"
             },
             "require-dev": {
@@ -864,7 +865,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-03-15 19:32:56"
+            "time": "2017-07-26 21:00:20"
         },
         {
             "name": "psr/http-message",
@@ -1189,7 +1190,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.22",
+            "version": "v2.8.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -1289,16 +1290,16 @@
         },
         {
             "name": "websharks/php-markdown",
-            "version": "170622",
+            "version": "170729",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/php-markdown.git",
-                "reference": "d86758aa409c1eabadf8cb84aae38201db9620c1"
+                "reference": "1f6a63f5299dcffef98314e16d2780dbd2f0b52c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/d86758aa409c1eabadf8cb84aae38201db9620c1",
-                "reference": "d86758aa409c1eabadf8cb84aae38201db9620c1",
+                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/1f6a63f5299dcffef98314e16d2780dbd2f0b52c",
+                "reference": "1f6a63f5299dcffef98314e16d2780dbd2f0b52c",
                 "shasum": ""
             },
             "require": {
@@ -1334,7 +1335,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2017-06-22 14:04:43"
+            "time": "2017-07-29 21:51:10"
         },
         {
             "name": "websharks/sharkicons",
