@@ -15,7 +15,7 @@
 @headerFont        : inherit;
 
 @h1 : 3.75rem;
-@h2 : 2.75rem;
+@h2 : 2.85rem;
 @h3 : 2rem;
 @h4 : 1.667rem;
 @h5 : 1.389rem;
