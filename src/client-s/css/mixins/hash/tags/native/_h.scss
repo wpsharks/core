@@ -33,21 +33,21 @@
     @extend                   %hash-body-hx-font-family;
     @extend                   %hash-body-hx-font-weight;
 
-    font-size:                2rem;
+    font-size:                1.875rem;
   }
 
   %hash-h4-tag-defaults {
     @extend                   %hash-body-hx-font-family;
     @extend                   %hash-body-hx-font-weight;
 
-    font-size:                1.667rem;
+    font-size:                1.563rem;
   }
 
   %hash-h5-tag-defaults {
     @extend                   %hash-body-hx-font-family;
     @extend                   %hash-body-hx-font-weight;
 
-    font-size:                1.389rem;
+    font-size:                1.302rem;
   }
 
   %hash-h6-tag-defaults {
@@ -57,7 +57,7 @@
     margin-bottom:            0;
 
     //
-    font-size:                1.389rem;
+    font-size:                1.302rem;
     line-height:              $line-height;
 
     + * {
