@@ -27,12 +27,12 @@ namespace Hash {
       this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js');
 
       if (this.hasCode()) {
-        this.styleResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/codepen-embed.min.css');
         this.stylesToLoadAsync.push('https://cloud.typography.com/7715196/6490572/css/fonts.css');
+        this.styleResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/codepen-embed.min.css');
 
         this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js');
-        this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js');
         this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scss.min.js');
+        this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js');
       }
       this.styleResourcesLoading = this.styleResourcesToLoad.length;
       this.scriptResourcesLoading = this.scriptResourcesToLoad.length;

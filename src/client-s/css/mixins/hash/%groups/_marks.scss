@@ -20,6 +20,7 @@
   @extend                     %hash-white-space-normal;
   @extend                     %hash-display-inline-baseline;
 
+  font-size:                  inherit;
   line-height:                inherit;
 
   //
@@ -33,6 +34,4 @@
 
 %hash-inline-unmark-code {
   @extend                     %hash-inline-unmark-defaults;
-
-  font-size:                 .889em;
 }
