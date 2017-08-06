@@ -61,7 +61,7 @@
     height:                   min-content !important;
   }
 
-  // Em units.
+  // Height, in default em units.
 
   @each $v in '.25', '.5', '.75', '1', '1.25', '1.5', '1.75', '2', '2.25', '2.5', '2.75', '3', '5', '10', '20', '30' {
     .\#h\:#{esc-class($v)} {

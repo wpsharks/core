@@ -17,7 +17,13 @@
     width:                    min-content !important;
   }
 
-  // Em units.
+  // Readabile width.
+
+  .\#w\:readable {
+    max-width:                calc(662px + (3em * 2));
+  }
+
+  // Width, in default em units.
 
   @each $v in '.25', '.5', '.75', '1', '1.25', '1.5', '1.75', '2', '2.25', '2.5', '2.75', '3', '5', '10', '20', '30' {
     .\#w\:#{esc-class($v)} {

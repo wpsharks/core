@@ -30,6 +30,8 @@
 - Adding `c::remoteFileSize()`.
 - Adding `$strict` param in all slug, var, and acronym utils.
 - Adding a new parameter to `c::sQuote()` that allows it to detect string-literals.
+- Adding `#w:readable` utility class to Hash framework.
+- Adding `#s:*` utility classes for common square sizes; e.g., `#s:12,16,24,32,48,64,128,256,512,1024`.
 
 ## v170623.50532
 

@@ -1,0 +1,8 @@
+@mixin size-hashes {
+  @each $v in '12', '16', '24', '32', '48', '64', '128', '256', '512', '1024' {
+    .\#s\:#{esc-class($v)} {
+      width:                  #{to-unit($v, 'px')} !important;
+      height:                 #{to-unit($v, 'px')} !important;
+    }
+  }
+}
