@@ -5,6 +5,10 @@
     @extend                   %hash-block-margins;
   }
 
+  %hash-list-ol-ul-defaults {
+    padding:                  0 0 0 2rem;
+  }
+
   %hash-list-ol-defaults {
     list-style-type:          decimal;
 
@@ -34,6 +38,12 @@
           list-style-type:    circle;
         }
       }
+    }
+  }
+
+  %hash-list-dl-defaults {
+    > dd > dl {
+      font-size:             .9em;
     }
   }
 
@@ -68,8 +78,6 @@
       }
     }
 
-    // Add margin to nested lists too.
-    // ~ but only if they follow something.
     > ol,
     > ul,
     > dl {
@@ -77,9 +85,9 @@
         margin-bottom:        1rem;
       }
     }
+  }
 
-    // Exclude & fit nested link lists.
-    // These follow a link, nothing more.
+  %hash-list-li-defaults {
     > a:first-child:only-of-type {
       + ol,
       + ul {
@@ -89,11 +97,10 @@
         }
       }
     }
+  }
 
-    // Slight decrease in font size w/ nested definitions.
-    > dl {
-      font-size:             .9em;
-    }
+  %hash-list-dd-defaults {
+    margin-left:              1rem;
   }
 
   // Lists.
@@ -105,12 +112,21 @@
       @extend                 %hash-list-defaults;
     }
 
+    ol,
+    ul {
+      @extend                 %hash-list-ol-ul-defaults;
+    }
+
     ol {
       @extend                 %hash-list-ol-defaults;
     }
 
     ul {
       @extend                 %hash-list-ul-defaults;
+    }
+
+    dl {
+      @extend                 %hash-list-dl-defaults;
     }
 
     dt {
@@ -120,6 +136,14 @@
     li,
     dd {
       @extend                 %hash-list-li-dd-defaults;
+    }
+
+    li {
+      @extend                 %hash-list-li-defaults;
+    }
+
+    dd {
+      @extend                 %hash-list-dd-defaults;
     }
   }
 }

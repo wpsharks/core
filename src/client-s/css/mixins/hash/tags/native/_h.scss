@@ -10,8 +10,20 @@
 
     margin-top:               calc(2rem -  0.143em);
 
+    > sub,
     > small {
       font-weight:            lighter;
+    }
+
+    > sub {
+      @extend                 %hash-display-block;
+      @extend                 %hash-opacity-75;
+
+      margin:                .25em 0 0;
+
+      //
+      font-size:             .5em;
+      font-feature-settings:  inherit;
     }
   }
 
