@@ -31,6 +31,22 @@
     }
   }
 
+  // Common pixel widths, including all 'size' hashes.
+
+  @each $v in '12', '16', '24', '32', '48', '64', '128', '256', '512', '768', '992', '1024', '1200', '1280' {
+    .\#w\:#{esc-class($v)}px {
+      width:                  #{to-unit($v, 'px')} !important;
+    }
+
+    .\#min-w\:#{esc-class($v)}px {
+      min-width:              #{to-unit($v, 'px')} !important;
+    }
+
+    .\#max-w\:#{esc-class($v)}px {
+      max-width:              #{to-unit($v, 'px')} !important;
+    }
+  }
+
   // Percentages.
 
   @each $v in '5', '10', '15', '20', '25', '30', '33.3', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95', '100' {

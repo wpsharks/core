@@ -69,6 +69,22 @@
     }
   }
 
+  // Common pixel heights, including all 'size' hashes.
+
+  @each $v in '12', '16', '24', '32', '48', '64', '128', '256', '512', '720', '768', '1024' {
+    .\#h\:#{esc-class($v)}px {
+      height:                 #{to-unit($v, 'px')} !important;
+    }
+
+    .\#min-h\:#{esc-class($v)}px {
+      min-height:             #{to-unit($v, 'px')} !important;
+    }
+
+    .\#max-h\:#{esc-class($v)}px {
+      max-height:             #{to-unit($v, 'px')} !important;
+    }
+  }
+
   // Percentages.
 
   @each $v in '5', '10', '15', '20', '25', '30', '33.3', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95', '100' {
