@@ -5,14 +5,14 @@ namespace Hash {
     protected _hasCode?: boolean;
     protected _supportsPreload?: boolean;
 
-    protected styleResourcesToLoad: string[] = [];
-    protected scriptResourcesToLoad: string[] = [];
+    protected stylesToLoad: string[] = [];
+    protected scriptsToLoad: string[] = [];
 
     protected stylesToLoadAsync: string[] = [];
     protected scriptsToLoadAsync: string[] = [];
 
-    protected styleResourcesLoading = 0;
-    protected scriptResourcesLoading = 0;
+    protected stylesLoading = 0;
+    protected scriptsLoading = 0;
 
     protected styleResourcesReady = false;
     protected scriptResourcesReady = false;
@@ -23,22 +23,19 @@ namespace Hash {
     // Constructor.
 
     public constructor() {
-      this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js');
-      this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js');
+      this.scriptsToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js');
+      this.scriptsToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js');
 
       if (this.hasCode()) {
         this.stylesToLoadAsync.push('https://cloud.typography.com/7715196/6490572/css/fonts.css');
-        this.styleResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/codepen-embed.min.css');
+        this.stylesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/codepen-embed.min.css');
 
-        this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js');
-        this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scss.min.js');
-        this.scriptResourcesToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js');
+        this.scriptsToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js');
+        this.scriptsToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scss.min.js');
+        this.scriptsToLoad.push('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js');
       }
-      this.styleResourcesLoading = this.styleResourcesToLoad.length;
-      this.scriptResourcesLoading = this.scriptResourcesToLoad.length;
-
+      this.stylesLoading = this.stylesToLoad.length, this.scriptsLoading = this.scriptsToLoad.length;
       document.addEventListener('DOMContentLoaded', this.onDomContentLoaded.bind(this));
-
       this.loadStyles(), this.loadScripts();
     }
 
@@ -102,8 +99,8 @@ namespace Hash {
     // Style loaders.
 
     protected loadStyles() {
-      if (this.styleResourcesToLoad.length > 0) {
-        this.styleResourcesToLoad.forEach((url) => {
+      if (this.stylesToLoad.length > 0) {
+        this.stylesToLoad.forEach((url) => {
           this.loadStyle(url);
         });
       } else {
@@ -125,22 +122,22 @@ namespace Hash {
 
     protected onStyleLoaded(url: string) {
       if (this.styleIsResource(url)) {
-        this.styleResourcesLoading--;
-        if (this.styleResourcesLoading <= 0) {
+        this.stylesLoading--;
+        if (this.stylesLoading <= 0) {
           this.onStyleResourcesReady();
         }
       }
     }
 
     protected styleIsResource(url: string) {
-      return this.styleResourcesToLoad.indexOf(url) !== -1;
+      return this.stylesToLoad.indexOf(url) !== -1;
     }
 
     // Script load handlers.
 
     protected loadScripts() {
-      if (this.scriptResourcesToLoad.length > 0) {
-        this.scriptResourcesToLoad.forEach((url) => {
+      if (this.scriptsToLoad.length > 0) {
+        this.scriptsToLoad.forEach((url) => {
           this.loadScript(url);
         });
       } else {
@@ -160,17 +157,26 @@ namespace Hash {
       (<HTMLElement>document.querySelector('head')).appendChild(s);
     }
 
+    protected onScriptPreloaded(url: string) {
+      if (this.scriptIsResource(url)) {
+        this.scriptsLoading--;
+        if (this.scriptsLoading <= 0) {
+          this.onScriptResourcesReady();
+        }
+      }
+    }
+
     protected onScriptLoaded(url: string) {
       if (this.scriptIsResource(url)) {
-        this.scriptResourcesLoading--;
-        if (this.scriptResourcesLoading <= 0) {
+        this.scriptsLoading--;
+        if (this.scriptsLoading <= 0) {
           this.onScriptResourcesReady();
         }
       }
     }
 
     protected scriptIsResource(url: string) {
-      return this.scriptResourcesToLoad.indexOf(url) !== -1;
+      return this.scriptsToLoad.indexOf(url) !== -1;
     }
 
     // Resource ready handlers.

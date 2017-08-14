@@ -17,12 +17,15 @@
 
     > sub {
       @extend                 %hash-display-block;
+      @extend                 %hash-position-static;
+      @extend                 %hash-line-height-inherit;
       @extend                 %hash-opacity-75;
 
       margin:                .25em 0 0;
 
       //
-      font-size:             .5em;
+      text-shadow:            none;
+      font-size:             .65em;
       font-feature-settings:  inherit;
     }
   }
