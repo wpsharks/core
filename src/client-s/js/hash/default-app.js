@@ -8,7 +8,6 @@ var Hash;
         function App() {
             var _this = this;
             // Properties.
-            this.cache = {};
             this.urls = {
                 jQuery: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js',
                 lodash: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js',
@@ -18,9 +17,10 @@ var Hash;
                 hljsTsLang: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js',
                 hljsTheme: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/codepen-embed.min.css',
             };
-            var jQueryExists = typeof w.$ !== 'undefined' || typeof w.jQuery !== 'undefined';
-            cc.promise(jQueryExists ? [] : [this.urls.jQuery]).then(function () {
-                $ = w.$ || w.jQuery; // Update local reference.
+            this.cache = {};
+            var jQueryExists = typeof w.jQuery !== 'undefined';
+            cc.promise(jQueryExists ? '' : this.urls.jQuery).then(function () {
+                $ = w.jQuery; // Update local reference.
                 $(document).ready(_this.onDomjQueryReady.bind(_this));
             });
         }
@@ -28,7 +28,7 @@ var Hash;
         App.prototype.onDomjQueryReady = function () {
             var _this = this;
             if (this.hasCode()) {
-                cc.promise([this.urls.codeFonts]);
+                cc.promise(this.urls.codeFonts);
             }
             if (this.hasPreCode()) {
                 cc.promise([
@@ -39,7 +39,7 @@ var Hash;
                 ]).then(this.setupHljs.bind(this));
             }
             var lodashExists = typeof w._ !== 'undefined' || typeof w.lodash !== 'undefined';
-            cc.promise(lodashExists ? [] : [this.urls.lodash]).then(function () {
+            cc.promise(lodashExists ? '' : this.urls.lodash).then(function () {
                 _ = w._ || w.lodash; // Update local reference.
                 _this.onReady(); // Call ready handler now.
             });
@@ -67,12 +67,12 @@ var Hash;
         };
         // Detection utilities.
         App.prototype.hasCode = function () {
-            if (typeof this.cache.hasCode !== undefined)
+            if (typeof this.cache.hasCode !== 'undefined')
                 return this.cache.hasCode;
             return this.cache.hasCode = $('code').length > 0;
         };
         App.prototype.hasPreCode = function () {
-            if (typeof this.cache.hasPreCode !== undefined)
+            if (typeof this.cache.hasPreCode !== 'undefined')
                 return this.cache.hasPreCode;
             return this.cache.hasPreCode = $('pre > code').length > 0;
         };

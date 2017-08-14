@@ -5,7 +5,6 @@ namespace Hash {
   export class App {
     // Properties.
 
-    protected cache: { [ key: string ]: any } = {};
     protected urls = {
       jQuery: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js',
       lodash: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js',
@@ -17,13 +16,14 @@ namespace Hash {
       hljsTsLang: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js',
       hljsTheme: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/codepen-embed.min.css',
     };
+    protected cache: { [ key: string ]: any } = {};
 
     // Constructor.
 
     public constructor() {
-      let jQueryExists = typeof w.$ !== 'undefined' || typeof w.jQuery !== 'undefined';
-      cc.promise(jQueryExists ? [] : [ this.urls.jQuery ]).then(() => {
-        $ = w.$ || w.jQuery; // Update local reference.
+      let jQueryExists = typeof w.jQuery !== 'undefined';
+      cc.promise(jQueryExists ? '' : this.urls.jQuery).then(() => {
+        $ = w.jQuery; // Update local reference.
         $(document).ready(this.onDomjQueryReady.bind(this));
       });
     }
@@ -32,7 +32,7 @@ namespace Hash {
 
     protected onDomjQueryReady() {
       if (this.hasCode()) {
-        cc.promise([ this.urls.codeFonts ]);
+        cc.promise(this.urls.codeFonts);
       }
       if (this.hasPreCode()) {
         cc.promise([
@@ -43,7 +43,7 @@ namespace Hash {
         ]).then(this.setupHljs.bind(this));
       }
       let lodashExists = typeof w._ !== 'undefined' || typeof w.lodash !== 'undefined';
-      cc.promise(lodashExists ? [] : [ this.urls.lodash ]).then(() => {
+      cc.promise(lodashExists ? '' : this.urls.lodash).then(() => {
         _ = w._ || w.lodash; // Update local reference.
         this.onReady(); // Call ready handler now.
       });
@@ -78,13 +78,13 @@ namespace Hash {
     // Detection utilities.
 
     protected hasCode(): boolean {
-      if (typeof this.cache.hasCode !== undefined)
+      if (typeof this.cache.hasCode !== 'undefined')
         return this.cache.hasCode;
       return this.cache.hasCode = $('code').length > 0;
     }
 
     protected hasPreCode(): boolean {
-      if (typeof this.cache.hasPreCode !== undefined)
+      if (typeof this.cache.hasPreCode !== 'undefined')
         return this.cache.hasPreCode;
       return this.cache.hasPreCode = $('pre > code').length > 0;
     }
