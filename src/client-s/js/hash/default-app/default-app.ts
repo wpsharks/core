@@ -1,11 +1,14 @@
+const w: Window = window;
+let cc: any = w.chopChop, $: any, _: any;
+
 namespace Hash {
   export class App {
     // Properties.
 
     protected cache: { [ key: string ]: any } = {};
-    protected resourceUrls = {
-      $: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js',
-      _: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js',
+    protected urls = {
+      jQuery: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js',
+      lodash: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js',
 
       codeFonts: 'https://cloud.typography.com/7715196/6490572/css/fonts.css',
 
@@ -18,7 +21,9 @@ namespace Hash {
     // Constructor.
 
     public constructor() {
-      chopChop.preloadThenLoad(window.$ ? [] : [ this.resourceUrls.$ ]).then(() => {
+      let jQueryExists = typeof w.$ !== 'undefined' || typeof w.jQuery !== 'undefined';
+      cc.promise(jQueryExists ? [] : [ this.urls.jQuery ]).then(() => {
+        $ = w.$ || w.jQuery; // Update local reference.
         $(document).ready(this.onDomjQueryReady.bind(this));
       });
     }
@@ -27,22 +32,26 @@ namespace Hash {
 
     protected onDomjQueryReady() {
       if (this.hasCode()) {
-        chopChop.preloadThenLoad([ this.resourceUrls.codeFonts ]);
+        cc.promise([ this.urls.codeFonts ]);
       }
       if (this.hasPreCode()) {
-        chopChop.preloadThenLoad([
-          this.resourceUrls.hljs,
-          this.resourceUrls.hljsScssLang,
-          this.resourceUrls.hljsTsLang,
-          this.resourceUrls.hljsTheme,
+        cc.promise([
+          this.urls.hljs,
+          this.urls.hljsScssLang,
+          this.urls.hljsTsLang,
+          this.urls.hljsTheme,
         ]).then(this.setupHljs.bind(this));
       }
-      chopChop.preloadThenLoad(window._ ? [] : [ this.resourceUrls._ ]).then(this.onReady.bind(this));
+      let lodashExists = typeof w._ !== 'undefined' || typeof w.lodash !== 'undefined';
+      cc.promise(lodashExists ? [] : [ this.urls.lodash ]).then(() => {
+        _ = w._ || w.lodash; // Update local reference.
+        this.onReady(); // Call ready handler now.
+      });
     }
 
     protected onReady() {
-      if (typeof window.onReady === 'function') {
-        onReady(); // App ready handler.
+      if (typeof w.onReady === 'function') {
+        w.onReady(); // App ready handler.
       }
     }
 
@@ -61,7 +70,7 @@ namespace Hash {
         if ($code.is(langNone)) {
           $code.addClass('hljs lang-none');
         } else {
-          hljs.highlightBlock(code);
+          w.hljs.highlightBlock(code);
         }
       });
     }
@@ -80,5 +89,5 @@ namespace Hash {
       return this.cache.hasPreCode = $('pre > code').length > 0;
     }
   }
-  window.app = new App();
+  w.app = new App();
 }
