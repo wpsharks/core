@@ -11,6 +11,7 @@
 - Adding `c::redirect()`.
 - Adding `c::spinReload()`.
 - Adding `c::currencySymbol()`.
+- Adding `c::currentMethod()`.
 - Adding `c::htmlCompress()`.
 - Adding `c::getUeCookie()`.
 - Adding `c::setUeCookie()`.
@@ -22,8 +23,11 @@
 - Adding `c::crc32KeyedHash()`.
 - Adding `c::closeRequestEarly()`.
 - Adding `c::die()`.
+- Adding `c::dieEcho()`.
 - Adding `c::dieInvalid()`.
 - Adding `c::dieForbidden()`.
+- Adding `c::statusHeaderSlug()`.
+- Adding `c::statusHeaderMessage()`.
 - Adding `c::dirCacheGet()`.
 - Adding `c::dirCacheSet()`.
 - Adding `c::dirCacheClear()`.

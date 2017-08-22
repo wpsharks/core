@@ -24,6 +24,31 @@ use function get_defined_vars as vars;
 class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusConstants
 {
     /**
+     * Current request headers.
+     *
+     * @since 17xxxx Current request headers.
+     *
+     * @return array Unique/associative array of all headers.
+     */
+    public function current(): array
+    {
+        if (($headers = &$this->cacheKey(__FUNCTION__)) !== null) {
+            return $headers; // Cached this already.
+        }
+        $headers = []; // Initialize.
+
+        foreach ($_SERVER as $_header => $_value) {
+            if (mb_stripos($_header, 'HTTP_') === 0) {
+                $_header                          = preg_replace('/^HTTP_/ui', '', $_header);
+                $_header                          = str_replace('_', '-', $_header);
+                $headers[mb_strtolower($_header)] = $_v;
+            }
+        } // unset($_header, $_value); // Housekeeping.
+
+        return $headers;
+    }
+
+    /**
      * No-cache headers.
      *
      * @since 160118 Adding no-cache headers.
@@ -46,6 +71,34 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
     }
 
     /**
+     * Get slug for status code.
+     *
+     * @since 17xxxx Adding status slug utility.
+     *
+     * @param int $status The HTTP status code.
+     *
+     * @return string Status slug for code.
+     */
+    public function getStatusSlug(int $status): string
+    {
+        return c::nameToSlug($this->getStatusMessage($status));
+    }
+
+    /**
+     * Get message for status code.
+     *
+     * @since 17xxxx Adding status message utility.
+     *
+     * @param int $status The HTTP status code.
+     *
+     * @return string Status message for code.
+     */
+    public function getStatusMessage(int $status): string
+    {
+        return $this::HTTP_STATUSES[$status] ?? 'Invalid request.';
+    }
+
+    /**
      * Status header.
      *
      * @since 151121 Header utilities.
@@ -59,24 +112,25 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
             'display_error'      => false,
             'display_error_page' => 'default',
         ];
-        $args       = array_merge($default_args, $args);
-        $args       = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
+
         $errors_dir = $this->App->Config->©fs_paths['©errors_dir'];
 
         $display_error      = (bool) $args['display_error'];
         $display_error_page = (string) $args['display_error_page'];
 
+        $message = $this->getStatusMessage($status);
+
         if (headers_sent()) {
             throw $this->c::issue('Headers already sent.');
-        } elseif (empty($this::HTTP_STATUSES[$status])) {
-            throw $this->c::issue('Unknown status.');
         } elseif ($this->c::isCli()) {
             throw $this->c::issue('Not possible in CLI mode.');
         }
         if (!($protocol = $_SERVER['SERVER_PROTOCOL'] ?? '')) {
             $protocol = 'HTTP/1.1'; // Default fallback.
         }
-        header($protocol.' '.$status.' '.$this::HTTP_STATUSES[$status], true, $status);
+        header($protocol.' '.$status.' '.$message, true, $status);
 
         if ($status >= 400 && $display_error) {
             if ($errors_dir && $display_error_page) {
@@ -96,7 +150,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
             if ($error_page && is_file($error_page)) {
                 readfile($error_page);
             } else {
-                echo '<h1>'.$this->c::escHtml($this::HTTP_STATUSES[$status]).'</h1>';
+                echo '<h1>'.$this->c::escHtml($message).'</h1>';
             }
         }
     }

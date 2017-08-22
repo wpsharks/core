@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
@@ -24,6 +24,18 @@ use function get_defined_vars as vars;
 trait Headers
 {
     /**
+     * @since 17xxxx Current headers.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::current()
+     */
+    public static function currentHeaders(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Headers->current(...$args);
+    }
+
+    /**
      * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -33,6 +45,30 @@ trait Headers
     public static function statusHeader(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Headers->sendStatus(...$args);
+    }
+
+    /**
+     * @since 17xxxx Status header slug.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::getStatusSlug()
+     */
+    public static function statusHeaderSlug(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Headers->getStatusSlug(...$args);
+    }
+
+    /**
+     * @since 17xxxx Status header message.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::getStatusMessage()
+     */
+    public static function statusHeaderMessage(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Headers->getStatusMessage(...$args);
     }
 
     /**

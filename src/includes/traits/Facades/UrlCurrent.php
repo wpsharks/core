@@ -48,6 +48,18 @@ trait UrlCurrent
     }
 
     /**
+     * @since 17xxxx Current request method.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\UrlCurrent::method()
+     */
+    public static function currentMethod(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©UrlCurrent->method(...$args);
+    }
+
+    /**
      * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.

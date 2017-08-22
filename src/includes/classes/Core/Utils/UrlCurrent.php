@@ -57,6 +57,21 @@ class UrlCurrent extends Classes\Core\Base\Core
     }
 
     /**
+     * Current request method.
+     *
+     * @since 17xxxx Current method.
+     *
+     * @return string Current method.
+     */
+    public function method(): string
+    {
+        if (($method = &$this->cacheKey(__FUNCTION__)) !== null) {
+            return $method; // Cached this already.
+        }
+        return $method = mb_strtoupper($_SERVER['REQUEST_METHOD']);
+    }
+
+    /**
      * Current scheme; lowercase.
      *
      * @since 150424 Initial release.
