@@ -81,7 +81,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
      */
     public function getStatusSlug(int $status): string
     {
-        return c::nameToSlug($this->getStatusMessage($status));
+        return $this->c::nameToSlug($this->getStatusMessage($status));
     }
 
     /**
