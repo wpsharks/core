@@ -115,7 +115,6 @@ class Fatalities extends Classes\Core\Base\Core
         ]), JSON_PRETTY_PRINT);
 
         $this->c::statusHeader($code);
-        header('access-control-allow-origin: *');
 
         if ($this->c::isAjax() || $this->c::isApi()) {
             header('content-type: application/json; charset=utf-8');
