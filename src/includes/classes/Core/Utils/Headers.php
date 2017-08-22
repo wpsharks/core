@@ -41,7 +41,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
             if (mb_stripos($_header, 'HTTP_') === 0) {
                 $_header                          = preg_replace('/^HTTP_/ui', '', $_header);
                 $_header                          = str_replace('_', '-', $_header);
-                $headers[mb_strtolower($_header)] = $_v;
+                $headers[mb_strtolower($_header)] = $_value;
             }
         } // unset($_header, $_value); // Housekeeping.
 
