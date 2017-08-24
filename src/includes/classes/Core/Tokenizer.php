@@ -237,7 +237,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     /**
      * Maybe tokenize `<!--[if`, `<![if` tags.
      *
-     * @since 17xxxx Initial release.
+     * @since 170824.30708 Initial release.
      */
     protected function maybeTokenizeIfCondTags()
     {
@@ -317,7 +317,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     /**
      * Maybe tokenize `<style>` tags.
      *
-     * @since 17xxxx Initial release.
+     * @since 170824.30708 Initial release.
      */
     protected function maybeTokenizeStyleTags()
     {
@@ -337,7 +337,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     /**
      * Maybe tokenize `<script>` tags.
      *
-     * @since 17xxxx Initial release.
+     * @since 170824.30708 Initial release.
      */
     protected function maybeTokenizeScriptTags()
     {
@@ -357,7 +357,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     /**
      * Maybe tokenize `<textarea>` tags.
      *
-     * @since 17xxxx Initial release.
+     * @since 170824.30708 Initial release.
      */
     protected function maybeTokenizeTextareaTags()
     {
@@ -417,7 +417,7 @@ class Tokenizer extends Classes\Core\Base\Core implements Interfaces\UrlConstant
     /**
      * Maybe tokenize `<x style|on*|data-*="">` attrs.
      *
-     * @since 17xxxx Initial release.
+     * @since 170824.30708 Initial release.
      */
     protected function maybeTokenizeSpecialAttrs()
     {

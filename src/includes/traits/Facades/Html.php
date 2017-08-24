@@ -36,7 +36,7 @@ trait Html
     }
 
     /**
-     * @since 17xxxx HTML compression.
+     * @since 170824.30708 HTML compression.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

@@ -72,7 +72,7 @@ trait Files
     }
 
     /**
-     * @since 17xxxx Remote file size.
+     * @since 170824.30708 Remote file size.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

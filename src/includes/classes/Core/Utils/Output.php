@@ -27,7 +27,7 @@ class Output extends Classes\Core\Base\Core
      * Prepares for file output.
      *
      * @since 160622 Adding file output prep.
-     * @since 17xxxx `filePrep()` is now `prepFile()`.
+     * @since 170824.30708 `filePrep()` is now `prepFile()`.
      */
     public function prepFile()
     {
@@ -39,7 +39,7 @@ class Output extends Classes\Core\Base\Core
     /**
      * Closes a request early.
      *
-     * @since 17xxxx Early close of request.
+     * @since 170824.30708 Early close of request.
      */
     public function closeRequestEarly()
     {
@@ -102,7 +102,7 @@ class Output extends Classes\Core\Base\Core
     /**
      * Ends/flushes any open output buffers.
      *
-     * @since 17xxxx Buffer end/flush.
+     * @since 170824.30708 Buffer end/flush.
      */
     public function buffersEndFlush()
     {

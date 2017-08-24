@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Boolean utils.
  *
- * @since 17xxxx Boolean utils.
+ * @since 170824.30708 Boolean utils.
  */
 trait Boolean
 {
     /**
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Boolean
     }
 
     /**
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait Boolean
     }
 
     /**
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -60,7 +60,7 @@ trait Boolean
     }
 
     /**
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -72,7 +72,7 @@ trait Boolean
     }
 
     /**
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -84,7 +84,7 @@ trait Boolean
     }
 
     /**
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

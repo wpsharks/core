@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Dir cache utils.
  *
- * @since 17xxxx Dir cache utils.
+ * @since 170824.30708 Dir cache utils.
  */
 trait DirCache
 {
     /**
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait DirCache
     }
 
     /**
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait DirCache
     }
 
     /**
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

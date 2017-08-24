@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * SHA-1 utils.
  *
- * @since 17xxxx SHA-1 utils.
+ * @since 170824.30708 SHA-1 utils.
  */
 trait Sha1
 {
     /**
-     * @since 17xxxx SHA-1 utils.
+     * @since 170824.30708 SHA-1 utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

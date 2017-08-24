@@ -19,7 +19,7 @@ use function get_defined_vars as vars;
 /**
  * Currency utils.
  *
- * @since 17xxxx Currency utils.
+ * @since 170824.30708 Currency utils.
  */
 class Currency extends Classes\Core\Base\Core
 {

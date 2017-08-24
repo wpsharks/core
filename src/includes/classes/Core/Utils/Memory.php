@@ -27,7 +27,7 @@ class Memory extends Classes\Core\Base\Core
      * Get/set available memory.
      *
      * @since 150424 Initial release.
-     * @since 17xxxx Returns `int` instead of `float`.
+     * @since 170824.30708 Returns `int` instead of `float`.
      *
      * @param string|null $limit Size abbr.
      *

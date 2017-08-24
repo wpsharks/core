@@ -27,7 +27,7 @@ class UploadSize extends Classes\Core\Base\Core
      * Max allowed file upload size.
      *
      * @since 150424 Initial release.
-     * @since 17xxxx Returns `int` instead of `float`.
+     * @since 170824.30708 Returns `int` instead of `float`.
      *
      * @return int Max allowed file upload size, in bytes.
      */

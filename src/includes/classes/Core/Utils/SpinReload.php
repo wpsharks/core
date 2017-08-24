@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Spin & reload.
  *
- * @since 17xxxx Spin & reload.
+ * @since 170824.30708 Spin & reload.
  */
 class SpinReload extends Classes\Core\Base\Core
 {
     /**
      * Spin & reload.
      *
-     * @since 17xxxx Spin & reload.
+     * @since 170824.30708 Spin & reload.
      *
      * @param array $vars Template vars.
      */

@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Dir cache utils.
  *
- * @since 17xxxx Dir cache utils.
+ * @since 170824.30708 Dir cache utils.
  */
 class DirCache extends Classes\Core\Base\Core
 {
     /**
      * Directory.
      *
-     * @since 17xxxx
+     * @since 170824.30708
      *
      * @type string
      */
@@ -35,7 +35,7 @@ class DirCache extends Classes\Core\Base\Core
     /**
      * Directory.
      *
-     * @since 17xxxx
+     * @since 170824.30708
      *
      * @type string
      */
@@ -44,7 +44,7 @@ class DirCache extends Classes\Core\Base\Core
     /**
      * Class constructor.
      *
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param Classes\App $App Instance of App.
      */
@@ -62,7 +62,7 @@ class DirCache extends Classes\Core\Base\Core
     /**
      * Get a cached value.
      *
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param string     $primary_key Primary key.
      * @param string|int $sub_key     Sub-key to get.
@@ -102,7 +102,7 @@ class DirCache extends Classes\Core\Base\Core
     /**
      * Cache a value.
      *
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param string     $primary_key   Primary key.
      * @param string|int $sub_key       Sub-key to set.
@@ -154,7 +154,7 @@ class DirCache extends Classes\Core\Base\Core
     /**
      * Clear cache value(s).
      *
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param string          $primary_key Primary key.
      * @param string|int|null $sub_key     Sub-key (optional).
@@ -178,7 +178,7 @@ class DirCache extends Classes\Core\Base\Core
     /**
      * Key sub-path.
      *
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param string          $primary_key Primary key.
      * @param string|int|null $sub_key     Sub-key to get.
@@ -205,7 +205,7 @@ class DirCache extends Classes\Core\Base\Core
     /**
      * SHA-1 cache keys.
      *
-     * @since 17xxxx Dir cache utils.
+     * @since 170824.30708 Dir cache utils.
      *
      * @param string          $primary_key Primary key.
      * @param string|int|null $sub_key     Sub-key to get.

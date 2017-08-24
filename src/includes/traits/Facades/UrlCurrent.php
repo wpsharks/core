@@ -48,7 +48,7 @@ trait UrlCurrent
     }
 
     /**
-     * @since 17xxxx Current request method.
+     * @since 170824.30708 Current request method.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

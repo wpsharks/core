@@ -24,7 +24,7 @@ use function get_defined_vars as vars;
 trait Output
 {
     /**
-     * @since 17xxxx Early close of request.
+     * @since 170824.30708 Early close of request.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Output
     }
 
     /**
-     * @since 17xxxx Shorter alias.
+     * @since 170824.30708 Shorter alias.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -49,7 +49,7 @@ trait Output
 
     /**
      * @since 160622 Adding file output prep.
-     * @deprecated 17xxxx Use shorter `prepFileOutput()`.
+     * @deprecated 170824.30708 Use shorter `prepFileOutput()`.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -97,7 +97,7 @@ trait Output
     }
 
     /**
-     * @since 17xxxx Buffer end/flush.
+     * @since 170824.30708 Buffer end/flush.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

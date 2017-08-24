@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * CRC-32 utilities.
  *
- * @since 17xxxx Initial release.
+ * @since 170824.30708 Initial release.
  */
 class Crc32 extends Classes\Core\Base\Core
 {
     /**
      * Generates a keyed CRC-32 signature.
      *
-     * @since 17xxxx Initial release.
+     * @since 170824.30708 Initial release.
      *
      * @param string $string String to sign.
      * @param string $key    Encryption key.

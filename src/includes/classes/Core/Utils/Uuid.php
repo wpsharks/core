@@ -111,7 +111,7 @@ class Uuid extends Classes\Core\Base\Core
     /**
      * UUID v4 generator x 2.
      *
-     * @since 17xxxx Initial release.
+     * @since 170824.30708 Initial release.
      *
      * @param bool $optimize Optimize?
      *

@@ -24,7 +24,7 @@ use function get_defined_vars as vars;
 trait Headers
 {
     /**
-     * @since 17xxxx Current headers.
+     * @since 170824.30708 Current headers.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait Headers
     }
 
     /**
-     * @since 17xxxx Status header slug.
+     * @since 170824.30708 Status header slug.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -60,7 +60,7 @@ trait Headers
     }
 
     /**
-     * @since 17xxxx Status header message.
+     * @since 170824.30708 Status header message.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

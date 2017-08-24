@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Spin & reload.
  *
- * @since 17xxxx Spin & reload.
+ * @since 170824.30708 Spin & reload.
  */
 trait SpinReload
 {
     /**
-     * @since 17xxxx Spin & reload.
+     * @since 170824.30708 Spin & reload.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

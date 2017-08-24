@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Fatalities.
  *
- * @since 17xxxx Fatalities
+ * @since 170824.30708 Fatalities
  */
 trait Fatalities
 {
     /**
-     * @since 17xxxx Fatalities
+     * @since 170824.30708 Fatalities
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Fatalities
     }
 
     /**
-     * @since 17xxxx Fatalities
+     * @since 170824.30708 Fatalities
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait Fatalities
     }
 
     /**
-     * @since 17xxxx Fatalities
+     * @since 170824.30708 Fatalities
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -60,7 +60,7 @@ trait Fatalities
     }
 
     /**
-     * @since 17xxxx Fatalities
+     * @since 170824.30708 Fatalities
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

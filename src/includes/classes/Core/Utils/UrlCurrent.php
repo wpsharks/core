@@ -59,7 +59,7 @@ class UrlCurrent extends Classes\Core\Base\Core
     /**
      * Current request method.
      *
-     * @since 17xxxx Current method.
+     * @since 170824.30708 Current method.
      *
      * @return string Current method.
      */

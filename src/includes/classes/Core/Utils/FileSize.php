@@ -78,7 +78,7 @@ class FileSize extends Classes\Core\Base\Core
      * Bytes represented by notation.
      *
      * @since 150424 Initial release.
-     * @since 17xxxx Returns `int` instead of `float`.
+     * @since 170824.30708 Returns `int` instead of `float`.
      *
      * @param string $string A string byte notation.
      *
@@ -120,7 +120,7 @@ class FileSize extends Classes\Core\Base\Core
     /**
      * Determines remote file size.
      *
-     * @since 17xxxx Remote file size.
+     * @since 170824.30708 Remote file size.
      *
      * @param string $url            URL to check size of.
      * @param int    $expires_after  Cache expires after (in seconds).

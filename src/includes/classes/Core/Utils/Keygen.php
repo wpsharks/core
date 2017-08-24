@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Key generator.
  *
- * @since 17xxxx Key generator.
+ * @since 170824.30708 Key generator.
  */
 class Keygen extends Classes\Core\Base\Core
 {
     /**
      * License key.
      *
-     * @since 17xxxx Key generator.
+     * @since 170824.30708 Key generator.
      *
      * @return string UUID w/ 4 dashed parts (35 uppercase bytes).
      *
@@ -41,7 +41,7 @@ class Keygen extends Classes\Core\Base\Core
     /**
      * Public API key.
      *
-     * @since 17xxxx Key generator.
+     * @since 170824.30708 Key generator.
      *
      * @return string UUID w/ `pub_` prefix (64 lowercase bytes).
      *
@@ -55,7 +55,7 @@ class Keygen extends Classes\Core\Base\Core
     /**
      * Secret API key.
      *
-     * @since 17xxxx Key generator.
+     * @since 170824.30708 Key generator.
      *
      * @return string UUID w/ `sec_` prefix (64 lowercase bytes).
      *
@@ -69,7 +69,7 @@ class Keygen extends Classes\Core\Base\Core
     /**
      * Secret sig key.
      *
-     * @since 17xxxx Key generator.
+     * @since 170824.30708 Key generator.
      *
      * @return string UUID w/ `sig_` prefix (64 lowercase bytes).
      *

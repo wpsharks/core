@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Redirect.
  *
- * @since 17xxxx Redirect.
+ * @since 170824.30708 Redirect.
  */
 trait Redirect
 {
     /**
-     * @since 17xxxx Redirect.
+     * @since 170824.30708 Redirect.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

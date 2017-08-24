@@ -129,7 +129,7 @@ class Serializer extends Classes\Core\Base\Core
      * Maybe serialize value.
      *
      * @since 150424 Serializer.
-     * @since 17xxxx `$strict` param (= true).
+     * @since 170824.30708 `$strict` param (= true).
      *
      * @param mixed $value  Value to serialize.
      * @param bool  $strict Enable strict types?

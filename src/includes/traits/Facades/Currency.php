@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Currency utils.
  *
- * @since 17xxxx Currency utils.
+ * @since 170824.30708 Currency utils.
  */
 trait Currency
 {
     /**
-     * @since 17xxxx Currency utils.
+     * @since 170824.30708 Currency utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Redirect utils.
  *
- * @since 17xxxx Spin & reload.
+ * @since 170824.30708 Spin & reload.
  */
 class Redirect extends Classes\Core\Base\Core
 {
     /**
      * Redirect.
      *
-     * @since 17xxxx Spin & reload.
+     * @since 170824.30708 Spin & reload.
      *
      * @param string $to   URL (required).
      * @param array  $args Any behavioral args.

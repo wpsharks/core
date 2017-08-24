@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * SHA-1 utils.
  *
- * @since 17xxxx SHA-1 utils.
+ * @since 170824.30708 SHA-1 utils.
  */
 class Sha1 extends Classes\Core\Base\Core
 {
     /**
      * Is a SHA-1 hash?
      *
-     * @since 17xxxx SHA-1 utils.
+     * @since 170824.30708 SHA-1 utils.
      *
      * @param mixed $value Value.
      *

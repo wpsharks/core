@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Html compression utilities.
  *
- * @since 17xxxx Initial release.
+ * @since 170824.30708 Initial release.
  */
 class HtmlCompress extends Classes\Core\Base\Core
 {
     /**
      * Compresses HTML markup.
      *
-     * @since 17xxxx Initial release.
+     * @since 170824.30708 Initial release.
      *
      * @param string $html Any HTML markup.
      *

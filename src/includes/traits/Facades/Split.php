@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Split.
  *
- * @since 17xxxx
+ * @since 170824.30708
  */
 trait Split
 {
     /**
-     * @since 17xxxx String splitter.
+     * @since 170824.30708 String splitter.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

@@ -122,7 +122,7 @@ trait Crypto
     }
 
     /**
-     * @since 17xxxx First facades.
+     * @since 170824.30708 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

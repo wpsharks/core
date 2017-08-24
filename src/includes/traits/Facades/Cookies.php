@@ -36,7 +36,7 @@ trait Cookies
     }
 
     /**
-     * @since 17xxxx Unencrypted cookies.
+     * @since 170824.30708 Unencrypted cookies.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -60,7 +60,7 @@ trait Cookies
     }
 
     /**
-     * @since 17xxxx Unencrypted cookies.
+     * @since 170824.30708 Unencrypted cookies.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

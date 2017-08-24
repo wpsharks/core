@@ -1,4 +1,4 @@
-## $v
+## v170824.30708
 
 - Adding `c::isTruthy()`.
 - Adding `c::isFalsy()`.

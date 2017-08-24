@@ -60,7 +60,7 @@ trait Uuids
     }
 
     /**
-     * @since 17xxxx UUID v4 x 2.
+     * @since 170824.30708 UUID v4 x 2.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

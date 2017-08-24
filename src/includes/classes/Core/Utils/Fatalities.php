@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Fatalities.
  *
- * @since 17xxxx Fatalities.
+ * @since 170824.30708 Fatalities.
  */
 class Fatalities extends Classes\Core\Base\Core
 {
     /**
      * Die (general).
      *
-     * @since 17xxxx Fatalities.
+     * @since 170824.30708 Fatalities.
      *
      * @param string $message Custom message.
      * @param string $slug    Custom error slug.
@@ -63,7 +63,7 @@ class Fatalities extends Classes\Core\Base\Core
     /**
      * Die (as an echo).
      *
-     * @since 17xxxx Fatalities.
+     * @since 170824.30708 Fatalities.
      */
     public function dieEcho()
     {
@@ -131,7 +131,7 @@ class Fatalities extends Classes\Core\Base\Core
     /**
      * Die (invalid).
      *
-     * @since 17xxxx Fatalities.
+     * @since 170824.30708 Fatalities.
      *
      * @param string $message Custom message.
      * @param string $slug    Custom error slug.
@@ -145,7 +145,7 @@ class Fatalities extends Classes\Core\Base\Core
     /**
      * Die (forbidden).
      *
-     * @since 17xxxx Fatalities.
+     * @since 170824.30708 Fatalities.
      *
      * @param string $message Custom message.
      * @param string $slug    Custom error slug.

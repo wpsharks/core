@@ -19,12 +19,12 @@ use function get_defined_vars as vars;
 /**
  * Keygen.
  *
- * @since 17xxxx Keygen.
+ * @since 170824.30708 Keygen.
  */
 trait Keygen
 {
     /**
-     * @since 17xxxx Keygen.
+     * @since 170824.30708 Keygen.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -36,7 +36,7 @@ trait Keygen
     }
 
     /**
-     * @since 17xxxx Keygen.
+     * @since 170824.30708 Keygen.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -48,7 +48,7 @@ trait Keygen
     }
 
     /**
-     * @since 17xxxx Keygen.
+     * @since 170824.30708 Keygen.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -60,7 +60,7 @@ trait Keygen
     }
 
     /**
-     * @since 17xxxx Keygen.
+     * @since 170824.30708 Keygen.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

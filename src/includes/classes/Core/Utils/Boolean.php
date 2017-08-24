@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * Boolean utils.
  *
- * @since 17xxxx Boolean utils.
+ * @since 170824.30708 Boolean utils.
  */
 class Boolean extends Classes\Core\Base\Core
 {
     /**
      * Test for truthy.
      *
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed $value   Value to test.
      * @param mixed $default Default if `!isset($value)`?
@@ -45,7 +45,7 @@ class Boolean extends Classes\Core\Base\Core
     /**
      * Test for falsy.
      *
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed $value   Value to test.
      * @param mixed $default Default if `!isset($value)`?
@@ -64,7 +64,7 @@ class Boolean extends Classes\Core\Base\Core
     /**
      * To `yes` or `no`.
      *
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed $value   Value to test.
      * @param mixed $default Default if `!isset($value)`?
@@ -83,7 +83,7 @@ class Boolean extends Classes\Core\Base\Core
     /**
      * To `on` or `off`.
      *
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed $value   Value to test.
      * @param mixed $default Default if `!isset($value)`?
@@ -102,7 +102,7 @@ class Boolean extends Classes\Core\Base\Core
     /**
      * To `true` or `false`.
      *
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed $value   Value to test.
      * @param mixed $default Default if `!isset($value)`?
@@ -121,7 +121,7 @@ class Boolean extends Classes\Core\Base\Core
     /**
      * To `1` or `0`.
      *
-     * @since 17xxxx Boolean utils.
+     * @since 170824.30708 Boolean utils.
      *
      * @param mixed $value   Value to test.
      * @param mixed $default Default if `!isset($value)`?

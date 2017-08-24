@@ -26,7 +26,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
     /**
      * Current request headers.
      *
-     * @since 17xxxx Current request headers.
+     * @since 170824.30708 Current request headers.
      *
      * @return array Unique/associative array of all headers.
      */
@@ -73,7 +73,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
     /**
      * Get slug for status code.
      *
-     * @since 17xxxx Adding status slug utility.
+     * @since 170824.30708 Adding status slug utility.
      *
      * @param int $status The HTTP status code.
      *
@@ -87,7 +87,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
     /**
      * Get message for status code.
      *
-     * @since 17xxxx Adding status message utility.
+     * @since 170824.30708 Adding status message utility.
      *
      * @param int $status The HTTP status code.
      *

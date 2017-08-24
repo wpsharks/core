@@ -19,14 +19,14 @@ use function get_defined_vars as vars;
 /**
  * String splitter.
  *
- * @since 17xxxx String splitter.
+ * @since 170824.30708 String splitter.
  */
 class Split extends Classes\Core\Base\Core
 {
     /**
      * String splitter.
      *
-     * @since 17xxxx String splitter.
+     * @since 170824.30708 String splitter.
      *
      * @param string $pattern Regex split pattern.
      * @param string $string  String to split (subject).
