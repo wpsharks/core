@@ -73,15 +73,17 @@ class Fatalities extends Classes\Core\Base\Core
 
         $url     = $this->c::currentUrl();
         $method  = $this->c::currentMethod();
-        $headers = $this->c::currentHeaders();
+        $headers = $_h = $this->c::currentHeaders();
 
-        $get_vars     = $this->c::unslash($_GET);
-        $request_vars = $_r = $this->c::unslash($_REQUEST);
+        $query = $this->c::unslash($_GET);
+        $vars  = $_r  = $this->c::unslash($_REQUEST);
 
-        $raw_data  = (string) file_get_contents('php://input');
-        $json_data = $raw_data ? (json_decode($raw_data) ?: null) : null;
+        $raw = (string) file_get_contents('php://input');
 
-        $code    = (int) ($_r['status'] ?? $_r['code'] ?? 200);
+        if (mb_stripos($_h['content-type'] ?? '', '/json')) {
+            $json = json_decode($raw) ?: (object) [];
+        }
+        $code    = (int) ($_r['status'] ?? 200);
         $slug    = $this->c::statusHeaderSlug($code);
         $message = $this->c::statusHeaderMessage($code);
 
@@ -97,14 +99,15 @@ class Fatalities extends Classes\Core\Base\Core
             'echo'    => [
                 'time' => time(),
 
-                'method'   => $method,
-                'url'      => $url,
-                'get_vars' => $get_vars,
+                'method' => $method,
+                'url'    => $url,
+                'query'  => $query,
 
-                'data' => [
-                    'vars' => $request_vars,
-                    'raw'  => $raw_data,
-                    'json' => $json_data,
+                'headers' => $headers,
+                'data'    => [
+                    'vars' => $vars,
+                    'json' => $json ?? null,
+                    'raw'  => $raw,
                 ],
                 'status' => [
                     'code'    => $code,

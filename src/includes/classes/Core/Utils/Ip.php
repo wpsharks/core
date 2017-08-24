@@ -1,6 +1,6 @@
 <?php
 /**
- * IP address utilities.
+ * IP address.
  *
  * @author @jaswrks
  * @copyright WebSharks™
@@ -17,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * IP address utilities.
+ * IP address utils.
  *
  * @since 150424 Initial release.
  */
