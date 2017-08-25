@@ -1,6 +1,6 @@
 ## $v
 
-- Adding `c::arraySwapRecursive()`.
+- Adding `c::arrayChangeRecursive()`.
 
 ## v170824.30708
 

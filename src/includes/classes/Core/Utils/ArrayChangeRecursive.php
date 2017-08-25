@@ -1,6 +1,6 @@
 <?php
 /**
- * Array swap recursive.
+ * Change recursive.
  *
  * @author @jaswrks
  * @copyright WebSharks™
@@ -17,16 +17,16 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Array swap recursive.
+ * Change recursive.
  *
  * @since 17xxxx Swap recursive.
  */
-class ArraySwapRecursive extends Classes\Core\Base\Core
+class ArrayChangeRecursive extends Classes\Core\Base\Core
 {
     /**
-     * Array swap recursive.
+     * Change recursive.
      *
-     * @since 17xxxx Swap recursive.
+     * @since 17xxxx Change recursive.
      *
      * @param array $array    Base array.
      * @param array ...$merge Array to merge.
@@ -43,7 +43,7 @@ class ArraySwapRecursive extends Classes\Core\Base\Core
     /**
      * Empty numeric arrays.
      *
-     * @since 17xxxx Swap recursive.
+     * @since 17xxxx Change recursive.
      *
      * @param array $array    Base array.
      * @param array ...$merge Array to merge.
@@ -69,6 +69,6 @@ class ArraySwapRecursive extends Classes\Core\Base\Core
             }
         } // unset($_key, $_value); // Housekeeping.
 
-        return $array; // Return possibly-modified array.
+        return $array;
     }
 }

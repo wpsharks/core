@@ -36,15 +36,15 @@ trait Arrays
     }
 
     /**
-     * @since 17xxxx Swap recursive.
+     * @since 17xxxx Change recursive.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\ArraySwapRecursive::__invoke()
+     * @see Classes\Core\Utils\ArrayChangeRecursive::__invoke()
      */
-    public static function arraySwapRecursive(...$args)
+    public static function arrayChangeRecursive(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©ArraySwapRecursive->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©ArrayChangeRecursive->__invoke(...$args);
     }
 
     /**
