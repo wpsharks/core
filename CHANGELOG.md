@@ -1,3 +1,7 @@
+## $v
+
+- Adding `c::arraySwapRecursive()`.
+
 ## v170824.30708
 
 - Adding `c::isTruthy()`.

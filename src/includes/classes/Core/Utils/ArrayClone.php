@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -21,7 +21,7 @@ use function get_defined_vars as vars;
  *
  * @since 160511 Array cloning.
  */
-class CloneArray extends Classes\Core\Base\Core
+class ArrayClone extends Classes\Core\Base\Core
 {
     /**
      * Clone an array deeply.
