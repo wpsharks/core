@@ -56,8 +56,7 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
         }
         if (mb_strlen($slug) < 3) {
             return $is = true;
-        }
-        if (in_array($slug, $this::SLUG_RESERVED_STRINGS, true)) {
+        } elseif (in_array($slug, $this::SLUG_RESERVED_STRINGS, true)) {
             return $is = true;
         }
         foreach ($this::SLUG_RESERVED_REGEX_FRAGS as $_regex_frag) {
@@ -80,7 +79,7 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
      */
     public function toName(string $slug): string
     {
-        $name = $slug; // Working copy.
+        $name = $slug; // Initialize.
         $name = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $name);
         $name = $this->c::mbUcWords($name);
         $name = $this->c::mbTrim($name);
@@ -115,7 +114,7 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
      */
     public function toVar(string $slug, bool $strict = true): string
     {
-        $var = $slug; // Working copy.
+        $var = $slug; // Initialize.
         $var = mb_strtolower($this->c::forceAscii($var));
         $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
         $var = $this->c::mbTrim($var, '', '_');

@@ -9,34 +9,24 @@ require_once dirname(__FILE__, 2).'/includes/local.php';
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 $a = [
-    'one' => [
-        'two'   => 'a2',
-        'three' => ['a4', 'a5', 'a6'],
-        'four'  => ['five' => 'a5', 'six' => 'a6', 'seven' => 'a7'],
-    ],
-    'two' => [
-        'three' => 'a3',
-        'four'  => ['a5', 'a6', 'a7'],
-        'five'  => ['six' => 'a6', 'seven' => 'a7', 'eight' => 'a8'],
-    ],
+    'zero'  => 'a',
+    'one'   => 'a',
+    'two'   => ['a'],
     'three' => [
-        'four'  => 'a4',
-        'five'  => ['a6', 'a7', 'a8'],
-        'six'   => ['seven' => 'a7', 'eight' => 'a8', 'nine' => 'a9'],
+        'four'  => 'a',
+        'five'  => ['a'],
+        'six'   => ['seven' => 'a', 'eight' => 'a', 'nine' => 'a'],
     ],
 ];
 $b = [
-    'one' => [
-        'two'   => '',
-        'three' => [],
-        'four'  => [],
+    'one'   => 'b',
+    'two'   => ['b'],
+    'three' => [
+        'four'  => 'b',
+        'five'  => ['b'],
+        'six'   => ['seven' => 'b', 'eight' => 'b', 'nine' => 'b', 'ten' => 'b'],
     ],
-    'two' => [
-        'three' => 'b3',
-        'four'  => ['b5', 'b6', 'b7'],
-        'five'  => ['six' => 'b6', 'seven' => 'b7', 'eight' => 'b8'],
-    ],
-    'three' => [],
+    'eleven' => ['twelve' => 'b'],
 ];
 echo json_encode($a, JSON_PRETTY_PRINT)."\n";
 echo json_encode($b, JSON_PRETTY_PRINT)."\n";

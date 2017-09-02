@@ -48,7 +48,7 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      */
     public function toName(string $var): string
     {
-        $name        = $var; // Working copy.
+        $name        = $var; // Initialize.
         $name        = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $name);
         $name        = $this->c::mbUcWords($name);
         return $name = $this->c::mbTrim($name);
@@ -81,7 +81,7 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      */
     public function toSlug(string $var, bool $strict = true): string
     {
-        $slug = $var; // Working copy.
+        $slug = $var; // Initialize.
         $slug = mb_strtolower($this->c::forceAscii($slug));
         $slug = preg_replace('/[^a-z0-9]+/u', '-', $slug);
         $slug = $this->c::mbTrim($slug, '', '-');

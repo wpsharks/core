@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Interfaces;
 
 use WebSharks\Core\Classes;
@@ -28,19 +28,19 @@ interface SlugConstants
      *
      * @since 150424 Initial release.
      *
-     * @var string Regex pattern for use in `preg_match()`.
+     * @type string Regex pattern for use in `preg_match()`.
      *
      * @internal This can be used in MySQL by outputting the following:
      *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/SlugConstants::SLUG_REGEX_VALID);`
      */
-    const SLUG_REGEX_VALID = '/^[a-z](?:[a-z0-9\-]*[a-z0-9])?$/u';
+    const SLUG_REGEX_VALID = '/^[a-z](?:(?:[a-z0-9]|\-(?!\-))*[a-z0-9])?$/u';
 
     /**
      * Reserved regex patterns.
      *
      * @since 150424 Reserved slug class.
      *
-     * @var array Reserved regex patterns.
+     * @type array Reserved regex patterns.
      */
     const SLUG_RESERVED_REGEX_FRAGS = [
         '(my|postgre)?sql[0-9]*',
@@ -534,7 +534,7 @@ interface SlugConstants
      *
      * @since 150424 Reserved slug strings.
      *
-     * @var array Reserved slug strings.
+     * @type array Reserved slug strings.
      */
     const SLUG_RESERVED_STRINGS = [
         '106andpark',

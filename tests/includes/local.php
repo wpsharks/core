@@ -24,4 +24,7 @@ $App = new App(${__FILE__}['instance_base'], [
         '©sris_dir'  => dirname(__FILE__, 2).'/local/.~sris',
         '©cache_dir' => dirname(__FILE__, 2).'/local/.~cache',
     ],
+    '©hash_ids' => [
+        '©hash_key' => 'qsTHGxuehSb5r26PEXDXykPJtWYuMYQbd3gmL3YwUJUdbnX7tm9hzH3CVKund5Wc',
+    ],
 ]);

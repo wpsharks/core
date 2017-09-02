@@ -144,7 +144,7 @@ class Name extends Classes\Core\Base\Core
     {
         $name = $this->stripClean($name);
 
-        $slug = $name; // Working copy.
+        $slug = $name; // Initialize.
         $slug = mb_strtolower($this->c::forceAscii($slug));
         $slug = preg_replace('/[^a-z0-9]+/u', '-', $slug);
         $slug = $this->c::mbTrim($slug, '', '-');
@@ -169,7 +169,7 @@ class Name extends Classes\Core\Base\Core
     {
         $name = $this->stripClean($name);
 
-        $var = $name; // Working copy.
+        $var = $name; // Initialize.
         $var = mb_strtolower($this->c::forceAscii($var));
         $var = preg_replace('/[^a-z0-9]+/u', '_', $var);
         $var = $this->c::mbTrim($var, '', '_');

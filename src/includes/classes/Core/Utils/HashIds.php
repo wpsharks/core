@@ -30,7 +30,7 @@ class HashIds extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var Parser
+     * @type Parser
      */
     protected $Parser;
 
@@ -38,20 +38,18 @@ class HashIds extends Classes\Core\Base\Core
      * Class constructor.
      *
      * @since 150424 Adding hash IDs.
+     * @since 17xxxx No constructor options.
      *
-     * @param Classes\App $App       Instance of App.
-     * @param string      $salt      Secret key.
-     * @param int         $min_chars Minumum chars.
-     * @param string      $alphabet  Chars to use in ID.
+     * @param Classes\App $App Instance of App.
      */
-    public function __construct(Classes\App $App, string $key = '', int $min_chars = 0, string $alphabet = '')
+    public function __construct(Classes\App $App)
     {
         parent::__construct($App);
 
-        if (!$key && !($key = $this->App->Config->©hash_ids['©hash_key'])) {
+        if (!($key = $this->App->Config->©hash_ids['©hash_key'])) {
             throw $this->c::issue('Missing HashIds hash key.');
         }
-        $this->Parser = new Parser($key, $min_chars, $alphabet);
+        $this->Parser = new Parser($key, 4, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     }
 
     /**
@@ -61,7 +59,7 @@ class HashIds extends Classes\Core\Base\Core
      *
      * @param int ...$integers Variadic integers to encode.
      *
-     * @return string A hash ID; e.g., `xjFsdcl`
+     * @return string A hash ID; e.g., `wQoQjgr`
      */
     public function encode(int ...$integers): string
     {

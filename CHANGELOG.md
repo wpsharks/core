@@ -1,6 +1,10 @@
 ## $v
 
 - Adding `c::arrayChangeRecursive()`.
+- Updating to latest release of HashIds package.
+- Removing integers from HashIds alphabet to guarantee non-numeric hash IDs.
+- Forcing all Hash IDs to be at least 4 characters in length to avoid confusion.
+- `bcmath` and `gmp` are now required extensions, instead of suggested extensions. Needed by HashIds package.
 
 ## v170824.30708
 
