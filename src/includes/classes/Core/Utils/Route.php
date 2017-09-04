@@ -117,21 +117,22 @@ class Route extends Classes\Core\Base\Core
             } elseif (!$_rewrite_path) {
                 continue; // Must have.
             }
-            $_rewrite_path_rcs = mb_strpos($_rewrite_path, '%%') !== false;
+            $_rewrite_path_contains_rcs = mb_strpos($_rewrite_path, '$') !== false
+                || mb_strpos($_rewrite_path, '%%') !== false;
 
             foreach ($_m as $_key => $_value) {
-                if (!is_string($_key) || !$_key || !isset($_value[0])) {
-                    continue; // Skip this one.
-                } // Only string keys w/ a value.
-
-                if ($_rewrite_path_rcs) { // If applicable.
-                    $_rewrite_path = str_replace('%%'.$_key.'%%', $_value, $_rewrite_path);
+                if ($_rewrite_path_contains_rcs) {
+                    $_rewrite_path = str_replace(['${'.$_key.'}', '%%'.$_key.'%%'], $_value, $_rewrite_path);
+                    $_rewrite_path = is_int($_key) ? str_replace('$'.$_key, $_value, $_rewrite_path) : $_rewrite_path;
                 } // This allows replacement codes in rewritten paths.
-                $rewrite_query_vars[urldecode($_key)] = urldecode($_value);
+
+                if ($_key && is_string($_key)) {
+                    $rewrite_query_vars[urldecode($_key)] = urldecode($_value);
+                } // Only string keys w/ a value.
             } // unset($_key, $_value); // Housekeeping.
 
-            if ($_rewrite_path_rcs && mb_strpos($_rewrite_path, '%%') !== false) {
-                $_rewrite_path = preg_replace('/%%.+?%%/u', '', $_rewrite_path);
+            if ($_rewrite_path_contains_rcs) {
+                $_rewrite_path = preg_replace(['/\$[0-9]+/u', '/\$\{.+?\}/u', '/%%.+?%%/u'], '', $_rewrite_path);
                 $_rewrite_path = preg_replace('/\/{2,}/u', '/', $_rewrite_path);
             }
             $path = $this->c::mbTrim($_rewrite_path, '/');
