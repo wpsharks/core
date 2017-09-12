@@ -29,9 +29,15 @@ interface VarConstants
      * @since 160220 Initial release.
      *
      * @type string Regex pattern for use in `preg_match()`.
-     *
-     * @internal This can be used in MySQL by outputting the following:
-     *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/VarConstants::VAR_REGEX_VALID);`
      */
-    const VAR_REGEX_VALID = '/^[a-z](?:(?:[a-z0-9]|_(?!_))*[a-z0-9])?$/u';
+    const VAR_REGEX_VALID = '/^[a-z0-9](?:(?:[a-z0-9]|_(?!_))*[a-z0-9])?$/u';
+
+    /**
+     * Regex matches a valid var, strictly.
+     *
+     * @since 17xxxx Adding strict validation.
+     *
+     * @type string Regex pattern for use in `preg_match()`.
+     */
+    const VAR_STRICT_REGEX_VALID = '/^[a-z](?:(?:[a-z0-9]|_(?!_))*[a-z0-9])?$/u';
 }

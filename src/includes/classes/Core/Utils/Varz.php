@@ -28,13 +28,14 @@ class Varz extends Classes\Core\Base\Core implements Interfaces\VarConstants
      *
      * @since 160220 Initial release.
      *
-     * @param string $var Var.
+     * @param string $var    Var.
+     * @param bool   $strict Strict?
      *
      * @return bool True if var is valid.
      */
-    public function isValid(string $var): bool
+    public function isValid(string $var, bool $strict = true): bool
     {
-        return (bool) preg_match($this::VAR_REGEX_VALID, $var);
+        return (bool) preg_match($strict ? $this::VAR_STRICT_REGEX_VALID : $this::VAR_REGEX_VALID, $var);
     }
 
     /**

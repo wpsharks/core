@@ -58,16 +58,11 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
         if (headers_sent()) {
             throw $this->c::issue('Headers already sent.');
         }
-        $headers = [
-            'expires'       => 'wed, 11 jan 1984 05:00:00 gmt',
-            'cache-control' => 'no-cache, must-revalidate, max-age=0',
-            'pragma'        => 'no-cache',
-        ];
-        foreach ($headers as $_header => $_value) {
-            header($_header.': '.$_value);
-        } // unset($_header, $_value);
-
         header_remove('last-modified');
+
+        header('expires: wed, 11 jan 1984 05:00:00 gmt');
+        header('cache-control: no-cache, must-revalidate, max-age=0');
+        header('pragma: no-cache');
     }
 
     /**
@@ -81,13 +76,27 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
      */
     public function getStatusSlug(int $status): string
     {
-        return $this->c::nameToSlug($this->getStatusMessage($status));
+        return $this->c::nameToSlug($this->getStatusTitle($status));
+    }
+
+    /**
+     * Get title for status code.
+     *
+     * @since 17xxxx Status title utility.
+     *
+     * @param int $status The HTTP status code.
+     *
+     * @return string Status title for code.
+     */
+    public function getStatusTitle(int $status): string
+    {
+        return $this::HTTP_STATUSES[$status] ?? 'Bad Request';
     }
 
     /**
      * Get message for status code.
      *
-     * @since 170824.30708 Adding status message utility.
+     * @since 17xxxx Status message utility.
      *
      * @param int $status The HTTP status code.
      *
@@ -95,7 +104,7 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
      */
     public function getStatusMessage(int $status): string
     {
-        return $this::HTTP_STATUSES[$status] ?? 'Invalid request.';
+        return $this->c::mbUcFirst(mb_strtolower($this->getStatusTitle($status))).'.';
     }
 
     /**
@@ -103,56 +112,17 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
      *
      * @since 151121 Header utilities.
      *
-     * @param int   $status The HTTP status code.
-     * @param array $args   Any additional behavioral args.
+     * @param int $status Status code.
      */
-    public function sendStatus(int $status, array $args = [])
+    public function sendStatus(int $status)
     {
-        $default_args = [
-            'display_error'      => false,
-            'display_error_page' => 'default',
-        ];
-        $args = array_merge($default_args, $args);
-        $args = array_intersect_key($args, $default_args);
-
-        $errors_dir = $this->App->Config->©fs_paths['©errors_dir'];
-
-        $display_error      = (bool) $args['display_error'];
-        $display_error_page = (string) $args['display_error_page'];
-
-        $message = $this->getStatusMessage($status);
-
         if (headers_sent()) {
             throw $this->c::issue('Headers already sent.');
-        } elseif ($this->c::isCli()) {
-            throw $this->c::issue('Not possible in CLI mode.');
         }
         if (!($protocol = $_SERVER['SERVER_PROTOCOL'] ?? '')) {
             $protocol = 'HTTP/1.1'; // Default fallback.
         }
-        header($protocol.' '.$status.' '.$message, true, $status);
-
-        if ($status >= 400 && $display_error) {
-            if ($errors_dir && $display_error_page) {
-                $error_page = $errors_dir.'/'.$status.'/'.$display_error_page.'/index.html';
-            } elseif ($errors_dir) {
-                $error_page = $errors_dir.'/'.$status.'/index.html';
-            } else {
-                $error_page = ''; // Not possible.
-            }
-            $this->c::noCacheFlags();
-            $this->c::sessionWriteClose();
-            $this->c::obEndCleanAll();
-
-            $this->sendNoCache(); // No-cache headers.
-            header('content-type: text/html; charset=utf-8');
-
-            if ($error_page && is_file($error_page)) {
-                readfile($error_page);
-            } else {
-                echo '<h1>'.$this->c::escHtml($message).'</h1>';
-            }
-        }
+        header($protocol.' '.$status.' '.$this->getStatusTitle($status), true, $status);
     }
 
     /**

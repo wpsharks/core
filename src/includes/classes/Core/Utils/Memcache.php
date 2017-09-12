@@ -159,6 +159,7 @@ class Memcache extends Classes\Core\Base\Core
     {
         if (!$this->enabled) {
             return; // Not possible.
+            //
         } elseif (!($key = $this->key($primary_key, $sub_key))) {
             return; // Fail; e.g., race condition.
         }
@@ -192,6 +193,7 @@ class Memcache extends Classes\Core\Base\Core
 
         if (!($key = $this->key($primary_key, $sub_key))) {
             return false; // Fail; e.g., race condition.
+            //
         } elseif ($value === null || is_resource($value)) {
             throw $this->c::issue('Incompatible data type.');
         }
@@ -280,6 +282,7 @@ class Memcache extends Classes\Core\Base\Core
     {
         if (!$this->enabled) {
             return ''; // Not possible.
+            //
         } elseif (!($namespaced_primary_key = $this->nspKey($primary_key))) {
             return ''; // Not possible; e.g., empty key.
         }
@@ -330,6 +333,7 @@ class Memcache extends Classes\Core\Base\Core
     {
         if (!$this->enabled) {
             return ''; // Not possible.
+            //
         } elseif (!isset($primary_key[0])) {
             return ''; // Not possible.
         }

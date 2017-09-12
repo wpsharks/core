@@ -29,11 +29,17 @@ interface SlugConstants
      * @since 150424 Initial release.
      *
      * @type string Regex pattern for use in `preg_match()`.
-     *
-     * @internal This can be used in MySQL by outputting the following:
-     *  `echo str_replace(["'", '\\x', '\\p', '\\?'], ["\\'", '\\\\x', '\\\\p', '\\\\?'], Interfaces/SlugConstants::SLUG_REGEX_VALID);`
      */
-    const SLUG_REGEX_VALID = '/^[a-z](?:(?:[a-z0-9]|\-(?!\-))*[a-z0-9])?$/u';
+    const SLUG_REGEX_VALID = '/^[a-z0-9](?:(?:[a-z0-9]|\-(?!\-))*[a-z0-9])?$/u';
+
+    /**
+     * Regex matches a valid slug, strictly.
+     *
+     * @since 17xxxx Adding strict validation.
+     *
+     * @type string Regex pattern for use in `preg_match()`.
+     */
+    const SLUG_STRICT_REGEX_VALID = '/^[a-z](?:(?:[a-z0-9]|\-(?!\-))*[a-z0-9])?$/u';
 
     /**
      * Reserved regex patterns.

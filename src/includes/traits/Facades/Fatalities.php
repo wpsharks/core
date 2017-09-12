@@ -40,18 +40,6 @@ trait Fatalities
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Fatalities::dieEcho()
-     */
-    public static function dieEcho(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Fatalities->dieEcho(...$args);
-    }
-
-    /**
-     * @since 170824.30708 Fatalities
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
      * @see Classes\Core\Utils\Fatalities::dieInvalid()
      */
     public static function dieInvalid(...$args)
@@ -69,5 +57,17 @@ trait Fatalities
     public static function dieForbidden(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Fatalities->dieForbidden(...$args);
+    }
+
+    /**
+     * @since 170824.30708 Fatalities
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Fatalities::dieEcho()
+     */
+    public static function dieEcho(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Fatalities->dieEcho(...$args);
     }
 }

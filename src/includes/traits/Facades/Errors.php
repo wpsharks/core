@@ -36,6 +36,18 @@ trait Errors
     }
 
     /**
+     * @since 17xxxx Error utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Error::__invoke()
+     */
+    public static function errors(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Error->__invoke(...$args);
+    }
+
+    /**
      * @since 160710 Error utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -43,6 +55,18 @@ trait Errors
      * @see Classes\Core\Utils\Error::is()
      */
     public static function isError(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Error->is(...$args);
+    }
+
+    /**
+     * @since 17xxxx Error utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Error::is()
+     */
+    public static function isErrors(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Error->is(...$args);
     }

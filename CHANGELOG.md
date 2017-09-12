@@ -1,5 +1,6 @@
 ## $v
 
+- Adding PSR-7 via Slim-HTTP.
 - Adding `c::arrayChangeRecursive()`.
 - Updating to latest release of HashIds package.
 - Removing integers from HashIds alphabet to guarantee non-numeric hash IDs.

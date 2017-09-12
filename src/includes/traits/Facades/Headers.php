@@ -72,6 +72,18 @@ trait Headers
     }
 
     /**
+     * @since 17xxxx Status header sentence.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::getStatusSentence()
+     */
+    public static function statusHeaderSentence(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Headers->getStatusSentence(...$args);
+    }
+
+    /**
      * @since 160118 Adding no-cache headers.
      *
      * @param mixed ...$args Variadic args to underlying utility.

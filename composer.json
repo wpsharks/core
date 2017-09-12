@@ -87,6 +87,7 @@
     "stripe/stripe-php": "4.*",
     "aws/aws-sdk-php": "3.*",
 
+    "slim/http": "0.*",
     "league/iso3166": "1.*",
     "embedly/embedly-php": "0.*",
     "corneltek/getoptionkit": "2.*",

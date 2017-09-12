@@ -77,6 +77,7 @@ abstract class Facades
     use Traits\Facades\Php;
     use Traits\Facades\Redirect;
     use Traits\Facades\Replacements;
+    use Traits\Facades\Request;
     use Traits\Facades\RequestType;
     use Traits\Facades\Routes;
     use Traits\Facades\SearchTerms;

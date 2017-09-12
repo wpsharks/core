@@ -27,43 +27,32 @@ class Route extends Classes\Core\Base\Core
      * Loads route file.
      *
      * @since 161008 Route utilities.
+     * @since 17xxxx Exit instead of return.
      *
      * @param array $args Behavioral args.
-     *
-     * @return bool True if route was loaded.
      */
-    public function load(array $args = []): bool
+    public function load(array $args = [])
     {
         $default_args = [
-            'path' => '',
-            'dir'  => '',
-            'vars' => [],
-
-            'rewrites'                => [],
-            'protocol'                => 'http',
-            'extension'               => 'php',
-            'redirect_trailing_slash' => true,
-            // See: {@link resolve()}
-
-            'display_error'      => true,
-            'display_error_page' => 'default',
-            // See: {@link c::statusHeader()}
+            'path'        => '',
+            'dir'         => '',
+            'vars'        => [],
+            'on_resolved' => null,
         ];
-        $args = array_merge($default_args, $args);
-        $args = array_intersect_key($args, $default_args);
+        $args += $default_args;
 
         $args['path'] = (string) $args['path'];
         $args['dir']  = (string) $args['dir'];
         $args['vars'] = (array) $args['vars'];
 
         if (($resolved = $this->resolve($args['path'], $args['dir'], $args))) {
-            echo $this->get($resolved)->parse($args['vars']);
-            return true; // Loaded successfully.
+            if (isset($args['on_resolved']) && is_callable($args['on_resolved'])) {
+                $args['on_resolved']($resolved);
+            }
+            exit($this->get($resolved)->parse($args['vars']));
+        } else {
+            $this->c::die(404); // Unable to resolve.
         }
-        if ($args['display_error']) {
-            $this->c::statusHeader(404, $args);
-        }
-        return false; // Failure.
     }
 
     /**
@@ -85,8 +74,7 @@ class Route extends Classes\Core\Base\Core
             'extension'               => 'php',
             'redirect_trailing_slash' => true,
         ];
-        $args = array_merge($default_args, $args);
-        $args = array_intersect_key($args, $default_args);
+        $args += $default_args; // Merge defaults.
 
         $rewrites                = (array) $args['rewrites'];
         $protocol                = (string) $args['protocol'];
@@ -103,8 +91,11 @@ class Route extends Classes\Core\Base\Core
                 $current_url         = $this->c::parseUrl($this->c::currentUrl());
                 $current_url['path'] = $this->c::mbRTrim($current_url['path'], '/');
                 $current_url         = $this->c::unparseUrl($current_url);
-                header('location: '.$current_url, true, 301);
-                exit; // Stop here on redirection.
+
+                $this->c::redirect($current_url, [
+                    'cacheable' => true,
+                    'status'    => 301,
+                ]); // Without trailing slash.
             }
         } // Trim leading/trailing slashes.
         $path               = $this->c::mbTrim($path, '/');
@@ -132,14 +123,16 @@ class Route extends Classes\Core\Base\Core
             } // unset($_key, $_value); // Housekeeping.
 
             if ($_rewrite_path_contains_rcs) {
-                $_rewrite_path = preg_replace(['/\$[0-9]+/u', '/\$\{.+?\}/u', '/%%.+?%%/u'], '', $_rewrite_path);
+                $_rewrite_path = preg_replace(['/\$[0-9]+/u', '/\$\{[^{}]*\}/u', '/%%[^%]*%%/u'], '', $_rewrite_path);
                 $_rewrite_path = preg_replace('/\/{2,}/u', '/', $_rewrite_path);
             }
-            $path = $this->c::mbTrim($_rewrite_path, '/');
+            $path = $_rewrite_path;
+            $path = $this->c::mbTrim($path, '/');
+            $path = isset($path[0]) ? $path : 'index';
             break; // Only one pattern can match; i.e., the first match wins.
         } // unset($_rewrite_pattern, $_rewrite_path, $_rewrite_path_contains_rcs, $_m);
 
-        $location        = $path ? $this->locate($protocol.'/'.$path.'.'.$extension, $dir) : [];
+        $location        = $this->locate($protocol.'/'.$path.'.'.$extension, $dir);
         return $resolved = $location ? array_merge($location, compact('path', 'rewrite_query_vars')) : [];
     }
 

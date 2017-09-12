@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -21,7 +21,7 @@ use function get_defined_vars as vars;
  *
  * @since 150424 Enhancing multibyte support.
  */
-class MbLcFirst extends Classes\Core\Base\Core
+class LcFirst extends Classes\Core\Base\Core
 {
     /**
      * Multibyte `lcfirst()`.

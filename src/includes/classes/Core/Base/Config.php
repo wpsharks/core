@@ -128,6 +128,10 @@ class Config extends Classes\Core\Base\Core
                         ],
                     ],
                 ],
+                '©default' => [
+                    '©host' => (string) ($_['CFG_MYSQL_DB_HOST'] ?? '127.0.0.1'),
+                    '©name' => (string) ($_['CFG_MYSQL_DB_NAME'] ?? 'db0'),
+                ],
             ],
 
             '©brand' => [ // `short_` variations should not exceed 10 bytes.
@@ -166,17 +170,20 @@ class Config extends Classes\Core\Base\Core
             ],
 
             '©urls' => [
-                '©hosts' => [ // Contains `:port` when necessary.
+                '©hosts' => [ // Containing `:port` when necessary.
                     '©app' => (string) ($_['CFG_HOST'] ?? $host),
+                    '©api' => (string) ($_['CFG_API_HOST'] ?? 'api.'.$root_host),
                     '©cdn' => (string) ($_['CFG_CDN_HOST'] ?? 'cdn.'.$root_host),
 
-                    '©roots' => [ // Expected to contain `:port` when necessary.
+                    '©roots' => [ // Containing `:port` when necessary.
                         '©app' => (string) ($_['CFG_ROOT_HOST'] ?? $root_host),
+                        '©api' => (string) ($_['CFG_API_ROOT_HOST'] ?? $root_host),
                         '©cdn' => (string) ($_['CFG_CDN_ROOT_HOST'] ?? $root_host),
                     ],
                 ],
                 '©base_paths' => [
                     '©app' => (string) ($_['CFG_HOST_BASE_PATH'] ?? ($_ ? '/' : '/src/')),
+                    '©api' => (string) ($_['CFG_API_HOST_BASE_PATH'] ?? ($_ ? '/' : '/src/')),
                     '©cdn' => (string) ($_['CFG_CDN_HOST_BASE_PATH'] ?? '/'),
                 ],
                 '©cdn_filter_enable' => (bool) ($_['CFG_CDN_FILTER_ENABLE'] ?? false),

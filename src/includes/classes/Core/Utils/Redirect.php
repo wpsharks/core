@@ -26,26 +26,28 @@ class Redirect extends Classes\Core\Base\Core
     /**
      * Redirect.
      *
-     * @since 170824.30708 Spin & reload.
+     * @since 170824.30708 Redirect.
      *
      * @param string $to   URL (required).
      * @param array  $args Any behavioral args.
      */
     public function __invoke(string $to, array $args = [])
     {
-        if (!$to) { // Must have a location.
+        if (!$to) { // Must have.
             throw $this->c::issue('Empty redirect.');
-            //
         } elseif (headers_sent()) {
             throw $this->c::issue('Headers already sent.');
         }
         $default_args = [
             'cacheable' => false,
+            'status'    => 302,
             'top'       => false,
             'exit'      => true,
         ];
         $args += $default_args; // Merge defaults.
+
         $args['cacheable'] = (bool) $args['cacheable'];
+        $args['status']    = (int) $args['status'];
         $args['top']       = (bool) $args['top'];
         $args['exit']      = (bool) $args['exit'];
 
@@ -54,19 +56,20 @@ class Redirect extends Classes\Core\Base\Core
             $this->c::noCacheHeaders();
         }
         if ($args['top']) {
+            $this->c::statusHeader(200);
             echo '<!DOCTYPE html>';
             echo '<html>';
             echo '  <head>';
-            echo '      <script>'; // Breaks frames.
+            echo '      <script>'; // Break frames.
             echo '          top.location.href = '.$this->c::sQuote($to).';';
             echo '      </script>';
             echo '  </head>';
             echo '</html>';
         } else {
-            header('location: '.$to);
+            header('location: '.$to, true, $args['status']);
         }
         if ($args['exit']) {
-            exit(); // Default behavior.
+            exit();
         }
     }
 }

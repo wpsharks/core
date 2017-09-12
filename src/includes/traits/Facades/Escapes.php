@@ -180,6 +180,79 @@ trait Escapes
     }
 
     /**
+     * @since 160422 SQL utils.
+     * @deprecated 17xxxx Use `quoteSqlColumns()`.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteColumns()
+     */
+    public static function quoteSqlCols(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Sql->quoteColumns(...$args);
+    }
+
+    /**
+     * @since 17xxxx Enhancing SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteColumn()
+     */
+    public static function quoteSqlColumn(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Sql->quoteColumn(...$args);
+    }
+
+    /**
+     * @since 17xxxx Enhancing SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteColumns()
+     */
+    public static function quoteSqlColumns(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Sql->quoteColumns(...$args);
+    }
+
+    /**
+     * @since 17xxxx SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteValues()
+     */
+    public static function quoteSqlValues(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Sql->quoteValues(...$args);
+    }
+
+    /**
+     * @since 17xxxx SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteCvSets()
+     */
+    public static function quoteSqlCvSets(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Sql->quoteCvSets(...$args);
+    }
+
+    /**
+     * @since 17xxxx SQL utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Sql::quoteCvPairs()
+     */
+    public static function quoteSqlCvPairs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Sql->quoteCvPairs(...$args);
+    }
+
+    /**
      * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -189,18 +262,6 @@ trait Escapes
     public static function escSqlName(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Sql->escapeName(...$args);
-    }
-
-    /**
-     * @since 160422 SQL utils.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\Core\Utils\Sql::quoteColumns()
-     */
-    public static function quoteSqlCols(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Sql->quoteColumns(...$args);
     }
 
     /**

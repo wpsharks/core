@@ -40,11 +40,11 @@ trait Multibyte
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\MbLcFirst::__invoke()
+     * @see Classes\Core\Utils\LcFirst::__invoke()
      */
     public static function mbLcFirst(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©MbLcFirst->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©LcFirst->__invoke(...$args);
     }
 
     /**

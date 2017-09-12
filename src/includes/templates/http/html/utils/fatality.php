@@ -17,7 +17,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 extract($this->setVars([
-    'message' => __('Unknown error. Please try again.'),
+    'message' => __('Unknown error, please try again.'),
 ]));
 ?>
 <!DOCTYPE html>
@@ -29,8 +29,8 @@ extract($this->setVars([
 
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/css/hash/default-app.min.css')); ?>" />
 
+    <link rel="stylesheet" href="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/css/hash/default-app.min.css')); ?>" />
     <script defer src="<?= $this->c::escUrl($this->c::appWsCoreUrl('/client-s/js/hash/default-app.min.js')); ?>"></script>
 </head>
 <body>

@@ -28,22 +28,26 @@ class Fatalities extends Classes\Core\Base\Core
      *
      * @since 170824.30708 Fatalities.
      *
-     * @param string $message Custom message.
-     * @param string $slug    Custom error slug.
-     * @param string $code    Custom error status code.
+     * @param string|int $message Message (or code).
+     * @param string     $slug    Custom error slug.
+     * @param string     $code    Custom error status code.
      */
-    public function die(string $message = '', string $slug = '', int $code = 0)
+    public function die($message = '', string $slug = '', int $code = 500)
     {
-        $code    = $code ?: 500;
-        $slug    = $slug ?: 'internal';
-        $message = $message ?: __('Internal server error.');
+        if (is_int($message)) {
+            $code    = $message;
+            $message = '';
+        }
+        $code    = $code ?: 500; // Default code.
+        $slug    = $slug ?: $this->c::statusHeaderSlug($code);
+        $message = $message ?: $this->c::statusHeaderMessage($code);
 
         $this->c::obEndCleanAll();
-        $this->c::noCacheHeaders();
         $this->c::noCacheFlags();
+        $this->c::noCacheHeaders();
+        $this->c::statusHeader($code);
 
         if ($this->c::isAjax() || $this->c::isApi()) {
-            $this->c::statusHeader($code);
             header('content-type: application/json; charset=utf-8');
             exit(json_encode([
                 'success' => false,
@@ -54,10 +58,37 @@ class Fatalities extends Classes\Core\Base\Core
                 ],
             ]));
         } else {
-            $this->c::statusHeader($code);
             header('content-type: text/html; charset=utf-8');
             exit($this->c::getTemplate('http/html/utils/fatality.php')->parse(compact('message')));
         }
+    }
+
+    /**
+     * Die (invalid).
+     *
+     * @since 170824.30708 Fatalities.
+     *
+     * @param string $message Custom message.
+     * @param string $slug    Custom error slug.
+     * @param string $code    Custom error status code.
+     */
+    public function dieInvalid(string $message = '', string $slug = '', int $code = 400)
+    {
+        $this->die($message, $slug, $code);
+    }
+
+    /**
+     * Die (forbidden).
+     *
+     * @since 170824.30708 Fatalities.
+     *
+     * @param string $message Custom message.
+     * @param string $slug    Custom error slug.
+     * @param string $code    Custom error status code.
+     */
+    public function dieForbidden(string $message = '', string $slug = '', int $code = 403)
+    {
+        $this->die($message, $slug, $code);
     }
 
     /**
@@ -67,10 +98,6 @@ class Fatalities extends Classes\Core\Base\Core
      */
     public function dieEcho()
     {
-        $this->c::obEndCleanAll();
-        $this->c::noCacheFlags();
-        $this->c::noCacheHeaders();
-
         $url     = $this->c::currentUrl();
         $method  = $this->c::currentMethod();
         $headers = $_h = $this->c::currentHeaders();
@@ -117,6 +144,9 @@ class Fatalities extends Classes\Core\Base\Core
             ],
         ]), JSON_PRETTY_PRINT);
 
+        $this->c::obEndCleanAll();
+        $this->c::noCacheFlags();
+        $this->c::noCacheHeaders();
         $this->c::statusHeader($code);
 
         if ($this->c::isAjax() || $this->c::isApi()) {
@@ -126,33 +156,5 @@ class Fatalities extends Classes\Core\Base\Core
             header('content-type: text/plain; charset=utf-8');
             exit($response);
         }
-    }
-
-    /**
-     * Die (invalid).
-     *
-     * @since 170824.30708 Fatalities.
-     *
-     * @param string $message Custom message.
-     * @param string $slug    Custom error slug.
-     * @param string $code    Custom error status code.
-     */
-    public function dieInvalid(string $message = '', string $slug = '', int $code = 0)
-    {
-        $this->die($message ?: __('Invalid request.'), $slug ?: 'invalid', $code ?: 400);
-    }
-
-    /**
-     * Die (forbidden).
-     *
-     * @since 170824.30708 Fatalities.
-     *
-     * @param string $message Custom message.
-     * @param string $slug    Custom error slug.
-     * @param string $code    Custom error status code.
-     */
-    public function dieForbidden(string $message = '', string $slug = '', int $code = 0)
-    {
-        $this->die($message ?: __('Forbidden.'), $slug ?: 'forbidden', $code ?: 403);
     }
 }

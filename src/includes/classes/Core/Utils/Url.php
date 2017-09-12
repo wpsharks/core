@@ -117,6 +117,88 @@ class Url extends Classes\Core\Base\Core implements Interfaces\UrlConstants, Int
     }
 
     /**
+     * Build API URL.
+     *
+     * @since 17xxxx URL utilities.
+     *
+     * @param string $uri    URI to append.
+     * @param string $scheme Specific scheme?
+     *
+     * @return string Output URL.
+     */
+    public function toApi(string $uri = '', string $scheme = ''): string
+    {
+        if (!($host = $this->App->Config->©urls['©hosts']['©api'])) {
+            throw $this->c::issue('API host is empty.');
+        }
+        $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
+        $uri = $uri ? '/'.$uri : ''; // Force leading slash.
+
+        $base_path = $this->App->Config->©urls['©base_paths']['©api'];
+        $base_path = $base_path && $uri ? $this->c::mbRTrim($base_path, '/') : $base_path;
+
+        $url = $this->c::setScheme('//'.$host.$base_path.$uri, $scheme);
+
+        return $url;
+    }
+
+    /**
+     * Build API parent URL.
+     *
+     * @since 17xxxx Parent utilities.
+     *
+     * @param string $uri    URI to append.
+     * @param string $scheme Specific scheme?
+     *
+     * @return string Output URL.
+     */
+    public function toApiParent(string $uri = '', string $scheme = ''): string
+    {
+        return $this->App->Parent ? $this->App->Parent->Utils->©Url->toApi($uri, $scheme) : $this->toApi($uri, $scheme);
+    }
+
+    /**
+     * Build API core URL.
+     *
+     * @since 17xxxx URL utilities.
+     *
+     * @param string $uri    URI to append.
+     * @param string $scheme Specific scheme?
+     *
+     * @return string Output URL.
+     */
+    public function toApiCore(string $uri = '', string $scheme = ''): string
+    {
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->©Url->toApiCore($uri, $scheme);
+        }
+        return $this->toApi($uri, $scheme);
+    }
+
+    /**
+     * Build 17xxxx WS core URL.
+     *
+     * @since 17xxxx URL utilities.
+     *
+     * @param string $uri    URI to append.
+     * @param string $scheme Specific scheme?
+     *
+     * @return string Output URL.
+     */
+    public function toApiWsCore(string $uri = '', string $scheme = ''): string
+    {
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->©Url->toApiWsCore($uri, $scheme);
+        }
+        if (!$this->App->is_ws_core) {
+            $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
+            $uri = $uri ? '/'.$uri : ''; // Force leading slash.
+            $uri = '/vendor/websharks/core/src'.$uri;
+        }
+        return $this->toApi($uri, $scheme);
+    }
+
+    /**
      * Build URL w/ current host.
      *
      * @since 151121 URL utilities.

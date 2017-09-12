@@ -28,13 +28,14 @@ class Slug extends Classes\Core\Base\Core implements Interfaces\SlugConstants
      *
      * @since 150424 Initial release.
      *
-     * @param string $slug Slug.
+     * @param string $slug   Slug.
+     * @param bool   $strict Strict?
      *
      * @return bool True if slug is valid.
      */
-    public function isValid(string $slug): bool
+    public function isValid(string $slug, bool $strict = true): bool
     {
-        return (bool) preg_match($this::SLUG_REGEX_VALID, $slug);
+        return (bool) preg_match($strict ? $this::SLUG_STRICT_REGEX_VALID : $this::SLUG_REGEX_VALID, $slug);
     }
 
     /**

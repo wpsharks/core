@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -28,7 +28,7 @@ class Pdo extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var \PDO|null
+     * @type \PDO|null
      */
     public $current;
 
@@ -84,44 +84,39 @@ class Pdo extends Classes\Core\Base\Core
      * PDO instance for a DB.
      *
      * @since 150424 Initial release.
+     * @since 17xxxx Additional arg/types.
      *
-     * @param int|null $shard_id Shard ID explicitly.
-     * @param int|null $uuid     Or, a UUID containing the shard ID.
+     * @param int|string|null $shard_id_or_host     Shard ID or DB host.
+     * @param int|string|null $uuid_or_host_db_name UUID64 or host DB name.
      *
      * @return \PDO A PDO class instance.
      */
-    public function get(int $shard_id = null, int $uuid = null): \PDO
+    public function get($shard_id_or_host = null, $uuid_or_host_db_name = null): \PDO
     {
-        if (!isset($shard_id)) {
-            if (isset($uuid)) {
-                $shard_id = $this->c::uuid64ShardIdIn($uuid);
-            } else {
-                $shard_id = 0; // Default.
+        // Acquire DB configuration details.
+
+        $db = $this->dbConfig($shard_id_or_host, $uuid_or_host_db_name);
+
+        // Are we already connected to this host?
+
+        if (($Pdo = &$this->cacheKey(__FUNCTION__, $db['©host']))) {
+            if (empty($Pdo->db_name) || $Pdo->db_name !== $db['©name']) {
+                $Pdo->exec('use `'.$db['©name'].'`');
+                $Pdo->db_name = $db['©name'];
             }
-        } // Now we acquire the configuration.
-
-        $shard_db = $this->shardDbConfig($shard_id);
-
-        if (empty($this->App->Config->©mysql_db['©hosts'][$shard_db['©host']])) {
-            throw $this->c::issue(sprintf('Missing host for shard ID: `%1$s`.', $shard_id));
-        }
-        $shard_db_host = $this->App->Config->©mysql_db['©hosts'][$shard_db['©host']];
-
-        // Check the cache. Already connected to this DB host?
-
-        if (($Pdo = &$this->cacheKey(__FUNCTION__, $shard_db['©host']))) {
-            $Pdo->exec('use `'.$shard_db['©name'].'`');
-            $this->current = $Pdo;
-            return $Pdo;
+            return $this->current = $Pdo;
         }
         // Otherwise, we need to establish a new connection.
 
-        $shard_db_host_options = [
+        if (empty($this->App->Config->©mysql_db['©hosts'][$db['©host']])) {
+            throw $this->c::issue(sprintf('Missing DB host: `%1$s`.', $db['©host']));
+        }
+        $db_host         = $this->App->Config->©mysql_db['©hosts'][$db['©host']];
+        $db_host_options = [
             \PDO::ATTR_TIMEOUT => 5,
 
             \PDO::ATTR_AUTOCOMMIT       => true,
             \PDO::ATTR_EMULATE_PREPARES => false,
-            // Emulation = stringified fetches (bad).
 
             \PDO::ATTR_CASE               => \PDO::CASE_NATURAL,
             \PDO::ATTR_ORACLE_NULLS       => \PDO::NULL_NATURAL,
@@ -130,49 +125,61 @@ class Pdo extends Classes\Core\Base\Core
             \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
             \PDO::ATTR_ERRMODE                  => \PDO::ERRMODE_EXCEPTION,
         ];
-        if ($shard_db_host['©charset']) { // Use a specific charset?
-            $shard_db_host_options[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \''.$shard_db_host['©charset'].'\'';
+        if ($db_host['©charset']) { // Use a specific charset?
+            $db_host_options[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \''.$db_host['©charset'].'\'';
 
-            if ($shard_db_host['©collate']) { // Also a specific collation?
-                $shard_db_host_options[\PDO::MYSQL_ATTR_INIT_COMMAND] .= ' COLLATE \''.$shard_db_host['©collate'].'\'';
+            if ($db_host['©collate']) { // Also a specific collation?
+                $db_host_options[\PDO::MYSQL_ATTR_INIT_COMMAND] .= ' COLLATE \''.$db_host['©collate'].'\'';
             }
         }
-        if ($shard_db_host['©ssl_enable'] && $shard_db_host['©ssl_key'] && $shard_db_host['©ssl_crt'] && $shard_db_host['©ssl_ca'] && $shard_db_host['©ssl_cipher']) {
-            $shard_db_host_options[\PDO::MYSQL_ATTR_SSL_KEY]    = $shard_db_host['©ssl_key'];
-            $shard_db_host_options[\PDO::MYSQL_ATTR_SSL_CERT]   = $shard_db_host['©ssl_crt'];
-            $shard_db_host_options[\PDO::MYSQL_ATTR_SSL_CA]     = $shard_db_host['©ssl_ca'];
-            $shard_db_host_options[\PDO::MYSQL_ATTR_SSL_CIPHER] = $shard_db_host['©ssl_cipher'];
+        if ($db_host['©ssl_enable'] && $db_host['©ssl_key'] && $db_host['©ssl_crt'] && $db_host['©ssl_ca'] && $db_host['©ssl_cipher']) {
+            $db_host_options[\PDO::MYSQL_ATTR_SSL_KEY]    = $db_host['©ssl_key'];
+            $db_host_options[\PDO::MYSQL_ATTR_SSL_CERT]   = $db_host['©ssl_crt'];
+            $db_host_options[\PDO::MYSQL_ATTR_SSL_CA]     = $db_host['©ssl_ca'];
+            $db_host_options[\PDO::MYSQL_ATTR_SSL_CIPHER] = $db_host['©ssl_cipher'];
         }
-        $Pdo = new \PDO(// By reference. We are caching this connection.
-            'mysql:host='.$shard_db['©host'].';port='.$shard_db_host['©port'],
-            $shard_db_host['©username'], // Connection username.
-            $shard_db_host['©password'], // Connection password.
-            $shard_db_host_options // Connection options (from above).
-        );
-        $Pdo->exec('use `'.$shard_db['©name'].'`');
-        $this->current = $Pdo;
-        return $Pdo;
+        $Pdo = new \PDO('mysql:host='.$db['©host'].';port='.$db_host['©port'], $db_host['©username'], $db_host['©password'], $db_host_options);
+
+        $Pdo->exec('use `'.$db['©name'].'`');
+        $Pdo->db_name         = $db['©name'];
+        return $this->current = $Pdo;
     }
 
     /**
-     * Shard DB config properties.
+     * DB config properties.
      *
      * @since 150424 Initial release.
+     * @since 17xxxx Additional arg/types.
      *
-     * @param int $shard_id Shard ID.
+     * @param int|string|null $shard_id_or_host     Shard ID or DB host.
+     * @param int|string|null $uuid_or_host_db_name UUID64 or host DB name.
      *
-     * @return array Shard DB config properties.
+     * @return array DB config properties.
      */
-    protected function shardDbConfig(int $shard_id): array
+    protected function dbConfig($shard_id_or_host = null, $uuid_or_host_db_name = null): array
     {
-        if (!is_null($properties = &$this->cacheKey(__FUNCTION__, $shard_id))) {
+        $cache_keys = [$shard_id_or_host, $uuid_or_host_db_name];
+
+        if (($properties = &$this->cacheKey(__FUNCTION__, $cache_keys)) !== null) {
             return $properties; // Cached this already.
         }
-        foreach ($this->App->Config->©mysql_db['©shards'] as $_key => $_shard_db) {
-            if ($shard_id >= $_shard_db['©range']['©from'] && $shard_id <= $_shard_db['©range']['©to']) {
-                return $properties = $_shard_db['©properties'];
-            }
-        } // unset($_key, $_shard_db); // Houskeeping.
-        throw $this->c::issue(sprintf('Missing DB info for shard ID: `%1$s`.', $shard_id));
+        if (!isset($shard_id_or_host)) {
+            $shard_id_or_host = is_int($uuid_or_host_db_name)
+                ? $this->c::uuid64ShardIdIn($uuid_or_host_db_name)
+                : $this->App->Config->©mysql_db['©default']['©host'];
+        }
+        if (!isset($uuid_or_host_db_name) && is_string($shard_id_or_host)) {
+            $uuid_or_host_db_name = $this->App->Config->©mysql_db['©default']['©name'];
+        }
+        if (is_int($shard_id = $shard_id_or_host) && $shard_id >= 0) {
+            foreach ($this->App->Config->©mysql_db['©shards'] as $_key => $_shard_db) {
+                if ($shard_id >= $_shard_db['©range']['©from'] && $shard_id <= $_shard_db['©range']['©to']) {
+                    return $properties = $_shard_db['©properties'];
+                }
+            } // unset($_key, $_shard_db);
+        } elseif (is_string($host = $shard_id_or_host) && is_string($host_db_name) && $host && $host_db_name) {
+            return $properties = ['©host' => $host, '©name' => $host_db_name];
+        }
+        throw $this->c::issue(sprintf('Missing DB config for: `%1$s`, `%2$s`.', $shard_id_or_host, $uuid_or_host_db_name));
     }
 }
