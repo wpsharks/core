@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core;
 
 use WebSharks\Core\Classes\App;
@@ -25,8 +25,9 @@ $App = new App(${__FILE__}['instance_base'], [
         '©er_assertions' => true,
     ],
     '©fs_paths' => [ // Use config. file.
-        '©logs_dir'  => dirname(__FILE__, 2).'/local/.~logs',
-        '©cache_dir' => dirname(__FILE__, 2).'/local/.~cache',
+        '©logs_dir'  => dirname(__FILE__, 3).'/tests/local/.~logs',
+        '©sris_dir'  => dirname(__FILE__, 3).'/tests/local/.~sris',
+        '©cache_dir' => dirname(__FILE__, 3).'/tests/local/.~cache',
     ],
 ]);
 class_alias('WebSharks\\Core\\Classes\\CoreFacades', 'c');
