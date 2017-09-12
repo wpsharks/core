@@ -9,9 +9,11 @@ declare (strict_types = 1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use WebSharks\Core\Classes\Core\Error;
+use WebSharks\Core\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -183,7 +185,7 @@ class App extends Classes\Core\Base\Core
      *
      * @var string Version.
      */
-    const VERSION = '170912.14155'; //v//
+    const VERSION = '170912.50363'; //v//
 
     /**
      * Constructor.

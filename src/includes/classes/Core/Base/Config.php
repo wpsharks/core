@@ -9,9 +9,11 @@ declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Base;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use WebSharks\Core\Classes\Core\Error;
+use WebSharks\Core\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -81,13 +83,18 @@ class Config extends Classes\Core\Base\Core
                 '©default_rule' => [
                     'new_instances' => [
                         Classes\Core\Error::class,
+                        Classes\Core\Base\Exception::class,
+
+                        Classes\Core\Request::class,
+                        Classes\Core\Response::class,
+
                         Classes\Core\Route::class,
-                        Classes\Core\CliOpts::class,
                         Classes\Core\Template::class,
+
+                        Classes\Core\CliOpts::class,
                         Classes\Core\Tokenizer::class,
                         Classes\Core\Paginator::class,
                         Classes\Core\SearchTermHighlighter::class,
-                        Classes\Core\Base\Exception::class,
                     ],
                 ],
             ],

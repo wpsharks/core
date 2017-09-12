@@ -9,9 +9,11 @@ declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use WebSharks\Core\Classes\Core\Error;
+use WebSharks\Core\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -29,11 +31,15 @@ class Html extends Classes\Core\Base\Core
      * @since 150424 Initial release.
      *
      * @param string $string Any input string to test here.
+     * @param bool   $strict Use strict (full DOM) check?
      *
      * @return bool `TRUE` if string is HTML.
      */
-    public function is(string $string): bool
+    public function is(string $string, bool $strict = false): bool
     {
+        if ($strict) {
+            return mb_strpos($string, '</html>') !== false;
+        }
         return mb_strpos($string, '<') !== false && preg_match('/\<[^<>]+\>/u', $string);
     }
 

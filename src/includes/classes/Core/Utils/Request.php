@@ -9,9 +9,11 @@ declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use WebSharks\Core\Classes\Core\Error;
+use WebSharks\Core\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -40,20 +42,26 @@ class Request extends Classes\Core\Base\Core
     }
 
     /**
-     * Get JSON request body.
+     * Current request.
      *
-     * @since 17xxxx Request utils.
+     * @since 17xxxx Request utilities.
      *
-     * @return \StdClass JSON data.
+     * @return Classes\Core\Base\Request Instance.
      */
-    public function jsonData(): \StdClass
+    public function current(): Classes\Core\Base\Request
     {
-        if (!($data = file_get_contents('php://input'))) {
-            return new \StdClass();
-            //
-        } elseif (!(($json = json_decode($data)) instanceof \StdClass)) {
-            return new \StdClass();
-        }
-        return $json;
+        return Classes\Core\Base\Request::createFromGlobals($_SERVER);
+    }
+
+    /**
+     * Create request.
+     *
+     * @since 17xxxx Request utilities.
+     *
+     * @return Classes\Core\Base\Request Instance.
+     */
+    public function create(array $args = []): Classes\Core\Base\Request
+    {
+        return $this->App->Di->get(Classes\Core\Base\Request::class, $args);
     }
 }

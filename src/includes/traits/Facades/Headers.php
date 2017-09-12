@@ -9,9 +9,11 @@ declare(strict_types=1);
 namespace WebSharks\Core\Traits\Facades;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use WebSharks\Core\Classes\Core\Error;
+use WebSharks\Core\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -84,15 +86,27 @@ trait Headers
     }
 
     /**
+     * @since 17xxxx No-cache headers.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::noCache()
+     */
+    public static function noCacheHeadersArray(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Headers->noCache(...$args);
+    }
+
+    /**
      * @since 160118 Adding no-cache headers.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Headers::sendNoCache()
+     * @see Classes\Core\Utils\Headers::noCacheSend()
      */
     public static function noCacheHeaders(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Headers->sendNoCache(...$args);
+        return $GLOBALS[static::class]->Utils->©Headers->noCacheSend(...$args);
     }
 
     /**

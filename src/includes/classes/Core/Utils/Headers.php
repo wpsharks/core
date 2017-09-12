@@ -9,9 +9,11 @@ declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
-use WebSharks\Core\Classes\Core\Base\Exception;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
+#
+use WebSharks\Core\Classes\Core\Error;
+use WebSharks\Core\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -51,18 +53,34 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
     /**
      * No-cache headers.
      *
-     * @since 160118 Adding no-cache headers.
+     * @since 17xxxx No-cache headers.
+     *
+     * @return array No-cache headers.
      */
-    public function sendNoCache()
+    public function noCache(): array
+    {
+        return [
+            'pragma'        => 'no-cache',
+            'expires'       => 'wed, 11 jan 1984 05:00:00 gmt',
+            'cache-control' => 'no-cache, must-revalidate, max-age=0',
+        ];
+    }
+
+    /**
+     * Send no-cache headers.
+     *
+     * @since 17xxxx No-cache headers.
+     */
+    public function noCacheSend()
     {
         if (headers_sent()) {
             throw $this->c::issue('Headers already sent.');
         }
         header_remove('last-modified');
 
-        header('expires: wed, 11 jan 1984 05:00:00 gmt');
-        header('cache-control: no-cache, must-revalidate, max-age=0');
-        header('pragma: no-cache');
+        foreach ($this->noCache() as $_header => $_value) {
+            header($_header.': '.$_value);
+        } // unset($_header, $_value);
     }
 
     /**
@@ -112,14 +130,15 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
      *
      * @since 151121 Header utilities.
      *
-     * @param int $status Status code.
+     * @param int    $status   Status code.
+     * @param string $protocol Protocol.
      */
-    public function sendStatus(int $status)
+    public function sendStatus(int $status, string $protocol = '')
     {
         if (headers_sent()) {
             throw $this->c::issue('Headers already sent.');
         }
-        if (!($protocol = $_SERVER['SERVER_PROTOCOL'] ?? '')) {
+        if (!$protocol && !($protocol = $_SERVER['SERVER_PROTOCOL'] ?? '')) {
             $protocol = 'HTTP/1.1'; // Default fallback.
         }
         header($protocol.' '.$status.' '.$this->getStatusTitle($status), true, $status);
