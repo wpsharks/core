@@ -27,7 +27,7 @@ use Psr\Http\Message\StreamInterface;
  *
  * @since 17xxxx
  */
-class Response extends Slim\Http\Response
+class Response extends \Slim\Http\Response
 {
     /**
      * App.

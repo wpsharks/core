@@ -23,6 +23,6 @@ use function get_defined_vars as vars;
  *
  * @since 17xxxx
  */
-class Request extends Slim\Http\Request
+class Request extends \Slim\Http\Request
 {
 }
