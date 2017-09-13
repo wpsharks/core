@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8de6e2c1ea32c3369b6d71558c503b25",
-    "content-hash": "51a38015407635ef4c1ba9c3792e4907",
+    "hash": "f3d76e4ee108f7f1578e91ffabd06f18",
+    "content-hash": "9188f4bcafcafa986b2deb172ae78bb9",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.36.5",
+            "version": "3.36.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "db5dc59777b663c7640a0cd3063e52b39c50dac2"
+                "reference": "a7cd486139971d66387a4938f5a0a2a95e50d678"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/db5dc59777b663c7640a0cd3063e52b39c50dac2",
-                "reference": "db5dc59777b663c7640a0cd3063e52b39c50dac2",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a7cd486139971d66387a4938f5a0a2a95e50d678",
+                "reference": "a7cd486139971d66387a4938f5a0a2a95e50d678",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-09-11 19:34:19"
+            "time": "2017-09-12 17:09:10"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1306,16 +1306,16 @@
         },
         {
             "name": "websharks/dicer",
-            "version": "160110",
+            "version": "170913.23168",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
-                "reference": "044696b13f196f4f0ab0905de05346a0090655f5"
+                "reference": "c65c52d7423f30adf1199c0ba89714865b6dcb58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/dicer/zipball/044696b13f196f4f0ab0905de05346a0090655f5",
-                "reference": "044696b13f196f4f0ab0905de05346a0090655f5",
+                "url": "https://api.github.com/repos/websharks/dicer/zipball/c65c52d7423f30adf1199c0ba89714865b6dcb58",
+                "reference": "c65c52d7423f30adf1199c0ba89714865b6dcb58",
                 "shasum": ""
             },
             "require": {
@@ -1353,7 +1353,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-01-10 08:24:59"
+            "time": "2017-09-13 06:26:35"
         },
         {
             "name": "websharks/php-markdown",
