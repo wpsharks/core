@@ -1,5 +1,6 @@
 ## $v
 
+- Updating to latest Dicer.
 - Adding PSR-7 via Slim-HTTP.
 - Adding `c::arrayChangeRecursive()`.
 - Updating to latest release of HashIds package.
