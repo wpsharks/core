@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Traits;
 
 use WebSharks\Core\Classes;
@@ -30,7 +30,7 @@ trait CoreConstructor
      *
      * @since 160223
      *
-     * @var Classes\App
+     * @type Classes\App
      */
     protected $App;
 
@@ -39,7 +39,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @var \StdClass
+     * @type \StdClass
      */
     protected $f;
 
@@ -48,7 +48,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @var string
+     * @type string
      */
     protected $c;
 
@@ -57,7 +57,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @var string
+     * @type string
      */
     protected $s;
 
@@ -66,7 +66,7 @@ trait CoreConstructor
      *
      * @since 160227
      *
-     * @var string
+     * @type string
      */
     protected $a;
 
@@ -75,16 +75,12 @@ trait CoreConstructor
      *
      * @since 160223 Initial release.
      *
-     * @param Classes\App|null $App Instance of App.
+     * @param Classes\App $App App.
      */
-    public function __construct(Classes\App $App = null)
+    public function __construct(Classes\App $App)
     {
-        if (!$App && $this instanceof Classes\App) {
-            $App = $this; // Self reference.
-        }
-        if (!($this->App = $App)) { // Must have!
-            throw new Exception('Missing App instance.');
-        }
+        $this->App = $App;
+
         if (!isset($this->App->Facades)) {
             $this->App->Facades = (object) ['c' => null, 's' => null, 'a' => null];
         } // In case of the app itself; simply create references for now.

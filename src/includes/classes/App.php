@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes;
 
 use WebSharks\Core\Classes;
@@ -30,7 +30,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160224
      *
-     * @var Classes\App|null
+     * @type Classes\App|null
      */
     public $Parent;
 
@@ -39,7 +39,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160228
      *
-     * @var \ReflectionClass
+     * @type \ReflectionClass
      */
     public $Reflection;
 
@@ -48,7 +48,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160223
      *
-     * @var string
+     * @type string
      */
     public $class;
 
@@ -57,7 +57,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var string
+     * @type string
      */
     public $namespace;
 
@@ -66,7 +66,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var string
+     * @type string
      */
     public $namespace_sha1;
 
@@ -75,7 +75,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160225
      *
-     * @var string
+     * @type string
      */
     public $file;
 
@@ -84,7 +84,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var string
+     * @type string
      */
     public $dir;
 
@@ -93,7 +93,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160223
      *
-     * @var string
+     * @type string
      */
     public $dir_basename;
 
@@ -102,7 +102,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160227
      *
-     * @var string
+     * @type string
      */
     public $base_dir;
 
@@ -111,7 +111,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160227
      *
-     * @var string
+     * @type string
      */
     public $base_dir_basename;
 
@@ -120,7 +120,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var string
+     * @type string
      */
     public $ws_core_dir;
 
@@ -129,7 +129,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var bool
+     * @type bool
      */
     public $is_ws_core;
 
@@ -138,7 +138,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var bool
+     * @type bool
      */
     public $is_core;
 
@@ -147,7 +147,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 160227
      *
-     * @var \StdClass
+     * @type \StdClass
      */
     public $Facades;
 
@@ -156,7 +156,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var Classes\Core\Base\Config
+     * @type Classes\Core\Base\Config
      */
     public $Config;
 
@@ -165,7 +165,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var Classes\Core\Base\Di
+     * @type Classes\Core\Base\Di
      */
     public $Di;
 
@@ -174,7 +174,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var Classes\Core\Base\Utils
+     * @type Classes\Core\Base\Utils
      */
     public $Utils;
 
@@ -183,7 +183,7 @@ class App extends Classes\Core\Base\Core
      *
      * @since 150424
      *
-     * @var string Version.
+     * @type string Version.
      */
     const VERSION = '170913.25763'; //v//
 
@@ -198,7 +198,7 @@ class App extends Classes\Core\Base\Core
      */
     public function __construct(array $instance_base = [], array $instance = [], Classes\App $Parent = null)
     {
-        parent::__construct();
+        parent::__construct($this);
 
         # Establish debug mode early-on.
 
