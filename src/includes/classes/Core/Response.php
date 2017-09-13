@@ -192,7 +192,7 @@ class Response extends \Slim\Http\Response
         $Body = $this->getBody();
         $Body->rewind(); // Rewind.
 
-        while (!$Body->feof()) {
+        while (!$Body->eof()) {
             echo $Body->read(262144); // 256kbs at a time.
         }
     }
