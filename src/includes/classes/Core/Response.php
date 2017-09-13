@@ -109,7 +109,9 @@ class Response extends \Slim\Http\Response
         if ($as_json) { // Format as JSON?
             $content_type = 'application/json';
             $data         = $is_data_array ? $data : [];
-            $content      = json_encode(['success' => true] + $data);
+            $content      = json_encode([
+                'success' => true,
+            ] + $data, JSON_PRETTY_PRINT);
         } else {
             $content      = is_string($data) ? $data : '';
             $content_type = 'text/'.($c::isHtml($content, true) ? 'html' : 'plain');
@@ -153,7 +155,7 @@ class Response extends \Slim\Http\Response
                     'slug'    => $Error->slug(),
                     'message' => $Error->message(),
                 ],
-            ]);
+            ], JSON_PRETTY_PRINT);
         } else {
             $data         = is_string($data) ? $data : '';
             $content      = $data ?: $c::statusHeaderMessage($status);
