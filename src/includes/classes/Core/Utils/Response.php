@@ -46,10 +46,10 @@ class Response extends Classes\Core\Base\Core
      *
      * @since 17xxxx Request utilities.
      *
-     * @return Classes\Core\Base\Response Instance.
+     * @return Classes\Core\Response Instance.
      */
-    public function create(array $args = []): Classes\Core\Base\Response
+    public function create(array $args = []): Classes\Core\Response
     {
-        return $this->App->Di->get(Classes\Core\Base\Response::class, $args);
+        return $this->App->Di->get(Classes\Core\Response::class, $args);
     }
 }

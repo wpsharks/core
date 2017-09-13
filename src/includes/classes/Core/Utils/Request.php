@@ -46,11 +46,11 @@ class Request extends Classes\Core\Base\Core
      *
      * @since 17xxxx Request utilities.
      *
-     * @return Classes\Core\Base\Request Instance.
+     * @return Classes\Core\Request Instance.
      */
-    public function current(): Classes\Core\Base\Request
+    public function current(): Classes\Core\Request
     {
-        return Classes\Core\Base\Request::createFromGlobals($_SERVER);
+        return Classes\Core\Request::createFromGlobals($_SERVER);
     }
 
     /**
@@ -58,10 +58,10 @@ class Request extends Classes\Core\Base\Core
      *
      * @since 17xxxx Request utilities.
      *
-     * @return Classes\Core\Base\Request Instance.
+     * @return Classes\Core\Request Instance.
      */
-    public function create(array $args = []): Classes\Core\Base\Request
+    public function create(array $args = []): Classes\Core\Request
     {
-        return $this->App->Di->get(Classes\Core\Base\Request::class, $args);
+        return $this->App->Di->get(Classes\Core\Request::class, $args);
     }
 }
