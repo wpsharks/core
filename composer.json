@@ -71,7 +71,7 @@
     "ext-xmlwriter": "*",
     "ext-SimpleXML": "*",
 
-    "websharks/dicer": "170913.23168",
+    "websharks/dicer": "170913.25494",
     "websharks/sharkicons": "160620",
 
     "websharks/php-markdown": "170729",
