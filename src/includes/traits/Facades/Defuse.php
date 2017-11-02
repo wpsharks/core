@@ -1,6 +1,6 @@
 <?php
 /**
- * Crypto.
+ * Defuse utils.
  *
  * @author @jaswrks
  * @copyright WebSharks™
@@ -19,45 +19,47 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Crypto.
+ * Defuse utils.
  *
- * @since 170309.60830
+ * @since 17xxxx
  */
-trait Crypto
+trait Defuse
 {
     /**
-     * @since 160701 Unique ID.
+     * @since 151214 First facades.
+     * @since 170309.60830 Switched to Defuse.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\UniqueId::__invoke()
+     * @see Classes\Core\Utils\Defuse::encrypt()
      */
-    public static function uniqueId(...$args)
+    public static function encrypt(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©UniqueId->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Defuse->encrypt(...$args);
     }
 
     /**
      * @since 151214 First facades.
+     * @since 170309.60830 Switched to Defuse.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\RandomKey::__invoke()
+     * @see Classes\Core\Utils\Defuse::decrypt()
      */
-    public static function randomKey(...$args)
+    public static function decrypt(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©RandomKey->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Defuse->decrypt(...$args);
     }
 
     /**
-     * @since 17xxxx Hash equals utils.
+     * @since 170309.60830 Defuse keygen.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\HashEquals::__invoke()
+     * @see Classes\Core\Utils\Defuse::keygen()
      */
-    public static function hashEquals(...$args)
+    public static function encryptionKey(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©HashEquals->__invoke(...$args);
+        return $GLOBALS[static::class]->Utils->©Defuse->keygen(...$args);
     }
 }

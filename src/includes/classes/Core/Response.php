@@ -43,15 +43,19 @@ class Response extends \Slim\Http\Response
      *
      * @since 17xxxx Response utils.
      *
-     * @param Classes\App           $App     App.
-     * @param int                   $status  Status.
-     * @param HeadersInterface|null $Headers Headers.
-     * @param StreamInterface|null  $Stream  Stream.
+     * @param Classes\App                       $App     App.
+     * @param int                               $status  Status.
+     * @param HeadersInterface|null             $Headers Headers.
+     * @param ResponseBody|StreamInterface|null $Body    Body/stream.
      */
-    public function __construct(Classes\App $App, int $status = 200, HeadersInterface $Headers = null, StreamInterface $Stream = null)
-    {
-        $this->App = $App; // Before parent contructor.
-        parent::__construct($status, $Headers, $Stream);
+    public function __construct(
+        Classes\App $App,
+        int $status = 200,
+        HeadersInterface $Headers = null,
+        StreamInterface $Body = null
+    ) {
+        $this->App = $App;
+        parent::__construct($status, $Headers, $Body);
     }
 
     /**
@@ -63,11 +67,9 @@ class Response extends \Slim\Http\Response
      */
     public function withNoCache(): self
     {
-        $c = $this->App->c;
-
         $clone = $this->withoutHeader('last-modified');
 
-        foreach ($c::noCacheHeadersArray() as $_header => $_value) {
+        foreach ($this->App->c::noCacheHeadersArray() as $_header => $_value) {
             $clone = $clone->withHeader($_header, $_value);
         } // unset($_header, $_value);
 
@@ -100,28 +102,23 @@ class Response extends \Slim\Http\Response
      */
     public function withSuccess(int $status, $data, bool $as_json = null): self
     {
-        $c             = $this->App->c;
         $is_data_array = is_array($data);
 
         if (!isset($as_json) && $is_data_array) {
-            $as_json = $c::isApi() || $c::isAjax();
+            $as_json = $this->App->c::isApi() || $this->App->c::isAjax();
         }
         if ($as_json) { // Format as JSON?
             $content_type = 'application/json';
             $data         = $is_data_array ? $data : [];
-            $content      = json_encode([
-                'success' => true,
-            ] + $data, JSON_PRETTY_PRINT);
+            $content      = json_encode(['success' => true] + $data, JSON_PRETTY_PRINT);
         } else {
             $content      = is_string($data) ? $data : '';
-            $content_type = 'text/'.($c::isHtml($content, true) ? 'html' : 'plain');
+            $content_type = 'text/'.($this->App->c::isHtml($content, true) ? 'html' : 'plain');
         }
         $clone = $this->withStatus($status);
         $clone = $clone->withHeader('content-type', $content_type.'; charset=utf-8');
 
-        $Body = new Body(fopen('php://temp', 'r+'));
-        $Body->write($content); // Content body.
-
+        $Body         = $this->App->c::createReponseBody($content);
         return $clone = $clone->withBody($Body);
     }
 
@@ -138,15 +135,14 @@ class Response extends \Slim\Http\Response
      */
     public function withError(int $status, $data, bool $as_json = null): self
     {
-        $c             = $this->App->c;
-        $is_data_error = $data && $c::isError($data);
+        $is_data_error = $data && $this->App->c::isError($data);
 
         if (!isset($as_json) && $is_data_error) {
-            $as_json = $c::isApi() || $c::isAjax();
+            $as_json = $this->App->c::isApi() || $this->App->c::isAjax();
         }
         if ($as_json) { // Format as JSON?
             $data         = $is_data_error ? $data : null;
-            $Error        = $data ?: $c::error();
+            $Error        = $data ?: $this->App->c::error();
             $content_type = 'application/json';
             $content      = json_encode([
                 'success' => false,
@@ -158,15 +154,13 @@ class Response extends \Slim\Http\Response
             ], JSON_PRETTY_PRINT);
         } else {
             $data         = is_string($data) ? $data : '';
-            $content      = $data ?: $c::statusHeaderMessage($status);
-            $content_type = 'text/'.($c::isHtml($content, true) ? 'html' : 'plain');
+            $content      = $data ?: $this->App->c::statusHeaderMessage($status);
+            $content_type = 'text/'.($this->App->c::isHtml($content, true) ? 'html' : 'plain');
         }
         $clone = $this->withStatus($status);
         $clone = $clone->withHeader('content-type', $content_type.'; charset=utf-8');
 
-        $Body = new Body(fopen('php://temp', 'r+'));
-        $Body->write($content); // Content body.
-
+        $Body         = $this->App->c::createReponseBody($content);
         return $clone = $clone->withBody($Body);
     }
 
@@ -174,18 +168,24 @@ class Response extends \Slim\Http\Response
      * Output response.
      *
      * @since 17xxxx Response utils.
+     *
+     * @param array $args Any behavioral args.
      */
-    public function output()
+    public function output(array $args = [])
     {
-        $c = $this->App->c;
+        $default_args = [
+            'exit' => false,
+        ];
+        $args += $default_args; // Merge defaults.
+        $args['exit'] = (bool) $args['exit'];
 
         if ($this->hasNoCache()) {
-            $c::noCacheFlags();
+            $this->App->c::noCacheFlags();
         }
         $status   = $this->getStatusCode();
         $protocol = 'HTTP/'.$this->getProtocolVersion();
 
-        $c::statusHeader($status, $protocol);
+        $this->App->c::statusHeader($status, $protocol);
 
         foreach (array_keys($this->getHeaders()) as $_header) {
             header($_header.': '.$this->getHeaderLine($_header));
@@ -196,6 +196,9 @@ class Response extends \Slim\Http\Response
 
         while (!$Body->eof()) {
             echo $Body->read(262144); // 256kbs at a time.
+        }
+        if ($args['exit']) {
+            exit; // Stop here.
         }
     }
 }

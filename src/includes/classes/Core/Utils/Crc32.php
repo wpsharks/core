@@ -1,6 +1,6 @@
 <?php
 /**
- * CRC-32 utilities.
+ * CRC-32 utils.
  *
  * @author @jaswrks
  * @copyright WebSharks™
@@ -19,12 +19,35 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * CRC-32 utilities.
+ * CRC-32 utils.
  *
  * @since 170824.30708 Initial release.
  */
 class Crc32 extends Classes\Core\Base\Core
 {
+    /**
+     * Is a CRC-32 hash?
+     *
+     * @since 17xxxx CRC-32 utils.
+     *
+     * @param mixed $value Value.
+     *
+     * @return bool True if a CRC-32 hash.
+     */
+    public function is($value): bool
+    {
+        if (!$value) {
+            return false;
+        } elseif (!is_string($value)) {
+            return false;
+        } elseif (strlen($value) !== 8) {
+            return false;
+        } elseif (!ctype_xdigit($value)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Generates a keyed CRC-32 signature.
      *
@@ -38,11 +61,7 @@ class Crc32 extends Classes\Core\Base\Core
     public function keyedHash(string $string, string $key = ''): string
     {
         if (!$key && !($key = $this->App->Config->©hash['©key'])) {
-            if (!($key = $this->App->Config->©encryption['©key'])) {
-                throw $this->c::issue('Missing HMAC hash key.');
-            } // @TODO Remove encryption key fallback.
-            // It's only here for backward compatibility.
-            // i.e., For apps missing a generic hash key.
+            throw $this->c::issue('Missing HMAC hash key.');
         }
         return hash_hmac('crc32b', $string, $key);
     }

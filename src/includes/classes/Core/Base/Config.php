@@ -88,6 +88,9 @@ class Config extends Classes\Core\Base\Core
                         Classes\Core\Request::class,
                         Classes\Core\Response::class,
 
+                        Classes\Core\RequestBody::class,
+                        Classes\Core\ResponseBody::class,
+
                         Classes\Core\Route::class,
                         Classes\Core\Template::class,
 
@@ -95,6 +98,9 @@ class Config extends Classes\Core\Base\Core
                         Classes\Core\Tokenizer::class,
                         Classes\Core\Paginator::class,
                         Classes\Core\SearchTermHighlighter::class,
+
+                        Classes\Core\OAuth\Server\Entities\Entity::class,
+                        Classes\Core\OAuth\Server\Repositories\Repository::class,
                     ],
                 ],
             ],
@@ -255,6 +261,11 @@ class Config extends Classes\Core\Base\Core
                 '©hash_key' => (string) ($_['CFG_PASSWORDS_HASH_KEY'] ?? $_['CFG_HASH_KEY'] ?? $_['CFG_ENCRYPTION_KEY'] ?? ''),
             ],
 
+            '©oauth' => [
+                '©public_key'     => (string) ($_['CFG_OAUTH_PUBLIC_KEY'] ?? ''),
+                '©private_key'    => (string) ($_['CFG_OAUTH_PRIVATE_KEY'] ?? ''),
+                '©encryption_key' => (string) ($_['CFG_OAUTH_ENCRYPTION_KEY'] ?? ''),
+            ],
             '©stripe' => [
                 '©secret_key' => (string) ($_['CFG_STRIPE_SECRET_KEY'] ?? ''),
                 '©public_key' => (string) ($_['CFG_STRIPE_PUBLIC_KEY'] ?? ''),

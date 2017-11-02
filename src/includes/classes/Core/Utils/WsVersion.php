@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -90,8 +90,7 @@ class WsVersion extends Classes\Core\Base\Core implements Interfaces\WsVersionCo
     {
         if (!$format) {
             return ''; // Not possible.
-        }
-        if (!($time = $this->time($version))) {
+        } elseif (!($time = $this->time($version))) {
             return ''; // Not possible.
         }
         return date($format, $time);
@@ -110,9 +109,8 @@ class WsVersion extends Classes\Core\Base\Core implements Interfaces\WsVersionCo
     {
         if (!$version) {
             return 0; // Not possible.
-        }
-        if (!$this->isValid($version)) {
-            return 0; // Not a valid version.
+        } elseif (!$this->isValid($version)) {
+            return 0; // Invalid version.
         }
         $Y = substr(date('Y'), 0, 2).substr($version, 0, 2);
         $m = substr($version, 2, 2); // Month.

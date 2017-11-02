@@ -1,6 +1,6 @@
 <?php
 /**
- * Request utils.
+ * Nonce utils.
  *
  * @author @jaswrks
  * @copyright WebSharks™
@@ -19,45 +19,45 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Request utils.
+ * Nonce utils.
  *
  * @since 17xxxx
  */
-trait Request
+trait Nonce
 {
     /**
-     * @since 17xxxx Request utils.
+     * @since 17xxxx Nonce utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Request::current()
+     * @see Classes\Core\Utils\Nonce::create()
      */
-    public static function currentRequest(...$args)
+    public static function createNonce(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Request->current(...$args);
+        return $GLOBALS[static::class]->Utils->©Nonce->create(...$args);
     }
 
     /**
-     * @since 17xxxx Request utils.
+     * @since 17xxxx Nonce utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Request::create()
+     * @see Classes\Core\Utils\Nonce::input()
      */
-    public static function createRequest(...$args)
+    public static function nonceInput(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Request->create(...$args);
+        return $GLOBALS[static::class]->Utils->©Nonce->input(...$args);
     }
 
     /**
-     * @since 17xxxx Request utils.
+     * @since 17xxxx Nonce utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Request::createBody()
+     * @see Classes\Core\Utils\Nonce::verify()
      */
-    public static function createRequestBody(...$args)
+    public static function verifyNonce(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Request->createBody(...$args);
+        return $GLOBALS[static::class]->Utils->©Nonce->verify(...$args);
     }
 }

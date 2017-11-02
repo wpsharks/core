@@ -1,5 +1,27 @@
 ## $v
 
+- oAuth server.
+- Adding `c::createNonce()`.
+- Adding `c::nonceInput()`.
+- Adding `c::verifyNonce()`.
+- Adding `c::createCsrf()`.
+- Adding `c::csrfInput()`.
+- Adding `c::verifyCsrf()`.
+- Adding `c::hashEquals()`.
+- Adding `c::isSha256()`.
+- Adding `c::sha1KeyedHash()`.
+- Adding `c::oauthAuthorizeResponse()`.
+- Adding `c::oauthTokenResponse()`.
+- Adding `c::oauthResourceResponse()`.
+- Adding `c::currentRequest()`.
+- Adding `c::createRequest()`.
+- Adding `c::createRequestBody()`.
+- Adding `c::createResponse()`.
+- Adding `c::createResponseBody()`.
+- Adding `c::isActiveSession()`.
+- Adding `c::startSession()`.
+- Hardening cookie security.
+- Hardening session security.
 - Updating to latest Dicer.
 - Adding PSR-7 via Slim-HTTP.
 - Adding `c::arrayChangeRecursive()`.

@@ -17,6 +17,15 @@ use WebSharks\Core\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
+#
+use Slim\Http\Uri;
+use Slim\Http\Headers;
+use Slim\Http\Cookies;
+use Slim\Http\UploadedFile;
+use Slim\Http\HeadersInterface;
+#
+use Psr\Http\Message\UriInterface;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * Request.
@@ -25,6 +34,83 @@ use function get_defined_vars as vars;
  */
 class Request extends \Slim\Http\Request
 {
+    /**
+     * App.
+     *
+     * @since 17xxxx
+     *
+     * @type Classes\App
+     */
+    protected $App;
+
+    /**
+     * Class constructor.
+     *
+     * @param Classes\App      $App            App.
+     * @param string           $method         Method.
+     * @param UriInterface     $Uri            URI object.
+     * @param HeadersInterface $Headers        Headers instance.
+     * @param array            $cookies        Array of cookies.
+     * @param array            $server_params  Environment variables.
+     * @param StreamInterface  $Body           A request body instance.
+     * @param array            $uploaded_files Uploaded files collection.
+     */
+    public function __construct(
+        Classes\App $App,
+        string $method,
+        UriInterface $Uri,
+        HeadersInterface $Headers,
+        array $cookies,
+        array $server_params,
+        StreamInterface $Body,
+        array $uploaded_files = []
+    ) {
+        $this->App = $App;
+        $method    = $method ?: null;
+        parent::construct($method, $Uri, $Headers, $cookies, $server_params, $Body, $uploaded_files);
+    }
+
+    /**
+     * Create from globals.
+     *
+     * @since 17xxxx Request object.
+     *
+     * @param array $globals Globals.
+     *
+     * @return Request Instance from globals.
+     */
+    public static function createFromGlobals(array $globals)
+    {
+        $g   = &$globals;
+        $App = $g['App'] ?? null;
+
+        if (!($App instanceof Classes\App)) {
+            throw new Exception('Missing App.');
+        }
+        unset($g['App']); // Ditch this.
+
+        foreach ($g as $_key => $_value) {
+            if (mb_stripos((string) $_key, 'CFG_') === 0) {
+                unset($g[$_key]);
+            }
+        } // unset($_key, $_value);
+
+        $method         = $g['REQUEST_METHOD'] ?? '';
+        $Uri            = Uri::createFromGlobals($g);
+        $Headers        = Headers::createFromGlobals($g);
+        $cookies        = Cookies::parseHeader($Headers->get('cookie', []));
+        $server_params  = $g; // Simply a copy of globals.
+        $Body           = $App->c::createRequestBody();
+        $uploaded_files = UploadedFile::createFromGlobals($g);
+
+        $Request = new static($App, $method, $Uri, $Headers, $cookies, $server_params, $Body, $uploaded_files);
+
+        if ($method === 'POST' && in_array($Request->getMediaType(), ['application/x-www-form-urlencoded', 'multipart/form-data'])) {
+            $Request = $Request->withParsedBody($_POST);
+        }
+        return $Request;
+    }
+
     /**
      * Get all data.
      *
@@ -61,7 +147,7 @@ class Request extends \Slim\Http\Request
      */
     public function getFormData(): array
     {
-        if ($this->getMediaType() !== 'application/x-www-form-urlencoded') {
+        if (!in_array($this->getMediaType(), ['application/x-www-form-urlencoded', 'multipart/form-data'], true)) {
             return $data = []; // Not possible.
         }
         $data        = $this->getParsedBody();
@@ -91,9 +177,9 @@ class Request extends \Slim\Http\Request
             $json        = $this->getParsedBody();
             return $json = $json instanceof \StdClass ? $json : (object) [];
             //
-        } else { // Array or object; implies `any`.
+        } else { // Array or object — either.
             $json        = $this->getParsedBody();
-            return $json = is_object($json) || is_array($json) ? $json : (object) [];
+            return $json = is_array($json) || is_object($json) ? $json : (object) [];
         }
     }
 }

@@ -36,4 +36,16 @@ trait Response
     {
         return $GLOBALS[static::class]->Utils->©Response->create(...$args);
     }
+
+    /**
+     * @since 17xxxx Request utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Response::createBody()
+     */
+    public static function createResponseBody(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Response->createBody(...$args);
+    }
 }

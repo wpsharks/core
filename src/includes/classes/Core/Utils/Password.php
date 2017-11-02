@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\Core\Classes\Core\Utils;
 
 use WebSharks\Core\Classes;
@@ -25,6 +25,37 @@ use function get_defined_vars as vars;
  */
 class Password extends Classes\Core\Base\Core
 {
+    /**
+     * Password strength.
+     *
+     * @since 17xxxx Password strength.
+     *
+     * @param string $password Password.
+     *
+     * @return int Strength (0 - 100).
+     */
+    public function strength(string $password): int
+    {
+        $score = 0; // Initialize.
+
+        if (!isset($password[0])) {
+            return $score;
+        }
+        if (preg_match('/\p{N}/u', $password)) {
+            $score += 25; // Number.
+        }
+        if (preg_match('/\p{Ll}/u', $password)) {
+            $score += 25; // Lowercase.
+        }
+        if (preg_match('/\p{Lu}/u', $password)) {
+            $score += 25; // Uppercase.
+        }
+        if (preg_match('/[^\p{N}\p{Ll}\p{Lu}]/u', $password)) {
+            $score += 25; // Special symbol.
+        }
+        return $score;
+    }
+
     /**
      * Generates a password hash.
      *

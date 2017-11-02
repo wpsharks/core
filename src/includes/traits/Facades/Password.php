@@ -1,6 +1,6 @@
 <?php
 /**
- * SHA-1 utils.
+ * Password utils.
  *
  * @author @jaswrks
  * @copyright WebSharks™
@@ -19,33 +19,33 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * SHA-1 utils.
+ * Password utils.
  *
- * @since 170824.30708 SHA-1 utils.
+ * @since 17xxxx
  */
-trait Sha1
+trait Password
 {
     /**
-     * @since 170824.30708 SHA-1 utils.
+     * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Sha1::is()
+     * @see Classes\Core\Utils\Password::strength()
      */
-    public static function isSha1(...$args)
+    public static function passwordStrength(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Sha1->is(...$args);
+        return $GLOBALS[static::class]->Utils->©Password->strength(...$args);
     }
 
     /**
-     * @since 17xxxx SHA-1 keyed hash.
+     * @since 151214 First facades.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Sha1::keyedHash()
+     * @see Classes\Core\Utils\Password::sha256()
      */
-    public static function sha1KeyedHash(...$args)
+    public static function passwordSha256(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Sha1->keyedHash(...$args);
+        return $GLOBALS[static::class]->Utils->©Password->sha256(...$args);
     }
 }

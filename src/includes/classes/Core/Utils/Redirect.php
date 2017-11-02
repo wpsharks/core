@@ -71,7 +71,7 @@ class Redirect extends Classes\Core\Base\Core
             header('location: '.$to, true, $args['status']);
         }
         if ($args['exit']) {
-            exit();
+            exit(); // Stop here.
         }
     }
 }

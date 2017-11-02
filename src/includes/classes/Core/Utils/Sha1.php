@@ -47,4 +47,22 @@ class Sha1 extends Classes\Core\Base\Core
         }
         return true;
     }
+
+    /**
+     * Generates a keyed SHA-1 signature.
+     *
+     * @since 17xxxx SHA-1 keyed hash.
+     *
+     * @param string $string String to sign.
+     * @param string $key    Encryption key.
+     *
+     * @return string SHA-1 signature string (40 bytes).
+     */
+    public function keyedHash(string $string, string $key = ''): string
+    {
+        if (!$key && !($key = $this->App->Config->©hash['©key'])) {
+            throw $this->c::issue('Missing HMAC hash key.');
+        }
+        return hash_hmac('sha1', $string, $key);
+    }
 }

@@ -62,16 +62,16 @@ class Sha1Mod extends Classes\Core\Base\Core
     public function __invoke(string $string, int $divisor, bool $is_sha1 = false): int
     {
         if ($is_sha1) {
-            $sha1 = $string;
+            if (!$this->c::isSha1($sha1 = $string)) {
+                throw $this->c::issue('Invalid SHA-1 hash.');
+            }
         } else {
             $sha1 = sha1($string);
-        }
-        if (strlen($sha1) !== 40) {
-            throw $this->c::issue('SHA-1 hash not 40 chars.');
         }
         $sha1_first_15 = substr($sha1, 0, 15);
         $dividend      = hexdec($sha1_first_15);
         $divisor       = max(1, $divisor);
+
         return $dividend % $divisor;
     }
 

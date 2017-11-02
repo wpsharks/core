@@ -1,6 +1,6 @@
 <?php
 /**
- * SHA-1 utils.
+ * CRC-32 utils.
  *
  * @author @jaswrks
  * @copyright WebSharks™
@@ -19,33 +19,33 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * SHA-1 utils.
+ * CRC-32 utils.
  *
- * @since 170824.30708 SHA-1 utils.
+ * @since 17xxxx CRC-32 utils.
  */
-trait Sha1
+trait Crc32
 {
     /**
-     * @since 170824.30708 SHA-1 utils.
+     * @since 17xxxx CRC-32 utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Sha1::is()
+     * @see Classes\Core\Utils\Crc32::is()
      */
-    public static function isSha1(...$args)
+    public static function isCrc32(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Sha1->is(...$args);
+        return $GLOBALS[static::class]->Utils->©Crc32->is(...$args);
     }
 
     /**
-     * @since 17xxxx SHA-1 keyed hash.
+     * @since 170824.30708 CRC-32 utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Sha1::keyedHash()
+     * @see Classes\Core\Utils\Crc32::keyedHash()
      */
-    public static function sha1KeyedHash(...$args)
+    public static function crc32KeyedHash(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Sha1->keyedHash(...$args);
+        return $GLOBALS[static::class]->Utils->©Crc32->keyedHash(...$args);
     }
 }

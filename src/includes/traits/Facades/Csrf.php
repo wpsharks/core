@@ -1,6 +1,6 @@
 <?php
 /**
- * Request utils.
+ * CSRF utils.
  *
  * @author @jaswrks
  * @copyright WebSharks™
@@ -19,45 +19,45 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Request utils.
+ * CSRF utils.
  *
  * @since 17xxxx
  */
-trait Request
+trait Csrf
 {
     /**
-     * @since 17xxxx Request utils.
+     * @since 17xxxx CSRF utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Request::current()
+     * @see Classes\Core\Utils\Csrf::create()
      */
-    public static function currentRequest(...$args)
+    public static function createCsrf(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Request->current(...$args);
+        return $GLOBALS[static::class]->Utils->©Csrf->create(...$args);
     }
 
     /**
-     * @since 17xxxx Request utils.
+     * @since 17xxxx CSRF utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Request::create()
+     * @see Classes\Core\Utils\Csrf::input()
      */
-    public static function createRequest(...$args)
+    public static function csrfInput(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Request->create(...$args);
+        return $GLOBALS[static::class]->Utils->©Csrf->input(...$args);
     }
 
     /**
-     * @since 17xxxx Request utils.
+     * @since 17xxxx CSRF utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Request::createBody()
+     * @see Classes\Core\Utils\Csrf::verify()
      */
-    public static function createRequestBody(...$args)
+    public static function verifyCsrf(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Request->createBody(...$args);
+        return $GLOBALS[static::class]->Utils->©Csrf->verify(...$args);
     }
 }

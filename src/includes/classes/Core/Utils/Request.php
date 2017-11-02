@@ -64,4 +64,18 @@ class Request extends Classes\Core\Base\Core
     {
         return $this->App->Di->get(Classes\Core\Request::class, $args);
     }
+
+    /**
+     * Create request body.
+     *
+     * @since 17xxxx Request utilities.
+     *
+     * @param string|null $content Body content.
+     *
+     * @return Classes\Core\RequestBody Instance.
+     */
+    public function createBody(string $content = null): Classes\Core\RequestBody
+    {
+        return $this->App->Di->get(Classes\Core\RequestBody::class, compact('content'));
+    }
 }

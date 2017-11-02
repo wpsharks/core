@@ -39,27 +39,31 @@ class Image extends Classes\Core\Base\Core
         if (mb_strpos($data_url, 'data:') !== 0) {
             return []; // Not applicable.
         }
-        $data      = str_replace(' ', '+', $data_url);
-        $data_f100 = mb_substr($data, 0, 100);
+        $data = str_replace(' ', '+', $data_url);
+        $f100 = mb_substr($data, 0, 100);
 
-        if (mb_strpos($data_f100, 'data:image/x-icon;base64,') === 0
-            || mb_strpos($data_f100, 'data:image/icon;base64,') === 0
-            || mb_strpos($data_f100, 'data:image/ico;base64,') === 0) {
+        if (mb_strpos($f100, 'data:image/x-icon;base64,') === 0) {
             $extension = 'ico';
-        } elseif (mb_strpos($data_f100, 'data:image/gif;base64,') === 0) {
+        } elseif (mb_strpos($f100, 'data:image/icon;base64,') === 0) {
+            $extension = 'ico';
+        } elseif (mb_strpos($f100, 'data:image/ico;base64,') === 0) {
+            $extension = 'ico';
+        } elseif (mb_strpos($f100, 'data:image/gif;base64,') === 0) {
             $extension = 'gif';
-        } elseif (mb_strpos($data_f100, 'data:image/jpg;base64,') === 0
-            || mb_strpos($data, 'data:image/jpeg;base64,') === 0) {
+        } elseif (mb_strpos($f100, 'data:image/jpg;base64,') === 0) {
             $extension = 'jpg';
-        } elseif (mb_strpos($data_f100, 'data:image/png;base64,') === 0) {
+        } elseif (mb_strpos($f100, 'data:image/jpeg;base64,') === 0) {
+            $extension = 'jpg';
+        } elseif (mb_strpos($f100, 'data:image/png;base64,') === 0) {
             $extension = 'png';
-        } elseif (mb_strpos($data_f100, 'data:image/webp;base64,') === 0) {
+        } elseif (mb_strpos($f100, 'data:image/webp;base64,') === 0) {
             $extension = 'webp';
-        } else { // Invalid; unknown MIME type.
+        } else {
             return []; // Not possible.
         }
-        if (!($raw_image_data = mb_substr($data, mb_strpos($data, ',') + 1))
-            || !($raw_image_data = (string) base64_decode($raw_image_data, true))) {
+        if (!($raw_image_data = mb_substr($data, mb_strpos($data, ',') + 1))) {
+            return []; // Decode failure.
+        } elseif (!($raw_image_data = (string) base64_decode($raw_image_data, true))) {
             return []; // Decode failure.
         }
         return compact('raw_image_data', 'extension');
