@@ -40,9 +40,12 @@ abstract class Facades
     use Traits\Facades\Color;
     use Traits\Facades\Cookies;
     use Traits\Facades\Country;
+    use Traits\Facades\Crc32;
     use Traits\Facades\Crypto;
+    use Traits\Facades\Csrf;
     use Traits\Facades\Currency;
     use Traits\Facades\Debugging;
+    use Traits\Facades\Defuse;
     use Traits\Facades\Deprecated;
     use Traits\Facades\Dimensions;
     use Traits\Facades\DirCache;
@@ -56,6 +59,7 @@ abstract class Facades
     use Traits\Facades\Files;
     use Traits\Facades\GitHub;
     use Traits\Facades\Gravatar;
+    use Traits\Facades\HashIds;
     use Traits\Facades\Headers;
     use Traits\Facades\Html;
     use Traits\Facades\Image;
@@ -69,10 +73,13 @@ abstract class Facades
     use Traits\Facades\Multibyte;
     use Traits\Facades\Names;
     use Traits\Facades\NoCache;
+    use Traits\Facades\Nonce;
+    use Traits\Facades\OAuthServer;
     use Traits\Facades\OEmbed;
     use Traits\Facades\Os;
     use Traits\Facades\Output;
     use Traits\Facades\Paginator;
+    use Traits\Facades\Password;
     use Traits\Facades\Patterns;
     use Traits\Facades\Pdo;
     use Traits\Facades\Percentages;
@@ -85,8 +92,10 @@ abstract class Facades
     use Traits\Facades\Routes;
     use Traits\Facades\SearchTerms;
     use Traits\Facades\Serializer;
+    use Traits\Facades\Session;
     use Traits\Facades\Sha1;
     use Traits\Facades\Sha1Mods;
+    use Traits\Facades\Sha256;
     use Traits\Facades\SimpleExpressions;
     use Traits\Facades\Slack;
     use Traits\Facades\Slashes;
