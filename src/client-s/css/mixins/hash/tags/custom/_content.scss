@@ -47,6 +47,15 @@
       }
     }
 
+    twitterwidget {
+      &,
+      & .EmbeddedTweet,
+      &::shadow .EmbeddedTweet {
+        width:                100% !important;
+        max-width:            100% !important;
+      }
+    }
+
     @include lte-tablet {
       img {
         &.alignleft,

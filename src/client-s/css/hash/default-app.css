@@ -1037,6 +1037,11 @@ content-body em :not(a):not(small) {
   letter-spacing: normal;
 }
 
+content-body twitterwidget, content-body twitterwidget .EmbeddedTweet, content-body twitterwidget::shadow .EmbeddedTweet {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 @media screen and (max-width: 991px) {
   html:not(.\!\@) content-body img.alignleft:not([class*=':if-']), html:not(.\!\@) content-body img.alignright:not([class*=':if-']), html:not(.\!\@) content-body img[class*='#float:']:not([class*=':if-']), html:not(.\!\@) content-body img[class*='#push:']:not([class*=':if-']), html:not(.\!\@) content-body img[class*='#pull:']:not([class*=':if-']), html:not(.\!\@) content-body img[class*='#yank:']:not([class*=':if-']) {
     float: none !important;
