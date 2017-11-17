@@ -560,7 +560,7 @@ h6.\~block, pre, table {
   border-radius: 0.25em ;
 }
 
-pre.code > code {
+pre > code {
   border-radius: .25em;
 }
 
@@ -617,7 +617,7 @@ h2.\~block > code,
 h3.\~block > code,
 h4.\~block > code,
 h5.\~block > code,
-h6.\~block > code, dt > code:first-child, details, hr, pre.code, pre.code > code, table.\~undivided > :not(caption) > * > :not(#x):not(#y) {
+h6.\~block > code, dt > code:first-child, details, hr, pre > code, pre.code, table.\~undivided > :not(caption) > * > :not(#x):not(#y) {
   border-width: 0;
 }
 
@@ -683,7 +683,7 @@ h4,
 h5,
 h6, hr, ol,
 ul,
-dl, pre, p, table, video, details[open], pre.code > code, a-container, content-body, a-foundation, a-slab, a-structure > structure-body, a-theme, details > summary, details > summary::after, h1 > sub,
+dl, pre, p, table, video, details[open], pre > code, a-container, content-body, a-foundation, a-slab, a-structure > structure-body, a-theme, details > summary, details > summary::after, h1 > sub,
 h2 > sub,
 h3 > sub,
 h4 > sub,
@@ -891,7 +891,7 @@ h2.\~block > code,
 h3.\~block > code,
 h4.\~block > code,
 h5.\~block > code,
-h6.\~block > code, dt > code:first-child, button, .\@btn, pre.code > code {
+h6.\~block > code, dt > code:first-child, button, .\@btn, pre > code {
   margin: 0;
 }
 
@@ -955,7 +955,7 @@ h6 > sub {
   opacity: .75;
 }
 
-a-brick, a-note, a-tile, blockquote, details[open], pre, pre.code > code {
+a-brick, a-note, a-tile, blockquote, details[open], pre, pre > code {
   padding: 1em;
 }
 
@@ -2747,15 +2747,7 @@ pre {
   white-space: pre-wrap;
 }
 
-pre.code {
-  background: none;
-  text-shadow: none;
-  box-shadow: none;
-  max-height: none;
-  overflow: visible;
-}
-
-pre.code > code {
+pre > code {
   white-space: pre;
   vertical-align: baseline;
   max-height: 500px;
@@ -2767,17 +2759,25 @@ pre.code > code {
   box-shadow: none;
 }
 
-pre.code > code:not(.hljs) {
+pre > code:not(.hljs) {
   color: #fff;
   background: #0b0b0b;
 }
 
-pre.code > code > strong {
+pre > code > strong {
   font-weight: 700;
 }
 
-pre.code > code .hljs-comment, pre.code > code .hljs-keyword, pre.code > code .hljs-built_in, pre.code > code .hljs-literal, pre.code > code.lang-html .hljs-attr {
+pre > code .hljs-comment, pre > code .hljs-keyword, pre > code .hljs-built_in, pre > code .hljs-literal, pre > code.lang-html .hljs-attr {
   font-style: italic;
+}
+
+pre.code {
+  background: none;
+  text-shadow: none;
+  box-shadow: none;
+  max-height: none;
+  overflow: visible;
 }
 
 pre.code[title] {

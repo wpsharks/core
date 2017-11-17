@@ -63,6 +63,47 @@
     font-size:               .889em;
     white-space:              pre-wrap;
 
+    > code {
+      @extend                 %hash-0-margin;
+      @extend                 %hash-block-padding;
+      @extend                 %hash-0-border-width;
+      @extend                 %hash-default-border-radius;
+
+      white-space:            pre;
+      vertical-align:         baseline;
+
+      //
+      max-height:             500px;
+      overflow:               auto;
+
+      //
+      font-size:              1em;
+      line-height:            1.2;
+      text-decoration:        none;
+
+      //
+      text-shadow:            none;
+      box-shadow:             none;
+
+      &:not(.hljs) {
+        // Don't step on HLJS theme.
+        color:                $bg-color;
+        background:           $fg-color;
+      }
+
+      > strong {
+        font-weight:          700;
+      }
+
+      .hljs-comment,
+      .hljs-keyword,
+      .hljs-built_in,
+      .hljs-literal,
+      &.lang-html .hljs-attr {
+        font-style:           italic;
+      }
+    }
+
     &.code {
       @extend                 %hash-0-padding;
       @extend                 %hash-0-border-width;
@@ -77,47 +118,6 @@
       //
       max-height:             none;
       overflow:               visible;
-
-      > code {
-        @extend               %hash-0-margin;
-        @extend               %hash-block-padding;
-        @extend               %hash-0-border-width;
-        @extend               %hash-default-border-radius;
-
-        white-space:          pre;
-        vertical-align:       baseline;
-
-        //
-        max-height:           500px;
-        overflow:             auto;
-
-        //
-        font-size:            1em;
-        line-height:          1.2;
-        text-decoration:      none;
-
-        //
-        text-shadow:          none;
-        box-shadow:           none;
-
-        &:not(.hljs) {
-          // Don't step on HLJS theme.
-          color:              $bg-color;
-          background:         $fg-color;
-        }
-
-        > strong {
-          font-weight:        700;
-        }
-
-        .hljs-comment,
-        .hljs-keyword,
-        .hljs-built_in,
-        .hljs-literal,
-        &.lang-html .hljs-attr {
-          font-style:         italic;
-        }
-      }
 
       &[title] {
         overflow:             hidden;
