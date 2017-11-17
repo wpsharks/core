@@ -92,17 +92,16 @@ class Twitter extends Classes\Core\Base\Core
         $default_args = $this->default_credentials;
 
         $args += $default_args;
-        $args = array_map('strval', $args);
         $hash = $this->remoteHash($args);
 
         if (isset($this->remotes[$hash])) {
             return $this->remotes[$hash];
         }
         return $this->remotes[$hash] = new TwitterOAuth(
-            $args['consumer_key'],
-            $args['consumer_secret'],
-            $args['access_token'],
-            $args['access_token_secret']
+            (string) $args['consumer_key'],
+            (string) $args['consumer_secret'],
+            (string) $args['access_token'],
+            (string) $args['access_token_secret']
         );
     }
 
@@ -174,8 +173,8 @@ class Twitter extends Classes\Core\Base\Core
         $default_args = $this->default_credentials;
 
         $args += $default_args;
-        $args        = array_map('strval', $args);
         $args        = array_intersect_key($args, $default_args);
+        $args        = array_map('strval', $args);
         return $hash = sha1(serialize($args));
     }
 }
