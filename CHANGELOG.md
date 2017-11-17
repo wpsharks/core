@@ -1,6 +1,8 @@
 ## $v
 
 - oAuth server.
+- Adding `c::twitterGetJson()`.
+- Adding `c::twitterGetRemote()`.
 - Adding `c::createNonce()`.
 - Adding `c::nonceInput()`.
 - Adding `c::verifyNonce()`.

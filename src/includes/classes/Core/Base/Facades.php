@@ -110,6 +110,7 @@ abstract class Facades
     use Traits\Facades\Time;
     use Traits\Facades\Tokenizer;
     use Traits\Facades\Translits;
+    use Traits\Facades\Twitter;
     use Traits\Facades\UrlBuilders;
     use Traits\Facades\UrlCurrent;
     use Traits\Facades\UrlParsers;

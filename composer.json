@@ -89,6 +89,7 @@
 
     "slim/http": "0.*",
     "league/iso3166": "1.*",
+    "abraham/twitteroauth": "0.*",
     "league/oauth2-server": "6.*",
     "embedly/embedly-php": "0.*",
     "corneltek/getoptionkit": "2.*",

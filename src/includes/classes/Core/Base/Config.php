@@ -11,10 +11,10 @@ namespace WebSharks\Core\Classes\Core\Base;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
 
@@ -38,18 +38,18 @@ class Config extends Classes\Core\Base\Core
     {
         parent::__construct($App);
 
-        # Server CFGs (if applicable).
+        // Server CFGs (if applicable).
 
         $use_server_cfgs = (bool) ($instance['©use_server_cfgs']
             ?? $instance_base['©use_server_cfgs'] ?? !empty($_SERVER['CFG_HOST']));
         $_ = $use_server_cfgs && !empty($_SERVER['CFG_HOST']) ? $_SERVER : [];
 
-        # Default host names; needed below as fallbacks.
+        // Default host names; needed below as fallbacks.
 
         $host      = $_['CFG_HOST'] ?? $_SERVER['HTTP_HOST'] ?? mb_strtolower(php_uname('n'));
         $root_host = $_['CFG_ROOT_HOST'] ?? implode('.', array_slice(explode('.', $host), -2));
 
-        # Default instance base (i.e., default config).
+        // Default instance base (i.e., default config).
 
         $default_instance_base = [
             '©use_server_cfgs' => false,
@@ -300,6 +300,12 @@ class Config extends Classes\Core\Base\Core
                 '©list_id' => (string) ($_['CFG_MAILCHIMP_LIST_ID'] ?? ''),
                 '©api_key' => (string) ($_['CFG_MAILCHIMP_API_KEY'] ?? ''),
             ],
+            '©twitter' => [
+                '©api_consumer_key'        => (string) ($_['CFG_TWITTER_API_CONSUMER_KEY'] ?? ''),
+                '©api_consumer_secret'     => (string) ($_['CFG_TWITTER_API_CONSUMER_SECRET'] ?? ''),
+                '©api_access_token'        => (string) ($_['CFG_TWITTER_API_ACCESS_TOKEN'] ?? ''),
+                '©api_access_token_secret' => (string) ($_['CFG_TWITTER_API_ACCESS_TOKEN_SECRET'] ?? ''),
+            ],
             '©slack' => [
                 '©api_client_id'     => (string) ($_['CFG_SLACK_API_CLIENT_ID'] ?? ''),
                 '©api_client_secret' => (string) ($_['CFG_SLACK_API_CLIENT_SECRET'] ?? ''),
@@ -317,17 +323,17 @@ class Config extends Classes\Core\Base\Core
                 '©api_access_token'  => (string) ($_['CFG_ZENHUB_API_ACCESS_TOKEN'] ?? ''),
             ],
         ];
-        # Merge `$instance_base` param into `$default_instance_base`.
+        // Merge `$instance_base` param into `$default_instance_base`.
 
         $instance_base = $this->App->mergeConfig($default_instance_base, $instance_base);
 
-        # Merge everything together & convert to object properties now.
+        // Merge everything together & convert to object properties now.
 
         $config = $this->App->mergeConfig($instance_base, $instance);
         $config = $this->App->fillConfigReplacementCodes($config);
         $config = (object) $config; // Config properties.
 
-        # Adjust a few values associated w/ master switches.
+        // Adjust a few values associated w/ master switches.
 
         if (!$config->©debug['©enable']) {
             $config->©debug['©edge']      = false;
@@ -336,7 +342,7 @@ class Config extends Classes\Core\Base\Core
         } elseif (!$config->©debug['©er_enable']) {
             $config->©debug['©er_display'] = $config->©debug['©er_assertions'] = false;
         }
-        # Overload configuration properties.
+        // Overload configuration properties.
 
         $this->overload($config, true); // Overload public/writable properties.
     }
