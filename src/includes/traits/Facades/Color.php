@@ -11,10 +11,10 @@ namespace WebSharks\Core\Traits\Facades;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
 
@@ -71,17 +71,5 @@ trait Color
     public static function cleanHexColor(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Color->cleanHex(...$args);
-    }
-
-    /**
-     * @since 170413.34876 Color utilities.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\Core\Utils\Color::md5Gradient()
-     */
-    public static function md5GradientImage(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Color->md5GradientImage(...$args);
     }
 }

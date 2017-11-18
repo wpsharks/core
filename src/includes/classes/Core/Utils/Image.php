@@ -11,12 +11,14 @@ namespace WebSharks\Core\Classes\Core\Utils;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
+//
+use RedeyeVentures\GeoPattern\GeoPattern;
 
 /**
  * Image utilities.
@@ -56,6 +58,8 @@ class Image extends Classes\Core\Base\Core
             $extension = 'jpg';
         } elseif (mb_strpos($f100, 'data:image/png;base64,') === 0) {
             $extension = 'png';
+        } elseif (mb_strpos($f100, 'data:image/svg+xml;base64,') === 0) {
+            $extension = 'svg';
         } elseif (mb_strpos($f100, 'data:image/webp;base64,') === 0) {
             $extension = 'webp';
         } else {
@@ -70,6 +74,81 @@ class Image extends Classes\Core\Base\Core
     }
 
     /**
+     * Convert SVG to PNG.
+     *
+     * @since 17xxxx SVG converter.
+     *
+     * @param string $file SVG file path.
+     * @param array  $args Any behavioral args.
+     *
+     * @return bool True on success.
+     *
+     * @see {@link compressPng()}
+     */
+    public function svgToPng(string $file, array $args = []): bool
+    {
+        if (!class_exists('Imagick')) {
+            return false; // Not possible.
+        } elseif (!$file || !is_file($file)) {
+            return false; // Not possible.
+        }
+        $png_file = preg_replace('/\.[^.]+$/ui', '.png', $file);
+
+        $default_args = [
+            'width'    => 0,
+            'height'   => 0,
+            'texture'  => false,
+            'filter'   => \Imagick::FILTER_LANCZOS,
+            'blur'     => 1,
+            'bestfit'  => false,
+
+            'output_file' => $png_file,
+            'bits'        => 32,
+        ];
+        $args += $default_args; // Merge w/ defaults.
+
+        $args['width']   = (int) $args['width'];
+        $args['height']  = (int) $args['height'];
+        $args['texture'] = (bool) $args['texture'];
+        $args['filter']  = (int) $args['filter'];
+        $args['blur']    = (int) $args['blur'];
+        $args['bestfit'] = (bool) $args['bestfit'];
+
+        $args['output_file'] = (string) $args['output_file'];
+        $args['output_file'] = $args['output_file'] ?: $png_file;
+        $args['bits']        = (int) $args['bits'];
+
+        $format      = 'png'.$args['bits'];
+        $resize_args = [$args['width'], $args['height'], $args['filter'], $args['blur'], $args['bestfit']];
+
+        if ($this->c::fileExt($args['output_file']) !== 'png') {
+            return false; // Wrong extension.
+        }
+        try { // Catch exceptions.
+            $svg   = new \Imagick();
+            $trans = new \ImagickPixel('transparent');
+
+            $svg->setBackgroundColor($trans);
+            $svg->readImage('svg:'.$file);
+
+            if ($args['width'] && $args['texture']) {
+                $png = new \Imagick();
+                $png->newImage($args['width'], $args['height'], $trans, $format);
+                ($png = $png->textureImage($svg))->writeImage($args['output_file']);
+            } elseif ($args['width']) {
+                $svg->resizeImage(...$resize_args);
+                $svg->writeImage($format.':'.$args['output_file']);
+            } else {
+                $svg->writeImage($format.':'.$args['output_file']);
+            }
+        } catch (\Throwable $Exception) {
+            @unlink($args['output_file']);
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Compress PNG image.
      *
      * @since 161011 Initial release.
@@ -77,7 +156,7 @@ class Image extends Classes\Core\Base\Core
      * @param string $file PNG file path.
      * @param array  $args Any behavioral args.
      *
-     * @return bool True if compression successfull.
+     * @return bool True on success.
      *
      * @see https://pngquant.org/php.html
      */
@@ -101,6 +180,9 @@ class Image extends Classes\Core\Base\Core
         $args['output_file'] = (string) $args['output_file'];
         $args['output_file'] = $args['output_file'] ?: $file;
 
+        if ($this->c::fileExt($args['output_file']) !== 'png') {
+            return false; // Wrong extension.
+        }
         $esc_file        = $this->c::escShellArg($file);
         $esc_output_file = $this->c::escShellArg($args['output_file']);
         $esc_min         = $this->c::escShellArg($args['min_quality']);
@@ -109,5 +191,72 @@ class Image extends Classes\Core\Base\Core
         exec('pngquant --quality='.$esc_min.'-'.$esc_max.' --force --output='.$esc_output_file.' '.$esc_file, $output, $status);
 
         return $status === 0 || $status === 99;
+    }
+
+    /**
+     * Geo-pattern generator.
+     *
+     * @since 17xxxx Geo-patterns.
+     *
+     * @param string $file New SVG file path.
+     * @param array  $args Any behavioral args.
+     *
+     * @return bool True on success.
+     */
+    public function geoPattern(string $file, array $args = []): bool
+    {
+        $default_args = [
+            'string' => $this->c::uniqueId(),
+            'for'    => '', // Alias of string.
+        ];
+        $args += $default_args; // Merge defaults.
+
+        if ($this->c::fileExt($file) !== 'svg') {
+            return false; // Wrong extension.
+        }
+        $args['string'] = (string) $args['string'];
+        $args['for']    = (string) $args['for'];
+
+        $args['string'] = $args['for'] ?: $args['string'];
+        unset($args['for']); // Housekeeping.
+
+        $data  = (new GeoPattern($args))->toSVG();
+        return file_put_contents($file, $data) !== false;
+    }
+
+    /**
+     * Geo-pattern thumbnail.
+     *
+     * @since 17xxxx Geo-patterns.
+     *
+     * @param string $file New PNG file path.
+     * @param array  $args Any behavioral args.
+     *
+     * @return bool True on success.
+     */
+    public function geoPatternThumbnail(string $file, array $args = []): bool
+    {
+        $default_args = [
+            'width'       => 512,
+            'height'      => 256,
+            'texture'     => true,
+            'output_file' => $file,
+        ];
+        $args += $default_args; // Merge defaults.
+
+        if ($this->c::fileExt($file) !== 'png') {
+            return false; // Wrong extension.
+        }
+        $svg_file = preg_replace('/\.[^.]+$/ui', '.svg', $file);
+
+        if (!$this->geoPattern($svg_file, $args)) {
+            return false;
+        }
+        if (!$this->svgToPng($svg_file, $args)) {
+            @unlink($svg_file);
+            return false;
+        }
+        @unlink($svg_file);
+        return true;
     }
 }

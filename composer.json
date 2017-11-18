@@ -94,6 +94,7 @@
     "embedly/embedly-php": "0.*",
     "corneltek/getoptionkit": "2.*",
     "jeremeamia/superclosure": "2.*",
+    "redeyeventures/geopattern": "1.*",
     "phpmailer/phpmailer": "5.*"
   },
   "require-dev": {

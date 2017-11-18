@@ -1,6 +1,9 @@
 ## $v
 
 - oAuth server.
+- Adding `c::svgToPng()`.
+- Adding `c::geoPattern()`.
+- Adding `c::geoPatternThumbnail()`.
 - Adding `c::twitterGetJson()`.
 - Adding `c::twitterGetRemote()`.
 - Adding `c::createNonce()`.
@@ -22,6 +25,7 @@
 - Adding `c::createResponseBody()`.
 - Adding `c::isActiveSession()`.
 - Adding `c::startSession()`.
+- Removing `c::md5GradientImage()`.
 - Hardening cookie security.
 - Hardening session security.
 - Updating to latest Dicer.
