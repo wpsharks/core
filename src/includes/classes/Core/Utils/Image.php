@@ -267,18 +267,60 @@ class Image extends Classes\Core\Base\Core
         $output_file_existed_prior = is_file($args['output_file']);
 
         try { // Catch exceptions.
-            $image = new \Imagick();
-            $image->setBackgroundColor('transparent');
-            $image->readImage($args['format'].':'.$args['file']);
+            if ($args['format'] === 'svg' && $args['output_format'] === 'svg') {
+                $xml = new \DOMDocument('1.0', 'utf-8');
+                $svg = ['texture_nodes' => []];
 
-            $canvas = new \Imagick(); // To hold texturization.
-            $canvas->newImage($args['width'], $args['height'], 'transparent', $args['output_format']);
+                if (!$xml->load($args['file'])) {
+                    throw $this->c::issue('SVG load failure.');
+                } elseif (!($svg['tag'] = $xml->getElementsByTagName('svg')->item(0))) {
+                    throw $this->c::issue('SVG tag parse failure.');
+                }
+                while ($svg['tag']->hasChildNodes()) {
+                    $svg['texture_nodes'][] = $svg['tag']->firstChild;
+                    $svg['tag']->removeChild($svg['tag']->firstChild);
+                }
+                $svg['defs']    = $xml->createElement('defs');
+                $svg['texture'] = $xml->createElement('pattern');
+                $svg['rect']    = $xml->createElement('rect');
 
-            $image = $canvas->textureImage($image);
-            $image->writeImage($args['output_format'].':'.$args['output_file']);
+                $svg['tag']->appendChild($svg['defs']);
+                $svg['defs']->appendChild($svg['texture']);
+                $svg['tag']->appendChild($svg['rect']);
 
-            return true; // Success.
-            //
+                $svg['texture']->setAttribute('id', 'texture');
+                $svg['texture']->setAttribute('patternUnits', 'userSpaceOnUse');
+                $svg['texture']->setAttribute('width', $svg['tag']->getAttribute('width'));
+                $svg['texture']->setAttribute('height', $svg['tag']->getAttribute('height'));
+
+                foreach ($svg['texture_nodes'] as $_texture_node) {
+                    $svg['texture']->appendChild($_texture_node);
+                } // unset($_texture_node); // Housekeeping.
+
+                $svg['rect']->setAttribute('width', '100%');
+                $svg['rect']->setAttribute('height', '100%');
+                $svg['rect']->setAttribute('fill', 'url(#texture)');
+
+                $svg['tag']->setAttribute('width', (string) $args['width']);
+                $svg['tag']->setAttribute('height', (string) $args['height']);
+
+                if (file_put_contents($args['output_file'], $xml->saveXML()) === false) {
+                    throw $this->c::issue('SVG save failure.');
+                }
+                return true; // Success.
+            } else {
+                $image = new \Imagick();
+                $image->setBackgroundColor('transparent');
+                $image->readImage($args['format'].':'.$args['file']);
+
+                $canvas = new \Imagick(); // To hold texturization.
+                $canvas->newImage($args['width'], $args['height'], 'transparent', $args['output_format']);
+
+                $image = $canvas->textureImage($image);
+                $image->writeImage($args['output_format'].':'.$args['output_file']);
+
+                return true; // Success.
+            }
         } catch (\Throwable $Exception) {
             if (!$output_file_existed_prior && is_file($args['output_file'])) {
                 unlink($args['output_file']);
