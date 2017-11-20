@@ -1,7 +1,13 @@
 ## $v
 
 - oAuth server.
+- Adding `c::yesCacheHeadersArray()`.
+- Adding `c::yesCacheHeaders()`.
 - Adding `c::onePx()`.
+- Adding `c::imageExtToFormat()`.
+- Adding `c::imageFormatToExt()`.
+- Adding `c::imageExtToMimeType()`.
+- Adding `c::imageFormatToMimeType()`.
 - Adding `c::setFileExt()`.
 - Adding `c::changeFileExt()`.
 - Adding `c::geoPattern()`.

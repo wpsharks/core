@@ -57,6 +57,11 @@ c::dump(c::texturizeImage([
     'width'         => 1200, 'height' => 600,
     'output_file'   => $dir.'/geo-pattern-texture-1200x600.png',
 ]));
+c::dump(c::texturizeImage([
+    'file'          => $dir.'/geo-pattern.svg',
+    'width'         => 512, 'height' => 256,
+    'output_file'   => $dir.'/geo-pattern-texture-512x256.svg',
+]));
 
 // Compression.
 

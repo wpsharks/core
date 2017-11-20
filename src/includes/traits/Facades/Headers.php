@@ -11,10 +11,10 @@ namespace WebSharks\Core\Traits\Facades;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
 
@@ -86,6 +86,18 @@ trait Headers
     }
 
     /**
+     * @since 17xxxx Yes-cache headers.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::yesCache()
+     */
+    public static function yesCacheHeadersArray(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Headers->yesCache(...$args);
+    }
+
+    /**
      * @since 17xxxx No-cache headers.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -95,6 +107,18 @@ trait Headers
     public static function noCacheHeadersArray(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Headers->noCache(...$args);
+    }
+
+    /**
+     * @since 17xxxx Yes-cache headers.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Headers::yesCacheSend()
+     */
+    public static function yesCacheHeaders(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Headers->yesCacheSend(...$args);
     }
 
     /**

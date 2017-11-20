@@ -11,10 +11,10 @@ namespace WebSharks\Core\Classes\Core\Utils;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
 
@@ -23,7 +23,7 @@ use function get_defined_vars as vars;
  *
  * @since 151121 Header utilities.
  */
-class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusConstants
+class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusConstants, Interfaces\SecondConstants
 {
     /**
      * Current request headers.
@@ -51,6 +51,24 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
     }
 
     /**
+     * Yes-cache headers.
+     *
+     * @since 17xxxx Yes-cache headers.
+     *
+     * @param int $expires_after Expires after (seconds).
+     *
+     * @return array Yes-cache headers.
+     */
+    public function yesCache(int $expires_after = self::SECONDS_IN_YEAR): array
+    {
+        return [
+            'pragma'        => 'public',
+            'expires'       => gmdate('D, d M Y H:i:s T', time() + $expires_after),
+            'cache-control' => 'public, immutable, max-age='.$expires_after,
+        ];
+    }
+
+    /**
      * No-cache headers.
      *
      * @since 17xxxx No-cache headers.
@@ -61,9 +79,28 @@ class Headers extends Classes\Core\Base\Core implements Interfaces\HttpStatusCon
     {
         return [
             'pragma'        => 'no-cache',
-            'expires'       => 'wed, 11 jan 1984 05:00:00 gmt',
+            'expires'       => gmdate('D, d M Y H:i:s T', time() - $this::SECONDS_IN_YEAR),
             'cache-control' => 'no-cache, must-revalidate, max-age=0',
         ];
+    }
+
+    /**
+     * Send yes-cache headers.
+     *
+     * @since 17xxxx Yes-cache headers.
+     *
+     * @param int $expires_after Expires after (seconds).
+     */
+    public function yesCacheSend(int $expires_after = self::SECONDS_IN_YEAR)
+    {
+        if (headers_sent()) {
+            throw $this->c::issue('Headers already sent.');
+        }
+        header_remove('last-modified');
+
+        foreach ($this->yesCache() as $_header => $_value) {
+            header($_header.': '.$_value);
+        } // unset($_header, $_value);
     }
 
     /**

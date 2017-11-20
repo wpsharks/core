@@ -18,7 +18,7 @@ use WebSharks\Core\Classes\Core\Base\Exception;
 use function assert as debug;
 use function get_defined_vars as vars;
 //
-use RedeyeVentures\GeoPattern\GeoPattern;
+use RedeyeVentures\GeoPattern\GeoPattern as Identipattern;
 
 /**
  * Image utilities.
@@ -28,15 +28,15 @@ use RedeyeVentures\GeoPattern\GeoPattern;
 class Image extends Classes\Core\Base\Core
 {
     /**
-     * Geo-pattern generator.
+     * Identipattern generator.
      *
-     * @since 17xxxx Geo-patterns.
+     * @since 17xxxx Identipatterns.
      *
      * @param array $args Named arguments.
      *
      * @return bool True on success.
      */
-    public function geoPattern(array $args): bool
+    public function identipattern(array $args): bool
     {
         if (!class_exists('Imagick')) {
             return false;
@@ -66,7 +66,7 @@ class Image extends Classes\Core\Base\Core
         $output_file_existed_prior = is_file($args['output_file']);
 
         try { // Catch exceptions.
-            $svg = (new GeoPattern([
+            $svg = (new Identipattern([
                 'string'    => $args['string'] ?: null,
                 'baseColor' => $args['base_color'] ?: null,
                 'color'     => $args['color'] ?: null,
@@ -77,8 +77,9 @@ class Image extends Classes\Core\Base\Core
             }
             if ($args['output_format'] !== 'svg') {
                 if (!$this->convert([
-                        'format'        => 'svg',
-                        'file'          => $args['output_file'],
+                        'format' => 'svg',
+                        'file'   => $args['output_file'],
+
                         'output_file'   => $args['output_file'],
                         'output_format' => $args['output_format'],
                     ])) {
@@ -523,6 +524,40 @@ class Image extends Classes\Core\Base\Core
     }
 
     /**
+     * One pixel image.
+     *
+     * @since 17xxxx Imagick utils.
+     *
+     * @param string $format Format.
+     *
+     * @return string One pixel image.
+     */
+    public function onePx(string $format): string
+    {
+        switch ($this->formatToExt($format)) {
+            case 'svg':
+                $_1px = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>';
+                break;
+
+            case 'png':
+                $_1px = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');
+                break;
+
+            case 'jpg': // Not transparent.
+                $_1px = base64_decode('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wgARCAABAAEDAREAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAAA//EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAADP/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oACAEBAAE/AH//xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAECAQE/AH//xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAEDAQE/AH//2Q==');
+                break;
+
+            case 'gif':
+                $_1px = base64_decode('R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+                break;
+
+            default:
+                $_1px = '';
+        }
+        return $_1px;
+    }
+
+    /**
      * Extension to format.
      *
      * @since 17xxxx Imagick utils.
@@ -531,7 +566,7 @@ class Image extends Classes\Core\Base\Core
      *
      * @return string Extension format.
      */
-    protected function extToFormat(string $ext_file): string
+    public function extToFormat(string $ext_file): string
     {
         if (mb_strpos($ext_file, '.') !== false) {
             $ext = $this->c::fileExt($ext_file);
@@ -562,7 +597,7 @@ class Image extends Classes\Core\Base\Core
      *
      * @return string Format extension.
      */
-    protected function formatToExt(string $format): string
+    public function formatToExt(string $format): string
     {
         switch (($format = mb_strtolower($format))) {
             case 'jpeg':
@@ -584,6 +619,59 @@ class Image extends Classes\Core\Base\Core
     }
 
     /**
+     * Extension to MIME type.
+     *
+     * @since 17xxxx Imagick utils.
+     *
+     * @param string $ext_file Extension (or file).
+     *
+     * @return string Extension MIME type.
+     */
+    public function extToMimeType(string $ext_file): string
+    {
+        if (mb_strpos($ext_file, '.') !== false) {
+            $ext = $this->c::fileExt($ext_file);
+        } else {
+            $ext = $ext_file;
+        }
+        switch (($ext = mb_strtolower($ext))) {
+            case 'svg':
+                $type = 'image/svg+xml';
+                break;
+
+            case 'png':
+                $type = 'image/png';
+                break;
+
+            case 'jpg':
+                $type = 'image/jpeg';
+                break;
+
+            case 'gif':
+                $type = 'image/gif';
+                break;
+
+            default:
+                $type = 'image/'.$ext;
+        }
+        return $type;
+    }
+
+    /**
+     * Format to MIME type.
+     *
+     * @since 17xxxx Imagick utils.
+     *
+     * @param string $format Image format.
+     *
+     * @return string Format MIME type.
+     */
+    public function formatToMimeType(string $format): string
+    {
+        return $this->extToMimeType($this->formatToExt($format));
+    }
+
+    /**
      * Format to compression type.
      *
      * @since 17xxxx Imagick utils.
@@ -597,7 +685,7 @@ class Image extends Classes\Core\Base\Core
         if (!class_exists('Imagick')) {
             return 0; // Not possible.
         }
-        switch ($this->formatToExt($format)) {
+        switch (($ext = $this->formatToExt($format))) {
             case 'jpg':
                 $type = \Imagick::COMPRESSION_JPEG;
                 break;
@@ -619,7 +707,7 @@ class Image extends Classes\Core\Base\Core
      */
     protected function formatToCompressionQuality(string $format): int
     {
-        switch ($this->formatToExt($format)) {
+        switch (($ext = $this->formatToExt($format))) {
             case 'jpg':
                 $quality = 85;
                 break;
@@ -695,39 +783,5 @@ class Image extends Classes\Core\Base\Core
         $args['output_file']   = $this->changeFormatExt($args['output_file'], $args['output_format']);
 
         return $args;
-    }
-
-    /**
-     * One pixel image.
-     *
-     * @since 17xxxx Imagick utils.
-     *
-     * @param string $format Format.
-     *
-     * @return string One pixel image.
-     */
-    public function onePx(string $format): string
-    {
-        switch ($this->formatToExt($format)) {
-            case 'svg':
-                $_1px = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>';
-                break;
-
-            case 'png':
-                $_1px = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');
-                break;
-
-            case 'jpg': // Not transparent.
-                $_1px = base64_decode('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wgARCAABAAEDAREAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAAA//EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAADP/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oACAEBAAE/AH//xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAECAQE/AH//xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAEDAQE/AH//2Q==');
-                break;
-
-            case 'gif':
-                $_1px = base64_decode('R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
-                break;
-
-            default:
-                $_1px = '';
-        }
-        return $_1px;
     }
 }

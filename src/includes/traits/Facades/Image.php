@@ -30,11 +30,11 @@ trait Image
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Image::geoPattern()
+     * @see Classes\Core\Utils\Image::identipattern()
      */
-    public static function geoPattern(...$args)
+    public static function identipattern(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Image->geoPattern(...$args);
+        return $GLOBALS[static::class]->Utils->©Image->identipattern(...$args);
     }
 
     /**
@@ -98,7 +98,7 @@ trait Image
     }
 
     /**
-     * @since 17xxxx One pixel utils.
+     * @since 17xxxx Imagick utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -107,5 +107,53 @@ trait Image
     public static function onePx(...$args)
     {
         return $GLOBALS[static::class]->Utils->©Image->onePx(...$args);
+    }
+
+    /**
+     * @since 17xxxx Imagick utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::extToFormat()
+     */
+    public static function imageExtToFormat(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->extToFormat(...$args);
+    }
+
+    /**
+     * @since 17xxxx Imagick utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::formatToExt()
+     */
+    public static function imageFormatToExt(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->formatToExt(...$args);
+    }
+
+    /**
+     * @since 17xxxx Imagick utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::extToMimeType()
+     */
+    public static function imageExtToMimeType(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->extToMimeType(...$args);
+    }
+
+    /**
+     * @since 17xxxx Imagick utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::formatToMimeType()
+     */
+    public static function imageFormatToMimeType(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->formatToMimeType(...$args);
     }
 }
