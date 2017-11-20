@@ -1,6 +1,7 @@
 ## $v
 
 - oAuth server.
+- Adding `c::onePx()`.
 - Adding `c::setFileExt()`.
 - Adding `c::changeFileExt()`.
 - Adding `c::geoPattern()`.

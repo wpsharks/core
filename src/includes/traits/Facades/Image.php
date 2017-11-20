@@ -96,4 +96,16 @@ trait Image
     {
         return $GLOBALS[static::class]->Utils->©Image->decodeDataUrl(...$args);
     }
+
+    /**
+     * @since 17xxxx One pixel utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::onePx()
+     */
+    public static function onePx(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->onePx(...$args);
+    }
 }

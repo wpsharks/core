@@ -696,4 +696,38 @@ class Image extends Classes\Core\Base\Core
 
         return $args;
     }
+
+    /**
+     * One pixel image.
+     *
+     * @since 17xxxx Imagick utils.
+     *
+     * @param string $format Format.
+     *
+     * @return string One pixel image.
+     */
+    public function onePx(string $format): string
+    {
+        switch ($this->formatToExt($format)) {
+            case 'svg':
+                $_1px = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>';
+                break;
+
+            case 'png':
+                $_1px = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');
+                break;
+
+            case 'jpg': // Not transparent.
+                $_1px = base64_decode('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wgARCAABAAEDAREAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAAA//EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAADP/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oACAEBAAE/AH//xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAECAQE/AH//xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oACAEDAQE/AH//2Q==');
+                break;
+
+            case 'gif':
+                $_1px = base64_decode('R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+                break;
+
+            default:
+                $_1px = '';
+        }
+        return $_1px;
+    }
 }
