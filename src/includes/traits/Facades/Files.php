@@ -11,10 +11,10 @@ namespace WebSharks\Core\Traits\Facades;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
 
@@ -35,6 +35,30 @@ trait Files
     public static function fileExt(...$args)
     {
         return $GLOBALS[static::class]->Utils->©FileExt->__invoke(...$args);
+    }
+
+    /**
+     * @since 17xxxx File ext utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\FileExt::set()
+     */
+    public static function setFileExt(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©FileExt->set(...$args);
+    }
+
+    /**
+     * @since 17xxxx File ext utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\FileExt::change()
+     */
+    public static function changeFileExt(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©FileExt->change(...$args);
     }
 
     /**

@@ -26,43 +26,7 @@ use function get_defined_vars as vars;
 trait Image
 {
     /**
-     * @since 161010 Decode image data URL.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\Core\Utils\Image::decodeDataUrl()
-     */
-    public static function decodeImageDataUrl(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Image->decodeDataUrl(...$args);
-    }
-
-    /**
-     * @since 17xxxx SVG converter.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\Core\Utils\Image::svgToPng()
-     */
-    public static function svgToPng(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Image->svgToPng(...$args);
-    }
-
-    /**
-     * @since 161010 PNG compression.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\Core\Utils\Image::compressPng()
-     */
-    public static function compressPng(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->©Image->compressPng(...$args);
-    }
-
-    /**
-     * @since 17xxxx Geo-patterns.
+     * @since 17xxxx Imagick utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -74,14 +38,62 @@ trait Image
     }
 
     /**
-     * @since 17xxxx Geo-patterns.
+     * @since 17xxxx Imagick utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\Core\Utils\Image::geoPatternThumbnail()
+     * @see Classes\Core\Utils\Image::convert()
      */
-    public static function geoPatternThumbnail(...$args)
+    public static function convertImage(...$args)
     {
-        return $GLOBALS[static::class]->Utils->©Image->geoPatternThumbnail(...$args);
+        return $GLOBALS[static::class]->Utils->©Image->convert(...$args);
+    }
+
+    /**
+     * @since 17xxxx Imagick utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::resize()
+     */
+    public static function resizeImage(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->resize(...$args);
+    }
+
+    /**
+     * @since 17xxxx Imagick utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::texturize()
+     */
+    public static function texturizeImage(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->texturize(...$args);
+    }
+
+    /**
+     * @since 17xxxx Imagick utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::compress()
+     */
+    public static function compressImage(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->compress(...$args);
+    }
+
+    /**
+     * @since 161010 Decode image data URL.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\Core\Utils\Image::decodeDataUrl()
+     */
+    public static function decodeImageDataUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->©Image->decodeDataUrl(...$args);
     }
 }

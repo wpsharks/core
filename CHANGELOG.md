@@ -1,9 +1,15 @@
 ## $v
 
 - oAuth server.
-- Adding `c::svgToPng()`.
+- Adding `c::setFileExt()`.
+- Adding `c::changeFileExt()`.
 - Adding `c::geoPattern()`.
-- Adding `c::geoPatternThumbnail()`.
+- Adding `c::convertImage()`.
+- Adding `c::resizeImage()`.
+- Adding `c::texturizeImage()`.
+- Adding `c::compressImage()`.
+- Adding `c::compressSvg()`.
+- Refactoring `c::compressPng()`.
 - Adding `c::twitterGetJson()`.
 - Adding `c::twitterGetRemote()`.
 - Adding `c::createNonce()`.
