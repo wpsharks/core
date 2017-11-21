@@ -610,7 +610,7 @@ class Image extends Classes\Core\Base\Core
      */
     public function extToFormat(string $ext_file): string
     {
-        if (mb_strpos($ext_file, '.') !== false) {
+        if ($ext_file && !preg_match('/^[a-z0-9_\-]+$/ui', $ext_file)) {
             $ext = $this->c::fileExt($ext_file);
         } else {
             $ext = $ext_file;
@@ -671,7 +671,7 @@ class Image extends Classes\Core\Base\Core
      */
     public function extToMimeType(string $ext_file): string
     {
-        if (mb_strpos($ext_file, '.') !== false) {
+        if ($ext_file && !preg_match('/^[a-z0-9_\-]+$/ui', $ext_file)) {
             $ext = $this->c::fileExt($ext_file);
         } else {
             $ext = $ext_file;
@@ -694,7 +694,7 @@ class Image extends Classes\Core\Base\Core
                 break;
 
             default:
-                $type = 'image/'.$ext;
+                $type = $ext ? 'image/'.$ext : '';
         }
         return $type;
     }
@@ -813,16 +813,15 @@ class Image extends Classes\Core\Base\Core
         $args['file']          = (string) $args['file'];
         $args['output_file']   = (string) $args['output_file'];
 
-        $args['format'] = mb_strtolower((string) $args['format']);
-        $args['format'] = $args['format'] === 'jpg' ? 'jpeg' : $args['format'];
-
+        $args['format']        = mb_strtolower((string) $args['format']);
         $args['output_format'] = mb_strtolower((string) $args['output_format']);
+
+        $args['format']        = $args['format'] === 'jpg' ? 'jpeg' : $args['format'];
         $args['output_format'] = $args['output_format'] === 'jpg' ? 'jpeg' : $args['output_format'];
 
         $args['format']        = $args['format'] ?: $this->extToFormat($args['file']);
         $args['output_file']   = $args['output_file'] ?: $this->changeFormatExt($args['file'], $args['output_format']);
         $args['output_format'] = $args['output_format'] ?: $this->extToFormat($args['output_file']);
-        $args['output_file']   = $this->changeFormatExt($args['output_file'], $args['output_format']);
 
         return $args;
     }
