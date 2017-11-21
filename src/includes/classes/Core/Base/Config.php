@@ -56,7 +56,7 @@ class Config extends Classes\Core\Base\Core
 
             '©debug' => [
                 '©enable' => (bool) ($_['CFG_DEBUG'] ?? false),
-                '©edge'   => (bool) ($_['CFG_DEBUG_EDGE'] ?? false),
+                '©edge'   => (bool) ($_['CFG_DEBUG_EDGE'] ?? $_['CFG_DEBUG'] ?? false),
 
                 '©log'          => (bool) ($_['CFG_DEBUG_LOG'] ?? $_['CFG_DEBUG'] ?? false),
                 '©log_callback' => false, // In case log entries should be reviewed in other ways.
@@ -65,7 +65,7 @@ class Config extends Classes\Core\Base\Core
                 '©er_display'    => (bool) ($_['CFG_DEBUG_ER_DISPLAY'] ?? $_['CFG_DEBUG_ER_ENABLE'] ?? $_['CFG_DEBUG'] ?? false),
                 '©er_assertions' => (bool) ($_['CFG_DEBUG_ER_ASSERTIONS'] ?? $_['CFG_DEBUG_ER_ENABLE'] ?? $_['CFG_DEBUG'] ?? false),
             ],
-            '©handle_throwables' => (bool) ($_['CFG_HANDLE_THROWABLES'] ?? false),
+            '©handle_throwables' => (bool) ($_['CFG_HANDLE_THROWABLES'] ?? $use_server_cfgs),
 
             '©locales' => (array) ($_['CFG_LOCALES'] ?? ($_ ? ['en_US.UTF-8', 'C'] : [])),
 
