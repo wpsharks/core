@@ -11,10 +11,10 @@ namespace WebSharks\Core\Classes\Core\Utils;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
 
@@ -64,7 +64,7 @@ class Output extends Classes\Core\Base\Core
     public function gzipOff()
     {
         if (headers_sent()) {
-            throw $this->c::issue('Heading already sent!');
+            throw $this->c::issue('Headers already sent!');
         }
         @ini_set('zlib.output_compression', 'off');
 
@@ -81,7 +81,7 @@ class Output extends Classes\Core\Base\Core
     public function sessionWriteClose()
     {
         if (headers_sent()) {
-            throw $this->c::issue('Heading already sent!');
+            throw $this->c::issue('Headers already sent!');
         }
         @session_write_close(); // End and write session data.
     }
@@ -94,7 +94,7 @@ class Output extends Classes\Core\Base\Core
     public function buffersEndClean()
     {
         if (headers_sent()) {
-            throw $this->c::issue('Heading already sent!');
+            throw $this->c::issue('Headers already sent!');
         }
         while (@ob_end_clean()) {
             // End & clean any open buffers.
@@ -109,7 +109,7 @@ class Output extends Classes\Core\Base\Core
     public function buffersEndFlush()
     {
         if (headers_sent()) {
-            throw $this->c::issue('Heading already sent!');
+            throw $this->c::issue('Headers already sent!');
         }
         while (@ob_end_flush()) {
             // End & flush any open buffers.
