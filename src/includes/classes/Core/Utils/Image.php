@@ -489,7 +489,7 @@ class Image extends Classes\Core\Base\Core
         $esc_file        = $this->c::escShellArg($file);
         $esc_output_file = $this->c::escShellArg($args['output_file']);
         $esc_quality     = $this->c::escShellArg($args['min_quality'].'-'.$args['max_quality']);
-        exec('pngquant --strip --skip-if-larger --quality='.$esc_quality.' --force --output='.$esc_output_file.' '.$esc_file, $_, $status);
+        exec('pngquant --skip-if-larger --quality='.$esc_quality.' --force --output='.$esc_output_file.' '.$esc_file, $_, $status);
 
         if ($status === 0) {
             return true; // Success.
