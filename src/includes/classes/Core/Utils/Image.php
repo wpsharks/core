@@ -678,7 +678,7 @@ class Image extends Classes\Core\Base\Core
         }
         switch (($ext = mb_strtolower($ext))) {
             case 'svg':
-                $type = 'image/svg+xml';
+                $type = 'image/svg+xml; charset=utf-8';
                 break;
 
             case 'png':
