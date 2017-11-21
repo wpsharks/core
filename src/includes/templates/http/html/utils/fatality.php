@@ -11,10 +11,10 @@ namespace WebSharks\Core;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
 
@@ -41,11 +41,13 @@ extract($this->setVars([
             <a-slab>
                 <a-structure>
                     <structure-body>
-                        <a-flex class="~ai:center ~vai:middle #stretch:vh">
-                            <a-tile class="b#red">
-                                <?= $message; ?>
-                            </a-tile>
-                        </a-flex>
+                        <a-container>
+                            <a-flex class="~1 ~ai:center ~vai:middle #stretch:vh">
+                                <a-tile class="b#red">
+                                    <?= $message; ?>
+                                </a-tile>
+                            </a-flex>
+                        </a-container>
                     </structure-body>
                 </a-structure>
             </a-slab>
