@@ -7,7 +7,7 @@
  */
 declare (strict_types = 1);
 
-if (!defined('ABSPATH') && !defined('WPINC')) {
+if (!defined('WPINC')) {
     if (!function_exists('__')) {
         /**
          * Polyfill.
