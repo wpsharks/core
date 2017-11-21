@@ -11,10 +11,10 @@ namespace WebSharks\Core\Classes\Core;
 use WebSharks\Core\Classes;
 use WebSharks\Core\Interfaces;
 use WebSharks\Core\Traits;
-#
+//
 use WebSharks\Core\Classes\Core\Error;
 use WebSharks\Core\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
 
@@ -30,7 +30,7 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008
      *
-     * @var string
+     * @type string
      */
     protected $dir;
 
@@ -39,7 +39,7 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008
      *
-     * @var string
+     * @type string
      */
     protected $file;
 
@@ -48,7 +48,7 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008
      *
-     * @var string
+     * @type string
      */
     protected $ext;
 
@@ -57,7 +57,7 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008
      *
-     * @var string
+     * @type string
      */
     protected $path;
 
@@ -66,7 +66,7 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008
      *
-     * @var array
+     * @type array
      */
     protected $rewrite_query_vars;
 
@@ -75,7 +75,7 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008
      *
-     * @var array
+     * @type array
      */
     protected $query_vars;
 
@@ -84,7 +84,7 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008
      *
-     * @var array
+     * @type array
      */
     protected $vars;
 
@@ -93,7 +93,7 @@ class Route extends Classes\Core\Base\Core
      *
      * @since 161008
      *
-     * @var int
+     * @type int
      */
     protected $parsed;
 
@@ -287,7 +287,7 @@ class Route extends Classes\Core\Base\Core
 
             ob_start(); // Output buffer.
             require $this->dir.'/'.$this->file;
-            return ob_get_clean();
+            return ob_get_clean() ?: ''; // In case route handled OB.
         } else {
             return file_get_contents($this->dir.'/'.$this->file);
         }
@@ -299,7 +299,7 @@ class Route extends Classes\Core\Base\Core
      * @since 161008 Route.
      *
      * @param array $defaults Default vars.
-     * @param array ...$vars Variadic route vars.
+     * @param array ...$vars  Variadic route vars.
      *
      * @return array New route vars.
      */
