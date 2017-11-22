@@ -6357,20 +6357,26 @@ pre.\!\#scroll > code {
 }
 
 .\#lh\:normal {
+  line-height: normal !important;
+}
+
+.\#lh\:default {
   line-height: 1.4285 !important;
 }
 
 .\#line-clamp {
-  max-width: 100% !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  line-height: normal !important;
+  max-width: 100% !important;
 }
 
 .in\#line-clamp {
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  line-height: normal !important;
   vertical-align: middle !important;
   display: inline-block !important;
 }

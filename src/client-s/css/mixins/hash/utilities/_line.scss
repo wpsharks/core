@@ -2,6 +2,10 @@
   // Names/aliases.
 
   .\#lh\:normal {
+    line-height:              normal !important;
+  }
+
+  .\#lh\:default {
     line-height:              $line-height !important;
   }
 

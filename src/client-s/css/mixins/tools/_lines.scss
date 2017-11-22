@@ -8,12 +8,13 @@
     $important: '';
   }
 
-  max-width:                  100% #{$important};
-
-  //
   white-space:                nowrap #{$important};
   overflow:                   hidden #{$important};
   text-overflow:              ellipsis #{$important};
+
+  //
+  line-height:                normal #{$important};
+  max-width:                  100% #{$important};
 }
 
 @mixin inline-clamp($important: false) {
@@ -32,6 +33,7 @@
   text-overflow:              ellipsis #{$important};
 
   //
+  line-height:                normal #{$important};
   vertical-align:             middle #{$important};
   display:                    inline-block #{$important};
 }
